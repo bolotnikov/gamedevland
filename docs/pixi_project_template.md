@@ -7,11 +7,8 @@ In this article, our goal is to develop a simple project template that we will u
 - Resource loading and rendering
 - Management of scenes, states, animations, sounds and screen
 
-## 1. Creating the Template Structure
+## 1. Creating the structure
 ### 1.1 Document template
-index.html file is an html document template that will contain the JavaScript code of the game after it is built. Let’s style the canvas element, and leave the body tag empty.
-
-
 <details>
   <summary>index.html</summary>
 
@@ -46,13 +43,10 @@ canvas {
 ```
   
 </details>
+The HTML template will contain the final JavaScript code after the game is built. Let’s style the canvas element and leave the `body` tag empty.
 
 
 ### 1.2 Project dependencies.
-
-package.json contains project settings and dependencies.
-
-
 <details>
   <summary>package.json</summary>
 
@@ -81,33 +75,30 @@ package.json contains project settings and dependencies.
   }
 }
 ```
-  
 </details>
-
-
-Main dependencies are:
+Config contains project settings and dependencies. Main dependencies are:
 
 - [gsap](https://greensock.com/gsap/) for animations
 - [pixi](https://pixijs.com/) for rendering
 - [webpack](https://webpack.js.org/) and [babel](https://babeljs.io/) for build
 
-### 1.3. Project structure
+### 1.3 Project structure
 
 * `webpack/` - build scripts
-* `src/scripts/system` - common system code, the same for all games
-* `src/scripts/game` - code of the game itself, unique for each project
-* `src/sounds` - sounds
-* `src/sprites` - sprites
+* `src/scripts/system/` - common system code, the same for all games
+* `src/scripts/game/` - code of the game itself, unique for each project
+* `src/sounds/` - audio assets
+* `src/sprites/` - images assets
 
 
 ### 1.4 Commands
-Installing dependencies from package.json
+Installing dependencies from `package.json`
 
 ``` bash
 npm i
 ```
 
-As you can see in the scripts block in package.json, we have 2 ways to run webpack: build and start.
+As you can see in the scripts block in `package.json`, we have 2 ways to run webpack: build and start.
 
 ``` bash
 npm start
@@ -119,9 +110,220 @@ Creates the build with the developer environment and automatically run the proje
 npm run build
 ```
 
-Creates the build for production and save the build files in the /dist folder.
+Creates the build for production and save the build files in the `dist/` folder.
 
 This folder is created automatically and cleared every time you run the command, so be careful not to save files in this folder.
 
 ## 2. Creating the canvas element
-Section in progress…
+
+Create a file `src/scripts/system/App.js`. This is the main class of the application.
+Let's implement the `run` method, which will start the game.
+
+
+``` javascript
+import * as PIXI from "pixi.js";
+ 
+class Application {
+   run() {
+       this.app = new PIXI.Application({resizeTo: window});
+       document.body.appendChild(this.app.view);
+   }
+}
+ 
+export const App = new Application();
+```
+
+Here we import the `PIXI` library and create a `PIXI` application.
+The `view` property of the `this.app` object is just the HTML `canvas` element that we add to the DOM structure of our html template.
+
+In addition, we make this class a singleton by creating an instance of the class and exporting the created object, not the class itself.
+
+So wherever in the application we import from this file, we will always get the same `App` object. This way using the global `App` object we can get access to all the necessary classes for managing the game: screen manager, sound manager, scene manager, and so on.
+
+Create an entry point `src/scripts/index.js` and run the application:
+
+
+``` javascript
+import { App } from "./system/App";
+ 
+App.run();
+```
+
+## 3. Creating the loader
+
+Let's start with the loader interface that we want to implement.
+``` javascript
+class Application {
+   run(config) {
+// …
+       this.loader = new Loader(this.app.loader, this.config);
+       this.loader.preload().then(() => this.start());
+   }
+start() {
+}
+``` 
+
+To load resources, `PIXI` provides us with the [`PIXI.Loader`](https://pixijs.download/v6.1.1/docs/PIXI.Loader.html) class. We can get it from the `app` property.
+
+We pass it as the first parameter to the constructor of our custom `Loader` class.
+And the second parameter is a list of resources to download.
+
+
+Create class `src/scripts/system/Loader.js`:
+
+``` javascript
+export class Loader {
+   constructor(loader, config) {
+       this.loader = loader;
+       this.config = config;
+   }
+ 
+   preload() {
+       return Promise.resolve();
+   }
+}
+```
+
+Since the list of resources will be unique for each game, we need to define the resource config separately from the general code, that is, outside the `system` folder.
+
+Let's create a `game/Config.js` file. Here we create the `Config` object, which will be unique for each specific game:
+
+``` javascript
+import { Tools } from "../system/Tools";
+ 
+export const Config = {
+   loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/)),
+   resources: {}
+};
+```
+
+Let's set the list of resources to load in the `loader` property.
+And we set the the loaded resources objects in the `resources` property.
+
+To automatically get the entire list of resources to load from a given folder, we use the capabilities of `require.context`.
+
+Let's create the `Tools` system class and implement the `massiveRequre` method in it:
+
+``` javascript
+export class Tools {
+   static massiveRequire(req) {
+       const files = [];
+ 
+       req.keys().forEach(key => {
+           files.push({
+               key, data: req(key)
+           });
+       });
+ 
+       return files;
+   }
+}
+```
+
+Now we can fully implement the `preload` method in the `Loader` class. We can do it in 2 steps:
+
+1. Add all resources from the loader config to the loading list using `this.loader.add` method.
+2. Start loading resources using `this.loader.load`.
+
+``` javascript
+export class Loader {
+//…
+   preload() {
+       for (const asset of this.config.loader) {
+           let key = asset.key.substr(asset.key.lastIndexOf('/') + 1);
+           key = key.substring(0, key.indexOf('.'));
+           if (asset.key.indexOf(".png") !== -1 || asset.key.indexOf(".jpg") !== -1) {
+               this.loader.add(key, asset.data.default)
+           }
+       }
+ 
+       return new Promise(resolve => {
+           this.loader.load((loader, resources) => {
+               this.config.resources = resources;
+               resolve();
+           });
+       });
+   }
+}
+```
+
+The `load` method of the `PIXI.Loader` object takes a callback function as a parameter, which will be called when all the resources have finished loading and become available for use.
+
+The callback function takes 2 parameters: the loader object itself and the second parameter is the loaded resources. Let's put them in the global config in the resources field, which we specially reserved for loaded resources.
+
+
+## 4. Game launch
+In the `Application` class, we implement the `start` method, which will start the game after the resources are loaded:
+
+``` javascript
+// ...
+class Application {
+// ... 
+   start() {
+       this.scene = new this.config["startScene"]();
+       this.app.stage.addChild(this.scene.container);
+   }
+``` 
+
+We could instantiate the scene class directly in the `start` method. But we want the shared code in the `system` folder to be unrelated to or dependent on the game code in the `game` folder. To do this, we have separated the common system code and the project code. At the same time, the system code can know about the parameters it needs through the game config, which we pass to the `App` class when launching applications. So in this case, instead of directly creating the game scene object directly in the `Application` class, we'd better create it through a parameter in the config.
+Add the `startScene` parameter to the game config in `Config.js`:
+
+``` javascript
+import { Game } from "./Game";
+ 
+export const Config = {
+   startScene: Game,
+};
+```
+
+And create the `Game` class itself in game folder `/src/scripts/game/Game`:
+
+``` javascript
+import * as PIXI from "pixi.js";
+import { App } from "../system/App";
+  
+export class Game {
+   constructor() {
+       this.container = new PIXI.Container();
+   }
+}
+``` 
+
+The scene class is based on the [`PIXI.Container`](https://pixijs.download/dev/docs/PIXI.Container.html). And we will add all objects added to the scene to this container.
+And we added the scene container itself to the main `app.stage` container in the start method of the `Application` class.
+
+
+## 5. Sprite Output
+To render sprites, we need to implement a helper method in the `Application` class:
+
+``` javascript
+   res(key) {
+       return this.config.resources[key].texture;
+   }
+ 
+   sprite(key) {
+       return new PIXI.Sprite(this.res(key));
+   }
+``` 
+
+We know that all loaded resources are stored in the `resources` property of the global config.
+Thus, getting the required resource by key, we can create a new instance of the [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html) class.
+Now, in the code of the game, it will be enough for us to use only the call to the `App.sprite` method to get the required `PIXI.Sprite` instance and work with it further.
+Let's render the background image:
+
+``` javascript
+export class Game {
+   constructor() {
+       this.container = new PIXI.Container();
+       this.createBackground();
+   }
+   createBackground() {
+       this.bg = App.sprite("bg");
+       this.bg.width = window.innerWidth;
+       this.bg.height = window.innerHeight;
+       this.container.addChild(this.bg);
+   }
+``` 
+
+
+
