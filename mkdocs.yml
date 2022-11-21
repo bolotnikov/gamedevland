@@ -1,5 +1,8 @@
 site_name: GameDev.Land
 theme:
+  logo: assets/logo.png
+  palette:
+    primary: teal
   name: material
 markdown_extensions:
   - pymdownx.highlight:
@@ -7,3 +10,5 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - attr_list
+  - md_in_html

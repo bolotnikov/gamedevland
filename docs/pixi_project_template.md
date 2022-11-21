@@ -1,26 +1,11 @@
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-
-
 # Сreating PixiJS project template
 
 In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games.
 
 ## Template functionality:
-Application creation and launch
-Resource loading and rendering
-Management of scenes, states, animations, sounds and screen
+- Application creation and launch
+- Resource loading and rendering
+- Management of scenes, states, animations, sounds and screen
 
 ## 1. Creating the Template Structure
 ### 1.1 Document template
