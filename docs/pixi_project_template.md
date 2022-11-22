@@ -1,6 +1,6 @@
 # Сreating PixiJS project template
 
-In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games.
+In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games. You can check the final template code in [GitHub](https://github.com/bolotnikov/pixi-project-template).
 
 ## Template functionality:
 - Application creation and launch
@@ -8,6 +8,8 @@ In this article, our goal is to develop a simple project template that we will u
 - Management of scenes, states, animations, sounds and screen
 
 ## 1. Creating the structure
+Let's take an empty project structure from [the initial branch](https://github.com/bolotnikov/pixi-project-template/tree/initial) and examine it.
+
 ### 1.1 Document template
 <details>
   <summary>index.html</summary>
