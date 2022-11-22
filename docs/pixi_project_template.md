@@ -322,6 +322,3 @@ export class Game {
        this.container.addChild(this.bg);
    }
 ``` 
-
-
-
