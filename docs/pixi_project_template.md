@@ -21,23 +21,23 @@ Let's take an empty project structure from [the initial branch](https://github.c
     <meta charset="utf-8">
   </head>
   <style>
-body {
-    background-color: #000;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-}
-canvas {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-}
+    body {
+        background-color: #000;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+    canvas {
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
   </style>
   <body>
   </body>
@@ -121,17 +121,17 @@ This folder is created automatically and cleared every time we run the command, 
 Create a file `src/scripts/system/App.js`. This is the main class of the application.
 Let's implement the `run` method, which will start the game.
 
-
 ``` javascript
 import * as PIXI from "pixi.js";
- 
+
 class Application {
-   run() {
-       this.app = new PIXI.Application({resizeTo: window});
-       document.body.appendChild(this.app.view);
-   }
+    run(config) {
+        this.config = config;
+        this.app = new PIXI.Application({resizeTo: window});
+        document.body.appendChild(this.app.view);
+    }
 }
- 
+
 export const App = new Application();
 ```
 
@@ -147,7 +147,6 @@ Create an entry point `src/scripts/index.js` and run the application:
 
 ``` javascript
 import { App } from "./system/App";
- 
 App.run();
 ```
 
@@ -180,7 +179,6 @@ export class Loader {
         this.config = config;
         this.resources = {};
     }
-
     preload() {
         return Promise.resolve();
     }
@@ -194,9 +192,9 @@ Let's create a `game/Config.js` file. Here we create the `Config` object, which 
 
 ``` javascript
 import { Tools } from "../system/Tools";
- 
+
 export const Config = {
-   loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/))
+    loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/))
 };
 ```
 
@@ -208,18 +206,26 @@ Let's create the `Tools` system class and implement the `massiveRequre` method i
 
 ``` javascript
 export class Tools {
-   static massiveRequire(req) {
-       const files = [];
- 
-       req.keys().forEach(key => {
-           files.push({
-               key, data: req(key)
-           });
-       });
- 
-       return files;
-   }
+    static massiveRequire(req) {
+        const files = [];
+
+        req.keys().forEach(key => {
+            files.push({
+                key, data: req(key)
+            });
+        });
+
+        return files;
+    }
 }
+```
+
+And now we need to update the entry point:
+``` javascript
+import { Config } from "./game/Config";
+import { App } from "./system/App";
+
+App.run(Config);
 ```
 
 Now we can fully implement the `preload` method in the `Loader` class. We can do it in 2 steps:
@@ -229,23 +235,23 @@ Now we can fully implement the `preload` method in the `Loader` class. We can do
 
 ``` javascript
 export class Loader {
-//…
-   preload() {
-       for (const asset of this.config.loader) {
-           let key = asset.key.substr(asset.key.lastIndexOf('/') + 1);
-           key = key.substring(0, key.indexOf('.'));
-           if (asset.key.indexOf(".png") !== -1 || asset.key.indexOf(".jpg") !== -1) {
-               this.loader.add(key, asset.data.default)
-           }
-       }
- 
-       return new Promise(resolve => {
-           this.loader.load((loader, resources) => {
-               this.resources = resources;
-               resolve();
-           });
-       });
-   }
+    // ...
+    preload() {
+        for (const asset of this.config.loader) {
+            let key = asset.key.substr(asset.key.lastIndexOf('/') + 1);
+            key = key.substring(0, key.indexOf('.'));
+            if (asset.key.indexOf(".png") !== -1 || asset.key.indexOf(".jpg") !== -1) {
+                this.loader.add(key, asset.data.default)
+            }
+        }
+
+        return new Promise(resolve => {
+            this.loader.load((loader, resources) => {
+            this.resources = resources;
+            resolve();
+            });
+        });
+    }
 }
 ```
 
@@ -260,10 +266,10 @@ In the `Application` class, we implement the `start` method, which will start th
 // ...
 class Application {
 // ... 
-   start() {
-       this.scene = new this.config["startScene"]();
-       this.app.stage.addChild(this.scene.container);
-   }
+    start() {
+        this.scene = new this.config["startScene"]();
+        this.app.stage.addChild(this.scene.container);
+    }
 ``` 
 
 We could instantiate the scene class directly in the `start` method. But we want the shared code in the `system` folder to be unrelated to or dependent on the game code in the `game` folder. To do this, we have separated the common system code and the project code. At the same time, the system code can know about the parameters it needs through the game config, which we pass to the `App` class when launching applications. So in this case, instead of directly creating the game scene object directly in the `Application` class, we'd better create it through a parameter in the config.
@@ -273,7 +279,8 @@ Add the `startScene` parameter to the game config in `Config.js`:
 import { Game } from "./Game";
  
 export const Config = {
-   startScene: Game,
+    // ...
+    startScene: Game,
 };
 ```
 
@@ -284,9 +291,9 @@ import * as PIXI from "pixi.js";
 import { App } from "../system/App";
   
 export class Game {
-   constructor() {
-       this.container = new PIXI.Container();
-   }
+    constructor() {
+        this.container = new PIXI.Container();
+    }
 }
 ``` 
 
@@ -298,13 +305,13 @@ And we added the scene container itself to the main `app.stage` container in the
 To render sprites, we need to implement a helper method in the `Application` class:
 
 ``` javascript
-   res(key) {
-       return this.loader.resources[key].texture;
-   }
- 
-   sprite(key) {
-       return new PIXI.Sprite(this.res(key));
-   }
+    res(key) {
+        return this.loader.resources[key].texture;
+    }
+
+    sprite(key) {
+        return new PIXI.Sprite(this.res(key));
+    }
 ``` 
 
 We know that all loaded resources are stored in the `resources` property of our custom `Loader` class. Getting the required resource by key, we can create a new instance of the [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html) class.
@@ -313,14 +320,25 @@ Let's render the background image:
 
 ``` javascript
 export class Game {
-   constructor() {
-       this.container = new PIXI.Container();
-       this.createBackground();
-   }
-   createBackground() {
-       this.bg = App.sprite("bg");
-       this.bg.width = window.innerWidth;
-       this.bg.height = window.innerHeight;
-       this.container.addChild(this.bg);
-   }
+    constructor() {
+        this.container = new PIXI.Container();
+        this.createBackground();
+    }
+    createBackground() {
+        this.bg = App.sprite("bg");
+        this.bg.width = window.innerWidth;
+        this.bg.height = window.innerHeight;
+        this.container.addChild(this.bg);
+    }
 ``` 
+## 6. Useful links
+- [Final source code](https://github.com/bolotnikov/pixi-project-template)
+- [`PIXI.Application`](https://pixijs.download/dev/docs/PIXI.Application.html)
+- [`PIXI.Loader`](https://pixijs.download/v6.1.1/docs/PIXI.Loader.html)
+- [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html)
+- [`PIXI.Container`](https://pixijs.download/dev/docs/PIXI.Container.html)
+- [GSAP](https://greensock.com/gsap/)
+- [PIXI](https://pixijs.com/)
+- [Webpack](https://webpack.js.org/) 
+- [Babel](https://babeljs.io/)
+- [Webpack `require.context`](https://webpack.js.org/guides/dependency-management/#requirecontext)
