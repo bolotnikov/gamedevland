@@ -92,7 +92,7 @@ Config contains project settings and dependencies. Main dependencies are:
 
 
 ### 1.4 Commands
-Installing dependencies from `package.json`
+First we need to install dependencies from `package.json`
 
 ``` bash
 npm i
@@ -104,15 +104,15 @@ As you can see in the scripts block in `package.json`, we have 2 ways to run web
 npm start
 ```
 
-Creates the build with the developer environment and automatically run the project in the browser using dev-server.
+This command creates the build with the developer environment and automatically run the project in the browser using dev-server.
 
 ``` bash
 npm run build
 ```
 
-Creates the build for production and save the build files in the `dist/` folder.
+This command creates the build for production and save the created build's files in the `dist/` folder.
 
-This folder is created automatically and cleared every time you run the command, so be careful not to save files in this folder.
+This folder is created automatically and cleared every time we run the command, so be careful not to save files in this folder.
 
 ## 2. Creating the canvas element
 
@@ -155,12 +155,12 @@ Let's start with the loader interface that we want to implement.
 ``` javascript
 class Application {
    run(config) {
-// …
-       this.loader = new Loader(this.app.loader, this.config);
-       this.loader.preload().then(() => this.start());
-   }
-start() {
-}
+        // …
+        this.loader = new Loader(this.app.loader, this.config);
+        this.loader.preload().then(() => this.start());
+    }
+    start() {
+    }
 ``` 
 
 To load resources, `PIXI` provides us with the [`PIXI.Loader`](https://pixijs.download/v6.1.1/docs/PIXI.Loader.html) class. We can get it from the `app` property.
@@ -173,16 +173,18 @@ Create class `src/scripts/system/Loader.js`:
 
 ``` javascript
 export class Loader {
-   constructor(loader, config) {
-       this.loader = loader;
-       this.config = config;
-   }
- 
-   preload() {
-       return Promise.resolve();
-   }
+    constructor(loader, config) {
+        this.loader = loader;
+        this.config = config;
+        this.resources = {};
+    }
+
+    preload() {
+        return Promise.resolve();
+    }
 }
 ```
+We will add all the loaded resources objects in the `resources` property which is empty by default.
 
 Since the list of resources will be unique for each game, we need to define the resource config separately from the general code, that is, outside the `system` folder.
 
@@ -192,13 +194,11 @@ Let's create a `game/Config.js` file. Here we create the `Config` object, which 
 import { Tools } from "../system/Tools";
  
 export const Config = {
-   loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/)),
-   resources: {}
+   loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/))
 };
 ```
 
 Let's set the list of resources to load in the `loader` property.
-And we set the the loaded resources objects in the `resources` property.
 
 To automatically get the entire list of resources to load from a given folder, we use the capabilities of `require.context`.
 
@@ -239,7 +239,7 @@ export class Loader {
  
        return new Promise(resolve => {
            this.loader.load((loader, resources) => {
-               this.config.resources = resources;
+               this.resources = resources;
                resolve();
            });
        });
@@ -249,8 +249,7 @@ export class Loader {
 
 The `load` method of the `PIXI.Loader` object takes a callback function as a parameter, which will be called when all the resources have finished loading and become available for use.
 
-The callback function takes 2 parameters: the loader object itself and the second parameter is the loaded resources. Let's put them in the global config in the resources field, which we specially reserved for loaded resources.
-
+The callback function takes 2 parameters: the loader object itself and the second parameter is the loaded resources. Let's put them in the `resources` field in the `Loader` class, which we specially reserved for all loaded resources.
 
 ## 4. Game launch
 In the `Application` class, we implement the `start` method, which will start the game after the resources are loaded:
@@ -298,7 +297,7 @@ To render sprites, we need to implement a helper method in the `Application` cla
 
 ``` javascript
    res(key) {
-       return this.config.resources[key].texture;
+       return this.loader.resources[key].texture;
    }
  
    sprite(key) {
@@ -306,9 +305,8 @@ To render sprites, we need to implement a helper method in the `Application` cla
    }
 ``` 
 
-We know that all loaded resources are stored in the `resources` property of the global config.
-Thus, getting the required resource by key, we can create a new instance of the [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html) class.
-Now, in the code of the game, it will be enough for us to use only the call to the `App.sprite` method to get the required `PIXI.Sprite` instance and work with it further.
+We know that all loaded resources are stored in the `resources` property of our custom `Loader` class. Getting the required resource by key, we can create a new instance of the [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html) class.
+Now, in the code of the game, it will be enough for us to use only the call to the `App.sprite` method to get the required [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html) instance and work with it further.
 Let's render the background image:
 
 ``` javascript
