@@ -10,7 +10,7 @@
 ## 1. Вывод доски тайлов
 Поставим первой задачей вывод на экран доски с тайлами.
 
-1.1. Создание ячейки
+## 1.1. Создание ячейки
 Первым шагом создадим класс ячейки доски и выведем спрайт одиночной ячейку на экран.
 
 Создаем класс game/Field.js:
@@ -57,3 +57,109 @@ export class Game {
 }
 ```
 
+## 1.2. Создание доски
+Теперь, когда у нас есть класс поля доски, мы можем создать и саму доску, состоящую из таких полей.
+Создадим класс `src/scripts/game/Board.js`:
+
+
+``` javascript
+import * as PIXI from "pixi.js";
+import { App } from "../system/App";
+import { Field } from "./Field";
+
+export class Board {
+    constructor() {
+        this.container = new PIXI.Container();
+        this.fields = [];
+        this.rows = App.config.board.rows;
+        this.cols = App.config.board.cols;
+        this.create();
+    }
+
+    create() {
+    }
+}
+```
+
+Доска состоит из сетки полей. Все созданные поля запишем в свойство `this.fields`.
+Количество строк и столбцов должно быть регулируемо.
+Поэтому добавим эти настройки в глобальный конфиг проекта:
+
+```javascript
+// ...
+export const Config = {
+    // ...
+    board: {
+        rows: 6,
+        cols: 6
+    }
+};
+```
+
+Все элементы доски, то есть поля и тайлы мы добавим в контейнер доски.
+А контейнер доски затем добавим в контейнер сцены.
+Чтобы создать доску, нам нужно разместить ее поля по сетке заданного размера. То есть создать спрайты полей в каждом столбце и каждой строки доски.
+Сделаем это в методе create:
+
+
+``` javascript
+export class Board {
+    // ...
+    create() {
+        this.createFields();
+    }
+
+    createFields() {
+        for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.cols; col++) {
+                this.createField(row, col);
+            }
+        }
+    }
+    createField(row, col) {
+        const field = new Field(row, col);
+        this.fields.push(field);
+        this.container.addChild(field.sprite);
+    }
+}
+```
+Выведем доску на сцену в классе `Game`:
+``` javascript
+// ...
+export class Game {
+    constructor() {
+        // ...
+        this.board = new Board();
+        this.container.addChild(this.board.container);
+    }
+// ...
+}
+```
+
+Сейчас доска расположена в левом верхнем углу. Исправим это, выровняв ее позицию по центру экрана.
+Мы можем получить размер поля доски, взяв первый элемент из массива созданных полей и прочитав ширину его спрайта:
+`this.fields[0].sprite.width;`
+Зная размер одного поля, мы можем рассчитать размер всей доски, умножив число строк и столбцов на размер поля:
+``` javascript
+        this.width = this.cols * this.fieldSize;
+        this.height = this.rows * this.fieldSize;
+```
+Зная размер доски и размер экрана, мы можем сделать правильный отступ для контейнера доски.
+Вычитаем размер доски из размера экрана и полученное оставшееся пространство будут занимать 2 отступа слева и справа от доски:
+
+``` javascript
+export class Board {
+    constructor() {
+        // ...
+        this.ajustPosition();
+    }
+    // ...
+    ajustPosition() {
+        this.fieldSize = this.fields[0].sprite.width;
+        this.width = this.cols * this.fieldSize;
+        this.height = this.rows * this.fieldSize;
+        this.container.x = (window.innerWidth - this.width) / 2 + this.fieldSize / 2;
+        this.container.y = (window.innerHeight - this.height) / 2 + this.fieldSize / 2;
+    }
+}
+```
