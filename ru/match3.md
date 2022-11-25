@@ -163,3 +163,137 @@ export class Board {
     }
 }
 ```
+### 1.3. Создаем одиночный тайл
+
+Теперь, когда у нас готовы поля доски, мы можем поместить в них тайлы, которые будем матчить. Как и в случае с выводом полей, начнем с того, что создадим класс одиночного тайла. 
+У всех тайлов названия спрайтов совпадают с их цветом. Чтобы создать спрайт тайла, нужно указать цвет, который мы хотим дать этому тайлу. Передаем названием цвета в качестве параметра в конструкторе класса и создаем соответствующий спрайт.
+Создаем файл src/scripts/games/Tile.js:
+``` javascript
+import { App } from "../system/App";
+
+export class Tile {
+    constructor(color) {
+        this.color = color;
+        this.sprite = App.sprite(this.color);
+        this.sprite.anchor.set(0.5);
+    }
+
+    setPosition(position) {
+        this.sprite.x = position.x;
+        this.sprite.y = position.y;
+    }
+}
+```
+Также сразу реализуем метод setPosition, который будет устанавливать спрайт сразу в правильную позицию.
+
+Добавим один тайл в классе `Board`:
+``` javascript
+// ...
+import { Tile } from "./Tile";
+
+export class Board {
+// ...
+    create() {
+        this.createFields();
+        this.createTiles();
+    }
+
+    createTiles() {
+        const tile = new Tile("green");
+        this.container.addChild(tile.sprite);
+    }
+// ...
+```
+
+### 1.4. Выводим тайлы во все поля доски
+Теперь мы можем вывести тайл в каждое поле доски.
+Для этого мы можем пройтись в цикле по массиву всех полей и в каждое поле установить свой тайл:
+
+``` javascript
+    create() {
+        this.createFields();
+        this.createTiles();
+    }
+
+    createTiles() {
+        this.fields.forEach(field => this.createTile(field));
+    }
+
+    createTile(field) {
+        const tile = new Tile("green");
+        field.setTile(tile);
+        this.container.addChild(tile.sprite);
+    }
+```
+
+Установить тайл в каждое поле означает поместить тайл в ту-же позицию на экране, что и данное поле. Реализуем метод setTile в классе Field:
+
+``` javascript
+    setTile(tile) {
+        this.tile = tile;
+        tile.field = this;
+        tile.setPosition(this.position);
+    }
+}
+
+Осталось сделать, чтобы в каждое поле попадал тайл со случайным цветом, а не одним заранее прописанным зеленым. Для этого создадим фабрику, которая будет генерировать случайный тайл. Создадим класс `src/scripts/game/TileFactory`:
+
+``` javascript
+import { App } from "../system/App";
+import { Tools } from "../system/Tools";
+import { Tile } from "./Tile";
+
+
+export class TileFactory {
+    static generate() {
+        const color = App.config.tilesColors[Tools.randomNumber(0, App.config.tilesColors.length - 1)];
+        return new Tile(color);
+    }
+}
+```
+
+Добавим конфиг цветов в конфиг проекта в `src/scripts/game/Config.js`:
+``` javascript
+export const Config = {
+    // ...
+    tilesColors: ['blue', 'green', 'orange', 'red', 'pink', 'yellow'],
+};
+```
+И добавим метод, возвращающий рандомное целое число в наш специальный класс хелперов `src/scripts/system/Tools.js`:
+
+``` javascript
+export class Tools {
+    static randomNumber(min, max) {
+        if (!max) {
+            max = min;
+            min = 0;
+        }
+    
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    static massiveRequire(req) {
+        const files = [];
+
+        req.keys().forEach(key => {
+            files.push({
+                key, data: req(key)
+            });
+        });
+
+        return files;
+    }
+}
+```
+
+И теперь в классе Board создаем тайл через фабрику:
+``` javascript
+// ...
+    createTile(field) {
+        const tile = TileFactory.generate();
+// ...
+
+```
+
+## 2. Своп тайлов
+## 2.1. Делаем тайлы интерактивными

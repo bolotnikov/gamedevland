@@ -160,3 +160,136 @@ export class Board {
 }
 ```
 
+### 1.3. Creating a single tile
+
+We have the board fields ready, and now we can create matching tiles in them.
+As in the case with the fields creation, we will start by creating a class for a single tile.
+
+As we can see in the assets, all tile names refer to their colors. To create a sprite, we need to specify the color we want to give to that tile. We pass the name of the color as a parameter in the constructor and create the corresponding sprite.
+Create a file `src/scripts/games/Tile.js`:
+
+``` javascript
+import { App } from "../system/App";
+
+export class Tile {
+    constructor(color) {
+        this.color = color;
+        this.sprite = App.sprite(this.color);
+        this.sprite.anchor.set(0.5);
+    }
+
+    setPosition(position) {
+        this.sprite.x = position.x;
+        this.sprite.y = position.y;
+    }
+}
+```
+
+We also implement the `setPosition` method, which will set the sprite to the correct position.
+Let's add a single tile in the `Board` class:
+
+``` javascript
+// ...
+import { Tile } from "./Tile";
+
+export class Board {
+// ...
+    create() {
+        this.createFields();
+        this.createTiles();
+    }
+
+    createTiles() {
+        const tile = new Tile("green");
+        this.container.addChild(tile.sprite);
+    }
+// ...
+```
+
+### 1.4. Create a tile in each field
+Now we can create a tile in each field of the board.
+To do this, we can loop through the array of all fields and set our own tile in each field:
+
+
+```javascript
+
+    create() {
+        this.createFields();
+        this.createTiles();
+    }
+
+    createTiles() {
+        this.fields.forEach(field => this.createTile(field));
+    }
+
+    createTile(field) {
+        const tile = new Tile("green");
+        field.setTile(tile);
+        this.container.addChild(tile.sprite);
+    }
+```
+
+Set a tile in each field means to place the tile in the same position on the screen as the given field. Let's implement the setTile method in the `Field` class:
+
+``` javascript
+    setTile(tile) {
+        this.tile = tile;
+        tile.field = this;
+        tile.setPosition(this.position);
+    }
+}
+```
+It remains to make sure that each field has a tile with a random color.
+To do this, we will create a factory that will generate a random tile.
+Let's create the `src/scripts/game/TileFactory.js` class:
+
+``` javascript
+import { App } from "../system/App";
+import { Tools } from "../system/Tools";
+import { Tile } from "./Tile";
+
+
+export class TileFactory {
+    static generate() {
+        const color = App.config.tilesColors[Tools.randomNumber(0, App.config.tilesColors.length - 1)];
+        return new Tile(color);
+    }
+}
+```
+
+Add the colors config to the project global config in `src/scripts/game/Config.js`:
+
+``` javascript
+export const Config = {
+    // ...
+    tilesColors: ['blue', 'green', 'orange', 'red', 'pink', 'yellow'],
+};
+```
+And add a method that returns a random integer to our special helpers class `src/scripts/system/Tools.js`:
+
+``` javascript
+export class Tools {
+    static randomNumber(min, max) {
+        if (!max) {
+            max = min;
+            min = 0;
+        }
+    
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    // ...
+}
+```
+
+And now in the `Board` class we create a tile using the factory:
+
+``` javascript
+// ...
+    createTile(field) {
+        const tile = TileFactory.generate();
+// ...
+
+```
+
+## 2. Tiles swap
+## 2.1. Adding interactivity to the tiles
