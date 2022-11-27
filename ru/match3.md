@@ -297,3 +297,84 @@ export class Tools {
 
 ## 2. Своп тайлов
 ## 2.1. Делаем тайлы интерактивными
+
+Начинаем разработку функционала перемещения тайлов.
+Чтобы выберать тайл для перемещения, нужно по нему кликнуть. Значит, тайлы должны быть интерактивными.
+Добавим интерактивность при создании тайлов в классе `Board`:
+``` javascript
+// ...
+    createTile(field) {
+        // ...
+        tile.sprite.interactive = true;
+        tile.sprite.on("pointerdown", () => {
+            this.container.emit('tile-touch-start', tile);
+        });
+    }
+// ...
+```
+Запустим событие tile-touch-start используя возможности класса `PIXI.Container`.
+Отследим и обработыем это событие в классе `Game`:
+``` javascript
+// ...
+export class Game {
+    constructor() {
+        // ...
+        this.board.container.on('tile-touch-start', this.onTileClick.bind(this));
+    }
+// ...
+```
+
+При возникновении события `tile-touch-start`, которое возникнет в случае клика по тайлу, запустим метод `onTileClick`.
+В этом методе обработаем все три возможных сценарии:
+
+- выбрать новый тайл для перемещения, если другой тайл не был выбран
+- переместить тайлы местами, если другой тайл уже был выбран и он является соседним по отношению к текущему
+- выбрать новый тайл, если другой тайл уже был выбран, но он не является соседним по отношению к текущему
+
+Прямо сейчас реализуем первый пункт, то есть выбор тайла. Выбор тайла определяется двумя действиями:
+1. запомнить выбранный тайл для попытки перемещения
+2. визуально выделить выбранное поле
+
+``` javascript
+// ...
+export class Game {
+    onTileClick(tile) {
+        if (this.selectedTile) {
+            // select new tile or make swap
+        } else {
+            this.selectTile(tile);
+        }
+    }
+
+    selectTile(tile) {
+        this.selectedTile = tile;
+        this.selectedTile.field.select();
+    }
+// ...
+
+```
+
+Мы можем выделить поле с выбранным тайлом, показав дополнительную рамку в этом поле.
+Реализуем код в классе `Field`:
+
+``` javascript
+// ...
+export class Field {
+    constructor(row, col) {
+        // ...
+        this.selected = App.sprite("field-selected");
+        this.sprite.addChild(this.selected);
+        this.selected.visible = false;
+        this.selected.anchor.set(0.5);
+
+    }
+
+    unselect() {
+        this.selected.visible = false;
+    }
+
+    select() {
+        this.selected.visible = true;
+    }
+    // ...
+```

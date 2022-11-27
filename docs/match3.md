@@ -291,5 +291,92 @@ And now in the `Board` class we create a tile using the factory:
 
 ```
 
-## 2. Tiles swap
-## 2.1. Adding interactivity to the tiles
+## 2. Moving tiles
+We start developing the functionality for moving tiles.
+
+## 2.1. Selecting a tile to move
+
+We need to click on a tile to select it. This means tiles must be interactive.
+Let's add interactivity when creating tiles in the `Board` class:
+
+``` javascript
+// ...
+    createTile(field) {
+        // ...
+        tile.sprite.interactive = true;
+        tile.sprite.on("pointerdown", () => {
+            this.container.emit('tile-touch-start', tile);
+        });
+    }
+// ...
+```
+Let's fire the `tile-touch-start` event using the capabilities of the `PIXI.Container` class.
+And then track and handle this event in the `Game` class:
+
+``` javascript
+// ...
+export class Game {
+    constructor() {
+        // ...
+        this.board.container.on('tile-touch-start', this.onTileClick.bind(this));
+    }
+// ...
+```
+
+Let's run the `onTileClick` method when the `tile-touch-start` event fires.
+In this method, we will handle all three possible scenarios:
+
+1. select a new tile to move if no other tile has been selected
+2. swap tiles if another tile has already been selected and it is next to the current one
+3. select a new tile if another tile has already been selected, but it is not next to the current one
+
+Right now we are implementing the first point. Now we are implementing the first point. When choosing a new tile, we need to do 2 things:
+
+1. remember the selected tile
+2. visually highlight the selected field
+
+``` javascript
+// ...
+export class Game {
+    onTileClick(tile) {
+        if (this.selectedTile) {
+            // select new tile or make swap
+        } else {
+            this.selectTile(tile);
+        }
+    }
+
+    selectTile(tile) {
+        this.selectedTile = tile;
+        this.selectedTile.field.select();
+    }
+// ...
+
+```
+
+We can highlight the field with the selected tile by showing an additional border in this field.
+Let's implement the code in the `Field` class:
+
+``` javascript
+// ...
+export class Field {
+    constructor(row, col) {
+        // ...
+        this.selected = App.sprite("field-selected");
+        this.sprite.addChild(this.selected);
+        this.selected.visible = false;
+        this.selected.anchor.set(0.5);
+
+    }
+
+    unselect() {
+        this.selected.visible = false;
+    }
+
+    select() {
+        this.selected.visible = true;
+    }
+    // ...
+```
+
+## 2.2. Swapping tiles
