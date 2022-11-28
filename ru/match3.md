@@ -378,3 +378,90 @@ export class Field {
     }
     // ...
 ```
+
+## 2.1. Перемещение тайлов
+
+В методе `onTileClick` класса `Game` добавим вызов метода `swap`, котором реализуем перемещение тайлов:
+
+``` javascript
+    onTileClick(tile) {
+        if (this.selectedTile) {
+            this.swap(this.selectedTile, tile);
+        } else {
+            this.selectTile(tile);
+        }
+    }
+
+```
+Определим, какие действия нам нужно выполнить для перемещения тайлов:
+1. Перемещенным тайлам установить новые поля
+2. Полям установить новые тайлы
+3. Перемещенные тайлы на экране поместить в позиции новых полей
+
+Движение тайлов при перемещении выполним через анимацию твинов используя gsap.
+Также стоит заблокировать доску, установив дополнительный флаг, чтобы не допустить обработку интерактивности во время выполнения анимации.
+Реализуем эти действия в коде:
+s
+``` javascript
+    // lesson 6
+    swap(selectedTile, tile) {
+        this.disabled = true;        // заблокируем доску, чтобы не допустить новое перемещение тайлов при уже запущенной анимации
+        this.clearSelection();        // скроем рамку "field-selected" с поля объекта selectedTile
+        selectedTile.sprite.zIndex = 2; // поместим спрайт объекта selectedTile на слой выше, чем спрайт объекта tile
+
+        selectedTile.moveTo(tile.field.position, 0.2); // переместим selectedTile в позицию тайла tile
+        // поместим tile в позицию selectedTilePosition
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            // после завершения анимаций движения:
+            // в объектах тайлов поменяем значения свойств field
+            // в объектах полей поменяем значения свойств tile
+            this.board.swap(selectedTile, tile);
+            this.disabled = false;            // разблокируем доску
+        });
+    }
+
+
+```
+
+Реализуем методы перемещения в классе Tile, используя анимацию твинов gsap:
+``` javascript
+
+export class Tile {
+    // ...
+    moveTo(position, duration) {
+        return new Promise(resolve => {
+            gsap.to(this.sprite, {
+                duration,
+                pixi: {
+                    x: position.x,
+                    y: position.y
+                },
+                onComplete: () => {
+                    resolve()
+                }
+            });
+        });
+    }
+}
+
+```
+
+Добавим метод `swap` в классе `Board`, в котором изменим значения свойств в перемещенных объектах:
+
+``` javascript
+
+export class Board {
+    // ...
+    swap(tile1, tile2) {
+        const tile1Field = tile1.field;
+        const tile2Field = tile2.field;
+
+        tile1Field.tile = tile2;
+        tile2.field = tile1Field;
+
+        tile2Field.tile = tile1;
+        tile1.field = tile2Field;
+    }
+}
+
+```

@@ -380,3 +380,90 @@ export class Field {
 ```
 
 ## 2.2. Swapping tiles
+
+In the `onTileClick` method of the `Game` class, add `swap` method call, which implements the movement of tiles:
+
+``` javascript
+    onTileClick(tile) {
+        if (this.selectedTile) {
+            this.swap(this.selectedTile, tile);
+        } else {
+            this.selectTile(tile);
+        }
+    }
+
+```
+Let's define what actions we need to move tiles:
+
+1. Reset fields in moved tiles
+2. Reset tiles in the board's fields
+3. Place the moved tiles in the positions of the new fields on the screen
+
+We will create tweens animation using gsap for tiles movement.
+It's also worth locking the board by setting an additional flag to prevent interactivity while the animation is running.
+
+Let's implement these actions in code:
+``` javascript
+    // lesson 6
+    swap(selectedTile, tile) {
+        this.disabled = true;        // lock the board to prevent tiles from moving again while the animation is already running
+        this.clearSelection();      // hide the "field-selected" frame from the field of the selectedTile object
+        selectedTile.sprite.zIndex = 2; // place the selectedTile sprite one layer higher than the tile sprite
+
+        selectedTile.moveTo(tile.field.position, 0.2); // move selectedTile to tile position
+        // move tile to electedTile position
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            // after motion animations complete:
+            // change the values of the field properties in the tile objects
+            // change the values of the tile properties in the field objects
+            this.board.swap(selectedTile, tile);
+            this.disabled = false; // unlock the board
+        });
+    }
+
+
+```
+
+Let's implement the `moveTo` method in the `Tile` class using the `gsap` tween animation:
+
+``` javascript
+
+export class Tile {
+    // ...
+    moveTo(position, duration) {
+        return new Promise(resolve => {
+            gsap.to(this.sprite, {
+                duration,
+                pixi: {
+                    x: position.x,
+                    y: position.y
+                },
+                onComplete: () => {
+                    resolve()
+                }
+            });
+        });
+    }
+}
+
+```
+
+Let's add the `swap` method in the `Board` class, in which we will change the properties values in the moved objects:
+
+``` javascript
+
+export class Board {
+    // ...
+    swap(tile1, tile2) {
+        const tile1Field = tile1.field;
+        const tile2Field = tile2.field;
+
+        tile1Field.tile = tile2;
+        tile2.field = tile1Field;
+
+        tile2Field.tile = tile1;
+        tile1.field = tile2Field;
+    }
+}
+
+```
