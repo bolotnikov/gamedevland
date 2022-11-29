@@ -467,3 +467,40 @@ export class Board {
 }
 
 ```
+
+Now, when moving tiles, we can swap not only neighboring tiles, but any tiles on the board. But only neighboring tiles should be swapped. And if the player has chosen a non-neighboring tile, then we just need to completely clear the first selection and select the new tile.
+
+Let's update the condition in the `onTileClick` method in the `Game` class:
+
+``` javascript
+    onTileClick(tile) {
+        if (this.disabled) {
+            return;
+        }
+
+        if (this.selectedTile) {
+            if (!this.selectedTile.isNeighbour(tile)) {
+                this.clearSelection(tile);
+                this.selectTile(tile);
+            } else {
+                this.swap(this.selectedTile, tile);
+            }
+        } else {
+            this.selectTile(tile);
+        }
+    }
+```
+
+As you can see, we also added a check for the `disabled` flag, which we set in the last paragraph.
+Thus, we block the functionality of the `onTileClick` method while the tiles are moving on the board, in order to avoid possible bugs.
+
+Let's implement the `isNeighbour` method in the `Tile` class.
+A neighbor is a tile located either in an adjacent column or in an adjacent row.
+This means that the difference between either rows or columns of the checked and current tile modulo must be equal to one:
+
+``` javascript
+
+    isNeighbour(tile) {
+        return Math.abs(this.field.row - tile.field.row) + Math.abs(this.field.col - tile.field.col) === 1
+    }
+```
