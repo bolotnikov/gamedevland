@@ -294,7 +294,7 @@ And now in the `Board` class we create a tile using the factory:
 ## 2. Moving tiles
 We start developing the functionality for moving tiles.
 
-## 2.1. Selecting a tile to move
+### 2.1 Selecting a tile to move
 
 We need to click on a tile to select it. This means tiles must be interactive.
 Let's add interactivity when creating tiles in the `Board` class:
@@ -379,7 +379,7 @@ export class Field {
     // ...
 ```
 
-## 2.2. Swapping tiles
+### 2.2 Swapping tiles
 
 In the `onTileClick` method of the `Game` class, add `swap` method call, which implements the movement of tiles:
 
@@ -504,3 +504,87 @@ This means that the difference between either rows or columns of the checked and
         return Math.abs(this.field.row - tile.field.row) + Math.abs(this.field.col - tile.field.col) === 1
     }
 ```
+
+## 3. Search for combinations
+
+After swapping tiles, the board must be checked for combinations.
+A combination is considered to be the collection of 3, 4 and 5 identical tiles in a row.
+To check for all these combinations, it is enough to compare each tile on the board with the next two tiles in a row and the next two tiles in a column.
+
+Let's add the comparison rules to the game config `Config.js`:
+
+``` javascript
+export const Config = {
+    // ...
+    combinationRules: [[
+        {col: 1, row: 0}, {col: 2, row: 0},
+    ], [
+        {col: 0, row: 1}, {col: 0, row: 2},
+    ]]
+};
+``` 
+We have added 2 validation rules that show exactly which fields on the board should have the same tiles in relation to the field being checked. That is, for each checked field on the board, it is necessary to check the match of the field in the next two columns, as well as in the next two rows.
+
+We implement the `CombinationManager` class:
+
+``` javascript
+
+import { App } from "../system/App";
+
+export class CombinationManager {
+    constructor(board) {
+        this.board = board;
+    }
+
+    getMatches() {
+        let result = [];
+
+        this.board.fields.forEach(checkingField => {
+            App.config.combinationRules.forEach(rule => {
+                let matches = [checkingField.tile];
+
+                rule.forEach(position => {
+                    const row = checkingField.row + position.row;
+                    const col = checkingField.col + position.col;
+                    const comparingField = this.board.getField(row, col);
+                    if (comparingField && comparingField.tile.color === checkingField.tile.color) {
+                        matches.push(comparingField.tile);
+                    }
+                });
+
+                if (matches.length === rule.length + 1) {
+                    result.push(matches);
+                }
+            });
+        });
+
+        return result;
+    }
+}
+
+``` 
+
+And call its method in the `Game` class:
+
+``` javascript
+// ...
+import { CombinationManager } from "./CombinationManager";
+    
+export class Game {
+    constructor() {
+        // ...
+        this.combinationManager = new CombinationManager(this.board);
+    }
+
+    swap(selectedTile, tile) {
+        // ...
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            this.board.swap(selectedTile, tile);
+            const matches = this.combinationManager.getMatches();
+            this.disabled = false;
+        });
+    }
+}
+
+```
+## 4. Processing combinations

@@ -296,7 +296,7 @@ export class Tools {
 ```
 
 ## 2. Своп тайлов
-## 2.1. Делаем тайлы интерактивными
+### 2.1 Делаем тайлы интерактивными
 
 Начинаем разработку функционала перемещения тайлов.
 Чтобы выберать тайл для перемещения, нужно по нему кликнуть. Значит, тайлы должны быть интерактивными.
@@ -379,7 +379,7 @@ export class Field {
     // ...
 ```
 
-## 2.1. Перемещение тайлов
+### 2.2 Перемещение тайлов
 
 В методе `onTileClick` класса `Game` добавим вызов метода `swap`, котором реализуем перемещение тайлов:
 
@@ -497,3 +497,84 @@ export class Board {
         return Math.abs(this.field.row - tile.field.row) + Math.abs(this.field.col - tile.field.col) === 1
     }
 ```
+
+## 3. Поиск комбинаций
+
+
+После свопа тайлов доску необходимо проверить на наличие комбинаций.
+Комбинацией считается сбор 3, 4 и 5 одинаковых камней подряд. Для того, чтобы проверить наличие всех этих комбинаций, достаточно сравнить каждый тайл на доске с двумя следующими тайлами в строке и двумя следующими тайлами в столбце.
+
+Добавим правила сравнения в конфиг игры Config.js:
+``` javascript
+export const Config = {
+    // ...
+    combinationRules: [[
+        {col: 1, row: 0}, {col: 2, row: 0},
+    ], [
+        {col: 0, row: 1}, {col: 0, row: 2},
+    ]]
+};
+``` 
+Здесь мы ввели 2 правила проверки, которые показывают, какие именно поля доске должны иметь одинаковые тайлы по отношению к проверяемому полю. То есть для каждого првоеряемого поля на доске необходимо проверить соответствие поля в двух следующих столбцах, а также в двух следующих строках.
+
+Реализуем класс `CombinationManager`:
+``` javascript
+
+import { App } from "../system/App";
+
+export class CombinationManager {
+    constructor(board) {
+        this.board = board;
+    }
+
+    getMatches() {
+        let result = [];
+
+        this.board.fields.forEach(checkingField => {
+            App.config.combinationRules.forEach(rule => {
+                let matches = [checkingField.tile];
+
+                rule.forEach(position => {
+                    const row = checkingField.row + position.row;
+                    const col = checkingField.col + position.col;
+                    const comparingField = this.board.getField(row, col);
+                    if (comparingField && comparingField.tile.color === checkingField.tile.color) {
+                        matches.push(comparingField.tile);
+                    }
+                });
+
+                if (matches.length === rule.length + 1) {
+                    result.push(matches);
+                }
+            });
+        });
+
+        return result;
+    }
+}
+
+``` 
+
+И вызовем его метод в классе `Game`:
+``` javascript
+// ...
+import { CombinationManager } from "./CombinationManager";
+    
+export class Game {
+    constructor() {
+        // ...
+        this.combinationManager = new CombinationManager(this.board);
+    }
+
+    swap(selectedTile, tile) {
+        // ...
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            this.board.swap(selectedTile, tile);
+            const matches = this.combinationManager.getMatches();
+            this.disabled = false;
+        });
+    }
+}
+
+```
+## 4. Обработка комбинаций
