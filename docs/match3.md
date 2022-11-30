@@ -588,3 +588,135 @@ export class Game {
 
 ```
 ## 4. Processing combinations
+### 4.1 Removing tiles
+
+First of all, we will remove all the tiles in the collected combinations:
+
+``` javascript
+// ...
+export class Game {
+// ...
+    swap(selectedTile, tile) {
+        // ...
+            const matches = this.combinationManager.getMatches();
+            if (matches.length) {
+                this.processMatches(matches);
+            }
+        });
+    }
+
+    processMatches(matches) {
+        this.removeMatches(matches);
+    }
+
+    removeMatches(matches) {
+        matches.forEach(match => {
+            match.forEach(tile => {
+                tile.remove();
+            });
+        });
+    }
+    // ...
+```
+
+Let's implement the `remove` method in the `Tile` class:
+
+
+``` javascript
+    remove() {
+        if (!this.sprite) {
+            return;
+        }
+        this.sprite.destroy();
+        this.sprite = null;
+
+        if (this.field) {
+            this.field.tile = null;
+            this.field = null;
+        }
+    }
+```
+If the object no longer has a sprite, then it has already been deleted.
+Otherwise, we delete the sprite and the reference to the field. At the field itself, we also remove the reference to the current tile.
+
+### 4.2 Fall of the remaining tiles
+
+After the combination is triggered and the collected tiles are removed, it is necessary to drop the remaining tiles on the board. Add `processFallDown` method call in `processMatches`:
+
+```javascript
+    processMatches(matches) {
+        this.removeMatches(matches);
+        this.processFallDown();
+    }
+```
+
+Starting from the bottom row of the board, check each field for a tile.
+If the field is empty, we will shift down the column all the tiles that are above it:
+
+```javascript
+    processFallDown() {
+        return new Promise(resolve => {
+            let completed = 0;
+            let started = 0;
+
+            // check all fields of the board, starting from the bottom row
+            for (let row = this.board.rows - 1; row >= 0; row--) {
+                for (let col = this.board.cols - 1; col >= 0; col--) {
+                    const field = this.board.getField(row, col);
+    
+                    // if there is no tile in the field
+                    if (!field.tile) {
+                        ++started;
+
+                        // shift all tiles that are in the same column in all rows above
+                        this.fallDownTo(field).then(() => {
+                            ++completed;
+                            if (completed >= started) {
+                                resolve();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+```
+
+We implement moving tiles down the column in the `fallDownTo` method:
+
+```javascript
+    fallDownTo(emptyField) {
+        // checking all board fields in the found empty field column, but in all higher rows
+        for (let row = emptyField.row - 1; row >= 0; row--) {
+            let fallingField = this.board.getField(row, emptyField.col);
+
+            // find the first field with a tile
+            if (fallingField.tile) {
+                // the first found tile will be placed in the current empty field
+                const fallingTile = fallingField.tile;
+                fallingTile.field = emptyField;
+                emptyField.tile = fallingTile;
+                fallingField.tile = null;
+                // run the tile move method and stop searching a tile for that empty field
+                return fallingTile.fallDownTo(emptyField.position);
+            }
+        }
+
+        return Promise.resolve();
+    }
+
+```
+
+Let's add the `fallDownTo` method to the `Tile` class:
+
+```javascript
+// ...
+export class Tile {
+    // ...
+    fallDownTo(position, delay) {
+        return this.moveTo(position, 0.5, delay, "bounce.out");
+    }
+}
+```
+
+### 4.3 Adding and dropping new tiles

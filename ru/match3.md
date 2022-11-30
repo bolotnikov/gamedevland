@@ -578,3 +578,129 @@ export class Game {
 
 ```
 ## 4. Обработка комбинаций
+### 4.1 Удаление тайлов
+
+Первым делом удалим все тайлы в собранных комбинациях:
+``` javascript
+// ...
+export class Game {
+// ...
+    swap(selectedTile, tile) {
+        // ...
+            const matches = this.combinationManager.getMatches();
+            if (matches.length) {
+                this.processMatches(matches);
+            }
+        });
+    }
+
+    processMatches(matches) {
+        this.removeMatches(matches);
+    }
+
+    removeMatches(matches) {
+        matches.forEach(match => {
+            match.forEach(tile => {
+                tile.remove();
+            });
+        });
+    }
+    // ...
+```
+
+Реализуем метод remove в классе `Tile`:
+
+``` javascript
+    remove() {
+        if (!this.sprite) {
+            return;
+        }
+        this.sprite.destroy();
+        this.sprite = null;
+
+        if (this.field) {
+            this.field.tile = null;
+            this.field = null;
+        }
+    }
+```
+Если у объекта уже нет спрайта, значит он уже удален.
+В противном случае, удаляем спрайт и ссылку на поле. У самого поля также удаляем ссылку на текущий тайл.
+
+### 4.2 Допадывание оставшихся тайлов
+
+После срабатывания комбинации и удаления собранных тайлов, необходимо выполнить допадывание оставшихся тайлов на доске. Добавим вызов нужного метода в `processMatches`:
+```javascript
+    processMatches(matches) {
+        this.removeMatches(matches);
+        this.processFallDown();
+    }
+```
+
+Начав с самой нижней строки доски, проверим каждое поле на наличие в нем тайла.
+Если поле является пустым, будем смещать вниз по столбцу все тайлы, которые находятся над ним:
+```javascript
+    processFallDown() {
+        return new Promise(resolve => {
+            let completed = 0;
+            let started = 0;
+
+            // проверяем все поля доски, начиная с нижней строки
+            for (let row = this.board.rows - 1; row >= 0; row--) {
+                for (let col = this.board.cols - 1; col >= 0; col--) {
+                    const field = this.board.getField(row, col);
+    
+                    // если в поле нет тайла
+                    if (!field.tile) {
+                        ++started;
+
+                        // сместим все тайлы, которые находятся в том-же столбце во всех строках выше
+                        this.fallDownTo(field).then(() => {
+                            ++completed;
+                            if (completed >= started) {
+                                resolve();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+```
+
+Реализуем перемещение тайлов вниз по столбцу в методе `fallDownTo`:
+```javascript
+    fallDownTo(emptyField) {
+        // проверяя все поля доски в столбце найденного пустого поля, но во всех более высоких строках
+        for (let row = emptyField.row - 1; row >= 0; row--) {
+            let fallingField = this.board.getField(row, emptyField.col);
+
+            // найдем первое поле с тайлом
+            if (fallingField.tile) {
+                // первый найденный тайл поместим в текущее пустое поле 
+                const fallingTile = fallingField.tile;
+                fallingTile.field = emptyField;
+                emptyField.tile = fallingTile;
+                fallingField.tile = null;
+                // и запустим  метод перемещения тайла
+                return fallingTile.fallDownTo(emptyField.position);
+            }
+        }
+
+        return Promise.resolve();
+    }
+
+```
+
+Добавим метод `fallDownTo` в класс `Tile`:
+```javascript
+// ...
+export class Tile {
+    // ...
+    fallDownTo(position, delay) {
+        return this.moveTo(position, 0.5, delay, "bounce.out");
+    }
+}
+```
+
+### 4.3 Добавление и допадывание новых тайлов
