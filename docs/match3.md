@@ -2,6 +2,9 @@
 
 In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 
+- [Complete source code](https://github.com/gamedevland/match3)
+- [Preview demo](https://gamedevland.github.io/match3/)
+
 Before starting the development, we need to perform 2 steps:
 
 1. Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
