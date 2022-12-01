@@ -765,4 +765,106 @@ For each empty field, create a new tile, place it higher than the first row of t
     }
 ```
 
-### 4.4 Checking for combinations after falldown
+### 4.4 Checking for combinations after tiles falling
+
+After the completion of falling new tiles, combinations may appear on the board again.
+If there are new combinations, it is also necessary to process them, that is, collect the combination, make a tiles fall and create new tiles.
+For all these actions, we have already developed functionality in the `processMatches` method. We will call it recursively until there are no combinations left on the board after the next falling of new tiles:
+
+```javascript
+    processMatches(matches) {
+        this.removeMatches(matches);
+        this.processFallDown()
+            .then(() => this.addTiles())
+            .then(() => this.onFallDownOver());
+    }
+
+    onFallDownOver() {
+        const matches = this.combinationManager.getMatches();
+
+        if (matches.length) {
+            this.processMatches(matches)
+        } else {
+            this.disabled = false;
+        }
+    }
+```
+
+### 5. Collect combinations at the start
+Combinations can appear be not only after moving two tiles, but also during the initial placement of tiles after creating the board.
+Such combinations must be automatically processed without falling animation and replaced with other tiles before showing the starting board to the player.
+We already have the functionality needed to handle starting combinations:
+
+1. Find all combinations on the board using `combinationManager`.
+2. Remove all founded matches
+3. Create new tiles in empty fields
+4. If combinations appear after adding new tiles, then repeat. Otherwise, let's start the game.
+
+```javascript
+// ...
+export class Game {
+    constructor() {
+        // ...
+        this.removeStartMatches();
+    }
+
+    // lesson 11
+    removeStartMatches() {
+        let matches = this.combinationManager.getMatches(); // find combinations to collect
+
+        while(matches.length) { // as long as there are combinations
+            this.removeMatches(matches); // remove tiles in combinations
+
+            const fields = this.board.fields.filter(field => field.tile === null); // find empty fields
+
+            fields.forEach(field => { // in each empty field
+                this.board.createTile(field); // create a new random tile
+            });
+
+            matches = this.combinationManager.getMatches(); // looking for combinations again after adding new tiles
+        }
+    }
+}
+```
+
+### 6. Reverse swap
+If, after the swap, no combination was formed on the board to collect, it is necessary to perform a reverse swap of tiles.
+To move tiles on the board, we have already implemented the `swap` method. We can modify it to perform a reverse move if no combinations are found after the main move.
+Add the `reverse` flag as the third parameter to the `swap` method:
+
+```javascript
+// ...
+export class Game {
+// ...
+
+    swap(selectedTile, tile, reverse) {
+        this.disabled = true;
+        selectedTile.sprite.zIndex = 2;
+
+        selectedTile.moveTo(tile.field.position, 0.2);
+
+        this.clearSelection();
+
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            this.board.swap(selectedTile, tile);
+
+            // after the swap, check if it was the main swap or reverse
+            if (!reverse) {
+                // if this is the main swap, then we are looking for combinations
+                const matches = this.combinationManager.getMatches();
+                if (matches.length) {
+                    // if there are combinations, then process them
+                    this.processMatches(matches);
+                } else {
+                    // if there are no combinations after the main swap, then perform a reverse swap by running the same method, but with the reverse parameter
+                    this.swap(tile, selectedTile, true);
+                }
+            } else {
+                // in this condition, by the reverse flag, we understand that the swap was reversed, so there is no need to look for combinations.
+                // all you need to do is unlock the board, because here the movement is already completed and there are no other animations
+                this.disabled = false;
+            }
+        });
+    }
+}
+```

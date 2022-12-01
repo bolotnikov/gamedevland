@@ -750,3 +750,107 @@ export class Tile {
 ```
 
 ### 4.4 Проверка на комбинации после допадывания
+После завершения допадывания новых тайлов на доске снова могут появиться комбинации.
+Если новые комбинации есть, необходимо их также обработать, то есть выполнить сбор комбинации, произвести допадывание и создание новых тайлов.
+Для всех этих действий мы уже разработали функционал в методе `processMatches`. Будем вызывать его рекурсивно до тех пор, пока на доске не останется комбинаций после очередного допадывания новых тайлов:
+
+```javascript
+
+### 4.4 Checking for combinations after falldown
+
+    processMatches(matches) {
+        this.removeMatches(matches);
+        this.processFallDown()
+            .then(() => this.addTiles())
+            .then(() => this.onFallDownOver());     // lesson 11
+    }
+
+    onFallDownOver() {
+        const matches = this.combinationManager.getMatches();
+
+        if (matches.length) {
+            this.processMatches(matches)
+        } else {
+            this.disabled = false;
+        }
+    }
+
+```
+
+### 5. Сбор комбинаций на старте
+Комбинации могут быть не только после перемещения двух тайлов, но и при стартовой расстоновке тайлов после создания доски.
+Такие комбинации нужно автоматически обработать без допадывания и заменить на другие тайлы перед тем, как показать игроку стартовую доску.
+У нас уже есть функционал, необходмый для обработки стартовых комбинаций.
+1. Найдем все комбинации на доске с помощью `combinationManager`.
+2. Удалим все совпадения
+3. Создадим новые тайлы в пустых полях
+4. Если после добавления новых тайлов появились комбинации, то повторим. В противном случае - начнем игру.
+
+```javascript
+// ...
+export class Game {
+    constructor() {
+        // ...
+        this.removeStartMatches();
+    }
+
+    // lesson 11
+    removeStartMatches() {
+        let matches = this.combinationManager.getMatches(); // находим комбинации для сбора
+
+        while(matches.length) { // пока комбинации есть
+            this.removeMatches(matches); // удаляем тайлы в комбинациях
+
+            const fields = this.board.fields.filter(field => field.tile === null); // находим пустые поля
+
+            fields.forEach(field => { // в каждом пустом поле
+                this.board.createTile(field); // создаем новый случайный тайл
+            });
+
+            matches = this.combinationManager.getMatches(); // заново ищем комбинации уже после добавления новых тайлов
+        }
+    }
+}
+```
+
+### 6. Обратный своп
+Если после свопа, на доске не образовалось комбинации для сбора, необходимо выполнить обратный своп тайлов.
+Для перемещения тайлов по доске у нас уже реализован метод swap. Мы можем доработать его так, чтобы выполнять обратное перемещение в случае, если после основного перемещения комбинаций не найдено.
+В метод `swap` добавим третьим параметром флаг `reverse`:
+
+```javascript
+// ...
+export class Game {
+// ...
+
+    swap(selectedTile, tile, reverse) {
+        this.disabled = true;
+        selectedTile.sprite.zIndex = 2;
+
+        selectedTile.moveTo(tile.field.position, 0.2);
+
+        this.clearSelection();
+
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            this.board.swap(selectedTile, tile);
+
+            // после осуществления свопа проверим, был ли это основной своп или обратный
+            if (!reverse) {
+                // если это основной своп, то ищем комбинации
+                const matches = this.combinationManager.getMatches();
+                if (matches.length) {
+                    // если комбинации есть, то обрабатываем их
+                    this.processMatches(matches);
+                } else {
+                    // если комбинаций после основного свопа нет, то выполним обратный своп, запустив этот-же метод, но с параметром reverse
+                    this.swap(tile, selectedTile, true);
+                }
+            } else {
+                // в данном условии по флагу reverse мы пониманием, что своп был обратный, значит искать комбинации не нужно.
+                // все, что нужно - это разблокировать доску, т.к. здесь движение уже завершено и других анимаций нет
+                this.disabled = false;
+            }
+        });
+    }
+}
+```
