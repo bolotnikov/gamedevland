@@ -428,10 +428,12 @@ s
 
 export class Tile {
     // ...
-    moveTo(position, duration) {
+    moveTo(position, duration, delay, ease) {
         return new Promise(resolve => {
             gsap.to(this.sprite, {
                 duration,
+                delay,
+                ease,
                 pixi: {
                     x: position.x,
                     y: position.y
@@ -704,3 +706,47 @@ export class Tile {
 ```
 
 ### 4.3 Добавление и допадывание новых тайлов
+После завершения допадывания оставшихся на доске тайлов, необходимо создать новые тайлы сверху доски так, чтобы они упали в получившиеся пустые поля.
+Создание и допадывание новых тайлов нужно осуществлять после допадывания оставшихся:
+```javascript
+
+    processMatches(matches) {
+        this.removeMatches(matches);
+        this.processFallDown()
+            .then(() => this.addTiles())
+
+    }
+```
+
+Чтобы выполнить создание и допадывание новых тайлов, нужно получить все поля на доске, в которых не осталось тайлов.
+Для каждого пустого поля создадим новый тайл, поместим его выше, чем первая строка доски и запустим анимацию движения в заданное пустое поле:
+
+```javascript
+
+    addTiles() {
+        return new Promise(resolve => {
+            // получим все поля, в которых нет тайлов
+            const fields = this.board.fields.filter(field => field.tile === null);
+            let total = fields.length;
+            let completed = 0;
+
+            // для каждого пустого поля
+            fields.forEach(field => {
+                // создадим новый тайл
+                const tile = this.board.createTile(field);
+                // поместим его над доской
+                tile.sprite.y = -500;
+                const delay = Math.random() * 2 / 10 + 0.3 / (field.row + 1);
+                // запустим движение тайла в заданное пустое поле с заданной задержкой 
+                tile.fallDownTo(field.position, delay).then(() => {
+                    ++completed;
+                    if (completed >= total) {
+                        resolve();
+                    }
+                });
+            });
+        });
+    }
+```
+
+### 4.4 Проверка на комбинации после допадывания

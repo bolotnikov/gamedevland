@@ -720,3 +720,49 @@ export class Tile {
 ```
 
 ### 4.3 Adding and dropping new tiles
+
+After the completion of the fall of the remaining tiles, we need to create new tiles on top of the board so that they fall into the resulting empty fields:
+
+```javascript
+
+    processMatches(matches) {
+        this.removeMatches(matches);
+        this.processFallDown()
+            .then(() => this.addTiles())
+
+    }
+```
+
+To perform the creation and dropping of new tiles, we need to get all the fields on the board that have no tiles left.
+For each empty field, create a new tile, place it higher than the first row of the board, and start the motion animation on the given empty field:
+
+
+```javascript
+
+    addTiles() {
+        return new Promise(resolve => {
+            // get all fields that don't have tiles
+            const fields = this.board.fields.filter(field => field.tile === null);
+            let total = fields.length;
+            let completed = 0;
+
+            // for each empty field
+            fields.forEach(field => {
+                // create a new tile
+                const tile = this.board.createTile(field);
+                // put it above the board
+                tile.sprite.y = -500;
+                const delay = Math.random() * 2 / 10 + 0.3 / (field.row + 1);
+                // start the movement of the tile in the given empty field with the given delay
+                tile.fallDownTo(field.position, delay).then(() => {
+                    ++completed;
+                    if (completed >= total) {
+                        resolve();
+                    }
+                });
+            });
+        });
+    }
+```
+
+### 4.4 Checking for combinations after falldown
