@@ -272,6 +272,7 @@ And add a method that returns a random integer to our special helpers class `src
 
 ``` javascript
 export class Tools {
+    // ...
     static randomNumber(min, max) {
         if (!max) {
             max = min;
@@ -280,18 +281,16 @@ export class Tools {
     
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
-    // ...
 }
 ```
 
 And now in the `Board` class we create a tile using the factory:
 
 ``` javascript
-// ...
     createTile(field) {
         const tile = TileFactory.generate();
-// ...
-
+        // ...
+    }
 ```
 
 ## 2. Moving tiles
@@ -303,7 +302,6 @@ We need to click on a tile to select it. This means tiles must be interactive.
 Let's add interactivity when creating tiles in the `Board` class:
 
 ``` javascript
-// ...
     createTile(field) {
         // ...
         tile.sprite.interactive = true;
@@ -311,7 +309,6 @@ Let's add interactivity when creating tiles in the `Board` class:
             this.container.emit('tile-touch-start', tile);
         });
     }
-// ...
 ```
 Let's fire the `tile-touch-start` event using the capabilities of the `PIXI.Container` class.
 And then track and handle this event in the `Game` class:
@@ -339,7 +336,6 @@ Right now we are implementing the first point. Now we are implementing the first
 2. visually highlight the selected field
 
 ``` javascript
-// ...
 export class Game {
     onTileClick(tile) {
         if (this.selectedTile) {
@@ -353,15 +349,12 @@ export class Game {
         this.selectedTile = tile;
         this.selectedTile.field.select();
     }
-// ...
-
 ```
 
 We can highlight the field with the selected tile by showing an additional border in this field.
 Let's implement the code in the `Field` class:
 
 ``` javascript
-// ...
 export class Field {
     constructor(row, col) {
         // ...
@@ -379,7 +372,6 @@ export class Field {
     select() {
         this.selected.visible = true;
     }
-    // ...
 ```
 
 ### 2.2 Swapping tiles
@@ -394,7 +386,6 @@ In the `onTileClick` method of the `Game` class, add `swap` method call, which i
             this.selectTile(tile);
         }
     }
-
 ```
 Let's define what actions we need to move tiles:
 
@@ -407,7 +398,6 @@ It's also worth locking the board by setting an additional flag to prevent inter
 
 Let's implement these actions in code:
 ``` javascript
-    // lesson 6
     swap(selectedTile, tile) {
         this.disabled = true;        // lock the board to prevent tiles from moving again while the animation is already running
         this.clearSelection();      // hide the "field-selected" frame from the field of the selectedTile object
@@ -423,16 +413,20 @@ Let's implement these actions in code:
             this.disabled = false; // unlock the board
         });
     }
-
-
 ```
 
+Let's reset the selection in the field in `clearSelection` method:
+``` javascript
+    clearSelection() {
+        if (this.selectedTile) {
+            this.selectedTile.field.unselect();
+            this.selectedTile = null;
+        }
+    }
+```
 Let's implement the `moveTo` method in the `Tile` class using the `gsap` tween animation:
 
 ``` javascript
-
-export class Tile {
-    // ...
     moveTo(position, duration) {
         return new Promise(resolve => {
             gsap.to(this.sprite, {
@@ -447,16 +441,11 @@ export class Tile {
             });
         });
     }
-}
-
 ```
 
 Let's add the `swap` method in the `Board` class, in which we will change the properties values in the moved objects:
 
 ``` javascript
-
-export class Board {
-    // ...
     swap(tile1, tile2) {
         const tile1Field = tile1.field;
         const tile2Field = tile2.field;
@@ -467,8 +456,6 @@ export class Board {
         tile2Field.tile = tile1;
         tile1.field = tile2Field;
     }
-}
-
 ```
 
 Now, when moving tiles, we can swap not only neighboring tiles, but any tiles on the board. But only neighboring tiles should be swapped. And if the player has chosen a non-neighboring tile, then we just need to completely clear the first selection and select the new tile.
@@ -502,7 +489,6 @@ A neighbor is a tile located either in an adjacent column or in an adjacent row.
 This means that the difference between either rows or columns of the checked and current tile modulo must be equal to one:
 
 ``` javascript
-
     isNeighbour(tile) {
         return Math.abs(this.field.row - tile.field.row) + Math.abs(this.field.col - tile.field.col) === 1
     }
@@ -531,7 +517,6 @@ We have added 2 validation rules that show exactly which fields on the board sho
 We implement the `CombinationManager` class:
 
 ``` javascript
-
 import { App } from "../system/App";
 
 export class CombinationManager {
@@ -567,10 +552,17 @@ export class CombinationManager {
 
 ``` 
 
+Let's implement the `getField` method in the `Board` class:
+
+``` javascript
+    getField(row, col) {
+        return this.fields.find(field => field.row === row && field.col === col);
+    }
+``` 
+
 And call its method in the `Game` class:
 
 ``` javascript
-// ...
 import { CombinationManager } from "./CombinationManager";
     
 export class Game {
@@ -596,7 +588,6 @@ export class Game {
 First of all, we will remove all the tiles in the collected combinations:
 
 ``` javascript
-// ...
 export class Game {
 // ...
     swap(selectedTile, tile) {
@@ -619,7 +610,7 @@ export class Game {
             });
         });
     }
-    // ...
+}
 ```
 
 Let's implement the `remove` method in the `Tile` class:
@@ -713,13 +704,9 @@ We implement moving tiles down the column in the `fallDownTo` method:
 Let's add the `fallDownTo` method to the `Tile` class:
 
 ```javascript
-// ...
-export class Tile {
-    // ...
     fallDownTo(position, delay) {
         return this.moveTo(position, 0.5, delay, "bounce.out");
     }
-}
 ```
 
 ### 4.3 Adding and dropping new tiles
@@ -727,7 +714,6 @@ export class Tile {
 After the completion of the fall of the remaining tiles, we need to create new tiles on top of the board so that they fall into the resulting empty fields:
 
 ```javascript
-
     processMatches(matches) {
         this.removeMatches(matches);
         this.processFallDown()
@@ -741,7 +727,6 @@ For each empty field, create a new tile, place it higher than the first row of t
 
 
 ```javascript
-
     addTiles() {
         return new Promise(resolve => {
             // get all fields that don't have tiles
@@ -811,7 +796,6 @@ export class Game {
         this.removeStartMatches();
     }
 
-    // lesson 11
     removeStartMatches() {
         let matches = this.combinationManager.getMatches(); // find combinations to collect
 
