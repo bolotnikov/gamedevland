@@ -2,13 +2,18 @@
 
 In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 
+## Video version
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kgIg5Ms-HRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Additional materials
 - [Complete source code](https://github.com/gamedevland/match3)
 - [Preview demo](https://gamedevland.github.io/match3/)
 
 Before starting the development, we need to perform 2 steps:
 
-1. Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
-2. Download [the assets pack](assets/match3.zip) for our game. Assets provided by the great website [kenney.nl](https://kenney.nl)
+:one: Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
+
+:two: Download [the assets pack](assets/match3.zip) for our game. Assets provided by the great website [kenney.nl](https://kenney.nl)
 
 ## 1. Creating the tiles board
 Let's set the first task to create the board with tiles.
@@ -41,9 +46,11 @@ export class Field {
 }
 ```
 
-A field is located in a certain column and in a certain row on the board. The `row` and `col` properties of the `Field` class define the row and column.
+A field is located in a certain column and in a certain row on the board. 
 
-The `position` getter determines the position of the field on the screen, depending on the position on the board and taking into account the size of the field sprite.
+!!! info "Info"
+    * The `row` and `col` properties of the `Field` class define the row and column.
+    * The `position` getter determines the position of the field on the screen, depending on the position on the board and taking into account the size of the field sprite.
 
 And now we can render a single field on the screen in the `Game` class:
 
@@ -84,7 +91,10 @@ export class Board {
 ```
 
 We will add all elements of the board (fields and tiles) to the board container. And the board container is then added to the scene container.
+
+
 The board consists of a grid of fields. Let's set all the created fields to the `this.fields` property.
+
 The number of rows and columns should be configurable. Therefore, let's add these settings to the global project config:
 
 ```javascript
@@ -326,9 +336,11 @@ export class Game {
 Let's run the `onTileClick` method when the `tile-touch-start` event fires.
 In this method, we will handle all three possible scenarios:
 
-1. select a new tile to move if no other tile has been selected
-2. swap tiles if another tile has already been selected and it is next to the current one
-3. select a new tile if another tile has already been selected, but it is not next to the current one
+:one: select a new tile to move if no other tile has been selected
+
+:two: swap tiles if another tile has already been selected and it is next to the current one
+
+:three: select a new tile if another tile has already been selected, but it is not next to the current one
 
 Right now we are implementing the first point. Now we are implementing the first point. When choosing a new tile, we need to do 2 things:
 
@@ -389,9 +401,11 @@ In the `onTileClick` method of the `Game` class, add `swap` method call, which i
 ```
 Let's define what actions we need to move tiles:
 
-1. Reset fields in moved tiles
-2. Reset tiles in the board's fields
-3. Place the moved tiles in the positions of the new fields on the screen
+:one: Reset fields in moved tiles
+
+:two: Reset tiles in the board's fields
+
+:three: Place the moved tiles in the positions of the new fields on the screen
 
 We will create tweens animation using gsap for tiles movement.
 It's also worth locking the board by setting an additional flag to prevent interactivity while the animation is running.
@@ -480,9 +494,8 @@ Let's update the condition in the `onTileClick` method in the `Game` class:
         }
     }
 ```
-
-As you can see, we also added a check for the `disabled` flag, which we set in the last paragraph.
-Thus, we block the functionality of the `onTileClick` method while the tiles are moving on the board, in order to avoid possible bugs.
+!!! note "Note"
+    As you can see, we also added a check for the `disabled` flag, which we set in the last paragraph. Thus, we block the functionality of the `onTileClick` method while the tiles are moving on the board, in order to avoid possible bugs.
 
 Let's implement the `isNeighbour` method in the `Tile` class.
 A neighbor is a tile located either in an adjacent column or in an adjacent row.
@@ -497,7 +510,10 @@ This means that the difference between either rows or columns of the checked and
 ## 3. Search for combinations
 
 After swapping tiles, the board must be checked for combinations.
-A combination is considered to be the collection of 3, 4 and 5 identical tiles in a row.
+
+!!! note "Note"
+    A combination is considered to be the collection of 3, 4 and 5 identical tiles in a row.
+
 To check for all these combinations, it is enough to compare each tile on the board with the next two tiles in a row and the next two tiles in a column.
 
 Let's add the comparison rules to the game config `Config.js`:
@@ -756,6 +772,7 @@ For each empty field, create a new tile, place it higher than the first row of t
 ### 4.4 Checking for combinations after tiles falling
 
 After the completion of falling new tiles, combinations may appear on the board again.
+
 If there are new combinations, it is also necessary to process them, that is, collect the combination, make a tiles fall and create new tiles.
 For all these actions, we have already developed functionality in the `processMatches` method. We will call it recursively until there are no combinations left on the board after the next falling of new tiles:
 
@@ -781,12 +798,16 @@ For all these actions, we have already developed functionality in the `processMa
 ### 5. Collect combinations at the start
 Combinations can appear be not only after moving two tiles, but also during the initial placement of tiles after creating the board.
 Such combinations must be automatically processed without falling animation and replaced with other tiles before showing the starting board to the player.
+
 We already have the functionality needed to handle starting combinations:
 
-1. Find all combinations on the board using `combinationManager`.
-2. Remove all founded matches
-3. Create new tiles in empty fields
-4. If combinations appear after adding new tiles, then repeat. Otherwise, let's start the game.
+:one: Find all combinations on the board using `combinationManager`.
+
+:two:  Remove all founded matches
+
+:three:  Create new tiles in empty fields
+
+:four:  If combinations appear after adding new tiles, then repeat. Otherwise, let's start the game.
 
 ```javascript
 // ...

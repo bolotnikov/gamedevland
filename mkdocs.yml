@@ -1,5 +1,6 @@
-
 site_name: GameDev.Land
+extra_css:
+    - css/extra.css
 theme:
   logo: assets/logo.png
   palette:
@@ -15,6 +16,9 @@ markdown_extensions:
   - md_in_html
   - admonition
   - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 extra:
   analytics:
     provider: google
