@@ -227,3 +227,90 @@ On the first line of the platform, use `platform` (grass sprite) as the sprite. 
 For each tile, we calculate its position based on its position in the platform. To get the correct coordinates, you need to multiply the column of the tile by its width, and the row by its height.
 
 ## 3. Creating a hero
+
+Let's place the hero sprite on the platform we just created.
+
+Let's create the `Hero.js` class:
+
+``` javascript
+import * as PIXI from "pixi.js";
+import { App } from '../system/App';
+
+export class Hero {
+    constructor() {
+        this.createSprite();
+    }
+
+    createSprite() {
+    }
+}
+```
+
+Implement the `createSprite` method:
+
+``` javascript
+    createSprite() {
+        this.sprite = new PIXI.AnimatedSprite([
+            App.res("walk1"),
+            App.res("walk2")
+        ]);
+
+        this.sprite.x = App.config.hero.position.x;
+        this.sprite.y = App.config.hero.position.y;
+        this.sprite.loop = true;
+        this.sprite.animationSpeed = 0.1;
+        this.sprite.play();
+    }
+```
+
+The hero consists of two images: `walk1` and `walk2`.
+From these two images, we can create a frame-by-frame animation of walking.
+For this we use the `PIXI.AnimatedSprite` class. In the constructor of this class, we pass an array of textures from which we want to create an animation. And the `App.res` method just returns the texture by key.
+
+Let's place the sprite in the initial position, which we will set in the global game config `Config.js`:
+
+``` javascript
+// ...
+export const Config = {
+    // ...
+    hero: {
+        position: {
+            x: 350,
+            y: 595
+        }
+    },
+    // ...
+};
+```
+
+Set the `loop` flag to `true` to loop the animation and set the desired playback speed:
+
+``` javascript
+        this.sprite.loop = true;
+        this.sprite.animationSpeed = 0.1;
+```
+
+And  call the `play` method to start animation.
+
+``` javascript
+        this.sprite.play();
+```
+
+
+Now we have a hero class and we can create a hero object on the stage in `GameScene.js`:
+
+``` javascript
+export class GameScene extends Scene {
+    create() {
+        // ...
+        this.createHero();
+    }
+
+    createHero() {
+        this.hero = new Hero();
+        this.container.addChild(this.hero.sprite);
+    }
+}
+```
+
+## 4. Generation of other platforms
