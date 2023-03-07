@@ -448,3 +448,94 @@ Now we can implement the `randomData` getter based on the given ranges:
 ```
 
 ## 5. Movement of platforms
+
+Before we start the movement of the platforms, we need to activate physics in the projects.
+To do this, first let's install the npm package with the `MatterJS` physical library:
+
+``` bash
+npm i matter-js
+```
+
+Let's activate the engine in `App.js`. To do this, follow 3 steps:
+  - engine initialization
+  - creating a runner
+  - running the engine
+
+``` javascript
+import * as Matter from 'matter-js';
+// ...
+class Application {
+    run(config) {
+        // ...
+        this.createPhysics();
+    }
+
+    createPhysics() {
+        this.physics = Matter.Engine.create();
+        const runner = Matter.Runner.create();
+        Matter.Runner.run(runner, this.physics);
+    }
+    // ...
+
+}
+```
+
+After we have added physics to the project, we need to tell the physics engine about all the objects that will be enabled for physics processing. Let's start with platforms. Add physical bodies to the created platforms and thus let the physics engine know about the platforms.
+
+What is the physical body of the platform? In fact, the platform is a rectangular sprite.
+
+In order to create the physical body of the platform that the engine can process, we need to create a rectangle that exactly matches the outline of the platform. We can accurately calculate the size and position of such a rectangle by taking the coordinates and dimensions of the current platform.
+
+In the `Platform.js` file:
+
+``` javascript
+import * as Matter from 'matter-js';
+
+export class Platform {
+    constructor(rows, cols, x) {
+        // ...
+        // specify the speed of the platform
+        this.dx = -1.5;
+        this.createBody();
+    }
+
+    createBody() {
+        // create a physical body
+        this.body = Matter.Bodies.rectangle(this.width / 2 + this.container.x, this.height / 2 + this.container.y, this.width, this.height, {friction: 0, isStatic: true});
+        // add the created body to the engine
+        Matter.World.add(App.physics.world, this.body);
+        // save a reference to the platform object itself for further access from the physical body object
+        this.body.gamePlatform = this;
+    }
+}
+```
+
+Now that we have a physical body at the platform, we can make the platform move by moving its physical body.
+Let's create a new `move` method, in which we will set the physical body to a new position, taking into account the speed of the platform specified in the property `this.dx`:
+
+``` javascript
+export class Platform {
+    // ...
+    move() {
+         Matter.Body.setPosition(this.body, {x: this.body.position.x + this.dx, y: this.body.position.y});
+    }
+}
+```
+
+It remains to run the `move` method for all created platforms in the `Platforms` class:
+``` javascript
+export class Platforms {
+    // ...
+    update() {
+        // ...
+        this.platforms.forEach(platform => {
+            if (platform.body) {
+                platform.container.x = platform.body.position.x - platform.width / 2;
+                platform.container.y = platform.body.position.y - platform.height / 2;
+                platform.move();
+            }
+        });
+    }
+}
+```
+## 6. Hero and platforms collisions
