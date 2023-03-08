@@ -447,7 +447,7 @@ Now we can implement the `randomData` getter based on the given ranges:
     }
 ```
 
-## 5. Movement of platforms
+## 5. Enable physics
 
 Before we start the movement of the platforms, we need to activate physics in the projects.
 To do this, first let's install the npm package with the `MatterJS` physical library:
@@ -479,6 +479,7 @@ class Application {
 
 }
 ```
+## 6. The physical body of platforms
 
 After we have added physics to the project, we need to tell the physics engine about all the objects that will be enabled for physics processing. Let's start with platforms. Add physical bodies to the created platforms and thus let the physics engine know about the platforms.
 
@@ -510,17 +511,26 @@ export class Platform {
 }
 ```
 
-Now that we have a physical body at the platform, we can make the platform move by moving its physical body.
-Let's create a new `move` method, in which we will set the physical body to a new position, taking into account the speed of the platform specified in the property `this.dx`:
+## 7. Movement of platforms
+
+Now we have the physical body of the platform and we can make the platform move by moving its physical body. Then we will move the platform container with all the tiles to the new position of the physical body.
+
+Let's create a new `move` method, in which we will set the physical body to a new position, taking into account the platform speed specified in the `this.dx` property.
 
 ``` javascript
 export class Platform {
     // ...
     move() {
-         Matter.Body.setPosition(this.body, {x: this.body.position.x + this.dx, y: this.body.position.y});
+        if (this.body) {
+            Matter.Body.setPosition(this.body, {x: this.body.position.x + this.dx, y: this.body.position.y});
+            this.container.x = this.body.position.x - this.width / 2;
+            this.container.y = this.body.position.y - this.height / 2;
+        }
     }
 }
 ```
+
+After setting the physical body to a new position, move the platform container to the same position, thus moving all the tiles of the platform to the correct place.
 
 It remains to run the `move` method for all created platforms in the `Platforms` class:
 ``` javascript
@@ -528,14 +538,43 @@ export class Platforms {
     // ...
     update() {
         // ...
-        this.platforms.forEach(platform => {
-            if (platform.body) {
-                platform.container.x = platform.body.position.x - platform.width / 2;
-                platform.container.y = platform.body.position.y - platform.height / 2;
-                platform.move();
-            }
-        });
+        this.platforms.forEach(platform => platform.move());
     }
 }
 ```
-## 6. Hero and platforms collisions
+## 8. The physical body of the hero
+
+By analogy with the platform, let's create a physical body for the hero in the `Hero.js` file:
+
+``` javascript
+
+import * as Matter from 'matter-js';
+// ...
+export class Hero {
+    constructor() {
+        // ...
+        this.createBody();
+        App.app.ticker.add(this.update.bind(this));
+    }
+
+    // [07]
+    createBody() {
+        this.body = Matter.Bodies.rectangle(this.sprite.x + this.sprite.width / 2, this.sprite.y + this.sprite.height / 2, this.sprite.width, this.sprite.height, {friction: 0});
+        Matter.World.add(App.physics.world, this.body);
+        this.body.gameHero = this;
+    }
+
+    update() {
+        this.sprite.x = this.body.position.x - this.sprite.width / 2;
+        this.sprite.y = this.body.position.y - this.sprite.height / 2;
+    }
+}
+``` 
+As well as for the platform we created a rectangle body in the position of the hero and in its dimensions.
+
+Then we added the created body to the engine and saved a reference to the hero itself in the `body` object. We will need this later when processing collisions, when we will have access to the colliding physical bodies.
+
+In addition, we have created an `update` method that is added to the `PIXI` ticker and will be called on every frame of the animation.
+In it, we force the hero's sprite to the position of his physical body in order to synchronize them. Thus, wherever the hero's physical body is sent as a result of interaction with physical objects, the hero's sprite will be placed in the same position.
+
+## 9. Hero Jump
