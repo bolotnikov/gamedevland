@@ -654,7 +654,7 @@ export const Config = {
 };
 ```
 
-## 8. Collision of the hero and platform
+## 10. Collision of the hero and platform
 
 Right now the hero can only perform jump 2 jumps because the `this.jumpIndex` counter never resets. 
 And at what point should this counter be reset to give the hero the opportunity for a new double jump?
@@ -727,4 +727,4 @@ And now we can improve the code of the `startJump` method by adding an additiona
     }
 ``` 
 
-## 9. Creating diamonds
+## 11. Creating diamonds
