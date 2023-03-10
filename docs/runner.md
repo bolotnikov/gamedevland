@@ -728,3 +728,176 @@ And now we can improve the code of the `startJump` method by adding an additiona
 ``` 
 
 ## 11. Creating diamonds
+
+In the game, the diamonds will be positioned above the platforms in such a way as to motivate the player to jump from the platform to collect them.
+
+We will create diamonds for each platform in the corresponding class. Let's create a certain number of diamond images above the platform:
+
+``` javascript
+// ...
+export class Platform {
+    constructor(rows, cols, x) {
+        // ...
+        this.diamonds = [];
+        this.createDiamonds();
+    }
+
+    createDiamonds() {
+        const y = App.config.diamonds.offset.min + Math.random() * (App.config.diamonds.offset.max - App.config.diamonds.offset.min);
+
+        for (let i = 0; i < this.cols; i++) {
+            if (Math.random() < App.config.diamonds.chance) {
+                const diamond = new Diamond(this.tileSize * i, -y);
+                this.container.addChild(diamond.sprite);
+                this.diamonds.push(diamond);
+            }
+        }
+    }
+    // ...
+}
+
+```
+
+Let's loop through all the tiles of the platform and check the possibility of creating a diamond over each tile. The probability of creating a diamond over one tile is obtained from the property of the global config `App.config.diamonds.chance`.
+
+If we need to create a diamond over this tile, then we will create an instance of the `Diamond` class. Let's place the created object in the `this.diamonds` property and add it as a child element to the platform container.
+
+
+Let's add the settings for creating diamonds to the global config:
+
+``` javascript
+// ...
+export const Config = {
+    // ...
+    diamonds: {
+        chance: 0.4,
+        offset: {
+            min: 100,
+            max: 200
+        }
+    }
+}
+```
+
+The chance property indicates the probability of a diamond being generated on each specific platform tile.
+The offset object defines the allowable height range at which the diamond must be positioned above the platform.
+
+It remains to implement the `Diamond` class. At the moment, we only implement in it the output of the diamond sprite:
+
+``` javascript
+import { App } from '../system/App';
+
+export class Diamond {
+    constructor(x, y) {
+        this.sprite = App.sprite("diamond");
+        this.sprite.x = x;
+        this.sprite.y = y;
+    }
+}
+```
+
+## 12. The physical body of a diamond
+
+As we already know, all game objects that need to handle physics interactions (such as collision) need to create physics bodies and add them to the physics engine for processing.
+
+We have already created a physical body for the hero and the platforms, and thus have the opportunity to handle the collision of the hero with the platform. 
+
+The player will be able to collect diamonds when they are touched by the hero's sprite while jumping. This means that diamonds also need to create a physical body. Let's improve the code in the `Diamond` class:
+
+
+``` javascript
+export class Diamond {
+    constructor(x, y) {
+        this.createSprite(x, y);
+    }
+
+    createSprite(x, y) {
+        this.sprite = App.sprite("diamond");
+        this.sprite.x = x;
+        this.sprite.y = y;
+    }
+
+    createBody() {
+        this.body = Matter.Bodies.rectangle(this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x, this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y, this.sprite.width, this.sprite.height, {friction: 0, isStatic: true, render: { fillStyle: '#060a19' }});
+        this.body.gameDiamond = this;
+        this.body.isSensor = true;
+        Matter.World.add(App.physics.world, this.body);
+    }
+}
+```
+
+Here we created the physical body in the same way as we did for the platform and the hero. We used a rectangle at the sprite coordinates and the dimensions of the diamond sprite.
+As usual, we have stored a reference to the diamond object in the physical body object in order to access the diamond at the time of the collision events.
+
+
+In addition, we have set the `this.body.isSensor` property to `true`.
+This way, the hero sprite will be able to pass through the diamond image, unlike the platform, which should not pass the sprite through itself.
+
+It remains to call the `createBody` method after the diamond is added as a child element to the platform container in the `Platform.js` class:
+
+
+``` javascript
+    createDiamonds() {
+        const y = App.config.diamonds.offset.min + Math.random() * (App.config.diamonds.offset.max - App.config.diamonds.offset.min);
+
+        for (let i = 0; i < this.cols; i++) {
+            if (Math.random() < App.config.diamonds.chance) {
+                this.createDiamond(this.tileSize * i, -y);
+            }
+        }
+    }
+
+    createDiamond(x, y) {
+            const diamond = new Diamond(x, y);
+            this.container.addChild(diamond.sprite);
+            diamond.createBody();
+            this.diamonds.push(diamond);
+    }
+```
+
+## 13. Collecting diamonds
+
+When the hero touches the diamond, it will be considered collected and should disappear from the screen. How to determine the moment of collision?
+We already did this for the hero and platform in the `GameScene.js` class when we implemented the `onCollisionStart` method. Now let's extend this method to check for the presence of a diamond object and handle such a collision:
+
+
+``` javascript
+export class GameScene extends Scene {
+    // ...
+    onCollisionStart(event) {
+        // ...
+        const diamond = colliders.find(body => body.gameDiamond);
+
+        if (hero && diamond) {
+            this.hero.collectDiamond(diamond.gameDiamond);
+        }
+    }
+    // ...
+}
+```
+We need to implement the `collectDiamond` method in the `Hero.js` class:
+
+``` javascript
+import * as Matter from 'matter-js';
+import * as PIXI from "pixi.js";
+import { App } from '../system/App';
+
+export class Hero {
+    constructor() {
+        // ...
+        this.score = 0;
+    }
+    collectDiamond(diamond) {
+        ++this.score;
+        Matter.World.remove(App.physics.world, diamond.body);
+        diamond.sprite.destroy();
+        diamond.sprite = null;
+    }
+    // ...
+}
+```
+When collecting a diamond, we destroy its physical body and destroy the sprite itself.
+We also increase the hero's score counter, which we will later display on the screen as a game score.
+
+## 14. UI
+
