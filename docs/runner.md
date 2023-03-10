@@ -313,7 +313,7 @@ export class GameScene extends Scene {
 }
 ```
 
-## 5. Creating multiple platforms
+## 4. Creating multiple platforms
 
 At this point, we have created the first platform and placed the hero on it.
 But in our game, platforms should create automatically and endlessly.
