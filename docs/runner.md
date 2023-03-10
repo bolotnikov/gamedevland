@@ -496,7 +496,7 @@ export class Platform {
     constructor(rows, cols, x) {
         // ...
         // specify the speed of the platform
-        this.dx = -1.5;
+        this.dx = App.config.platforms.moveSpeed;
         this.createBody();
     }
 
@@ -511,6 +511,18 @@ export class Platform {
 }
 ```
 
+And let's take out the value of the platforms speed into the global config for the convenience of configuration:
+
+```javascript
+export const Config = {
+    // ...
+    platforms: {
+        // ...
+        moveSpeed: -1.5
+    }
+    // ...
+};
+```
 ## 7. Movement of platforms
 
 Now we have the physical body of the platform and we can make the platform move by moving its physical body. Then we will move the platform container with all the tiles to the new position of the physical body.
@@ -577,4 +589,142 @@ Then we added the created body to the engine and saved a reference to the hero i
 In addition, we have created an `update` method that is added to the `PIXI` ticker and will be called on every frame of the animation.
 In it, we force the hero's sprite to the position of his physical body in order to synchronize them. Thus, wherever the hero's physical body is sent as a result of interaction with physical objects, the hero's sprite will be placed in the same position.
 
-## 9. Hero Jump
+## 9. Hero jump
+
+We will give the hero the opportunity to jump twice.
+This means that after the first jump, the hero will be able to perform another jump while he's in the air.
+Then he must land on the platform to make the next jump.
+
+Let's make the hero jump by pressing anywhere in the screen.
+We will listen to the `pointerdown` event in the `GameScene` class:
+
+``` javascript
+
+export class GameScene extends Scene {
+    // ...
+    createHero() {
+        // ...
+        this.container.interactive = true;
+        this.container.on("pointerdown", () => {
+            this.hero.startJump();
+        });
+    }
+    // ...
+}
+```
+
+As you can see, now we need to implement the `startJump` method in the` Hero` class:
+
+
+``` javascript
+
+export class Hero {
+    constructor() {
+        // ...
+        this.dy = App.config.hero.jumpSpeed;
+        this.maxJumps = App.config.hero.maxJumps;
+        this.jumpIndex = 0;
+    }
+
+    startJump() {
+        if (this.jumpIndex < this.maxJumps) {
+            ++this.jumpIndex;
+            Matter.Body.setVelocity(this.body, { x: 0, y: -this.dy });
+        }
+    }
+    // ...
+}
+```
+
+The `jumpIndex` counter limits the number of jumps until the next touch of the platform. 
+The maximum possible number of jumps is indicated in the property `this.maxJumps`.
+
+We use the physical engine to set the speed of the hero’s physical body. For a jump, we need to move it only along the axis `y` up. This means that we need to set a negative displacement for the `y` coordinate, which is set in the `this.dy` property.
+
+And finally, we take out the values of the jump speed and the number of jumps into the global config for the convenience of configuration:
+
+``` javascript
+export const Config = {
+    // ...
+    hero: {
+        jumpSpeed: 15,
+        maxJumps: 2,
+        //...
+    }
+};
+```
+
+## 8. Collision of the hero and platform
+
+Right now the hero can only perform jump 2 jumps because the `this.jumpIndex` counter never resets. 
+And at what point should this counter be reset to give the hero the opportunity for a new double jump?
+
+That is the moment when hero touches the platform. This means that the hero has landed on the ground and the previous jump is completed.
+
+How can we track the collision of the hero and the platform? To do this, we will again use the physics engine and the interaction of the physical bodies of the hero and the platform.
+
+The `Matter` physics engine will fire a collision event when two physics bodies collide. So we need to listen for this event.
+Let's do this in the `GameScene` class:
+
+
+``` javascript
+import * as Matter from 'matter-js';
+import { App } from '../system/App';
+//...
+
+export class GameScene extends Scene {
+    create() {
+        //...
+        this.setEvents();
+    }
+
+    setEvents() {
+        Matter.Events.on(App.physics, 'collisionStart', this.onCollisionStart.bind(this));
+    }
+
+    onCollisionStart(event) {
+        const colliders = [event.pairs[0].bodyA, event.pairs[0].bodyB];
+        const hero = colliders.find(body => body.gameHero);
+        const platform = colliders.find(body => body.gamePlatform);
+
+        if (hero && platform) {
+            this.hero.stayOnPlatform(platform.gamePlatform);
+        }
+    }
+    // ...
+}
+```
+The `onCollisionStart` method will run automatically when the `collisionStart` event occurs, which means that a collision of physical bodies has occurred.
+
+In this method, we get physical bodies that interact with each other.
+Since we created the `gameHero` and `gamePlatform` properties in the physical body objects of the hero and platform in advance, we can now check for the presence of such properties and determine from them what kind of body is involved in the collision.
+
+Finally, if we got both a hero and a platform, we'll call the `stayOnPlatform` method to set the hero on the platform.
+
+Let's implement this method in the `Hero` class:
+
+``` javascript
+export class Hero {
+    // ...
+
+    stayOnPlatform(platform) {
+        this.platform = platform;
+        this.jumpIndex = 0;
+    }
+``` 
+
+All we need to do in it is reset the counter and set the current platform to the `this.platform` property.
+
+And now we can improve the code of the `startJump` method by adding an additional check whether the hero is currently on the platform. If a jump is possible, then the `this.platform` property should be reset.
+
+``` javascript
+    startJump() {
+        if (this.platform || this.jumpIndex === 1) {
+            ++this.jumpIndex;
+            this.platform = null;
+            Matter.Body.setVelocity(this.body, { x: 0, y: -this.dy });
+        }
+    }
+``` 
+
+## 9. Creating diamonds
