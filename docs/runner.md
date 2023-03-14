@@ -901,3 +901,162 @@ We also increase the hero's score counter, which we will later display on the sc
 
 ## 14. UI
 
+Let's display the player's score on the screen.
+Let's create the `LabelScore` class, which will be the successor of `PIXI.Text`:
+
+``` javascript
+import * as PIXI from "pixi.js";
+import { App } from "../system/App";
+
+export class LabelScore extends PIXI.Text {
+    constructor() {
+        super();
+        this.x = App.config.score.x;
+        this.y = App.config.score.y;
+        this.anchor.set(App.config.score.anchor);
+        this.style = App.config.score.style;
+        this.renderScore();
+    }
+
+    renderScore(score = 0) {
+        this.text = `Score: ${score}`;
+    }
+}
+```
+
+Let's take out all the positioning and text style parameters in the global config `Config.js`:
+
+``` javascript
+export const Config = {
+    score: {
+        x: 10,
+        y: 10,
+        anchor: 0,
+        style: {
+            fontFamily: "Verdana",
+            fontWeight: "bold",
+            fontSize: 44,
+            fill: ["#FF7F50"]
+        }
+    },
+    // ...
+};
+```
+
+Let's create an instance of this class and add it to the game scene:
+
+``` javascript
+export class GameScene extends Scene {
+    create() {
+        // ...
+        this.createUI();
+    }
+
+    createUI() {
+        this.labelScore = new LabelScore();
+        this.container.addChild(this.labelScore);
+        this.hero.sprite.on("score", () => {
+            this.labelScore.renderScore(this.hero.score);
+        });
+    }
+}
+```
+
+As you can see, it remains to add the launch of the `score` event to the hero object at the time of collecting the diamond:
+
+``` javascript
+export class Hero {
+    // ...
+    collectDiamond(diamond) {
+        // ...
+        this.sprite.emit("score");
+    }
+}
+```
+## 15. Restart the game when it crashes
+
+We will complete the development by restarting the game after the hero falls off the platform.
+You need to restart the game on the event of the death of the hero.
+Let's start by adding a handler for such an event in the `GameScene` class:
+
+``` javascript
+export class GameScene extends Scene {
+    createHero() {
+        // ...
+        this.hero.sprite.once("die", () => {
+            App.scenes.start("Game");
+        });
+    }
+}
+``` 
+
+We know that calling the `start` method of the `ScenesManager` class will automatically call the `destroy` method of the current scene before starting a new scene. Thus, in this method, it is necessary to implement all the logic for closing the scene. Namely: destroy all objects on the stage and disable all event handlers. Let's do it:
+
+``` javascript
+    destroy() {
+        Matter.Events.off(App.physics, 'collisionStart', this.onCollisionStart.bind(this));
+        App.app.ticker.remove(this.update, this);
+        this.bg.destroy();
+        this.hero.destroy();
+        this.platfroms.destroy();
+        this.labelScore.destroy();
+    }
+``` 
+
+Now we implement the destroy method in each of the listed objects.
+`Background.js`:
+``` javascript
+    destroy() {
+        this.container.destroy();
+    }
+``` 
+
+``` javascript
+`Platforms.js`
+    destroy() {
+        this.platforms.forEach(platform => platform.destroy());
+        this.container.destroy();
+    }
+``` 
+
+`Platform.js`
+``` javascript
+    destroy() {
+        Matter.World.remove(App.physics.world, this.body);
+        this.diamonds.forEach(diamond => diamond.destroy());
+        this.container.destroy();
+    }
+``` 
+
+`Diamond.js`
+``` javascript
+    destroy() {
+        if (this.sprite) {
+            App.app.ticker.remove(this.update, this);
+            Matter.World.remove(App.physics.world, this.body);
+            this.sprite.destroy();
+            this.sprite = null;
+        }
+    }
+``` 
+
+Finally, let's finish by firing the `die` event on the `Hero` class:
+
+`Hero.js`
+``` javascript
+    update() {
+        // ...
+        if (this.sprite.y > window.innerHeight) {
+            this.sprite.emit("die");
+        }
+    }
+
+destroy() {
+        App.app.ticker.remove(this.update, this);
+        Matter.World.add(App.physics.world, this.body);
+        this.sprite.destroy();
+    }
+
+``` 
+
+
