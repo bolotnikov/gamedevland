@@ -2,6 +2,10 @@
 
 In this article, we will create an infinite runner game using [PIXI](https://pixijs.com/).
 
+## Additional materials
+- [Complete source code](https://github.com/gamedevland/runner)
+- [Preview demo](https://gamedevland.github.io/runner/)
+
 Before starting the development, we need to perform 2 steps:
 
 :one: Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
