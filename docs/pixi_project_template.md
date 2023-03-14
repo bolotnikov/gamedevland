@@ -443,7 +443,7 @@ class Application {
 
 
 ## 7. Useful links
-- [Final source code](https://github.com/bolotnikov/pixi-project-template)
+- [Final source code](https://github.com/gamedevland/pixi-project-template)
 - [`PIXI.Application`](https://pixijs.download/dev/docs/PIXI.Application.html)
 - [`PIXI.Loader`](https://pixijs.download/v6.1.1/docs/PIXI.Loader.html)
 - [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html)
