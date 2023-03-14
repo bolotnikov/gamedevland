@@ -977,7 +977,7 @@ export class Hero {
     }
 }
 ```
-## 15. restarting the game when the hero falls
+## 15. Restarting the game when the hero falls
 
 We will complete the development by restarting the game after the hero falls off the platform.
 You need to restart the game on the event of the death of the hero.

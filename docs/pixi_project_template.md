@@ -333,7 +333,7 @@ export class Game {
         this.container.addChild(this.bg);
     }
 ``` 
-## 5. Scenes Manager
+## 6. Scenes Manager
 Let's create a scene manager for easy switching between scenes in the game.
 Let's create a base scene class:
 
@@ -442,7 +442,7 @@ class Application {
 ```
 
 
-## 6. Useful links
+## 7. Useful links
 - [Final source code](https://github.com/bolotnikov/pixi-project-template)
 - [`PIXI.Application`](https://pixijs.download/dev/docs/PIXI.Application.html)
 - [`PIXI.Loader`](https://pixijs.download/v6.1.1/docs/PIXI.Loader.html)
