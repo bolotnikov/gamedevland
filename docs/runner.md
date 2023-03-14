@@ -973,7 +973,7 @@ export class Hero {
     }
 }
 ```
-## 15. Restart the game when it crashes
+## 15. restarting the game when the hero falls
 
 We will complete the development by restarting the game after the hero falls off the platform.
 You need to restart the game on the event of the death of the hero.
@@ -1004,14 +1004,14 @@ destroy() {
 ``` 
 
 Now we implement the destroy method in each of the listed objects.
-`Background.js`:
+`Background.js`
 ``` javascript
 destroy() {
     this.container.destroy();
 }
 ``` 
 
-`Platforms.js`:
+`Platforms.js`
 ``` javascript
 destroy() {
     this.platforms.forEach(platform => platform.destroy());
@@ -1019,7 +1019,7 @@ destroy() {
 }
 ``` 
 
-`Platform.js`:
+`Platform.js`
 ``` javascript
 destroy() {
     Matter.World.remove(App.physics.world, this.body);
@@ -1028,7 +1028,7 @@ destroy() {
 }
 ``` 
 
-`Diamond.js`:
+`Diamond.js`
 ``` javascript
 destroy() {
     if (this.sprite) {
@@ -1042,7 +1042,7 @@ destroy() {
 
 Finally, let's finish by firing the `die` event on the `Hero` class:
 
-`Hero.js`:
+`Hero.js`
 ``` javascript
 update() {
     // ...
