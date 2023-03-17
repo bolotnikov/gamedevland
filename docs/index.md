@@ -1,5 +1,14 @@
 <a href="pixi_project_template">
 !!! info ""
+    ![Creating a 2D infinite runner game with PixiJS](/assets/runner.png){ width="300" align="left" }
+    # [Creating a 2D infinite runner game with PixiJS](/runner)
+    [Read](/runner){ .md-button .md-button--primary }
+
+</a>
+
+
+<a href="pixi_project_template">
+!!! info ""
     ![Сreating Match3 game with PixiJS](/assets/match3.png){ width="300" align="left" }
     # [Сreating Match3 game with PixiJS](/match3)
     [Read](/match3){ .md-button .md-button--primary }
