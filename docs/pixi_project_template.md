@@ -1,12 +1,11 @@
 # Сreating PixiJS project template
 In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games. You can check the final template code in [GitHub](https://github.com/gamedevland/pixi-project-template).
 
-## Step-by-step guide on Udemy
-- https://www.udemy.com/course/pixicourse/
-
 ## Video version
 <iframe width="560" height="315" src="https://www.youtube.com/embed/itT6L3LQ1cM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Step-by-step guide on Udemy
+- [https://www.udemy.com/course/pixicourse/](https://www.udemy.com/course/pixicourse/)
 
 ## Template functionality:
 - Application creation and launch

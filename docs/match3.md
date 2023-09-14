@@ -2,11 +2,11 @@
 
 In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 
-## Step-by-step guide on Udemy
-- https://www.udemy.com/course/pixicourse/
-
 ## Video version
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kgIg5Ms-HRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Step-by-step guide on Udemy
+- [https://www.udemy.com/course/pixicourse/](https://www.udemy.com/course/pixicourse/)
 
 ## Additional materials
 - [Complete source code](https://github.com/gamedevland/match3)
