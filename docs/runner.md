@@ -2,6 +2,9 @@
 
 In this article, we will create an infinite runner game using [PIXI](https://pixijs.com/).
 
+## Video version
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oZInrjsClPg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## Additional materials
 - [Complete source code](https://github.com/gamedevland/runner)
 - [Preview demo](https://gamedevland.github.io/runner/)
