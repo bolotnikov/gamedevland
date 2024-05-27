@@ -23,3 +23,11 @@
 
 </a>
 
+<a href="tower-defense">
+!!! info ""
+    ![Сreating 2D Tower Defense game with PixiJS](/assets/tower-defense.png){ width="300" align="left" }
+    # [Сreating 2D Tower Defense game with PixiJS](/tower-defense)
+    [Read](/tower-defense){ .md-button .md-button--primary }
+
+</a>
+
