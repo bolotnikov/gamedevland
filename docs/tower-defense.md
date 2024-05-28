@@ -53,7 +53,7 @@ In the `this.atlas` field we will get the texture of the loaded tilemap asset.
 Let each tile have its own ID number in the atlas, by which we can specifically identify the tile by determining its position.
 Thus, before we understand how to draw the desired part of the image, let's determine its position by ID.
 
-First, let's manually set the number of rows and columns in our atlas in the game config, and also directly indicate the size of the tiles:
+First, let's manually set the number of rows and columns of our atlas image `tilemap.png` in the game config, and also directly indicate the size of the tiles:
 
 ``` javascript
 
@@ -65,24 +65,24 @@ export const Config = {
     scenes: {
         "Game": GameScene
     },
-    map: {
-        rows: 13,
+    atlas: {
         cols: 23,
+        rows: 13,
         tileSize: 64
-    }
+    }    
 };
 
 ```
 
-Now, knowing the total number of rows and columns, we can calculate which row and which column has a tile with a given ID:
+Now, knowing the total number of rows and columns of the atlas image, we can calculate which row and which column has a tile with a given ID:
 
 
 ``` javascript
     get position() {
         let index = 0;
 
-        for (let row = 0; row < App.config.map.rows; row++) {
-            for (let col = 0; col < App.config.map.cols; col++) {
+        for (let row = 0; row < App.config.atlas.rows; row++) {
+            for (let col = 0; col < App.config.atlas.cols; col++) {
                 ++index;
                 if (index === this.id) {
                     return {row, col};
@@ -99,9 +99,9 @@ Having defined the tile's row and column in the tilemap grid, we can finally dra
 
 ``` javascript
     createSprite() {
-        const x = App.config.map.tileSize * this.position.col;
-        const y = App.config.map.tileSize * this.position.row;
-        const texture = new PIXI.Texture(this.atlas, new PIXI.Rectangle(x + 1, y + 1, App.config.map.tileSize - 2, App.config.map.tileSize - 2));
+        const x = App.config.atlas.tileSize * this.position.col;
+        const y = App.config.atlas.tileSize * this.position.row;
+        const texture = new PIXI.Texture(this.atlas, new PIXI.Rectangle(x + 1, y + 1, App.config.atlas.tileSize - 2, App.config.atlas.tileSize - 2));
         this.sprite = new PIXI.Sprite(texture);
         this.sprite.anchor.set(0.5);
     }
@@ -124,3 +124,148 @@ export class GameScene extends Scene {
     }
 }
 ```
+
+## 2. Creating the level
+
+So we learned how to create a specific tile by its ID. This means we can draw the entire map specified in `tilemap.json`.
+Let's create a new class `LevelMap` for this.
+
+1. We will receive the level data from the `tilemap.json` into the `const TilemapJson` variable using the `require` mechanism, reading the contents of the corresponding file.
+2. Let's create a container `this.container`, into which we will place the created tile sprites.
+3. Let's create a field `this.tiles`, in which we will place all the created tiles.
+4. We will implement the map rendering function in the `this.render` method
+
+``` javascript
+import * as PIXI from "pixi.js";
+import { Tile } from "./Tile";
+import { App } from "../system/App";
+const TilemapJson = require("../../json/tilemap.json");
+
+export class LevelMap {
+    constructor() {
+        this.container = new PIXI.Container();
+        this.tiles = {};
+        this.render();
+    }
+
+    render() {
+    }
+}
+```
+
+So, we need to implement the `render` method to render the level map on the game scene.
+
+Let's determine the data that we need to draw the map on the game scene:
+
+1. In `Tiled`, we created a level that consists of an 18 x 32 grid of tiles.
+2. In addition, we have created 5 layers on this map.
+3. And also in our game we plan to draw tiles 2 times smaller than their original size in the atlas. That is, we will render tiles with a size of 32px instead of 64x.
+Let's add this data to the game config:
+
+``` javascript
+export const Config = {
+    // ...
+    level: {
+        rows: 18,
+        cols: 32,
+        layers: 5,
+        tileSize: 32
+    }
+};
+```
+
+Please note that in the `level` field we indicate exactly the data related directly to our level. So, our game map consists of an 18 x 32 grid, that is, it has only 18 rows and 32 tiles in each row.
+And in the `atlas` field, that we created in the previous step, we store information directly about the `tilemap.png` atlas, which in turn consists of a 23 X 13 grid, where each tile has a tile size of 64px.
+
+We know that our level map contains 5 layers, which we added ourselves when we created the map in the `Tiled`.
+This means that we need to iterate through each layer in the generated map and check if any tile is created in that layer at a given position:
+
+``` javascript
+    render() {
+        for (let layer = 0; layer < App.config.level.layers; layer++) {
+            let index = 0;
+            const layerData = TilemapJson.layers[layer];
+            this.tiles[layerData.name] = [];
+        }
+    }
+```
+
+As you can see, information about the presence of a tile in the grid can be obtained from data about the current layer from `tilemap.json`. Let's save this data in `layerData`.
+Let each property of the `this.tiles` object refer to a specific map layer.
+
+If `tilemap.json` contains data for the current layer, then we can find out the tile ID by the `index` counter, which increases by 1 for each next tile checked. Thus, let's loop through all the columns in all the rows of our map, increasing the `index` parameter in each iteration.
+This way we find out whether there is a tile in a given position on a given layer.
+If there is a tile, then we get its ID:
+
+``` javascript
+
+    render() {
+        for (let layer = 0; layer < App.config.level.layers; layer++) {
+            let index = 0;
+            const layerData = json.layers[layer];
+            this.tiles[layerData.name] = [];
+
+            if (layerData.data) {
+                for (let row = 0; row < App.config.level.rows; row++) {
+                    for (let col = 0; col < App.config.level.cols; col++) {
+                        const tileId = TilemapJson.layers[layer].data[index];
+                        index++;
+                        if (tileId) {
+                            const tile = this.renderTile(tileId, row, col);
+                            this.tiles[layerData.name].push(tile);
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+```
+
+If we found the tile ID at a given position, we can draw it:
+
+``` javascript
+
+    renderTile(id, row, col) {
+        let tile = new Tile(id);
+        tile.sprite.x = col * App.config.level.tileSize;
+        tile.sprite.y = row * App.config.level.tileSize;
+        tile.sprite.width = App.config.level.tileSize;
+        tile.sprite.height = App.config.level.tileSize;
+        this.container.addChild(tile.sprite);
+        return tile;
+    }
+```
+
+When drawing, we use the tile sizes that we want to get in the game. That is, we take data from the `tileSize` field of the `level` object, and not from the `map`. In our case, it is 32px. Taking these dimensions into account, we create the tile in the correct position on the screen with the correct offset. And add the created tile to the container of the `LevelMap` class.
+
+Now we can render the entire map in the `Game` scene:
+
+
+``` javascript
+import { Scene } from '../system/Scene';
+import { LevelMap } from './LevelMap';
+
+export class GameScene extends Scene {
+    create() {
+        this.createMap();
+    }
+    createMap() {
+        this.map = new LevelMap();
+        this.container.addChild(this.map.container);
+    }
+}
+```
+
+It is easy to calculate that a grid size of 18x32 taking into account the tile size of 32px will give us a map of 1024 x 576 pixels.
+
+Let's specify this data when creating the pixi canvas in the `App` class:
+
+``` javascript
+        this.app = new PIXI.Application({ width: 1024, height: 576});
+        this.app.view.style = `width: 1024px; height: 576;`;
+```
+
+And now let’s check whether the map is displayed correctly on the screen.
