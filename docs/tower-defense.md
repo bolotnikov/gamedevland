@@ -269,3 +269,61 @@ Let's specify this data when creating the pixi canvas in the `App` class:
 ```
 
 And now let’s check whether the map is displayed correctly on the screen.
+
+## 2. Creating the enemy
+### 2.1 Enemy sprite
+
+Let's create a single enemy in a random location on the map.
+We know that enemies tiles are also included in the general atlas `tilemap.png`. Each enemy tile has its own frame number in the atlas. Let's add this data to the general game config:
+
+``` javascript
+export const Config = {
+    // ...
+    enemies: {
+        "unit1": 246,
+        "unit2": 247,
+        "unit3": 248,
+        "unit4": 249
+    }
+};
+```
+
+We indicated that in our `tilemap.png` atlas there are 4 frames with indexes 246-249, which correspond to the enemy images.
+
+To render one tile, which is the atlas frame, we have previously developed the `Tile` class. Since the image of an enemy is also a tile, we can create the `Enemy` class, which will be a child of a `Tile` class.
+All we need to do is pass the correct frame index to the constructor of the `Tile` base class. And now we can get these numbers from the config:
+
+``` javascript
+import { Tile } from "./Tile";
+import { App } from "../system/App";
+
+export class Enemy extends Tile {
+
+    constructor(key) {
+        super(App.config.enemies[key]);
+        this.sprite.anchor.set(0.5);
+    }
+}
+
+```
+
+Now let's create an enemy in a random location on the map in the `Game` class:
+
+``` javascript
+// ...
+import { Enemy } from './Enemy';
+
+export class GameScene extends Scene {
+    create() {
+        this.createMap();
+        this.createEnemies();
+    }
+    createEnemies() {
+        const enemy = new Enemy("unit1");
+        this.container.addChild(enemy.sprite);
+        enemy.sprite.x = 130;
+        enemy.sprite.y = 530;
+    }
+    // ...
+}
+```
