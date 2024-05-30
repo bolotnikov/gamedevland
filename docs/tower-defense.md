@@ -270,8 +270,8 @@ Let's specify this data when creating the pixi canvas in the `App` class:
 
 And now let’s check whether the map is displayed correctly on the screen.
 
-## 2. Creating the enemy
-### 2.1 Enemy sprite
+## 3. Creating the enemy
+### 3.1 Enemy sprite
 
 Let's create a single enemy in a random location on the map.
 We know that enemies tiles are also included in the general atlas `tilemap.png`. Each enemy tile has its own frame number in the atlas. Let's add this data to the general game config:
