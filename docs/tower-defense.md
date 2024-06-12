@@ -327,3 +327,140 @@ export class GameScene extends Scene {
     // ...
 }
 ```
+
+### 3.2 Enemy movement
+
+Now let's implement the movement of the newly created enemy.
+The enemy should be moving along the road on our level map.
+When we created our map in `Tiled`, we set special points on the road that indicates the direction of the enemies.
+These points are markers through which enemies must pass, moving from one point to the next and so on until they reach the last one.
+We placed such marks on a separate special layer of our tilemap, which is called `path`.
+There is no `data` field in this layer, since there are no tiles on it. Instead, on this layer in the `objects` field there are points with map coordinates.
+Let's put this data in the `this.path` field of the `LevelMap` class:
+
+``` javascript
+//...
+export class LevelMap {
+    constructor() {
+        // ...
+        this.path = {};
+    }
+
+    render() {
+        //...
+        if (layerData.data) {
+            //...
+        } else if (layerData.objects) {
+            this.path = layerData.objects;
+        }
+    }
+}
+``` 
+When creating an enemy, we must let him know about the points on the map through which he must pass. That is, we will pass the `path` field of the map object to the enemy object:
+
+``` javascript
+// ...
+export class GameScene extends Scene {
+    //...
+    createEnemies() {
+        const enemy = new Enemy("unit1", this.map.path);
+        // ...
+        enemy.move();
+    }
+}
+``` 
+Here we also immediately called the `move` method, which should start an animation of the enemy moving around the map. Now let's implement this method in the `Enemy` class.
+
+1. Save the `path` object of the map in a `this.path` field of the `Enemy` class.
+2. Add the index number of the current point: the `pathIndex` field will show which point the enemy passed last.
+
+``` javascript
+//...
+export class Enemy extends Tile {
+
+    constructor(key, path) {
+        super(App.config.enemies[key]);
+        this.sprite.anchor.set(0.5);
+        this.pathIndex = 1;
+        this.path = path;
+    }
+    //...
+}
+``` 
+The `getNextPoint` method will return the enemy's current target based on the number of the point the enemy last passed.
+So, knowing the number of the point that the enemy just passed, he can get the next point to move to in the movement animation:
+
+``` javascript
+    //...
+    getNextPoint() {
+        const nextPoint = this.pathIndex + 1;
+
+        return this.path.find(point => point.name === nextPoint.toString());
+    }
+    //...
+    
+```
+Now we can fully implement the `move` method, which will launch an animation of the enemy moving between points. To do this, we need to develop the following algorithm:
+
+ 1. Get the next point to move to
+ 2. Increase the value of the `pathIndex` field, indicating the next point passed
+ 3. Get the current coordinates of the enemy sprite
+ 4. Get the coordinates of the target to which you want to move
+ 5. Calculate the distance between the target and the current position of the enemy
+ 6. Calculate the duration of the movement based on the distance traveled and the speed taken from the game config
+ 7. Run a motion animation using `gsap`
+ 8. When the motion animation is finished, restart the `move` method to start moving to the next point
+
+Let's implement this algorithm:
+
+``` javascript
+    move() {
+        // get the next point
+        const point = this.getNextPoint();
+        if (!point) {
+            // if there is no such thing, then there is nowhere to move
+            return;
+        }
+        //increase the index of the last point passed
+        ++this.pathIndex;
+
+        // current coordinates
+        const sourceX = this.sprite.x;
+        const sourceY = this.sprite.y;
+
+        // target coordinates
+        const targetX = point.x / 2;
+        const targetY = point.y / 2;
+
+        // distance between target and current position
+        const diffX = Math.abs(targetX - sourceX);
+        const diffY = Math.abs(targetY - sourceY);
+        const diff = Math.max(diffX, diffY);
+
+        // duration of movement
+        const duration = diff / App.config.enemyVelocity;
+
+        // movement animation
+        gsap.to(this.sprite, {
+            onComplete: () => {
+                // repeat the process for the next point
+                this.move();
+            },
+            pixi: { x: point.x / 2, y: point.y / 2 },
+            duration,
+            ease: "none",
+          });
+
+    }
+}
+``` 
+
+Let's put the speed value in the game config `Config.js` and check the movement:
+
+```javascript
+//...
+export const Config = {
+    //...
+    enemyVelocity: 75
+};
+```
