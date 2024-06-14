@@ -464,3 +464,41 @@ export const Config = {
     enemyVelocity: 75
 };
 ```
+
+### 3.3 Setting the angle
+Now our enemy is really moving across the entire map from point to point, but he is always facing the same direction. Let's fix this.
+Let's make sure that the enemy always faces towards the next point on his path.
+
+To do this, we need the `getAngle` method, which, based on the coordinates of the target point, will return the angle by which the enemy sprite needs to be rotated.
+You can get the angle using the function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2">
+`Math.atan2`</a>:
+
+!!! quote "Math.atan2"
+    The Math.atan2() static method returns the angle in the plane (in radians) between the positive x-axis and the ray from (0, 0) to the point (x, y), for Math.atan2(y, x).
+
+Since this method returns the angle in radians, let's convert it to degrees:
+
+```javascript
+// Enemy.js
+getAngle(target) {
+    const sourceX = this.sprite.x;
+    const sourceY = this.sprite.y;
+
+    const dy = target.y - sourceY;
+    const dx = target.x - sourceX;
+    return 180 * Math.atan2(dy, dx) / Math.PI; 
+}
+```
+
+Now we can call this angle in the move method before starting the motion animation:
+
+```javascript
+// Enemy.js
+move() {
+    //...
+    this.sprite.angle = this.getAngle({x: targetX, y: targetY});
+}
+```
+
+
+
