@@ -502,3 +502,83 @@ move() {
 
 
 
+## 4. Wave of enemies
+We have successfully created a single enemy that moves along the map.
+Now we can create a wave consisting of a given number of opponents.
+Let's create the `Enemies.js` class:
+
+```javascript
+
+import { EventEmitter } from "events";
+import * as PIXI from "pixi.js";
+import { App } from '../system/App';
+import { Enemy } from "./Enemy";
+
+export class Enemies extends EventEmitter {
+
+    constructor(map) {
+        super();
+
+        this.container = new PIXI.Container();
+        this.map = map;
+        this.units = [];
+        this.count = App.config.enemiesCount;
+        this.create();
+    }
+
+    createEnemy(i) {
+        // @todo: create single enemy
+    }
+
+    create() {
+        for (let i = 0; i < this.count; i++) {
+            this.createEnemy(i);
+        }
+    }
+}
+```
+
+In the constructor we created a container in which we will place all the created enemy sprites.
+We write the level map object to the internal field `this.map`.
+In the `this.units` field we will store all created objects of the `Enemy` class.
+The `this.count` field shows how many enemies need to be created in the wave.
+And the `create` method creates all the enemies by calling the `createEnemy` method in a loop.
+
+We can move the enemy creation code from `Game.createEnemies` into the `Enemies.createEnemy` method. We need to perform 3 steps:
+
+1. Create an enemy object and store it in the `this.units` field of the `Enemies` class.
+2. Place the created object at the starting point on the map
+3. Start the movement of the enemy object
+
+Let's do these steps:
+
+```javascript
+// Enemies.js
+// ...
+createEnemy(i) {
+    // create a new enemy
+    const enemy = new Enemy("unit1", this.map.path);
+    enemy.sprite.anchor.set(0.5);
+    this.container.addChild(enemy.sprite);
+    this.units.push(enemy);
+
+    // place it at the starting position on the map
+    const start = this.map.path.find(point => point.name === "1");
+    enemy.sprite.x = start.x / 2;
+    enemy.sprite.y = start.y / 2;
+
+    // start the enemy's movement with a given delay
+    window.setTimeout(() => enemy.move(), 1000 * i);
+}
+```
+
+Now in the `Game` class we will rewrite the `createEnemies` method and create an `Enemies` class object in it to create a wave of opponents:
+
+```javascript
+// Game.js
+// ...
+createEnemies() {
+    this.enemies = new Enemies(this.map);
+    this.container.addChild(this.enemies.container);
+}
+```
