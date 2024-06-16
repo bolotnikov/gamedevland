@@ -582,3 +582,80 @@ createEnemies() {
     this.container.addChild(this.enemies.container);
 }
 ```
+## 5. Creating a tower
+### 5.1 Tower place
+
+Now we have enemies in the level, which means it's time to create towers that will shoot at these enemies. 
+
+On our map we have special places where we can build a tower. We defined such places as tiles in `tilemap` on a separate layer called `towers`. So we can check the name of the current layer when creating the level map. If the current layer is a `towers` layer, then we will create an object of the `TowerPlace` class. Let's modify the `render` method of the `LevelMap` class:
+
+```javascript
+import { TowerPlace } from "./TowerPlace";
+
+export class LevelMap {
+    constructor() {
+        // ...
+        this.towersPlaces = [];
+    }
+    // ...
+    render() {
+        // ...
+        const tile = this.renderTile(tileId, row, col);
+        this.tiles[layerData.name].push(tile);
+
+        if (layerData.name === "towers") {
+            this.towersPlaces.push(new TowerPlace(tile));
+        }
+        // ...
+    }
+}
+```
+
+Let's create the `TowerPlace` class:
+
+```javascript
+import { App } from "../system/App";
+
+export class TowerPlace {
+
+    constructor(tile) {
+        this.tile = tile;
+        this.tile.sprite.interactive = true;
+        this.tile.sprite.once("pointerdown", this.onClick, this);
+        this.tower = null;
+    }
+
+    onClick() {
+        App.emit("tower-place-click", this);
+    }
+}
+```
+We will pass the created tile for the tower location to the constructor of this class. The main task of the `TowerPlace` class will be to track the click event on such a tile and trigger the event through the application class.
+
+Let's extend Application class from the `EventEmitter` class of the `events` library to be able to emit and listen events:
+
+```javascript
+import { EventEmitter } from "events";
+
+class Application extends EventEmitter {
+    // ...
+}
+```
+
+And finally, in the `Game` class we will add an event handler for the tower's place click:
+
+```javascript
+export class GameScene extends Scene {
+    create() {
+        // ...
+        this.setEvents();
+    }
+
+    setEvents() {
+        App.on("tower-place-click", this.onTowerPlaceClick.bind(this));
+    }
+
+    onTowerPlaceClick(towerPlace) {
+        console.log("tower place click", towerPlace);
+    }
+```
