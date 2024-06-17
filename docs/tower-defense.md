@@ -600,41 +600,32 @@ createEnemies() {
 
 Now we have enemies in the level, which means it's time to create towers that will shoot at these enemies. 
 
-On our map we have special places where we can build a tower. We defined such places as tiles in `tilemap` on a separate layer called `towers`. So we can check the name of the current layer when creating the level map. If the current layer is a `towers` layer, then we will create an object of the `TowerPlace` class. Let's modify the `render` method of the `LevelMap` class:
+On our map we have special places where we can build a tower. We defined such places as special tiles in `tilemap` on a separate layer called `towers`. 
+
+Let's explicitly list which tiles are places for the tower. Tilemap frames with serial numbers `42` and `111` are tiles of tower locations. For such tiles, we will specify a special class in the config, which will be a child of the `Tile` class:
 
 ```javascript
-import { TowerPlace } from "./TowerPlace";
-
-export class LevelMap {
-    constructor() {
-        // ...
-        this.towersPlaces = [];
-    }
+export const Config = {
     // ...
-    render() {
-        // ...
-        const tile = this.renderTile(tileId, row, col);
-        this.tiles[layerData.name].push(tile);
-
-        if (layerData.name === "towers") {
-            this.towersPlaces.push(new TowerPlace(tile));
-        }
-        // ...
+    tiles: {
+        42: TowerPlace,
+        111: TowerPlace
     }
 }
 ```
 
-Let's create the `TowerPlace` class:
+Now let's create the `TowerPlace` class:
 
 ```javascript
 import { App } from "../system/App";
+import { Tile } from "./Tile";
 
-export class TowerPlace {
+export class TowerPlace extends Tile {
 
-    constructor(tile) {
-        this.tile = tile;
-        this.tile.sprite.interactive = true;
-        this.tile.sprite.once("pointerdown", this.onClick, this);
+    constructor(id) {
+        super(id)
+        this.sprite.interactive = true;
+        this.sprite.once("pointerdown", this.onClick, this);
         this.tower = null;
     }
 
@@ -643,14 +634,48 @@ export class TowerPlace {
     }
 }
 ```
-We will pass the created tile for the tower location to the constructor of this class. The main task of the `TowerPlace` class will be to track the click event on such a tile and trigger the event through the application class.
+We will pass the tile id to the constructor of this class. The main task of the `TowerPlace` class will be to track the click event on such a tile and fire the event by the application class.
 
-Let's extend Application class from the `EventEmitter` class of the `events` library to be able to emit and listen events:
+
+Let's extend `Application` class from the `EventEmitter` class of the `events` library to be able to emit and listen for the events:
 
 ```javascript
 import { EventEmitter } from "events";
 
 class Application extends EventEmitter {
+    // ...
+}
+```
+
+Now, when creating tiles in the `LevelMap` class, we somehow need to check which class needs to be created for the current tile: base class `Tile` or special class `TowerPlace`, if the current tile is specified by one of the identifiers specified earlier in the config.
+A factory pattern is best option for this task.
+
+Let's create the `TileFactory` class. In this class we implement the static method `create`. In this method we will take the id of the tile as a parameter.
+If for a given tile id a special class is specified in the game config, then we will create an instance of this class. Otherwise, let's create an instance of the base class `Tile`:
+
+```javascript
+import { App } from "../system/App";
+import { Tile } from "./Tile";
+
+export class TileFactory {
+
+    static create(id) {
+        const tileClass = App.config.tiles[id];
+
+        if (tileClass) {
+            return new tileClass(id);
+        }
+
+        return new Tile(id);
+    }
+}
+```
+
+Now let's update the first line of code in the `LevelMap.renderTile` method so that instead of directly creating a base `Tile` class, we use a factory:
+
+```javascript
+renderTile(id, row, col) {
+    const tile = TileFactory.create(id);
     // ...
 }
 ```
