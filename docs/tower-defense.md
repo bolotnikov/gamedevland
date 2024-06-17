@@ -758,6 +758,7 @@ We have already set the range of the firing zone in the tower config. Since a zo
 [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics) to draw such a circle.
 
 Let's create a fire zone in the `Tower` class:
+
 1. Draw a circle with a given radius using [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics).
 2. Add this circle as a child element to the tower tile.
 
