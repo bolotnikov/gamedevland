@@ -742,3 +742,37 @@ onTowerPlaceClick(towerPlace) {
 ```
 Having built the tower, we will save a reference to it in the `towerPlace` object, and also save a reference to the `towerPlace` object in the `tower` itself.
 To display the tower on the level map, add a tower tile sprite as a child of the tower place sprite.
+
+## 6. Shooting at enemies
+### 6.1 Tower coverage
+
+Now that there are both enemies and towers in the game, we can move on to creating the functionality for shooting at enemies.
+
+How will the tower attack the enemy?
+
+First, the enemy must get into the tower's firing range. If enemies enter such a zone, the tower will be able to detect them and begin attack.
+We have already set the range of the firing zone in the tower config. Since a zone is a circle with a given radius, we can use the class
+[PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics) to draw such a circle.
+
+Let's create a fire zone in the `Tower` class:
+1. Draw a circle with a given radius using [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics).
+2. Add this circle as a child element to the tower tile.
+
+```javascript
+export class Tower extends Tile {
+    constructor(config) {
+        // ...
+        this.createArea();
+    }
+
+    createArea() {
+        this.area = new PIXI.Graphics();
+        this.area.beginFill(0xffffff, 0.5);
+        this.area.drawCircle(0, 0, this.config.radius);
+        this.area.endFill();
+        this.sprite.addChild(this.area);
+    }
+}
+```
+
+Now we have specified a transparency level of `0.5` in order to make it more convenient to debug the functionality. When we're done with development, we'll change the transparency value to 0 so that the circle is no longer visible.
