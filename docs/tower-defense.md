@@ -596,10 +596,9 @@ createEnemies() {
 }
 ```
 ## 5. Creating a tower
-### 5.1 Tower place
-
 Now we have enemies in the level, which means it's time to create towers that will shoot at these enemies. 
 
+### 5.1 Tower place
 On our map we have special places where we can build a tower. We defined such places as special tiles in `tilemap` on a separate layer called `towers`. 
 
 Let's explicitly list which tiles are places for the tower. Tilemap frames with serial numbers `42` and `111` are tiles of tower locations. For such tiles, we will specify a special class in the config, which will be a child of the `Tile` class:
