@@ -780,3 +780,87 @@ export class Tower extends Tile {
 ```
 
 Now we have specified a transparency level of `0.5` in order to make it more convenient to debug the functionality. When we're done with development, we'll change the transparency value to 0 so that the circle is no longer visible.
+
+### 6.2 Enemy Detection
+Now we can check that the enemy is in the created firing zone.
+
+First, let's implement the `Tower.detect` method:
+
+```javascript
+detect(enemy) {
+    if (enemy.sprite) {
+        return this.area.containsPoint(new PIXI.Point(enemy.sprite.x, enemy.sprite.y));
+    }
+    return false;
+}
+```
+
+Here we use the [containsPoint](https://pixijs.download/v4.8.2/docs/PIXI.Graphics.html#containsPoint) method of the [PIXI.Graphics](https://pixijs.com/8.x/) object guides/components/graphics), passing it the enemy coordinates as a parameter and thus checking whether these coordinates belong to the current zone or not.
+
+We must call this method constantly throughout the game to check the visibility of opponents in real time.
+
+To do this, in the `Game` class we will use the capabilities of [PIXI.Ticker](https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html) to constantly call the `update` method on each new animation frame:
+
+```javascript
+    setEvents() {
+        App.on("tower-place-click", this.onTowerPlaceClick.bind(this));
+        App.app.ticker.add(this.update, this);
+    }
+
+    update() {
+    }
+```
+
+Let's write down the algorithm of actions we need in this method to check the detection of opponents by towers:
+
+- For each tower created at the level
+    - Check each created enemy
+        - If the enemy is detected by the tower
+            - Start attack
+
+
+Now let's implement this algorithm in the `Game.update` method:
+
+
+```javascript
+    update() {
+        this.map.towers.forEach(tower => {
+            this.enemies.units.forEach(enemy => {
+                if (tower.detect(enemy)) {
+                    console.log("collision", tower, enemy)
+                }
+            });
+        });
+    }
+```
+
+We will implement the attack itself in the following lessons.
+Currently we get all created towers from the `this.map.towers` object.
+This means we need to implement this getter in the `LevelMap` class.
+Getting all created towers is simple:
+
+- get all the tiles from the towers layer - these are places for towers:
+
+```javascript
+const towerPlaces = this.tiles["towers"];
+```
+
+- filter out those places where the towers are actually built:
+
+```javascript
+const towerPlacesWithTowers = towerPlaces.filter(towerPlace => towerPlace.tower);
+```
+
+- get the towers with the `Array.prototype.map` function:
+
+```javascript
+towerPlacesWithTowers.map(towerPlace => towerPlace.tower);
+```
+
+As a result, all these actions can be written in one line:
+
+```javascript
+    get towers() {
+        return this.tiles["towers"].filter(towerPlace => towerPlace.tower).map(towerPlace => towerPlace.tower);
+    }
+```
