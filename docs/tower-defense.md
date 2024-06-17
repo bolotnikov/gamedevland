@@ -744,9 +744,10 @@ Having built the tower, we will save a reference to it in the `towerPlace` objec
 To display the tower on the level map, add a tower tile sprite as a child of the tower place sprite.
 
 ## 6. Shooting at enemies
-### 6.1 Tower coverage
 
 Now that there are both enemies and towers in the game, we can move on to creating the functionality for shooting at enemies.
+
+### 6.1 Tower coverage
 
 How will the tower attack the enemy?
 
