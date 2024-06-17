@@ -795,7 +795,7 @@ detect(enemy) {
 }
 ```
 
-Here we use the [containsPoint](https://pixijs.download/v4.8.2/docs/PIXI.Graphics.html#containsPoint) method of the [PIXI.Graphics](https://pixijs.com/8.x/) object guides/components/graphics), passing it the enemy coordinates as a parameter and thus checking whether these coordinates belong to the current zone or not.
+Here we use the [containsPoint](https://pixijs.download/v4.8.2/docs/PIXI.Graphics.html#containsPoint) method of the [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics), passing it the enemy coordinates as a parameter and thus checking whether these coordinates belong to the current zone or not.
 
 We must call this method constantly throughout the game to check the visibility of opponents in real time.
 
