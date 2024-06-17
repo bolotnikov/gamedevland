@@ -280,15 +280,34 @@ We know that enemies tiles are also included in the general atlas `tilemap.png`.
 export const Config = {
     // ...
     enemies: {
-        "unit1": 246,
-        "unit2": 247,
-        "unit3": 248,
-        "unit4": 249
+        "unit1": {
+            "id": 246,
+            "velocity": 75,
+            "hp": 1
+        },
+        "unit2": {
+            "id": 247,
+            "velocity": 100,
+            "hp": 2
+        },
+        "unit3": {
+            "id": 248,
+            "velocity": 125,
+            "hp": 3
+        },
+        "unit4": {
+            "id": 249,
+            "velocity": 150,
+            "hp": 4
+        }
     }
 };
 ```
 
-We indicated that in our `tilemap.png` atlas there are 4 frames with indexes 246-249, which correspond to the enemy images.
+Thus, each enemy unit receives its own config, which distinguishes it from all other units. In this case, we set the following parameters in the config of each unit:
+- frame id in tilemap
+- movement speed
+- health
 
 To render one tile, which is the atlas frame, we have previously developed the `Tile` class. Since the image of an enemy is also a tile, we can create the `Enemy` class, which will be a child of a `Tile` class.
 All we need to do is pass the correct frame index to the constructor of the `Tile` base class. And now we can get these numbers from the config:
@@ -298,14 +317,17 @@ import { Tile } from "./Tile";
 import { App } from "../system/App";
 
 export class Enemy extends Tile {
-
-    constructor(key) {
-        super(App.config.enemies[key]);
+    constructor(config, path) {
+        super(config.id);
+        this.config = config;
         this.sprite.anchor.set(0.5);
     }
 }
 
 ```
+Thus, we pass the config of the enemy unit to the constructor of the `Enemy` class.
+Using the id from the config, we get the required tile.
+We save the unit config in the `this.config` field for further receiving special unit parameters.
 
 Now let's create an enemy in a random location on the map in the `Game` class:
 
@@ -319,7 +341,7 @@ export class GameScene extends Scene {
         this.createEnemies();
     }
     createEnemies() {
-        const enemy = new Enemy("unit1");
+        const enemy = new Enemy(App.config.enemies.unit1);
         this.container.addChild(enemy.sprite);
         enemy.sprite.x = 130;
         enemy.sprite.y = 530;
@@ -363,7 +385,7 @@ When creating an enemy, we must let him know about the points on the map through
 export class GameScene extends Scene {
     //...
     createEnemies() {
-        const enemy = new Enemy("unit1", this.map.path);
+        const enemy = new Enemy(App.config.enemies.unit1, this.map.path);
         // ...
         enemy.move();
     }
@@ -378,8 +400,9 @@ Here we also immediately called the `move` method, which should start an animati
 //...
 export class Enemy extends Tile {
 
-    constructor(key, path) {
-        super(App.config.enemies[key]);
+    constructor(config, path) {
+        super(config.id);
+        this.config = config;
         this.sprite.anchor.set(0.5);
         this.pathIndex = 1;
         this.path = path;
@@ -407,7 +430,7 @@ Now we can fully implement the `move` method, which will launch an animation of 
  3. Get the current coordinates of the enemy sprite
  4. Get the coordinates of the target to which you want to move
  5. Calculate the distance between the target and the current position of the enemy
- 6. Calculate the duration of the movement based on the distance traveled and the speed taken from the game config
+ 6. Calculate the duration of the movement based on the distance traveled and the speed taken from the unit config
  7. Run a motion animation using `gsap`
  8. When the motion animation is finished, restart the `move` method to start moving to the next point
 
@@ -438,7 +461,7 @@ Let's implement this algorithm:
         const diff = Math.max(diffX, diffY);
 
         // duration of movement
-        const duration = diff / App.config.enemyVelocity;
+        const duration = diff / this.config.velocity;
 
         // movement animation
         gsap.to(this.sprite, {
@@ -454,16 +477,6 @@ Let's implement this algorithm:
     }
 }
 ``` 
-
-Let's put the speed value in the game config `Config.js` and check the movement:
-
-```javascript
-//...
-export const Config = {
-    //...
-    enemyVelocity: 75
-};
-```
 
 ### 3.3 Setting the angle
 Now our enemy is really moving across the entire map from point to point, but he is always facing the same direction. Let's fix this.
@@ -557,7 +570,7 @@ Let's do these steps:
 // ...
 createEnemy(i) {
     // create a new enemy
-    const enemy = new Enemy("unit1", this.map.path);
+    const enemy = new Enemy(App.config.enemies.unit1, this.map.path);
     enemy.sprite.anchor.set(0.5);
     this.container.addChild(enemy.sprite);
     this.units.push(enemy);
@@ -659,3 +672,49 @@ export class GameScene extends Scene {
         console.log("tower place click", towerPlace);
     }
 ```
+
+### 5.2 Tower construction
+
+Towers are represented by tiles with serial numbers `250` and `251`. Let's add this data to the game config:
+
+```javascript
+export const Config = {
+    // ...
+    towers: {
+        "tower1": {
+            "id": 250
+        },
+        "tower2": {
+            "id": 251
+        }
+    }
+}
+```
+Let's inherit the `Tower` class from the `Tile` class:
+
+```javascript
+import { Tile } from "./Tile";
+
+export class Tower extends Tile {
+    constructor(config) {
+        super(config.id);
+        this.config = config;
+        this.place = null;
+    }
+}
+```
+We will pass the config of the current tower as a parameter to the constructor of the `Tower` class.
+In addition, we will set the `this.place` field, in which we will place a `towerPlace` object.
+
+Now we can build the tower. To implement the tower construction functionality, we have already provided the `Game.onTowerPlaceClick` method:
+
+```javascript
+onTowerPlaceClick(towerPlace) {
+    const tower = new Tower(App.config.towers.tower1);
+    towerPlace.tower = tower;
+    tower.place = towerPlace;
+    towerPlace.tile.sprite.addChild(tower.sprite);
+}
+```
+Having built the tower, we will save a reference to it in the `towerPlace` object, and also save a reference to the `towerPlace` object in the `tower` itself.
+To display the tower on the level map, add a tower tile sprite as a child of the tower place sprite.
