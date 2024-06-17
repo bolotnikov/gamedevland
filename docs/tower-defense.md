@@ -738,7 +738,7 @@ onTowerPlaceClick(towerPlace) {
     const tower = new Tower(App.config.towers.tower1);
     towerPlace.tower = tower;
     tower.place = towerPlace;
-    towerPlace.tile.sprite.addChild(tower.sprite);
+    towerPlace.sprite.addChild(tower.sprite);
 }
 ```
 Having built the tower, we will save a reference to it in the `towerPlace` object, and also save a reference to the `towerPlace` object in the `tower` itself.
