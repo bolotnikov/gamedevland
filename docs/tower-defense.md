@@ -647,7 +647,7 @@ class Application extends EventEmitter {
 ```
 
 Now, when creating tiles in the `LevelMap` class, we somehow need to check which class needs to be created for the current tile: base class `Tile` or special class `TowerPlace`, if the current tile is specified by one of the identifiers specified earlier in the config.
-A factory pattern is best option for this task.
+A factory pattern is the best option for this task.
 
 Let's create the `TileFactory` class. In this class we implement the static method `create`. In this method we will take the id of the tile as a parameter.
 If for a given tile id a special class is specified in the game config, then we will create an instance of this class. Otherwise, let's create an instance of the base class `Tile`:
