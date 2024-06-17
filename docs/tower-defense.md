@@ -706,10 +706,12 @@ export const Config = {
     // ...
     towers: {
         "tower1": {
-            "id": 250
+            "id": 250,
+            "range": 300
         },
         "tower2": {
-            "id": 251
+            "id": 251,
+            "range": 400
         }
     }
 }
