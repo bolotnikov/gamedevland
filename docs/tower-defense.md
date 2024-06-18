@@ -975,14 +975,3 @@ update() {
 }
 ```
 
-    shoot(enemy) {
-        if (!this.shooting) {
-            this.shooting = true;
-            const bullet = new Bullet(this, enemy);
-            this.bullets.push(bullet);
-            this.sprite.parent.addChild(bullet.sprite);
-        }
-    }
-
-Для этого нужно создать спрайт пули, которая будет вылетать из дула пушки и запустить пулю в противника.
-
