@@ -864,3 +864,44 @@ As a result, all these actions can be written in one line:
         return this.tiles["towers"].filter(towerPlace => towerPlace.tower).map(towerPlace => towerPlace.tower);
     }
 ```
+
+### 6.3 Tower rotation
+
+Let's turn the tower towards the enemy we need to shoot at.
+To do this, we need to get the angle by which we want to rotate the tower sprite. We have already done a similar mechanism in the `Enemy` class, when we implemented a unit turn towards the next point on its path.
+Let's move this code into the `Tower` class:
+
+
+```javascript
+    getAngleByTarget(targetPosition) {
+        const x = targetPosition.x - this.sprite.parent.x;
+        const y = targetPosition.y - this.sprite.parent.y;
+        return 180 * Math.atan2(y, x) / Math.PI + 90;
+    }
+
+    rotateToEnemy(enemy) {
+        this.sprite.angle = this.getAngleByTarget({x: enemy.sprite.x, y: enemy.sprite.y});
+    }
+```
+
+Since the tower sprite is a child sprite of the tower place tile, we must get the coordinates of the tower place tile as coordinates. Therefore, in this case we get the source coordinates from the parent sprite:
+- `this.sprite.parent.x`
+- `this.sprite.parent.y`
+
+Please note that in our atlas `tilemap.png` the tower tiles are rotated 90 degrees relative to the unit tiles. Therefore, we add 90 degrees to the resulting value before returning the result of the `getAngleByTarget` function.
+
+Let's add a call to the `rotateToEnemy` method to the `Game.update` method:
+
+```javascript
+update() {
+    //...
+    if (tower.detect(enemy)) {
+        tower.rotateToEnemy(enemy);
+    }
+    //...
+}
+```
+
+
+
+
