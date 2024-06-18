@@ -905,3 +905,84 @@ update() {
 
 
 
+### 6.4 Creating a bullet
+
+The towers will shoot bullets at enemies. The bullet in our game is represented by the `fire.png` sprite. Let's create a `Bullet` class that will create a bullet for a given tower:
+
+```javascript
+
+import { EventEmitter } from "events";
+import { App } from '../system/App';
+
+export class Bullet extends EventEmitter {
+    constructor(tower, enemy) {
+        super();
+        this.tower = tower;
+        this.enemy = enemy;
+
+        this.sprite = App.sprite("fire");
+        this.sprite.anchor.set(0.5, 1);
+        this.sprite.x = this.tower.sprite.x;
+        this.sprite.y = this.tower.sprite.y;
+
+        this.sprite.angle = this.tower.sprite.angle;
+    }
+}
+```
+
+Let's extend this class from the `EventEmitter` class to be able to send bullet events. For example, in the future we will need to know about the moment when a bullet is destroyed (either when it hits an enemy or when it goes off the edge of the screen), at which we will trigger the corresponding event.
+
+Let's pass into the `Bullet` constructor the objects of the tower from which the shooting is made, as well as the enemy at whom the bullet was fired.
+
+Let's create a bullet sprite and place it in the coordinates of the tower at the same angle as the tower.
+
+The `shoot` method in the `Tower` class will be responsible for the shooting itself. In this method we need to create an instance of the `Bullet` class:
+
+```javascript
+export class Tower extends Tile {
+    constructor(config) {
+        // ...
+        this.bullets = [];
+        this.active = true;
+    }
+
+    shoot(enemy) {
+        if (this.active) {
+            this.active = false;
+            const bullet = new Bullet(this, enemy);
+            this.bullets.push(bullet);
+            this.sprite.parent.addChild(bullet.sprite);
+        }
+    }
+    }
+    // ...
+}
+```
+This method also takes as a parameter the enemy object that the tower is firing at.
+
+Additionally, we've added an `active` flag to indicate whether the turret can fire at the moment. The fact is that we will call the `shoot` method immediately after the `rotateToEnemy` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout.
+
+In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collided with any enemy.
+
+And now all that remains is to call the `Tower.shoot` method immediately after rotating the tower in `Game.update`:
+
+```javascript
+update() {
+    // ...
+    tower.rotateToEnemy(enemy);
+    tower.shoot(enemy);
+    // ...
+}
+```
+
+    shoot(enemy) {
+        if (!this.shooting) {
+            this.shooting = true;
+            const bullet = new Bullet(this, enemy);
+            this.bullets.push(bullet);
+            this.sprite.parent.addChild(bullet.sprite);
+        }
+    }
+
+Для этого нужно создать спрайт пули, которая будет вылетать из дула пушки и запустить пулю в противника.
+
