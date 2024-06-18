@@ -954,7 +954,6 @@ export class Tower extends Tile {
             this.sprite.parent.addChild(bullet.sprite);
         }
     }
-    }
     // ...
 }
 ```
