@@ -1021,7 +1021,7 @@ Knowing the azimuth and speed, we can calculate the the bullet's offset along th
 
 And finally, we create a callback function `update`, in which we assign the resulting offset to the coordinates of the bullet sprite. 
 
-And let's add this function to the (PIXI.Ticker)[https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html] so that it runs for every frame of the game animation.
+And let's add this function to the [PIXI.Ticker](https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html) so that it runs for every frame of the game animation.
 
 ### 7.3 Destruction of a bullet
 If the bullet goes beyond the screen, it must be destroyed for 2 reasons:
@@ -1054,7 +1054,7 @@ Let's check the coordinates of the bullet and, if the bullet has gone beyond the
 ```
 
 We only need to check one `x` coordinate of the bullet sprite.
-To get the global position of the bullet on the screen, use the method (PIXI.Sprite)[https://api.pixijs.io/@pixi/sprite/PIXI/Sprite.html] (`getGlobalPosition`)[https://pixijs.download/ v5.3.5/docs/PIXI.Sprite.html#getGlobalPosition]
+To get the global position of the bullet on the screen, use the method [PIXI.Sprite](https://api.pixijs.io/@pixi/sprite/PIXI/Sprite.html) [`getGlobalPosition`](https://pixijs.download/v5.3.5/docs/PIXI.Sprite.html#getGlobalPosition)
 We know that the left edge of the screen has an `x` coordinate equal to `0`.
 The coordinate of the right edge of the screen can be obtained by finding out the width of the `canvas` by calling `App.app.view.width`.
 If the `x` coordinate of the bullet is less than `0` or greater than the coordinate of the right edge of the screen, destroy the bullet sprite, remove the callback from the ticker and fire the corresponding event.
