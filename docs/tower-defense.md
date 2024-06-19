@@ -741,11 +741,12 @@ export class Tower extends Tile {
         super(config.id);
         this.config = config;
         this.place = null;
+        this.active = false;
     }
 }
 ```
 We will pass the config of the current tower as a parameter to the constructor of the `Tower` class.
-In addition, we will set the `this.place` field, in which we will place a `towerPlace` object.
+In addition, we will set the `this.place` field, in which we will place a `towerPlace` object. We also added `this.active` flag, indicating that this tower can fire at the moment and is not in reloading mode.
 
 Now we can build the tower. To implement the tower construction functionality, we have already provided the `Game.onTowerPlaceClick` method:
 
@@ -839,6 +840,7 @@ Now let's implement this algorithm in the `Game.update` method:
     update() {
         this.map.towers.forEach(tower => {
             const enemy = this.enemies.units.find(unit => tower.detect(unit));
+
             if (enemy) {
                 console.log("collision", tower, enemy)
             }
@@ -902,20 +904,25 @@ Since the tower sprite is a child sprite of the tower place tile, we must get th
 
 Please note that in our atlas `tilemap.png` the tower tiles are rotated 90 degrees relative to the unit tiles. Therefore, we add 90 degrees to the resulting value before returning the result of the `getAngleByTarget` function.
 
-Let's add a call to the `rotateToEnemy` method to the `Game.update` method:
+Let's create an `attack` method in the `Tower` class and call it in the `Game.update` method:
 
 ```javascript
-update() {
-    //...
-    if (enemy) {
-        tower.rotateToEnemy(enemy);
-    }
-    //...
+// Tower.js
+attack(enemy) {
+    this.rotateToEnemy(enemy);
 }
 ```
 
-
-
+```javascript
+// Game.js
+    update() {
+        // ...
+        if (enemy) {
+            tower.attack(enemy);
+        }
+        // ...
+    }
+```
 
 ## 7. Shooting
 ### 7.1 Creating a bullet
@@ -958,37 +965,34 @@ export class Tower extends Tile {
         this.bullets = [];
         this.active = true;
     }
-
+    // ...
     shoot(enemy) {
+        const bullet = new Bullet(this, enemy);
+        this.bullets.push(bullet);
+        this.sprite.parent.addChild(bullet.sprite);
+    }
+}
+```
+This method also takes as a parameter the enemy object that the tower is firing at. In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collided with any enemy.
+
+
+Now let's modify the `attack` method in the `Tower` class by adding a call of the `shoot` method, making sure the tower is active:
+
+```javascript
+    attack(enemy) {
+        this.rotateToEnemy(enemy);
+
         if (this.active) {
             this.active = false;
-            const bullet = new Bullet(this, enemy);
-            this.bullets.push(bullet);
-            this.sprite.parent.addChild(bullet.sprite);
+            this.shoot(enemy);
             window.setTimeout(() => this.active = true, this.config.cooldown);
         }
     }
-    // ...
-}
 ```
-This method also takes as a parameter the enemy object that the tower is firing at.
 
-Additionally, we've added an `active` flag to indicate whether the turret can fire at the moment. The fact is that we will call the `shoot` method immediately after the `rotateToEnemy` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. 
+We used an `active` flag to indicate whether the turret can fire at the moment. The fact is that we are calling the `Tower.attack` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. 
 
 Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout. Then we start a timeout with the reload time specified from the tower config, after which we activate the tower again by setting the flag `this.active = true;`
-
-In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collided with any enemy.
-
-And now all that remains is to call the `Tower.shoot` method immediately after rotating the tower in `Game.update`:
-
-```javascript
-update() {
-    // ...
-    tower.rotateToEnemy(enemy);
-    tower.shoot(enemy);
-    // ...
-}
-```
 
 
 ### 7.2 Firing a bullet
