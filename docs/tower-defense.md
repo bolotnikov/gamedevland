@@ -973,8 +973,9 @@ export class Tower extends Tile {
 ```
 This method also takes as a parameter the enemy object that the tower is firing at.
 
-Additionally, we've added an `active` flag to indicate whether the turret can fire at the moment. The fact is that we will call the `shoot` method immediately after the `rotateToEnemy` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout.
-We start a timeout with the reload time specified from the tower config, after which we activate the tower again by setting the flag `this.active =true;`
+Additionally, we've added an `active` flag to indicate whether the turret can fire at the moment. The fact is that we will call the `shoot` method immediately after the `rotateToEnemy` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. 
+
+Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout. Then we start a timeout with the reload time specified from the tower config, after which we activate the tower again by setting the flag `this.active = true;`
 
 In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collided with any enemy.
 
