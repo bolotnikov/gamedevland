@@ -1053,7 +1053,7 @@ Let's check the coordinates of the bullet and, if the bullet has gone beyond the
     }
 ```
 
-We only need to check one `x` coordinate of the bullet sprite.
+We only need to check the `x` coordinate of the bullet sprite.
 To get the global position of the bullet on the screen, use the method [PIXI.Sprite](https://api.pixijs.io/@pixi/sprite/PIXI/Sprite.html) [`getGlobalPosition`](https://pixijs.download/v5.3.5/docs/PIXI.Sprite.html#getGlobalPosition)
 We know that the left edge of the screen has an `x` coordinate equal to `0`.
 The coordinate of the right edge of the screen can be obtained by finding out the width of the `canvas` by calling `App.app.view.width`.
