@@ -707,15 +707,30 @@ export const Config = {
     towers: {
         "tower1": {
             "id": 250,
-            "range": 300
+            "range": 300,
+            "cooldown": 1000,
+            "bullet": {
+                "speed": 10,
+                "damage": 1
+            }
         },
         "tower2": {
             "id": 251,
-            "range": 400
+            "range": 400,
+            "cooldown": 500,
+            "bullet": {
+                "speed": 15,
+                "damage": 2
+            }
         }
     }
 }
 ```
+In addition, we added all the necessary data for each tower:
+- `range` - radius of the coverage area
+- `cooldown` - reloading time
+- `bullet` - speed and damage from tower's bullets
+
 Let's inherit the `Tower` class from the `Tile` class:
 
 ```javascript
@@ -745,7 +760,7 @@ onTowerPlaceClick(towerPlace) {
 Having built the tower, we will save a reference to it in the `towerPlace` object, and also save a reference to the `towerPlace` object in the `tower` itself.
 To display the tower on the level map, add a tower tile sprite as a child of the tower place sprite.
 
-## 6. Shooting at enemies
+## 6. Preparation for shooting
 
 Now that there are both enemies and towers in the game, we can move on to creating the functionality for shooting at enemies.
 
@@ -905,7 +920,8 @@ update() {
 
 
 
-### 6.4 Creating a bullet
+## 7. Shooting
+### 7.1 Creating a bullet
 
 The towers will shoot bullets at enemies. The bullet in our game is represented by the `fire.png` sprite. Let's create a `Bullet` class that will create a bullet for a given tower:
 
@@ -974,3 +990,35 @@ update() {
 }
 ```
 
+
+### 7.2 Firing a bullet
+
+To make a bullet move, we need to update the coordinates of the bullet sprite by a given offset every frame of the animation. To do this, we need to determine the correct offset along the `x` and `y` axes, taking into account the angle by which the bullet sprite is rotated. Let's do this in the `Bullet.init` method:
+
+```javascript
+export class Bullet extends EventEmitter {
+    constructor(tower, enemy) {
+        // ...
+        this.init();
+    }
+
+    init() {
+        const speed = this.tower.config.bullet.speed;
+        const azimuth = (this.sprite.angle) * (Math.PI / 180) - Math.PI / 2;
+        this.velocity = {x: Math.cos(azimuth) * speed, y: Math.sin(azimuth) * speed};
+        App.app.ticker.add(this.update, this);
+    }
+
+    update() {
+        this.sprite.x += this.velocity.x;
+        this.sprite.y += this.velocity.y;
+    }
+}
+```
+Here we take the bullet speed from the tower config that we set earlier.
+Next, we determine the azimuth based on the angle at which the bullet sprite is rotated after its creation.
+Knowing the azimuth and speed, we can calculate the the bullet's offset along the `x` and `y` axes. Let's write the offset in the `this.velocity` field.
+
+And finally, we create a callback function `update`, in which we assign the resulting offset to the coordinates of the bullet sprite. 
+
+And let's add this function to the (PIXI.Ticker)[https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html] so that it runs for every frame of the game animation.
