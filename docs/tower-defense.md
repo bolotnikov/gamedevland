@@ -828,11 +828,9 @@ To do this, in the `Game` class we will use the capabilities of (PIXI.Ticker)[ht
 
 Let's write down the algorithm of actions we need in this method to check the detection of opponents by towers:
 
-- For each tower created at the level
-    - Check each created enemy
-        - If the enemy is detected by the tower
-            - Start attack
-
+- for each tower created at the level
+    - find the first unit that fell into the tower’s fire zone
+        - if such a unit is found, we attack it
 
 Now let's implement this algorithm in the `Game.update` method:
 
@@ -840,11 +838,10 @@ Now let's implement this algorithm in the `Game.update` method:
 ```javascript
     update() {
         this.map.towers.forEach(tower => {
-            this.enemies.units.forEach(enemy => {
-                if (tower.detect(enemy)) {
-                    console.log("collision", tower, enemy)
-                }
-            });
+            const enemy = this.enemies.units.find(unit => tower.detect(unit));
+            if (enemy) {
+                console.log("collision", tower, enemy)
+            }
         });
     }
 ```
@@ -910,7 +907,7 @@ Let's add a call to the `rotateToEnemy` method to the `Game.update` method:
 ```javascript
 update() {
     //...
-    if (tower.detect(enemy)) {
+    if (enemy) {
         tower.rotateToEnemy(enemy);
     }
     //...
@@ -968,6 +965,7 @@ export class Tower extends Tile {
             const bullet = new Bullet(this, enemy);
             this.bullets.push(bullet);
             this.sprite.parent.addChild(bullet.sprite);
+            window.setTimeout(() => this.active = true, this.config.cooldown);
         }
     }
     // ...
@@ -976,6 +974,7 @@ export class Tower extends Tile {
 This method also takes as a parameter the enemy object that the tower is firing at.
 
 Additionally, we've added an `active` flag to indicate whether the turret can fire at the moment. The fact is that we will call the `shoot` method immediately after the `rotateToEnemy` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout.
+We start a timeout with the reload time specified from the tower config, after which we activate the tower again by setting the flag `this.active =true;`
 
 In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collided with any enemy.
 
@@ -1058,3 +1057,12 @@ To get the global position of the bullet on the screen, use the method [PIXI.Spr
 We know that the left edge of the screen has an `x` coordinate equal to `0`.
 The coordinate of the right edge of the screen can be obtained by finding out the width of the `canvas` by calling `App.app.view.width`.
 If the `x` coordinate of the bullet is less than `0` or greater than the coordinate of the right edge of the screen, destroy the bullet sprite, remove the callback from the ticker and fire the corresponding event.
+
+Now that we can track the bullet's destruction event, we'll modify the `Tower.shoot` method and remove the destroyed bullet from the tower's bullet pool:
+
+```javascript
+shoot(enemy) {
+    // ...
+    bullet.once("removed", () => this.bullets = this.bullets.filter(item => item !== bullet));
+}
+```
