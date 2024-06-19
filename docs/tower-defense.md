@@ -814,7 +814,7 @@ Here we use the [containsPoint](https://pixijs.download/v4.8.2/docs/PIXI.Graphic
 
 We must call this method constantly throughout the game to check the visibility of opponents in real time.
 
-To do this, in the `Game` class we will use the capabilities of [PIXI.Ticker](https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html) to constantly call the `update` method on each new animation frame:
+To do this, in the `Game` class we will use the capabilities of (PIXI.Ticker)[https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html] to constantly call the `update` method on each new animation frame:
 
 ```javascript
     setEvents() {
