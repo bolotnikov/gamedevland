@@ -1071,3 +1071,35 @@ shoot(enemy) {
     bullet.once("removed", () => this.bullets = this.bullets.filter(item => item !== bullet));
 }
 ```
+
+## 8 Enemy damage
+### 8.1 Collision with a bullet
+If the bullet sprite comes into contact with the enemy sprite, it is necessary to destroy the bullet and apply damage to the enemy unit. Let's start by tracking sprite collisions.
+
+In the `Game.update` method we can, for each active enemy, check all the bullets fired and see if they collide. To do this, we implement a nested loop:
+
+```javascript
+    update() {
+        this.map.towers.forEach(tower => {
+            this.enemies.units.forEach(enemy => {
+                tower.bullets.forEach(bullet => {
+                    if (bullet.collide(enemy.sprite)) {
+                        bullet.remove();
+                    }
+                });
+            });
+            // ...
+        });
+    }
+```
+
+Let's develop the `collide` method in the `Bullet` class:
+
+```javascript
+collide(sprite) {
+    if (!sprite) {
+        return;
+    }
+    return sprite.containsPoint(this.sprite.getGlobalPosition());
+}
+```
