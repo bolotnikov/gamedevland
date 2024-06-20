@@ -1103,3 +1103,71 @@ collide(sprite) {
     return sprite.containsPoint(this.sprite.getGlobalPosition());
 }
 ```
+
+### 8.2 Applying Damage
+Let's apply bullet damage to the enemy before destroying the bullet:
+
+```javascript
+    update() {
+        // ...
+        if (bullet.collide(enemy.sprite)) {
+            enemy.addDamage(bullet.damage);
+            bullet.remove();
+        }
+        // ...
+    }
+```
+
+Let's set the `damage` field in the `Bullet` class with the value from the config:
+
+```javascript
+export class Bullet extends EventEmitter {
+    constructor(tower, enemy) {
+        // ...
+        this.damage = this.tower.config.bullet.damage;
+    }
+}
+// ...
+```
+
+Let's implement the `addDamage` and `remove` methods in the `Enemy` class:
+
+```javascript
+export class Enemy extends Tile {
+
+    constructor(config, path) {
+        // ...
+        this.hp = this.config.hp;
+    }
+    // ...
+
+    addDamage(damage) {
+        this.hp -= damage;
+
+        if (this.hp <= 0) {
+            this.remove();
+        }
+    }
+
+    remove() {
+        gsap.killTweensOf(this.sprite);
+        this.sprite.destroy();
+        this.sprite = null;
+        this.emit("removed");
+    }
+}
+```
+Let's set the health value from the enemy config.
+In the `addDamage` method we subtract the required amount of health and, if the value is less than or equal to zero, call the `remove` method.
+
+In the `remove` method, first of all, we need to stop the animation of the `gsap` tweens. Then we destroy the sprite and fire the `removed` event:
+
+Let's subscribe to this event in the `Enemies` class immediately after creating the unit. Therefore, we will remove the unit from the active units pool when the event occurs:
+
+```javascript
+createEnemy(i) {
+    // ...
+    enemy.once("removed", () => this.units = this.units.filter(unit => unit !== enemy));
+}
+
+```
