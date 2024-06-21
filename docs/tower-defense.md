@@ -1241,7 +1241,7 @@ export class GameScene extends Scene {
 }
 ```
 
-### 10. UI
+## 10. UI
 
 Now that we have data about the player's available coins and lives, we can display it on the screen. Our `UI` will consist of the following elements:
 
@@ -1359,7 +1359,7 @@ export class GameScene extends Scene {
 }
 ```
 
-## 10. Handling surviving enemies
+## 11. Enemies Processing
 
 Units that were able to reach the last point on the path should take one life from the player and disappear from the game. Let's add a call to the `processCompletedEnemies` method at the beginning of the `update` method in the `Game` class:
 
