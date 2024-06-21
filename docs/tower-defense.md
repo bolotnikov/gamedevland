@@ -1334,3 +1334,57 @@ export class GameScene extends Scene {
     // ...
 }
 ```
+
+## 10. Handling surviving enemies
+
+Units that were able to reach the last point on the path should take one life from the player and disappear from the game. Let's add a call to the `processCompletedEnemies` method at the beginning of the `update` method in the `Game` class:
+
+```javascript
+    processCompletedEnemies() {
+        const enemy = this.enemies.units.find(enemy => enemy.isOutOfTheScreen);
+
+        if (enemy) {
+            enemy.remove();
+            --this.player.lives;
+            this.checkGameOver();
+        }
+    }
+    update() {
+        this.processCompletedEnemies();
+        // ...
+    }
+```
+
+Let's implement the `isOutOfTheScreen` getter:
+
+```javascript
+    get isOutOfTheScreen() {
+        if (this.pathIndex === this.path.length) {
+            let point = this.sprite.getGlobalPosition();
+
+            if (point.x < 0 ||point.x > App.app.view.width) {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+```
+
+Here we make sure to check whether the enemy unit has reached its final point:
+```javascript
+this.pathIndex === this.path.length
+```
+
+And if the final point is reached, then it is enough to check the positions using one of the sprite coordinates.
+
+Let's add the `checkGameOver` method to the `Game` class. In it we will restart the game if the player has lost all lives:
+```javascript
+    checkGameOver() {
+        if (this.player.lives <= 0) {
+            alert("Game Over!");
+            App.scenes.start("Game");
+        }
+    }
+```
