@@ -1172,7 +1172,7 @@ createEnemy(i) {
 
 ```
 
-### 9 Player
+## 9. Player
 
 The player class will store information about the available number of coins and the number of lives remaining:
 
