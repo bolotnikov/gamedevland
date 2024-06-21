@@ -623,6 +623,7 @@ export class TowerPlace extends Tile {
 
     constructor(id) {
         super(id)
+        this.level = 0;
         this.sprite.interactive = true;
         this.sprite.once("pointerdown", this.onClick, this);
         this.tower = null;
@@ -633,7 +634,13 @@ export class TowerPlace extends Tile {
     }
 }
 ```
-We will pass the tile id to the constructor of this class. The main task of the `TowerPlace` class will be to track the click event on such a tile and fire the event by the application class.
+We will pass the tile id to the constructor of this class. 
+
+The `this.level` field will indicate what level the tower is currently built at this location. Accordingly, `this.level = 0;` means that there is currently no tower at this place.
+
+The `this.tower` property will store the object of the tower built at that place.
+
+The main task of the `TowerPlace` class will be to track the click event on such a tile and fire the event by the application class.
 
 
 Let's extend `Application` class from the `EventEmitter` class of the `events` library to be able to emit and listen for the events:
@@ -748,16 +755,32 @@ export class Tower extends Tile {
 We will pass the config of the current tower as a parameter to the constructor of the `Tower` class.
 In addition, we will set the `this.place` field, in which we will place a `towerPlace` object. We also added `this.active` flag, indicating that this tower can fire at the moment and is not in reloading mode.
 
-Now we can build the tower. To implement the tower construction functionality, we have already provided the `Game.onTowerPlaceClick` method:
+Now we can build the tower. Each click on a tower place tile will build a higher level tower on that place. To implement the tower construction functionality, we have the `Game.onTowerPlaceClick` method. And to build a tower we must do the following:
+
+1. Increase the tower level for selected `towerPlace` object.
+2. Find a tower in the config with the same level as the selected `towerPlace` object.
+3. If there is such a tower, create a new tower object and save it in the `towerPlace` object. 
+4. If a tower has already been built in a given place, then destroy its sprite.
 
 ```javascript
 onTowerPlaceClick(towerPlace) {
-    const tower = new Tower(App.config.towers.tower1);
-    towerPlace.tower = tower;
-    tower.place = towerPlace;
-    towerPlace.sprite.addChild(tower.sprite);
+    ++towerPlace.level;
+
+    const towerConfig = App.config.towers["tower" + towerPlace.level];
+
+    if (towerConfig) {
+        if (towerPlace.tower) {
+            towerPlace.tower.sprite.destroy();
+        }
+
+        const tower = new Tower(towerConfig);
+        towerPlace.tower = tower;
+        tower.place = towerPlace;
+        towerPlace.sprite.addChild(tower.sprite);
+    }
 }
 ```
+
 Having built the tower, we will save a reference to it in the `towerPlace` object, and also save a reference to the `towerPlace` object in the `tower` itself.
 To display the tower on the level map, add a tower tile sprite as a child of the tower place sprite.
 
