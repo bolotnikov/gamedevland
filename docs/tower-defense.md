@@ -833,22 +833,30 @@ Let's write down the algorithm of actions we need in this method to check the de
     - find the first unit that fell into the tower’s fire zone
         - if such a unit is found, we attack it
 
-Now let's implement this algorithm in the `Game.update` method:
+Now let's implement this algorithm in the `processTowerAttackEnemies` method in the `Game` class and call this methid in the `update`:
 
 
 ```javascript
-    update() {
+    processTowerAttackEnemies() {
         this.map.towers.forEach(tower => {
             const enemy = this.enemies.units.find(unit => tower.detect(unit));
 
             if (enemy) {
-                console.log("collision", tower, enemy)
+                tower.attack(enemy);
             }
         });
     }
+
+    update() {
+        this.processTowerAttackEnemies();
+    }
 ```
 
-We will implement the attack itself in the following lessons.
+We will implement the attack itself in the following lessons. For now, let's leave the `Tower.attack` method empty:
+```javascript
+// Tower.js
+attack() {}
+```
 Currently we get all created towers from the `this.map.towers` object.
 This means we need to implement this getter in the `LevelMap` class.
 Getting all created towers is simple:
@@ -904,24 +912,13 @@ Since the tower sprite is a child sprite of the tower place tile, we must get th
 
 Please note that in our atlas `tilemap.png` the tower tiles are rotated 90 degrees relative to the unit tiles. Therefore, we add 90 degrees to the resulting value before returning the result of the `getAngleByTarget` function.
 
-Let's create an `attack` method in the `Tower` class and call it in the `Game.update` method:
+Let's modify `attack` method in the `Tower` class:
 
 ```javascript
 // Tower.js
 attack(enemy) {
     this.rotateToEnemy(enemy);
 }
-```
-
-```javascript
-// Game.js
-    update() {
-        // ...
-        if (enemy) {
-            tower.attack(enemy);
-        }
-        // ...
-    }
 ```
 
 ## 7. Shooting
@@ -990,7 +987,7 @@ Now let's modify the `attack` method in the `Tower` class by adding a call of th
     }
 ```
 
-We used an `active` flag to indicate whether the turret can fire at the moment. The fact is that we are calling the `Tower.attack` method in the `Game.update` class, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. 
+We used an `active` flag to indicate whether the turret can fire at the moment. The fact is that we are calling the `Tower.attack` method in the `Game.update` method, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower. 
 
 Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout. Then we start a timeout with the reload time specified from the tower config, after which we activate the tower again by setting the flag `this.active = true;`
 
@@ -1076,20 +1073,24 @@ shoot(enemy) {
 ### 8.1 Collision with a bullet
 If the bullet sprite comes into contact with the enemy sprite, it is necessary to destroy the bullet and apply damage to the enemy unit. Let's start by tracking sprite collisions.
 
-In the `Game.update` method we can, for each active enemy, check all the bullets fired and see if they collide. To do this, we implement a nested loop:
+In the new `processEnemyBulletCollision` method, we will loop through all the bullets of each tower and for each bullet we will check if there is at least one enemy that this bullet collided with:
 
 ```javascript
-    update() {
+    processEnemyBulletCollision() {
         this.map.towers.forEach(tower => {
-            this.enemies.units.forEach(enemy => {
-                tower.bullets.forEach(bullet => {
-                    if (bullet.collide(enemy.sprite)) {
-                        bullet.remove();
-                    }
-                });
+            tower.bullets.forEach(bullet => {
+                const enemy = this.enemies.units.find(unit => bullet.collide(unit.sprite));
+
+                if (enemy) {
+                    bullet.remove();
+                }
             });
-            // ...
         });
+    }
+
+    update() {
+        // ...
+        this.processEnemyBulletCollision();
     }
 ```
 
@@ -1108,7 +1109,7 @@ collide(sprite) {
 Let's apply bullet damage to the enemy before destroying the bullet:
 
 ```javascript
-    update() {
+    processEnemyBulletCollision() {
         // ...
         if (bullet.collide(enemy.sprite)) {
             enemy.addDamage(bullet.damage);
