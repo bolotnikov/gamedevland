@@ -1171,3 +1171,49 @@ createEnemy(i) {
 }
 
 ```
+
+### 9 Player
+
+The player class will store information about the available number of coins and the number of lives remaining:
+
+```javascript
+import { App } from "../system/App";
+
+export class Player {
+    constructor() {
+        this.coins = App.config.player.coins;
+        this.lives = App.config.player.lives;
+    }
+}
+```
+
+We will write the initial values ​​in the config:
+
+```javascript
+export const Config = {
+    // ...
+    player: {
+        coins: 200,
+        lives: 5
+    }
+};
+```
+
+Let's create a player in the `Game` class:
+
+```javascript
+import { Player } from './Player';
+
+export class GameScene extends Scene {
+    create() {
+        this.createPlayer();
+        // ...
+    }
+
+    createPlayer() {
+        this.player = new Player();
+    }
+    // ...
+}
+```
+
