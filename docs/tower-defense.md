@@ -282,21 +282,25 @@ export const Config = {
     enemies: {
         "unit1": {
             "id": 246,
+            "coins": 20,
             "velocity": 75,
             "hp": 1
         },
         "unit2": {
             "id": 247,
+            "coins": 30,
             "velocity": 100,
             "hp": 2
         },
         "unit3": {
             "id": 248,
+            "coins": 40,
             "velocity": 125,
             "hp": 3
         },
         "unit4": {
             "id": 249,
+            "coins": 50,
             "velocity": 150,
             "hp": 4
         }
@@ -308,6 +312,7 @@ Thus, each enemy unit receives its own config, which distinguishes it from all o
 - frame id in tilemap
 - movement speed
 - health
+- the reward amount for killing
 
 To render one tile, which is the atlas frame, we have previously developed the `Tile` class. Since the image of an enemy is also a tile, we can create the `Enemy` class, which will be a child of a `Tile` class.
 All we need to do is pass the correct frame index to the constructor of the `Tile` base class. And now we can get these numbers from the config:
@@ -715,6 +720,7 @@ export const Config = {
         "tower1": {
             "id": 250,
             "range": 300,
+            "coins": 100,
             "cooldown": 1000,
             "bullet": {
                 "speed": 10,
@@ -724,6 +730,7 @@ export const Config = {
         "tower2": {
             "id": 251,
             "range": 400,
+            "coins": 200,
             "cooldown": 500,
             "bullet": {
                 "speed": 15,
@@ -734,6 +741,7 @@ export const Config = {
 }
 ```
 In addition, we added all the necessary data for each tower:
+- `coins` - construction cost
 - `range` - radius of the coverage area
 - `cooldown` - reloading time
 - `bullet` - speed and damage from tower's bullets
@@ -1412,3 +1420,43 @@ Let's add the `checkGameOver` method to the `Game` class. In it we will restart 
         }
     }
 ```
+
+## 12. Earning and spending coins
+The player will spend coins to build and upgrade towers. And he will earn coins for killing each enemy. The cost of each tower, as well as the reward value for killing an enemy, are indicated in the `towers` and `enemies` configs in `Config.js`.
+
+Let's add processing of expenses and earnings to the corresponding methods of the `Game` class.
+
+1. Let's add an addditional check for the required number of coins and further spending for building and upgrading a tower in the `onTowerPlaceClick` method:
+
+```javascript
+onTowerPlaceClick(towerPlace) {
+    const towerConfig = App.config.towers["tower" + (towerPlace.level + 1)];
+
+    if (!towerConfig) {
+        return;
+    }
+
+    if (this.player.coins < towerConfig.coins) {
+        return;
+    }
+
+    this.player.coins -= towerConfig.coins;
+    ++towerPlace.level;
+    // ...
+}
+```
+
+2. We will also give the player a reward for killing an enemy unit in the `processEnemyBulletCollision` method:
+
+```javascript
+processEnemyBulletCollision() {
+    // ...
+    enemy.addDamage(bullet.damage);
+    if (enemy.hp <= 0) {
+        this.player.coins += enemy.config.coins;
+    }
+    // ...
+}
+```
+
+Since our UI is already constantly updated in the `Game.update` method, we do not need to additionally redraw the UI for each such action.
