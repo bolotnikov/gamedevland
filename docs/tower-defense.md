@@ -520,15 +520,36 @@ move() {
 
 
 
-## 4. Wave of enemies
-We have successfully created a single enemy that moves along the map.
-Now we can create a wave consisting of a given number of opponents.
-Let's create the `Enemies.js` class:
+## 4. Waves of enemies
+We have successfully created a single enemy that moves along the map. There will be 4 waves of enemies in our game. Each wave will have a given number of units of a certain type. Let's start by setting the enemies waves config:
 
 ```javascript
 
-import { EventEmitter } from "events";
+export const Config = {
+    // ...
+    enemiesWaves: [{
+        count: 1,
+        type: "unit1"
+    }, {
+        count: 2,
+        type: "unit2"
+    }, {
+        count: 3,
+        type: "unit3"
+    }, {
+        count: 4,
+        type: "unit4"
+    }]
+}
+
+```
+
+Now we can develop a class that will manage the creation of enemy waves. Let's create the `Enemies.js` class:
+
+```javascript
+
 import * as PIXI from "pixi.js";
+import { EventEmitter } from "events";
 import { App } from '../system/App';
 import { Enemy } from "./Enemy";
 
@@ -540,31 +561,44 @@ export class Enemies extends EventEmitter {
         this.container = new PIXI.Container();
         this.map = map;
         this.units = [];
-        this.count = App.config.enemiesCount;
+        this.config = App.config.enemiesWaves;
+        this.index = 0;
         this.create();
     }
 
-    createEnemy(i) {
-        // @todo: create single enemy
-    }
-
-    create() {
-        for (let i = 0; i < this.count; i++) {
-            this.createEnemy(i);
-        }
-    }
+    createEnemy(i, type) {}
+    create() {}
 }
+
 ```
 
-In the constructor we created a container in which we will place all the created enemy sprites.
-We write the level map object to the internal field `this.map`.
-In the `this.units` field we will store all created objects of the `Enemy` class.
-The `this.count` field shows how many enemies need to be created in the wave.
-And the `create` method creates all the enemies by calling the `createEnemy` method in a loop.
+- In the constructor we created a container in which we will place all the created enemy sprites.
+- We write the level map object to the internal field `this.map`.
+- In the `this.units` field we will store all created objects of the `Enemy` class.
+- In the `this.config` field we set data about all planned waves of enemies from the config.
+- The `this.index` field indicates the index of the current wave.
 
-We can move the enemy creation code from `Game.createEnemies` into the `Enemies.createEnemy` method. We need to perform 3 steps:
+And the `create` method will create a new wave based on the current index. Let's develop it:
 
-1. Create an enemy object and store it in the `this.units` field of the `Enemies` class.
+```javascript
+    create() {
+        const config = this.config[this.index];
+
+        if (!config) {
+            return;
+        }
+
+        ++this.index;
+
+        for (let i = 0; i < config.count; i++) {
+            this.createEnemy(i, config.type);
+        }
+    }
+```
+
+Here we get the config of the desired wave according to the current index. And we create the required number of enemies in a loop in the `createEnemy` method. We can move the enemy creation code from `Game.createEnemies` into the `Enemies.createEnemy` method. We need to perform 3 steps:
+
+1. Create an enemy object and save it in an `Enemies` class object.
 2. Place the created object at the starting point on the map
 3. Start the movement of the enemy object
 
@@ -573,9 +607,9 @@ Let's do these steps:
 ```javascript
 // Enemies.js
 // ...
-createEnemy(i) {
+createEnemy(i, type) {
     // create a new enemy
-    const enemy = new Enemy(App.config.enemies.unit1, this.map.path);
+    const enemy = new Enemy(App.config.enemies[type], this.map.path);
     enemy.sprite.anchor.set(0.5);
     this.container.addChild(enemy.sprite);
     this.units.push(enemy);
@@ -586,7 +620,22 @@ createEnemy(i) {
     enemy.sprite.y = start.y / 2;
 
     // start the enemy's movement with a given delay
-    window.setTimeout(() => enemy.move(), 1000 * i);
+    window.setTimeout(enemy.move.bind(enemy), this.enemyDelay * i);
+}
+```
+
+Let's add the `this.enemyDelay` field to the `Enemies` class constructor:
+
+```javascript
+const EnemyDelay = 1000;
+
+export class Enemies extends EventEmitter {
+
+    constructor(map) {
+        // ...
+        this.enemyDelay = EnemyDelay;
+    }
+    // ...
 }
 ```
 
@@ -600,6 +649,7 @@ createEnemies() {
     this.container.addChild(this.enemies.container);
 }
 ```
+
 ## 5. Creating a tower
 Now we have enemies in the level, which means it's time to create towers that will shoot at these enemies. 
 
