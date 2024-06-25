@@ -1249,9 +1249,31 @@ Let's subscribe to this event in the `Enemies` class immediately after creating 
 ```javascript
 createEnemy(i) {
     // ...
-    enemy.once("removed", () => this.units = this.units.filter(unit => unit !== enemy));
+    enemy.once("removed", this.onEnemyRemoved.bind(this, enemy));
 }
 
+onEnemyRemoved(enemy) {
+    this.units = this.units.filter(unit => unit !== enemy);
+
+    if (!this.units.length) {
+        window.setTimeout(this.create.bind(this), this.waveDelay);
+    }
+}
+```
+
+After deleting a unit, we additionally check the size of `this.units` field. If there are no units left in it, then it’s time to create a new enemies wave by calling the `create` method with a given delay. And let's add the `this.waveDelay` field to the `Enemies` class constructor:
+
+```javascript
+const WaveDelay = 3000;
+
+export class Enemies extends EventEmitter {
+
+    constructor(map) {
+        // ...
+        this.waveDelay = WaveDelay;
+    }
+    // ...
+}
 ```
 
 ## 9. Player
