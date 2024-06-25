@@ -528,16 +528,16 @@ We have successfully created a single enemy that moves along the map. There will
 export const Config = {
     // ...
     enemiesWaves: [{
-        count: 1,
+        count: 8,
         type: "unit1"
     }, {
-        count: 2,
+        count: 12,
         type: "unit2"
     }, {
-        count: 3,
+        count: 16,
         type: "unit3"
     }, {
-        count: 4,
+        count: 20,
         type: "unit4"
     }]
 }
@@ -854,29 +854,42 @@ First, the enemy must get into the tower's firing range. If enemies enter such a
 We have already set the range of the firing zone in the tower config. Since a zone is a circle with a given radius, we can use the class
 [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics) to draw such a circle.
 
-Let's create a fire zone in the `Tower` class:
-
-1. Draw a circle with a given radius using [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics).
-2. Add this circle as a child element to the tower tile.
+Let's create a fire zone in the `Tower` class. Draw a circle with a given radius in a tower global coordinates using [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics).
 
 ```javascript
 export class Tower extends Tile {
-    constructor(config) {
-        // ...
-        this.createArea();
-    }
-
+    // ...
     createArea() {
         this.area = new PIXI.Graphics();
-        this.area.beginFill(0xffffff, 0.5);
-        this.area.drawCircle(0, 0, this.config.radius);
+        this.area.beginFill(0xffffff, 1);
+        this.area.drawCircle(this.sprite.getGlobalPosition().x, this.sprite.getGlobalPosition().y, this.config.range);
         this.area.endFill();
-        this.sprite.addChild(this.area);
     }
 }
 ```
 
-Now we have specified a transparency level of `0.5` in order to make it more convenient to debug the functionality. When we're done with development, we'll change the transparency value to 0 so that the circle is no longer visible.
+Next, call this method in the `Game` class when creating a tower:
+
+```javascript
+export class GameScene extends Scene {
+    create() {
+        this.createCollisionsContainer();
+        // ...
+    }
+
+    createCollisionsContainer() {
+        this.collisions = new PIXI.Container();
+        this.container.addChild(this.collisions);
+    }
+
+    onTowerPlaceClick(towerPlace) {
+        // ...
+        tower.createArea();
+        this.collisions.addChild(tower.area);
+    }
+```
+
+We will also need a separate `this.collisions` container in the `Game` class, which we will create at the very beginning and add it as the very first children for the `Game` container. We will add all created tower zones as child elements to this container. We do this in order to hide the zone images themselves under the map layer.
 
 ### 6.2 Enemy Detection
 Now we can check that the enemy is in the created firing zone.
