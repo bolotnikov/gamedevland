@@ -11,6 +11,7 @@ Before starting the development, we need to make 2 steps:
 :one: Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
 
 :two: Download game assets:
+
 - [sprites](https://github.com/gamedevland/tower-defense/tree/main/src/sprites)
 - [tilemap](https://github.com/gamedevland/tower-defense/blob/main/src/json/tilemap.json) created in [Tiled](https://www.mapeditor.org/) editor
 
