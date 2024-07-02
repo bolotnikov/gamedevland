@@ -1,0 +1,1080 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../match3/">
+      
+      
+        <link rel="next" href="../runner/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>Сreating PixiJS project template - GameDev.Land</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-9KPG9DDEYS"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-9KPG9DDEYS",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-9KPG9DDEYS",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reating-pixijs-project-template" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="GameDev.Land" class="md-header__button md-logo" aria-label="GameDev.Land" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GameDev.Land
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Сreating PixiJS project template
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="GameDev.Land" class="md-nav__button md-logo" aria-label="GameDev.Land" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    GameDev.Land
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../match3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Сreating Match3 game with PixiJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Сreating PixiJS project template
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Сreating PixiJS project template
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#video-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-guide-on-udemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-step guide on Udemy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template functionality:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-creating-the-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Creating the structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Creating the structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-document-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Document template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-project-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Project dependencies.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Project structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-creating-the-canvas-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Creating the canvas element
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-creating-the-loader" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Creating the loader
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-game-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Game launch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sprite-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Sprite Output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-scenes-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Scenes Manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-useful-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Useful links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create a platformer with PixiJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tower-defense/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Сreating Tower Defense game with PIXI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#video-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-guide-on-udemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-step guide on Udemy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template functionality:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-creating-the-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Creating the structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Creating the structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-document-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Document template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-project-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Project dependencies.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Project structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-creating-the-canvas-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Creating the canvas element
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-creating-the-loader" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Creating the loader
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-game-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Game launch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sprite-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Sprite Output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-scenes-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Scenes Manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-useful-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Useful links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="reating-pixijs-project-template">Сreating PixiJS project template</h1>
+<p>In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games. You can check the final template code in <a href="https://github.com/gamedevland/pixi-project-template">GitHub</a>.</p>
+<h2 id="video-version">Video version</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/itT6L3LQ1cM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="step-by-step-guide-on-udemy">Step-by-step guide on Udemy</h2>
+<ul>
+<li><a href="https://www.udemy.com/course/pixicourse/">https://www.udemy.com/course/pixicourse/</a></li>
+</ul>
+<h2 id="template-functionality">Template functionality:</h2>
+<ul>
+<li>Application creation and launch</li>
+<li>Resource loading and rendering</li>
+<li>Management of scenes, states, animations, sounds and screen</li>
+</ul>
+<h2 id="1-creating-the-structure">1. Creating the structure</h2>
+<p>Let's take an empty project structure from <a href="https://github.com/bolotnikov/pixi-project-template/tree/initial">the initial branch</a> and examine it.</p>
+<h3 id="11-document-template">1.1 Document template</h3>
+<details>
+  <summary>index.html</summary>
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#000</span><span class="p">;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">canvas</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="k">position</span><span class="p">:</span><span class="kc">absolute</span><span class="p">;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="k">top</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="k">left</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="kp">-o-</span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="kp">-ms-</span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">        </span><span class="kp">-moz-</span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="kp">-webkit-</span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">  </span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+</details>
+<p>The HTML template will contain the final JavaScript code after the game is built. Let’s style the canvas element and leave the <code>body</code> tag empty.</p>
+<h3 id="12-project-dependencies">1.2 Project dependencies.</h3>
+<details>
+  <summary>package.json</summary>
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;match3&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="s2">&quot;version&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="s2">&quot;main&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;index.js&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="s2">&quot;scripts&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="s2">&quot;build&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;webpack --config webpack/prod.js &quot;</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="s2">&quot;start&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;webpack-dev-server --config webpack/base.js --open&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="s2">&quot;dependencies&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="s2">&quot;gsap&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^3.10.4&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="s2">&quot;pixi.js&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^6.5.1&quot;</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="s2">&quot;babel-loader&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^8.2.5&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="s2">&quot;clean-webpack-plugin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^4.0.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="s2">&quot;file-loader&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^6.2.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="s2">&quot;html-webpack-plugin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^5.5.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="s2">&quot;webpack-cli&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^4.10.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="s2">&quot;webpack-dev-server&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^4.9.3&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="s2">&quot;webpack-merge&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;^5.8.0&quot;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+<p>Config contains project settings and dependencies. Main dependencies are:</p>
+<ul>
+<li><a href="https://greensock.com/gsap/">gsap</a> for animations</li>
+<li><a href="https://pixijs.com/">pixi</a> for rendering</li>
+<li><a href="https://webpack.js.org/">webpack</a> and <a href="https://babeljs.io/">babel</a> for build</li>
+</ul>
+<h3 id="13-project-structure">1.3 Project structure</h3>
+<ul>
+<li><code>webpack/</code> - build scripts</li>
+<li><code>src/scripts/system/</code> - common system code, the same for all games</li>
+<li><code>src/scripts/game/</code> - code of the game itself, unique for each project</li>
+<li><code>src/sounds/</code> - audio assets</li>
+<li><code>src/sprites/</code> - images assets</li>
+</ul>
+<h3 id="14-commands">1.4 Commands</h3>
+<p>First we need to install dependencies from <code>package.json</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>npm<span class="w"> </span>i
+</code></pre></div>
+<p>As you can see in the scripts block in <code>package.json</code>, we have 2 ways to run webpack: build and start.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>npm<span class="w"> </span>start
+</code></pre></div>
+<p>This command creates the build with the developer environment and automatically run the project in the browser using dev-server.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>npm<span class="w"> </span>run<span class="w"> </span>build
+</code></pre></div>
+<p>This command creates the build for production and save the created build's files in the <code>dist/</code> folder.</p>
+<p>This folder is created automatically and cleared every time we run the command, so be careful not to save files in this folder.</p>
+<h2 id="2-creating-the-canvas-element">2. Creating the canvas element</h2>
+<p>Create a file <code>src/scripts/system/App.js</code>. This is the main class of the application.
+Let's implement the <code>run</code> method, which will start the game.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PIXI</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;pixi.js&quot;</span><span class="p">;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Application</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nx">run</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">config</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Application</span><span class="p">({</span><span class="nx">resizeTo</span><span class="o">:</span><span class="w"> </span><span class="nb">window</span><span class="p">});</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">view</span><span class="p">);</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Application</span><span class="p">();</span>
+</code></pre></div>
+<p>Here we import the <code>PIXI</code> library and create a <code>PIXI</code> application.
+The <code>view</code> property of the <code>this.app</code> object is just the HTML <code>canvas</code> element that we add to the DOM structure of our html template.</p>
+<p>In addition, we make this class a singleton by creating an instance of the class and exporting the created object, not the class itself.</p>
+<p>So wherever in the application we import from this file, we will always get the same <code>App</code> object. This way using the global <code>App</code> object we can get access to all the necessary classes for managing the game: screen manager, sound manager, scene manager, and so on.</p>
+<p>Create an entry point <code>src/scripts/index.js</code> and run the application:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">App</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+</code></pre></div>
+<h2 id="3-creating-the-loader">3. Creating the loader</h2>
+<p>Let's start with the loader interface that we want to implement.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Application</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">   </span><span class="nx">run</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="c1">// …</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Loader</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">loader</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">preload</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">start</span><span class="p">());</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nx">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div></p>
+<p>To load resources, <code>PIXI</code> provides us with the <a href="https://pixijs.download/v6.1.1/docs/PIXI.Loader.html"><code>PIXI.Loader</code></a> class. We can get it from the <code>app</code> property.</p>
+<p>We pass it as the first parameter to the constructor of our custom <code>Loader</code> class.
+And the second parameter is a list of resources to download.</p>
+<p>Create class <code>src/scripts/system/Loader.js</code>:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Loader</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">loader</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">loader</span><span class="p">;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">config</span><span class="p">;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nx">preload</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="p">}</span>
+</code></pre></div>
+We will add all the loaded resources objects in the <code>resources</code> property which is empty by default.</p>
+<p>Since the list of resources will be unique for each game, we need to define the resource config separately from the general code, that is, outside the <code>system</code> folder.</p>
+<p>Let's create a <code>game/Config.js</code> file. Here we create the <code>Config</code> object, which will be unique for each specific game:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Tools</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/Tools&quot;</span><span class="p">;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nx">loader</span><span class="o">:</span><span class="w"> </span><span class="nx">Tools</span><span class="p">.</span><span class="nx">massiveRequire</span><span class="p">(</span><span class="nx">require</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">](</span><span class="s1">&#39;./../../sprites/&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="sr">/\.(mp3|png|jpe?g)$/</span><span class="p">))</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">};</span>
+</code></pre></div>
+<p>Let's set the list of resources to load in the <code>loader</code> property.</p>
+<p>To automatically get the entire list of resources to load from a given folder, we use the capabilities of <code>require.context</code>.</p>
+<p>Let's create the <code>Tools</code> system class and implement the <code>massiveRequre</code> method in it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Tools</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">massiveRequire</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="nx">req</span><span class="p">.</span><span class="nx">keys</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">            </span><span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">                </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">req</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">files</span><span class="p">;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="p">}</span>
+</code></pre></div>
+<p>And now we need to update the entry point:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./game/Config&quot;</span><span class="p">;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nx">App</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">Config</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Now we can fully implement the <code>preload</code> method in the <code>Loader</code> class. We can do it in 2 steps:</p>
+<ol>
+<li>Add all resources from the loader config to the loading list using <code>this.loader.add</code> method.</li>
+<li>Start loading resources using <code>this.loader.load</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Loader</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nx">preload</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">asset</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">loader</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">asset</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">asset</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">            </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">));</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">asset</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">asset</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">asset</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="k">default</span><span class="p">)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">load</span><span class="p">((</span><span class="nx">loader</span><span class="p">,</span><span class="w"> </span><span class="nx">resources</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resources</span><span class="p">;</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">            </span><span class="nx">resolve</span><span class="p">();</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="p">}</span>
+</code></pre></div>
+<p>The <code>load</code> method of the <code>PIXI.Loader</code> object takes a callback function as a parameter, which will be called when all the resources have finished loading and become available for use.</p>
+<p>The callback function takes 2 parameters: the loader object itself and the second parameter is the loaded resources. Let's put them in the <code>resources</code> field in the <code>Loader</code> class, which we specially reserved for all loaded resources.</p>
+<h2 id="4-game-launch">4. Game launch</h2>
+<p>In the <code>Application</code> class, we implement the <code>start</code> method, which will start the game after the resources are loaded:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Application</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1">// ... </span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nx">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">[</span><span class="s2">&quot;startScene&quot;</span><span class="p">]();</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">container</span><span class="p">);</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>We could instantiate the scene class directly in the <code>start</code> method. But we want the shared code in the <code>system</code> folder to be unrelated to or dependent on the game code in the <code>game</code> folder. To do this, we have separated the common system code and the project code. At the same time, the system code can know about the parameters it needs through the game config, which we pass to the <code>App</code> class when launching applications. So in this case, instead of directly creating the game scene object directly in the <code>Application</code> class, we'd better create it through a parameter in the config.
+Add the <code>startScene</code> parameter to the game config in <code>Config.js</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Game&quot;</span><span class="p">;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nx">startScene</span><span class="o">:</span><span class="w"> </span><span class="nx">Game</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">};</span>
+</code></pre></div>
+<p>And create the <code>Game</code> class itself in game folder <code>/src/scripts/game/Game</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PIXI</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;pixi.js&quot;</span><span class="p">;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Container</span><span class="p">();</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>The scene class is based on the <a href="https://pixijs.download/dev/docs/PIXI.Container.html"><code>PIXI.Container</code></a>. And we will add all objects added to the scene to this container.
+And we added the scene container itself to the main <code>app.stage</code> container in the start method of the <code>Application</code> class.</p>
+<h2 id="5-sprite-output">5. Sprite Output</h2>
+<p>To render sprites, we need to implement a helper method in the <code>Application</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="w">    </span><span class="nx">res</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">texture</span><span class="p">;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nx">sprite</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">res</span><span class="p">(</span><span class="nx">key</span><span class="p">));</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>We know that all loaded resources are stored in the <code>resources</code> property of our custom <code>Loader</code> class. Getting the required resource by key, we can create a new instance of the <a href="https://pixijs.download/dev/docs/PIXI.Sprite.html"><code>PIXI.Sprite</code></a> class.
+Now, in the code of the game, it will be enough for us to use only the call to the <code>App.sprite</code> method to get the required <a href="https://pixijs.download/dev/docs/PIXI.Sprite.html"><code>PIXI.Sprite</code></a> instance and work with it further.
+Let's render the background image:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Container</span><span class="p">();</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createBackground</span><span class="p">();</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nx">createBackground</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="s2">&quot;bg&quot;</span><span class="p">);</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">bg</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">;</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">bg</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span><span class="p">;</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">bg</span><span class="p">);</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="6-scenes-manager">6. Scenes Manager</h2>
+<p>Let's create a scene manager for easy switching between scenes in the game.
+Let's create a base scene class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PIXI</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;pixi.js&quot;</span><span class="p">;</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./App&quot;</span><span class="p">;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Container</span><span class="p">();</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">interactive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">        </span><span class="nx">App</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">update</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">    </span><span class="nx">create</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">    </span><span class="nx">update</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">    </span><span class="nx">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="w">    </span><span class="nx">remove</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="w">        </span><span class="nx">App</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">update</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="p">}</span>
+</code></pre></div>
+<p>Let's add 3 methods to the base class that can be overridden in the project scene:
+- <code>create</code>
+- <code>update</code>
+- <code>destroy</code></p>
+<p>In the constructor, we will perform the universal actions required for each scene in the game:
+- create a scene container
+- call the <code>create</code> method, which will be overridden in the game scene
+- add <code>PIXI</code> ticker with <code>update</code> method so that it is called on every animation frame
+- add the <code>remove</code> method that will be called by the manager when the scene is destroyed and implement the deletion of the ticker in it</p>
+<p>Now let's create the manager itself to manage and switch scenes:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PIXI</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;pixi.js&quot;</span><span class="p">;</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./App&quot;</span><span class="p">;</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">ScenesManager</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Container</span><span class="p">();</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">interactive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">    </span><span class="nx">start</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">scenes</span><span class="p">[</span><span class="nx">scene</span><span class="p">]();</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">container</span><span class="p">);</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="p">}</span>
+</code></pre></div>
+The manager's only job is to run the scene.
+In this case, if any scene has already been launched, it must be deleted.
+We can start the scene by the key passed as a parameter to the <code>start</code> method.
+Which scene class corresponds to this key, we specify in the global config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="nx">scenes</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">        </span><span class="s2">&quot;Game&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">Game</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="p">};</span>
+</code></pre></div>
+<p>Let's finalize our game scene <code>Game</code> by making this class an inheritor of the base class of the scene:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1">//...</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Scene</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/Scene&quot;</span><span class="p">;</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>And all that's left is to change the scene launch method in the <code>App.js</code> application class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ScenesManager</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./ScenesManager&quot;</span><span class="p">;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Application</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="nx">run</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">        </span><span class="c1">//...</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">scenes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ScenesManager</span><span class="p">();</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">scenes</span><span class="p">.</span><span class="nx">container</span><span class="p">);</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">    </span><span class="nx">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">scenes</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s2">&quot;Game&quot;</span><span class="p">);</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="7-useful-links">7. Useful links</h2>
+<ul>
+<li><a href="https://github.com/gamedevland/pixi-project-template">Final source code</a></li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Application.html"><code>PIXI.Application</code></a></li>
+<li><a href="https://pixijs.download/v6.1.1/docs/PIXI.Loader.html"><code>PIXI.Loader</code></a></li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Sprite.html"><code>PIXI.Sprite</code></a></li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Container.html"><code>PIXI.Container</code></a></li>
+<li><a href="https://greensock.com/gsap/">GSAP</a></li>
+<li><a href="https://pixijs.com/">PIXI</a></li>
+<li><a href="https://webpack.js.org/">Webpack</a> </li>
+<li><a href="https://babeljs.io/">Babel</a></li>
+<li><a href="https://webpack.js.org/guides/dependency-management/#requirecontext">Webpack <code>require.context</code></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

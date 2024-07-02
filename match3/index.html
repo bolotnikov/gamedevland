@@ -1,0 +1,1549 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../pixi_project_template/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>Сreating Match3 game with PixiJS - GameDev.Land</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-9KPG9DDEYS"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-9KPG9DDEYS",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-9KPG9DDEYS",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reating-match3-game-with-pixijs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="GameDev.Land" class="md-header__button md-logo" aria-label="GameDev.Land" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GameDev.Land
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Сreating Match3 game with PixiJS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="GameDev.Land" class="md-nav__button md-logo" aria-label="GameDev.Land" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    GameDev.Land
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Сreating Match3 game with PixiJS
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Сreating Match3 game with PixiJS
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#video-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-guide-on-udemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-step guide on Udemy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional materials
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-creating-the-tiles-board" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Creating the tiles board
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Creating the tiles board">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-creating-a-single-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Creating a single field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-creating-a-fields-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Creating a fields grid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-creating-a-single-tile" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Creating a single tile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-create-a-tile-in-each-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4. Create a tile in each field
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-moving-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Moving tiles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Moving tiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-selecting-a-tile-to-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Selecting a tile to move
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-swapping-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Swapping tiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-search-for-combinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Search for combinations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-processing-combinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Processing combinations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Processing combinations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-removing-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Removing tiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-fall-of-the-remaining-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Fall of the remaining tiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-adding-and-dropping-new-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Adding and dropping new tiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-checking-for-combinations-after-tiles-falling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Checking for combinations after tiles falling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-collect-combinations-at-the-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Collect combinations at the start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-reverse-swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Reverse swap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pixi_project_template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Сreating PixiJS project template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create a platformer with PixiJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tower-defense/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Сreating Tower Defense game with PIXI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#video-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-guide-on-udemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-step guide on Udemy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional materials
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-creating-the-tiles-board" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Creating the tiles board
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Creating the tiles board">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-creating-a-single-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Creating a single field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-creating-a-fields-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Creating a fields grid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-creating-a-single-tile" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Creating a single tile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-create-a-tile-in-each-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4. Create a tile in each field
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-moving-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Moving tiles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Moving tiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-selecting-a-tile-to-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Selecting a tile to move
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-swapping-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Swapping tiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-search-for-combinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Search for combinations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-processing-combinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Processing combinations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Processing combinations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-removing-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Removing tiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-fall-of-the-remaining-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Fall of the remaining tiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-adding-and-dropping-new-tiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Adding and dropping new tiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-checking-for-combinations-after-tiles-falling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Checking for combinations after tiles falling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-collect-combinations-at-the-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Collect combinations at the start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-reverse-swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Reverse swap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="reating-match3-game-with-pixijs">Сreating Match3 game with PixiJS</h1>
+<p>In this article, we will create a match3 game using <a href="https://pixijs.com/">PIXI</a>.</p>
+<h2 id="video-version">Video version</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kgIg5Ms-HRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="step-by-step-guide-on-udemy">Step-by-step guide on Udemy</h2>
+<ul>
+<li><a href="https://www.udemy.com/course/pixicourse/">https://www.udemy.com/course/pixicourse/</a></li>
+</ul>
+<h2 id="additional-materials">Additional materials</h2>
+<ul>
+<li><a href="https://github.com/gamedevland/match3">Complete source code</a></li>
+<li><a href="https://gamedevland.github.io/match3/">Preview demo</a></li>
+</ul>
+<p>Before starting the development, we need to perform 2 steps:</p>
+<p><img alt="1⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/31-20e3.svg" title=":one:" /> Download our <a href="https://github.com/gamedevland/pixi-project-template">PIXI project template</a>. You can start working on the game right now or check out <a href="../pixi_project_template/">the tutorial</a> on how to create a PIXI project template.</p>
+<p><img alt="2⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/32-20e3.svg" title=":two:" /> Download <a href="../assets/match3.zip">the assets pack</a> for our game. Assets provided by the great website <a href="https://kenney.nl">kenney.nl</a></p>
+<h2 id="1-creating-the-tiles-board">1. Creating the tiles board</h2>
+<p>Let's set the first task to create the board with tiles.</p>
+<h3 id="11-creating-a-single-field">1.1. Creating a single field</h3>
+<p>The first step is to create a board field class and render a single field sprite on the screen.</p>
+<p>Create the <code>game/Field.js</code> class:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Field</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">row</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">col</span><span class="p">;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="s2">&quot;field&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nx">get</span><span class="w"> </span><span class="nx">position</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">            </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">col</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">            </span><span class="nx">y</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">height</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="p">};</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>A field is located in a certain column and in a certain row on the board. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<ul>
+<li>The <code>row</code> and <code>col</code> properties of the <code>Field</code> class define the row and column.</li>
+<li>The <code>position</code> getter determines the position of the field on the screen, depending on the position on the board and taking into account the size of the field sprite.</li>
+</ul>
+</div>
+<p>And now we can render a single field on the screen in the <code>Game</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Field</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Field&quot;</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">// ...    </span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Field</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">sprite</span><span class="p">);</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="12-creating-a-fields-grid">1.2. Creating a fields grid</h3>
+<p>We have a class for the board field and now we can create the board itself, consisting of a number of fields.
+Let's create a class <code>src/scripts/game/Board.js</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PIXI</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;pixi.js&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Field</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Field&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Board</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PIXI</span><span class="p">.</span><span class="nx">Container</span><span class="p">();</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">rows</span><span class="p">;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">cols</span><span class="p">;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nx">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
+</code></pre></div>
+<p>We will add all elements of the board (fields and tiles) to the board container. And the board container is then added to the scene container.</p>
+<p>The board consists of a grid of fields. Let's set all the created fields to the <code>this.fields</code> property.</p>
+<p>The number of rows and columns should be configurable. Therefore, let's add these settings to the global project config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">board</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nx">rows</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nx">cols</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">};</span>
+</code></pre></div>
+<p>To create a board, we need to place its fields on a grid of a given size. That is, create field sprites in each column and each row of the board.
+Let's do this in the <code>create</code> method:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Board</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createFields</span><span class="p">();</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">createFields</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">rows</span><span class="p">;</span><span class="w"> </span><span class="nx">row</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">col</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">cols</span><span class="p">;</span><span class="w"> </span><span class="nx">col</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">createField</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">);</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="nx">createField</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Field</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">);</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">fields</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">field</span><span class="p">);</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">sprite</span><span class="p">);</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="p">}</span>
+</code></pre></div>
+Let's bring the board to the stage in the <code>Game</code> class:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Board</span><span class="p">();</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">container</span><span class="p">);</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">// ...</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>Now the board is located in the upper left corner. Let's fix this by aligning its position to the center of the screen.
+We can get the size of the board's field by taking the first element from the generated fields array and reading the width of its sprite:
+<code>this.fields[0].sprite.width;</code>
+Knowing the size of one field, we can calculate the size of the entire board by multiplying the number of rows and columns by the size of the field:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">cols</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">rows</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="p">;</span>
+</code></pre></div>
+Knowing the size of the board and the size of the screen, we can make the right padding for the board container.
+Subtract the size of the board from the size of the screen and the resulting remaining space will take up 2 indents to the left and right of the board:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Board</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ajustPosition</span><span class="p">();</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nx">ajustPosition</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fields</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">cols</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">rows</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fieldSize</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="13-creating-a-single-tile">1.3. Creating a single tile</h3>
+<p>We have the board fields ready, and now we can create matching tiles in them.
+As in the case with the fields creation, we will start by creating a class for a single tile.</p>
+<p>As we can see in the assets, all tile names refer to their colors. To create a sprite, we need to specify the color we want to give to that tile. We pass the name of the color as a parameter in the constructor and create the corresponding sprite.
+Create a file <code>src/scripts/games/Tile.js</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Tile</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">color</span><span class="p">;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">);</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="p">}</span>
+</code></pre></div>
+<p>We also implement the <code>setPosition</code> method, which will set the sprite to the correct position.
+Let's add a single tile in the <code>Board</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Tile</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Tile&quot;</span><span class="p">;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Board</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1">// ...</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nx">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createFields</span><span class="p">();</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createTiles</span><span class="p">();</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nx">createTiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tile</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">);</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">tile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">);</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="c1">// ...</span>
+</code></pre></div>
+<h3 id="14-create-a-tile-in-each-field">1.4. Create a tile in each field</h3>
+<p>Now we can create a tile in each field of the board.
+To do this, we can loop through the array of all fields and set our own tile in each field:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">    </span><span class="nx">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createFields</span><span class="p">();</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createTiles</span><span class="p">();</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nx">createTiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">fields</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">createTile</span><span class="p">(</span><span class="nx">field</span><span class="p">));</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="nx">createTile</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tile</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">);</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">        </span><span class="nx">field</span><span class="p">.</span><span class="nx">setTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">tile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">);</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Set a tile in each field means to place the tile in the same position on the screen as the given field. Let's implement the setTile method in the <code>Field</code> class:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="w">    </span><span class="nx">setTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile</span><span class="p">;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">);</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">}</span>
+</code></pre></div>
+It remains to make sure that each field has a tile with a random color.
+To do this, we will create a factory that will generate a random tile.
+Let's create the <code>src/scripts/game/TileFactory.js</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Tools</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/Tools&quot;</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Tile</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Tile&quot;</span><span class="p">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">TileFactory</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">generate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">tilesColors</span><span class="p">[</span><span class="nx">Tools</span><span class="p">.</span><span class="nx">randomNumber</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">tilesColors</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)];</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Tile</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>Add the colors config to the project global config in <code>src/scripts/game/Config.js</code>:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nx">tilesColors</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;pink&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;yellow&#39;</span><span class="p">],</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">};</span>
+</code></pre></div>
+And add a method that returns a random integer to our special helpers class <code>src/scripts/system/Tools.js</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Tools</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">randomNumber</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">            </span><span class="nx">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">min</span><span class="p">;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">            </span><span class="nx">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">min</span><span class="p">);</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>And now in the <code>Board</code> class we create a tile using the factory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="w">    </span><span class="nx">createTile</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">TileFactory</span><span class="p">.</span><span class="nx">generate</span><span class="p">();</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="2-moving-tiles">2. Moving tiles</h2>
+<p>We start developing the functionality for moving tiles.</p>
+<h3 id="21-selecting-a-tile-to-move">2.1 Selecting a tile to move</h3>
+<p>We need to click on a tile to select it. This means tiles must be interactive.
+Let's add interactivity when creating tiles in the <code>Board</code> class:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="w">    </span><span class="nx">createTile</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">interactive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;pointerdown&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;tile-touch-start&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+Let's fire the <code>tile-touch-start</code> event using the capabilities of the <code>PIXI.Container</code> class.
+And then track and handle this event in the <code>Game</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tile-touch-start&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">onTileClick</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1">// ...</span>
+</code></pre></div>
+<p>Let's run the <code>onTileClick</code> method when the <code>tile-touch-start</code> event fires.
+In this method, we will handle all three possible scenarios:</p>
+<p><img alt="1⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/31-20e3.svg" title=":one:" /> select a new tile to move if no other tile has been selected</p>
+<p><img alt="2⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/32-20e3.svg" title=":two:" /> swap tiles if another tile has already been selected and it is next to the current one</p>
+<p><img alt="3⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/33-20e3.svg" title=":three:" /> select a new tile if another tile has already been selected, but it is not next to the current one</p>
+<p>Right now we are implementing the first point. Now we are implementing the first point. When choosing a new tile, we need to do 2 things:</p>
+<ol>
+<li>remember the selected tile</li>
+<li>visually highlight the selected field</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="nx">onTileClick</span><span class="p">(</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">            </span><span class="c1">// select new tile or make swap</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">selectTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="nx">selectTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile</span><span class="p">;</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>We can highlight the field with the selected tile by showing an additional border in this field.
+Let's implement the code in the <code>Field</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Field</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="s2">&quot;field-selected&quot;</span><span class="p">);</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selected</span><span class="p">);</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selected</span><span class="p">.</span><span class="nx">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selected</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">    </span><span class="nx">unselect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selected</span><span class="p">.</span><span class="nx">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="w">    </span><span class="nx">select</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">selected</span><span class="p">.</span><span class="nx">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="22-swapping-tiles">2.2 Swapping tiles</h3>
+<p>In the <code>onTileClick</code> method of the <code>Game</code> class, add <code>swap</code> method call, which implements the movement of tiles:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="w">    </span><span class="nx">onTileClick</span><span class="p">(</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">selectTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+Let's define what actions we need to move tiles:</p>
+<p><img alt="1⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/31-20e3.svg" title=":one:" /> Reset fields in moved tiles</p>
+<p><img alt="2⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/32-20e3.svg" title=":two:" /> Reset tiles in the board's fields</p>
+<p><img alt="3⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/33-20e3.svg" title=":three:" /> Place the moved tiles in the positions of the new fields on the screen</p>
+<p>We will create tweens animation using gsap for tiles movement.
+It's also worth locking the board by setting an additional flag to prevent interactivity while the animation is running.</p>
+<p>Let's implement these actions in code:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="w">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">        </span><span class="c1">// lock the board to prevent tiles from moving again while the animation is already running</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">clearSelection</span><span class="p">();</span><span class="w">      </span><span class="c1">// hide the &quot;field-selected&quot; frame from the field of the selectedTile object</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">        </span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">zIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// place the selectedTile sprite one layer higher than the tile sprite</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">        </span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">);</span><span class="w"> </span><span class="c1">// move selectedTile to tile position</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">        </span><span class="c1">// move tile to electedTile position</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">            </span><span class="c1">// after motion animations complete:</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">            </span><span class="c1">// change the values of the field properties in the tile objects</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">            </span><span class="c1">// change the values of the tile properties in the field objects</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="c1">// unlock the board</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div></p>
+<p>Let's reset the selection in the field in <code>clearSelection</code> method:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="w">    </span><span class="nx">clearSelection</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">unselect</span><span class="p">();</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+Let's implement the <code>moveTo</code> method in the <code>Tile</code> class using the <code>gsap</code> tween animation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="w">    </span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">            </span><span class="nx">gsap</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">                </span><span class="nx">duration</span><span class="p">,</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">                </span><span class="nx">pixi</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">                    </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">                    </span><span class="nx">y</span><span class="o">:</span><span class="w"> </span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">                </span><span class="p">},</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">                </span><span class="nx">onComplete</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">                    </span><span class="nx">resolve</span><span class="p">()</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Let's add the <code>swap</code> method in the <code>Board</code> class, in which we will change the properties values in the moved objects:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="w">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">tile1</span><span class="p">,</span><span class="w"> </span><span class="nx">tile2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tile1Field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile1</span><span class="p">.</span><span class="nx">field</span><span class="p">;</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tile2Field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile2</span><span class="p">.</span><span class="nx">field</span><span class="p">;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">        </span><span class="nx">tile1Field</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile2</span><span class="p">;</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">        </span><span class="nx">tile2</span><span class="p">.</span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile1Field</span><span class="p">;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">        </span><span class="nx">tile2Field</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile1</span><span class="p">;</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">        </span><span class="nx">tile1</span><span class="p">.</span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tile2Field</span><span class="p">;</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Now, when moving tiles, we can swap not only neighboring tiles, but any tiles on the board. But only neighboring tiles should be swapped. And if the player has chosen a non-neighboring tile, then we just need to completely clear the first selection and select the new tile.</p>
+<p>Let's update the condition in the <code>onTileClick</code> method in the <code>Game</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="w">    </span><span class="nx">onTileClick</span><span class="p">(</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">isNeighbour</span><span class="p">(</span><span class="nx">tile</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">clearSelection</span><span class="p">(</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">selectTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">selectTile</span><span class="p">(</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As you can see, we also added a check for the <code>disabled</code> flag, which we set in the last paragraph. Thus, we block the functionality of the <code>onTileClick</code> method while the tiles are moving on the board, in order to avoid possible bugs.</p>
+</div>
+<p>Let's implement the <code>isNeighbour</code> method in the <code>Tile</code> class.
+A neighbor is a tile located either in an adjacent column or in an adjacent row.
+This means that the difference between either rows or columns of the checked and current tile modulo must be equal to one:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="w">    </span><span class="nx">isNeighbour</span><span class="p">(</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">tile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">row</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">col</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">tile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">1</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="3-search-for-combinations">3. Search for combinations</h2>
+<p>After swapping tiles, the board must be checked for combinations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A combination is considered to be the collection of 3, 4 and 5 identical tiles in a row.</p>
+</div>
+<p>To check for all these combinations, it is enough to compare each tile on the board with the next two tiles in a row and the next two tiles in a column.</p>
+<p>Let's add the comparison rules to the game config <code>Config.js</code>:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nx">combinationRules</span><span class="o">:</span><span class="w"> </span><span class="p">[[</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">        </span><span class="p">{</span><span class="nx">col</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">row</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">col</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">row</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">},</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span><span class="p">],</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">        </span><span class="p">{</span><span class="nx">col</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">row</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">col</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">row</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">},</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">    </span><span class="p">]]</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="p">};</span>
+</code></pre></div>
+We have added 2 validation rules that show exactly which fields on the board should have the same tiles in relation to the field being checked. That is, for each checked field on the board, it is necessary to check the match of the field in the next two columns, as well as in the next two rows.</p>
+<p>We implement the <code>CombinationManager</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../system/App&quot;</span><span class="p">;</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CombinationManager</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">;</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">    </span><span class="nx">getMatches</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">fields</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">checkingField</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="w">            </span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">combinationRules</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">rule</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">checkingField</span><span class="p">.</span><span class="nx">tile</span><span class="p">];</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="w">                </span><span class="nx">rule</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">position</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a><span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checkingField</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">position</span><span class="p">.</span><span class="nx">row</span><span class="p">;</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checkingField</span><span class="p">.</span><span class="nx">col</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">position</span><span class="p">.</span><span class="nx">col</span><span class="p">;</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a><span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">comparingField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">getField</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">);</span>
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">comparingField</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">comparingField</span><span class="p">.</span><span class="nx">tile</span><span class="p">.</span><span class="nx">color</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">checkingField</span><span class="p">.</span><span class="nx">tile</span><span class="p">.</span><span class="nx">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="w">                        </span><span class="nx">matches</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">comparingField</span><span class="p">.</span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a><span class="w">                    </span><span class="p">}</span>
+<a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a><span class="w">                </span><span class="p">});</span>
+<a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a>
+<a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">matches</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">rule</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a><span class="w">                    </span><span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-28-27" name="__codelineno-28-27" href="#__codelineno-28-27"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-28-28" name="__codelineno-28-28" href="#__codelineno-28-28"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-28-29" name="__codelineno-28-29" href="#__codelineno-28-29"></a>
+<a id="__codelineno-28-30" name="__codelineno-28-30" href="#__codelineno-28-30"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
+<a id="__codelineno-28-31" name="__codelineno-28-31" href="#__codelineno-28-31"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-28-32" name="__codelineno-28-32" href="#__codelineno-28-32"></a><span class="p">}</span>
+</code></pre></div>
+<p>Let's implement the <code>getField</code> method in the <code>Board</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="w">    </span><span class="nx">getField</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fields</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">col</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">col</span><span class="p">);</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>And call its method in the <code>Game</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CombinationManager</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./CombinationManager&quot;</span><span class="p">;</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CombinationManager</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">);</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="p">.</span><span class="nx">getMatches</span><span class="p">();</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="4-processing-combinations">4. Processing combinations</h2>
+<h3 id="41-removing-tiles">4.1 Removing tiles</h3>
+<p>First of all, we will remove all the tiles in the collected combinations:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="c1">// ...</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="p">.</span><span class="nx">getMatches</span><span class="p">();</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">matches</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">    </span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">removeMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">    </span><span class="nx">removeMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="w">        </span><span class="nx">matches</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">match</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a><span class="w">            </span><span class="nx">match</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">tile</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a><span class="w">                </span><span class="nx">tile</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a><span class="p">}</span>
+</code></pre></div>
+<p>Let's implement the <code>remove</code> method in the <code>Tile</code> class:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="w">    </span><span class="nx">remove</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+If the object no longer has a sprite, then it has already been deleted.
+Otherwise, we delete the sprite and the reference to the field. At the field itself, we also remove the reference to the current tile.</p>
+<h3 id="42-fall-of-the-remaining-tiles">4.2 Fall of the remaining tiles</h3>
+<p>After the combination is triggered and the collected tiles are removed, it is necessary to drop the remaining tiles on the board. Add <code>processFallDown</code> method call in <code>processMatches</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="w">    </span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">removeMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">processFallDown</span><span class="p">();</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Starting from the bottom row of the board, check each field for a tile.
+If the field is empty, we will shift down the column all the tiles that are above it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="w">    </span><span class="nx">processFallDown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">completed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">started</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">            </span><span class="c1">// check all fields of the board, starting from the bottom row</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">rows</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">row</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">cols</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">col</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">col</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">getField</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">col</span><span class="p">);</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="w">                    </span><span class="c1">// if there is no tile in the field</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">field</span><span class="p">.</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="w">                        </span><span class="o">++</span><span class="nx">started</span><span class="p">;</span>
+<a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a>
+<a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a><span class="w">                        </span><span class="c1">// shift all tiles that are in the same column in all rows above</span>
+<a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a><span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="nx">fallDownTo</span><span class="p">(</span><span class="nx">field</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="w">                            </span><span class="o">++</span><span class="nx">completed</span><span class="p">;</span>
+<a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a><span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">completed</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">started</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a><span class="w">                                </span><span class="nx">resolve</span><span class="p">();</span>
+<a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a><span class="w">                            </span><span class="p">}</span>
+<a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a><span class="w">                        </span><span class="p">});</span>
+<a id="__codelineno-34-22" name="__codelineno-34-22" href="#__codelineno-34-22"></a><span class="w">                    </span><span class="p">}</span>
+<a id="__codelineno-34-23" name="__codelineno-34-23" href="#__codelineno-34-23"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-34-24" name="__codelineno-34-24" href="#__codelineno-34-24"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-34-25" name="__codelineno-34-25" href="#__codelineno-34-25"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-34-26" name="__codelineno-34-26" href="#__codelineno-34-26"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>We implement moving tiles down the column in the <code>fallDownTo</code> method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="w">    </span><span class="nx">fallDownTo</span><span class="p">(</span><span class="nx">emptyField</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">        </span><span class="c1">// checking all board fields in the found empty field column, but in all higher rows</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">emptyField</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">row</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">fallingField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">getField</span><span class="p">(</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">emptyField</span><span class="p">.</span><span class="nx">col</span><span class="p">);</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">            </span><span class="c1">// find the first field with a tile</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fallingField</span><span class="p">.</span><span class="nx">tile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">                </span><span class="c1">// the first found tile will be placed in the current empty field</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">fallingTile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fallingField</span><span class="p">.</span><span class="nx">tile</span><span class="p">;</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">                </span><span class="nx">fallingTile</span><span class="p">.</span><span class="nx">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">emptyField</span><span class="p">;</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">                </span><span class="nx">emptyField</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fallingTile</span><span class="p">;</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">                </span><span class="nx">fallingField</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">                </span><span class="c1">// run the tile move method and stop searching a tile for that empty field</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nx">fallingTile</span><span class="p">.</span><span class="nx">fallDownTo</span><span class="p">(</span><span class="nx">emptyField</span><span class="p">.</span><span class="nx">position</span><span class="p">);</span>
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a>
+<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Let's add the <code>fallDownTo</code> method to the <code>Tile</code> class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="w">    </span><span class="nx">fallDownTo</span><span class="p">(</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="nx">delay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="nx">delay</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bounce.out&quot;</span><span class="p">);</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="43-adding-and-dropping-new-tiles">4.3 Adding and dropping new tiles</h3>
+<p>After the completion of the fall of the remaining tiles, we need to create new tiles on top of the board so that they fall into the resulting empty fields:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="w">    </span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">removeMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">processFallDown</span><span class="p">()</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">            </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">addTiles</span><span class="p">())</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>To perform the creation and dropping of new tiles, we need to get all the fields on the board that have no tiles left.
+For each empty field, create a new tile, place it higher than the first row of the board, and start the motion animation on the given empty field:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="w">    </span><span class="nx">addTiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="w">            </span><span class="c1">// get all fields that don&#39;t have tiles</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">fields</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fields</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">completed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">            </span><span class="c1">// for each empty field</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="w">            </span><span class="nx">fields</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="w">                </span><span class="c1">// create a new tile</span>
+<a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">createTile</span><span class="p">(</span><span class="nx">field</span><span class="p">);</span>
+<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="w">                </span><span class="c1">// put it above the board</span>
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="w">                </span><span class="nx">tile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">500</span><span class="p">;</span>
+<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">row</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="w">                </span><span class="c1">// start the movement of the tile in the given empty field with the given delay</span>
+<a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="w">                </span><span class="nx">tile</span><span class="p">.</span><span class="nx">fallDownTo</span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="nx">delay</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="w">                    </span><span class="o">++</span><span class="nx">completed</span><span class="p">;</span>
+<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">completed</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">total</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a><span class="w">                        </span><span class="nx">resolve</span><span class="p">();</span>
+<a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="w">                    </span><span class="p">}</span>
+<a id="__codelineno-38-21" name="__codelineno-38-21" href="#__codelineno-38-21"></a><span class="w">                </span><span class="p">});</span>
+<a id="__codelineno-38-22" name="__codelineno-38-22" href="#__codelineno-38-22"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-38-23" name="__codelineno-38-23" href="#__codelineno-38-23"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-38-24" name="__codelineno-38-24" href="#__codelineno-38-24"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="44-checking-for-combinations-after-tiles-falling">4.4 Checking for combinations after tiles falling</h3>
+<p>After the completion of falling new tiles, combinations may appear on the board again.</p>
+<p>If there are new combinations, it is also necessary to process them, that is, collect the combination, make a tiles fall and create new tiles.
+For all these actions, we have already developed functionality in the <code>processMatches</code> method. We will call it recursively until there are no combinations left on the board after the next falling of new tiles:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="w">    </span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">removeMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">processFallDown</span><span class="p">()</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="w">            </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">addTiles</span><span class="p">())</span>
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="w">            </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">onFallDownOver</span><span class="p">());</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="w">    </span><span class="nx">onFallDownOver</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="p">.</span><span class="nx">getMatches</span><span class="p">();</span>
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">matches</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span>
+<a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-14" name="__codelineno-39-14" href="#__codelineno-39-14"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-39-15" name="__codelineno-39-15" href="#__codelineno-39-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-39-16" name="__codelineno-39-16" href="#__codelineno-39-16"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="5-collect-combinations-at-the-start">5. Collect combinations at the start</h3>
+<p>Combinations can appear be not only after moving two tiles, but also during the initial placement of tiles after creating the board.
+Such combinations must be automatically processed without falling animation and replaced with other tiles before showing the starting board to the player.</p>
+<p>We already have the functionality needed to handle starting combinations:</p>
+<p><img alt="1⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/31-20e3.svg" title=":one:" /> Find all combinations on the board using <code>combinationManager</code>.</p>
+<p><img alt="2⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/32-20e3.svg" title=":two:" />  Remove all founded matches</p>
+<p><img alt="3⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/33-20e3.svg" title=":three:" />  Create new tiles in empty fields</p>
+<p><img alt="4⃣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/34-20e3.svg" title=":four:" />  If combinations appear after adding new tiles, then repeat. Otherwise, let's start the game.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">removeStartMatches</span><span class="p">();</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="w">    </span><span class="nx">removeStartMatches</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="p">.</span><span class="nx">getMatches</span><span class="p">();</span><span class="w"> </span><span class="c1">// find combinations to collect</span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>
+<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="nx">matches</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// as long as there are combinations</span>
+<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">removeMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span><span class="w"> </span><span class="c1">// remove tiles in combinations</span>
+<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a>
+<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a><span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">fields</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">tile</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"> </span><span class="c1">// find empty fields</span>
+<a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a>
+<a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a><span class="w">            </span><span class="nx">fields</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// in each empty field</span>
+<a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">createTile</span><span class="p">(</span><span class="nx">field</span><span class="p">);</span><span class="w"> </span><span class="c1">// create a new random tile</span>
+<a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a><span class="w">            </span><span class="p">});</span>
+<a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a>
+<a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a><span class="w">            </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="p">.</span><span class="nx">getMatches</span><span class="p">();</span><span class="w"> </span><span class="c1">// looking for combinations again after adding new tiles</span>
+<a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="6-reverse-swap">6. Reverse swap</h3>
+<p>If, after the swap, no combination was formed on the board to collect, it is necessary to perform a reverse swap of tiles.
+To move tiles on the board, we have already implemented the <code>swap</code> method. We can modify it to perform a reverse move if no combinations are found after the main move.
+Add the <code>reverse</code> flag as the third parameter to the <code>swap</code> method:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="c1">// ...</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="c1">// ...</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="w">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">,</span><span class="w"> </span><span class="nx">reverse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="w">        </span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">zIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="w">        </span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">);</span>
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">clearSelection</span><span class="p">();</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a><span class="w">        </span><span class="nx">tile</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">.</span><span class="nx">field</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">board</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="nx">tile</span><span class="p">);</span>
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="w">            </span><span class="c1">// after the swap, check if it was the main swap or reverse</span>
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">reverse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a><span class="w">                </span><span class="c1">// if this is the main swap, then we are looking for combinations</span>
+<a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a><span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">combinationManager</span><span class="p">.</span><span class="nx">getMatches</span><span class="p">();</span>
+<a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">matches</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a><span class="w">                    </span><span class="c1">// if there are combinations, then process them</span>
+<a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a><span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">processMatches</span><span class="p">(</span><span class="nx">matches</span><span class="p">);</span>
+<a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a><span class="w">                    </span><span class="c1">// if there are no combinations after the main swap, then perform a reverse swap by running the same method, but with the reverse parameter</span>
+<a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a><span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">tile</span><span class="p">,</span><span class="w"> </span><span class="nx">selectedTile</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-41-26" name="__codelineno-41-26" href="#__codelineno-41-26"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-41-27" name="__codelineno-41-27" href="#__codelineno-41-27"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-28" name="__codelineno-41-28" href="#__codelineno-41-28"></a><span class="w">                </span><span class="c1">// in this condition, by the reverse flag, we understand that the swap was reversed, so there is no need to look for combinations.</span>
+<a id="__codelineno-41-29" name="__codelineno-41-29" href="#__codelineno-41-29"></a><span class="w">                </span><span class="c1">// all you need to do is unlock the board, because here the movement is already completed and there are no other animations</span>
+<a id="__codelineno-41-30" name="__codelineno-41-30" href="#__codelineno-41-30"></a><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-41-31" name="__codelineno-41-31" href="#__codelineno-41-31"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-41-32" name="__codelineno-41-32" href="#__codelineno-41-32"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-41-33" name="__codelineno-41-33" href="#__codelineno-41-33"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-41-34" name="__codelineno-41-34" href="#__codelineno-41-34"></a><span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>
