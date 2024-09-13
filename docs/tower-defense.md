@@ -82,7 +82,7 @@ export const Config = {
 
 ```
 
-Now, knowing the total number of rows and columns of the atlas image, we can calculate which row and which column has a tile with a given ID:
+Knowing the total number of rows and columns of the atlas image, we can calculate which row and column has a tile with a given ID:
 
 
 ``` javascript
@@ -135,12 +135,12 @@ export class GameScene extends Scene {
 
 ## 2. Creating the level
 
-So we learned how to create a specific tile by its ID. This means we can draw the entire map specified in `tilemap.json`.
+So we've learned how to create a specific tile by its ID. It means we can draw the entire map specified in `tilemap.json`.
 Let's create a new class `LevelMap` for this.
 
 1. We will receive the level data from the `tilemap.json` into the `const TilemapJson` variable using the `require` mechanism, reading the contents of the corresponding file.
 2. Let's create a container `this.container`, into which we will place the created tile sprites.
-3. Let's create a field `this.tiles`, in which we will place all the created tiles.
+3. Let's create a field `this.tiles`, where we will place all the created tiles.
 4. We will implement the map rendering function in the `this.render` method
 
 ``` javascript
@@ -161,13 +161,13 @@ export class LevelMap {
 }
 ```
 
-So, we need to implement the `render` method to render the level map on the game scene.
+So, we need to implement the `render` method to draw the level map on the game scene.
 
-Let's determine the data that we need to draw the map on the game scene:
+Let's determine the data we need to draw the map on the game scene:
 
 1. In `Tiled`, we created a level that consists of an 18 x 32 grid of tiles.
 2. In addition, we have created 5 layers on this map.
-3. And also in our game we plan to draw tiles 2 times smaller than their original size in the atlas. That is, we will render tiles with a size of 32px instead of 64x.
+3. And also in our game we plan to draw tiles 2 times smaller than their original size in the atlas is. We will render tiles with a size of 32px instead of 64x.
 Let's add this data to the game config:
 
 ``` javascript
@@ -182,11 +182,11 @@ export const Config = {
 };
 ```
 
-Please note that in the `level` field we indicate exactly the data related directly to our level. So, our game map consists of an 18 x 32 grid, that is, it has only 18 rows and 32 tiles in each row.
-And in the `atlas` field, that we created in the previous step, we store information directly about the `tilemap.png` atlas, which in turn consists of a 23 X 13 grid, where each tile has a tile size of 64px.
+Please note that in the `level` field we indicate exactly the data related directly to our level. So, our game map consists of an 18 x 32 grid. It has only 18 rows and 32 tiles in each row.
+And in the `atlas` field we created in the previous step, we store information directly about the `tilemap.png` atlas, which in turn consists of a 23 X 13 grid, where each tile has a tile size of 64px.
 
 We know that our level map contains 5 layers, which we added ourselves when we created the map in the `Tiled`.
-This means that we need to iterate through each layer in the generated map and check if any tile is created in that layer at a given position:
+This means that we need to iterate through each layer in the generated map and check if a tile is created in that layer at a given position:
 
 ``` javascript
     render() {
@@ -198,7 +198,7 @@ This means that we need to iterate through each layer in the generated map and c
     }
 ```
 
-As you can see, information about the presence of a tile in the grid can be obtained from data about the current layer from `tilemap.json`. Let's save this data in `layerData`.
+As you can see, the information about the tile presence in the grid can be obtained from the current layer data from `tilemap.json`. Let's save this data in `layerData`.
 Let each property of the `this.tiles` object refer to a specific map layer.
 
 If `tilemap.json` contains data for the current layer, then we can find out the tile ID by the `index` counter, which increases by 1 for each next tile checked. Thus, let's loop through all the columns in all the rows of our map, increasing the `index` parameter in each iteration.
@@ -232,7 +232,7 @@ If there is a tile, then we get its ID:
 }
 ```
 
-If we found the tile ID at a given position, we can draw it:
+If we've found the tile ID at a given position, we can draw it:
 
 ``` javascript
 
@@ -247,7 +247,7 @@ If we found the tile ID at a given position, we can draw it:
     }
 ```
 
-When drawing, we use the tile sizes that we want to get in the game. That is, we take data from the `tileSize` field of the `level` object, and not from the `map`. In our case, it is 32px. Taking these dimensions into account, we create the tile in the correct position on the screen with the correct offset. And add the created tile to the container of the `LevelMap` class.
+While drawing, we use the tile sizes that we want to get in the game. We take data from the `tileSize` field of the `level` object, and not from the `map`. In our case, it is 32px. Taking these dimensions into account, we create the tile in the correct position on the screen with the correct offset and add the created tile to the container of the `LevelMap` class.
 
 Now we can render the entire map in the `Game` scene:
 
@@ -269,7 +269,7 @@ export class GameScene extends Scene {
 
 It is easy to calculate that a grid size of 18x32 taking into account the tile size of 32px will give us a map of 1024 x 576 pixels.
 
-Let's specify this data when creating the pixi canvas in the `App` class:
+Let's specify this data while creating the pixi canvas in the `App` class:
 
 ``` javascript
         this.app = new PIXI.Application({ width: 1024, height: 576});
@@ -282,7 +282,7 @@ And now let’s check whether the map is displayed correctly on the screen.
 ### 3.1 Enemy sprite
 
 Let's create a single enemy in a random location on the map.
-We know that enemies tiles are also included in the general atlas `tilemap.png`. Each enemy tile has its own frame number in the atlas. Let's add this data to the general game config:
+We know that enemy tiles are also included in the general atlas `tilemap.png`. Each enemy tile has its own frame number in the atlas. Let's add this data to the general game config:
 
 ``` javascript
 export const Config = {
@@ -323,7 +323,7 @@ Thus, each enemy unit receives its own config, which distinguishes it from all o
 - the reward amount for killing
 
 To render one tile, which is the atlas frame, we have previously developed the `Tile` class. Since the image of an enemy is also a tile, we can create the `Enemy` class, which will be a child of a `Tile` class.
-All we need to do is pass the correct frame index to the constructor of the `Tile` base class. And now we can get these numbers from the config:
+All we need to do is to pass the correct frame index to the constructor of the `Tile` base class. And now we can get these numbers from the config:
 
 ``` javascript
 import { Tile } from "./Tile";
@@ -338,9 +338,9 @@ export class Enemy extends Tile {
 }
 
 ```
-Thus, we pass the config of the enemy unit to the constructor of the `Enemy` class.
+As a result we pass the config of the enemy unit to the constructor of the `Enemy` class.
 Using the id from the config, we get the required tile.
-We save the unit config in the `this.config` field for further receiving special unit parameters.
+We save the unit config in the `this.config` field for further special unit parameters receiving.
 
 Now let's create an enemy in a random location on the map in the `Game` class:
 
@@ -369,7 +369,7 @@ Now let's implement the movement of the newly created enemy.
 The enemy should be moving along the road on our level map.
 When we created our map in `Tiled`, we set special points on the road that indicates the direction of the enemies.
 These points are markers through which enemies must pass, moving from one point to the next and so on until they reach the last one.
-We placed such marks on a separate special layer of our tilemap, which is called `path`.
+We placed such marks on a special separate layer of our tilemap, which is called `path`.
 There is no `data` field in this layer, since there are no tiles on it. Instead, on this layer in the `objects` field there are points with map coordinates.
 Let's put this data in the `this.path` field of the `LevelMap` class:
 
@@ -391,7 +391,7 @@ export class LevelMap {
     }
 }
 ``` 
-When creating an enemy, we must let him know about the points on the map through which he must pass. That is, we will pass the `path` field of the map object to the enemy object:
+When creating an enemy, we must let him know about the points on the map through which he must pass. We will pass the `path` field of the map object to the enemy object:
 
 ``` javascript
 // ...
@@ -495,7 +495,7 @@ Let's implement this algorithm:
 Now our enemy is really moving across the entire map from point to point, but he is always facing the same direction. Let's fix this.
 Let's make sure that the enemy always faces towards the next point on his path.
 
-To do this, we need the `getAngle` method, which, based on the coordinates of the target point, will return the angle by which the enemy sprite needs to be rotated.
+Let's create the `getAngle` method. It will return the angle for the enemy sprite rotation based on the target point coordinates.
 You can get the angle using the function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2">
 `Math.atan2`</a>:
 
@@ -580,10 +580,10 @@ export class Enemies extends EventEmitter {
 
 ```
 
-- In the constructor we created a container in which we will place all the created enemy sprites.
-- We write the level map object to the internal field `this.map`.
+- In the constructor we've created a container in which we will place all the created enemy sprites.
+- We'll write the level map object to the internal field `this.map`.
 - In the `this.units` field we will store all created objects of the `Enemy` class.
-- In the `this.config` field we set data about all planned waves of enemies from the config.
+- In the `this.config` field we'll set data about all planned waves of enemies from the config.
 - The `this.index` field indicates the index of the current wave.
 
 And the `create` method will create a new wave based on the current index. Let's develop it:
@@ -716,11 +716,11 @@ class Application extends EventEmitter {
 }
 ```
 
-Now, when creating tiles in the `LevelMap` class, we somehow need to check which class needs to be created for the current tile: base class `Tile` or special class `TowerPlace`, if the current tile is specified by one of the identifiers specified earlier in the config.
+While creating tiles in the `LevelMap` class, we need to check which class needs to be created for the current tile: base class `Tile` or special class `TowerPlace`, if the current tile is specified by one of the identifiers specified earlier in the config.
 A factory pattern is the best option for this task.
 
 Let's create the `TileFactory` class. In this class we implement the static method `create`. In this method we will take the id of the tile as a parameter.
-If for a given tile id a special class is specified in the game config, then we will create an instance of this class. Otherwise, let's create an instance of the base class `Tile`:
+If a special class is specified for a given tile id in the game config, then we will create an instance of this class. Otherwise, let's create an instance of the base class `Tile`:
 
 ```javascript
 import { App } from "../system/App";
@@ -740,7 +740,7 @@ export class TileFactory {
 }
 ```
 
-Now let's update the first line of code in the `LevelMap.renderTile` method so that instead of directly creating a base `Tile` class, we use a factory:
+Now let's update the first line of the code in the `LevelMap.renderTile` method in that way that instead of directly creating a base `Tile` class, we use a factory:
 
 ```javascript
 renderTile(id, row, col) {
@@ -798,7 +798,7 @@ export const Config = {
     }
 }
 ```
-In addition, we added all the necessary data for each tower:
+In addition, we've added all the necessary data for each tower:
 - `coins` - construction cost
 - `range` - radius of the coverage area
 - `cooldown` - reloading time
@@ -819,11 +819,11 @@ export class Tower extends Tile {
 }
 ```
 We will pass the config of the current tower as a parameter to the constructor of the `Tower` class.
-In addition, we will set the `this.place` field, in which we will place a `towerPlace` object. We also added `this.active` flag, indicating that this tower can fire at the moment and is not in reloading mode.
+In addition, we will set the `this.place` field, in which we will place a `towerPlace` object. We've also added `this.active` flag, indicating that this tower can fire immediately and is not in a reloading mode.
 
 Now we can build the tower. Each click on a tower place tile will build a higher level tower on that place. To implement the tower construction functionality, we have the `Game.onTowerPlaceClick` method. And to build a tower we must do the following:
 
-1. Increase the tower level for selected `towerPlace` object.
+1. Increase the tower level for a selected `towerPlace` object.
 2. Find a tower in the config with the same level as the selected `towerPlace` object.
 3. If there is such a tower, create a new tower object and save it in the `towerPlace` object. 
 4. If a tower has already been built in a given place, then destroy its sprite.
@@ -856,9 +856,9 @@ Now that there are both enemies and towers in the game, we can move on to creati
 
 ### 6.1 Tower coverage
 
-How will the tower attack the enemy?
+Let's define how the tower will attack the enemy.
 
-First, the enemy must get into the tower's firing range. If enemies enter such a zone, the tower will be able to detect them and begin attack.
+First, the enemy must get into the tower's firing range. If enemies enter such a zone, the tower will be able to detect them and begin an attack.
 We have already set the range of the firing zone in the tower config. Since a zone is a circle with a given radius, we can use the class
 [PIXI.Graphics](https://pixijs.com/8.x/guides/components/graphics) to draw such a circle.
 
@@ -897,7 +897,7 @@ export class GameScene extends Scene {
     }
 ```
 
-We will also need a separate `this.collisions` container in the `Game` class, which we will create at the very beginning and add it as the very first children for the `Game` container. We will add all created tower zones as child elements to this container. We do this in order to hide the zone images themselves under the map layer.
+We will also need a separate `this.collisions` container in the `Game` class, which we will create at the very beginning and add it as the very first child for the `Game` container. Besides, we will add all created tower zones as child elements to this container. We do this in order to hide the zone images themselves under the map layer.
 
 ### 6.2 Enemy Detection
 Now we can check that the enemy is in the created firing zone.
@@ -932,7 +932,7 @@ To do this, in the `Game` class we will use the capabilities of (PIXI.Ticker)[ht
 Let's write down the algorithm of actions we need in this method to check the detection of opponents by towers:
 
 - for each tower created at the level
-    - find the first unit that fell into the tower’s fire zone
+    - find the first unit that fell into the tower fire zone
         - if such a unit is found, we attack it
 
 Now let's implement this algorithm in the `processTowerAttackEnemies` method in the `Game` class and call this methid in the `update`:
@@ -1008,11 +1008,11 @@ Let's move this code into the `Tower` class:
     }
 ```
 
-Since the tower sprite is a child sprite of the tower place tile, we must get the coordinates of the tower place tile as coordinates. Therefore, in this case we get the source coordinates from the parent sprite:
+Since the tower sprite is a child sprite of the tower place tile, we must get the coordinates of the tower place tile as coordinates. Therefore we get the source coordinates from the parent sprite:
 - `this.sprite.parent.x`
 - `this.sprite.parent.y`
 
-Please note that in our atlas `tilemap.png` the tower tiles are rotated 90 degrees relative to the unit tiles. Therefore, we add 90 degrees to the resulting value before returning the result of the `getAngleByTarget` function.
+Please note that in our atlas `tilemap.png` the tower tiles are rotated 90 degrees relative to the unit tiles. As a result we add 90 degrees to the resulting value before returning the result of the `getAngleByTarget` function.
 
 Let's modify `attack` method in the `Tower` class:
 
@@ -1026,7 +1026,7 @@ attack(enemy) {
 ## 7. Shooting
 ### 7.1 Creating a bullet
 
-The towers will shoot bullets at enemies. The bullet in our game is represented by the `fire.png` sprite. Let's create a `Bullet` class that will create a bullet for a given tower:
+The towers will shoot bullets at enemies. The bullet in our game is represented by the `fire.png` sprite. Let's create a `Bullet` class that will create the bullet for a given tower:
 
 ```javascript
 
@@ -1049,9 +1049,9 @@ export class Bullet extends EventEmitter {
 }
 ```
 
-Let's extend this class from the `EventEmitter` class to be able to send bullet events. For example, in the future we will need to know about the moment when a bullet is destroyed (either when it hits an enemy or when it goes off the edge of the screen), at which we will trigger the corresponding event.
+Let's extend this class from the `EventEmitter` class to be able to send bullet events. For example, in the future we will need to know about the moment when a bullet is destroyed (either when it hits an enemy or when it goes off the edge of the screen), when we will trigger the corresponding event.
 
-Let's pass into the `Bullet` constructor the objects of the tower from which the shooting is made, as well as the enemy at whom the bullet was fired.
+Let's pass into the `Bullet` constructor the objects of the tower which the shooting is made from, as well as the enemy the bullet was fired at.
 
 Let's create a bullet sprite and place it in the coordinates of the tower at the same angle as the tower.
 
@@ -1072,7 +1072,7 @@ export class Tower extends Tile {
     }
 }
 ```
-This method also takes as a parameter the enemy object that the tower is firing at. In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collided with any enemy.
+This method also takes as a parameter the enemy object that the tower is firing at. In addition, we will put all the bullets created in the `this.bullets` field so that we can track each bullet created later and check if it collides with any enemy.
 
 
 Now let's modify the `attack` method in the `Tower` class by adding a call of the `shoot` method, making sure the tower is active:
@@ -1162,7 +1162,7 @@ We know that the left edge of the screen has an `x` coordinate equal to `0`.
 The coordinate of the right edge of the screen can be obtained by finding out the width of the `canvas` by calling `App.app.view.width`.
 If the `x` coordinate of the bullet is less than `0` or greater than the coordinate of the right edge of the screen, destroy the bullet sprite, remove the callback from the ticker and fire the corresponding event.
 
-Now that we can track the bullet's destruction event, we'll modify the `Tower.shoot` method and remove the destroyed bullet from the tower's bullet pool:
+Now as we can track the bullet's destruction event, we'll modify the `Tower.shoot` method and remove the destroyed bullet from the tower bullet pool:
 
 ```javascript
 shoot(enemy) {
@@ -1175,7 +1175,7 @@ shoot(enemy) {
 ### 8.1 Collision with a bullet
 If the bullet sprite comes into contact with the enemy sprite, it is necessary to destroy the bullet and apply damage to the enemy unit. Let's start by tracking sprite collisions.
 
-In the new `processEnemyBulletCollision` method, we will loop through all the bullets of each tower and for each bullet we will check if there is at least one enemy that this bullet collided with:
+In the new `processEnemyBulletCollision` method, we will loop through all the bullets of each tower and for each bullet we will check if there is at least one enemy this bullet collides with:
 
 ```javascript
     processEnemyBulletCollision() {
@@ -1299,7 +1299,7 @@ export class Enemies extends EventEmitter {
 
 ## 9. Player
 
-The player class will store information about the available number of coins and the number of lives remaining:
+The player class will store information about the available number of coins and the remaining number of lives:
 
 ```javascript
 import { App } from "../system/App";
@@ -1344,7 +1344,7 @@ export class GameScene extends Scene {
 
 ## 10. UI
 
-Now that we have data about the player's available coins and lives, we can display it on the screen. Our `UI` will consist of the following elements:
+Now as we have data about the player's available coins and lives, we can display it on the screen. Our `UI` will consist of the following elements:
 
 - lives icon - sprite `heart.png`
 - coin icon - sprite `coin.png`
@@ -1411,7 +1411,7 @@ export class UI {
 
 ```
 
-A player object was passed to the `UI` class `constructor` and this way we can display the current values ​​of `coins` and `lives` in the `update` method.
+A player object is passed to the `UI` class `constructor` and this way we can display the current values ​​of `coins` and `lives` in the `update` method.
 
 Let's place UI in the upper left corner of the screen, setting values ​​for the position of all elements in the config:
 
@@ -1504,7 +1504,7 @@ this.pathIndex === this.path.length
 
 And if the final point is reached, then it is enough to check the positions using one of the sprite coordinates.
 
-Let's add the `checkGameOver` method to the `Game` class. In it we will restart the game if the player has lost all lives:
+Let's add the `checkGameOver` method to the `Game` class. We will restart the game if the player has lost all lives:
 ```javascript
     checkGameOver() {
         if (this.player.lives <= 0) {
@@ -1515,11 +1515,11 @@ Let's add the `checkGameOver` method to the `Game` class. In it we will restart 
 ```
 
 ## 12. Earning and spending coins
-The player will spend coins to build and upgrade towers. And he will earn coins for killing each enemy. The cost of each tower, as well as the reward value for killing an enemy, are indicated in the `towers` and `enemies` configs in `Config.js`.
+The player will spend coins to build and upgrade towers. And he will earn coins for killing each enemy. The cost of each tower, as well as the reward value for killing an enemy, is indicated in the `towers` and `enemies` configs in `Config.js`.
 
 Let's add processing of expenses and earnings to the corresponding methods of the `Game` class.
 
-1. Let's add an addditional check for the required number of coins and further spending for building and upgrading a tower in the `onTowerPlaceClick` method:
+1. Let's add an addditional check for the required number of coins and further spending on building and upgrading a tower in the `onTowerPlaceClick` method:
 
 ```javascript
 onTowerPlaceClick(towerPlace) {
