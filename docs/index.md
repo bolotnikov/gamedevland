@@ -1,32 +1,57 @@
-<a href="tower-defense">
-!!! info ""
-    ![Сreating 2D Tower Defense game with PixiJS](/assets/tower-defense.png){ width="300" align="left" }
-    # [Сreating 2D Tower Defense game with PixiJS](/tower-defense)
-    [Read](/tower-defense){ .md-button .md-button--primary }
+---
+hide:
+  - toc
+---
+# 🎮 Welcome to GameDev.Land
 
-</a>
+> Master HTML5 Game Development with **PixiJS**, **TypeScript**, and real project examples.
 
-<a href="pixi_project_template">
-!!! info ""
-    ![Creating a 2D infinite runner game with PixiJS](/assets/runner.png){ width="300" align="left" }
-    # [Creating a 2D infinite runner game with PixiJS](/runner)
-    [Read](/runner){ .md-button .md-button--primary }
+---
 
-</a>
+## 🌟 Featured Projects
 
-<a href="pixi_project_template">
-!!! info ""
-    ![Сreating Match3 game with PixiJS](/assets/match3.png){ width="300" align="left" }
-    # [Сreating Match3 game with PixiJS](/match3)
-    [Read](/match3){ .md-button .md-button--primary }
+<div class="project-grid" markdown="1">
 
-</a>
+<div class="project-card" markdown="1">
+<img src="/assets/tower-defense.png" alt="Tower Defense" class="project-img" />
+<div class="project-content" markdown="1">
+### [🛡️ Tower Defense Game](/tower-defense)
+Build a tower defense game with pathfinding, enemy waves, upgrades, and special effects.  
+[Explore →](/tower-defense){ .md-button .md-button--primary }
+</div>
+</div>
 
-<a href="pixi_project_template">
-!!! info ""
-    ![Сreating PixiJS project template](/assets/pixi_project_template.png){ width="300" align="left" }
-    # [Сreating PixiJS project template](/pixi_project_template)
-    [Read](/pixi_project_template){ .md-button .md-button--primary }
+---
 
-</a>
+<div class="project-card" markdown="1">
+<img src="/assets/runner.png" alt="Runner" class="project-img" />
+<div class="project-content" markdown="1">
+### [🏃 Infinite Runner Game](/runner)
+Create a fast-paced endless runner game with procedural generation and player abilities.  
+[Explore →](/runner){ .md-button .md-button--primary }
+</div>
+</div>
 
+---
+
+<div class="project-card" markdown="1">
+<img src="/assets/match3.png" alt="Match-3" class="project-img" />
+<div class="project-content" markdown="1">
+### [💎 Match-3 Puzzle Game](/match3)
+Develop a polished Match-3 puzzle game with combos, bombs, and chain reactions.  
+[Explore →](/match3){ .md-button .md-button--primary }
+</div>
+</div>
+
+---
+
+<div class="project-card" markdown="1">
+<img src="/assets/pixi_project_template.png" alt="PixiJS Template" class="project-img" />
+<div class="project-content" markdown="1">
+### [📦 PixiJS Starter Template](/pixi_project_template)
+Use a clean PixiJS + TypeScript boilerplate to kickstart your next HTML5 game.  
+[Explore →](/pixi_project_template){ .md-button .md-button--primary }
+</div>
+</div>
+
+</div>

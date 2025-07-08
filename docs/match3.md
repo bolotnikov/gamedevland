@@ -14,9 +14,9 @@ In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 
 Before starting the development, we need to perform 2 steps:
 
-:one: Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
+1️⃣ Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](pixi_project_template.md) on how to create a PIXI project template.
 
-:two: Download [the assets pack](assets/match3.zip) for our game. Assets provided by the great website [kenney.nl](https://kenney.nl)
+2️⃣ Download [the assets pack](assets/match3.zip) for our game. Assets provided by the great website [kenney.nl](https://kenney.nl)
 
 ## 1. Creating the tiles board
 Let's set the first task to create the board with tiles.
