@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 1 of the Creating Match3 game with PixiJS tutorial: Creating the tiles board."><title>Step 1. Creating the tiles board | Creating Match3 game with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 1. Creating the tiles board</h1> <div class="article-page__meta"> <span>Creating Match3 game with PixiJS</span> <span>•</span> <span>Step 1 of 4</span>  <span>•</span> <span>4 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Match3 game with PixiJS</h2> <p>Step-by-step guide to building a Match-3 game with PixiJS, from board creation to tile movement and combinations.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Match3 game with PixiJS steps"> <a class="series-sidebar__link is-active" href="/articles/match3" aria-current="page"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tiles board</span> </a><a class="series-sidebar__link" href="/articles/match3/moving-tiles"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Moving tiles</span> </a><a class="series-sidebar__link" href="/articles/match3/search-for-combinations"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Search for combinations</span> </a><a class="series-sidebar__link" href="/articles/match3/processing-combinations"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Processing combinations</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>In this article, we will create a match3 game using <a href="https://pixijs.com/">PIXI</a>.</p>
+<h2 id="video-version">Video version</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kgIg5Ms-HRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="step-by-step-guide-on-udemy">Step-by-step guide on Udemy</h2>
+<ul>
+<li><a href="https://www.udemy.com/course/pixicourse/">https://www.udemy.com/course/pixicourse/</a></li>
+</ul>
+<h2 id="additional-materials">Additional materials</h2>
+<ul>
+<li><a href="https://github.com/gamedevland/match3">Complete source code</a></li>
+<li><a href="https://gamedevland.github.io/match3/">Preview demo</a></li>
+</ul>
+<p>Before starting the development, we need to perform 2 steps:</p>
+<p>1️⃣ Download our <a href="https://github.com/gamedevland/pixi-project-template">PIXI project template</a>. You can start working on the game right now or check out <a href="/articles/pixi-project-template">the tutorial</a> on how to create a PIXI project template.</p>
+<p>2️⃣ Download <a href="/assets/match3.zip">the assets pack</a> for our game. Assets provided by the great website <a href="https://kenney.nl">kenney.nl</a></p>
+<p>Let’s set the first task to create the board with tiles.</p>
+<h3 id="11-creating-a-single-field">1.1. Creating a single field</h3>
+<p>The first step is to create a board field class and render a single field sprite on the screen.</p>
+<p>Create the <code>game/Field.js</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Field</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">row</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">col</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.row </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> row;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.col </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> col;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.</span><span style="color:#B392F0">sprite</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"field"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.position.x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.position.y;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    get</span><span style="color:#B392F0"> position</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            x: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.col </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.width,</span></span>
+<span class="line"><span style="color:#E1E4E8">            y: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.row </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.height</span></span>
+<span class="line"><span style="color:#E1E4E8">        };</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>A field is located in a certain column and in a certain row on the board.</p>
+<p><strong>Info</strong></p>
+<ul>
+<li>The <code>row</code> and <code>col</code> properties of the <code>Field</code> class define the row and column.</li>
+<li>The <code>position</code> getter determines the position of the field on the screen, depending on the position on the board and taking into account the size of the field sprite.</li>
+</ul>
+<p>And now we can render a single field on the screen in the <code>Game</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Field } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Field"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// ...    </span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> field</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Field</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(field.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="12-creating-a-fields-grid">1.2. Creating a fields grid</h3>
+<p>We have a class for the board field and now we can create the board itself, consisting of a number of fields.
+Let’s create a class <code>src/scripts/game/Board.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> PIXI </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "pixi.js"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Field } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Field"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Board</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> PIXI</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Container</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.fields </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.rows </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.board.rows;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.cols </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.board.cols;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We will add all elements of the board (fields and tiles) to the board container. And the board container is then added to the scene container.</p>
+<p>The board consists of a grid of fields. Let’s set all the created fields to the <code>this.fields</code> property.</p>
+<p>The number of rows and columns should be configurable. Therefore, let’s add these settings to the global project config:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    board: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        rows: </span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        cols: </span><span style="color:#79B8FF">6</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>To create a board, we need to place its fields on a grid of a given size. That is, create field sprites in each column and each row of the board.
+Let’s do this in the <code>create</code> method:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Board</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createFields</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createFields</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; row </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.rows; row</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> col </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; col </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.cols; col</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createField</span><span style="color:#E1E4E8">(row, col);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    createField</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">row</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">col</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> field</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Field</span><span style="color:#E1E4E8">(row, col);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.fields.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">(field);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(field.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Let’s bring the board to the stage in the <code>Game</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.board </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Board</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.board.container);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now the board is located in the upper left corner. Let’s fix this by aligning its position to the center of the screen.
+We can get the size of the board’s field by taking the first element from the generated fields array and reading the width of its sprite:
+<code>this.fields[0].sprite.width;</code>
+Knowing the size of one field, we can calculate the size of the entire board by multiplying the number of rows and columns by the size of the field:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.width </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.cols </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fieldSize;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.height </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.rows </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fieldSize;</span></span></code></pre>
+<p>Knowing the size of the board and the size of the screen, we can make the right padding for the board container.
+Subtract the size of the board from the size of the screen and the resulting remaining space will take up 2 indents to the left and right of the board:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Board</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ajustPosition</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#B392F0">    ajustPosition</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.fieldSize </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fields[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].sprite.width;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.width </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.cols </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fieldSize;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.height </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.rows </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fieldSize;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (window.innerWidth </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.width) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fieldSize </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.y </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (window.innerHeight </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.height) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.fieldSize </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="13-creating-a-single-tile">1.3. Creating a single tile</h3>
+<p>We have the board fields ready, and now we can create matching tiles in them.
+As in the case with the fields creation, we will start by creating a class for a single tile.</p>
+<p>As we can see in the assets, all tile names refer to their colors. To create a sprite, we need to specify the color we want to give to that tile. We pass the name of the color as a parameter in the constructor and create the corresponding sprite.
+Create a file <code>src/scripts/games/Tile.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">color</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> color;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.</span><span style="color:#B392F0">sprite</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.color);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    setPosition</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">position</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> position.x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> position.y;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We also implement the <code>setPosition</code> method, which will set the sprite to the correct position.
+Let’s add a single tile in the <code>Board</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Board</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createFields</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createTiles</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createTiles</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tile</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"green"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(tile.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span></code></pre>
+<h3 id="14-create-a-tile-in-each-field">1.4. Create a tile in each field</h3>
+<p>Now we can create a tile in each field of the board.
+To do this, we can loop through the array of all fields and set our own tile in each field:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createFields</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createTiles</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createTiles</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.fields.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">field</span><span style="color:#F97583"> =></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createTile</span><span style="color:#E1E4E8">(field));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createTile</span><span style="color:#E1E4E8">(field) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tile</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"green"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        field.</span><span style="color:#B392F0">setTile</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(tile.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Set a tile in each field means to place the tile in the same position on the screen as the given field. Let’s implement the setTile method in the <code>Field</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    setTile</span><span style="color:#E1E4E8">(tile) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.tile </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tile;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.field </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.</span><span style="color:#B392F0">setPosition</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.position);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>It remains to make sure that each field has a tile with a random color.
+To do this, we will create a factory that will generate a random tile.
+Let’s create the <code>src/scripts/game/TileFactory.js</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tools } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/Tools"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TileFactory</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#B392F0"> generate</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> App.config.tilesColors[Tools.</span><span style="color:#B392F0">randomNumber</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, App.config.tilesColors.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> -</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">)];</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8">(color);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Add the colors config to the project global config in <code>src/scripts/game/Config.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    tilesColors: [</span><span style="color:#9ECBFF">'blue'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'green'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'orange'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'red'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'pink'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'yellow'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>And add a method that returns a random integer to our special helpers class <code>src/scripts/system/Tools.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Tools</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#B392F0"> randomNumber</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">min</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">max</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">max) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            max </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> min;</span></span>
+<span class="line"><span style="color:#E1E4E8">            min </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">floor</span><span style="color:#E1E4E8">(Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (max </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> min </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> min);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>And now in the <code>Board</code> class we create a tile using the factory:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    createTile</span><span style="color:#E1E4E8">(field) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tile</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> TileFactory.</span><span style="color:#B392F0">generate</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre> </div> <div class="series-pagination"> <div></div> <a class="series-pagination__link is-next" href="/articles/match3/moving-tiles"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 2. Moving tiles </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

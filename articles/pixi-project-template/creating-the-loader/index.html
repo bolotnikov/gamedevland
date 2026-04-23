@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 3 of the Creating PixiJS project template tutorial: Creating the loader."><title>Step 3. Creating the loader | Creating PixiJS project template</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 3. Creating the loader</h1> <div class="article-page__meta"> <span>Creating PixiJS project template</span> <span>•</span> <span>Step 3 of 7</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating PixiJS project template</h2> <p>Build a reusable PixiJS + JavaScript project template with loading, scenes, sprites, and a clean application structure.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating PixiJS project template steps"> <a class="series-sidebar__link" href="/articles/pixi-project-template"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the structure</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/creating-the-canvas-element"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the canvas element</span> </a><a class="series-sidebar__link is-active" href="/articles/pixi-project-template/creating-the-loader" aria-current="page"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the loader</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/game-launch"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Game launch</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/sprite-output"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Sprite Output</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/scenes-manager"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Scenes Manager</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/useful-links"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Useful links</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>Let’s start with the loader interface that we want to implement.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Application</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">   run</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // …</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.loader </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Loader</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.app.loader, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.config);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.loader.</span><span style="color:#B392F0">preload</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">start</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    start</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>To load resources, <code>PIXI</code> provides us with the <a href="https://pixijs.download/v6.1.1/docs/PIXI.Loader.html"><code>PIXI.Loader</code></a> class. We can get it from the <code>app</code> property.</p>
+<p>We pass it as the first parameter to the constructor of our custom <code>Loader</code> class.
+And the second parameter is a list of resources to download.</p>
+<p>Create class <code>src/scripts/system/Loader.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Loader</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">loader</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.loader </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> loader;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.config </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> config;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.resources </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    preload</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">resolve</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We will add all the loaded resources objects in the <code>resources</code> property which is empty by default.</p>
+<p>Since the list of resources will be unique for each game, we need to define the resource config separately from the general code, that is, outside the <code>system</code> folder.</p>
+<p>Let’s create a <code>game/Config.js</code> file. Here we create the <code>Config</code> object, which will be unique for each specific game:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tools } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/Tools"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    loader: Tools.</span><span style="color:#B392F0">massiveRequire</span><span style="color:#E1E4E8">(require[</span><span style="color:#9ECBFF">"context"</span><span style="color:#E1E4E8">](</span><span style="color:#9ECBFF">'./../../sprites/'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span><span style="color:#9ECBFF"> /</span><span style="color:#85E89D;font-weight:bold">\.</span><span style="color:#DBEDFF">(mp3</span><span style="color:#F97583">|</span><span style="color:#DBEDFF">png</span><span style="color:#F97583">|</span><span style="color:#DBEDFF">jpe</span><span style="color:#F97583">?</span><span style="color:#DBEDFF">g)</span><span style="color:#F97583">$</span><span style="color:#9ECBFF">/</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>Let’s set the list of resources to load in the <code>loader</code> property.</p>
+<p>To automatically get the entire list of resources to load from a given folder, we use the capabilities of <code>require.context</code>.</p>
+<p>Let’s create the <code>Tools</code> system class and implement the <code>massiveRequre</code> method in it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Tools</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#B392F0"> massiveRequire</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">req</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> files</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        req.</span><span style="color:#B392F0">keys</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">key</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            files.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">                key, data: </span><span style="color:#B392F0">req</span><span style="color:#E1E4E8">(key)</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> files;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>And now we need to update the entry point:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Config } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./game/Config"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">App.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">(Config);</span></span></code></pre>
+<p>Now we can fully implement the <code>preload</code> method in the <code>Loader</code> class. We can do it in 2 steps:</p>
+<ol>
+<li>Add all resources from the loader config to the loading list using <code>this.loader.add</code> method.</li>
+<li>Start loading resources using <code>this.loader.load</code>.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Loader</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#B392F0">    preload</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">const</span><span style="color:#79B8FF"> asset</span><span style="color:#F97583"> of</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.config.loader) {</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> key </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> asset.key.</span><span style="color:#B392F0">substr</span><span style="color:#E1E4E8">(asset.key.</span><span style="color:#B392F0">lastIndexOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/'</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            key </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> key.</span><span style="color:#B392F0">substring</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, key.</span><span style="color:#B392F0">indexOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (asset.key.</span><span style="color:#B392F0">indexOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">".png"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">!==</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> asset.key.</span><span style="color:#B392F0">indexOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">".jpg"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">!==</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.loader.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(key, asset.data.default)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">resolve</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.loader.</span><span style="color:#B392F0">load</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">loader</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">resources</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.resources </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resources;</span></span>
+<span class="line"><span style="color:#B392F0">            resolve</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The <code>load</code> method of the <code>PIXI.Loader</code> object takes a callback function as a parameter, which will be called when all the resources have finished loading and become available for use.</p>
+<p>The callback function takes 2 parameters: the loader object itself and the second parameter is the loaded resources. Let’s put them in the <code>resources</code> field in the <code>Loader</code> class, which we specially reserved for all loaded resources.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/pixi-project-template/creating-the-canvas-element"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 2. Creating the canvas element </span> </a> <a class="series-pagination__link is-next" href="/articles/pixi-project-template/game-launch"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 4. Game launch </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 7 of the Creating Tower Defense game with PIXI tutorial: Shooting."><title>Step 7. Shooting | Creating Tower Defense game with PIXI</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 7. Shooting</h1> <div class="article-page__meta"> <span>Creating Tower Defense game with PIXI</span> <span>•</span> <span>Step 7 of 12</span>  <span>•</span> <span>4 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Tower Defense game with PIXI</h2> <p>Build a tower defense game with PixiJS, tilemaps, enemies, path following, and core gameplay systems.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Tower Defense game with PIXI steps"> <a class="series-sidebar__link" href="/articles/tower-defense"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tile</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-level"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the level</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-enemy"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the enemy</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/waves-of-enemies"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Waves of enemies</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-a-tower"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Creating a tower</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Preparation for shooting</span> </a><a class="series-sidebar__link is-active" href="/articles/tower-defense/shooting" aria-current="page"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemy-damage"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">Enemy damage</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/player"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Player</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/ui"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemies-processing"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Enemies Processing</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/earning-and-spending-coins"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">Earning and spending coins</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h3 id="71-creating-a-bullet">7.1 Creating a bullet</h3>
+<p>The towers will shoot bullets at enemies. The bullet in our game is represented by the <code>fire.png</code> sprite. Let’s create a <code>Bullet</code> class that will create the bullet for a given tower:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { EventEmitter } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "events"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '../system/App'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Bullet</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> EventEmitter</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tower</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">enemy</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.tower </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tower;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.enemy </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> enemy;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.</span><span style="color:#B392F0">sprite</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"fire"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.tower.sprite.x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.tower.sprite.y;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.angle </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.tower.sprite.angle;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Let’s extend this class from the <code>EventEmitter</code> class to be able to send bullet events. For example, in the future we will need to know about the moment when a bullet is destroyed (either when it hits an enemy or when it goes off the edge of the screen), when we will trigger the corresponding event.</p>
+<p>Let’s pass into the <code>Bullet</code> constructor the objects of the tower which the shooting is made from, as well as the enemy the bullet was fired at.</p>
+<p>Let’s create a bullet sprite and place it in the coordinates of the tower at the same angle as the tower.</p>
+<p>The <code>shoot</code> method in the <code>Tower</code> class will be responsible for the shooting itself. In this method we need to create an instance of the <code>Bullet</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Tower</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.bullets </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.active </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#B392F0">    shoot</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">enemy</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> bullet</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Bullet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, enemy);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.bullets.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">(bullet);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.parent.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(bullet.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>This method also takes as a parameter the enemy object that the tower is firing at. In addition, we will put all the bullets created in the <code>this.bullets</code> field so that we can track each bullet created later and check if it collides with any enemy.</p>
+<p>Now let’s modify the <code>attack</code> method in the <code>Tower</code> class by adding a call of the <code>shoot</code> method, making sure the tower is active:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    attack</span><span style="color:#E1E4E8">(enemy) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">rotateToEnemy</span><span style="color:#E1E4E8">(enemy);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.active) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.active </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">shoot</span><span style="color:#E1E4E8">(enemy);</span></span>
+<span class="line"><span style="color:#E1E4E8">            window.</span><span style="color:#B392F0">setTimeout</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.active </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.config.cooldown);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>We used an <code>active</code> flag to indicate whether the turret can fire at the moment. The fact is that we are calling the <code>Tower.attack</code> method in the <code>Game.update</code> method, which in turn is called constantly for each new animation frame. But we want to fire bullets only at a given frequency for a given tower.</p>
+<p>Therefore, in order to implement the cooldown time, we need to turn off the tower activity immediately after the shot and then turn it on after a given timeout. Then we start a timeout with the reload time specified from the tower config, after which we activate the tower again by setting the flag <code>this.active = true;</code></p>
+<h3 id="72-firing-a-bullet">7.2 Firing a bullet</h3>
+<p>To make a bullet move, we need to update the coordinates of the bullet sprite by a given offset every frame of the animation. To do this, we need to determine the correct offset along the <code>x</code> and <code>y</code> axes, taking into account the angle by which the bullet sprite is rotated. Let’s do this in the <code>Bullet.init</code> method:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Bullet</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> EventEmitter</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tower</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">enemy</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">init</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    init</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> speed</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.tower.config.bullet.speed;</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> azimuth</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.angle) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (Math.</span><span style="color:#79B8FF">PI</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 180</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> Math.</span><span style="color:#79B8FF">PI</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.velocity </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {x: Math.</span><span style="color:#B392F0">cos</span><span style="color:#E1E4E8">(azimuth) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> speed, y: Math.</span><span style="color:#B392F0">sin</span><span style="color:#E1E4E8">(azimuth) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> speed};</span></span>
+<span class="line"><span style="color:#E1E4E8">        App.app.ticker.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.update, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    update</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.velocity.x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.velocity.y;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Here we take the bullet speed from the tower config that we set earlier.
+Next, we determine the azimuth based on the angle at which the bullet sprite is rotated after its creation.
+Knowing the azimuth and speed, we can calculate the the bullet’s offset along the <code>x</code> and <code>y</code> axes. Let’s write the offset in the <code>this.velocity</code> field.</p>
+<p>And finally, we create a callback function <code>update</code>, in which we assign the resulting offset to the coordinates of the bullet sprite.</p>
+<p>And let’s add this function to the <a href="https://pixijs.download/v7.0.5/docs/PIXI.Ticker.html">PIXI.Ticker</a> so that it runs for every frame of the game animation.</p>
+<h3 id="73-destruction-of-a-bullet">7.3 Destruction of a bullet</h3>
+<p>If the bullet goes beyond the screen, it must be destroyed for 2 reasons:</p>
+<ol>
+<li>an object that is no longer used should not take up memory space</li>
+<li>checks that are no longer required should not be performed and the bullet’s <code>update</code> method should not continue to be called, performing unnecessary calculations</li>
+</ol>
+<p>Let’s do this right away in order to immediately avoid possible problems with the game’s performance.</p>
+<p>Let’s check the coordinates of the bullet and, if the bullet has gone beyond the screen, destroy the sprite and remove the <code>update</code> method from the ticker:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    update</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.velocity.x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.velocity.y;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        let</span><span style="color:#E1E4E8"> position </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">getGlobalPosition</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (position.x </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> position.x </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> App.app.view.width) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    remove</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        App.app.ticker.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.update, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">destroy</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">emit</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"removed"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>We only need to check the <code>x</code> coordinate of the bullet sprite.
+To get the global position of the bullet on the screen, use the method <a href="https://api.pixijs.io/@pixi/sprite/PIXI/Sprite.html">PIXI.Sprite</a> <a href="https://pixijs.download/v5.3.5/docs/PIXI.Sprite.html#getGlobalPosition"><code>getGlobalPosition</code></a>
+We know that the left edge of the screen has an <code>x</code> coordinate equal to <code>0</code>.
+The coordinate of the right edge of the screen can be obtained by finding out the width of the <code>canvas</code> by calling <code>App.app.view.width</code>.
+If the <code>x</code> coordinate of the bullet is less than <code>0</code> or greater than the coordinate of the right edge of the screen, destroy the bullet sprite, remove the callback from the ticker and fire the corresponding event.</p>
+<p>Now as we can track the bullet’s destruction event, we’ll modify the <code>Tower.shoot</code> method and remove the destroyed bullet from the tower bullet pool:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">shoot</span><span style="color:#E1E4E8">(enemy) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    bullet.</span><span style="color:#B392F0">once</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"removed"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.bullets </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.bullets.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">item</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> item </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> bullet));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 6. Preparation for shooting </span> </a> <a class="series-pagination__link is-next" href="/articles/tower-defense/enemy-damage"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 8. Enemy damage </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 8 of the Create a platformer with PixiJS tutorial: The physical body of the hero."><title>Step 8. The physical body of the hero | Create a platformer with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 8. The physical body of the hero</h1> <div class="article-page__meta"> <span>Create a platformer with PixiJS</span> <span>•</span> <span>Step 8 of 15</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Create a platformer with PixiJS</h2> <p>Step-by-step guide to building an infinite runner game with PixiJS, procedural platforms, physics, and hero movement.</p> </div> <nav class="series-sidebar__nav" aria-label="Create a platformer with PixiJS steps"> <a class="series-sidebar__link" href="/articles/runner"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Create a moving background</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-single-platform"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating a single platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-hero"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating a hero</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-multiple-platforms"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Creating multiple platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/enable-physics"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Enable physics</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-platforms"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">The physical body of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/movement-of-platforms"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Movement of platforms</span> </a><a class="series-sidebar__link is-active" href="/articles/runner/the-physical-body-of-the-hero" aria-current="page"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">The physical body of the hero</span> </a><a class="series-sidebar__link" href="/articles/runner/hero-jump"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Hero jump</span> </a><a class="series-sidebar__link" href="/articles/runner/collision-of-the-hero-and-platform"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">Collision of the hero and platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-diamonds"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Creating diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-a-diamond"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">The physical body of a diamond</span> </a><a class="series-sidebar__link" href="/articles/runner/collecting-diamonds"> <span class="series-sidebar__step">Step 13</span> <span class="series-sidebar__title">Collecting diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/ui"> <span class="series-sidebar__step">Step 14</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/runner/restarting-the-game-when-the-hero-falls"> <span class="series-sidebar__step">Step 15</span> <span class="series-sidebar__title">Restarting the game when the hero falls</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>By analogy with the platform, let’s create a physical body for the hero in the <code>Hero.js</code> file:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> Matter </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'matter-js'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Hero</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createBody</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        App.app.ticker.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.update.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // [07]</span></span>
+<span class="line"><span style="color:#B392F0">    createBody</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.body </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Matter.Bodies.</span><span style="color:#B392F0">rectangle</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.width </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.height </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.width, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.height, {friction: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">        Matter.World.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(App.physics.world, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.body);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.body.gameHero </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    update</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.body.position.x </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.width </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.body.position.y </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.height </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>As well as for the platform we created a rectangle body in the position of the hero and in its dimensions.</p>
+<p>Then we added the created body to the engine and saved a reference to the hero itself in the <code>body</code> object. We will need this later when processing collisions, when we will have access to the colliding physical bodies.</p>
+<p>In addition, we have created an <code>update</code> method that is added to the <code>PIXI</code> ticker and will be called on every frame of the animation.
+In it, we force the hero’s sprite to the position of his physical body in order to synchronize them. Thus, wherever the hero’s physical body is sent as a result of interaction with physical objects, the hero’s sprite will be placed in the same position.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/runner/movement-of-platforms"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 7. Movement of platforms </span> </a> <a class="series-pagination__link is-next" href="/articles/runner/hero-jump"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 9. Hero jump </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

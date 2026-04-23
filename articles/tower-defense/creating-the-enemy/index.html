@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 3 of the Creating Tower Defense game with PIXI tutorial: Creating the enemy."><title>Step 3. Creating the enemy | Creating Tower Defense game with PIXI</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 3. Creating the enemy</h1> <div class="article-page__meta"> <span>Creating Tower Defense game with PIXI</span> <span>•</span> <span>Step 3 of 12</span>  <span>•</span> <span>4 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Tower Defense game with PIXI</h2> <p>Build a tower defense game with PixiJS, tilemaps, enemies, path following, and core gameplay systems.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Tower Defense game with PIXI steps"> <a class="series-sidebar__link" href="/articles/tower-defense"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tile</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-level"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the level</span> </a><a class="series-sidebar__link is-active" href="/articles/tower-defense/creating-the-enemy" aria-current="page"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the enemy</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/waves-of-enemies"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Waves of enemies</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-a-tower"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Creating a tower</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Preparation for shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/shooting"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemy-damage"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">Enemy damage</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/player"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Player</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/ui"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemies-processing"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Enemies Processing</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/earning-and-spending-coins"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">Earning and spending coins</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h3 id="31-enemy-sprite">3.1 Enemy sprite</h3>
+<p>Let’s create a single enemy in a random location on the map.
+We know that enemy tiles are also included in the general atlas <code>tilemap.png</code>. Each enemy tile has its own frame number in the atlas. Let’s add this data to the general game config:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    enemies: {</span></span>
+<span class="line"><span style="color:#9ECBFF">        "unit1"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">            "id"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">246</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "coins"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "velocity"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">75</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "hp"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#9ECBFF">        "unit2"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">            "id"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">247</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "coins"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "velocity"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "hp"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#9ECBFF">        "unit3"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">            "id"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">248</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "coins"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "velocity"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">125</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "hp"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#9ECBFF">        "unit4"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">            "id"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">249</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "coins"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "velocity"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">150</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "hp"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">4</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>Thus, each enemy unit receives its own config, which distinguishes it from all other units. In this case, we set the following parameters in the config of each unit:</p>
+<ul>
+<li>frame id in tilemap</li>
+<li>movement speed</li>
+<li>health</li>
+<li>the reward amount for killing</li>
+</ul>
+<p>To render one tile, which is the atlas frame, we have previously developed the <code>Tile</code> class. Since the image of an enemy is also a tile, we can create the <code>Enemy</code> class, which will be a child of a <code>Tile</code> class.
+All we need to do is to pass the correct frame index to the constructor of the <code>Tile</code> base class. And now we can get these numbers from the config:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Enemy</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">path</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">(config.id);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.config </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> config;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>As a result we pass the config of the enemy unit to the constructor of the <code>Enemy</code> class.
+Using the id from the config, we get the required tile.
+We save the unit config in the <code>this.config</code> field for further special unit parameters receiving.</p>
+<p>Now let’s create an enemy in a random location on the map in the <code>Game</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Enemy } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './Enemy'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createMap</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createEnemies</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    createEnemies</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> enemy</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Enemy</span><span style="color:#E1E4E8">(App.config.enemies.unit1);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(enemy.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">        enemy.sprite.x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 130</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        enemy.sprite.y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 530</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="32-enemy-movement">3.2 Enemy movement</h3>
+<p>Now let’s implement the movement of the newly created enemy.
+The enemy should be moving along the road on our level map.
+When we created our map in <code>Tiled</code>, we set special points on the road that indicates the direction of the enemies.
+These points are markers through which enemies must pass, moving from one point to the next and so on until they reach the last one.
+We placed such marks on a special separate layer of our tilemap, which is called <code>path</code>.
+There is no <code>data</code> field in this layer, since there are no tiles on it. Instead, on this layer in the <code>objects</code> field there are points with map coordinates.
+Let’s put this data in the <code>this.path</code> field of the <code>LevelMap</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">//...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> LevelMap</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.path </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (layerData.data) {</span></span>
+<span class="line"><span style="color:#6A737D">            //...</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (layerData.objects) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.path </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> layerData.objects;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>When creating an enemy, we must let him know about the points on the map through which he must pass. We will pass the <code>path</code> field of the map object to the enemy object:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#B392F0">    createEnemies</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> enemy</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Enemy</span><span style="color:#E1E4E8">(App.config.enemies.unit1, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.map.path);</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">        enemy.</span><span style="color:#B392F0">move</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Here we also immediately called the <code>move</code> method, which should start an animation of the enemy moving around the map. Now let’s implement this method in the <code>Enemy</code> class.</p>
+<ol>
+<li>Save the <code>path</code> object of the map in a <code>this.path</code> field of the <code>Enemy</code> class.</li>
+<li>Add the index number of the current point: the <code>pathIndex</code> field will show which point the enemy passed last.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">//...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Enemy</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">path</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">(config.id);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.config </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> config;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.pathIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.path </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> path;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The <code>getNextPoint</code> method will return the enemy’s current target based on the number of the point the enemy last passed.
+So, knowing the number of the point that the enemy just passed, he can get the next point to move to in the movement animation:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#B392F0">    getNextPoint</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> nextPoint</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.pathIndex </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.path.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">point</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> point.name </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> nextPoint.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span></code></pre>
+<p>Now we can fully implement the <code>move</code> method, which will launch an animation of the enemy moving between points. To do this, we need to develop the following algorithm:</p>
+<ol>
+<li>Get the next point to move to</li>
+<li>Increase the value of the <code>pathIndex</code> field, indicating the next point passed</li>
+<li>Get the current coordinates of the enemy sprite</li>
+<li>Get the coordinates of the target to which you want to move</li>
+<li>Calculate the distance between the target and the current position of the enemy</li>
+<li>Calculate the duration of the movement based on the distance traveled and the speed taken from the unit config</li>
+<li>Run a motion animation using <code>gsap</code></li>
+<li>When the motion animation is finished, restart the <code>move</code> method to start moving to the next point</li>
+</ol>
+<p>Let’s implement this algorithm:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    move</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // get the next point</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> point</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getNextPoint</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">point) {</span></span>
+<span class="line"><span style="color:#6A737D">            // if there is no such thing, then there is nowhere to move</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //increase the index of the last point passed</span></span>
+<span class="line"><span style="color:#F97583">        ++</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.pathIndex;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // current coordinates</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> sourceX</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.x;</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> sourceY</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.y;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // target coordinates</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> targetX</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> point.x </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> targetY</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> point.y </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // distance between target and current position</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> diffX</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">abs</span><span style="color:#E1E4E8">(targetX </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> sourceX);</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> diffY</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">abs</span><span style="color:#E1E4E8">(targetY </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> sourceY);</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> diff</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">max</span><span style="color:#E1E4E8">(diffX, diffY);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // duration of movement</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> duration</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> diff </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.config.velocity;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // movement animation</span></span>
+<span class="line"><span style="color:#E1E4E8">        gsap.</span><span style="color:#B392F0">to</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite, {</span></span>
+<span class="line"><span style="color:#B392F0">            onComplete</span><span style="color:#E1E4E8">: () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // repeat the process for the next point</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">move</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">            pixi: { x: point.x </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">, y: point.y </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">            duration,</span></span>
+<span class="line"><span style="color:#E1E4E8">            ease: </span><span style="color:#9ECBFF">"none"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">          });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="33-setting-the-angle">3.3 Setting the angle</h3>
+<p>Now our enemy is really moving across the entire map from point to point, but he is always facing the same direction. Let’s fix this.
+Let’s make sure that the enemy always faces towards the next point on his path.</p>
+<p>Let’s create the <code>getAngle</code> method. It will return the angle for the enemy sprite rotation based on the target point coordinates.
+You can get the angle using the function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2">
+<code>Math.atan2</code></a>:</p>
+<p><strong>Math.atan2</strong>
+The Math.atan2() static method returns the angle in the plane (in radians) between the positive x-axis and the ray from (0, 0) to the point (x, y), for Math.atan2(y, x).</p>
+<p>Since this method returns the angle in radians, let’s convert it to degrees:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// Enemy.js</span></span>
+<span class="line"><span style="color:#B392F0">getAngle</span><span style="color:#E1E4E8">(target) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> sourceX</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.x;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> sourceY</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.y;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> dy</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> target.y </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> sourceY;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> dx</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> target.x </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> sourceX;</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> 180</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">atan2</span><span style="color:#E1E4E8">(dy, dx) </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> Math.</span><span style="color:#79B8FF">PI</span><span style="color:#E1E4E8">; </span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now we can call this angle in the move method before starting the motion animation:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// Enemy.js</span></span>
+<span class="line"><span style="color:#B392F0">move</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.sprite.angle </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getAngle</span><span style="color:#E1E4E8">({x: targetX, y: targetY});</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/tower-defense/creating-the-level"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 2. Creating the level </span> </a> <a class="series-pagination__link is-next" href="/articles/tower-defense/waves-of-enemies"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 4. Waves of enemies </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

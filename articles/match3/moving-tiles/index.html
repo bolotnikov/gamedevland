@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 2 of the Creating Match3 game with PixiJS tutorial: Moving tiles."><title>Step 2. Moving tiles | Creating Match3 game with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 2. Moving tiles</h1> <div class="article-page__meta"> <span>Creating Match3 game with PixiJS</span> <span>•</span> <span>Step 2 of 4</span>  <span>•</span> <span>3 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Match3 game with PixiJS</h2> <p>Step-by-step guide to building a Match-3 game with PixiJS, from board creation to tile movement and combinations.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Match3 game with PixiJS steps"> <a class="series-sidebar__link" href="/articles/match3"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tiles board</span> </a><a class="series-sidebar__link is-active" href="/articles/match3/moving-tiles" aria-current="page"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Moving tiles</span> </a><a class="series-sidebar__link" href="/articles/match3/search-for-combinations"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Search for combinations</span> </a><a class="series-sidebar__link" href="/articles/match3/processing-combinations"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Processing combinations</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>We start developing the functionality for moving tiles.</p>
+<h3 id="21-selecting-a-tile-to-move">2.1 Selecting a tile to move</h3>
+<p>We need to click on a tile to select it. This means tiles must be interactive.
+Let’s add interactivity when creating tiles in the <code>Board</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    createTile</span><span style="color:#E1E4E8">(field) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.sprite.interactive </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.sprite.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"pointerdown"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">emit</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'tile-touch-start'</span><span style="color:#E1E4E8">, tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s fire the <code>tile-touch-start</code> event using the capabilities of the <code>PIXI.Container</code> class.
+And then track and handle this event in the <code>Game</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.board.container.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'tile-touch-start'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.onTileClick.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span></code></pre>
+<p>Let’s run the <code>onTileClick</code> method when the <code>tile-touch-start</code> event fires.
+In this method, we will handle all three possible scenarios:</p>
+<p>:one: select a new tile to move if no other tile has been selected</p>
+<p>:two: swap tiles if another tile has already been selected and it is next to the current one</p>
+<p>:three: select a new tile if another tile has already been selected, but it is not next to the current one</p>
+<p>Right now we are implementing the first point. Now we are implementing the first point. When choosing a new tile, we need to do 2 things:</p>
+<ol>
+<li>remember the selected tile</li>
+<li>visually highlight the selected field</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    onTileClick</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tile</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile) {</span></span>
+<span class="line"><span style="color:#6A737D">            // select new tile or make swap</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">selectTile</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    selectTile</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tile</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selectedTile </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tile;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selectedTile.field.</span><span style="color:#B392F0">select</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>We can highlight the field with the selected tile by showing an additional border in this field.
+Let’s implement the code in the <code>Field</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Field</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">row</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">col</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selected </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.</span><span style="color:#B392F0">sprite</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"field-selected"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selected);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selected.visible </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selected.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    unselect</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selected.visible </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    select</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.selected.visible </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h3 id="22-swapping-tiles">2.2 Swapping tiles</h3>
+<p>In the <code>onTileClick</code> method of the <code>Game</code> class, add <code>swap</code> method call, which implements the movement of tiles:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    onTileClick</span><span style="color:#E1E4E8">(tile) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">swap</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile, tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">selectTile</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s define what actions we need to move tiles:</p>
+<p>:one: Reset fields in moved tiles</p>
+<p>:two: Reset tiles in the board’s fields</p>
+<p>:three: Place the moved tiles in the positions of the new fields on the screen</p>
+<p>We will create tweens animation using gsap for tiles movement.
+It’s also worth locking the board by setting an additional flag to prevent interactivity while the animation is running.</p>
+<p>Let’s implement these actions in code:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    swap</span><span style="color:#E1E4E8">(selectedTile, tile) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;        </span><span style="color:#6A737D">// lock the board to prevent tiles from moving again while the animation is already running</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">clearSelection</span><span style="color:#E1E4E8">();      </span><span style="color:#6A737D">// hide the "field-selected" frame from the field of the selectedTile object</span></span>
+<span class="line"><span style="color:#E1E4E8">        selectedTile.sprite.zIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// place the selectedTile sprite one layer higher than the tile sprite</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        selectedTile.</span><span style="color:#B392F0">moveTo</span><span style="color:#E1E4E8">(tile.field.position, </span><span style="color:#79B8FF">0.2</span><span style="color:#E1E4E8">); </span><span style="color:#6A737D">// move selectedTile to tile position</span></span>
+<span class="line"><span style="color:#6A737D">        // move tile to electedTile position</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.</span><span style="color:#B392F0">moveTo</span><span style="color:#E1E4E8">(selectedTile.field.position, </span><span style="color:#79B8FF">0.2</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // after motion animations complete:</span></span>
+<span class="line"><span style="color:#6A737D">            // change the values of the field properties in the tile objects</span></span>
+<span class="line"><span style="color:#6A737D">            // change the values of the tile properties in the field objects</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.board.</span><span style="color:#B392F0">swap</span><span style="color:#E1E4E8">(selectedTile, tile);</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// unlock the board</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s reset the selection in the field in <code>clearSelection</code> method:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    clearSelection</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.selectedTile.field.</span><span style="color:#B392F0">unselect</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.selectedTile </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s implement the <code>moveTo</code> method in the <code>Tile</code> class using the <code>gsap</code> tween animation:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    moveTo</span><span style="color:#E1E4E8">(position, duration) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">resolve</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            gsap.</span><span style="color:#B392F0">to</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite, {</span></span>
+<span class="line"><span style="color:#E1E4E8">                duration,</span></span>
+<span class="line"><span style="color:#E1E4E8">                pixi: {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    x: position.x,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    y: position.y</span></span>
+<span class="line"><span style="color:#E1E4E8">                },</span></span>
+<span class="line"><span style="color:#B392F0">                onComplete</span><span style="color:#E1E4E8">: () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                    resolve</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s add the <code>swap</code> method in the <code>Board</code> class, in which we will change the properties values in the moved objects:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    swap</span><span style="color:#E1E4E8">(tile1, tile2) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tile1Field</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> tile1.field;</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tile2Field</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> tile2.field;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        tile1Field.tile </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tile2;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile2.field </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tile1Field;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        tile2Field.tile </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tile1;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile1.field </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tile2Field;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Now, when moving tiles, we can swap not only neighboring tiles, but any tiles on the board. But only neighboring tiles should be swapped. And if the player has chosen a non-neighboring tile, then we just need to completely clear the first selection and select the new tile.</p>
+<p>Let’s update the condition in the <code>onTileClick</code> method in the <code>Game</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    onTileClick</span><span style="color:#E1E4E8">(tile) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.disabled) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile.</span><span style="color:#B392F0">isNeighbour</span><span style="color:#E1E4E8">(tile)) {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">clearSelection</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">selectTile</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">swap</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.selectedTile, tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">selectTile</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p><strong>Note</strong>
+As you can see, we also added a check for the <code>disabled</code> flag, which we set in the last paragraph. Thus, we block the functionality of the <code>onTileClick</code> method while the tiles are moving on the board, in order to avoid possible bugs.</p>
+<p>Let’s implement the <code>isNeighbour</code> method in the <code>Tile</code> class.
+A neighbor is a tile located either in an adjacent column or in an adjacent row.
+This means that the difference between either rows or columns of the checked and current tile modulo must be equal to one:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    isNeighbour</span><span style="color:#E1E4E8">(tile) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">abs</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.field.row </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> tile.field.row) </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">abs</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.field.col </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> tile.field.col) </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/match3"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 1. Creating the tiles board </span> </a> <a class="series-pagination__link is-next" href="/articles/match3/search-for-combinations"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 3. Search for combinations </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

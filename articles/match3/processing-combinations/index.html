@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 4 of the Creating Match3 game with PixiJS tutorial: Processing combinations."><title>Step 4. Processing combinations | Creating Match3 game with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 4. Processing combinations</h1> <div class="article-page__meta"> <span>Creating Match3 game with PixiJS</span> <span>•</span> <span>Step 4 of 4</span>  <span>•</span> <span>3 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Match3 game with PixiJS</h2> <p>Step-by-step guide to building a Match-3 game with PixiJS, from board creation to tile movement and combinations.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Match3 game with PixiJS steps"> <a class="series-sidebar__link" href="/articles/match3"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tiles board</span> </a><a class="series-sidebar__link" href="/articles/match3/moving-tiles"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Moving tiles</span> </a><a class="series-sidebar__link" href="/articles/match3/search-for-combinations"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Search for combinations</span> </a><a class="series-sidebar__link is-active" href="/articles/match3/processing-combinations" aria-current="page"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Processing combinations</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h3 id="41-removing-tiles">4.1 Removing tiles</h3>
+<p>First of all, we will remove all the tiles in the collected combinations:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#B392F0">    swap</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">selectedTile</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">tile</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#79B8FF"> matches</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.combinationManager.</span><span style="color:#B392F0">getMatches</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (matches.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processMatches</span><span style="color:#E1E4E8">(matches);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    processMatches</span><span style="color:#E1E4E8">(matches) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">removeMatches</span><span style="color:#E1E4E8">(matches);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    removeMatches</span><span style="color:#E1E4E8">(matches) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        matches.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">match</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            match.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tile</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                tile.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Let’s implement the <code>remove</code> method in the <code>Tile</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    remove</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">destroy</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.field) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.field.tile </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.field </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>If the object no longer has a sprite, then it has already been deleted.
+Otherwise, we delete the sprite and the reference to the field. At the field itself, we also remove the reference to the current tile.</p>
+<h3 id="42-fall-of-the-remaining-tiles">4.2 Fall of the remaining tiles</h3>
+<p>After the combination is triggered and the collected tiles are removed, it is necessary to drop the remaining tiles on the board. Add <code>processFallDown</code> method call in <code>processMatches</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    processMatches</span><span style="color:#E1E4E8">(matches) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">removeMatches</span><span style="color:#E1E4E8">(matches);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processFallDown</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Starting from the bottom row of the board, check each field for a tile.
+If the field is empty, we will shift down the column all the tiles that are above it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    processFallDown</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">resolve</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> completed </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> started </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // check all fields of the board, starting from the bottom row</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.rows </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; row </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; row</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> col </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.cols </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; col </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; col</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                    const</span><span style="color:#79B8FF"> field</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.</span><span style="color:#B392F0">getField</span><span style="color:#E1E4E8">(row, col);</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">                    // if there is no tile in the field</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">field.tile) {</span></span>
+<span class="line"><span style="color:#F97583">                        ++</span><span style="color:#E1E4E8">started;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                        // shift all tiles that are in the same column in all rows above</span></span>
+<span class="line"><span style="color:#79B8FF">                        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">fallDownTo</span><span style="color:#E1E4E8">(field).</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                            ++</span><span style="color:#E1E4E8">completed;</span></span>
+<span class="line"><span style="color:#F97583">                            if</span><span style="color:#E1E4E8"> (completed </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> started) {</span></span>
+<span class="line"><span style="color:#B392F0">                                resolve</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                            }</span></span>
+<span class="line"><span style="color:#E1E4E8">                        });</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>We implement moving tiles down the column in the <code>fallDownTo</code> method:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    fallDownTo</span><span style="color:#E1E4E8">(emptyField) {</span></span>
+<span class="line"><span style="color:#6A737D">        // checking all board fields in the found empty field column, but in all higher rows</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyField.row </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; row </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; row</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> fallingField </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.</span><span style="color:#B392F0">getField</span><span style="color:#E1E4E8">(row, emptyField.col);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // find the first field with a tile</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (fallingField.tile) {</span></span>
+<span class="line"><span style="color:#6A737D">                // the first found tile will be placed in the current empty field</span></span>
+<span class="line"><span style="color:#F97583">                const</span><span style="color:#79B8FF"> fallingTile</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> fallingField.tile;</span></span>
+<span class="line"><span style="color:#E1E4E8">                fallingTile.field </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyField;</span></span>
+<span class="line"><span style="color:#E1E4E8">                emptyField.tile </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fallingTile;</span></span>
+<span class="line"><span style="color:#E1E4E8">                fallingField.tile </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">                // run the tile move method and stop searching a tile for that empty field</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#E1E4E8"> fallingTile.</span><span style="color:#B392F0">fallDownTo</span><span style="color:#E1E4E8">(emptyField.position);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">resolve</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span></code></pre>
+<p>Let’s add the <code>fallDownTo</code> method to the <code>Tile</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    fallDownTo</span><span style="color:#E1E4E8">(position, delay) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">moveTo</span><span style="color:#E1E4E8">(position, </span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">, delay, </span><span style="color:#9ECBFF">"bounce.out"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h3 id="43-adding-and-dropping-new-tiles">4.3 Adding and dropping new tiles</h3>
+<p>After the completion of the fall of the remaining tiles, we need to create new tiles on top of the board so that they fall into the resulting empty fields:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    processMatches</span><span style="color:#E1E4E8">(matches) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">removeMatches</span><span style="color:#E1E4E8">(matches);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processFallDown</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">addTiles</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>To perform the creation and dropping of new tiles, we need to get all the fields on the board that have no tiles left.
+For each empty field, create a new tile, place it higher than the first row of the board, and start the motion animation on the given empty field:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    addTiles</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">resolve</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // get all fields that don't have tiles</span></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#79B8FF"> fields</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.fields.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">field</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> field.tile </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> total </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fields.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> completed </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // for each empty field</span></span>
+<span class="line"><span style="color:#E1E4E8">            fields.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">field</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // create a new tile</span></span>
+<span class="line"><span style="color:#F97583">                const</span><span style="color:#79B8FF"> tile</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.</span><span style="color:#B392F0">createTile</span><span style="color:#E1E4E8">(field);</span></span>
+<span class="line"><span style="color:#6A737D">                // put it above the board</span></span>
+<span class="line"><span style="color:#E1E4E8">                tile.sprite.y </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">500</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                const</span><span style="color:#79B8FF"> delay</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 10</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 0.3</span><span style="color:#F97583"> /</span><span style="color:#E1E4E8"> (field.row </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">                // start the movement of the tile in the given empty field with the given delay</span></span>
+<span class="line"><span style="color:#E1E4E8">                tile.</span><span style="color:#B392F0">fallDownTo</span><span style="color:#E1E4E8">(field.position, delay).</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                    ++</span><span style="color:#E1E4E8">completed;</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (completed </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> total) {</span></span>
+<span class="line"><span style="color:#B392F0">                        resolve</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                });</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h3 id="44-checking-for-combinations-after-tiles-falling">4.4 Checking for combinations after tiles falling</h3>
+<p>After the completion of falling new tiles, combinations may appear on the board again.</p>
+<p>If there are new combinations, it is also necessary to process them, that is, collect the combination, make a tiles fall and create new tiles.
+For all these actions, we have already developed functionality in the <code>processMatches</code> method. We will call it recursively until there are no combinations left on the board after the next falling of new tiles:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    processMatches</span><span style="color:#E1E4E8">(matches) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">removeMatches</span><span style="color:#E1E4E8">(matches);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processFallDown</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">addTiles</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onFallDownOver</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    onFallDownOver</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> matches</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.combinationManager.</span><span style="color:#B392F0">getMatches</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (matches.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processMatches</span><span style="color:#E1E4E8">(matches)</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h3 id="5-collect-combinations-at-the-start">5. Collect combinations at the start</h3>
+<p>Combinations can appear be not only after moving two tiles, but also during the initial placement of tiles after creating the board.
+Such combinations must be automatically processed without falling animation and replaced with other tiles before showing the starting board to the player.</p>
+<p>We already have the functionality needed to handle starting combinations:</p>
+<p>:one: Find all combinations on the board using <code>combinationManager</code>.</p>
+<p>:two:  Remove all founded matches</p>
+<p>:three:  Create new tiles in empty fields</p>
+<p>:four:  If combinations appear after adding new tiles, then repeat. Otherwise, let’s start the game.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">removeStartMatches</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    removeStartMatches</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        let</span><span style="color:#E1E4E8"> matches </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.combinationManager.</span><span style="color:#B392F0">getMatches</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// find combinations to collect</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8">(matches.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) { </span><span style="color:#6A737D">// as long as there are combinations</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">removeMatches</span><span style="color:#E1E4E8">(matches); </span><span style="color:#6A737D">// remove tiles in combinations</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#79B8FF"> fields</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.board.fields.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">field</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> field.tile </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">); </span><span style="color:#6A737D">// find empty fields</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            fields.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">field</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> { </span><span style="color:#6A737D">// in each empty field</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.board.</span><span style="color:#B392F0">createTile</span><span style="color:#E1E4E8">(field); </span><span style="color:#6A737D">// create a new random tile</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            matches </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.combinationManager.</span><span style="color:#B392F0">getMatches</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// looking for combinations again after adding new tiles</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="6-reverse-swap">6. Reverse swap</h3>
+<p>If, after the swap, no combination was formed on the board to collect, it is necessary to perform a reverse swap of tiles.
+To move tiles on the board, we have already implemented the <code>swap</code> method. We can modify it to perform a reverse move if no combinations are found after the main move.
+Add the <code>reverse</code> flag as the third parameter to the <code>swap</code> method:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Game</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    swap</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">selectedTile</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">tile</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">reverse</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        selectedTile.sprite.zIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        selectedTile.</span><span style="color:#B392F0">moveTo</span><span style="color:#E1E4E8">(tile.field.position, </span><span style="color:#79B8FF">0.2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">clearSelection</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        tile.</span><span style="color:#B392F0">moveTo</span><span style="color:#E1E4E8">(selectedTile.field.position, </span><span style="color:#79B8FF">0.2</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.board.</span><span style="color:#B392F0">swap</span><span style="color:#E1E4E8">(selectedTile, tile);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // after the swap, check if it was the main swap or reverse</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">reverse) {</span></span>
+<span class="line"><span style="color:#6A737D">                // if this is the main swap, then we are looking for combinations</span></span>
+<span class="line"><span style="color:#F97583">                const</span><span style="color:#79B8FF"> matches</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.combinationManager.</span><span style="color:#B392F0">getMatches</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (matches.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                    // if there are combinations, then process them</span></span>
+<span class="line"><span style="color:#79B8FF">                    this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processMatches</span><span style="color:#E1E4E8">(matches);</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                    // if there are no combinations after the main swap, then perform a reverse swap by running the same method, but with the reverse parameter</span></span>
+<span class="line"><span style="color:#79B8FF">                    this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">swap</span><span style="color:#E1E4E8">(tile, selectedTile, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // in this condition, by the reverse flag, we understand that the swap was reversed, so there is no need to look for combinations.</span></span>
+<span class="line"><span style="color:#6A737D">                // all you need to do is unlock the board, because here the movement is already completed and there are no other animations</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/match3/search-for-combinations"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 3. Search for combinations </span> </a>  </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

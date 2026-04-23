@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 14 of the Create a platformer with PixiJS tutorial: UI."><title>Step 14. UI | Create a platformer with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 14. UI</h1> <div class="article-page__meta"> <span>Create a platformer with PixiJS</span> <span>•</span> <span>Step 14 of 15</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Create a platformer with PixiJS</h2> <p>Step-by-step guide to building an infinite runner game with PixiJS, procedural platforms, physics, and hero movement.</p> </div> <nav class="series-sidebar__nav" aria-label="Create a platformer with PixiJS steps"> <a class="series-sidebar__link" href="/articles/runner"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Create a moving background</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-single-platform"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating a single platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-hero"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating a hero</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-multiple-platforms"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Creating multiple platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/enable-physics"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Enable physics</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-platforms"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">The physical body of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/movement-of-platforms"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Movement of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-the-hero"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">The physical body of the hero</span> </a><a class="series-sidebar__link" href="/articles/runner/hero-jump"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Hero jump</span> </a><a class="series-sidebar__link" href="/articles/runner/collision-of-the-hero-and-platform"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">Collision of the hero and platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-diamonds"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Creating diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-a-diamond"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">The physical body of a diamond</span> </a><a class="series-sidebar__link" href="/articles/runner/collecting-diamonds"> <span class="series-sidebar__step">Step 13</span> <span class="series-sidebar__title">Collecting diamonds</span> </a><a class="series-sidebar__link is-active" href="/articles/runner/ui" aria-current="page"> <span class="series-sidebar__step">Step 14</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/runner/restarting-the-game-when-the-hero-falls"> <span class="series-sidebar__step">Step 15</span> <span class="series-sidebar__title">Restarting the game when the hero falls</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>Let’s display the player’s score on the screen.
+Let’s create the <code>LabelScore</code> class, which will be the successor of <code>PIXI.Text</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> PIXI </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "pixi.js"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> LabelScore</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> PIXI</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Text</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.score.x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.y </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.score.y;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.anchor.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(App.config.score.anchor);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.style </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.score.style;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">renderScore</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    renderScore</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">score</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.text </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> `Score: ${</span><span style="color:#E1E4E8">score</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Let’s take out all the positioning and text style parameters in the global config <code>Config.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    score: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        x: </span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        y: </span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        anchor: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        style: {</span></span>
+<span class="line"><span style="color:#E1E4E8">            fontFamily: </span><span style="color:#9ECBFF">"Verdana"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            fontWeight: </span><span style="color:#9ECBFF">"bold"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            fontSize: </span><span style="color:#79B8FF">44</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            fill: [</span><span style="color:#9ECBFF">"#FF7F50"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>Let’s create an instance of this class and add it to the game scene:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createUI</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createUI</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.labelScore </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LabelScore</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.labelScore);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.hero.sprite.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"score"</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.labelScore.</span><span style="color:#B392F0">renderScore</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.hero.score);</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>As you can see, it remains to add the launch of the <code>score</code> event to the hero object at the time of collecting the diamond:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Hero</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#B392F0">    collectDiamond</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">diamond</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">emit</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"score"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/runner/collecting-diamonds"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 13. Collecting diamonds </span> </a> <a class="series-pagination__link is-next" href="/articles/runner/restarting-the-game-when-the-hero-falls"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 15. Restarting the game when the hero falls </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

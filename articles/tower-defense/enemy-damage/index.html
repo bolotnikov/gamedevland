@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 8 of the Creating Tower Defense game with PIXI tutorial: Enemy damage."><title>Step 8. Enemy damage | Creating Tower Defense game with PIXI</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 8. Enemy damage</h1> <div class="article-page__meta"> <span>Creating Tower Defense game with PIXI</span> <span>•</span> <span>Step 8 of 12</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Tower Defense game with PIXI</h2> <p>Build a tower defense game with PixiJS, tilemaps, enemies, path following, and core gameplay systems.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Tower Defense game with PIXI steps"> <a class="series-sidebar__link" href="/articles/tower-defense"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tile</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-level"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the level</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-enemy"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the enemy</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/waves-of-enemies"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Waves of enemies</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-a-tower"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Creating a tower</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Preparation for shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/shooting"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Shooting</span> </a><a class="series-sidebar__link is-active" href="/articles/tower-defense/enemy-damage" aria-current="page"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">Enemy damage</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/player"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Player</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/ui"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemies-processing"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Enemies Processing</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/earning-and-spending-coins"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">Earning and spending coins</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h3 id="81-collision-with-a-bullet">8.1 Collision with a bullet</h3>
+<p>If the bullet sprite comes into contact with the enemy sprite, it is necessary to destroy the bullet and apply damage to the enemy unit. Let’s start by tracking sprite collisions.</p>
+<p>In the new <code>processEnemyBulletCollision</code> method, we will loop through all the bullets of each tower and for each bullet we will check if there is at least one enemy this bullet collides with:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    processEnemyBulletCollision</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.map.towers.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tower</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            tower.bullets.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">bullet</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                const</span><span style="color:#79B8FF"> enemy</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.enemies.units.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">unit</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> bullet.</span><span style="color:#B392F0">collide</span><span style="color:#E1E4E8">(unit.sprite));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (enemy) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    bullet.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            });</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    update</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">processEnemyBulletCollision</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s develop the <code>collide</code> method in the <code>Bullet</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">collide</span><span style="color:#E1E4E8">(sprite) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">sprite) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> sprite.</span><span style="color:#B392F0">containsPoint</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">getGlobalPosition</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="82-applying-damage">8.2 Applying Damage</h3>
+<p>Let’s apply bullet damage to the enemy before destroying the bullet:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    processEnemyBulletCollision</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (bullet.</span><span style="color:#B392F0">collide</span><span style="color:#E1E4E8">(enemy.sprite)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            enemy.</span><span style="color:#B392F0">addDamage</span><span style="color:#E1E4E8">(bullet.damage);</span></span>
+<span class="line"><span style="color:#E1E4E8">            bullet.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>Let’s set the <code>damage</code> field in the <code>Bullet</code> class with the value from the config:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Bullet</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> EventEmitter</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">tower</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">enemy</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.damage </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.tower.config.bullet.damage;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span></code></pre>
+<p>Let’s implement the <code>addDamage</code> and <code>remove</code> methods in the <code>Enemy</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Enemy</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">path</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.hp </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.config.hp;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    addDamage</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">damage</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.hp </span><span style="color:#F97583">-=</span><span style="color:#E1E4E8"> damage;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.hp </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    remove</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        gsap.</span><span style="color:#B392F0">killTweensOf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">destroy</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">emit</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"removed"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Let’s set the health value from the enemy config.
+In the <code>addDamage</code> method we subtract the required amount of health and, if the value is less than or equal to zero, call the <code>remove</code> method.</p>
+<p>In the <code>remove</code> method, first of all, we need to stop the animation of the <code>gsap</code> tweens. Then we destroy the sprite and fire the <code>removed</code> event:</p>
+<p>Let’s subscribe to this event in the <code>Enemies</code> class immediately after creating the unit. Therefore, we will remove the unit from the active units pool when the event occurs:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">createEnemy</span><span style="color:#E1E4E8">(i) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    enemy.</span><span style="color:#B392F0">once</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"removed"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.onEnemyRemoved.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, enemy));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">onEnemyRemoved</span><span style="color:#E1E4E8">(enemy) {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.units </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.units.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">unit</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> unit </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> enemy);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.units.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        window.</span><span style="color:#B392F0">setTimeout</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.create.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.waveDelay);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>After deleting a unit, we additionally check the size of <code>this.units</code> field. If there are no units left in it, then it’s time to create a new enemies wave by calling the <code>create</code> method with a given delay. And let’s add the <code>this.waveDelay</code> field to the <code>Enemies</code> class constructor:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> WaveDelay</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 3000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Enemies</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> EventEmitter</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">map</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.waveDelay </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> WaveDelay;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/tower-defense/shooting"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 7. Shooting </span> </a> <a class="series-pagination__link is-next" href="/articles/tower-defense/player"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 9. Player </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

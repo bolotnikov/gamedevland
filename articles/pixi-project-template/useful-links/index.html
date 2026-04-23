@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 7 of the Creating PixiJS project template tutorial: Useful links."><title>Step 7. Useful links | Creating PixiJS project template</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 7. Useful links</h1> <div class="article-page__meta"> <span>Creating PixiJS project template</span> <span>•</span> <span>Step 7 of 7</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating PixiJS project template</h2> <p>Build a reusable PixiJS + JavaScript project template with loading, scenes, sprites, and a clean application structure.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating PixiJS project template steps"> <a class="series-sidebar__link" href="/articles/pixi-project-template"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the structure</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/creating-the-canvas-element"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the canvas element</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/creating-the-loader"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the loader</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/game-launch"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Game launch</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/sprite-output"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Sprite Output</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/scenes-manager"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Scenes Manager</span> </a><a class="series-sidebar__link is-active" href="/articles/pixi-project-template/useful-links" aria-current="page"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Useful links</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <ul>
+<li><a href="https://github.com/gamedevland/pixi-project-template">Final source code</a></li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Application.html"><code>PIXI.Application</code></a></li>
+<li><a href="https://pixijs.download/v6.1.1/docs/PIXI.Loader.html"><code>PIXI.Loader</code></a></li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Sprite.html"><code>PIXI.Sprite</code></a></li>
+<li><a href="https://pixijs.download/dev/docs/PIXI.Container.html"><code>PIXI.Container</code></a></li>
+<li><a href="https://greensock.com/gsap/">GSAP</a></li>
+<li><a href="https://pixijs.com/">PIXI</a></li>
+<li><a href="https://webpack.js.org/">Webpack</a></li>
+<li><a href="https://babeljs.io/">Babel</a></li>
+<li><a href="https://webpack.js.org/guides/dependency-management/#requirecontext">Webpack <code>require.context</code></a></li>
+</ul> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/pixi-project-template/scenes-manager"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 6. Scenes Manager </span> </a>  </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

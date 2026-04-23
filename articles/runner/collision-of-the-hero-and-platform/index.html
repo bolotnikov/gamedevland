@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 10 of the Create a platformer with PixiJS tutorial: Collision of the hero and platform."><title>Step 10. Collision of the hero and platform | Create a platformer with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 10. Collision of the hero and platform</h1> <div class="article-page__meta"> <span>Create a platformer with PixiJS</span> <span>•</span> <span>Step 10 of 15</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Create a platformer with PixiJS</h2> <p>Step-by-step guide to building an infinite runner game with PixiJS, procedural platforms, physics, and hero movement.</p> </div> <nav class="series-sidebar__nav" aria-label="Create a platformer with PixiJS steps"> <a class="series-sidebar__link" href="/articles/runner"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Create a moving background</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-single-platform"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating a single platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-hero"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating a hero</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-multiple-platforms"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Creating multiple platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/enable-physics"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Enable physics</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-platforms"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">The physical body of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/movement-of-platforms"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Movement of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-the-hero"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">The physical body of the hero</span> </a><a class="series-sidebar__link" href="/articles/runner/hero-jump"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Hero jump</span> </a><a class="series-sidebar__link is-active" href="/articles/runner/collision-of-the-hero-and-platform" aria-current="page"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">Collision of the hero and platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-diamonds"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Creating diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-a-diamond"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">The physical body of a diamond</span> </a><a class="series-sidebar__link" href="/articles/runner/collecting-diamonds"> <span class="series-sidebar__step">Step 13</span> <span class="series-sidebar__title">Collecting diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/ui"> <span class="series-sidebar__step">Step 14</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/runner/restarting-the-game-when-the-hero-falls"> <span class="series-sidebar__step">Step 15</span> <span class="series-sidebar__title">Restarting the game when the hero falls</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>Right now the hero can only perform jump 2 jumps because the <code>this.jumpIndex</code> counter never resets.
+And at what point should this counter be reset to give the hero the opportunity for a new double jump?</p>
+<p>That is the moment when hero touches the platform. This means that the hero has landed on the ground and the previous jump is completed.</p>
+<p>How can we track the collision of the hero and the platform? To do this, we will again use the physics engine and the interaction of the physical bodies of the hero and the platform.</p>
+<p>The <code>Matter</code> physics engine will fire a collision event when two physics bodies collide. So we need to listen for this event.
+Let’s do this in the <code>GameScene</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> Matter </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'matter-js'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '../system/App'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">//...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setEvents</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    setEvents</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Matter.Events.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(App.physics, </span><span style="color:#9ECBFF">'collisionStart'</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.onCollisionStart.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    onCollisionStart</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">event</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> colliders</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> [event.pairs[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].bodyA, event.pairs[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].bodyB];</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> hero</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> colliders.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">body</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> body.gameHero);</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> platform</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> colliders.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">body</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> body.gamePlatform);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (hero </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> platform) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.hero.</span><span style="color:#B392F0">stayOnPlatform</span><span style="color:#E1E4E8">(platform.gamePlatform);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The <code>onCollisionStart</code> method will run automatically when the <code>collisionStart</code> event occurs, which means that a collision of physical bodies has occurred.</p>
+<p>In this method, we get physical bodies that interact with each other.
+Since we created the <code>gameHero</code> and <code>gamePlatform</code> properties in the physical body objects of the hero and platform in advance, we can now check for the presence of such properties and determine from them what kind of body is involved in the collision.</p>
+<p>Finally, if we got both a hero and a platform, we’ll call the <code>stayOnPlatform</code> method to set the hero on the platform.</p>
+<p>Let’s implement this method in the <code>Hero</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Hero</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    stayOnPlatform</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">platform</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.platform </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> platform;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.jumpIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>All we need to do in it is reset the counter and set the current platform to the <code>this.platform</code> property.</p>
+<p>And now we can improve the code of the <code>startJump</code> method by adding an additional check whether the hero is currently on the platform. If a jump is possible, then the <code>this.platform</code> property should be reset.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    startJump</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.platform </span><span style="color:#F97583">||</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.jumpIndex </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            ++</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.jumpIndex;</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.platform </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            Matter.Body.</span><span style="color:#B392F0">setVelocity</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.body, { x: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, y: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.dy });</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/runner/hero-jump"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 9. Hero jump </span> </a> <a class="series-pagination__link is-next" href="/articles/runner/creating-diamonds"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 11. Creating diamonds </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

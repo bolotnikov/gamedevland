@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 12 of the Create a platformer with PixiJS tutorial: The physical body of a diamond."><title>Step 12. The physical body of a diamond | Create a platformer with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 12. The physical body of a diamond</h1> <div class="article-page__meta"> <span>Create a platformer with PixiJS</span> <span>•</span> <span>Step 12 of 15</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Create a platformer with PixiJS</h2> <p>Step-by-step guide to building an infinite runner game with PixiJS, procedural platforms, physics, and hero movement.</p> </div> <nav class="series-sidebar__nav" aria-label="Create a platformer with PixiJS steps"> <a class="series-sidebar__link" href="/articles/runner"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Create a moving background</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-single-platform"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating a single platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-hero"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating a hero</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-multiple-platforms"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Creating multiple platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/enable-physics"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Enable physics</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-platforms"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">The physical body of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/movement-of-platforms"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Movement of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-the-hero"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">The physical body of the hero</span> </a><a class="series-sidebar__link" href="/articles/runner/hero-jump"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Hero jump</span> </a><a class="series-sidebar__link" href="/articles/runner/collision-of-the-hero-and-platform"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">Collision of the hero and platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-diamonds"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Creating diamonds</span> </a><a class="series-sidebar__link is-active" href="/articles/runner/the-physical-body-of-a-diamond" aria-current="page"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">The physical body of a diamond</span> </a><a class="series-sidebar__link" href="/articles/runner/collecting-diamonds"> <span class="series-sidebar__step">Step 13</span> <span class="series-sidebar__title">Collecting diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/ui"> <span class="series-sidebar__step">Step 14</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/runner/restarting-the-game-when-the-hero-falls"> <span class="series-sidebar__step">Step 15</span> <span class="series-sidebar__title">Restarting the game when the hero falls</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>As we already know, all game objects that need to handle physics interactions (such as collision) need to create physics bodies and add them to the physics engine for processing.</p>
+<p>We have already created a physical body for the hero and the platforms, and thus have the opportunity to handle the collision of the hero with the platform.</p>
+<p>The player will be able to collect diamonds when they are touched by the hero’s sprite while jumping. This means that diamonds also need to create a physical body. Let’s improve the code in the <code>Diamond</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Diamond</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">x</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">y</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createSprite</span><span style="color:#E1E4E8">(x, y);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createSprite</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">x</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">y</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.</span><span style="color:#B392F0">sprite</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"diamond"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> x;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> y;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createBody</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.body </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Matter.Bodies.</span><span style="color:#B392F0">rectangle</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.width </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.x </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.parent.x, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.height </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.y </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.sprite.parent.y, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.width, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.sprite.height, {friction: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, isStatic: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">, render: { fillStyle: </span><span style="color:#9ECBFF">'#060a19'</span><span style="color:#E1E4E8"> }});</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.body.gameDiamond </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.body.isSensor </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        Matter.World.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(App.physics.world, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.body);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Here we created the physical body in the same way as we did for the platform and the hero. We used a rectangle at the sprite coordinates and the dimensions of the diamond sprite.
+As usual, we have stored a reference to the diamond object in the physical body object in order to access the diamond at the time of the collision events.</p>
+<p>In addition, we have set the <code>this.body.isSensor</code> property to <code>true</code>.
+This way, the hero sprite will be able to pass through the diamond image, unlike the platform, which should not pass the sprite through itself.</p>
+<p>It remains to call the <code>createBody</code> method after the diamond is added as a child element to the platform container in the <code>Platform.js</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    createDiamonds</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> y</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> App.config.diamonds.offset.min </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (App.config.diamonds.offset.max </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> App.config.diamonds.offset.min);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.cols; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> App.config.diamonds.chance) {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createDiamond</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.tileSize </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> i, </span><span style="color:#F97583">-</span><span style="color:#E1E4E8">y);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    createDiamond</span><span style="color:#E1E4E8">(x, y) {</span></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#79B8FF"> diamond</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Diamond</span><span style="color:#E1E4E8">(x, y);</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(diamond.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">            diamond.</span><span style="color:#B392F0">createBody</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.diamonds.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">(diamond);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/runner/creating-diamonds"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 11. Creating diamonds </span> </a> <a class="series-pagination__link is-next" href="/articles/runner/collecting-diamonds"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 13. Collecting diamonds </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

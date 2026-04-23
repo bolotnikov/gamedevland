@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 1 of the Creating PixiJS project template tutorial: Creating the structure."><title>Step 1. Creating the structure | Creating PixiJS project template</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 1. Creating the structure</h1> <div class="article-page__meta"> <span>Creating PixiJS project template</span> <span>•</span> <span>Step 1 of 7</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating PixiJS project template</h2> <p>Build a reusable PixiJS + JavaScript project template with loading, scenes, sprites, and a clean application structure.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating PixiJS project template steps"> <a class="series-sidebar__link is-active" href="/articles/pixi-project-template" aria-current="page"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the structure</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/creating-the-canvas-element"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the canvas element</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/creating-the-loader"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the loader</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/game-launch"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Game launch</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/sprite-output"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Sprite Output</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/scenes-manager"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Scenes Manager</span> </a><a class="series-sidebar__link" href="/articles/pixi-project-template/useful-links"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Useful links</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games. You can check the final template code in <a href="https://github.com/gamedevland/pixi-project-template">GitHub</a>.</p>
+<h2 id="video-version">Video version</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/itT6L3LQ1cM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="step-by-step-guide-on-udemy">Step-by-step guide on Udemy</h2>
+<ul>
+<li><a href="https://www.udemy.com/course/pixicourse/">https://www.udemy.com/course/pixicourse/</a></li>
+</ul>
+<h2 id="template-functionality">Template functionality:</h2>
+<ul>
+<li>Application creation and launch</li>
+<li>Resource loading and rendering</li>
+<li>Management of scenes, states, animations, sounds and screen</li>
+</ul>
+<p>Let’s take an empty project structure from <a href="https://github.com/bolotnikov/pixi-project-template/tree/initial">the initial branch</a> and examine it.</p>
+<h3 id="11-document-template">1.1 Document template</h3>
+<details>
+  <summary>index.html</summary>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;!</span><span style="color:#85E89D">DOCTYPE</span><span style="color:#B392F0"> html</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">html</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">head</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">meta</span><span style="color:#B392F0"> charset</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"utf-8"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">head</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">style</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#85E89D">    body</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        background-color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">#000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        padding</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        margin</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        height</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#85E89D">    canvas</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        position</span><span style="color:#E1E4E8">:</span><span style="color:#79B8FF">absolute</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        top</span><span style="color:#E1E4E8">:</span><span style="color:#79B8FF">50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        left</span><span style="color:#E1E4E8">:</span><span style="color:#79B8FF">50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        transform</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">translate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        -o-transform</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">translate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        -ms-transform</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">translate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        -moz-transform</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">translate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        -webkit-transform</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">translate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">-50</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">style</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">html</span><span style="color:#E1E4E8">></span></span></code></pre>
+</details>
+The HTML template will contain the final JavaScript code after the game is built. Let’s style the canvas element and leave the `body` tag empty.
+<h3 id="12-project-dependencies">1.2 Project dependencies.</h3>
+<details>
+  <summary>package.json</summary>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#9ECBFF">  "name"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"match3"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  "version"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"1.0.0"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  "description"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  "main"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"index.js"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  "scripts"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">    "build"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"webpack --config webpack/prod.js "</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "start"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"webpack-dev-server --config webpack/base.js --open"</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#9ECBFF">  "dependencies"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">    "gsap"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^3.10.4"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "pixi.js"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^6.5.1"</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#9ECBFF">  "devDependencies"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">    "babel-loader"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^8.2.5"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "clean-webpack-plugin"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^4.0.0"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "file-loader"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^6.2.0"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "html-webpack-plugin"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^5.5.0"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "webpack-cli"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^4.10.0"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "webpack-dev-server"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^4.9.3"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "webpack-merge"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^5.8.0"</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+</details>
+Config contains project settings and dependencies. Main dependencies are:
+<ul>
+<li><a href="https://greensock.com/gsap/">gsap</a> for animations</li>
+<li><a href="https://pixijs.com/">pixi</a> for rendering</li>
+<li><a href="https://webpack.js.org/">webpack</a> and <a href="https://babeljs.io/">babel</a> for build</li>
+</ul>
+<h3 id="13-project-structure">1.3 Project structure</h3>
+<ul>
+<li><code>webpack/</code> - build scripts</li>
+<li><code>src/scripts/system/</code> - common system code, the same for all games</li>
+<li><code>src/scripts/game/</code> - code of the game itself, unique for each project</li>
+<li><code>src/sounds/</code> - audio assets</li>
+<li><code>src/sprites/</code> - images assets</li>
+</ul>
+<h3 id="14-commands">1.4 Commands</h3>
+<p>First we need to install dependencies from <code>package.json</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> i</span></span></code></pre>
+<p>As you can see in the scripts block in <code>package.json</code>, we have 2 ways to run webpack: build and start.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> start</span></span></code></pre>
+<p>This command creates the build with the developer environment and automatically run the project in the browser using dev-server.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> build</span></span></code></pre>
+<p>This command creates the build for production and save the created build’s files in the <code>dist/</code> folder.</p>
+<p>This folder is created automatically and cleared every time we run the command, so be careful not to save files in this folder.</p> </div> <div class="series-pagination"> <div></div> <a class="series-pagination__link is-next" href="/articles/pixi-project-template/creating-the-canvas-element"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 2. Creating the canvas element </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

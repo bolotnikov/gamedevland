@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 2 of the Creating Tower Defense game with PIXI tutorial: Creating the level."><title>Step 2. Creating the level | Creating Tower Defense game with PIXI</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 2. Creating the level</h1> <div class="article-page__meta"> <span>Creating Tower Defense game with PIXI</span> <span>•</span> <span>Step 2 of 12</span>  <span>•</span> <span>3 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Tower Defense game with PIXI</h2> <p>Build a tower defense game with PixiJS, tilemaps, enemies, path following, and core gameplay systems.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Tower Defense game with PIXI steps"> <a class="series-sidebar__link" href="/articles/tower-defense"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tile</span> </a><a class="series-sidebar__link is-active" href="/articles/tower-defense/creating-the-level" aria-current="page"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the level</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-enemy"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the enemy</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/waves-of-enemies"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Waves of enemies</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-a-tower"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Creating a tower</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Preparation for shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/shooting"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemy-damage"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">Enemy damage</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/player"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Player</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/ui"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemies-processing"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Enemies Processing</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/earning-and-spending-coins"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">Earning and spending coins</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>So we’ve learned how to create a specific tile by its ID. It means we can draw the entire map specified in <code>tilemap.json</code>.
+Let’s create a new class <code>LevelMap</code> for this.</p>
+<ol>
+<li>We will receive the level data from the <code>tilemap.json</code> into the <code>const TilemapJson</code> variable using the <code>require</code> mechanism, reading the contents of the corresponding file.</li>
+<li>Let’s create a container <code>this.container</code>, into which we will place the created tile sprites.</li>
+<li>Let’s create a field <code>this.tiles</code>, where we will place all the created tiles.</li>
+<li>We will implement the map rendering function in the <code>this.render</code> method</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> PIXI </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "pixi.js"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> TilemapJson</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"../../json/tilemap.json"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> LevelMap</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> PIXI</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Container</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.tiles </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>So, we need to implement the <code>render</code> method to draw the level map on the game scene.</p>
+<p>Let’s determine the data we need to draw the map on the game scene:</p>
+<ol>
+<li>In <code>Tiled</code>, we created a level that consists of an 18 x 32 grid of tiles.</li>
+<li>In addition, we have created 5 layers on this map.</li>
+<li>And also in our game we plan to draw tiles 2 times smaller than their original size in the atlas is. We will render tiles with a size of 32px instead of 64x.
+Let’s add this data to the game config:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    level: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        rows: </span><span style="color:#79B8FF">18</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        cols: </span><span style="color:#79B8FF">32</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        layers: </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        tileSize: </span><span style="color:#79B8FF">32</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>Please note that in the <code>level</code> field we indicate exactly the data related directly to our level. So, our game map consists of an 18 x 32 grid. It has only 18 rows and 32 tiles in each row.
+And in the <code>atlas</code> field we created in the previous step, we store information directly about the <code>tilemap.png</code> atlas, which in turn consists of a 23 X 13 grid, where each tile has a tile size of 64px.</p>
+<p>We know that our level map contains 5 layers, which we added ourselves when we created the map in the <code>Tiled</code>.
+This means that we need to iterate through each layer in the generated map and check if a tile is created in that layer at a given position:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> layer </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; layer </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> App.config.level.layers; layer</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#79B8FF"> layerData</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> TilemapJson.layers[layer];</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.tiles[layerData.name] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>As you can see, the information about the tile presence in the grid can be obtained from the current layer data from <code>tilemap.json</code>. Let’s save this data in <code>layerData</code>.
+Let each property of the <code>this.tiles</code> object refer to a specific map layer.</p>
+<p>If <code>tilemap.json</code> contains data for the current layer, then we can find out the tile ID by the <code>index</code> counter, which increases by 1 for each next tile checked. Thus, let’s loop through all the columns in all the rows of our map, increasing the <code>index</code> parameter in each iteration.
+This way we find out whether there is a tile in a given position on a given layer.
+If there is a tile, then we get its ID:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> layer </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; layer </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> App.config.level.layers; layer</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            let</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#79B8FF"> layerData</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> json.layers[layer];</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.tiles[layerData.name] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (layerData.data) {</span></span>
+<span class="line"><span style="color:#F97583">                for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; row </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> App.config.level.rows; row</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> col </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; col </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> App.config.level.cols; col</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                        const</span><span style="color:#79B8FF"> tileId</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> TilemapJson.layers[layer].data[index];</span></span>
+<span class="line"><span style="color:#E1E4E8">                        index</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                        if</span><span style="color:#E1E4E8"> (tileId) {</span></span>
+<span class="line"><span style="color:#F97583">                            const</span><span style="color:#79B8FF"> tile</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">renderTile</span><span style="color:#E1E4E8">(tileId, row, col);</span></span>
+<span class="line"><span style="color:#79B8FF">                            this</span><span style="color:#E1E4E8">.tiles[layerData.name].</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">(tile);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                        }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>If we’ve found the tile ID at a given position, we can draw it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#B392F0">    renderTile</span><span style="color:#E1E4E8">(id, row, col) {</span></span>
+<span class="line"><span style="color:#F97583">        let</span><span style="color:#E1E4E8"> tile </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.sprite.x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> col </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> App.config.level.tileSize;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.sprite.y </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> row </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> App.config.level.tileSize;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.sprite.width </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.level.tileSize;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tile.sprite.height </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.level.tileSize;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(tile.sprite);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> tile;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>While drawing, we use the tile sizes that we want to get in the game. We take data from the <code>tileSize</code> field of the <code>level</code> object, and not from the <code>map</code>. In our case, it is 32px. Taking these dimensions into account, we create the tile in the correct position on the screen with the correct offset and add the created tile to the container of the <code>LevelMap</code> class.</p>
+<p>Now we can render the entire map in the <code>Game</code> scene:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Scene } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '../system/Scene'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { LevelMap } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './LevelMap'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createMap</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    createMap</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.map </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LevelMap</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.map.container);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>It is easy to calculate that a grid size of 18x32 taking into account the tile size of 32px will give us a map of 1024 x 576 pixels.</p>
+<p>Let’s specify this data while creating the pixi canvas in the <code>App</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.app </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> PIXI</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">({ width: </span><span style="color:#79B8FF">1024</span><span style="color:#E1E4E8">, height: </span><span style="color:#79B8FF">576</span><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.app.view.style </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> `width: 1024px; height: 576;`</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p>And now let’s check whether the map is displayed correctly on the screen.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/tower-defense"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 1. Creating the tile </span> </a> <a class="series-pagination__link is-next" href="/articles/tower-defense/creating-the-enemy"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 3. Creating the enemy </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

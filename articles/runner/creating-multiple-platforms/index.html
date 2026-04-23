@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 4 of the Create a platformer with PixiJS tutorial: Creating multiple platforms."><title>Step 4. Creating multiple platforms | Create a platformer with PixiJS</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 4. Creating multiple platforms</h1> <div class="article-page__meta"> <span>Create a platformer with PixiJS</span> <span>•</span> <span>Step 4 of 15</span>  <span>•</span> <span>2 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Create a platformer with PixiJS</h2> <p>Step-by-step guide to building an infinite runner game with PixiJS, procedural platforms, physics, and hero movement.</p> </div> <nav class="series-sidebar__nav" aria-label="Create a platformer with PixiJS steps"> <a class="series-sidebar__link" href="/articles/runner"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Create a moving background</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-single-platform"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating a single platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-a-hero"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating a hero</span> </a><a class="series-sidebar__link is-active" href="/articles/runner/creating-multiple-platforms" aria-current="page"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Creating multiple platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/enable-physics"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Enable physics</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-platforms"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">The physical body of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/movement-of-platforms"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Movement of platforms</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-the-hero"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">The physical body of the hero</span> </a><a class="series-sidebar__link" href="/articles/runner/hero-jump"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Hero jump</span> </a><a class="series-sidebar__link" href="/articles/runner/collision-of-the-hero-and-platform"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">Collision of the hero and platform</span> </a><a class="series-sidebar__link" href="/articles/runner/creating-diamonds"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Creating diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/the-physical-body-of-a-diamond"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">The physical body of a diamond</span> </a><a class="series-sidebar__link" href="/articles/runner/collecting-diamonds"> <span class="series-sidebar__step">Step 13</span> <span class="series-sidebar__title">Collecting diamonds</span> </a><a class="series-sidebar__link" href="/articles/runner/ui"> <span class="series-sidebar__step">Step 14</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/runner/restarting-the-game-when-the-hero-falls"> <span class="series-sidebar__step">Step 15</span> <span class="series-sidebar__title">Restarting the game when the hero falls</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>At this point, we have created the first platform and placed the hero on it.
+But in our game, platforms should create automatically and endlessly.
+Therefore, it’s time to write the code for generation of all the platforms.</p>
+<p>Let’s create the <code>Platforms</code> class, which will be responsible for generating all the platforms in the game:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#79B8FF"> *</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> PIXI </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "pixi.js"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Platform } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Platform"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Platforms</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.platforms </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> PIXI</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Container</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We will place all created platforms in the <code>this.platforms</code> array.
+And we will also add all platforms as children in a single container <code>this.container</code>, which we will then add to the stage.</p>
+<p>Since we decided that the <code>Platforms</code> class should create all the platforms, it means that this class should create the very first platform also. Then we will transfer the code for creating the first platform from the <code>GameScene</code> to the <code>Platforms</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Platforms</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createPlatform</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">            rows: </span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            cols: </span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            x: </span><span style="color:#79B8FF">200</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    createPlatform</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> platform</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Platform</span><span style="color:#E1E4E8">(data.rows, data.cols, data.x);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(platform.container);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Then on the stage itself, instead of creating the first platform, we need to initialize an instance of the <code>Platforms</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createPlatforms</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#B392F0">    createPlatforms</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.platfroms </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Platforms</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.platfroms.container);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">update</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">dt</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.platfroms.</span><span style="color:#B392F0">update</span><span style="color:#E1E4E8">(dt);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>In addition, we added the call to the <code>Platforms.update</code> method in the <code>GameScene.update</code> method.
+In this way, we will constantly check the status of the platforms manager and perform certain actions at the right time.</p>
+<p>And what, for example, actions do we need to track and perform at certain moments?
+For example, we can automatically create platforms until the last created platform goes off screen! Let’s implement the <code>update</code> method in the <code>Platforms</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    update</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.current.container.x </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.current.container.width </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> window.innerWidth) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">createPlatform</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.randomData);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>If the last created platform fits entirely on the screen (that is, its right side coordinate is less than the width of the screen), then we want to create the next platform.
+Thus, we say that we want to create platforms until the entire screen is filled with platforms. In other words, we create new platforms until the last created platform goes beyond the right border of the screen!</p>
+<p>As you can see, we placed the last created platform in the <code>this.current</code> property. Therefore, let’s add its setting to the <code>createPlatform</code> method along with adding the created platform to the <code>this.platforms</code> array:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Platforms</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#B392F0">    createPlatform</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> platform</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Platform</span><span style="color:#E1E4E8">(data.rows, data.cols, data.x);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.container.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(platform.container);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.platforms.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">(platform);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.current </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> platform;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Each next platform, unlike the first one, we will create with random parameters.
+Random parameters are returned to us by the <code>randomData</code> getter.</p>
+<p>The parameters used, although random, must still be within certain ranges so that the platforms are created in reasonable sizes and positions. Let’s describe such limits in the global config <code>Config.js</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">    platforms</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">        ranges</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">            rows</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">                min</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">                max</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">6</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#B392F0">            cols</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">                min</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">                max</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">9</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#B392F0">            offset</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">                min</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">60</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">                max</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">200</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span></code></pre>
+<p>Here we have specified the minimum and maximum number of rows and columns in one platform, as well as the minimum and maximum offset relative to the previous platform.
+Now we can implement the <code>randomData</code> getter based on the given ranges:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">    get </span><span style="color:#B392F0">randomData</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.ranges </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> App.config.platforms.ranges;</span></span>
+<span class="line"><span style="color:#F97583">        let</span><span style="color:#E1E4E8"> data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { rows: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, cols: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, x: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> offset</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.ranges.offset.min </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">round</span><span style="color:#E1E4E8">(Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.ranges.offset.max </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.ranges.offset.min));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        data.x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.current.container.x </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.current.container.width </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> offset;</span></span>
+<span class="line"><span style="color:#E1E4E8">        data.cols </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.ranges.cols.min </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">round</span><span style="color:#E1E4E8">(Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.ranges.cols.max </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.ranges.cols.min));</span></span>
+<span class="line"><span style="color:#E1E4E8">        data.rows </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.ranges.rows.min </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">round</span><span style="color:#E1E4E8">(Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.ranges.rows.max </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.ranges.rows.min));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> data;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/runner/creating-a-hero"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 3. Creating a hero </span> </a> <a class="series-pagination__link is-next" href="/articles/runner/enable-physics"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 5. Enable physics </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

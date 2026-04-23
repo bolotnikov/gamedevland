@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Step 5 of the Creating Tower Defense game with PIXI tutorial: Creating a tower."><title>Step 5. Creating a tower | Creating Tower Defense game with PIXI</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Tutorial series</div> <h1 class="article-page__title">Step 5. Creating a tower</h1> <div class="article-page__meta"> <span>Creating Tower Defense game with PIXI</span> <span>•</span> <span>Step 5 of 12</span>  <span>•</span> <span>3 min read</span>  </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Tutorial series</div> <h2>Creating Tower Defense game with PIXI</h2> <p>Build a tower defense game with PixiJS, tilemaps, enemies, path following, and core gameplay systems.</p> </div> <nav class="series-sidebar__nav" aria-label="Creating Tower Defense game with PIXI steps"> <a class="series-sidebar__link" href="/articles/tower-defense"> <span class="series-sidebar__step">Step 1</span> <span class="series-sidebar__title">Creating the tile</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-level"> <span class="series-sidebar__step">Step 2</span> <span class="series-sidebar__title">Creating the level</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/creating-the-enemy"> <span class="series-sidebar__step">Step 3</span> <span class="series-sidebar__title">Creating the enemy</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/waves-of-enemies"> <span class="series-sidebar__step">Step 4</span> <span class="series-sidebar__title">Waves of enemies</span> </a><a class="series-sidebar__link is-active" href="/articles/tower-defense/creating-a-tower" aria-current="page"> <span class="series-sidebar__step">Step 5</span> <span class="series-sidebar__title">Creating a tower</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-sidebar__step">Step 6</span> <span class="series-sidebar__title">Preparation for shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/shooting"> <span class="series-sidebar__step">Step 7</span> <span class="series-sidebar__title">Shooting</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemy-damage"> <span class="series-sidebar__step">Step 8</span> <span class="series-sidebar__title">Enemy damage</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/player"> <span class="series-sidebar__step">Step 9</span> <span class="series-sidebar__title">Player</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/ui"> <span class="series-sidebar__step">Step 10</span> <span class="series-sidebar__title">UI</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/enemies-processing"> <span class="series-sidebar__step">Step 11</span> <span class="series-sidebar__title">Enemies Processing</span> </a><a class="series-sidebar__link" href="/articles/tower-defense/earning-and-spending-coins"> <span class="series-sidebar__step">Step 12</span> <span class="series-sidebar__title">Earning and spending coins</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <p>Now we have enemies in the level, which means it’s time to create towers that will shoot at these enemies.</p>
+<h3 id="51-tower-place">5.1 Tower place</h3>
+<p>On our map we have special places where we can build a tower. We defined such places as special tiles in <code>tilemap</code> on a separate layer called <code>towers</code>.</p>
+<p>Let’s explicitly list which tiles are places for the tower. Tilemap frames with serial numbers <code>42</code> and <code>111</code> are tiles of tower locations. For such tiles, we will specify a special class in the config, which will be a child of the <code>Tile</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    tiles: {</span></span>
+<span class="line"><span style="color:#79B8FF">        42</span><span style="color:#E1E4E8">: TowerPlace,</span></span>
+<span class="line"><span style="color:#79B8FF">        111</span><span style="color:#E1E4E8">: TowerPlace</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now let’s create the <code>TowerPlace</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TowerPlace</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">(id)</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.level </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.interactive </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.sprite.</span><span style="color:#B392F0">once</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"pointerdown"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.onClick, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.tower </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    onClick</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        App.</span><span style="color:#B392F0">emit</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tower-place-click"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We will pass the tile id to the constructor of this class.</p>
+<p>The <code>this.level</code> field will indicate what level the tower is currently built at this location. Accordingly, <code>this.level = 0;</code> means that there is currently no tower at this place.</p>
+<p>The <code>this.tower</code> property will store the object of the tower built at that place.</p>
+<p>The main task of the <code>TowerPlace</code> class will be to track the click event on such a tile and fire the event by the application class.</p>
+<p>Let’s extend <code>Application</code> class from the <code>EventEmitter</code> class of the <code>events</code> library to be able to emit and listen for the events:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { EventEmitter } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "events"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Application</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> EventEmitter</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>While creating tiles in the <code>LevelMap</code> class, we need to check which class needs to be created for the current tile: base class <code>Tile</code> or special class <code>TowerPlace</code>, if the current tile is specified by one of the identifiers specified earlier in the config.
+A factory pattern is the best option for this task.</p>
+<p>Let’s create the <code>TileFactory</code> class. In this class we implement the static method <code>create</code>. In this method we will take the id of the tile as a parameter.
+If a special class is specified for a given tile id in the game config, then we will create an instance of this class. Otherwise, let’s create an instance of the base class <code>Tile</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { App } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../system/App"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TileFactory</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#B392F0"> create</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tileClass</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> App.config.tiles[id];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (tileClass) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> tileClass</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now let’s update the first line of the code in the <code>LevelMap.renderTile</code> method in that way that instead of directly creating a base <code>Tile</code> class, we use a factory:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">renderTile</span><span style="color:#E1E4E8">(id, row, col) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> tile</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> TileFactory.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>And finally, in the <code>Game</code> class we will add an event handler for the tower’s place click:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Scene</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    create</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setEvents</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    setEvents</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        App.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tower-place-click"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.onTowerPlaceClick.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    onTowerPlaceClick</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">towerPlace</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tower place click"</span><span style="color:#E1E4E8">, towerPlace);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h3 id="52-tower-construction">5.2 Tower construction</h3>
+<p>Towers are represented by tiles with serial numbers <code>250</code> and <code>251</code>. Let’s add this data to the game config:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> Config</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    towers: {</span></span>
+<span class="line"><span style="color:#9ECBFF">        "tower1"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">            "id"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">250</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "range"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "coins"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "cooldown"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "bullet"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">                "speed"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                "damage"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#9ECBFF">        "tower2"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">            "id"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">251</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "range"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">400</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "coins"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "cooldown"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">500</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "bullet"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">                "speed"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">15</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                "damage"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>In addition, we’ve added all the necessary data for each tower:</p>
+<ul>
+<li><code>coins</code> - construction cost</li>
+<li><code>range</code> - radius of the coverage area</li>
+<li><code>cooldown</code> - reloading time</li>
+<li><code>bullet</code> - speed and damage from tower’s bullets</li>
+</ul>
+<p>Let’s inherit the <code>Tower</code> class from the <code>Tile</code> class:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Tile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./Tile"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Tower</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Tile</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    constructor</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">config</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">(config.id);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.config </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> config;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.place </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.active </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We will pass the config of the current tower as a parameter to the constructor of the <code>Tower</code> class.
+In addition, we will set the <code>this.place</code> field, in which we will place a <code>towerPlace</code> object. We’ve also added <code>this.active</code> flag, indicating that this tower can fire immediately and is not in a reloading mode.</p>
+<p>Now we can build the tower. Each click on a tower place tile will build a higher level tower on that place. To implement the tower construction functionality, we have the <code>Game.onTowerPlaceClick</code> method. And to build a tower we must do the following:</p>
+<ol>
+<li>Increase the tower level for a selected <code>towerPlace</code> object.</li>
+<li>Find a tower in the config with the same level as the selected <code>towerPlace</code> object.</li>
+<li>If there is such a tower, create a new tower object and save it in the <code>towerPlace</code> object.</li>
+<li>If a tower has already been built in a given place, then destroy its sprite.</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">onTowerPlaceClick</span><span style="color:#E1E4E8">(towerPlace) {</span></span>
+<span class="line"><span style="color:#F97583">    ++</span><span style="color:#E1E4E8">towerPlace.level;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> towerConfig</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> App.config.towers[</span><span style="color:#9ECBFF">"tower"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> towerPlace.level];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (towerConfig) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (towerPlace.tower) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            towerPlace.tower.sprite.</span><span style="color:#B392F0">destroy</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> tower</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Tower</span><span style="color:#E1E4E8">(towerConfig);</span></span>
+<span class="line"><span style="color:#E1E4E8">        towerPlace.tower </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tower;</span></span>
+<span class="line"><span style="color:#E1E4E8">        tower.place </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> towerPlace;</span></span>
+<span class="line"><span style="color:#E1E4E8">        towerPlace.sprite.</span><span style="color:#B392F0">addChild</span><span style="color:#E1E4E8">(tower.sprite);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Having built the tower, we will save a reference to it in the <code>towerPlace</code> object, and also save a reference to the <code>towerPlace</code> object in the <code>tower</code> itself.
+To display the tower on the level map, add a tower tile sprite as a child of the tower place sprite.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/tower-defense/waves-of-enemies"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title">
+Step 4. Waves of enemies </span> </a> <a class="series-pagination__link is-next" href="/articles/tower-defense/preparation-for-shooting"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title">
+Step 6. Preparation for shooting </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>
