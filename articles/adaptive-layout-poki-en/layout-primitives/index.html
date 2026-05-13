@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="How simple responsive positioning, background fill, intro scaling, and popup fitting stay declarative in layout JSON."><title>Declarative Layout Primitives | Adaptive Layout for a Poki HTML5 Game</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Workshop series</div> <h1 class="article-page__title">Declarative Layout Primitives</h1> <div class="article-page__meta"> <span>Adaptive Layout for a Poki HTML5 Game</span> <span>•</span> <span>Section 4 of 11</span> </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Workshop series</div> <h2>Adaptive Layout for a Poki HTML5 Game</h2> <p>A production workshop on making UI, screen, and gameplay adapt across Poki desktop, mobile, tablet, and iframe resolutions.</p> </div> <nav class="series-sidebar__nav" aria-label="Adaptive Layout for a Poki HTML5 Game steps"> <a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en"> <span class="series-sidebar__step">Section 1</span> <span class="series-sidebar__title">Problem and Architecture</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/virtual-screen"> <span class="series-sidebar__step">Section 2</span> <span class="series-sidebar__title">Virtual Screen</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/screen-changes"> <span class="series-sidebar__step">Section 3</span> <span class="series-sidebar__title">Screen Changes</span> </a><a class="series-sidebar__link is-active" href="/articles/adaptive-layout-poki-en/layout-primitives" aria-current="page"> <span class="series-sidebar__step">Section 4</span> <span class="series-sidebar__title">Layout Primitives</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/scene-composition"> <span class="series-sidebar__step">Section 5</span> <span class="series-sidebar__title">Scene Composition</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/level-panel"> <span class="series-sidebar__step">Section 6</span> <span class="series-sidebar__title">Level Panel</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/responsive-physics"> <span class="series-sidebar__step">Section 7</span> <span class="series-sidebar__title">Responsive Physics</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/object-sizing"> <span class="series-sidebar__step">Section 8</span> <span class="series-sidebar__title">Object Sizing</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/resize-during-animation"> <span class="series-sidebar__step">Section 9</span> <span class="series-sidebar__title">Resize During Animation</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/responsive-text"> <span class="series-sidebar__step">Section 10</span> <span class="series-sidebar__title">Responsive Text</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/recommendations"> <span class="series-sidebar__step">Section 11</span> <span class="series-sidebar__title">Recommendations</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h2 id="3-simple-responsive-tasks-are-declarative">3. Simple Responsive Tasks Are Declarative</h2>
+<p>If an element only needs to be centered, placed near the right edge, or stretched as a background, I do not write a custom TypeScript component.</p>
+<p>The engine already has layout components:</p>
+<ul>
+<li><code>ResponsiveNodePositionComponent</code></li>
+<li><code>ResponsiveNodeSizeComponent</code></li>
+<li><code>FitStackLayoutComponent</code></li>
+</ul>
+<p>For example, the settings button is always near the right edge:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "components"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "responsivePosition"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">      "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"ResponsiveNodePositionComponent"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "enabled"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "data"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "mode"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"screen"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "position"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">          "right"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>This comes from <code>game/assets/json/layouts/features/settings/_button.json</code>.</p>
+<p>The loading indicator is centered:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"ResponsiveNodePositionComponent"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "enabled"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "data"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "mode"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"screen"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "position"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">      "cx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "cy"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>These cases belong in layout JSON. It is simpler and keeps runtime code focused.</p>
+<h2 id="4-background-fill-is-part-of-the-game-layout">4. Background Fill Is Part of the Game Layout</h2>
+<p>Several scenes use a background built from <code>gradient</code> and <code>pattern</code>. It must fill the whole virtual screen.</p>
+<p>Example from <code>game/assets/json/layouts/scenes/item/layout.json</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "responsiveNodeSize"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"ResponsiveNodeSizeComponent"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "enabled"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "data"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">      "mode"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"fill_width_height_ratio"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "minScale"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "maxScale"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "fill"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "resizeTargets"</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">"gradient"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"pattern"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#79B8FF">        "widthPercent"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "heightRatio"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "minHeightPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "maxHeightPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">5000</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "horizontalAlign"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"left"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "verticalAlign"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"top"</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The background is not a DOM background. It is part of the scene layout and uses the same coordinate system as all other game elements.</p>
+<h2 id="5-uniform-scale-for-the-intro-scene">5. Uniform Scale for the Intro Scene</h2>
+<p>The boot scene has an intro animation with stickers and a logo. It does not need a completely different composition per orientation. Centering and uniform scaling are enough.</p>
+<p>Example from <code>game/assets/json/layouts/scenes/boot/layout.json</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "responsivePosition"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"ResponsiveNodePositionComponent"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "enabled"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "data"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">      "mode"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"screen"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "position"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "cx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "cy"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#79B8FF">  "responsiveSize"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"ResponsiveNodeSizeComponent"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "enabled"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "data"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">      "mode"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"uniform_scale"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "minScale"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.68</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "maxScale"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "uniform"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "axis"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"min"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "referenceScreenWidthPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">720</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "referenceScreenHeightPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1280</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>axis: "min"</code> means that the most restrictive axis drives the scale.</p>
+<p>This is a good approach for:</p>
+<ul>
+<li>logos;</li>
+<li>intro animation groups;</li>
+<li>decorative groups;</li>
+<li>small UI blocks that do not need composition changes.</li>
+</ul>
+<h2 id="6-fit-by-real-bounds-for-popup-ui">6. Fit by Real Bounds for Popup UI</h2>
+<p>For popup UI, I use <code>fit_bounds</code>.</p>
+<p>The problem with popups is that their real size depends on content: background, labels, buttons, spacing. If you only scale by reference width, narrow screens may clip the popup.</p>
+<p>Settings popup:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "responsiveSize"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"ResponsiveNodeSizeComponent"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "enabled"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "data"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">      "mode"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"fit_bounds"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "minScale"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.25</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "maxScale"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">      "fit"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        "primaryAxisByOrientation"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">          "port"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"width"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">          "land"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"height"</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#79B8FF">        "widthPercent"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.9</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "heightPercent"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.9</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "topPaddingPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "bottomPaddingPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "leftPaddingPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "rightPaddingPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "alignX"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"center"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "alignY"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"center"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">        "offsetYPx"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>In portrait, the popup fits by width. In landscape, it fits by height. This is more precise than using one universal scale rule.</p>
+<p>Inside the engine, <code>fit_bounds</code> measures the actual subtree:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> bounds</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> targetNode.view.</span><span style="color:#B392F0">getLocalBounds</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> availableWidth</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> widthBeforePadding </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> fit.leftPaddingPx </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> fit.rightPaddingPx;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> availableHeight</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> heightBeforePadding </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> fit.topPaddingPx </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> fit.bottomPaddingPx;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> widthFitScale</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> availableWidth </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> bounds.width;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> heightFitScale</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> availableHeight </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> bounds.height;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> scale</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">clampScale</span><span style="color:#E1E4E8">(fitScale, config.minScale, config.maxScale);</span></span></code></pre>
+<p>This comes from <code>engine/layouts/components/ResponsiveNodeSizeComponent.ts</code>.</p>
+<p>The important part: the component uses real rendered bounds, not a guessed size.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/adaptive-layout-poki-en/screen-changes"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title"> Section 3. Screen Changes </span> </a> <a class="series-pagination__link is-next" href="/articles/adaptive-layout-poki-en/scene-composition"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title"> Section 5. Scene Composition </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="How text bounds and localization risk affect responsive UI in completion overlays."><title>Responsive Text Is About Readability | Adaptive Layout for a Poki HTML5 Game</title><link rel="stylesheet" href="/_astro/Layout.BisltLvx.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Workshop series</div> <h1 class="article-page__title">Responsive Text Is About Readability</h1> <div class="article-page__meta"> <span>Adaptive Layout for a Poki HTML5 Game</span> <span>•</span> <span>Section 10 of 11</span> </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Workshop series</div> <h2>Adaptive Layout for a Poki HTML5 Game</h2> <p>A production workshop on making UI, screen, and gameplay adapt across Poki desktop, mobile, tablet, and iframe resolutions.</p> </div> <nav class="series-sidebar__nav" aria-label="Adaptive Layout for a Poki HTML5 Game steps"> <a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en"> <span class="series-sidebar__step">Section 1</span> <span class="series-sidebar__title">Problem and Architecture</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/virtual-screen"> <span class="series-sidebar__step">Section 2</span> <span class="series-sidebar__title">Virtual Screen</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/screen-changes"> <span class="series-sidebar__step">Section 3</span> <span class="series-sidebar__title">Screen Changes</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/layout-primitives"> <span class="series-sidebar__step">Section 4</span> <span class="series-sidebar__title">Layout Primitives</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/scene-composition"> <span class="series-sidebar__step">Section 5</span> <span class="series-sidebar__title">Scene Composition</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/level-panel"> <span class="series-sidebar__step">Section 6</span> <span class="series-sidebar__title">Level Panel</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/responsive-physics"> <span class="series-sidebar__step">Section 7</span> <span class="series-sidebar__title">Responsive Physics</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/object-sizing"> <span class="series-sidebar__step">Section 8</span> <span class="series-sidebar__title">Object Sizing</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/resize-during-animation"> <span class="series-sidebar__step">Section 9</span> <span class="series-sidebar__title">Resize During Animation</span> </a><a class="series-sidebar__link is-active" href="/articles/adaptive-layout-poki-en/responsive-text" aria-current="page"> <span class="series-sidebar__step">Section 10</span> <span class="series-sidebar__title">Responsive Text</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/recommendations"> <span class="series-sidebar__step">Section 11</span> <span class="series-sidebar__title">Recommendations</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h2 id="14-responsive-text-is-about-readability">14. Responsive Text Is About Readability</h2>
+<p>Completion overlay text can become too wide in portrait. Before positioning, I reset scale and check text bounds:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#E1E4E8">private </span><span style="color:#B392F0">applyResponsiveTextScale</span><span style="color:#E1E4E8">(text: Text): </span><span style="color:#F97583">void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.node.screen.</span><span style="color:#B392F0">getOrientation</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> 'port'</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  text.</span><span style="color:#B392F0">setScale</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> screenWidth</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.node.screen.</span><span style="color:#B392F0">getVirtualSize</span><span style="color:#E1E4E8">().width;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> maxWidth</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> screenWidth </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> LevelCompletionOverlayComponent.</span><span style="color:#79B8FF">PORT_TEXT_MAX_SCREEN_WIDTH_RATIO</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> bounds</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> text.view.</span><span style="color:#B392F0">getLocalBounds</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> width</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">max</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, bounds.width);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (width </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> width </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> maxWidth) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> scale</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">max</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.01</span><span style="color:#E1E4E8">, maxWidth </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> width);</span></span>
+<span class="line"><span style="color:#E1E4E8">  text.</span><span style="color:#B392F0">setScale</span><span style="color:#E1E4E8">(scale, scale);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>This is also important for localization. A string that fits in one language may be much longer in another.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/adaptive-layout-poki-en/resize-during-animation"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title"> Section 9. Resize During Animation </span> </a> <a class="series-pagination__link is-next" href="/articles/adaptive-layout-poki-en/recommendations"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title"> Section 11. Recommendations </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>
