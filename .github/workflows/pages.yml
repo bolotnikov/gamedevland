@@ -37,6 +37,17 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Validate Pages artifact
+        run: |
+          find dist -name .DS_Store -delete
+          test -f dist/index.html
+          test -f dist/CNAME
+          test -f dist/.nojekyll
+          if find dist -type l | grep -q .; then
+            echo "Pages artifact must not contain symbolic links"
+            exit 1
+          fi
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
