@@ -28,11 +28,11 @@ My approach is simple: AI agents write code, but they work inside a predefined a
 
 That is why I built my own HTML5 game SDK:
 
-- [@gamedevland/engine](https://www.npmjs.com/package/@gamedevland/engine)
-- [@gamedevland/vite](https://www.npmjs.com/package/@gamedevland/vite)
-- production game example: [Block Puzzle](https://gamedevland.github.io/block-puzzle/)
+- sdk npm packages: <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">@gamedevland/engine</a> and <a href="https://www.npmjs.com/package/@gamedevland/vite" target="_blank" rel="noreferrer">@gamedevland/vite</a>
+- game example: <a href="https://gamedevland.github.io/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
+- game repository: <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
 
-`Block Puzzle` is a complete game built on this SDK. It has a boot scene, preload, layout JSON, prefab JSON, FSM, commands, scene services, a domain model, components, drag-and-drop, score, game over, best score, sounds, and a production build.
+<a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> is a complete game built on this SDK. It has a boot scene, preload, layout JSON, prefab JSON, FSM, commands, scene services, a domain model, components, drag-and-drop, score, game over, best score, sounds, and a production build.
 
 ## Why the SDK Exists
 
@@ -40,22 +40,14 @@ The SDK is not there to hide all game code.
 
 Its job is to define the project rules:
 
-- how the engine starts;
-- how scenes are structured;
-- how FSM works;
-- where commands are executed;
-- where scene runtime state lives;
-- where game rules belong;
-- how components are attached to layout nodes;
-- how assets are loaded;
-- how prefabs are created;
-- how input is handled;
-- how tweens are owned;
-- how resize and screen state work.
+- scene flow: lifecycle, FSM, commands, scene services, domain model;
+- visual composition: layout nodes, components, actions, prefabs;
+- runtime systems: assets, input, tweens, audio, screen state, persistence;
+- boundaries: what belongs to the game and what belongs to the SDK.
 
 After that, an agent does not have to invent the structure every time. It should work inside the existing boundaries.
 
-In `Block Puzzle`, the scene class is almost empty:
+In <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>, the scene class is almost empty:
 
 ```ts
 export class GameScene extends FsmDrivenScene {}
@@ -63,91 +55,179 @@ export class GameScene extends FsmDrivenScene {}
 
 That is a good state for a scene. The scene should not contain all gameplay logic.
 
-The main flow looks like this:
+The two main flows are separated:
 
-```text
-FSM -> Command -> Scene Service -> Domain Model
-```
-
-The visual layer goes separately:
-
-```text
-Layout JSON -> Node -> Component / Action
-```
-
-The split is:
-
-- FSM describes scene states and transitions;
-- command executes one use-case step;
-- scene service stores the current scene runtime state;
-- domain classes contain game rules;
-- components/actions control node-local visual behavior;
-- layout/prefab/config JSON stores authored values;
-- SDK contains reusable infrastructure.
+<div class="article-layer-flows">
+  <div class="article-layer-flow">
+    <span class="article-layer-flow__label">Scene flow</span>
+    <div class="article-layer-flow__steps">
+      <strong>FSM</strong>
+      <strong>Command</strong>
+      <strong>Scene Service</strong>
+      <strong>Domain Model</strong>
+    </div>
+  </div>
+  <div class="article-layer-flow">
+    <span class="article-layer-flow__label">Visual layer</span>
+    <div class="article-layer-flow__steps">
+      <strong>Layout JSON</strong>
+      <strong>Node</strong>
+      <strong>Component / Action</strong>
+    </div>
+  </div>
+</div>
 
 This matters for AI-assisted development. It is much easier for an agent to change a small class with one responsibility than to work with a large scene file that mixes game rules, PIXI objects, animations, input, and progress saving.
 
 ## Example: Placing a Block
 
-Take the main action in `Block Puzzle`: the player drags a shape onto the board.
+Take the main action in <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>: the player drags a shape onto the board.
 
-The bad version is to put everything into one component:
+### The Problem
 
-- listen to pointer events;
-- calculate preview;
-- validate placement;
-- mutate the board;
-- clear lines;
-- calculate score;
-- update UI;
-- play effects;
-- check game over.
+The bad version is to put everything into one component.
+
+<div class="article-problem-list">
+  <h3>God component</h3>
+  <ul>
+    <li>pointer events</li>
+    <li>placement preview</li>
+    <li>board mutation</li>
+    <li>line clearing</li>
+    <li>score calculation</li>
+    <li>UI update</li>
+    <li>effects</li>
+    <li>game over check</li>
+  </ul>
+</div>
 
 This code can work, but it is hard to evolve.
 
-In the current architecture, the responsibilities are split:
+### The Actual Flow
 
-1. Drag component handles input and preview.
-2. On drop, it emits `PlacementRequested`.
-3. FSM moves the scene into `resolvingPlacement`.
-4. `PlaceBlockCommand` decodes the payload and calls the gameplay service.
-5. Gameplay service works with the board, slots, and score domain model.
-6. Then the service emits `PlacementCompleted`, `LinesCleared`, `BoardChanged`, `BlocksChanged`, and `ScoreChanged`.
-7. Visual components react to events and update the screen.
+In the current architecture, the simplified flow is:
+
+<div class="article-flow-diagram">
+  <div class="article-flow-step">
+    <span>1</span>
+    <strong>Drag component</strong>
+    <small>handles input and preview, then emits PlacementRequested</small>
+  </div>
+  <div class="article-flow-step">
+    <span>2</span>
+    <strong>FSM + command</strong>
+    <small>moves to resolvingPlacement and runs PlaceBlockCommand</small>
+  </div>
+  <div class="article-flow-step">
+    <span>3</span>
+    <strong>Gameplay service</strong>
+    <small>validates placement and updates session state</small>
+  </div>
+  <div class="article-flow-step">
+    <span>4</span>
+    <strong>Board / Slots / Score</strong>
+    <small>domain model applies the game rules</small>
+  </div>
+  <div class="article-flow-step">
+    <span>5</span>
+    <strong>Events + visual components</strong>
+    <small>PlacementCompleted, BoardChanged, BlocksChanged, ScoreChanged update the screen</small>
+  </div>
+</div>
 
 As a result, game rules do not depend on PIXI, and visual components do not calculate score.
 
 This is not architecture for its own sake. This is how I keep the project in a state where a new task can be given to an agent with a clear scope.
 
+### Code Shape
+
+The top-level code stays small. The FSM decides when placement should be resolved:
+
+```ts
+playing: {
+  on: {
+    [BlockPuzzleEvents.PlacementRequested]: {
+      target: 'resolvingPlacement',
+      actions: ['PlaceBlockCommand'],
+    },
+  },
+}
+```
+
+The command is only a boundary between the FSM event and the scene service:
+
+```ts
+export class PlaceBlockCommand extends BaseTypedCommand<PlaceBlockCommandPayload> {
+  protected override readonly inputDecoder =
+    BlockPuzzleEventSchemas.PlacementRequest;
+
+  protected override execute(payload: PlaceBlockCommandPayload): void {
+    this.getSceneService(BlockPuzzleServices.Gameplay).place(payload);
+  }
+}
+```
+
+The service owns the session update and delegates the rules to the domain model:
+
+```ts
+export class BlockPuzzleGameplayService extends BaseSceneService {
+  place(request: PlacementRequest): void {
+    // Read current session state and validate the requested shape.
+    // Apply board, slots, line-clear, and scoring domain rules.
+    // Build a MoveResult for visual components and follow-up commands.
+    // Emit placement, board, blocks, line-clear, and score events.
+  }
+}
+```
+
 ## What Belongs in the SDK
 
 I try to keep game code focused on the specific game.
 
-Reusable things should move into the SDK:
+Reusable infrastructure should move into the SDK when it appears across projects.
 
-- scene and component lifecycle;
-- scene-scoped DI;
-- event bus;
-- command bus;
-- FSM;
-- typed config decoding;
-- asset bundles;
-- prefab creation;
-- input routing;
-- screen manager;
-- audio;
-- persistence;
-- tween ownership;
-- async safety;
-- debug hooks.
-
-For example, a component can start an async operation or a tween. When the scene changes, it is important not to continue working with a destroyed node. The SDK provides component lifecycle, task tracking, component scope version, and owned tween management for that.
-
-Asset loading should not be a local set of `fetch` calls. The engine has an asset manager with bundles, retry, timeout, and limited parallel loading.
-
-Resize should not be a set of `window.innerWidth` checks in different components. The engine has a screen manager and a single screen snapshot model.
-
-FSM transitions run sequentially through the command bus. This makes execution order predictable.
+<div class="article-sdk-grid">
+  <div class="article-sdk-card">
+    <h3>Orchestration</h3>
+    <ul>
+      <li>scene lifecycle</li>
+      <li>FSM</li>
+      <li>command bus</li>
+      <li>event bus</li>
+      <li>scene-scoped DI</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Data and assets</h3>
+    <ul>
+      <li>typed config decoding</li>
+      <li>asset manifest</li>
+      <li>asset bundles</li>
+      <li>prefab creation</li>
+      <li>persistent storage</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Runtime systems</h3>
+    <ul>
+      <li>input routing</li>
+      <li>screen manager</li>
+      <li>audio</li>
+      <li>tweens</li>
+      <li>runtime scheduler</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Safety and debugging</h3>
+    <ul>
+      <li>component lifecycle</li>
+      <li>async task tracking</li>
+      <li>owned tween cleanup</li>
+      <li>fail-fast diagnostics</li>
+      <li>debug hooks</li>
+    </ul>
+  </div>
+</div>
 
 ## How I Work with AI Agents
 
@@ -164,13 +244,40 @@ The main rule: the agent should not replace the project architecture.
 
 When I add a new feature, I first choose where it belongs:
 
-- gameplay rule - domain;
-- use-case step - command;
-- scene runtime state - scene service;
-- visual behavior - component/action;
-- repeated visual structure - prefab;
-- authored values - layout/config JSON;
-- generic lifecycle/input/assets/tween problem - SDK.
+<div class="article-routing-map">
+  <div class="article-routing-map__header">
+    <span>Problem</span>
+    <span>Where it belongs</span>
+  </div>
+  <div class="article-routing-map__row">
+    <span>gameplay rule</span>
+    <strong>domain</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>use-case step</span>
+    <strong>command</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>scene runtime state</span>
+    <strong>scene service</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>visual behavior</span>
+    <strong>component / action</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>repeated visual structure</span>
+    <strong>prefab</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>authored values</span>
+    <strong>layout / config JSON</strong>
+  </div>
+  <div class="article-routing-map__row is-sdk">
+    <span>generic lifecycle / input / assets / tween problem</span>
+    <strong>SDK</strong>
+  </div>
+</div>
 
 This way AI helps write code faster without breaking the project structure.
 
@@ -180,17 +287,7 @@ You can keep the SDK minimal and solve everything inside a specific game. On the
 
 The problem appears on the next projects. Lifecycle guards, asset helpers, responsive helpers, prefab helpers, and debug hooks start getting copied. After a while, it becomes unclear which version is the correct one.
 
-So the boundary is:
-
-- game code contains rules of the specific game;
-- SDK contains reusable infrastructure;
-- layout/config contains authored values;
-- domain code does not know about the renderer;
-- components do not calculate game rules;
-- scene services do not draw sprites;
-- engine does not know what block puzzle is.
-
-This boundary helps both the developer and the AI agent.
+So I keep the same boundary from the workflow above: game-specific rules stay in game code, reusable infrastructure moves to the SDK, and authored presentation data stays in layout/config files. This boundary helps both the developer and the AI agent.
 
 ## Next Topics
 
@@ -201,12 +298,10 @@ Next, I want to cover the individual parts and practical details of working with
 - FSM in game scenes;
 - components and actions;
 - safe tweens and async operations;
-- shared ticker and runtime systems;
 - debug services for DevTools;
-- logging and diagnostics with AI;
 - workflow with Codex, VS Code, Figma, and Photopea;
-- gameplay iterations using `Block Puzzle` as an example;
-- and so on.
+- gameplay iterations using <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> as an example;
+- and other similar practical topics.
 
 The main idea: AI is useful in game development when the project has clear boundaries.
 
