@@ -1,0 +1,58 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	date: string;
+	categoryLabel: string;
+	categoryId: string;
+	categoryTone?: 'primary' | 'secondary';
+	imageUrl?: string;
+	imageAlt?: string;
+	href: string;
+}
+
+const {
+	title,
+	description,
+	date,
+	categoryLabel,
+	categoryId,
+	categoryTone = 'primary',
+	imageUrl,
+	imageAlt,
+	href,
+} = Astro.props;
+---
+
+<article class="article-card" data-category={categoryId}>
+	<a class="article-card__link" href={href}>
+		<div class="article-card__media">
+			{
+				imageUrl ? (
+					<img src={imageUrl} alt={imageAlt ?? title} />
+				) : (
+					<div class="article-card__media-fallback"></div>
+				)
+			}
+			<div class="article-card__badge-wrap">
+				<span class:list={['article-card__badge', categoryTone === 'secondary' && 'is-secondary']}>
+					{categoryLabel}
+				</span>
+			</div>
+		</div>
+
+		<div class="article-card__body">
+			<div class="article-card__meta">
+				<time>{date}</time>
+			</div>
+
+			<h3>{title}</h3>
+			<p>{description}</p>
+
+			<div class="article-card__cta">
+				<span>Read article</span>
+				<span aria-hidden="true">→</span>
+			</div>
+		</div>
+	</a>
+</article>

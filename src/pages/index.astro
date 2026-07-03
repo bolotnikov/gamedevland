@@ -1,0 +1,95 @@
+---
+import ArticleCard from '../components/article/ArticleCard.astro';
+import CategoryFilter from '../components/article/CategoryFilter.astro';
+import Footer from '../components/common/Footer.astro';
+import Header from '../components/common/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const categoryLabels = {
+	technical: 'Tutorial',
+	monetization: 'Monetization',
+	template: 'Template',
+	workshop: 'Workshop',
+};
+
+const visibleCategories = ['technical', 'workshop'] as const;
+
+const filters = [
+	{ id: 'all', label: 'All articles', count: articles.length },
+	...visibleCategories.map((category) => ({
+		id: category,
+		label: categoryLabels[category],
+		count: articles.filter((article) => article.data.category === category).length,
+	})),
+];
+---
+
+<Layout
+	title="HTML5 Game Dev Blog"
+	description="Technical guides and practical notes on building HTML5 games."
+>
+	<Header
+		title="HTML5 Game Development"
+		description="Technical guides and practical notes on building HTML5 games."
+		current="home"
+	/>
+
+	<main class="page-main">
+		<section class="container">
+			<CategoryFilter items={filters} />
+			<div class="cards-grid" data-cards-grid>
+				{
+					articles.map((article) => (
+						<ArticleCard
+							title={article.data.title}
+							description={article.data.description}
+							date={article.data.pubDate.toLocaleDateString('en-US', {
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							})}
+							categoryLabel={categoryLabels[article.data.category]}
+							categoryId={article.data.category}
+							categoryTone={article.data.category === 'workshop' ? 'primary' : 'secondary'}
+							imageUrl={article.data.thumbnailImage ?? article.data.coverImage}
+							imageAlt={article.data.thumbnailAlt ?? article.data.coverAlt}
+							href={`/articles/${article.id}`}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+
+	<script is:inline>
+		document.addEventListener('DOMContentLoaded', () => {
+			const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+			const cards = Array.from(document.querySelectorAll('[data-category]'));
+			if (!buttons.length || !cards.length) return;
+
+			const normalize = (text) => String(text).toLowerCase();
+
+			for (const button of buttons) {
+				button.addEventListener('click', () => {
+					const filter = normalize(button.getAttribute('data-filter'));
+
+					for (const el of buttons) {
+						el.classList.toggle('is-active', el === button);
+					}
+
+					for (const card of cards) {
+						const category = normalize(card.getAttribute('data-category'));
+						const visible = filter === 'all' || category === filter;
+						card.classList.toggle('is-hidden', !visible);
+					}
+				});
+			}
+		});
+	</script>
+</Layout>

@@ -1,0 +1,73 @@
+---
+import CodeBlockEnhancer from '../../components/article/CodeBlockEnhancer.astro';
+import Footer from '../../components/common/Footer.astro';
+import Header from '../../components/common/Header.astro';
+import { articleSeriesSlugs } from '../../data/articleSeries';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles', ({ data }) => !data.draft);
+
+	return articles
+		.filter((article) => !articleSeriesSlugs.includes(article.id))
+		.map((article) => ({
+		params: { slug: article.id },
+		props: { article },
+		}));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const categoryLabels = {
+	technical: 'Tutorial',
+	monetization: 'Monetization',
+	template: 'Template',
+	workshop: 'Workshop',
+};
+---
+
+<Layout title={`${article.data.title} | HTML5 Game Dev Blog`} description={article.data.description}>
+	<Header
+		title="HTML5 Game Development"
+		description="Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds."
+		current="home"
+	/>
+
+	<main class="page-main article-page">
+		<section class="container">
+			<div class="article-page__header">
+				<a class="article-page__back" href="/">← Back to home</a>
+				<div class="article-page__tag">{categoryLabels[article.data.category]}</div>
+				<h1 class="article-page__title">{article.data.title}</h1>
+				<div class="article-page__meta">
+					<time>
+						{article.data.pubDate.toLocaleDateString('en-US', {
+							day: 'numeric',
+							month: 'long',
+							year: 'numeric',
+						})}
+					</time>
+				</div>
+			</div>
+
+			<div class="article-page__hero">
+				{
+					article.data.coverImage ? (
+						<img src={article.data.coverImage} alt={article.data.coverAlt ?? article.data.title} />
+					) : (
+						<div class="article-page__hero-fallback"></div>
+					)
+				}
+			</div>
+
+			<div class="article-prose">
+				<Content />
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+	<CodeBlockEnhancer />
+</Layout>

@@ -1,0 +1,28 @@
+:root {
+	--color-background: #ffffff;
+	--color-foreground: #111111;
+	--color-card: #ffffff;
+	--color-card-foreground: #111111;
+	--color-primary: #101828;
+	--color-primary-foreground: #ffffff;
+	--color-secondary: #eef1f5;
+	--color-secondary-foreground: #101828;
+	--color-muted: #f4f6f8;
+	--color-muted-foreground: #667085;
+	--color-accent: #f2f4f7;
+	--color-accent-foreground: #111111;
+	--color-border: rgba(16, 24, 40, 0.1);
+	--color-ring: rgba(16, 24, 40, 0.16);
+
+	--font-sans: 'Inter', 'Segoe UI', sans-serif;
+
+	--radius-sm: 10px;
+	--radius-md: 14px;
+	--radius-lg: 18px;
+	--radius-xl: 22px;
+
+	--shadow-card: 0 10px 30px rgba(16, 24, 40, 0.06);
+	--shadow-card-hover: 0 18px 40px rgba(16, 24, 40, 0.1);
+
+	--container-width: 1200px;
+}

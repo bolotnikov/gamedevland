@@ -1,0 +1,103 @@
+---
+import CodeBlockEnhancer from '../components/article/CodeBlockEnhancer.astro';
+import Footer from '../components/common/Footer.astro';
+import Header from '../components/common/Header.astro';
+import Layout from './Layout.astro';
+
+const frontmatter = Astro.props.frontmatter;
+const seriesSteps = frontmatter.steps ?? [];
+const currentStep = seriesSteps.find((item) => item.step === frontmatter.step);
+const currentIndex = seriesSteps.findIndex((item) => item.step === frontmatter.step);
+const previousStep = currentIndex > 0 ? seriesSteps[currentIndex - 1] : null;
+const nextStep =
+	currentIndex >= 0 && currentIndex < seriesSteps.length - 1 ? seriesSteps[currentIndex + 1] : null;
+const seriesTypeLabel = frontmatter.seriesTypeLabel ?? 'Tutorial series';
+const stepLabel = frontmatter.stepLabel ?? 'Step';
+
+const buildStepHref = (slug: string) =>
+	slug ? `/articles/${frontmatter.seriesSlug}/${slug}` : `/articles/${frontmatter.seriesSlug}`;
+---
+
+<Layout title={`${frontmatter.title} | ${frontmatter.seriesTitle}`} description={frontmatter.description}>
+	<Header
+		title="HTML5 Game Development"
+		description="Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds."
+		current="home"
+	/>
+
+	<main class="page-main article-page">
+		<section class="container">
+			<div class="article-page__header">
+				<a class="article-page__back" href="/">← Back to home</a>
+				<div class="article-page__tag">{seriesTypeLabel}</div>
+				<h1 class="article-page__title">{frontmatter.title}</h1>
+				<div class="article-page__meta">
+					<span>{frontmatter.seriesTitle}</span>
+					<span>•</span>
+					<span>{stepLabel} {frontmatter.step} of {seriesSteps.length}</span>
+				</div>
+			</div>
+
+			<div class="tutorial-series-layout">
+				<aside class="series-sidebar">
+					<div class="series-sidebar__inner">
+						<div class="series-sidebar__intro">
+							<div class="series-sidebar__eyebrow">{seriesTypeLabel}</div>
+							<h2>{frontmatter.seriesTitle}</h2>
+							<p>{frontmatter.seriesDescription}</p>
+						</div>
+
+						<nav class="series-sidebar__nav" aria-label={`${frontmatter.seriesTitle} steps`}>
+							{
+								seriesSteps.map((item) => (
+									<a
+										class:list={[
+											'series-sidebar__link',
+											item.step === currentStep?.step && 'is-active',
+										]}
+										href={buildStepHref(item.slug)}
+										aria-current={item.step === currentStep?.step ? 'page' : undefined}
+									>
+										<span class="series-sidebar__step">{stepLabel} {item.step}</span>
+										<span class="series-sidebar__title">{item.title}</span>
+									</a>
+								))
+							}
+						</nav>
+					</div>
+				</aside>
+
+				<div class="tutorial-series-content">
+					<div class="article-prose tutorial-prose">
+						<slot />
+					</div>
+
+					<div class="series-pagination">
+						{previousStep ? (
+							<a class="series-pagination__link" href={buildStepHref(previousStep.slug)}>
+								<span class="series-pagination__label">Previous</span>
+								<span class="series-pagination__title">
+									{stepLabel} {previousStep.step}. {previousStep.title}
+								</span>
+							</a>
+						) : (
+							<div></div>
+						)}
+
+						{nextStep ? (
+							<a class="series-pagination__link is-next" href={buildStepHref(nextStep.slug)}>
+								<span class="series-pagination__label">Next</span>
+								<span class="series-pagination__title">
+									{stepLabel} {nextStep.step}. {nextStep.title}
+								</span>
+							</a>
+						) : null}
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+	<CodeBlockEnhancer />
+</Layout>

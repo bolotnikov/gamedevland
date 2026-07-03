@@ -1,0 +1,28 @@
+---
+interface Item {
+	id: string;
+	label: string;
+	count: number;
+}
+
+interface Props {
+	items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="category-filter" data-category-filter>
+	{
+		items.map((item, index) => (
+			<button
+				class:list={['category-filter__button', index === 0 && 'is-active']}
+				type="button"
+				data-filter={item.id}
+			>
+				{item.label}
+				<span>({item.count})</span>
+			</button>
+		))
+	}
+</div>
