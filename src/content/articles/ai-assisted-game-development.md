@@ -192,39 +192,43 @@ Reusable infrastructure should move into the SDK when it appears across projects
     <ul>
       <li>scene lifecycle</li>
       <li>FSM</li>
-      <li>command bus</li>
-      <li>event bus</li>
+      <li>commands</li>
+      <li>events</li>
+      <li>scene services</li>
       <li>scene-scoped DI</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Layout and interaction</h3>
+    <ul>
+      <li>layout nodes</li>
+      <li>components and actions</li>
+      <li>prefabs</li>
+      <li>responsive layout</li>
+      <li>input routing</li>
+      <li>drag interactions</li>
     </ul>
   </div>
   <div class="article-sdk-card">
     <h3>Data and assets</h3>
     <ul>
       <li>typed config decoding</li>
+      <li>settings and storage</li>
       <li>asset manifest</li>
       <li>asset bundles</li>
-      <li>prefab creation</li>
-      <li>persistent storage</li>
+      <li>texture resolution</li>
     </ul>
   </div>
   <div class="article-sdk-card">
-    <h3>Runtime systems</h3>
+    <h3>Runtime and safety</h3>
     <ul>
-      <li>input routing</li>
       <li>screen manager</li>
       <li>audio</li>
-      <li>tweens</li>
-      <li>runtime scheduler</li>
-    </ul>
-  </div>
-  <div class="article-sdk-card">
-    <h3>Safety and debugging</h3>
-    <ul>
-      <li>component lifecycle</li>
-      <li>async task tracking</li>
-      <li>owned tween cleanup</li>
-      <li>fail-fast diagnostics</li>
-      <li>debug hooks</li>
+      <li>tween ownership</li>
+      <li>async scope safety</li>
+      <li>physics and particles</li>
+      <li>platform integrations</li>
+      <li>fail-fast errors</li>
     </ul>
   </div>
 </div>
