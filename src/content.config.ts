@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { GAME_STATUSES } from './data/gameStatus';
 
 const articles = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
@@ -20,6 +21,57 @@ const articles = defineCollection({
 	}),
 });
 
+const screenshotSchema = z.object({
+	title: z.string(),
+	landscapeSrc: z.string(),
+	landscapeAlt: z.string(),
+	portraitSrc: z.string(),
+	portraitAlt: z.string(),
+});
+
+const promoVideoSchema = z.object({
+	landscapeWebm: z.string(),
+	landscapeMp4: z.string(),
+	portraitWebm: z.string(),
+	portraitMp4: z.string(),
+	landscapePoster: z.string(),
+	portraitPoster: z.string(),
+});
+
+const games = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/games' }),
+	schema: z
+		.object({
+			title: z.string(),
+			description: z.string(),
+			status: z.enum(GAME_STATUSES),
+			releaseDate: z.coerce.date().optional(),
+			releaseYear: z.number().int().min(1970).max(2100).optional(),
+			genre: z.string(),
+			platforms: z.array(z.string()).default([]),
+			technologies: z.array(z.string()).default([]),
+			roles: z.array(z.string()).default([]),
+			iconImage: z.string(),
+			iconAlt: z.string(),
+			coverImage: z.string(),
+			coverAlt: z.string(),
+			logoImage: z.string().optional(),
+			screenshots: z.array(screenshotSchema).default([]),
+			promoVideo: promoVideoSchema.optional(),
+			playableUrl: z.string().url().optional(),
+			externalUrl: z.string().url().optional(),
+			articleUrl: z.string().regex(/^\//).optional(),
+			orientation: z.enum(['landscape', 'portrait', 'adaptive']).default('landscape'),
+			embedAspectRatio: z.string().default('16 / 9'),
+			order: z.number().int().default(0),
+			draft: z.boolean().default(false),
+		})
+		.refine(({ releaseDate, releaseYear }) => !(releaseDate && releaseYear), {
+			message: 'Use either releaseDate or releaseYear, not both.',
+		}),
+});
+
 export const collections = {
 	articles,
+	games,
 };

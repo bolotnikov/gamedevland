@@ -5,13 +5,22 @@ interface Props {
 	title?: string;
 	description?: string;
 	lang?: string;
+	canonicalPath?: string;
+	image?: string;
+	ogType?: 'website' | 'article';
 }
 
 const {
 	title = 'HTML5 Game Dev Blog',
 	description = 'Technical guides, development tools, and practical notes on building HTML5 games.',
 	lang = 'en',
+	canonicalPath,
+	image,
+	ogType = 'website',
 } = Astro.props;
+
+const canonicalUrl = canonicalPath && Astro.site ? new URL(canonicalPath, Astro.site).toString() : undefined;
+const imageUrl = image && Astro.site ? new URL(image, Astro.site).toString() : undefined;
 ---
 
 <!doctype html>
@@ -28,6 +37,16 @@ const {
 		<link rel="icon" type="image/png" href="/assets/logo.png" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={ogType} />
+		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+		{imageUrl && <meta property="og:image" content={imageUrl} />}
+		<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{imageUrl && <meta name="twitter:image" content={imageUrl} />}
 		<title>{title}</title>
 	</head>
 	<body>

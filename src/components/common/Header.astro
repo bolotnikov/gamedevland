@@ -2,18 +2,20 @@
 interface Props {
 	title: string;
 	description: string;
-	current?: 'home' | 'about';
+	current?: 'home' | 'games' | 'about';
+	compact?: boolean;
 }
 
-const { title, description, current = 'home' } = Astro.props;
+const { title, description, current = 'home', compact = false } = Astro.props;
 ---
 
-<header class="site-header">
+<header class:list={['site-header', compact && 'is-compact']}>
 	<div class="container">
 		<nav class="top-nav">
 			<a class="brand-pill" href="/">GameDev.Land</a>
 			<div class="top-nav__links">
 				<a class:list={['top-nav__link', current === 'home' && 'is-active']} href="/">Home</a>
+				<a class:list={['top-nav__link', current === 'games' && 'is-active']} href="/games">Games</a>
 				<a class:list={['top-nav__link', current === 'about' && 'is-active']} href="/about">About</a>
 			</div>
 		</nav>

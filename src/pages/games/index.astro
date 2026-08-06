@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Footer from '../../components/common/Footer.astro';
+import Header from '../../components/common/Header.astro';
+import GameCard from '../../components/game/GameCard.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const games = (await getCollection('games', ({ data }) => !data.draft)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+---
+
+<Layout
+	title="Games | GameDev.Land"
+	description="Playable HTML5 games created by Alex Bolotnikov, with development notes and technical details."
+	canonicalPath="/games"
+	image="/assets/games/stickers-merge/cover-land-en.png"
+>
+	<Header
+		title="Games"
+		description="A growing collection of released games and experiments, with playable builds and the engineering stories behind them."
+		current="games"
+		compact
+	/>
+
+	<main class="games-index">
+		<section class="container" aria-label="Game portfolio">
+			<div class="games-index__grid">
+				{
+					games.map((game) => (
+						<GameCard
+							title={game.data.title}
+							description={game.data.description}
+							status={game.data.status}
+							releaseYear={game.data.releaseYear}
+							genre={game.data.genre}
+							technologies={game.data.technologies}
+							iconImage={game.data.iconImage}
+							iconAlt={game.data.iconAlt}
+							href={`/games/${game.id}`}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.games-index {
+		padding: 40px 0 0;
+	}
+
+	.games-index__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
+		gap: 28px;
+	}
+
+	@media (max-width: 420px) {
+		.games-index__grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

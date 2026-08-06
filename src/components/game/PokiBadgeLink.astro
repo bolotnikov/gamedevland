@@ -1,0 +1,37 @@
+---
+interface Props {
+	href: string;
+	gameTitle: string;
+}
+
+const { href, gameTitle } = Astro.props;
+---
+
+<a
+	class="poki-badge-link"
+	href={href}
+	target="_blank"
+	rel="noreferrer"
+	aria-label={`Play ${gameTitle} on Poki`}
+>
+	<img src="/assets/poki/poki-badge_dark.svg" alt="" width="136" height="40" />
+</a>
+
+<style>
+	.poki-badge-link {
+		display: inline-flex;
+		width: 136px;
+		height: 40px;
+		border-radius: 6px;
+	}
+
+	.poki-badge-link:focus-visible {
+		outline: 3px solid rgba(255, 255, 255, 0.65);
+		outline-offset: 4px;
+	}
+
+	.poki-badge-link img {
+		width: 136px;
+		height: 40px;
+	}
+</style>

@@ -1,0 +1,144 @@
+---
+import PokiBadgeLink from './PokiBadgeLink.astro';
+
+interface Props {
+	title: string;
+	playableUrl?: string;
+	externalUrl?: string;
+	orientation?: 'landscape' | 'portrait' | 'adaptive';
+	embedAspectRatio?: string;
+}
+
+const {
+	title,
+	playableUrl,
+	externalUrl,
+	orientation = 'landscape',
+	embedAspectRatio = '16 / 9',
+} = Astro.props;
+---
+
+<section class="game-embed" aria-labelledby="play-game-heading">
+	<div class="game-embed__bar">
+		<div>
+			<p class="game-embed__eyebrow">Playable build</p>
+			<h2 id="play-game-heading">Play {title}</h2>
+		</div>
+		<div class="game-embed__actions">
+			{playableUrl && <a href={playableUrl} target="_blank" rel="noreferrer">Open game in new tab</a>}
+			{externalUrl && <PokiBadgeLink href={externalUrl} gameTitle={title} />}
+		</div>
+	</div>
+
+	{
+		playableUrl ? (
+			<div
+				class:list={['game-embed__frame', orientation === 'adaptive' && 'is-adaptive']}
+				style={`--embed-aspect-ratio: ${embedAspectRatio}`}
+			>
+				<iframe
+					src={playableUrl}
+					title={`Play ${title}`}
+					loading="eager"
+					allow="fullscreen"
+					allowfullscreen
+					referrerpolicy="strict-origin-when-cross-origin"
+				></iframe>
+			</div>
+		) : (
+			<p class="game-embed__fallback">The web build is not available yet.</p>
+		)
+	}
+</section>
+
+<style>
+	.game-embed {
+		overflow: hidden;
+		border: 1px solid #263142;
+		border-radius: 8px;
+		background: #0d1117;
+		box-shadow: 0 24px 56px rgba(16, 24, 40, 0.16);
+	}
+
+	.game-embed__bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		min-height: 78px;
+		padding: 14px 18px;
+		color: #ffffff;
+	}
+
+	.game-embed__eyebrow {
+		margin: 0 0 4px;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: #a9b4c4;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 20px;
+		line-height: 1.3;
+		letter-spacing: 0;
+	}
+
+	.game-embed__actions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+
+	.game-embed__actions > :global(a:not(.poki-badge-link)) {
+		font-size: 13px;
+		font-weight: 600;
+		color: #ffffff;
+		text-underline-offset: 4px;
+	}
+
+	.game-embed__actions > :global(a:focus-visible) {
+		outline: 3px solid rgba(255, 255, 255, 0.65);
+		outline-offset: 4px;
+	}
+
+	.game-embed__frame {
+		width: 100%;
+		aspect-ratio: var(--embed-aspect-ratio);
+		background: #07090d;
+	}
+
+	iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	.game-embed__fallback {
+		margin: 0;
+		padding: 32px 18px;
+		color: #a9b4c4;
+	}
+
+	@media (max-width: 680px) {
+		.game-embed__bar {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.game-embed__actions {
+			justify-content: flex-start;
+		}
+
+	}
+
+	@media (max-width: 900px) and (orientation: portrait) {
+		.game-embed__frame.is-adaptive {
+			aspect-ratio: 9 / 16;
+		}
+	}
+</style>

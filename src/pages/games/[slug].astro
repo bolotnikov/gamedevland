@@ -1,0 +1,406 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Footer from '../../components/common/Footer.astro';
+import Header from '../../components/common/Header.astro';
+import GameEmbed from '../../components/game/GameEmbed.astro';
+import GameMediaShowcase from '../../components/game/GameMediaShowcase.astro';
+import { GAME_STATUS_LABELS } from '../../data/gameStatus';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const games = await getCollection('games', ({ data }) => !data.draft);
+
+	return games.map((game) => ({
+		params: { slug: game.id },
+		props: { game },
+	}));
+}
+
+const { game } = Astro.props as { game: CollectionEntry<'games'> };
+const { Content } = await render(game);
+const releaseLabel = game.data.releaseDate
+	? game.data.releaseDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+	: game.data.releaseYear;
+---
+
+<Layout
+	title={`${game.data.title} | GameDev.Land`}
+	description={game.data.description}
+	canonicalPath={`/games/${game.id}`}
+	image={game.data.coverImage}
+>
+	<Header
+		title="Games"
+		description="Playable projects and the development decisions behind them."
+		current="games"
+		compact
+	/>
+
+	<main class="game-page">
+		<section class="container game-hero">
+			<a class="game-hero__back" href="/games">&larr; Back to Games</a>
+			<div class="game-hero__layout">
+				<div class="game-hero__copy">
+					{
+						game.data.logoImage && (
+							<img class="game-hero__logo" src={game.data.logoImage} alt="" width="1165" height="499" />
+						)
+					}
+					<div class="game-hero__title-row">
+						<img src={game.data.iconImage} alt="" width="72" height="72" />
+						<div>
+							<p>{GAME_STATUS_LABELS[game.data.status]}</p>
+							<h1>{game.data.title}</h1>
+						</div>
+					</div>
+					<p class="game-hero__description">{game.data.description}</p>
+					<dl class="game-hero__facts">
+						<div>
+							<dt>Genre</dt>
+							<dd>{game.data.genre}</dd>
+						</div>
+						{
+							releaseLabel && (
+								<div>
+									<dt>Released</dt>
+									<dd>{releaseLabel}</dd>
+								</div>
+							)
+						}
+						{
+							game.data.platforms.length > 0 && (
+								<div>
+									<dt>Platforms</dt>
+									<dd>{game.data.platforms.join(', ')}</dd>
+								</div>
+							)
+						}
+					</dl>
+				</div>
+				<div class="game-hero__cover">
+					<img src={game.data.coverImage} alt={game.data.coverAlt} width="800" height="470" loading="eager" />
+				</div>
+			</div>
+		</section>
+
+		<section class="container game-page__playable">
+			<GameEmbed
+				title={game.data.title}
+				playableUrl={game.data.playableUrl}
+				externalUrl={game.data.externalUrl}
+				orientation={game.data.orientation}
+				embedAspectRatio={game.data.embedAspectRatio}
+			/>
+		</section>
+
+		<section class="container game-page__story">
+			<article class="game-prose">
+				<Content />
+			</article>
+			<aside class="game-profile" aria-label="Project details">
+				{
+					game.data.roles.length > 0 && (
+						<section>
+							<h2>My role</h2>
+							<ul>{game.data.roles.map((role) => <li>{role}</li>)}</ul>
+						</section>
+					)
+				}
+				{
+					game.data.technologies.length > 0 && (
+						<section>
+							<h2>Technologies</h2>
+							<ul class="game-profile__technologies">
+								{game.data.technologies.map((technology) => <li>{technology}</li>)}
+							</ul>
+						</section>
+					)
+				}
+			</aside>
+		</section>
+
+		<section class="container">
+			<GameMediaShowcase screenshots={game.data.screenshots} promoVideo={game.data.promoVideo} />
+			{
+				game.data.articleUrl && (
+					<div class="game-page__workshop">
+						<p>Development notes</p>
+						<a href={game.data.articleUrl}>Read the adaptive layout workshop <span aria-hidden="true">&rarr;</span></a>
+					</div>
+				)
+			}
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.game-page {
+		padding-top: 32px;
+	}
+
+	.game-hero__back {
+		display: inline-flex;
+		margin-bottom: 24px;
+		color: var(--color-muted-foreground);
+		font-size: 14px;
+		text-decoration: none;
+	}
+
+	.game-hero__back:hover {
+		color: var(--color-foreground);
+	}
+
+	.game-hero__layout {
+		display: grid;
+		grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+		gap: 48px;
+		align-items: center;
+	}
+
+	.game-hero__copy {
+		min-width: 0;
+	}
+
+	.game-hero__logo {
+		width: min(100%, 280px);
+		height: auto;
+		max-height: 112px;
+		margin-bottom: 24px;
+		object-fit: contain;
+		object-position: left center;
+	}
+
+	.game-hero__title-row {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.game-hero__title-row > img {
+		width: 72px;
+		height: 72px;
+		flex: 0 0 auto;
+		border-radius: 8px;
+		box-shadow: var(--shadow-card);
+	}
+
+	.game-hero__title-row p {
+		margin: 0 0 5px;
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: var(--color-muted-foreground);
+	}
+
+	h1 {
+		margin: 0;
+		font-size: 42px;
+		line-height: 1.1;
+		letter-spacing: 0;
+	}
+
+	.game-hero__description {
+		margin: 22px 0 0;
+		font-size: 17px;
+		line-height: 1.75;
+		color: var(--color-muted-foreground);
+	}
+
+	.game-hero__facts {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px 24px;
+		margin: 28px 0 0;
+	}
+
+	.game-hero__facts div:last-child {
+		grid-column: 1 / -1;
+	}
+
+	dt {
+		margin-bottom: 4px;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: var(--color-muted-foreground);
+	}
+
+	dd {
+		margin: 0;
+		font-size: 14px;
+		line-height: 1.55;
+	}
+
+	.game-hero__cover {
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background: var(--color-accent);
+		box-shadow: var(--shadow-card);
+	}
+
+	.game-hero__cover img {
+		width: 100%;
+		aspect-ratio: 800 / 470;
+		object-fit: cover;
+	}
+
+	.game-page__playable {
+		margin-top: 64px;
+	}
+
+	.game-page__story {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 280px;
+		gap: 64px;
+		align-items: start;
+		padding-top: 64px;
+	}
+
+	.game-prose {
+		max-width: 780px;
+	}
+
+	.game-prose :global(h2) {
+		margin: 40px 0 14px;
+		font-size: 28px;
+		line-height: 1.25;
+		letter-spacing: 0;
+	}
+
+	.game-prose :global(h2:first-child) {
+		margin-top: 0;
+	}
+
+	.game-prose :global(p),
+	.game-prose :global(li) {
+		font-size: 17px;
+		line-height: 1.85;
+		color: var(--color-muted-foreground);
+	}
+
+	.game-prose :global(p) {
+		margin: 0 0 18px;
+	}
+
+	.game-profile {
+		padding-left: 28px;
+		border-left: 1px solid var(--color-border);
+	}
+
+	.game-profile section + section {
+		margin-top: 32px;
+	}
+
+	.game-profile h2 {
+		margin: 0 0 12px;
+		font-size: 16px;
+		line-height: 1.4;
+		letter-spacing: 0;
+	}
+
+	.game-profile ul {
+		display: grid;
+		gap: 9px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.game-profile li {
+		font-size: 14px;
+		line-height: 1.55;
+		color: var(--color-muted-foreground);
+	}
+
+	.game-profile__technologies {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.game-profile__technologies li {
+		padding: 8px 9px;
+		border-radius: 8px;
+		background: var(--color-accent);
+		color: var(--color-foreground);
+		font-size: 12px;
+	}
+
+	.game-page__workshop {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		margin-top: 64px;
+		padding: 28px 0;
+		border-top: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.game-page__workshop p {
+		margin: 0;
+		font-size: 13px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: var(--color-muted-foreground);
+	}
+
+	.game-page__workshop a {
+		font-size: 16px;
+		font-weight: 600;
+		text-align: right;
+		text-underline-offset: 4px;
+	}
+
+	@media (max-width: 900px) {
+		.game-hero__layout,
+		.game-page__story {
+			grid-template-columns: 1fr;
+		}
+
+		.game-hero__layout {
+			gap: 32px;
+		}
+
+		.game-page__story {
+			gap: 40px;
+		}
+
+		.game-profile {
+			padding: 28px 0 0;
+			border-top: 1px solid var(--color-border);
+			border-left: 0;
+		}
+	}
+
+	@media (max-width: 560px) {
+		h1 {
+			font-size: 34px;
+		}
+
+		.game-hero__title-row > img {
+			width: 60px;
+			height: 60px;
+		}
+
+		.game-page__playable,
+		.game-page__story {
+			margin-top: 48px;
+			padding-top: 0;
+		}
+
+		.game-profile__technologies {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.game-page__workshop {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.game-page__workshop a {
+			text-align: left;
+		}
+	}
+</style>
