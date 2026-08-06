@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/png" href="/assets/logo.png"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="A practical approach to AI-assisted HTML5 game development: architecture, SDK contracts, agents, and project control."><meta property="og:title" content="How I Build HTML5 Games with AI Agents and My Own SDK | HTML5 Game Dev Blog"><meta property="og:description" content="A practical approach to AI-assisted HTML5 game development: architecture, SDK contracts, agents, and project control."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="How I Build HTML5 Games with AI Agents and My Own SDK | HTML5 Game Dev Blog"><meta name="twitter:description" content="A practical approach to AI-assisted HTML5 game development: architecture, SDK contracts, agents, and project control."><title>How I Build HTML5 Games with AI Agents and My Own SDK | HTML5 Game Dev Blog</title><link rel="stylesheet" href="/_astro/Layout.DGapxwKH.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/games">Games</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Workshop</div> <h1 class="article-page__title">How I Build HTML5 Games with AI Agents and My Own SDK</h1> <div class="article-page__meta"> <time> July 3, 2026 </time> </div> </div> <div class="article-page__hero"> <img src="/assets/intro/cover.png" alt="AI-assisted HTML5 game development cover"> </div> <div class="article-prose"> <p>AI helps a lot with writing code, but AI alone is not enough for game development.</p>
+<p>If you ask an agent to “make a game”, it can quickly produce a prototype. The problems usually start later: when you need to add mechanics, fix bugs, change layout, optimize loading, support resize, audio, animations, and scene transitions.</p>
+<p>Games have a lot of state and side effects. Without architecture, AI starts generating different solutions for the same types of problems.</p>
+<p>My approach is simple: AI agents write code, but they work inside a predefined architecture.</p>
+<p>That is why I built my own HTML5 game SDK:</p>
+<ul>
+<li>sdk npm packages: <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">@gamedevland/engine</a> and <a href="https://www.npmjs.com/package/@gamedevland/vite" target="_blank" rel="noreferrer">@gamedevland/vite</a></li>
+<li>game example: <a href="https://gamedevland.github.io/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a></li>
+<li>game repository: <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a></li>
+</ul>
+<p><a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> is a complete game built on this SDK. It has a boot scene, preload, layout JSON, prefab JSON, FSM, commands, scene services, a domain model, components, drag-and-drop, score, game over, best score, sounds, and a production build.</p>
+<h2 id="why-the-sdk-exists">Why the SDK Exists</h2>
+<p>The SDK is not there to hide all game code.</p>
+<p>Its job is to define the project rules:</p>
+<ul>
+<li>scene flow: lifecycle, FSM, commands, scene services, domain model;</li>
+<li>visual composition: layout nodes, components, actions, prefabs;</li>
+<li>runtime systems: assets, input, tweens, audio, screen state, persistence;</li>
+<li>boundaries: what belongs to the game and what belongs to the SDK.</li>
+</ul>
+<p>After that, an agent does not have to invent the structure every time. It should work inside the existing boundaries.</p>
+<p>In <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>, the scene class is almost empty:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GameScene</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> FsmDrivenScene</span><span style="color:#E1E4E8"> {}</span></span></code></pre>
+<p>That is a good state for a scene. The scene should not contain all gameplay logic.</p>
+<p>The two main flows are separated:</p>
+<div class="article-layer-flows">
+  <div class="article-layer-flow">
+    <span class="article-layer-flow__label">Scene flow</span>
+    <div class="article-layer-flow__steps">
+      <strong>FSM</strong>
+      <strong>Command</strong>
+      <strong>Scene Service</strong>
+      <strong>Domain Model</strong>
+    </div>
+  </div>
+  <div class="article-layer-flow">
+    <span class="article-layer-flow__label">Visual layer</span>
+    <div class="article-layer-flow__steps">
+      <strong>Layout JSON</strong>
+      <strong>Node</strong>
+      <strong>Component / Action</strong>
+    </div>
+  </div>
+</div>
+<p>This matters for AI-assisted development. It is much easier for an agent to change a small class with one responsibility than to work with a large scene file that mixes game rules, PIXI objects, animations, input, and progress saving.</p>
+<h2 id="example-placing-a-block">Example: Placing a Block</h2>
+<p>Take the main action in <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>: the player drags a shape onto the board.</p>
+<h3 id="the-problem">The Problem</h3>
+<p>The bad version is to put everything into one component.</p>
+<div class="article-problem-list">
+  <h3>God component</h3>
+  <ul>
+    <li>pointer events</li>
+    <li>placement preview</li>
+    <li>board mutation</li>
+    <li>line clearing</li>
+    <li>score calculation</li>
+    <li>UI update</li>
+    <li>effects</li>
+    <li>game over check</li>
+  </ul>
+</div>
+<p>This code can work, but it is hard to evolve.</p>
+<h3 id="the-actual-flow">The Actual Flow</h3>
+<p>In the current architecture, the simplified flow is:</p>
+<div class="article-flow-diagram">
+  <div class="article-flow-step">
+    <span>1</span>
+    <strong>Drag component</strong>
+    <small>handles input and preview, then emits PlacementRequested</small>
+  </div>
+  <div class="article-flow-step">
+    <span>2</span>
+    <strong>FSM + command</strong>
+    <small>moves to resolvingPlacement and runs PlaceBlockCommand</small>
+  </div>
+  <div class="article-flow-step">
+    <span>3</span>
+    <strong>Gameplay service</strong>
+    <small>validates placement and updates session state</small>
+  </div>
+  <div class="article-flow-step">
+    <span>4</span>
+    <strong>Board / Slots / Score</strong>
+    <small>domain model applies the game rules</small>
+  </div>
+  <div class="article-flow-step">
+    <span>5</span>
+    <strong>Events + visual components</strong>
+    <small>PlacementCompleted, BoardChanged, BlocksChanged, ScoreChanged update the screen</small>
+  </div>
+</div>
+<p>As a result, game rules do not depend on PIXI, and visual components do not calculate score.</p>
+<p>This is not architecture for its own sake. This is how I keep the project in a state where a new task can be given to an agent with a clear scope.</p>
+<h3 id="code-shape">Code Shape</h3>
+<p>The top-level code stays small. The FSM decides when placement should be resolved:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#B392F0">playing</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">  on</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">    [BlockPuzzleEvents.PlacementRequested]: {</span></span>
+<span class="line"><span style="color:#E1E4E8">      target: </span><span style="color:#9ECBFF">'resolvingPlacement'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      actions: [</span><span style="color:#9ECBFF">'PlaceBlockCommand'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The command is only a boundary between the FSM event and the scene service:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> PlaceBlockCommand</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> BaseTypedCommand</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">PlaceBlockCommandPayload</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">  protected</span><span style="color:#F97583"> override</span><span style="color:#F97583"> readonly</span><span style="color:#FFAB70"> inputDecoder</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">    BlockPuzzleEventSchemas.PlacementRequest;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  protected</span><span style="color:#F97583"> override</span><span style="color:#B392F0"> execute</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">payload</span><span style="color:#F97583">:</span><span style="color:#B392F0"> PlaceBlockCommandPayload</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getSceneService</span><span style="color:#E1E4E8">(BlockPuzzleServices.Gameplay).</span><span style="color:#B392F0">place</span><span style="color:#E1E4E8">(payload);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The service owns the session update and delegates the rules to the domain model:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BlockPuzzleGameplayService</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> BaseSceneService</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">  place</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">request</span><span style="color:#F97583">:</span><span style="color:#B392F0"> PlacementRequest</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // Read current session state and validate the requested shape.</span></span>
+<span class="line"><span style="color:#6A737D">    // Apply board, slots, line-clear, and scoring domain rules.</span></span>
+<span class="line"><span style="color:#6A737D">    // Build a MoveResult for visual components and follow-up commands.</span></span>
+<span class="line"><span style="color:#6A737D">    // Emit placement, board, blocks, line-clear, and score events.</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="what-belongs-in-the-sdk">What Belongs in the SDK</h2>
+<p>I try to keep game code focused on the specific game.</p>
+<p>Reusable infrastructure should move into the SDK when it appears across projects.</p>
+<div class="article-sdk-grid">
+  <div class="article-sdk-card">
+    <h3>Orchestration</h3>
+    <ul>
+      <li>scene lifecycle</li>
+      <li>FSM</li>
+      <li>commands</li>
+      <li>events</li>
+      <li>scene services</li>
+      <li>scene-scoped DI</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Layout and interaction</h3>
+    <ul>
+      <li>layout nodes</li>
+      <li>components and actions</li>
+      <li>prefabs</li>
+      <li>responsive layout</li>
+      <li>input routing</li>
+      <li>drag interactions</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Data and assets</h3>
+    <ul>
+      <li>typed config decoding</li>
+      <li>settings and storage</li>
+      <li>asset manifest</li>
+      <li>asset bundles</li>
+      <li>texture resolution</li>
+    </ul>
+  </div>
+  <div class="article-sdk-card">
+    <h3>Runtime and safety</h3>
+    <ul>
+      <li>screen manager</li>
+      <li>audio</li>
+      <li>tween ownership</li>
+      <li>async scope safety</li>
+      <li>physics and particles</li>
+      <li>platform integrations</li>
+      <li>fail-fast errors</li>
+    </ul>
+  </div>
+</div>
+<h2 id="how-i-work-with-ai-agents">How I Work with AI Agents</h2>
+<p>My usual workflow:</p>
+<ol>
+<li>Describe the task and limit the scope.</li>
+<li>Let the agent read local project rules and the current implementation.</li>
+<li>Make the change inside the existing architecture.</li>
+<li>If game code starts getting repeated helpers, check whether they should become part of the SDK.</li>
+<li>Run <code>typecheck</code> and <code>lint</code> after the change.</li>
+<li>Review the result like a normal code review.</li>
+</ol>
+<p>The main rule: the agent should not replace the project architecture.</p>
+<p>When I add a new feature, I first choose where it belongs:</p>
+<div class="article-routing-map">
+  <div class="article-routing-map__header">
+    <span>Problem</span>
+    <span>Where it belongs</span>
+  </div>
+  <div class="article-routing-map__row">
+    <span>gameplay rule</span>
+    <strong>domain</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>use-case step</span>
+    <strong>command</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>scene runtime state</span>
+    <strong>scene service</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>visual behavior</span>
+    <strong>component / action</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>repeated visual structure</span>
+    <strong>prefab</strong>
+  </div>
+  <div class="article-routing-map__row">
+    <span>authored values</span>
+    <strong>layout / config JSON</strong>
+  </div>
+  <div class="article-routing-map__row is-sdk">
+    <span>generic lifecycle / input / assets / tween problem</span>
+    <strong>SDK</strong>
+  </div>
+</div>
+<p>This way AI helps write code faster without breaking the project structure.</p>
+<h2 id="why-not-everything-belongs-in-game-code">Why Not Everything Belongs in Game Code</h2>
+<p>You can keep the SDK minimal and solve everything inside a specific game. On the first project, that may look faster.</p>
+<p>The problem appears on the next projects. Lifecycle guards, asset helpers, responsive helpers, prefab helpers, and debug hooks start getting copied. After a while, it becomes unclear which version is the correct one.</p>
+<p>So I keep the same boundary from the workflow above: game-specific rules stay in game code, reusable infrastructure moves to the SDK, and authored presentation data stays in layout/config files. This boundary helps both the developer and the AI agent.</p>
+<h2 id="next-topics">Next Topics</h2>
+<p>Next, I want to cover the individual parts and practical details of working with my SDK on real projects:</p>
+<ul>
+<li>adaptive and responsive layout;</li>
+<li>smart resource loading;</li>
+<li>FSM in game scenes;</li>
+<li>components and actions;</li>
+<li>safe tweens and async operations;</li>
+<li>debug services for DevTools;</li>
+<li>workflow with Codex, VS Code, Figma, and Photopea;</li>
+<li>gameplay iterations using <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> as an example;</li>
+<li>and other similar practical topics.</li>
+</ul>
+<p>The main idea: AI is useful in game development when the project has clear boundaries.</p>
+<p>Without boundaries, AI accelerates chaos. With boundaries, AI accelerates development.</p> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/games">Games</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>

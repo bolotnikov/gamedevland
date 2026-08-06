@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="icon" type="image/png" href="/assets/logo.png"><meta name="generator" content="Astro v6.1.6"><meta name="description" content="Why physics bounds, drag state, spawn positions, and collision space must react to screen changes."><meta property="og:title" content="Gameplay Physics Is Responsive Too | Adaptive Layout for a Poki HTML5 Game"><meta property="og:description" content="Why physics bounds, drag state, spawn positions, and collision space must react to screen changes."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Gameplay Physics Is Responsive Too | Adaptive Layout for a Poki HTML5 Game"><meta name="twitter:description" content="Why physics bounds, drag state, spawn positions, and collision space must react to screen changes."><title>Gameplay Physics Is Responsive Too | Adaptive Layout for a Poki HTML5 Game</title><link rel="stylesheet" href="/_astro/Layout.DGapxwKH.css"></head> <body>  <header class="site-header"> <div class="container"> <nav class="top-nav"> <a class="brand-pill" href="/">GameDev.Land</a> <div class="top-nav__links"> <a class="top-nav__link is-active" href="/">Home</a> <a class="top-nav__link" href="/games">Games</a> <a class="top-nav__link" href="/about">About</a> </div> </nav> <div class="hero-block"> <div class="hero-block__inner"> <h1>HTML5 Game Development</h1> <p>Project walkthroughs, architecture notes, and implementation details from real HTML5 game builds.</p> </div> </div> </div> </header> <main class="page-main article-page"> <section class="container"> <div class="article-page__header"> <a class="article-page__back" href="/">← Back to home</a> <div class="article-page__tag">Workshop series</div> <h1 class="article-page__title">Gameplay Physics Is Responsive Too</h1> <div class="article-page__meta"> <span>Adaptive Layout for a Poki HTML5 Game</span> <span>•</span> <span>Section 7 of 11</span> </div> </div> <div class="tutorial-series-layout"> <aside class="series-sidebar"> <div class="series-sidebar__inner"> <div class="series-sidebar__intro"> <div class="series-sidebar__eyebrow">Workshop series</div> <h2>Adaptive Layout for a Poki HTML5 Game</h2> <p>A production workshop on making UI, screen, and gameplay adapt across Poki desktop, mobile, tablet, and iframe resolutions.</p> </div> <nav class="series-sidebar__nav" aria-label="Adaptive Layout for a Poki HTML5 Game steps"> <a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en"> <span class="series-sidebar__step">Section 1</span> <span class="series-sidebar__title">Problem and Architecture</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/virtual-screen"> <span class="series-sidebar__step">Section 2</span> <span class="series-sidebar__title">Virtual Screen</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/screen-changes"> <span class="series-sidebar__step">Section 3</span> <span class="series-sidebar__title">Screen Changes</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/layout-primitives"> <span class="series-sidebar__step">Section 4</span> <span class="series-sidebar__title">Layout Primitives</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/scene-composition"> <span class="series-sidebar__step">Section 5</span> <span class="series-sidebar__title">Scene Composition</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/level-panel"> <span class="series-sidebar__step">Section 6</span> <span class="series-sidebar__title">Level Panel</span> </a><a class="series-sidebar__link is-active" href="/articles/adaptive-layout-poki-en/responsive-physics" aria-current="page"> <span class="series-sidebar__step">Section 7</span> <span class="series-sidebar__title">Responsive Physics</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/object-sizing"> <span class="series-sidebar__step">Section 8</span> <span class="series-sidebar__title">Object Sizing</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/resize-during-animation"> <span class="series-sidebar__step">Section 9</span> <span class="series-sidebar__title">Resize During Animation</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/responsive-text"> <span class="series-sidebar__step">Section 10</span> <span class="series-sidebar__title">Responsive Text</span> </a><a class="series-sidebar__link" href="/articles/adaptive-layout-poki-en/recommendations"> <span class="series-sidebar__step">Section 11</span> <span class="series-sidebar__title">Recommendations</span> </a> </nav> </div> </aside> <div class="tutorial-series-content"> <div class="article-prose tutorial-prose"> <h2 id="11-gameplay-physics-is-responsive-too">11. Gameplay Physics Is Responsive Too</h2>
+<p>A common mistake in HTML5 games: UI is responsive, but gameplay logic still uses old bounds.</p>
+<p>In <code>Stickers Merge</code>, physics bounds are recalculated when the screen changes.</p>
+<p><code>LevelPhysicsBoundsResolver</code> uses current virtual size and layout:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> virtualSize</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.screen.</span><span style="color:#B392F0">getVirtualSize</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> leftInset</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.screen.</span><span style="color:#B392F0">getOrientation</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'land'</span></span>
+<span class="line"><span style="color:#F97583">  ?</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">resolveLandLeftInset</span><span style="color:#E1E4E8">(layout, virtualSize)</span></span>
+<span class="line"><span style="color:#F97583">  :</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> localTopLeft</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> playfield.view.</span><span style="color:#B392F0">toLocal</span><span style="color:#E1E4E8">({ x: leftInset, y: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> }, root.view);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> localTopRight</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> playfield.view.</span><span style="color:#B392F0">toLocal</span><span style="color:#E1E4E8">({ x: virtualSize.width, y: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> }, root.view);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> localBottomLeft</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> playfield.view.</span><span style="color:#B392F0">toLocal</span><span style="color:#E1E4E8">({ x: leftInset, y: virtualSize.height }, root.view);</span></span></code></pre>
+<p>In landscape, bounds start after the left panel. In portrait, bounds start at zero because the panel is at the bottom.</p>
+<p>On <code>SCREEN_CHANGED</code>, the FSM runs:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#E1E4E8">[SharedUiEvents.ScreenChanged]: {</span></span>
+<span class="line"><span style="color:#E1E4E8">  actions: [</span><span style="color:#9ECBFF">'RebuildLevelStickersOnResizeCommand'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">},</span></span></code></pre>
+<p>The command calls:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getSceneService</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">LevelStickerResizeRebuildService</span><span style="color:#E1E4E8">>(</span></span>
+<span class="line"><span style="color:#E1E4E8">  GameServices.LevelStickerResizeRebuildService,</span></span>
+<span class="line"><span style="color:#E1E4E8">).</span><span style="color:#B392F0">rebuildFromCurrentScene</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  layout: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.layout,</span></span>
+<span class="line"><span style="color:#E1E4E8">  stickersLayer: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getStickersLayer</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span></code></pre>
+<p>The service:</p>
+<ul>
+<li>cleans up active drag;</li>
+<li>captures current sticker state;</li>
+<li>recalculates physics bounds;</li>
+<li>removes old physics bodies;</li>
+<li>spawns stickers again in the new layout;</li>
+<li>warms up the physics simulation;</li>
+<li>marks stickers as settled.</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> stickersSnapshot</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">captureSnapshot</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.physics.</span><span style="color:#B392F0">setBounds</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.boundsResolver.</span><span style="color:#B392F0">resolveFromLayout</span><span style="color:#E1E4E8">(params.layout));</span></span>
+<span class="line"><span style="color:#F97583">await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.mergeService.</span><span style="color:#B392F0">consumeManyByIds</span><span style="color:#E1E4E8">(stickersSnapshot.</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">entry</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> entry.id));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> respawnedRecords</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.spawnFlowService.</span><span style="color:#B392F0">spawnBatch</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  layer: params.stickersLayer,</span></span>
+<span class="line"><span style="color:#E1E4E8">  physics: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.physics,</span></span>
+<span class="line"><span style="color:#E1E4E8">  registrar: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.registrar,</span></span>
+<span class="line"><span style="color:#E1E4E8">  entries: stickersSnapshot,</span></span>
+<span class="line"><span style="color:#E1E4E8">  mode: </span><span style="color:#9ECBFF">'packed_visible'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span></code></pre>
+<p>Responsive gameplay means visual resize is not enough. Physics, spawn positions, collision bounds, and drag state must respond too.</p> </div> <div class="series-pagination"> <a class="series-pagination__link" href="/articles/adaptive-layout-poki-en/level-panel"> <span class="series-pagination__label">Previous</span> <span class="series-pagination__title"> Section 6. Level Panel </span> </a> <a class="series-pagination__link is-next" href="/articles/adaptive-layout-poki-en/object-sizing"> <span class="series-pagination__label">Next</span> <span class="series-pagination__title"> Section 8. Object Sizing </span> </a> </div> </div> </div> </section> </main> <footer class="site-footer"> <div class="container footer-card"> <div class="footer-grid"> <div> <h4>About the blog</h4> <p>
+Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
+</p> </div> <div> <h4>Sections</h4> <ul> <li><a href="/">Home</a></li> <li><a href="/games">Games</a></li> <li><a href="/about">About</a></li> </ul> </div> <div> <h4>Projects</h4> <ul> <li><a href="/articles/tower-defense">Tower Defense</a></li> <li><a href="/articles/runner">Infinite Runner</a></li> <li><a href="/articles/match3">Match-3</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p> </div> </div> </footer> <script>
+	(() => {
+		const enhanceCodeBlocks = () => {
+			const blocks = document.querySelectorAll('.article-prose pre');
+
+			for (const pre of blocks) {
+				pre.removeAttribute('tabindex');
+				pre.setAttribute('draggable', 'false');
+				pre.style.userSelect = 'text';
+				pre.style.webkitUserSelect = 'text';
+				pre.style.cursor = 'text';
+
+				const descendants = pre.querySelectorAll('*');
+				for (const node of descendants) {
+					if (node instanceof HTMLElement) {
+						node.setAttribute('draggable', 'false');
+						node.style.userSelect = 'text';
+						node.style.webkitUserSelect = 'text';
+						node.style.cursor = 'text';
+					}
+				}
+
+				if (pre.parentElement?.classList.contains('code-block-shell')) {
+					continue;
+				}
+
+				const shell = document.createElement('div');
+				shell.className = 'code-block-shell';
+				pre.parentNode?.insertBefore(shell, pre);
+				shell.appendChild(pre);
+
+				const button = document.createElement('button');
+				button.className = 'code-block-copy';
+				button.type = 'button';
+				button.setAttribute('aria-label', 'Copy code to clipboard');
+				button.textContent = 'Copy';
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code');
+					const text = code?.textContent ?? pre.textContent ?? '';
+
+					try {
+						await navigator.clipboard.writeText(text);
+						button.textContent = 'Copied';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					} catch {
+						button.textContent = 'Failed';
+						window.setTimeout(() => {
+							button.textContent = 'Copy';
+						}, 1600);
+					}
+				});
+
+				shell.appendChild(button);
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', enhanceCodeBlocks, { once: true });
+		} else {
+			enhanceCodeBlocks();
+		}
+	})();
+</script>  </body></html>
