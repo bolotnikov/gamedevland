@@ -19,9 +19,9 @@ technologies:
   - Webpack 5
   - Custom HTML5 game engine
 roles:
-  - Creator and developer
-  - Game architecture and custom engine
-  - Responsive gameplay and UI
+  - Full-cycle game development
+  - Architecture and engine
+  - Game design and UI
 iconImage: /assets/games/foam-n-find/icon.webp
 iconAlt: Foam and Find game icon with a young detective holding a magnifying glass
 coverImage: /assets/games/foam-n-find/cover.webp
@@ -54,20 +54,8 @@ draft: false
 
 ## About the game
 
-Foam and Find is a bright hidden-object puzzle set in richly detailed rooms. Each scene is packed with toys, plants, clothes, and household objects, turning a simple search list into a focused observation challenge.
+Foam and Find is a hidden-object puzzle set in detailed rooms. Levels are grouped into themed locations and use lives and hints as light supporting systems.
 
 ## How it plays
 
-The game selects a set of target objects for each level. Players can drag and zoom the scene, tap objects to collect them, and use a hint when a target is difficult to spot. Incorrect taps cost a life, so careful searching matters just as much as speed.
-
-## Progression and game design
-
-Levels are grouped into themed episodes and locations. A compact task panel keeps the current goals visible, while lives and limited hints add light resource management without distracting from the core search loop.
-
-## My role
-
-I created and developed the game end to end: hidden-object rules, level and episode progression, drag and zoom interaction, responsive layouts, effects, audio, platform integration, and the production web build for GameDistribution.
-
-## Technical highlights
-
-The game is written in TypeScript and rendered with PixiJS. Tween.js drives interface and gameplay motion, Howler.js handles audio, and Pixi filters and particle emitters provide focus effects and celebration feedback. Webpack produces the platform builds, while the custom engine owns scenes, layouts, assets, input, persistence, and platform adapters.
+Pan and zoom the scene, then tap every object shown in the task list. Incorrect taps cost a life, and a hint can reveal a difficult target.

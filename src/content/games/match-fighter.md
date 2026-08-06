@@ -20,9 +20,9 @@ technologies:
   - Webpack 5
   - Custom HTML5 game engine
 roles:
-  - Creator and developer
-  - Game architecture and custom engine
-  - Responsive gameplay and UI
+  - Full-cycle game development
+  - Architecture and engine
+  - Game design and UI
 iconImage: /assets/games/match-fighter/icon_512.jpg
 iconAlt: Match Fighter game icon with two martial artists facing each other
 logoImage: /assets/games/match-fighter/logo.webp
@@ -54,20 +54,14 @@ draft: false
 
 ## About the game
 
-Match Fighter combines a turn-based fighting duel with a match-3 board. Every successful move contributes to an attack, so board planning and combat timing are part of the same loop.
+Match Fighter combines turn-based combat with a match-3 board. It includes a ten-opponent solo tower and a shared-device two-player mode.
 
 ## How it plays
 
-Players swap neighboring tiles to make matches and damage the opposing fighter. Matches charge energy, strong combinations create bombs, lightning, and color-based special tiles, and well-planned chains can produce an extra move. The fight ends when one health bar is depleted.
-
-## Two ways to fight
-
-The game supports a bot opponent with difficulty tied to campaign progress, plus a local two-player mode where both fighters share the same device. Solo victories move the player through a tower of ten opponents.
-
-## My role
-
-I created and developed the game end to end: match and booster rules, turn flow, bot decisions, combat progression, responsive layouts, effects, audio, platform integration, and the production web build for GameDistribution.
+Swap neighboring tiles to make matches and attack the opponent. Larger combinations create special tiles, and the fight ends when one health bar reaches zero.
 
 ## Technical highlights
 
-The gameplay is organized around a custom entity-component-system pipeline. TypeScript and PixiJS power the runtime and rendering, GSAP and Tween.js handle combat and interface animation, Howler.js provides audio, and Pixi filters and particle emitters build the impact effects. Webpack produces the platform-specific web bundles.
+- A custom ECS engine provides entities, components, system management, and state/input processing pipelines.
+- The game layer contains 41 systems and 25 components for the grid, swaps, matches, cascades, boosters, combat, turns, bot logic, and game-over flow.
+- Bot and local two-player modes use the same turn and board systems; only move selection differs.

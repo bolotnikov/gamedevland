@@ -18,9 +18,9 @@ technologies:
   - Vite
   - Custom HTML5 game engine
 roles:
-  - Creator and developer
-  - Game architecture and custom engine
-  - Responsive gameplay and UI
+  - Full-cycle game development
+  - Architecture and engine
+  - Game design and UI
 iconImage: /assets/games/fish-sort/icon.jpg
 iconAlt: Fish Sort game icon with colorful fish swimming underwater
 coverImage: /assets/games/fish-sort/cover1.jpg
@@ -53,20 +53,13 @@ draft: false
 
 ## About the game
 
-Fish Sort is a calm underwater sorting puzzle built around planning, pattern recognition, and satisfying chain reactions. The player moves colorful fish between seaweed lines and brings matching species together until the whole board is cleared.
+Fish Sort is an underwater sorting puzzle with level-based boards and three optional boosters.
 
 ## How it plays
 
-Only compatible groups can be moved onto each other. Once a line is filled with fish of the same type, they swim away and the line disappears. There is no timer, so each layout can be solved at the player's own pace. Undo, Add Line, and Shuffle boosters provide a way forward when the board gets tight.
-
-## My role
-
-I created and developed the game end to end: core sorting rules, level flow, boosters, animations, responsive layouts, custom engine integration, audio, and the production web build.
+Move the top group of fish between seaweed lines and collect matching fish on the same line. A completed group swims away; Undo, Add Line, and Shuffle can help when no useful move remains.
 
 ## Technical highlights
 
-The game is written in TypeScript and rendered with PixiJS. GSAP drives fish movement and interface animation, Pixi Filters provides selection and highlight effects, and Howler.js powers the audio backend. Vite produces the web builds, while the custom engine owns scenes, layouts, input, assets, tween lifecycles, persistence, and platform integration.
-
-## Responsive across devices
-
-Fish Sort supports landscape and portrait play with dedicated layout compositions for each orientation. The canvas, gameplay area, controls, and visual scale adapt to desktop, phone, and tablet viewports while preserving the puzzle state.
+- Portrait and landscape layouts share the same puzzle state.
+- Move history supports deterministic undo.

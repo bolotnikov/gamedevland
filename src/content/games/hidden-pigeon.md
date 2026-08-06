@@ -19,7 +19,9 @@ technologies:
   - Webpack 5
   - Custom HTML5 game engine
 roles:
-  - Creator and developer
+  - Full-cycle game development
+  - Architecture and engine
+  - Game design and UI
 iconImage: /assets/games/hidden-pigeon/icon.jpg
 iconAlt: Hidden Pigeon game icon with an illustrated pigeon portrait
 playableUrl: https://bolotnikov.github.io/hidden-pigeon-public
@@ -32,16 +34,8 @@ draft: false
 
 ## About the game
 
-Hidden Pigeon is a lighthearted hidden-object puzzle with one clear mission: find every pigeon concealed in the picture. Each scene turns a familiar place into a visual search challenge filled with small details and unexpected hiding spots.
+Hidden Pigeon is a hidden-object puzzle set around recognizable European landmarks. Each illustrated location contains a new group of concealed pigeons.
 
 ## How it plays
 
-Explore each illustration and click or tap a pigeon when you spot one. Finding every hidden bird completes the scene and opens the way to the next location. The controls stay intentionally simple so the challenge remains focused on observation.
-
-## A trip across Europe
-
-The journey moves through recognizable European settings, from the romantic streets of Paris to the ancient landmarks of Rome. Every destination introduces a new composition to inspect and a fresh flock to uncover.
-
-## Release
-
-Hidden Pigeon was released on Poki in March 2025 and is playable on desktop, phone, and tablet.
+Inspect the scene and click or tap every pigeon. Finding them all completes the location and unlocks the next one.

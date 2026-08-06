@@ -18,9 +18,9 @@ technologies:
   - Vite
   - Custom HTML5 game engine
 roles:
-  - Creator and developer
-  - Game architecture and custom engine
-  - Responsive gameplay and UI
+  - Full-cycle game development
+  - Architecture and engine
+  - Game design and UI
 iconImage: /assets/games/stickers-merge/icon.jpg
 iconAlt: Stickers Merge game icon with a colorful sticker book
 coverImage: /assets/games/stickers-merge/cover-land-en.png
@@ -56,20 +56,13 @@ draft: false
 
 ## About the game
 
-Stickers Merge is a cozy merge puzzle built around the pleasure of completing a sticker book. Each level turns a page into a small collection to uncover, with bright objects, satisfying combinations, and a clear visual goal.
+Stickers Merge is a merge puzzle about completing illustrated sticker albums. Each level is a new page with a collection of stickers to reveal.
 
 ## How it plays
 
-Matching stickers combine into a higher-level sticker. The player keeps merging objects, manages the available space, and gradually reveals every item required to complete the current album page.
-
-## My role
-
-I created and developed the game end to end: from the core merge loop and content flow to the custom engine integration, responsive interface, platform adapters, and release build.
+Merge identical stickers to create the next sticker in the chain. Manage the available space and reveal every required item to complete the page.
 
 ## Technical highlights
 
-The game is written in TypeScript and rendered with PixiJS. Matter.js handles physics, while GSAP powers motion and transitions. The project is structured around reusable engine systems for scenes, layouts, input, assets, audio, and platform integration.
-
-## Responsive across devices
-
-Stickers Merge supports both landscape and portrait play. Its virtual screen, layout composition, readable UI, and physics bounds adapt to viewport changes so the game remains stable across desktop, phone, and tablet screens.
+- The current level is preserved when the layout switches between portrait and landscape.
+- Physics bounds, controls, and UI adapt to the active viewport.

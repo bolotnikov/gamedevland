@@ -59,6 +59,7 @@ const games = defineCollection({
 			articleUrl: z.string().regex(/^\//).optional(),
 			orientation: z.enum(['landscape', 'portrait', 'adaptive']).default('landscape'),
 			embedAspectRatio: z.string().default('16 / 9'),
+			fitEmbedToViewport: z.boolean().default(false),
 			order: z.number().int().default(0),
 			draft: z.boolean().default(false),
 		})

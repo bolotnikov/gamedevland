@@ -7,6 +7,7 @@ interface Props {
 	externalUrl?: string;
 	orientation?: 'landscape' | 'portrait' | 'adaptive';
 	embedAspectRatio?: string;
+	fitToViewport?: boolean;
 }
 
 const {
@@ -15,10 +16,11 @@ const {
 	externalUrl,
 	orientation = 'landscape',
 	embedAspectRatio = '16 / 9',
+	fitToViewport = false,
 } = Astro.props;
 ---
 
-<section class="game-embed" aria-labelledby="play-game-heading">
+<section class:list={['game-embed', fitToViewport && 'is-viewport-fit']} aria-labelledby="play-game-heading">
 	<div class="game-embed__bar">
 		<div>
 			<p class="game-embed__eyebrow">Playable build</p>
@@ -58,6 +60,11 @@ const {
 		border-radius: 8px;
 		background: #0d1117;
 		box-shadow: 0 24px 56px rgba(16, 24, 40, 0.16);
+	}
+
+	.game-embed.is-viewport-fit {
+		width: min(100%, calc((100svh - 132px) * 0.75), 540px);
+		margin-inline: auto;
 	}
 
 	.game-embed__bar {

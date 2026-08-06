@@ -53,7 +53,6 @@ const releaseLabel = game.data.releaseDate
 							<h1>{game.data.title}</h1>
 						</div>
 					</div>
-					<p class="game-hero__description">{game.data.description}</p>
 					<dl class="game-hero__facts">
 						<div>
 							<dt>Genre</dt>
@@ -94,6 +93,7 @@ const releaseLabel = game.data.releaseDate
 				externalUrl={game.data.externalUrl}
 				orientation={game.data.orientation}
 				embedAspectRatio={game.data.embedAspectRatio}
+				fitToViewport={game.data.fitEmbedToViewport}
 			/>
 		</section>
 
@@ -207,13 +207,6 @@ const releaseLabel = game.data.releaseDate
 		font-size: 42px;
 		line-height: 1.1;
 		letter-spacing: 0;
-	}
-
-	.game-hero__description {
-		margin: 22px 0 0;
-		font-size: 17px;
-		line-height: 1.75;
-		color: var(--color-muted-foreground);
 	}
 
 	.game-hero__facts {
