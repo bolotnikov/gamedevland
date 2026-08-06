@@ -30,12 +30,8 @@ const screenshotSchema = z.object({
 });
 
 const promoVideoSchema = z.object({
-	landscapeWebm: z.string(),
-	landscapeMp4: z.string(),
-	portraitWebm: z.string(),
-	portraitMp4: z.string(),
-	landscapePoster: z.string(),
-	portraitPoster: z.string(),
+	webm: z.string(),
+	poster: z.string(),
 });
 
 const games = defineCollection({

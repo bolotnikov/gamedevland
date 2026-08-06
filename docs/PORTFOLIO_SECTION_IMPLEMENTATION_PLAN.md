@@ -75,7 +75,7 @@ Standalone web build уже опубликован в отдельном реп�
 | Landscape cover | `/assets/games/stickers-merge/cover-land-en.png` | оригинальный key art, 800×470 |
 | Logo | `/assets/games/stickers-merge/logo.png` | прозрачный брендовый wordmark, 1165×499 |
 | Screenshots | `/assets/games/stickers-merge/en/screens/` | по 5 кадров в landscape и portrait |
-| Promo videos | `/assets/games/stickers-merge/en/videos/` | 25 секунд, landscape/portrait, WebM/MP4 |
+| Promo video | `/assets/games/stickers-merge/en/videos/land.webm` | 25 секунд, VP9, 1280×720, 30 fps |
 | Poki badge | `/assets/poki/poki-badge_dark.svg` | официальный badge 136×40 |
 
 Публичные данные Poki проверены 31 июля 2026 года. Динамические показатели вроде рейтинга и числа
@@ -148,7 +148,7 @@ Standalone web build уже опубликован в отдельном реп�
   alt-тексты. Landscape и portrait кадры должны быть видимы как доказательство адаптивности, а не
   автоматически заменять друг друга так, чтобы пользователь видел только одну ориентацию.
 - Promo video выводить только после iframe и основного описания. Использовать `<video controls
-  playsinline preload="metadata">`, WebM как первый source и MP4 как fallback; autoplay не включать.
+  playsinline preload="metadata">` с единственным landscape WebM; autoplay не включать.
 - Для video выбирать landscape или portrait sources через `media` у `<source>`. При изменении
   ориентации допустима повторная загрузка выбранного source.
 - Не загружать video целиком до действия пользователя. В качестве poster использовать
@@ -178,9 +178,6 @@ gamedevland/
         port/{1..5}.png
       videos/
         land.webm
-        land.mp4
-        port.webm
-        port.mp4
   public/assets/poki/
     poki-badge_dark.svg
   src/components/game/
@@ -278,9 +275,8 @@ draft
 iframe source. `logoImage` optional и используется только detail template.
 
 `screenshots` — массив пар `{ landscapeSrc, portraitSrc, alt }`, чтобы одна запись описывала одно и
-то же состояние игры в двух ориентациях. `promoVideo` — объект с `landscapeWebm`, `landscapeMp4`,
-`portraitWebm`, `portraitMp4` и poster images. Все media fields optional для будущих игр, но заполнены
-у Stickers Merge.
+то же состояние игры в двух ориентациях. `promoVideo` — объект с единственным WebM-файлом и poster.
+Все media fields optional для будущих игр, но заполнены у Stickers Merge.
 
 Проверка:
 
@@ -304,7 +300,7 @@ iframe source. `logoImage` optional и используется только det
 6. Указать asset paths для `iconImage`, `coverImage` и `logoImage` из раздела 4.1.
 7. Добавить три screenshot pairs с индексами `1`, `4`, `5` и точными alt-текстами для показанных
    состояний игры.
-8. Добавить четыре video source и posters из screenshot pair `1`.
+8. Добавить основной landscape WebM и poster из landscape screenshot `1`.
 9. Написать английский Markdown body с секциями:
    - `About the game`;
    - `How it plays`;
@@ -435,8 +431,8 @@ iframe source. `logoImage` optional и используется только det
     `/assets/poki/poki-badge_dark.svg` размером 136×40.
 11. Передавать в `PokiBadgeLink` URL `https://poki.com/en/g/stickers-merge`, `target="_blank"`,
     `rel="noreferrer"` и доступное имя `Play Stickers Merge on Poki`.
-12. Реализовать `GameMediaShowcase`: три пары landscape/portrait screenshots и promo video с
-    responsive sources, controls, `playsinline`, `preload="metadata"` и без autoplay.
+12. Реализовать `GameMediaShowcase`: три пары landscape/portrait screenshots и основной landscape
+    WebM с controls, `playsinline`, `preload="metadata"` и без autoplay.
 13. Не загружать screenshots/video до первого viewport: gallery images используют lazy loading, а
     video загружает только metadata до действия пользователя.
 
@@ -450,7 +446,7 @@ iframe source. `logoImage` optional и используется только det
 - fallback корректно выглядит без `playableUrl`;
 - прямая ссылка на standalone build открывается отдельно от Poki badge;
 - Poki badge ведет на точную страницу Stickers Merge и доступен с клавиатуры;
-- video выбирает подходящую ориентацию, WebM работает первым, MP4 остается fallback;
+- основной landscape WebM загружается и запускается вручную;
 - media не создают горизонтальный overflow и не загружаются целиком до взаимодействия.
 
 ### Этап 7. Реализовать `/games/[slug]`
@@ -514,8 +510,7 @@ iframe source. `logoImage` optional и используется только det
 9. Проверить iframe resize и игровой UI во всех поддерживаемых ориентациях.
 10. Проверить, что screenshot pairs одновременно демонстрируют landscape и portrait без слишком
     мелкого текста или чрезмерной высоты страницы.
-11. Проверить ручной запуск video, poster, выбор source по ориентации и отсутствие autoplay/audio до
-    действия пользователя.
+11. Проверить ручной запуск WebM, poster и отсутствие autoplay/audio до действия пользователя.
 
 Результат:
 

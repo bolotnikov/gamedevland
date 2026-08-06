@@ -43,12 +43,8 @@ screenshots:
     portraitSrc: /assets/games/stickers-merge/en/screens/port/5.png
     portraitAlt: Sticker album selection screen in portrait orientation
 promoVideo:
-  landscapeWebm: /assets/games/stickers-merge/en/videos/land.webm
-  landscapeMp4: /assets/games/stickers-merge/en/videos/land.mp4
-  portraitWebm: /assets/games/stickers-merge/en/videos/port.webm
-  portraitMp4: /assets/games/stickers-merge/en/videos/port.mp4
-  landscapePoster: /assets/games/stickers-merge/en/screens/land/1.png
-  portraitPoster: /assets/games/stickers-merge/en/screens/port/1.png
+  webm: /assets/games/stickers-merge/en/videos/land.webm
+  poster: /assets/games/stickers-merge/en/screens/land/1.png
 playableUrl: https://bolotnikov.github.io/stickers-merge-game/
 externalUrl: https://poki.com/en/g/stickers-merge
 articleUrl: /articles/adaptive-layout-poki-en

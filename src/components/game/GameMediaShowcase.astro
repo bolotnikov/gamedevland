@@ -8,12 +8,8 @@ interface Screenshot {
 }
 
 interface PromoVideo {
-	landscapeWebm: string;
-	landscapeMp4: string;
-	portraitWebm: string;
-	portraitMp4: string;
-	landscapePoster: string;
-	portraitPoster: string;
+	webm: string;
+	poster: string;
 }
 
 interface Props {
@@ -64,27 +60,9 @@ const { screenshots, promoVideo } = Astro.props;
 		promoVideo && (
 			<div class="media-showcase__video">
 				<h3>Gameplay preview</h3>
-				<video
-					controls
-					playsinline
-					preload="metadata"
-					poster={promoVideo.landscapePoster}
-					data-responsive-promo-video
-					data-landscape-poster={promoVideo.landscapePoster}
-					data-portrait-poster={promoVideo.portraitPoster}
-				>
-					<source
-						src={promoVideo.portraitWebm}
-						type="video/webm"
-						media="(max-width: 900px) and (orientation: portrait)"
-					/>
-					<source src={promoVideo.landscapeWebm} type="video/webm" />
-					<source
-						src={promoVideo.portraitMp4}
-						type="video/mp4"
-						media="(max-width: 900px) and (orientation: portrait)"
-					/>
-					<source src={promoVideo.landscapeMp4} type="video/mp4" />
+				<video controls playsinline preload="metadata" poster={promoVideo.poster}>
+					<source src={promoVideo.webm} type="video/webm" />
+					<a href={promoVideo.webm}>Open the gameplay video</a>
 				</video>
 			</div>
 		)
@@ -192,27 +170,4 @@ const { screenshots, promoVideo } = Astro.props;
 
 	}
 
-	@media (max-width: 900px) and (orientation: portrait) {
-		video {
-			aspect-ratio: 9 / 16;
-		}
-	}
 </style>
-
-<script>
-	const promoVideos = document.querySelectorAll<HTMLVideoElement>('[data-responsive-promo-video]');
-	const portraitMedia = window.matchMedia('(max-width: 900px) and (orientation: portrait)');
-
-	const updatePromoPosters = () => {
-		for (const video of promoVideos) {
-			if (video.currentTime > 0) continue;
-
-			const attribute = portraitMedia.matches ? 'data-portrait-poster' : 'data-landscape-poster';
-			const poster = video.getAttribute(attribute);
-			if (poster) video.poster = poster;
-		}
-	};
-
-	updatePromoPosters();
-	portraitMedia.addEventListener('change', updatePromoPosters);
-</script>
