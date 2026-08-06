@@ -12,9 +12,9 @@ platforms:
 technologies:
   - TypeScript
   - PixiJS 8
-  - Matter.js
   - GSAP
   - Howler.js
+  - Pixi Filters
   - Vite
   - Custom HTML5 game engine
 roles:
@@ -65,7 +65,7 @@ I created and developed the game end to end: core sorting rules, level flow, boo
 
 ## Technical highlights
 
-The game is written in TypeScript and rendered with PixiJS. Matter.js provides physics support, GSAP drives motion and transitions, and Howler.js handles audio. Its architecture uses reusable systems for scenes, layouts, input, assets, tween ownership, and platform integration.
+The game is written in TypeScript and rendered with PixiJS. GSAP drives fish movement and interface animation, Pixi Filters provides selection and highlight effects, and Howler.js powers the audio backend. Vite produces the web builds, while the custom engine owns scenes, layouts, input, assets, tween lifecycles, persistence, and platform integration.
 
 ## Responsive across devices
 
