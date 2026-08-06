@@ -42,7 +42,7 @@ screenshots:
     portraitSrc: /assets/games/fish-sort/en/screens/port/30.webp
     portraitAlt: Fish Sort level 30 gameplay in portrait orientation
 promoVideo:
-  webm: /assets/games/fish-sort/en/videos/land.webm
+  mp4: /assets/games/fish-sort/en/videos/land.mp4
   poster: /assets/games/fish-sort/en/screens/land/10.webp
 playableUrl: https://gamedevland.github.io/fish-sort-game/
 orientation: adaptive

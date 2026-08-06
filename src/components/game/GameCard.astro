@@ -5,7 +5,7 @@ interface Props {
 	title: string;
 	description: string;
 	status: GameStatus;
-	releaseYear?: number;
+	releaseLabel?: string;
 	genre: string;
 	technologies: string[];
 	iconImage: string;
@@ -13,7 +13,7 @@ interface Props {
 	href: string;
 }
 
-const { title, description, status, releaseYear, genre, technologies, iconImage, iconAlt, href } = Astro.props;
+const { title, description, status, releaseLabel, genre, technologies, iconImage, iconAlt, href } = Astro.props;
 ---
 
 <article class="game-card">
@@ -25,13 +25,17 @@ const { title, description, status, releaseYear, genre, technologies, iconImage,
 			<div class="game-card__meta">
 				<span class="game-card__status">{GAME_STATUS_LABELS[status]}</span>
 				<span>{genre}</span>
-				{releaseYear && <span>{releaseYear}</span>}
+				{releaseLabel && <span>{releaseLabel}</span>}
 			</div>
 			<h2>{title}</h2>
 			<p>{description}</p>
-			<ul class="game-card__stack" aria-label="Main technologies">
-				{technologies.slice(0, 3).map((technology) => <li>{technology}</li>)}
-			</ul>
+			{
+				technologies.length > 0 && (
+					<ul class="game-card__stack" aria-label="Main technologies">
+						{technologies.slice(0, 3).map((technology) => <li>{technology}</li>)}
+					</ul>
+				)
+			}
 			<span class="game-card__cta">View game <span aria-hidden="true">&rarr;</span></span>
 		</div>
 	</a>

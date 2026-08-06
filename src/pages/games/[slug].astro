@@ -27,7 +27,7 @@ const releaseLabel = game.data.releaseDate
 	title={`${game.data.title} | GameDev.Land`}
 	description={game.data.description}
 	canonicalPath={`/games/${game.id}`}
-	image={game.data.coverImage}
+	image={game.data.coverImage ?? game.data.iconImage}
 >
 	<Header
 		title="Games"
@@ -39,7 +39,7 @@ const releaseLabel = game.data.releaseDate
 	<main class="game-page">
 		<section class="container game-hero">
 			<a class="game-hero__back" href="/games">&larr; Back to Games</a>
-			<div class="game-hero__layout">
+			<div class:list={['game-hero__layout', game.data.coverImage && 'has-cover']}>
 				<div class="game-hero__copy">
 					{
 						game.data.logoImage && (
@@ -77,9 +77,13 @@ const releaseLabel = game.data.releaseDate
 						}
 					</dl>
 				</div>
-				<div class="game-hero__cover">
-					<img src={game.data.coverImage} alt={game.data.coverAlt} width="800" height="470" loading="eager" />
-				</div>
+				{
+					game.data.coverImage && game.data.coverAlt && (
+						<div class="game-hero__cover">
+							<img src={game.data.coverImage} alt={game.data.coverAlt} width="800" height="470" loading="eager" />
+						</div>
+					)
+				}
 			</div>
 		</section>
 
@@ -154,9 +158,13 @@ const releaseLabel = game.data.releaseDate
 
 	.game-hero__layout {
 		display: grid;
-		grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+		grid-template-columns: minmax(0, 720px);
 		gap: 48px;
 		align-items: center;
+	}
+
+	.game-hero__layout.has-cover {
+		grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
 	}
 
 	.game-hero__copy {

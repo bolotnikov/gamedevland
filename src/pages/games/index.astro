@@ -32,7 +32,12 @@ const games = (await getCollection('games', ({ data }) => !data.draft)).sort(
 							title={game.data.title}
 							description={game.data.description}
 							status={game.data.status}
-							releaseYear={game.data.releaseYear}
+							releaseLabel={game.data.releaseDate
+								? game.data.releaseDate.toLocaleDateString('en-US', {
+									month: 'short',
+									year: 'numeric',
+								})
+								: game.data.releaseYear?.toString()}
 							genre={game.data.genre}
 							technologies={game.data.technologies}
 							iconImage={game.data.iconImage}

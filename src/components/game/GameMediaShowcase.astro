@@ -8,7 +8,7 @@ interface Screenshot {
 }
 
 interface PromoVideo {
-	webm: string;
+	mp4: string;
 	poster: string;
 }
 
@@ -18,9 +18,11 @@ interface Props {
 }
 
 const { screenshots, promoVideo } = Astro.props;
+const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 ---
 
-<section class="media-showcase" aria-labelledby="media-showcase-heading">
+{
+	hasMedia && <section class="media-showcase" aria-labelledby="media-showcase-heading">
 	<div class="media-showcase__heading">
 		<p>Portrait and landscape</p>
 		<h2 id="media-showcase-heading">Made for every screen</h2>
@@ -61,13 +63,14 @@ const { screenshots, promoVideo } = Astro.props;
 			<div class="media-showcase__video">
 				<h3>Gameplay preview</h3>
 				<video controls playsinline preload="metadata" poster={promoVideo.poster}>
-					<source src={promoVideo.webm} type="video/webm" />
-					<a href={promoVideo.webm}>Open the gameplay video</a>
+					<source src={promoVideo.mp4} type="video/mp4" />
+					<a href={promoVideo.mp4}>Open the gameplay video</a>
 				</video>
 			</div>
 		)
 	}
 </section>
+}
 
 <style>
 	.media-showcase {

@@ -30,7 +30,7 @@ const screenshotSchema = z.object({
 });
 
 const promoVideoSchema = z.object({
-	webm: z.string(),
+	mp4: z.string(),
 	poster: z.string(),
 });
 
@@ -49,8 +49,8 @@ const games = defineCollection({
 			roles: z.array(z.string()).default([]),
 			iconImage: z.string(),
 			iconAlt: z.string(),
-			coverImage: z.string(),
-			coverAlt: z.string(),
+			coverImage: z.string().optional(),
+			coverAlt: z.string().optional(),
 			logoImage: z.string().optional(),
 			screenshots: z.array(screenshotSchema).default([]),
 			promoVideo: promoVideoSchema.optional(),
@@ -64,6 +64,9 @@ const games = defineCollection({
 		})
 		.refine(({ releaseDate, releaseYear }) => !(releaseDate && releaseYear), {
 			message: 'Use either releaseDate or releaseYear, not both.',
+		})
+		.refine(({ coverImage, coverAlt }) => Boolean(coverImage) === Boolean(coverAlt), {
+			message: 'Provide coverImage and coverAlt together.',
 		}),
 });
 
