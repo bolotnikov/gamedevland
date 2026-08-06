@@ -1,0 +1,428 @@
+---
+import Footer from '../components/common/Footer.astro';
+import Header from '../components/common/Header.astro';
+import Layout from '../layouts/Layout.astro';
+
+const linkedinUrl = 'https://www.linkedin.com/in/alexander-bolotnikov-html5/';
+---
+
+<Layout
+	lang="en"
+	title="Playable Ads Development Services | Alexander Bolotnikov"
+	description="End-to-end playable ads development, technical leadership, reusable HTML5 technology, production infrastructure, and AI-ready development workflows."
+	canonicalPath="/services"
+>
+	<Header
+		title="Services"
+		description="I develop playable ads end to end on a project basis as an external contractor. I am also open to full-time roles leading a playable ads development team."
+		current="services"
+	/>
+
+	<main class="services-main">
+		<section class="container services-intro" aria-labelledby="services-heading">
+			<div>
+				<p class="services-eyebrow">Ways to work together</p>
+				<h2 id="services-heading">How I can help</h2>
+			</div>
+		</section>
+
+		<section class="container engagement-grid" aria-label="Engagement models">
+			<article class="engagement-card">
+				<div class="engagement-card__topline">
+					<span class="engagement-card__number">01</span>
+					<span class="engagement-card__mode">Project-based</span>
+				</div>
+				<h2>Playable ads development</h2>
+				<p>
+					Project-based development for studios that need an external contractor. I can work from
+					a brief or an existing concept and handle prototyping, implementation, optimization,
+					and delivery.
+				</p>
+				<ul>
+					<li>Mechanic prototyping and interaction design</li>
+					<li>HTML5 and TypeScript production development</li>
+					<li>Adaptation for ad networks and technical constraints</li>
+					<li>Performance, bundle size, and loading optimization</li>
+					<li>Reliable handoff with maintainable source code</li>
+				</ul>
+			</article>
+
+			<article class="engagement-card engagement-card--dark">
+				<div class="engagement-card__topline">
+					<span class="engagement-card__number">02</span>
+					<span class="engagement-card__mode">Full-time</span>
+				</div>
+				<h2>Playable ads team lead</h2>
+				<p>
+					I am open to a full-time lead role focused on building or developing a playable ads team,
+					improving its technical foundation, and organizing the development process.
+				</p>
+				<ul>
+					<li>Team formation, technical direction, and mentoring</li>
+					<li>Architecture and reusable technology ownership</li>
+					<li>Production workflows, standards, and quality control</li>
+					<li>Collaboration across creative, marketing, and engineering</li>
+					<li>Practical AI integration with clear engineering boundaries</li>
+				</ul>
+			</article>
+		</section>
+
+		<section class="experience-band">
+			<div class="container experience-layout">
+				<div class="experience-heading">
+					<p class="services-eyebrow">Experience</p>
+					<h2>Relevant experience</h2>
+					<p>
+						At Moon Active, I built and lead an HTML5 playable ads development department. My work
+						includes hands-on engineering, technical leadership, and internal development tools.
+					</p>
+				</div>
+
+				<div class="experience-list">
+					<article>
+						<span>Foundation</span>
+						<h3>Built the playable ads department</h3>
+						<p>
+							Established the engineering direction, working practices, and shared technical approach
+							for a dedicated playable ads team.
+						</p>
+					</article>
+					<article>
+						<span>Technology</span>
+						<h3>Developed a reusable playable engine</h3>
+						<p>
+							Created a common HTML5 foundation and reusable tools so new projects can start from
+							proven systems instead of rebuilding the same runtime every time.
+						</p>
+					</article>
+					<article>
+						<span>Production</span>
+						<h3>Created development infrastructure</h3>
+						<p>
+							Introduced architecture, tooling, and delivery workflows designed for fast iteration,
+							consistent quality, and the constraints of playable advertising platforms.
+						</p>
+					</article>
+					<article>
+						<span>AI-ready</span>
+						<h3>Prepared the workflow for AI-assisted development</h3>
+						<p>
+							Built structured, maintainable systems that let AI tools contribute effectively while
+							keeping architecture, code quality, and human ownership under control.
+						</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="container services-cta" aria-labelledby="services-contact-heading">
+			<div>
+				<p class="services-eyebrow">Start a conversation</p>
+				<h2 id="services-contact-heading">Contact</h2>
+				<p>
+					You can contact me about project-based playable ads development or relevant full-time
+					lead opportunities.
+				</p>
+			</div>
+			<a class="services-cta__link" href={linkedinUrl} target="_blank" rel="noreferrer">
+				Contact me on LinkedIn
+			</a>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.services-main {
+		padding-top: 64px;
+	}
+
+	.services-eyebrow {
+		margin: 0 0 12px;
+		color: #b54708;
+		font-size: 13px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0;
+	}
+
+	.services-intro {
+		margin-bottom: 32px;
+	}
+
+	.services-intro h2,
+	.experience-heading h2,
+	.services-cta h2 {
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 3rem);
+		font-weight: 600;
+		line-height: 1.15;
+		letter-spacing: 0;
+	}
+
+	.experience-heading > p:last-child,
+	.services-cta p {
+		margin: 0;
+		color: var(--color-muted-foreground);
+		font-size: 17px;
+		line-height: 1.75;
+	}
+
+	.engagement-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+		margin-bottom: 80px;
+	}
+
+	.engagement-card {
+		display: flex;
+		min-height: 500px;
+		flex-direction: column;
+		padding: 36px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background: #f8fafc;
+	}
+
+	.engagement-card--dark {
+		border-color: #101828;
+		background: #101828;
+		color: #ffffff;
+	}
+
+	.engagement-card__topline {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin-bottom: 56px;
+	}
+
+	.engagement-card__number {
+		color: #b54708;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.engagement-card--dark .engagement-card__number {
+		color: #fdb022;
+	}
+
+	.engagement-card__mode {
+		color: var(--color-muted-foreground);
+		font-size: 14px;
+	}
+
+	.engagement-card--dark .engagement-card__mode {
+		color: #ffffff;
+	}
+
+	.engagement-card h2 {
+		margin: 0 0 18px;
+		max-width: 520px;
+		font-size: 30px;
+		font-weight: 600;
+		line-height: 1.25;
+		letter-spacing: 0;
+	}
+
+	.engagement-card p {
+		margin: 0;
+		color: var(--color-muted-foreground);
+		font-size: 16px;
+		line-height: 1.75;
+	}
+
+	.engagement-card ul {
+		margin: auto 0 0;
+		padding: 32px 0 0;
+		list-style: none;
+	}
+
+	.engagement-card li {
+		position: relative;
+		padding: 12px 0 12px 22px;
+		border-top: 1px solid var(--color-border);
+		color: #344054;
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	.engagement-card--dark li {
+		border-color: rgba(255, 255, 255, 0.14);
+	}
+
+	.engagement-card.engagement-card--dark p,
+	.engagement-card.engagement-card--dark li {
+		color: #ffffff;
+	}
+
+	.engagement-card li::before {
+		position: absolute;
+		top: 18px;
+		left: 2px;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: #b54708;
+		content: '';
+	}
+
+	.engagement-card--dark li::before {
+		background: #fdb022;
+	}
+
+	.experience-band {
+		padding: 80px 0;
+		background: #f2f4f7;
+	}
+
+	.experience-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+		gap: 88px;
+	}
+
+	.experience-heading {
+		align-self: start;
+	}
+
+	.experience-heading h2 {
+		margin-bottom: 24px;
+	}
+
+	.experience-list article {
+		padding: 0 0 32px;
+		border-bottom: 1px solid rgba(16, 24, 40, 0.12);
+	}
+
+	.experience-list article + article {
+		padding-top: 32px;
+	}
+
+	.experience-list span {
+		display: block;
+		margin-bottom: 10px;
+		color: #b54708;
+		font-size: 13px;
+		font-weight: 600;
+	}
+
+	.experience-list h3 {
+		margin: 0 0 10px;
+		font-size: 22px;
+		font-weight: 600;
+		line-height: 1.35;
+		letter-spacing: 0;
+	}
+
+	.experience-list p {
+		margin: 0;
+		color: var(--color-muted-foreground);
+		line-height: 1.7;
+	}
+
+	.services-cta {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 48px;
+		align-items: end;
+		padding-top: 80px;
+		padding-bottom: 16px;
+	}
+
+	.services-cta h2 {
+		max-width: 780px;
+		margin-bottom: 20px;
+	}
+
+	.services-cta p {
+		max-width: 720px;
+	}
+
+	.services-cta__link {
+		display: inline-flex;
+		min-height: 52px;
+		align-items: center;
+		justify-content: center;
+		padding: 14px 22px;
+		border: 1px solid #101828;
+		border-radius: var(--radius-sm);
+		background: #101828;
+		color: #ffffff;
+		font-size: 14px;
+		font-weight: 600;
+		text-decoration: none;
+		transition: background-color 0.2s ease, transform 0.2s ease;
+	}
+
+	.services-cta__link:hover {
+		background: #344054;
+		transform: translateY(-1px);
+	}
+
+	@media (max-width: 900px) {
+		.experience-layout,
+		.services-cta {
+			grid-template-columns: 1fr;
+			gap: 28px;
+		}
+
+		.engagement-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.services-cta {
+			align-items: start;
+		}
+
+		.services-cta__link {
+			justify-self: start;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.services-main {
+			padding-top: 48px;
+		}
+
+		.services-intro {
+			margin-bottom: 24px;
+		}
+
+		.engagement-grid {
+			margin-bottom: 56px;
+		}
+
+		.engagement-card {
+			min-height: 0;
+			padding: 26px 22px;
+		}
+
+		.engagement-card__topline {
+			margin-bottom: 36px;
+		}
+
+		.engagement-card h2 {
+			font-size: 26px;
+		}
+
+		.engagement-card ul {
+			margin-top: 32px;
+		}
+
+		.experience-band {
+			padding: 56px 0;
+		}
+
+		.services-cta {
+			padding-top: 56px;
+		}
+
+		.services-cta__link {
+			width: 100%;
+		}
+	}
+</style>

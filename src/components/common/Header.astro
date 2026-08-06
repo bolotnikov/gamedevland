@@ -2,7 +2,7 @@
 interface Props {
 	title: string;
 	description: string;
-	current?: 'home' | 'games' | 'about';
+	current?: 'home' | 'games' | 'services' | 'about';
 	compact?: boolean;
 }
 
@@ -15,7 +15,8 @@ const { title, description, current = 'home', compact = false } = Astro.props;
 			<a class="brand-pill" href="/">GameDev.Land</a>
 			<div class="top-nav__links">
 				<a class:list={['top-nav__link', current === 'home' && 'is-active']} href="/">Home</a>
-				<a class:list={['top-nav__link', current === 'games' && 'is-active']} href="/games">Games</a>
+				<a class:list={['top-nav__link', current === 'games' && 'is-active']} href="/games">Portfolio</a>
+				<a class:list={['top-nav__link', current === 'services' && 'is-active']} href="/services">Services</a>
 				<a class:list={['top-nav__link', current === 'about' && 'is-active']} href="/about">About</a>
 			</div>
 		</nav>

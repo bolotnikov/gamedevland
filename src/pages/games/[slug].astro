@@ -30,15 +30,15 @@ const releaseLabel = game.data.releaseDate
 	image={game.data.coverImage ?? game.data.iconImage}
 >
 	<Header
-		title="Games"
-		description="Playable projects and the development decisions behind them."
+		title="Portfolio"
+		description="Games and gameplay prototypes from my work in HTML5 game development."
 		current="games"
 		compact
 	/>
 
 	<main class="game-page">
 		<section class="container game-hero">
-			<a class="game-hero__back" href="/games">&larr; Back to Games</a>
+			<a class="game-hero__back" href="/games">&larr; Back to Portfolio</a>
 			<div class:list={['game-hero__layout', game.data.coverImage && 'has-cover']}>
 				<div class="game-hero__copy">
 					{
