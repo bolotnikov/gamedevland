@@ -18,7 +18,8 @@ export async function getStaticPaths() {
 }
 
 const { article } = Astro.props;
-const { Content } = await render(article);
+const { Content, headings } = await render(article);
+const tableOfContents = headings.filter((heading) => heading.depth === 2);
 
 const categoryLabels = {
 	technical: 'Tutorial',
@@ -62,12 +63,83 @@ const categoryLabels = {
 				}
 			</div>
 
-			<div class="article-prose">
-				<Content />
-			</div>
+			{
+				article.data.tableOfContents ? (
+					<div class="article-with-toc-layout">
+						<aside class="article-toc">
+							<div class="article-toc__inner">
+								<div class="article-toc__header">
+									<div class="article-toc__eyebrow">Contents</div>
+									<h2>On this page</h2>
+									<p>{article.data.readingTime}</p>
+								</div>
+								<nav class="article-toc__nav" aria-label="Article contents">
+									{tableOfContents.map((heading, index) => (
+										<a class="article-toc__link" href={`#${heading.slug}`}>
+											<span>{String(index + 1).padStart(2, '0')}</span>
+											<strong>{heading.text}</strong>
+										</a>
+									))}
+								</nav>
+							</div>
+						</aside>
+
+						<div class="article-prose article-with-toc__content">
+							<Content />
+						</div>
+					</div>
+				) : (
+					<div class="article-prose">
+						<Content />
+					</div>
+				)
+			}
 		</section>
 	</main>
 
 	<Footer />
 	<CodeBlockEnhancer />
+	<script>
+		const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.article-toc__link'));
+		const tocSections = tocLinks
+			.map((link) => document.getElementById(link.hash.slice(1)))
+			.filter((section): section is HTMLElement => section !== null);
+
+		if (tocLinks.length > 0 && tocSections.length > 0) {
+			const setActiveLink = (id: string) => {
+				tocLinks.forEach((link) => {
+					const isActive = link.hash === `#${id}`;
+					link.classList.toggle('is-active', isActive);
+					if (isActive) link.setAttribute('aria-current', 'location');
+					else link.removeAttribute('aria-current');
+				});
+			};
+
+			const updateActiveLink = () => {
+				const marker = Math.min(240, window.innerHeight * 0.35);
+				let activeSection = tocSections[0];
+
+				for (const section of tocSections) {
+					if (section.getBoundingClientRect().top > marker) break;
+					activeSection = section;
+				}
+
+				setActiveLink(activeSection.id);
+			};
+
+			let updateScheduled = false;
+			const scheduleUpdate = () => {
+				if (updateScheduled) return;
+				updateScheduled = true;
+				requestAnimationFrame(() => {
+					updateScheduled = false;
+					updateActiveLink();
+				});
+			};
+
+			window.addEventListener('scroll', scheduleUpdate, { passive: true });
+			window.addEventListener('hashchange', scheduleUpdate);
+			requestAnimationFrame(updateActiveLink);
+		}
+	</script>
 </Layout>

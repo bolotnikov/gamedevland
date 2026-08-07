@@ -18,6 +18,7 @@ const articles = defineCollection({
 		coverAlt: z.string().optional(),
 		thumbnailImage: z.string().optional(),
 		thumbnailAlt: z.string().optional(),
+		tableOfContents: z.boolean().default(false),
 		category: z.enum(['technical', 'monetization', 'template', 'workshop']).default('technical'),
 	}),
 });
