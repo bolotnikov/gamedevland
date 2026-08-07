@@ -4,6 +4,7 @@ import Header from '../components/common/Header.astro';
 import Layout from '../layouts/Layout.astro';
 
 const linkedinUrl = 'https://www.linkedin.com/in/alexander-bolotnikov-html5/';
+const emailUrl = 'mailto:alexander.bolotnikov@gmail.com';
 ---
 
 <Layout
@@ -124,9 +125,17 @@ const linkedinUrl = 'https://www.linkedin.com/in/alexander-bolotnikov-html5/';
 					lead opportunities.
 				</p>
 			</div>
-			<a class="services-cta__link" href={linkedinUrl} target="_blank" rel="noreferrer">
-				Contact me on LinkedIn
-			</a>
+			<div class="services-cta__actions">
+				<a class="services-cta__link" href={emailUrl}>alexander.bolotnikov@gmail.com</a>
+				<a
+					class="services-cta__link services-cta__link--secondary"
+					href={linkedinUrl}
+					target="_blank"
+					rel="noreferrer"
+				>
+					Contact me on LinkedIn
+				</a>
+			</div>
 		</section>
 	</main>
 
@@ -358,9 +367,25 @@ const linkedinUrl = 'https://www.linkedin.com/in/alexander-bolotnikov-html5/';
 		transition: background-color 0.2s ease, transform 0.2s ease;
 	}
 
+	.services-cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 10px;
+	}
+
+	.services-cta__link--secondary {
+		background: #ffffff;
+		color: #101828;
+	}
+
 	.services-cta__link:hover {
 		background: #344054;
 		transform: translateY(-1px);
+	}
+
+	.services-cta__link--secondary:hover {
+		background: #f2f4f7;
 	}
 
 	@media (max-width: 900px) {
@@ -380,6 +405,10 @@ const linkedinUrl = 'https://www.linkedin.com/in/alexander-bolotnikov-html5/';
 
 		.services-cta__link {
 			justify-self: start;
+		}
+
+		.services-cta__actions {
+			justify-content: flex-start;
 		}
 	}
 
@@ -422,6 +451,10 @@ const linkedinUrl = 'https://www.linkedin.com/in/alexander-bolotnikov-html5/';
 		}
 
 		.services-cta__link {
+			width: 100%;
+		}
+
+		.services-cta__actions {
 			width: 100%;
 		}
 	}

@@ -303,7 +303,7 @@ select {
 
 .footer-grid {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: 1.3fr repeat(2, minmax(0, 1fr));
 	gap: 32px;
 	margin-bottom: 32px;
 }
@@ -333,6 +333,7 @@ select {
 
 .footer-grid a {
 	text-decoration: none;
+	overflow-wrap: anywhere;
 }
 
 .footer-bottom {
@@ -429,6 +430,7 @@ select {
 	font-size: 13px;
 	line-height: 1.5;
 	color: var(--color-muted-foreground);
+	overflow-wrap: anywhere;
 }
 
 .contact-links {
@@ -436,6 +438,10 @@ select {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 14px;
 	margin-top: 20px;
+}
+
+.social-link--email {
+	grid-column: 1 / -1;
 }
 
 .page-grid-two {
