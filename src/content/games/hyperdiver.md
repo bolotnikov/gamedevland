@@ -33,7 +33,7 @@ draft: false
 
 Hyperdiver is a sci-fi roguelike dungeon crawler with minesweeper-style exploration, combat, loot, and persistent ship upgrades. It was [featured by Phaser](https://phaser.io/news/2018/08/hyperdiver) in 2018.
 
-## How it plays
+## How to play
 
 Open cells on a 6×8 sector grid to find hyperfuel, bonuses, enemies, planets, and the exit. Collect enough fuel to jump onward, fight only when needed, and upgrade the ship between sectors.
 

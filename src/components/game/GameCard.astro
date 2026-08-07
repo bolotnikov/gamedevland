@@ -1,10 +1,8 @@
 ---
-import { GAME_STATUS_LABELS, type GameStatus } from '../../data/gameStatus';
-
 interface Props {
 	title: string;
 	description: string;
-	status: GameStatus;
+	badgeLabel?: string;
 	releaseLabel?: string;
 	genre: string;
 	technologies: string[];
@@ -13,7 +11,7 @@ interface Props {
 	href: string;
 }
 
-const { title, description, status, releaseLabel, genre, technologies, iconImage, iconAlt, href } = Astro.props;
+const { title, description, badgeLabel, releaseLabel, genre, technologies, iconImage, iconAlt, href } = Astro.props;
 ---
 
 <article class="game-card">
@@ -23,7 +21,7 @@ const { title, description, status, releaseLabel, genre, technologies, iconImage
 		</div>
 		<div class="game-card__body">
 			<div class="game-card__meta">
-				<span class="game-card__status">{GAME_STATUS_LABELS[status]}</span>
+				{badgeLabel && <span class="game-card__status">{badgeLabel}</span>}
 				<span>{genre}</span>
 				{releaseLabel && <span>{releaseLabel}</span>}
 			</div>

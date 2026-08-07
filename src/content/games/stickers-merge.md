@@ -2,6 +2,7 @@
 title: Stickers Merge
 description: A relaxing merge game about completing colorful sticker books. Find matching stickers, merge them, and bring each collection to life one page at a time.
 status: released
+releasePlatform: poki
 releaseYear: 2026
 genre: Merge puzzle
 platforms:
@@ -58,7 +59,7 @@ draft: false
 
 Stickers Merge is a merge puzzle about completing illustrated sticker albums. Each level is a new page with a collection of stickers to reveal.
 
-## How it plays
+## How to play
 
 Merge identical stickers to create the next sticker in the chain. Manage the available space and reveal every required item to complete the page.
 

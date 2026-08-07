@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { GAME_RELEASE_PLATFORMS } from './data/gameReleasePlatform';
 import { GAME_STATUSES } from './data/gameStatus';
 
 const articles = defineCollection({
@@ -41,6 +42,7 @@ const games = defineCollection({
 			title: z.string(),
 			description: z.string(),
 			status: z.enum(GAME_STATUSES),
+			releasePlatform: z.enum(GAME_RELEASE_PLATFORMS).optional(),
 			releaseDate: z.coerce.date().optional(),
 			releaseYear: z.number().int().min(1970).max(2100).optional(),
 			genre: z.string(),

@@ -2,6 +2,7 @@
 title: Match Fighter
 description: A turn-based match-3 fighting game where every combo powers an attack, creates special tiles, and brings the next tower opponent closer.
 status: released
+releasePlatform: game-distribution
 releaseYear: 2025
 genre: Match-3 fighting puzzle
 platforms:
@@ -45,7 +46,7 @@ screenshots:
 promoVideo:
   mp4: /assets/games/match-fighter/videos/land.mp4
   poster: /assets/games/match-fighter/screens/land/battle.webp
-playableUrl: https://uncached-html5.gamedistribution.com/56b5cb9b86014d5f8bf726ca5c4ff06e/?correlator=1786017627542
+playableUrl: https://gamedevland.github.io/match-fighter/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 5
@@ -56,7 +57,7 @@ draft: false
 
 Match Fighter combines turn-based combat with a match-3 board. It includes a ten-opponent solo tower and a shared-device two-player mode.
 
-## How it plays
+## How to play
 
 Swap neighboring tiles to make matches and attack the opponent. Larger combinations create special tiles, and the fight ends when one health bar reaches zero.
 

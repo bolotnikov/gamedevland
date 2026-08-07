@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Footer from '../../components/common/Footer.astro';
 import Header from '../../components/common/Header.astro';
 import GameCard from '../../components/game/GameCard.astro';
+import { GAME_RELEASE_PLATFORM_LABELS } from '../../data/gameReleasePlatform';
 import Layout from '../../layouts/Layout.astro';
 
 const games = (await getCollection('games', ({ data }) => !data.draft)).sort(
@@ -31,12 +32,11 @@ const games = (await getCollection('games', ({ data }) => !data.draft)).sort(
 						<GameCard
 							title={game.data.title}
 							description={game.data.description}
-							status={game.data.status}
+							badgeLabel={game.data.releasePlatform
+								? GAME_RELEASE_PLATFORM_LABELS[game.data.releasePlatform]
+								: undefined}
 							releaseLabel={game.data.releaseDate
-								? game.data.releaseDate.toLocaleDateString('en-US', {
-									month: 'short',
-									year: 'numeric',
-								})
+								? game.data.releaseDate.getFullYear().toString()
 								: game.data.releaseYear?.toString()}
 							genre={game.data.genre}
 							technologies={game.data.technologies}

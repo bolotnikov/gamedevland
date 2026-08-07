@@ -2,6 +2,7 @@
 title: Block Puzzle
 description: A focused Block Blast-style mechanics prototype built around drag-and-drop placement, line clearing, scoring, and readable game architecture.
 status: prototype
+releaseYear: 2026
 genre: Block puzzle
 platforms:
   - Web
@@ -34,7 +35,7 @@ draft: false
 
 Block Puzzle is a mechanics prototype focused on the core Block Blast-style loop and used as a reference project for the GameDevLand SDK.
 
-## How it plays
+## How to play
 
 Place three available shapes on an 8×8 board. Completed rows and columns clear for points; a new set appears after all three shapes are used, and the run ends when no shape fits.
 

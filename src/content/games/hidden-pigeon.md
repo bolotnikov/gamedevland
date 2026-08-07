@@ -2,7 +2,8 @@
 title: Hidden Pigeon
 description: A playful hidden-object puzzle about finding cleverly concealed pigeons among famous European landmarks.
 status: released
-releaseDate: 2025-03-01
+releasePlatform: poki
+releaseYear: 2025
 genre: Hidden object puzzle
 platforms:
   - Web
@@ -36,6 +37,6 @@ draft: false
 
 Hidden Pigeon is a hidden-object puzzle set around recognizable European landmarks. Each illustrated location contains a new group of concealed pigeons.
 
-## How it plays
+## How to play
 
 Inspect the scene and click or tap every pigeon. Finding them all completes the location and unlocks the next one.

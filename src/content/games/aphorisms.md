@@ -2,6 +2,7 @@
 title: Aphorisms
 description: An early English word puzzle where the final word is removed from a quotation and rebuilt from a shuffled set of letters.
 status: completed
+releaseYear: 2021
 genre: Word puzzle
 platforms:
   - Web
@@ -32,6 +33,6 @@ draft: false
 
 Aphorisms is an English word puzzle based on quotations, with chapters, level progression, and two hint boosters.
 
-## How it plays
+## How to play
 
 Rebuild the missing final word of a quotation from shuffled letters. A correct answer reveals the complete quotation and its author.

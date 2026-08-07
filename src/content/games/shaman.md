@@ -2,6 +2,7 @@
 title: Shaman's Way
 description: An early card-based dungeon puzzle about guiding a shaman through encounters by shifting and using cards on a compact board.
 status: completed
+releaseYear: 2020
 genre: Card-based dungeon puzzle
 platforms:
   - Web
@@ -32,6 +33,6 @@ draft: false
 
 Shaman's Way is a card-based dungeon puzzle with short levels, unlockable shamans, new card types, and persistent progression.
 
-## How it plays
+## How to play
 
 Swipe rows and columns on the 3×3 board toward the empty cell, then use the exposed cards. Weapons attack enemies, healing and shields restore resources, and doors advance the level.

@@ -2,6 +2,7 @@
 title: Fish Sort
 description: An underwater sorting puzzle where every move matters. Group matching fish on seaweed lines, clear completed sets, and use helpful boosters when the board gets tricky.
 status: released
+releasePlatform: game-distribution
 releaseYear: 2026
 genre: Sort puzzle
 platforms:
@@ -55,7 +56,7 @@ draft: false
 
 Fish Sort is an underwater sorting puzzle with level-based boards and three optional boosters.
 
-## How it plays
+## How to play
 
 Move the top group of fish between seaweed lines and collect matching fish on the same line. A completed group swims away; Undo, Add Line, and Shuffle can help when no useful move remains.
 

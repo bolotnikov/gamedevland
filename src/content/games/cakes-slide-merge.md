@@ -2,6 +2,7 @@
 title: Cakes Slide Merge
 description: A physics-based merge prototype where cakes are aimed, dropped, and combined through collisions into increasingly elaborate desserts.
 status: prototype
+releaseYear: 2026
 genre: Physics merge puzzle
 platforms:
   - Web
@@ -33,7 +34,7 @@ draft: false
 
 Cakes Slide Merge is a physics-based merge prototype with eleven cake types, score progression, and a next-piece preview.
 
-## How it plays
+## How to play
 
 Move the current cake horizontally and drop it into the tray. Two matching cakes merge into the next type, and the run ends when the settled pile crosses the limit line.
 
