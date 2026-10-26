@@ -20,8 +20,8 @@ roles:
   - Architecture and engine
   - Gameplay systems and progression
   - UI and responsive layouts
-iconImage: /assets/games/idle-submarine/icon.svg
-iconAlt: A yellow submarine with a blue porthole surrounded by underwater bubbles
+iconImage: /assets/games/idle-submarine/icon.jpg
+iconAlt: A yellow submarine collecting colorful gems and gold coins underwater
 coverImage: /assets/games/idle-submarine/cover.webp
 coverAlt: Idle Submarine gameplay with a yellow submarine, rising treasure, and bubbles above a colorful seabed
 screenshots:
