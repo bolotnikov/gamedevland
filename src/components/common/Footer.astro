@@ -1,46 +1,46 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+---
 <footer class="site-footer">
 	<div class="container footer-card">
 		<div class="footer-grid">
 			<div>
-				<h4>About the blog</h4>
-				<p>
-					Practical writing about HTML5 game development: workflows, architecture, shipping and monetization.
-				</p>
+				<h4>{t("About the blog")}</h4>
+				<p>{t(" Practical writing about HTML5 game development: workflows, architecture, shipping and monetization. ")}</p>
 			</div>
 			<div>
-				<h4>Sections</h4>
+				<h4>{t("Sections")}</h4>
 				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="/games">Portfolio</a></li>
-					<li><a href="/services">Services</a></li>
-					<li><a href="/about">About</a></li>
+					<li><a href={i18n.path("/")}>{t("Home")}</a></li>
+					<li><a href={i18n.path("/academy/")}>{t("Academy")}</a></li>
+					<li><a href={i18n.path("/games")}>{t("Portfolio")}</a></li>
+					<li><a href={i18n.path("/services")}>{t("Services")}</a></li>
+					<li><a href={i18n.path("/about")}>{t("About")}</a></li>
 				</ul>
 			</div>
 			<div>
-				<h4>Contact</h4>
+				<h4>{t("Contact")}</h4>
 				<ul>
 					<li>
-						<a href="mailto:alexander.bolotnikov@gmail.com">alexander.bolotnikov@gmail.com</a>
+						<a href="mailto:alexander.bolotnikov@gmail.com">{t("alexander.bolotnikov@gmail.com")}</a>
 					</li>
 					<li>
 						<a
 							href="https://www.linkedin.com/in/alexander-bolotnikov-html5/"
 							target="_blank"
-							rel="noreferrer"
-						>
-							LinkedIn
-						</a>
+							rel="noopener noreferrer"
+						>{t(" LinkedIn ")}</a>
 					</li>
 					<li>
-						<a href="https://www.youtube.com/@gamedevland" target="_blank" rel="noreferrer">
-							YouTube
-						</a>
+						<a href="https://www.youtube.com/@gamedevland" target="_blank" rel="noopener noreferrer">{t(" YouTube ")}</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p>© 2026 HTML5 Game Dev Blog. All rights reserved.</p>
+			<p>{t("© 2026 HTML5 Game Dev Blog. All rights reserved.")}</p>
 		</div>
 	</div>
 </footer>

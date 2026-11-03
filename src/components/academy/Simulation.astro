@@ -1,0 +1,46 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import { EngineSimulations, type EngineSimulationId, type Simulation } from '../../data/engineSimulations';
+import RuntimeDiagram from './RuntimeDiagram.astro';
+interface Props { id: EngineSimulationId }
+const { id } = Astro.props;
+const simulation: Simulation = EngineSimulations.get(id, i18n);
+---
+<section class="simulation" data-simulation aria-label={simulation.title}>
+	<h2>{simulation.title}</h2>
+	<p class="simulation__hint">{simulation.hint}</p>
+	<div class="simulation__tabs" role="group" aria-label={t("Состояния модели")}>
+		{simulation.states.map((state, index) => <button type="button" data-state-select={index} aria-pressed={index === 0}>{state.label}</button>)}
+	</div>
+	{simulation.states.map((state, index) => (
+		<div data-simulation-state hidden={index !== 0}>
+			<div class:list={['simulation__workspace', simulation.code && 'has-code']}>
+				{simulation.code && <pre class="simulation__code" aria-label={t("Код модели")}><code>{simulation.code.map((line, lineIndex) => <span class:list={['simulation__line', lineIndex === state.line && 'is-current']}><span class="line-number" aria-hidden="true">{lineIndex + 1}</span>{line}</span>)}</code></pre>}
+				{id === 'runtime' ? <RuntimeDiagram state={state} i18n={i18n}/> : <div class:list={['diagram', `diagram--${simulation.layout ?? 'columns'}`]}>
+					{state.columns.map((column, columnIndex) => (
+						<div class="diagram__column">
+						<div class="diagram__label">{column.label}</div>
+						<div class:list={['diagram__items', simulation.layout === 'stack' && 'is-stack']}>
+							{column.items.map((item) => <div class:list={['diagram__node', `tone-${item.tone ?? 'cyan'}`]}><strong>{item.label}</strong><span>{item.detail}</span>{item.children && <div class="diagram__children" aria-label={t("Дочерние литералы")}>{item.children.map((child) => <strong>{child}</strong>)}</div>}</div>)}
+						</div>
+						{simulation.layout === 'flow' && columnIndex !== state.columns.length - 1 && <span class="diagram__arrow" aria-hidden="true">→</span>}
+						</div>))}
+				</div>}
+			</div>
+			{state.output && <div class="simulation__output"><span>{t("OUTPUT")}</span><code>{state.output}</code></div>}
+			<p class="simulation__note" data-state-note>{state.note}</p>
+		</div>
+	))}
+	<div class="simulation__controls">
+		<button class="academy-button is-secondary" type="button" data-simulation-reset>{t("↺ Сначала")}</button>
+		<span class="simulation__count" data-simulation-count>1 / {simulation.states.length}</span>
+		<button class="academy-button" type="button" data-simulation-next>{t("Следующее действие →")}</button>
+	</div>
+	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
+</section>
+<script>
+	import { SimulationController } from '../../scripts/SimulationController';
+	document.querySelectorAll<HTMLElement>('[data-simulation]').forEach((root) => new SimulationController(root));
+</script>

@@ -1,4 +1,7 @@
 ---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
 interface Props {
 	title: string;
 	description: string;
@@ -6,8 +9,8 @@ interface Props {
 	categoryLabel: string;
 	categoryId: string;
 	categoryTone?: 'primary' | 'secondary';
-	imageUrl?: string;
-	imageAlt?: string;
+	imageUrl?: string | undefined;
+	imageAlt?: string | undefined;
 	href: string;
 }
 
@@ -50,7 +53,7 @@ const {
 			<p>{description}</p>
 
 			<div class="article-card__cta">
-				<span>Read article</span>
+				<span>{t("Read article")}</span>
 				<span aria-hidden="true">→</span>
 			</div>
 		</div>

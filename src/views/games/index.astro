@@ -1,0 +1,73 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import { Content } from '../../i18n/Content';
+import Footer from '../../components/common/Footer.astro';
+import Header from '../../components/common/Header.astro';
+import GameCard from '../../components/game/GameCard.astro';
+import { GAME_RELEASE_PLATFORM_LABELS } from '../../data/gameReleasePlatform';
+import Layout from '../../layouts/Layout.astro';
+
+const games = await Content.games(i18n.code);
+---
+
+<Layout
+	title={t("Game Portfolio | Alexander Bolotnikov")}
+	description={t("A portfolio of released HTML5 games and gameplay prototypes developed by Alexander Bolotnikov, with playable builds and technical details.")}
+	canonicalPath="/games"
+	image="/assets/games/stickers-merge/cover-land-en.png"
+>
+	<Header
+		title={t("Portfolio")}
+		description={t("Released games and gameplay prototypes I have developed, with playable builds and technical details for each project.")}
+		current="games"
+		compact
+	/>
+
+	<main class="games-index">
+		<section class="container" aria-label={t("Game portfolio")}>
+			<div class="games-index__grid">
+				{
+					games.map((game) => (
+						<GameCard
+							title={game.data.title}
+							description={game.data.description}
+							badgeLabel={game.data.releasePlatform
+								? t(GAME_RELEASE_PLATFORM_LABELS[game.data.releasePlatform])
+								: undefined}
+							releaseLabel={game.data.releaseDate
+								? game.data.releaseDate.getUTCFullYear().toString()
+								: game.data.releaseYear?.toString()}
+							genre={game.data.genre}
+							technologies={game.data.technologies}
+							iconImage={game.data.iconImage}
+							iconAlt={game.data.iconAlt}
+							href={i18n.path(`/games/${game.data.translationKey}`)}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.games-index {
+		padding: 40px 0 0;
+	}
+
+	.games-index__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
+		gap: 28px;
+	}
+
+	@media (max-width: 420px) {
+		.games-index__grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

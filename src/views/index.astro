@@ -1,0 +1,98 @@
+---
+import { Locale } from '../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import ArticleCard from '../components/article/ArticleCard.astro';
+import CategoryFilter from '../components/article/CategoryFilter.astro';
+import Footer from '../components/common/Footer.astro';
+import Header from '../components/common/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import { Content } from '../i18n/Content';
+
+const articles = await Content.articles(i18n.code);
+
+const categoryLabels = {
+	technical: t('Tutorial'),
+	monetization: t('Monetization'),
+	template: t('Template'),
+	workshop: t('Workshop'),
+};
+
+const visibleCategories = ['technical', 'workshop'] as const;
+
+const filters = [
+	{ id: 'all', label: t('All articles'), count: articles.length },
+	...visibleCategories.map((category) => ({
+		id: category,
+		label: categoryLabels[category],
+		count: articles.filter((article) => article.data.category === category).length,
+	})),
+];
+---
+
+<Layout
+	title={t("HTML5 Game Dev Blog")}
+	description={t("Technical guides and practical notes on building HTML5 games.")}
+>
+	<Header
+		title={t("HTML5 Game Development")}
+		description={t("Technical guides and practical notes on building HTML5 games.")}
+		current="home"
+	/>
+
+	<main class="page-main">
+		<section class="container">
+			<CategoryFilter items={filters} />
+			<div class="cards-grid" data-cards-grid>
+				{
+					articles.map((article) => (
+						<ArticleCard
+							title={article.data.title}
+							description={article.data.description}
+							date={article.data.pubDate.toLocaleDateString(i18n.dateLocale, {
+								day: 'numeric',
+								month: 'long',
+								timeZone: 'UTC',
+								year: 'numeric',
+							})}
+							categoryLabel={categoryLabels[article.data.category]}
+							categoryId={article.data.category}
+							categoryTone={article.data.category === 'workshop' ? 'primary' : 'secondary'}
+							imageUrl={article.data.thumbnailImage ?? article.data.coverImage}
+							imageAlt={article.data.thumbnailAlt ?? article.data.coverAlt}
+							href={i18n.path(`/articles/${article.data.translationKey}`)}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+
+	<script is:inline>
+		document.addEventListener('DOMContentLoaded', () => {
+			const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+			const cards = Array.from(document.querySelectorAll('[data-category]'));
+			if (!buttons.length || !cards.length) return;
+
+			const normalize = (text) => String(text).toLowerCase();
+
+			for (const button of buttons) {
+				button.addEventListener('click', () => {
+					const filter = normalize(button.getAttribute('data-filter'));
+
+					for (const el of buttons) {
+						el.classList.toggle('is-active', el === button);
+					}
+
+					for (const card of cards) {
+						const category = normalize(card.getAttribute('data-category'));
+						const visible = filter === 'all' || category === filter;
+						card.classList.toggle('is-hidden', !visible);
+					}
+				});
+			}
+		});
+	</script>
+</Layout>

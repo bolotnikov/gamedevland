@@ -1,0 +1,24 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import EngineMark from '../../components/academy/EngineMark.astro';
+import { javascriptCourse } from '../../data/academy';
+import '../../styles/academy.css';
+---
+<Layout title={t("Academy — GameDev.Land")} description={t("Интерактивные курсы для разработчиков HTML5-игр: глубокая теория, наглядные модели и инженерная практика.")} lang={i18n.code} canonicalPath="/academy/">
+	<Header title={t("Academy")} description="" current="academy" navigationOnly />
+	<main class="academy-page container">
+		<div class="academy-page__intro"><span class="academy-eyebrow">{t("GameDev.Land / Academy")}</span><h1>{t("Понимать глубже.")}<br/><span>{t("Создавать осознанно.")}</span></h1><p>{t("Инженерные знания для тех, кто строит игры.")}<br/>{t("Теория и наглядные примеры работы механизмов.")}</p></div>
+		<div class="academy-section-heading"><h2>{t("Курсы")}</h2><span>{t("01 курс · на русском")}</span></div>
+		<a href={i18n.path("/academy/javascript/")} class="course-card">
+			<div class="course-card__art"><EngineMark /><span class="course-card__series">{t("JAVASCRIPT / 01")}</span></div>
+			<div class="course-card__body"><div class="academy-chips"><span class="academy-chip">{t("JavaScript")}</span><span class="academy-chip is-green">{t("Первый урок доступен")}</span></div><h2>{t(javascriptCourse.title)}</h2><p>{t(javascriptCourse.description)}</p><div class="course-card__meta"><span>{t("11 уроков в программе")}</span><span>{t("Пошаговый формат")}</span></div><div class="course-card__cta">{t("Открыть курс ")}<span>↗</span></div></div>
+		</a>
+		<div class="academy-principles"><div><span>{t("01 / Понять")}</span><h3>{t("Одна идея за шаг")}</h3><p>{t("Короткие шаги с последовательным разбором каждого понятия.")}</p></div><div><span>{t("02 / Увидеть")}</span><h3>{t("Механизм в действии")}</h3><p>{t("Интерактивные модели показывают изменения состояния и позволяют проверить предположения.")}</p></div><div><span>{t("03 / Применить")}</span><h3>{t("От теории к игре")}</h3><p>{t("Примеры из HTML5 GameDev, практика и ссылки на первоисточники.")}</p></div></div>
+	</main>
+	<Footer />
+</Layout>

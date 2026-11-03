@@ -1,10 +1,13 @@
 ---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
 import PokiBadgeLink from './PokiBadgeLink.astro';
 
 interface Props {
 	title: string;
-	playableUrl?: string;
-	externalUrl?: string;
+	playableUrl?: string | undefined;
+	externalUrl?: string | undefined;
 	orientation?: 'landscape' | 'portrait' | 'adaptive';
 	embedAspectRatio?: string;
 	fitToViewport?: boolean;
@@ -23,11 +26,11 @@ const {
 <section class:list={['game-embed', fitToViewport && 'is-viewport-fit']} aria-labelledby="play-game-heading">
 	<div class="game-embed__bar">
 		<div>
-			<p class="game-embed__eyebrow">Playable build</p>
-			<h2 id="play-game-heading">Play {title}</h2>
+			<p class="game-embed__eyebrow">{t("Playable build")}</p>
+			<h2 id="play-game-heading">{t("Play ")}{title}</h2>
 		</div>
 		<div class="game-embed__actions">
-			{playableUrl && <a href={playableUrl} target="_blank" rel="noreferrer">Open game in new tab</a>}
+			{playableUrl && <a href={playableUrl} target="_blank" rel="noopener noreferrer">{t("Open game in new tab")}</a>}
 			{externalUrl && <PokiBadgeLink href={externalUrl} gameTitle={title} />}
 		</div>
 	</div>
@@ -40,7 +43,7 @@ const {
 			>
 				<iframe
 					src={playableUrl}
-					title={`Play ${title}`}
+					title={`${t("Play")} ${title}`}
 					loading="eager"
 					allow="fullscreen"
 					allowfullscreen
@@ -48,7 +51,7 @@ const {
 				></iframe>
 			</div>
 		) : (
-			<p class="game-embed__fallback">The web build is not available yet.</p>
+			<p class="game-embed__fallback">{t("The web build is not available yet.")}</p>
 		)
 	}
 </section>

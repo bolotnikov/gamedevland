@@ -1,0 +1,28 @@
+---
+import { Locale } from '../../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import EngineMark from '../../../components/academy/EngineMark.astro';
+import LessonProgress from '../../../components/academy/LessonProgress.astro';
+import { javascriptCourse } from '../../../data/academy';
+import { Content } from '../../../i18n/Content';
+import '../../../styles/academy.css';
+const steps = await Content.steps(i18n.code);
+const first = steps[0];
+if (!first) throw new Error('JavaScript Engine lesson must contain steps.');
+const firstHref = `/academy/${first.data.translationKey}/`;
+---
+<Layout title={t("Basic → Advanced JavaScript — Academy")} description={t(javascriptCourse.description)} lang={i18n.code} canonicalPath="/academy/javascript/">
+	<Header title={t("JavaScript")} description="" current="academy" navigationOnly />
+	<main class="academy-page container" data-lesson-overview data-total={steps.length} data-step-slugs={steps.map((entry) => entry.data.translationKey.split('/').at(-1)).join(',')}>
+		<nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Academy")}</a><span>/</span><span>{t("JavaScript")}</span></nav>
+		<div class="course-hero"><div><span class="academy-eyebrow">{t("Курс / JavaScript")}</span><h1>{t("Basic → Advanced")}<br/><span>{t("JavaScript")}</span></h1><p>{t(javascriptCourse.description)}</p><div class="academy-chips"><span class="academy-chip">{t("11 уроков")}</span><span class="academy-chip">{t("Русский язык")}</span><span class="academy-chip">{t("GameDev focus")}</span></div><a class="academy-button" href={i18n.path(firstHref)} data-resume-link>{t("Начать первый урок →")}</a></div><EngineMark /></div>
+		<div class="curriculum-layout"><section><div class="academy-section-heading"><h2>{t("Программа курса")}</h2><span>{t("Curriculum / 11")}</span></div><ol class="curriculum">{javascriptCourse.lessons.map((lesson, index) => <li class:list={[!lesson.available && 'is-planned']}>
+			{lesson.available ? <a href={i18n.path(`/academy/javascript/${lesson.slug}/`)}><span class="curriculum__number">{String(index + 1).padStart(2, '0')}</span><div><span class="academy-eyebrow">{t("Доступен · ")}{steps.length}{t(" шагов")}</span><h3>{t(lesson.title)}</h3><p>{t(lesson.description)}</p></div><span class="curriculum__arrow">↗</span></a> : <div class="curriculum__row"><span class="curriculum__number">{String(index + 1).padStart(2, '0')}</span><div><span class="academy-eyebrow">{t("В программе")}</span><h3>{t(lesson.title)}</h3><p>{t(lesson.description)}</p></div><span class="planned-dot" aria-label={t("Урок ещё не подготовлен")}>○</span></div>}
+		</li>)}</ol></section><aside class="course-note"><span class="academy-eyebrow">{t("Порядок изучения")}</span><h2>{t("Глубина,")}<br/>{t("по одному шагу.")}</h2><p>{t("Начнём с движка. Затем рассмотрим очередь задач, контексты и остальные механизмы языка.")}</p><LessonProgress total={steps.length}/><p class="course-note__small">{t("Здесь отображается прогресс первого урока. Новые уроки будут появляться по мере подготовки.")}</p><a href={i18n.path("/academy/javascript/engine/")}>{t("Об уроке Engine →")}</a></aside></div>
+	</main><Footer/>
+	<script>import { LessonController } from '../../../scripts/LessonController'; new LessonController();</script>
+</Layout>

@@ -1,11 +1,16 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 import { GAME_RELEASE_PLATFORMS } from './data/gameReleasePlatform';
 import { GAME_STATUSES } from './data/gameStatus';
+import { localeCodes } from './i18n/locales';
+
+const localized = { locale: z.enum(localeCodes), translationKey: z.string().min(1) };
 
 const articles = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
 	schema: z.object({
+		...localized,
 		title: z.string(),
 		description: z.string(),
 		pubDate: z.coerce.date(),
@@ -40,6 +45,7 @@ const games = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/games' }),
 	schema: z
 		.object({
+			...localized,
 			title: z.string(),
 			description: z.string(),
 			status: z.enum(GAME_STATUSES),
@@ -57,8 +63,8 @@ const games = defineCollection({
 			logoImage: z.string().optional(),
 			screenshots: z.array(screenshotSchema).default([]),
 			promoVideo: promoVideoSchema.optional(),
-			playableUrl: z.string().url().optional(),
-			externalUrl: z.string().url().optional(),
+			playableUrl: z.url().optional(),
+			externalUrl: z.url().optional(),
 			articleUrl: z.string().regex(/^\//).optional(),
 			orientation: z.enum(['landscape', 'portrait', 'adaptive']).default('landscape'),
 			embedAspectRatio: z.string().default('16 / 9'),
@@ -74,7 +80,44 @@ const games = defineCollection({
 		}),
 });
 
+const academy = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/academy' }),
+	schema: z.object({
+		...localized,
+		course: z.literal('javascript'),
+		lesson: z.literal('engine'),
+		order: z.number().int().positive(),
+		title: z.string(),
+		concept: z.string(),
+		description: z.string(),
+		takeaway: z.union([z.string(), z.array(z.string().min(1)).min(1)]),
+		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'ast', 'lazy', 'bytecode', 'interpreter', 'jit', 'deopt', 'stack', 'frames', 'heap', 'references', 'gc', 'leak', 'threads', 'performance', 'recap']).optional(),
+		assessment: z.enum(['quiz', 'mentor']).optional(),
+		sources: z.array(z.object({
+			title: z.string(),
+			url: z.url().refine((value) => {
+				const url = new URL(value);
+				return url.protocol === 'https:' && ['tc39.es', 'v8.dev', 'developer.chrome.com', 'html.spec.whatwg.org', 'dom.spec.whatwg.org', '262.ecma-international.org'].includes(url.hostname);
+			}, 'Academy sources must use official documentation or specifications.'),
+			note: z.string(),
+		})).min(1),
+	}),
+});
+
+const tutorials = defineCollection({
+ loader: glob({ pattern: '**/*.md', base: './src/content/tutorials' }),
+ schema: z.object({
+  ...localized,
+  title: z.string(), description: z.string(), seriesTitle: z.string(),
+  seriesDescription: z.string(), seriesSlug: z.string(), step: z.number().int(),
+  steps: z.array(z.object({ step: z.number().int(), slug: z.string(), title: z.string() })),
+  seriesTypeLabel: z.string().optional(), stepLabel: z.string().optional(), readingTime: z.string(),
+ }),
+});
+
 export const collections = {
 	articles,
 	games,
+	academy,
+	tutorials,
 };

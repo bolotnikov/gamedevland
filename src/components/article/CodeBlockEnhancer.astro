@@ -1,4 +1,12 @@
-<script is:inline>
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+---
+<script is:inline define:vars={{labels: {
+ copy: t('Copy'), copied: t('Copied'), failed: t('Failed'),
+ aria: t('Copy code to clipboard'),
+}}}>
 	(() => {
 		const enhanceCodeBlocks = () => {
 			const blocks = document.querySelectorAll('.article-prose pre');
@@ -32,8 +40,8 @@
 				const button = document.createElement('button');
 				button.className = 'code-block-copy';
 				button.type = 'button';
-				button.setAttribute('aria-label', 'Copy code to clipboard');
-				button.textContent = 'Copy';
+				button.setAttribute('aria-label', labels.aria);
+				button.textContent = labels.copy;
 
 				button.addEventListener('click', async () => {
 					const code = pre.querySelector('code');
@@ -41,14 +49,14 @@
 
 					try {
 						await navigator.clipboard.writeText(text);
-						button.textContent = 'Copied';
+						button.textContent = labels.copied;
 						window.setTimeout(() => {
-							button.textContent = 'Copy';
+							button.textContent = labels.copy;
 						}, 1600);
 					} catch {
-						button.textContent = 'Failed';
+						button.textContent = labels.failed;
 						window.setTimeout(() => {
-							button.textContent = 'Copy';
+							button.textContent = labels.copy;
 						}, 1600);
 					}
 				});

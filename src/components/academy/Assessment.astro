@@ -1,0 +1,12 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import { engineQuiz } from '../../data/engineQuiz';
+interface Props { kind: 'quiz' | 'mentor' }
+const { kind } = Astro.props;
+---
+{kind === 'quiz' ? <form class="academy-quiz" data-academy-quiz>
+	{engineQuiz.map((question,index) => <fieldset data-question={question.id} data-answer={question.answer}><legend><span>{String(index+1).padStart(2,'0')}</span>{t(question.question)}</legend>{question.choices.map((choice,i) => <label class="quiz-choice"><input type="radio" name={question.id} value={i}/><span>{t(choice)}</span></label>)}<div class="quiz-explanation" hidden><strong data-question-result></strong><p>{t(question.explanation)}</p><a href={i18n.path(`/academy/javascript/engine/${question.step}/`)}>{t("Повторить этот шаг →")}</a></div></fieldset>)}
+	<button class="academy-button" type="submit">{t("Проверить ответы →")}</button><button class="academy-button is-secondary" type="reset">{t("Сбросить ответы")}</button><p class="assessment-status" aria-live="polite" data-quiz-result></p>
+</form> : <section class="mentor-panel"><label for="mentor-answers">{t("Ответы для разбора")}</label><p>{t("Черновик сохраняется локально. Для разбора и оценки ответы можно отправить в чат.")}</p><textarea id="mentor-answers" data-mentor-answers maxlength="200000" rows="14" placeholder={t("1. ECMAScript задаёт…\n\n2. От исходного кода до выполнения…")}></textarea><div class="mentor-panel__actions"><button type="button" class="academy-button" data-copy-answers>{t("Скопировать ответы ↗")}</button><button type="button" class="academy-button is-secondary" data-download-answers>{t("Скачать .txt ↓")}</button></div><p class="assessment-status" aria-live="polite" data-answer-status></p></section>}

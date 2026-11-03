@@ -1,0 +1,15 @@
+---
+import { Locale } from '../../i18n/Locale';
+import { locales } from '../../i18n/locales';
+const i18n = Locale.forPath(Astro.url.pathname);
+---
+<div class="language-switcher" role="group" aria-label={i18n.t('Language')}>
+	{locales.map((language) => <a href={i18n.path(Astro.url.pathname, language.code)} lang={language.code} hreflang={language.code} aria-current={language.code === i18n.code ? 'page' : undefined} aria-label={language.name} data-language-link>{language.label}</a>)}
+</div>
+<script>
+	for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-language-link]')) {
+		const update = () => { const url = new URL(link.href); url.hash = location.hash; link.href = url.toString(); };
+		update();
+		window.addEventListener('hashchange', update);
+	}
+</script>
