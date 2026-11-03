@@ -4,10 +4,13 @@ const i18n = Locale.forPath(Astro.url.pathname);
 const t = i18n.t.bind(i18n);
 import { EngineSimulations, type EngineSimulationId, type Simulation } from '../../data/engineSimulations';
 import RuntimeDiagram from './RuntimeDiagram.astro';
-interface Props { id: EngineSimulationId }
+import InterpreterTrace from './InterpreterTrace.astro';
+import TokenScanner from './TokenScanner.astro';
+interface Props { id: EngineSimulationId | 'interpreter-trace' | 'token-scanner' }
 const { id } = Astro.props;
-const simulation: Simulation = EngineSimulations.get(id, i18n);
+const simulation: Simulation | undefined = id === 'interpreter-trace' || id === 'token-scanner' ? undefined : EngineSimulations.get(id, i18n);
 ---
+{simulation ? (
 <section class="simulation" data-simulation aria-label={simulation.title}>
 	<h2>{simulation.title}</h2>
 	<p class="simulation__hint">{simulation.hint}</p>
@@ -40,6 +43,7 @@ const simulation: Simulation = EngineSimulations.get(id, i18n);
 	</div>
 	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
 </section>
+) : id === 'token-scanner' ? <TokenScanner /> : <InterpreterTrace />}
 <script>
 	import { SimulationController } from '../../scripts/SimulationController';
 	document.querySelectorAll<HTMLElement>('[data-simulation]').forEach((root) => new SimulationController(root));

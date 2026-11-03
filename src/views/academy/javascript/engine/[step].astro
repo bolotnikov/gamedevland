@@ -19,7 +19,7 @@ const previous = steps[index - 1];
 const next = steps[index + 1];
 const slug = step.data.translationKey.split('/').at(-1);
 ---
-<Layout title={`${step.data.title} — ${t("JavaScript Engine")} | ${t("Academy")}`} description={step.data.description} lang={i18n.code} canonicalPath={i18n.path(`/academy/${step.data.translationKey}/`)}>
+<Layout title={`${step.data.title} — ${t("JavaScript Engine")} | ${t("Academy")}`} description={step.data.description || step.data.title} lang={i18n.code} canonicalPath={i18n.path(`/academy/${step.data.translationKey}/`)}>
 	<Header title={t("JavaScript Engine")} description="" current="academy" navigationOnly/>
 	<main class="lesson-shell container" data-lesson-step={slug} data-total={steps.length} data-step-slugs={steps.map((entry) => entry.data.translationKey.split('/').at(-1)).join(',')}>
 		<aside class="lesson-sidebar">
@@ -30,7 +30,7 @@ const slug = step.data.translationKey.split('/').at(-1);
 		<div class="lesson-content">
 			<nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Academy")}</a><span>/</span><a href={i18n.path("/academy/javascript/")}>{t("JavaScript")}</a><span>/</span><a href={i18n.path("/academy/javascript/engine/")}>{t("Engine")}</a></nav>
 			<div class="step-topline"><span class="academy-eyebrow">{step.data.concept}</span><span class="step-position">{String(step.data.order).padStart(2,'0')} <span>/ {steps.length}</span></span></div>
-			<article class="lesson-article"><h1>{step.data.title}</h1><p class="step-description">{step.data.description}</p><div class="article-prose lesson-prose"><Content /></div></article>
+			<article class="lesson-article"><h1>{step.data.title}</h1>{step.data.description && <p class="step-description">{step.data.description}</p>}<div class="article-prose lesson-prose"><Content /></div></article>
 			{step.data.simulation && <Simulation id={step.data.simulation}/>}
 			{step.data.assessment && <Assessment kind={step.data.assessment}/>}
 			<div class="lesson-takeaway"><span>{t("Основной вывод")}</span>{Array.isArray(step.data.takeaway) ? <ol>{step.data.takeaway.map((item) => <li>{item}</li>)}</ol> : <p>{step.data.takeaway}</p>}</div>

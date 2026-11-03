@@ -19,7 +19,7 @@
       "note": "Нормативные правила токенов, комментариев и переносов строк."
     }
   ],
-  "simulation": "tokens",
+  "simulation": "token-scanner",
   "locale": "ru",
   "translationKey": "javascript/engine/tokens"
 }

@@ -15,6 +15,14 @@ Their Russian translations are useful counterparts, but the original articles es
 the author's voice. Preserve these reference articles unless Alex requests their revision.
 This document records repository-specific editorial guidance, not global Codex settings.
 
+The Academy's purpose is to turn verified ECMA-262 rules and official V8 implementation
+details into accessible lessons. Understand the source first, then explain the mechanism
+in plain language with a focused example and suitable infographic or interaction. The revised
+Russian Memory Heap lesson is an approved reference for this approach.
+
+For other existing lessons, first read the current text and propose concrete changes; apply
+them after Alex's decision. A direct request to revise a named lesson is sufficient authorization.
+
 ## Authoring language
 
 Write and revise new material in Russian first. Alex reviews and approves the Russian text;
@@ -44,6 +52,10 @@ The site's default English URL is independent of the language used for authoring
 
 ## Explanatory structure
 
+Academy hierarchy is course → section → lesson. Engine and Event Loop are sections;
+their individual concept pages are lessons. Use “step” for an actual action within an
+exercise or simulation. Legacy source identifiers do not determine public terminology.
+
 The reference tutorials introduce a concrete task, perform one change, explain the relevant
 code, and establish the result before continuing. Preserve this sequence:
 
@@ -56,6 +68,22 @@ Use short paragraphs and explicit causal links. Keep exact identifiers and code 
 their explanation. Explain new terms before relying on them. Avoid rhetorical padding;
 technical depth should come from mechanisms and consequences, not a more conversational tone.
 Do not copy accidental repetition or grammatical errors from the reference articles.
+
+Keep each step focused on its main concept. Include only details needed to understand the
+explanation or exercise; omit related facts added merely for completeness. For example,
+a bytecode trace with numeric inputs does not need a remark about addition's type semantics.
+Preserve qualifications needed for accuracy, but explain them locally and briefly.
+
+Introduce unfamiliar technical terms with a short definition at their first meaningful use.
+Use the existing book-style `lesson-note` block labelled “Термин”, following the machine-code
+definition in step 01. Prefer concrete language in the surrounding prose (for example,
+“instructions for the Ignition interpreter”) and define broader abstractions separately.
+A definition should not require the reader to learn several more unexplained terms.
+
+Keep technical accuracy while explaining the mechanism in concrete language first. Prefer
+“the same object” over “the same identity”, and show the exact effect of an assignment before
+discussing storage abstractions. Implementation caveats should not overshadow the lesson's
+main idea; defer register placement and allocation-elimination details to relevant lessons.
 
 ## Technical references and visual presentation
 
@@ -75,6 +103,12 @@ Prefer static diagrams for relationships. Add interaction only when a reader's a
 an input/result, reveals execution order, tests a hypothesis, or supplies meaningful feedback.
 Recoloring or restating an unchanged diagram does not justify tabs or next/reset controls.
 Avoid duplicate controls; describe actual actions and make meaningful changes obvious.
+
+Alex's approved interaction references are the AST example (grouping changes both the tree
+and result) and the scanner example (each action highlights the actual source fragment and
+adds its recognized token). Model future interactions on these visible cause-and-effect
+relationships. Use a static infographic by default for other explanations; switching labels
+or showing successive explanatory cards alone does not justify interaction.
 
 Use occasional book-style definition/aside blocks for terms or important qualifications.
 Academy supports `<aside class="lesson-note">` with a `lesson-note__label`, a labelled

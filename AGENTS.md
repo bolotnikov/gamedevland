@@ -11,6 +11,35 @@ Reply to Alex in Russian. Write code comments and code documentation in English.
 Preserve strict TypeScript, explicit ownership, focused changes, and existing abstractions.
 Do not use unsafe casts, `any`, non-null assertions, or execute arbitrary lesson snippets.
 
+## Academy purpose and revision workflow — mandatory
+
+Start from ECMA-262 and official V8 implementation documentation. Read and understand the
+relevant mechanism, then explain it in plain, accessible language through a concrete example
+and clear infographic or useful interaction. Preserve technical accuracy and primary-source
+links without copying the density or terminology of the source into the lesson unexplained.
+Technical depth comes from explaining what happens and why, not from difficult wording.
+
+Alex approved the revised Russian Memory Heap lesson (`memory-heap.md`) on 2026-11-03 as
+a reference for this approach: a clear definition, one short code example, an explanation
+of each operation, and a diagram that makes the relationship obvious.
+
+Before revising other existing lessons, read their current text and propose specific edits
+for Alex's review; wait for his decision before applying them. A direct request to revise a
+named lesson already authorizes that revision. Do not expand it into an unsolicited course-wide
+rewrite. Preserve Alex's manual edits when preparing changes.
+
+## Academy terminology — latest agreement
+
+- Public hierarchy: Academy → course → section (раздел) → lesson (урок).
+- The former Engine lesson is now section 01, containing 20 lessons. Event Loop is section 02.
+  Former step pages are individual lessons; use these names consistently in prose, contents,
+  navigation, progress, assessments, and future course planning.
+- “Step” remains appropriate for an individual simulation action or diagnostic operation.
+- Existing internal names are compatibility details: the `lesson` content field identifies
+  a section, and `step`/`steps` identify its lesson pages. Keep existing URLs, translation keys,
+  DOM hooks, and stored progress; a terminology change does not require a schema migration.
+- Update Russian material first; English content still follows the separate translation workflow.
+
 ## Editorial voice — mandatory
 
 Read `docs/EDITORIAL_STYLE.md` before writing or editing public-facing prose. Alex's four
@@ -28,11 +57,31 @@ Preserve the original reference articles unless Alex requests their revision.
 - Prefer a static infographic when the reader only needs to see relationships or boundaries.
   Interaction is justified only when an action materially helps understanding: changing an
   input/result, tracing execution, testing a hypothesis, or receiving useful feedback.
+- Approved interaction references are the AST lesson (`abstract-syntax-tree.md`), where
+  changing grouping changes the tree and result, and the scanner lesson (`tokens.md`), where
+  each action visibly highlights source text and adds a recognized token. Use these as the
+  standard: the reader must see a concrete consequence of an action. For other explanations,
+  default to a static infographic unless similarly meaningful interaction is demonstrated.
+- Alex explicitly approved the revised `TokenScanner.astro` on 2026-11-03 as a reference:
+  real source stays visible, one clearly named action reveals one token, the same fragment
+  is highlighted in the source and output, and recognized tokens accumulate. Adapt this
+  cause-and-effect pattern to each new concept rather than copying the same widget everywhere.
 - Do not require clicks merely to recolor or rephrase the same diagram. Do not duplicate
   controls with the same purpose. Labels must describe the actual action; avoid “Next action”
   when nothing is being executed or changed. Useful controls need obvious state feedback.
 - Preserve technical meaning while removing repetition and explanatory UI clutter. Brevity
   takes precedence over earlier decorative diagram/header conventions.
+- Keep only information needed to understand the current step. Omit tangents, qualifications,
+  and related concepts that do not help its explanation or exercise. For example, a numeric
+  bytecode trace does not need an aside about JavaScript addition's type semantics.
+  Keep qualifications essential for accuracy short and local.
+- Define unfamiliar technical terms at their first introduction with a concise book-style
+  `lesson-note` callout labelled “Термин”, following the approved machine-code example.
+  Use concrete wording in the main explanation; do not require unexplained terminology to
+  understand a new concept. Avoid adding further undefined terms inside a definition.
+- A step's `description` is a subtitle/standfirst below its H1, not the start of the article.
+  Use the shared `.step-description` styling to separate it visually on every existing and
+  future step, including step 01. Keep it concise and avoid unsupported counts or extra labels.
 
 ## Russian-first authoring — mandatory
 
@@ -51,14 +100,15 @@ Preserve the original reference articles unless Alex requests their revision.
 
 ## Approved course baseline
 
-Alex approved the Russian lesson 01 / step 01 on 2026-11-03 as the reference for subsequent
+Alex approved the Russian section 01 / lesson 01 on 2026-11-03 as the reference for subsequent
 course work: `src/content/academy/ru/javascript/engine/engine-and-runtime.md`.
 Follow its focused explanations, official inline references, useful code insert/term callout,
 static relationship diagram, restrained styling, and concise takeaway list. Preserve the
 approved machine-code byte example in that step; the detailed CPU/JIT pipeline is excluded.
-Do not remove or relocate approved elements while editing another section. Step 02 is next
-for Alex's review; approval of step 01 does not approve the remaining lesson or authorize
-English translation or production publication.
+Do not remove or relocate approved elements while editing another part. Approval of lesson 01
+does not approve the remaining section or authorize English translation or production publication.
+The approved Memory Heap lesson complements this baseline with plain-language explanations;
+the AST and scanner examples establish the standard for useful interaction.
 
 ## Publication workflow
 
@@ -74,8 +124,8 @@ English translation or production publication.
 
 - Main navigation order: Home, Academy, Portfolio, Services, About.
 - `/academy/` lists actual courses. Initially show only Basic → Advanced JavaScript.
-- `/academy/javascript/` is the curriculum. Lesson 01 is JavaScript Engine; Event Loop is 02.
-- A lesson has an introduction, shared table of contents, and separate step URLs.
+- `/academy/javascript/` is the curriculum. Section 01 is JavaScript Engine; Event Loop is 02.
+- A section has an introduction, shared table of contents, and separate lesson URLs.
 - Use `src/content/academy/<locale>/<course>/<lesson>/<step>.md` as the source of lesson theory.
 - Use the Astro content collection/schema and shared components; no iframe or independent HTML site.
 - Planned lessons are labelled as planned, not linked to nonexistent pages.
@@ -86,9 +136,9 @@ English translation or production publication.
 
 - Russian-first material for an experienced JS/TS/HTML5 game developer and former Tech Lead.
   Prepare equivalent English material only in the separately authorized translation task.
-- One main concept per step, approximately 12–25 steps per lesson as the material requires.
+- One main concept per lesson, approximately 12–25 lessons per section as the material requires.
 - Keep screens digestible while preserving depth. Split explanations instead of deleting them.
-- Each step needs explanatory text and an appropriate visual, example, exercise, or simulation.
+- Each lesson needs explanatory text and an appropriate visual, example, exercise, or simulation.
   Prefer useful interactive state changes over decorative animation or repetitive click-through cards.
 - Explain both mechanism and consequence for real HTML5 games and SDK architecture.
 - Preserve the approved Event Loop v2 reference's strengths: full theory, step navigation,
@@ -102,8 +152,8 @@ English translation or production publication.
 ## Evidence and technical accuracy — mandatory
 
 - Research factual claims using specifications and official implementation documentation.
-- Every step must link to at least one relevant primary source, with a short note explaining
-  what it substantiates. Every lesson must be supported by those sources.
+- Every lesson must link to at least one relevant primary source, with a short note explaining
+  what it substantiates. Every section must be supported by those sources.
 - ECMAScript semantics: ECMA-262 (TC39 / Ecma International), preferably the exact clause.
 - V8 internals: v8.dev documentation and articles authored by the V8 team, or official V8 source.
 - Browser APIs: WHATWG HTML/DOM standards; browser tooling: official Chrome documentation.

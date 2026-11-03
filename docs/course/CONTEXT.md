@@ -2,6 +2,15 @@
 
 Updated: 2026-11-03.
 
+## Course hierarchy (latest agreement)
+
+Academy → course → section → lesson. Engine is section 01 with 20 individual lessons;
+Event Loop is planned section 02. Earlier references below to a whole Engine “lesson” and
+its “steps” describe the former naming. Use section/lesson in current and future public prose.
+Existing source fields (`lesson`, `order`), routes, UI hooks, and progress storage retain their
+identifiers for compatibility. Russian naming is updated first; English translation remains
+a separately authorized task.
+
 ## Current agreement
 
 Alex is moving a learning workflow from ChatGPT into this Astro repository.
@@ -12,7 +21,7 @@ The ZIP is a design reference, not an independent site to embed.
 
 The latest explicit request supersedes the earlier mixed-course integration proposal:
 create an Academy catalog, separate course curricula, and first implement only JavaScript
-lesson 01 (Engine/V8). Event Loop is lesson 02 and remains planned. Other courses will follow.
+section 01 (Engine/V8). Event Loop is section 02 and remains planned. Other courses will follow.
 The long-term 63-lesson/7-track idea is background, not 63 currently approved or ready lessons.
 
 The first course is Basic → Advanced JavaScript. Topics range from engine fundamentals to
@@ -36,7 +45,7 @@ model hints, and interface feedback. See `docs/EDITORIAL_STYLE.md`.
 ## Implementation
 
 - Keep Astro and existing Markdown collections. Add `academy` content collection.
-- Each step is its own Markdown file and statically generated URL.
+- Each lesson is its own Markdown file and statically generated URL within a section.
 - Native Astro components render diagrams, deterministic simulations, quizzes, and source links.
 - Shared Layout/Header and semantic tokens apply the theme throughout the whole site.
 - No user account/backend: current step, explicit completion, quiz choices, and drafts live

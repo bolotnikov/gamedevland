@@ -91,7 +91,7 @@ const academy = defineCollection({
 		concept: z.string(),
 		description: z.string(),
 		takeaway: z.union([z.string(), z.array(z.string().min(1)).min(1)]),
-		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'ast', 'lazy', 'bytecode', 'interpreter', 'jit', 'deopt', 'stack', 'frames', 'heap', 'references', 'gc', 'leak', 'threads', 'performance', 'recap']).optional(),
+		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'token-scanner', 'ast', 'lazy', 'bytecode', 'interpreter', 'interpreter-trace', 'jit', 'deopt', 'stack', 'frames', 'heap', 'references', 'gc', 'leak', 'threads', 'performance', 'recap']).optional(),
 		assessment: z.enum(['quiz', 'mentor']).optional(),
 		sources: z.array(z.object({
 			title: z.string(),

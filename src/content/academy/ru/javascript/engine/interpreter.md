@@ -19,7 +19,7 @@
       "note": "Baseline-компиляция из байткода в машинный код."
     }
   ],
-  "simulation": "interpreter",
+  "simulation": "interpreter-trace",
   "locale": "ru",
   "translationKey": "javascript/engine/interpreter"
 }
