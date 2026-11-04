@@ -26,7 +26,7 @@
 ---
 
 
-Before understanding an expression, we need to identify its parts. In `const hp = 10;` the [scanner](https://v8.dev/blog/scanner) recognizes ` const`, the identifier ` hp`, the symbol `=`, the numeric literal `10` and `;`.
+Before understanding an expression, we need to identify its parts. In `const hp = 10;` the [scanner](https://v8.dev/blog/scanner) recognizes `const`, the identifier `hp`, the symbol `=`, the numeric literal `10` and `;`.
 
 Spaces help separate elements, but the rules cover more than spaces. They also account for strings, comments, Unicode, the context of `/`, and line breaks that matter for [automatic semicolon insertion](https://tc39.es/ecma262/multipage/ecmascript-language-lexical-grammar.html#sec-automatic-semicolon-insertion). Splitting text on spaces is therefore not enough to build a JavaScript parser.
 

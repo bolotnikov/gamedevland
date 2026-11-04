@@ -67,10 +67,10 @@ target = null;
 // player.hp is 50; the object is still reachable
 ```
 
-1. `const player = { hp: 100 }` creates an object and stores a reference to it in ` player`.
-2. `let target = player` assigns to ` target` the same object value. Both variables now hold references to one object. This is not a reference from ` target` to the variable ` player`: each variable provides access to the object independently.
-3. `target.hp = 50` accesses the object through the reference held by ` target` and <a href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-putvalue">writes a new value to its</a> ` hp`property. The shared object changes, so both ` target.hp`and ` player.hp` now equal `50`.
-4. `target = null` replaces only the value of ` target`. It now holds ` null` instead of a reference. The value of ` player` and the object itself stay the same; the object remains accessible through ` player`.
+1. `const player = { hp: 100 }` creates an object and stores a reference to it in `player`.
+2. `let target = player` assigns to `target` the same object value. Both variables now hold references to one object. This is not a reference from `target` to the variable `player`: each variable provides access to the object independently.
+3. `target.hp = 50` accesses the object through the reference held by `target` and <a href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-putvalue">writes a new value to its</a> `hp` property. The shared object changes, so both `target.hp` and `player.hp` now equal `50`.
+4. `target = null` replaces only the value of `target`. It now holds `null` instead of a reference. The value of `player` and the object itself stay the same; the object remains accessible through `player`.
 
 <figure class="references-map" aria-label="After changing hp, both variables refer to the object with hp 50. After setting target to null, the player reference and the object remain">
   <div class="references-map__snapshot">

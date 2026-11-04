@@ -45,7 +45,7 @@ startGame();
 Consider how these declarations are parsed lazily on a first run, with no prepared code in the cache:
 
 1. **Initial parsing.** The preparser checks the syntax of the function bodies and gathers the required information about variable declarations and references. Full syntax trees and bytecode for these functions have not been created yet.
-2. **The call to `startGame()`.** Execution reaches the call. V8 fully parses the function body, builds its AST, and generates bytecode for the interpreter. Only then does execution enter the body of ` startGame`.
+2. **The call to `startGame()`.** Execution reaches the call. V8 fully parses the function body, builds its AST, and generates bytecode for the interpreter. Only then does execution enter the body of `startGame`.
 3. **`openEditor()` has not been called yet.** Its full parsing and bytecode generation can remain deferred. If execution later reaches a call to it, V8 performs the same preparation before running its body.
 
 Here, compilation produces bytecode. Generating machine code with JIT compilers is covered separately.

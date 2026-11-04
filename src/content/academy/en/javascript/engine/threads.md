@@ -87,4 +87,4 @@ async function buildMap() {
 }
 ```
 
-Here, `generateMap()` runs on the same thread that called ` buildMap()`. If the calculation takes a long time, the thread stays busy throughout. Adding ` async` does not move the calculation to a Worker.
+Here, `generateMap()` runs on the same thread that called `buildMap()`. If the calculation takes a long time, the thread stays busy throughout. Adding `async` does not move the calculation to a Worker.

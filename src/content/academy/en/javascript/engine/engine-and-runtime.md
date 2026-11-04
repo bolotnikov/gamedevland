@@ -83,7 +83,7 @@ const player = { hp: 100 }; // Language values and objects
 setTimeout(() => player.hp -= 10, 100); // Host timer API
 ```
 
-Creating an object and changing `hp` follow the language rules. ` setTimeout` is provided by the runtime. When the callback is invoked, the engine executes its JavaScript code.
+Creating an object and changing `hp` follow the language rules. `setTimeout` is provided by the runtime. When the callback is invoked, the engine executes its JavaScript code.
 
 <figure class="runtime-map runtime-map--static" aria-label="Language, engine, and browser">
   <div class="runtime-map__node tone-cyan"><div><strong>ECMAScript</strong><p>Language rules</p></div></div>

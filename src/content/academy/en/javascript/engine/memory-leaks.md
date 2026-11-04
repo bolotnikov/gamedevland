@@ -36,6 +36,6 @@ function mount(scene) {
 }
 ```
 
-`mount(scene)` returns a cleanup function. When the scene is no longer needed, that function must be called: it removes the ` onResize` from ` window`. The call to [` removeEventListener`](https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener) must receive **the same handler**that was originally added.
+`mount(scene)` returns a cleanup function. When the scene is no longer needed, that function must be called: it removes the `onResize` listener from `window`. The call to [`removeEventListener`](https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener) must receive **the same handler** that was originally added.
 
 To find a leak in an application, we can compare [memory snapshots](https://developer.chrome.com/docs/devtools/memory-problems) after opening and closing the scene several times and check what still keeps it in memory.
