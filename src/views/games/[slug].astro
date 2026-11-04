@@ -245,6 +245,7 @@ const releaseLabel = game.data.releaseDate
 
 	.game-hero__cover img {
 		width: 100%;
+		height: auto;
 		aspect-ratio: 800 / 470;
 		object-fit: cover;
 	}
@@ -357,6 +358,7 @@ const releaseLabel = game.data.releaseDate
 
 	@media (max-width: 900px) {
 		.game-hero__layout,
+		.game-hero__layout.has-cover,
 		.game-page__story {
 			grid-template-columns: 1fr;
 		}
