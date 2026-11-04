@@ -53,9 +53,9 @@ target.hp = 80;
 // player.hp is also 80
 ```
 
-1. `const player = { hp: 100 }` creates a player object. In the interactive diagram, V8 allocates heap memory for it and stores its ` hp`property there. The variable ` player` receives a reference to this object.
-2. `const target = player` <a href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-getvalue">reads the value of</a> ` player` and assigns it to ` target`. This copies the reference: both variables now provide access to **the same object**. No second object is created.
-3. `target.hp = 80` follows the reference to the object and changes its ` hp`property. The references themselves stay the same. As a result, ` player.hp` also becomes `80`.
+1. `const player = { hp: 100 }` creates a player object. In the interactive diagram, V8 allocates heap memory for it and stores its `hp` property there. The variable `player` receives a reference to this object.
+2. `const target = player` <a href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-getvalue">reads the value of</a> `player` and assigns it to `target`. This copies the reference: both variables now provide access to **the same object**. No second object is created.
+3. `target.hp = 80` follows the reference to the object and changes its `hp` property. The references themselves stay the same. As a result, `player.hp` also becomes `80`.
 
 <figure class="heap-map" aria-label="The player and target variables refer to one player object with hp equal to 80">
   <div class="heap-map__references">

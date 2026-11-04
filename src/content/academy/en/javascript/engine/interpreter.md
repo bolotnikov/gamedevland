@@ -35,4 +35,4 @@ Each instruction has a **handler**: the part of the interpreter that performs it
   <p><a href="https://v8.dev/blog/ignition-interpreter#details">A place where the interpreter stores the current intermediate result.</a> The next instruction can use or change this value.</p>
 </aside>
 
-Consider the function `add(a, b)`, which returns the sum of its arguments. When called as ` add(2, 3)`, its instructions first load `2`, then add `3`, and return `5`.
+Consider the function `add(a, b)`, which returns the sum of its arguments. When called as `add(2, 3)`, its instructions first load `2`, then add `3`, and return `5`.

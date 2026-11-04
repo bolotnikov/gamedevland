@@ -21,7 +21,7 @@
 ---
 
 
-When `start()` calls ` update()`, execution of ` start()` waits for the return. When ` update()` calls ` damage()`, the active function becomes ` damage()`. On return, control moves back in the opposite order.
+When `start()` calls `update()`, execution of `start()` waits for the return. When `update()` calls `damage()`, the active function becomes `damage()`. On return, control moves back in the opposite order.
 
 ```js
 function damage() { return 10; }

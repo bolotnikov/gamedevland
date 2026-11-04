@@ -43,9 +43,9 @@ const first = double(3);
 const second = double(8);
 ```
 
-1. For `double(3)`, the engine needs the values ` value = 3` and ` result = 6`. After ` return`, the number `6` is assigned to ` first`.
+1. For `double(3)`, the engine needs the values `value = 3` and `result = 6`. After `return`, the number `6` is assigned to `first`.
 2. The first call finishes and its frame is popped off the stack.
-3. The call to `double(8)` gets its own frame: now ` value = 8`, ` result = 16`, and the result must be returned to ` second`.
+3. The call to `double(8)` gets its own frame: now `value = 8`, `result = 16`, and the result must be returned to `second`.
 
 <figure class="frame-map" aria-label="Two consecutive calls to double have their own arguments, local values, and return locations">
   <div class="frame-map__snapshot">

@@ -57,6 +57,6 @@ function add(a, b) {
 }
 ```
 
-For this function, the generator produces instructions whose meaning is: obtain `a`, add ` b`, and return the result. Bytecode describes these operations; Ignition executes them.
+For this function, the generator produces instructions whose meaning is: obtain `a`, add `b`, and return the result. Bytecode describes these operations; Ignition executes them.
 
 In the [next lesson](../interpreter/) we will step through these instructions and see how the result changes.
