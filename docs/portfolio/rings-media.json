@@ -71,13 +71,13 @@
       "outputSha256": "7e5a0e21a9980667d48c21514e080d381a888cab8591f04ec8fc4b70047ed8de"
     },
     {
-      "source": "rings/output/imagegen/poki-rings-icon-v1.png",
-      "target": "icon.webp",
+      "source": "IconRings.jpg",
+      "target": "icon-rings.webp",
       "width": 512,
       "height": 512,
-      "bytes": 50070,
-      "inputSha256": "94d1b82134443cc1c9f0756a494ebd4c90d37db6f1658207e3df68b5f7b5d97e",
-      "outputSha256": "b27772160ed88d150f54fb0acae691507ae00ad374d5ee0db484e411c67b14f2"
+      "bytes": 39324,
+      "inputSha256": "97bfb4b5fbb2ab3c77c2b79d853ea16cf82bebb6384663b40617f26e5869c58c",
+      "outputSha256": "c02ed50157ab5dcaa84b35bef452c1d133e26a743fdb887922b60bcbb462e29c"
     }
   ]
 }
