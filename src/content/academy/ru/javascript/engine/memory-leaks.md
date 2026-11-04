@@ -36,6 +36,6 @@ function mount(scene) {
 }
 ```
 
-Функция очистки должна быть вызвана владельцем lifecycle и удалить **тот же callback**. Новая стрелочная функция в [`removeEventListener`](https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener) не подойдёт. Аналогично проверяют ticker-подписки, таймеры и долгоживущие кэши.
+`mount(scene)` возвращает функцию очистки. Когда сцена больше не нужна, эту функцию нужно вызвать: она удалит обработчик `onResize` из `window`. В [`removeEventListener`](https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener) нужно передать **тот же обработчик**, который был добавлен.
 
-В модели есть явная цепочка удержания до `scene`. После очистки она исчезает. В приложении воспроизведём несколько циклов открытия и закрытия сцены, сравним [heap snapshots](https://developer.chrome.com/docs/devtools/memory-problems) и найдём retaining path. Один рост heap ещё не доказывает утечку: нужны повторяемость и объяснимый путь удержания.
+Для поиска утечки в приложении можно сравнить [снимки памяти](https://developer.chrome.com/docs/devtools/memory-problems) после нескольких открытий и закрытий сцены и проверить, что продолжает её удерживать.

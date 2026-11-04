@@ -1,0 +1,90 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+---
+<section class="simulation reachability-graph" data-reachability-graph aria-label={t("Разрыв ссылок и достижимость объектов")}>
+	<h2>{t("Разрыв ссылок")}</h2>
+	<p class="simulation__hint">{t("Кнопки на связях заменяют ссылку значением null. Начальное состояние:")}</p>
+	<pre class="reachability-graph__initial"><code>{'globalThis.activeScene = { player: { hp: 100 } };'}</code></pre>
+	<div class="reachability-graph__layout">
+		<div class="reachability-graph__root">
+			<span>{t("Корень (root)")}</span><strong>globalThis</strong>
+			<code data-root-property>{t("activeScene: ссылка на scene")}</code>
+		</div>
+		<div class="reachability-graph__edge reachability-graph__edge--root" data-root-edge aria-label={t("Связь root → scene")}>
+			<span class="reachability-graph__arrow" data-edge-symbol aria-hidden="true">→</span>
+			<button class="academy-button is-secondary" type="button" data-remove-root-link aria-label={t("Разорвать связь root → scene")}><span data-edge-action>{t("Разорвать связь")}</span><code>globalThis.activeScene = null</code></button>
+		</div>
+		<div class="reachability-graph__heap">
+			<h3>{t("Heap · куча")}</h3>
+			<div class="reachability-graph__object is-reachable" data-scene-object>
+				<div><strong>scene</strong><span class="reachability-graph__status" data-object-status>{t("✓ Достижим · сохранить")}</span></div>
+				<code data-scene-property>{t("player: ссылка на player")}</code>
+			</div>
+			<div class="reachability-graph__edge reachability-graph__edge--player" data-player-edge aria-label={t("Связь scene → player")}>
+				<span class="reachability-graph__arrow" data-edge-symbol aria-hidden="true">↓</span>
+				<button class="academy-button is-secondary" type="button" data-remove-player-link aria-label={t("Разорвать связь scene → player")}><span data-edge-action>{t("Разорвать связь")}</span><code>globalThis.activeScene.player = null</code></button>
+			</div>
+			<div class="reachability-graph__object is-reachable" data-player-object>
+				<div><strong>player</strong><span class="reachability-graph__status" data-object-status>{t("✓ Достижим · сохранить")}</span></div>
+				<code>hp: 100</code>
+			</div>
+		</div>
+	</div>
+	<div class="reachability-graph__operations"><span>{t("Выполненные операции · интерактивная схема")}</span><pre><code data-operations>{t("Пока ни одной.")}</code></pre></div>
+	<p class="simulation__note" data-reachability-note>{t("От корня есть путь к scene и через неё — к player. Оба объекта достижимы.")}</p>
+	<div class="simulation__controls reachability-graph__controls">
+		<button class="academy-button is-secondary" type="button" data-reachability-reset disabled>{t("↺ Сначала")}</button>
+		<span class="simulation__count" data-reachability-count>{t("Достижимы: 2 из 2")}</span>
+	</div>
+	<p class="reachability-graph__caption">{t("Интерактивная схема. Других ссылок на эти объекты здесь нет. Недостижимые объекты остаются на схеме: время реального освобождения памяти выбирает V8.")}</p>
+	<span class="sr-only" aria-live="polite" data-reachability-announcement></span>
+</section>
+
+<script>
+	import { ReachabilityController } from '../../scripts/ReachabilityController';
+	document.querySelectorAll<HTMLElement>('[data-reachability-graph]').forEach((root) => new ReachabilityController(root));
+</script>
+
+<style>
+	.reachability-graph__initial, .reachability-graph__operations pre { margin: 12px 0 0; padding: 12px 14px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-code); color: var(--color-foreground); font: 11px/1.8 ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+	.reachability-graph__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(130px, .9fr) minmax(0, 2.2fr); gap: 12px; align-items: start; margin-top: 22px; }
+	.reachability-graph__root { padding: 16px 12px; margin-top: 48px; border: 1px solid var(--color-cyan); border-radius: 12px; background: color-mix(in srgb, var(--color-cyan) 5%, var(--color-code)); }
+	.reachability-graph__root > span { display: block; font-size: 10px; line-height: 1.7; color: var(--color-muted-foreground); }
+	.reachability-graph__root > strong { display: block; color: var(--color-cyan); font: 500 17px/1.7 ui-monospace, monospace; margin-top: 5px; }
+	.reachability-graph__root > code { display: block; margin-top: 8px; color: var(--color-foreground); font: 11px/1.8 ui-monospace, monospace; overflow-wrap: anywhere; }
+	.reachability-graph__edge { display: grid; justify-items: center; gap: 5px; color: var(--color-cyan); }
+	.reachability-graph__edge--root { margin-top: 54px; }
+	.reachability-graph__arrow { font: 30px/1.1 ui-monospace, monospace; }
+	.reachability-graph__edge .academy-button { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; padding: 9px 7px; border-color: color-mix(in srgb, var(--color-cyan) 55%, var(--color-border)); font-size: 10px; }
+	.reachability-graph__edge button code { font: 10px/1.6 ui-monospace, monospace; overflow-wrap: anywhere; }
+	.reachability-graph__edge.is-broken { color: var(--color-amber); }
+	.reachability-graph__edge.is-broken .academy-button { border-color: var(--color-amber); }
+	.reachability-graph__edge--player { padding: 8px 0; }
+	.reachability-graph__edge--player .academy-button { width: auto; max-width: 100%; }
+	.reachability-graph__heap { min-width: 0; padding: 16px; border: 1px dashed color-mix(in srgb, var(--color-violet) 50%, var(--color-border)); border-radius: 14px; background: color-mix(in srgb, var(--color-violet) 4%, var(--color-code)); }
+	.reachability-graph__heap h3 { margin: 0 0 12px; color: var(--color-muted-foreground); font-size: 12px; line-height: 1.7; font-weight: 500; }
+	.reachability-graph__object { padding: 12px; border: 1px solid currentColor; border-radius: 10px; }
+	.reachability-graph__object > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; }
+	.reachability-graph__object strong { font: 500 19px/1.6 ui-monospace, monospace; }
+	.reachability-graph__object code { display: block; margin-top: 8px; color: var(--color-foreground); font: 11px/1.8 ui-monospace, monospace; overflow-wrap: anywhere; }
+	.reachability-graph__status { font-size: 10px; line-height: 1.8; }
+	.reachability-graph__object.is-reachable { color: var(--color-green); background: color-mix(in srgb, var(--color-green) 5%, var(--color-code)); }
+	.reachability-graph__object.is-unreachable { color: var(--color-amber); background: color-mix(in srgb, var(--color-amber) 6%, var(--color-code)); border-style: dashed; }
+	.reachability-graph__operations { margin-top: 18px; }
+	.reachability-graph__operations > span { font-size: 10px; line-height: 1.7; color: var(--color-muted-foreground); }
+	.reachability-graph__operations pre { min-height: 66px; margin-top: 6px; }
+	.reachability-graph .simulation__note { min-height: 66px; padding: 0; margin: 14px 0; }
+	.reachability-graph__controls { flex-wrap: wrap; }
+	.reachability-graph__caption { margin: 14px 0 0; font-size: 11px; line-height: 1.8; color: var(--color-muted-foreground); }
+	@media (max-width: 800px) {
+		.reachability-graph { padding: 16px; }
+		.reachability-graph__layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+		.reachability-graph__root, .reachability-graph__edge--root { margin: 0; }
+		.reachability-graph__edge--root .reachability-graph__arrow { transform: rotate(90deg); }
+		.reachability-graph__edge--root .academy-button { width: auto; max-width: 100%; }
+		.reachability-graph__heap { padding: 14px; }
+		.reachability-graph .simulation__note { min-height: 110px; }
+	}
+</style>

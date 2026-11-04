@@ -15,7 +15,7 @@ reference for course structure and presentation. Use that approved version as th
 1. Curriculum entry: title, summary, availability. Never link an unpublished lesson.
 2. Lesson introduction: outcome, prerequisites, suggested time, contents, start/resume.
 3. Approximately 12–25 separately addressable lessons per section, one concept each.
-4. Theory before exercises; final self-check and mentor/interview practice.
+4. Theory before exercises; end with a self-check quiz. No separate free-text/interview lesson.
 5. Review supplied answers before recording mastery or a grade.
 
 ## Lesson source
@@ -24,8 +24,9 @@ Create `src/content/academy/<locale>/<course>/<section>/<slug>.md` and extend th
 course/section identifiers and routing when actually adding another section. The existing
 frontmatter field for the section is named `lesson` for compatibility.
 Frontmatter must include locale, translationKey, course, lesson, unique positive order, title, concept,
-description, takeaway, and one or more sources (title, official URL, substantiation note).
-Optionally select a simulation or assessment.
+description, and one or more sources (title, official URL, substantiation note).
+Optionally include a takeaway, simulation, or assessment. Omit the takeaway when no conclusion is needed;
+an absent/null value, blank string, or list without non-blank items renders no takeaway block or heading.
 `description` is a short subtitle under the H1. The shared `.step-description` style sets
 it apart from body prose on all steps; do not include it again as an opening paragraph.
 `takeaway` accepts a string or an ordered list of strings. Step 01 uses three items:
@@ -75,8 +76,7 @@ External references use a new tab; the shared Markdown renderer sets target and 
 ## Assessment
 
 Self-check: targeted questions, explanatory feedback, links to remediation, no invented grade.
-Mentor: open questions covering theory, trace/code reasoning, failure analysis, and GameDev use.
-Rubric: theory 25 + mechanisms 25 + application 25 + explanation 25 = 100.
+Do not require written answers or instructor assessment unless Alex explicitly requests them.
 
 ## Verification
 

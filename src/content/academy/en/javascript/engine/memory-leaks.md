@@ -3,20 +3,20 @@
   "course": "javascript",
   "lesson": "engine",
   "order": 15,
-  "title": "A leak: the graph still needs the object",
+  "title": "Memory leaks: a reference keeps the object alive",
   "concept": "Scene lifecycle",
-  "description": "Closing a scene does not automatically make its listener unreachable.",
-  "takeaway": "dispose must break the long-lived relationships owned by the scene.",
+  "description": "Finishing a scene does not automatically make its event listener unreachable.",
+  "takeaway": "dispose should remove the scene's long-lived connections.",
   "sources": [
     {
       "title": "Chrome DevTools · Memory",
       "url": "https://developer.chrome.com/docs/devtools/memory-problems",
-      "note": "Official tools for diagnosing memory use, leaks, and frequent collections."
+      "note": "Official tools for diagnosing memory use, leaks, and frequent garbage collections."
     },
     {
       "title": "DOM Standard · removeEventListener",
       "url": "https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener",
-      "note": "The normative listener-removal contract: type, callback, and capture must match."
+      "note": "The standard's rules for removing listeners: type, callback, and capture must match."
     }
   ],
   "simulation": "leak",
@@ -25,7 +25,8 @@
 }
 ---
 
-The player closed a scene, but a global event target still retains a callback that uses its data. To the developer, the scene has “finished.” To the collector, it remains reachable.
+
+The player closed the scene, but a global event target still holds a callback that uses its data. To the developer, the scene has finished. To the garbage collector, it remains reachable.
 
 ```js
 function mount(scene) {
@@ -35,6 +36,6 @@ function mount(scene) {
 }
 ```
 
-The lifecycle owner must call the cleanup function and remove **the same callback**. A new arrow function passed to [`removeEventListener`](https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener) will not work. Check ticker subscriptions, timers, and long-lived caches in the same way.
+`mount(scene)` returns a cleanup function. When the scene is no longer needed, that function must be called: it removes the ` onResize` from ` window`. The call to [` removeEventListener`](https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener) must receive **the same handler**that was originally added.
 
-The model shows an explicit retaining chain to `scene`. Cleanup removes it. In an application, we will reproduce several scene open/close cycles, compare [heap snapshots](https://developer.chrome.com/docs/devtools/memory-problems), and find the retaining path. One increase in heap size does not prove a leak: the behavior must be repeatable and the retention path explainable.
+To find a leak in an application, we can compare [memory snapshots](https://developer.chrome.com/docs/devtools/memory-problems) after opening and closing the scene several times and check what still keeps it in memory.

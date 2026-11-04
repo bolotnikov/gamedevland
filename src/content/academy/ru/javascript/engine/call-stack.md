@@ -11,7 +11,7 @@
     {
       "title": "ECMA-262 · Execution Contexts",
       "url": "https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-execution-contexts",
-      "note": "Абстрактная модель контекстов исполнения и их стека."
+      "note": "Контексты исполнения и их стек в спецификации."
     }
   ],
   "simulation": "stack",

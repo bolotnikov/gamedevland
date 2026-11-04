@@ -1,15 +1,23 @@
 # Academy context
 
-Updated: 2026-11-03.
+Updated: 2026-11-04.
 
 ## Course hierarchy (latest agreement)
 
-Academy → course → section → lesson. Engine is section 01 with 20 individual lessons;
+Academy → course → section → lesson. Engine is section 01 with 19 individual lessons;
 Event Loop is planned section 02. Earlier references below to a whole Engine “lesson” and
 its “steps” describe the former naming. Use section/lesson in current and future public prose.
 Existing source fields (`lesson`, `order`), routes, UI hooks, and progress storage retain their
 identifiers for compatibility. Russian naming is updated first; English translation remains
 a separately authorized task.
+
+On 2026-11-04 Alex removed the separate free-text/interview lesson in both languages.
+Section 01 now ends with lesson 19, the self-check quiz. Do not recreate the removed lesson
+or require written answers or instructor assessment unless explicitly requested.
+
+Russian lessons 06 and 07 have distinct roles: Bytecode explains generation from AST and terms,
+while Interpreter contains the single instruction-by-instruction execution diagram. Do not duplicate
+the execution trace in Bytecode. Keep the interpreter diagram to an instruction list and one current value.
 
 ## Current agreement
 
@@ -22,9 +30,11 @@ The ZIP is a design reference, not an independent site to embed.
 The latest explicit request supersedes the earlier mixed-course integration proposal:
 create an Academy catalog, separate course curricula, and first implement only JavaScript
 section 01 (Engine/V8). Event Loop is section 02 and remains planned. Other courses will follow.
+Only section 01 is shown publicly. Sections 02–11 remain commented out in `src/data/academy.ts`;
+the course page has no learning-order sidebar.
 The long-term 63-lesson/7-track idea is background, not 63 currently approved or ready lessons.
 
-The first course is Basic → Advanced JavaScript. Topics range from engine fundamentals to
+The first course is “Продвинутый JavaScript” in Russian and “Advanced JavaScript” in English. Topics range from engine fundamentals to
 advanced language and runtime concepts. Explanations target a developer experienced in
 TypeScript, HTML5 engines, FSM/ECS/DI, PixiJS/Three.js, and technical leadership.
 
@@ -34,7 +44,10 @@ Every step must provide relevant official documentation/specification links. Sem
 should be supported by ECMA-262; implementation claims by the V8 team. No third-party tutorial
 citations. Explain which claims are normative and which describe a teaching model or V8.
 
-All changes are for local review. No push or production deployment until explicitly requested.
+On 2026-11-04 Alex approved all 19 Russian lessons and the Academy, course, and section pages.
+He explicitly requested their English translation and a bilingual production release via the
+existing commit/push/GitHub Pages CI/CD workflow. Future changes still require separate release
+authorization.
 A project-local AGENTS.md stores these requirements; global Codex settings are not changed.
 
 Alex's handwritten Platformer, Tower Defense, Match-3, and PixiJS Project Template tutorials

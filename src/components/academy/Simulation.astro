@@ -6,9 +6,12 @@ import { EngineSimulations, type EngineSimulationId, type Simulation } from '../
 import RuntimeDiagram from './RuntimeDiagram.astro';
 import InterpreterTrace from './InterpreterTrace.astro';
 import TokenScanner from './TokenScanner.astro';
-interface Props { id: EngineSimulationId | 'interpreter-trace' | 'token-scanner' }
+import HeapTrace from './HeapTrace.astro';
+import ReachabilityGraph from './ReachabilityGraph.astro';
+import ListenerCleanup from './ListenerCleanup.astro';
+interface Props { id: EngineSimulationId | 'interpreter-trace' | 'token-scanner' | 'heap-trace' | 'reference-trace' | 'reachability-graph' }
 const { id } = Astro.props;
-const simulation: Simulation | undefined = id === 'interpreter-trace' || id === 'token-scanner' ? undefined : EngineSimulations.get(id, i18n);
+const simulation: Simulation | undefined = id === 'interpreter-trace' || id === 'token-scanner' || id === 'heap-trace' || id === 'reference-trace' || id === 'reachability-graph' || id === 'leak' ? undefined : EngineSimulations.get(id, i18n);
 ---
 {simulation ? (
 <section class="simulation" data-simulation aria-label={simulation.title}>
@@ -43,7 +46,7 @@ const simulation: Simulation | undefined = id === 'interpreter-trace' || id === 
 	</div>
 	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
 </section>
-) : id === 'token-scanner' ? <TokenScanner /> : <InterpreterTrace />}
+) : id === 'token-scanner' ? <TokenScanner /> : id === 'heap-trace' || id === 'reference-trace' ? <HeapTrace variant={id === 'heap-trace' ? 'heap' : 'references'} /> : id === 'reachability-graph' ? <ReachabilityGraph /> : id === 'leak' ? <ListenerCleanup /> : <InterpreterTrace />}
 <script>
 	import { SimulationController } from '../../scripts/SimulationController';
 	document.querySelectorAll<HTMLElement>('[data-simulation]').forEach((root) => new SimulationController(root));

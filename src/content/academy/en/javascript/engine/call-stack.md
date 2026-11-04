@@ -3,15 +3,15 @@
   "course": "javascript",
   "lesson": "engine",
   "order": 10,
-  "title": "Call Stack: what is running now",
+  "title": "Call Stack: which function is running",
   "concept": "Call → return",
   "description": "Pushing and popping stack frames in the correct order.",
-  "takeaway": "A nested call executes before the function that called it continues.",
+  "takeaway": "A nested call runs before its calling function can continue.",
   "sources": [
     {
       "title": "ECMA-262 · Execution Contexts",
       "url": "https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-execution-contexts",
-      "note": "The abstract model of execution contexts and their stack."
+      "note": "Execution contexts and their stack in the specification."
     }
   ],
   "simulation": "stack",
@@ -20,7 +20,8 @@
 }
 ---
 
-When `start()` calls `update()`, `start()` waits for it to return. When `update()` calls `damage()`, `damage()` becomes current. On return, control travels in the opposite direction.
+
+When `start()` calls ` update()`, execution of ` start()` waits for the return. When ` update()` calls ` damage()`, the active function becomes ` damage()`. On return, control moves back in the opposite order.
 
 ```js
 function damage() { return 10; }
@@ -29,8 +30,8 @@ function start() { return update(); }
 start();
 ```
 
-This is **LIFO: last in, first out**. The stack remembers where execution should continue after a nested call. [ECMA-262](https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-execution-contexts) describes an execution-context stack; V8’s actual machine frames can differ because of inlining and other optimizations.
+This is the **LIFO: last in, first out** principle. The stack records where execution should continue after a nested call. The [ECMA-262](https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-execution-contexts) specification defines a stack of execution contexts; V8's actual machine-level frames may differ because of inlining and other optimizations.
 
-In the simulation, `script` is an illustrative lower boundary for the running script. Using “Next action,” we can follow the changes to the top frame. We show logical call order, not a native stack dump.
+In the simulation `script` represents the base of the running script in this diagram. The “Next action” button traces changes to the top frame. The diagram shows the logical order of calls, rather than a native stack dump.
 
-If a synchronous call takes a long time to return, another JavaScript callback on the same thread will not automatically preempt it.
+If a synchronous call takes a long time to return, another JavaScript callback on the same thread cannot interrupt it on its own.

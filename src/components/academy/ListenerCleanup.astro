@@ -1,0 +1,58 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+const states = [
+	{ cleaned: false, note: t("window хранит обработчик onResize. Обработчик обращается к scene, поэтому сцена остаётся доступной через подписку."), next: t("Вызвать функцию очистки →"), count: t("Подписка активна") },
+	{ cleaned: true, note: t("Функция очистки удалила onResize из window. Путь к сцене через подписку исчез. Если других ссылок нет, GC сможет освободить память сцены."), next: t("Подписка удалена"), count: t("Подписка удалена") },
+];
+---
+<section class="simulation listener-cleanup" data-simulation aria-label={t("Удаление обработчика события")}>
+	<h2>{t("Очистка подписки")}</h2>
+	<p class="simulation__hint">{t("Вызовем функцию очистки и посмотрим, что изменится.")}</p>
+	{states.map((state, index) => <div data-simulation-state hidden={index !== 0} data-next-label={state.next} data-state-counter={state.count}>
+		<div class="listener-cleanup__chain">
+			<div class="listener-cleanup__node"><strong>window</strong><span>{t("Список обработчиков")}</span><code>{state.cleaned ? t("resize: нет обработчика") : 'resize: onResize'}</code></div>
+			<span class:list={['listener-cleanup__arrow', state.cleaned && 'is-broken']} aria-label={state.cleaned ? t("Связь удалена") : t("Ссылка на обработчик")}>{state.cleaned ? '×' : '→'}</span>
+			<div class:list={['listener-cleanup__node', state.cleaned && 'is-detached']}><strong>onResize</strong><span>{state.cleaned ? t("Удалён из window") : t("Обработчик события")}</span><code>() =&gt; scene.resize()</code></div>
+			<span class="listener-cleanup__arrow" aria-hidden="true">→</span>
+			<div class:list={['listener-cleanup__node', state.cleaned && 'is-detached']}><strong>scene</strong><span>{state.cleaned ? t("Больше нет пути через window") : t("Доступна через обработчик")}</span></div>
+		</div>
+		<div class:list={['listener-cleanup__result', state.cleaned && 'is-clean']}>
+			<strong>{state.cleaned ? t("Подписка удалена") : t("Подписка удерживает сцену")}</strong>
+			<p data-state-note>{state.note}</p>
+		</div>
+	</div>)}
+	<div class="simulation__controls listener-cleanup__controls">
+		<button class="academy-button is-secondary" type="button" data-simulation-reset>{t("↺ Сначала")}</button>
+		<button class="academy-button" type="button" data-simulation-next>{t("Вызвать функцию очистки →")}</button>
+	</div>
+	<p class="listener-cleanup__caption">{t("Интерактивная схема показывает удаление подписки. Функция очистки и другие ссылки на сцену также должны быть освобождены; момент сборки выбирает движок.")}</p>
+	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
+</section>
+
+<style>
+	.listener-cleanup__chain { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.35fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 22px 0; }
+	.listener-cleanup__node { min-width: 0; min-height: 150px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 14px; border: 1px solid color-mix(in srgb, var(--color-cyan) 40%, var(--color-border)); border-radius: 10px; background: var(--color-code); }
+	.listener-cleanup__node strong { color: var(--color-cyan); font: 500 17px/1.6 ui-monospace, monospace; }
+	.listener-cleanup__node span { color: var(--color-muted-foreground); font-size: 11px; line-height: 1.7; }
+	.listener-cleanup__node code { color: var(--color-foreground); font: 11px/1.7 ui-monospace, monospace; overflow-wrap: anywhere; }
+	.listener-cleanup__node.is-detached { border-style: dashed; border-color: var(--color-border); }
+	.listener-cleanup__node.is-detached strong { color: var(--color-muted-foreground); }
+	.listener-cleanup__arrow { color: var(--color-cyan); font-size: 28px; line-height: 1; }
+	.listener-cleanup__arrow.is-broken { color: var(--color-amber); }
+	.listener-cleanup__result { padding: 16px; border: 1px solid color-mix(in srgb, var(--color-amber) 45%, var(--color-border)); border-radius: 10px; background: color-mix(in srgb, var(--color-amber) 6%, var(--color-code)); }
+	.listener-cleanup__result.is-clean { border-color: color-mix(in srgb, var(--color-green) 45%, var(--color-border)); background: color-mix(in srgb, var(--color-green) 6%, var(--color-code)); }
+	.listener-cleanup__result strong { font-size: 14px; line-height: 1.6; }
+	.listener-cleanup__result p, .listener-cleanup__caption { margin: 8px 0 0; color: var(--color-muted-foreground); font-size: 12px; line-height: 1.8; }
+	.listener-cleanup__controls { margin-top: 20px; flex-wrap: wrap; }
+	.listener-cleanup__caption { font-size: 11px; margin-top: 16px; }
+	@media (max-width: 650px) {
+		.listener-cleanup { padding: 16px; }
+		.listener-cleanup__chain { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+		.listener-cleanup__node { min-height: 0; padding: 12px; }
+		.listener-cleanup__arrow { justify-self: center; transform: rotate(90deg); }
+		.listener-cleanup__controls { display: grid; grid-template-columns: 1fr auto; }
+		.listener-cleanup__controls [data-simulation-next] { grid-column: 1 / -1; width: 100%; }
+	}
+</style>

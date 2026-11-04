@@ -3,15 +3,20 @@
   "course": "javascript",
   "lesson": "engine",
   "order": 5,
-  "title": "Not everything needs compiling immediately",
+  "title": "Not everything needs compiling at startup",
   "concept": "Startup and lazy parsing",
-  "description": "Why source size and startup cost are related, but not identical.",
-  "takeaway": "V8 can defer full function processing; source text still has a cost.",
+  "description": "How source size relates to the work required at startup.",
+  "takeaway": "V8 can defer fully parsing a function and generating its bytecode until the first call. On that call, the bytecode is generated before the function body starts executing.",
   "sources": [
     {
       "title": "V8 · Lazy parsing",
       "url": "https://v8.dev/blog/preparser",
-      "note": "The preparser, deferred function preparation, and the cost of eager compilation."
+      "note": "The preparser checks syntax and gathers scope information; on its first call, a deferred function is fully parsed and compiled to bytecode."
+    },
+    {
+      "title": "V8 · Choosing eager compilation",
+      "url": "https://v8.dev/blog/preparser#possibly-invoked-function-expressions",
+      "note": "The parser makes the decision before parsing the function body. Syntax suggesting an immediate call can lead to eager compilation."
     }
   ],
   "simulation": "lazy",
@@ -20,9 +25,16 @@
 }
 ---
 
-Let’s consider an SDK containing level-editor logic that is never called during an ad session. Fully parsing and compiling every such function at startup would be expensive.
 
-V8 uses **[lazy parsing](https://v8.dev/blog/preparser)**: for suitable functions, a preparser performs a reduced pass and full preparation is deferred. This does not mean the engine “ignores everything inside”: it still needs to check syntax conditions and collect required scope information.
+Consider a game with a built-in level editor. During normal gameplay, the editor's functions may never be called. Fully parsing and compiling them at startup would add to startup time.
+
+With **[lazy parsing](https://v8.dev/blog/preparser)** V8 defers fully parsing a function body and generating its bytecode.
+
+**V8's parser makes this decision while processing the source text.** If the engine settings allow lazy compilation, it is the default for ordinary function declarations.
+
+In some cases, V8 prefers eager compilation. For example, the start of `(function () { … })()` suggests to the parser that the function may be called immediately. It therefore tries to fully parse and compile that function straight away. This is a **heuristic**: a rule based on the shape of the code that suggests the function will be needed soon. [V8's official explanation](https://v8.dev/blog/preparser#possibly-invoked-function-expressions).
+
+Lazy compilation can also be disabled through engine settings.
 
 ```js
 function startGame() { /* Needed immediately */ }
@@ -30,4 +42,12 @@ function openEditor() { /* May never be called */ }
 startGame();
 ```
 
-Caching, heuristics, and engine version affect the actual path. A single line of code cannot establish the exact compilation time. When preparing a playable, we will first remove unnecessary code from the delivered bundle: lazy parsing does not eliminate the costs of transferring, decoding, and storing source text.
+Consider how these declarations are parsed lazily on a first run, with no prepared code in the cache:
+
+1. **Initial parsing.** The preparser checks the syntax of the function bodies and gathers the required information about variable declarations and references. Full syntax trees and bytecode for these functions have not been created yet.
+2. **The call to `startGame()`.** Execution reaches the call. V8 fully parses the function body, builds its AST, and generates bytecode for the interpreter. Only then does execution enter the body of ` startGame`.
+3. **`openEditor()` has not been called yet.** Its full parsing and bytecode generation can remain deferred. If execution later reaches a call to it, V8 performs the same preparation before running its body.
+
+Here, compilation produces bytecode. Generating machine code with JIT compilers is covered separately.
+
+V8 can therefore generate bytecode ahead of time or defer generation until a function is called. The exact rules depend on the engine version and settings.

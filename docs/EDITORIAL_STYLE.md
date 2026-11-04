@@ -52,6 +52,13 @@ The site's default English URL is independent of the language used for authoring
 
 ## Explanatory structure
 
+All new or revised public-facing text must be simple, clear, concise, and reduced to the
+essentials. Alex approved the shortened Russian `garbage-collection.md` prose on 2026-11-04
+as the reference for this standard. Explain the mechanism in plain language, define only
+the terms needed now, and remove repetition and secondary details. Preserve the cause and
+effect and any conditions essential for accuracy. Apply this to subtitles, takeaways,
+captions, and simulation notes as well as the main prose.
+
 Academy hierarchy is course → section → lesson. Engine and Event Loop are sections;
 their individual concept pages are lessons. Use “step” for an actual action within an
 exercise or simulation. Legacy source identifiers do not determine public terminology.

@@ -90,9 +90,9 @@ const academy = defineCollection({
 		title: z.string(),
 		concept: z.string(),
 		description: z.string(),
-		takeaway: z.union([z.string(), z.array(z.string().min(1)).min(1)]),
-		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'token-scanner', 'ast', 'lazy', 'bytecode', 'interpreter', 'interpreter-trace', 'jit', 'deopt', 'stack', 'frames', 'heap', 'references', 'gc', 'leak', 'threads', 'performance', 'recap']).optional(),
-		assessment: z.enum(['quiz', 'mentor']).optional(),
+		takeaway: z.union([z.string(), z.array(z.string())]).nullish(),
+		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'token-scanner', 'ast', 'lazy', 'bytecode', 'interpreter', 'interpreter-trace', 'jit', 'deopt', 'stack', 'frames', 'heap', 'heap-trace', 'references', 'reference-trace', 'gc', 'reachability-graph', 'leak', 'threads', 'performance', 'recap']).optional(),
+		assessment: z.literal('quiz').optional(),
 		sources: z.array(z.object({
 			title: z.string(),
 			url: z.url().refine((value) => {

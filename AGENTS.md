@@ -19,6 +19,13 @@ and clear infographic or useful interaction. Preserve technical accuracy and pri
 links without copying the density or terminology of the source into the lesson unexplained.
 Technical depth comes from explaining what happens and why, not from difficult wording.
 
+For every new or revised public-facing text, use simple, clear, concise language and reduce
+the explanation to what is essential for the current concept. State the mechanism directly;
+remove repetition, secondary facts, and details added only for completeness. Keep the causal
+explanation and conditions needed for accuracy. This applies to prose, subtitles, takeaways,
+diagram captions, and simulation notes. Alex approved the shortened Russian GC lesson prose
+(`garbage-collection.md`) on 2026-11-04 as the baseline for this level of brevity and clarity.
+
 Alex approved the revised Russian Memory Heap lesson (`memory-heap.md`) on 2026-11-03 as
 a reference for this approach: a clear definition, one short code example, an explanation
 of each operation, and a diagram that makes the relationship obvious.
@@ -31,7 +38,9 @@ rewrite. Preserve Alex's manual edits when preparing changes.
 ## Academy terminology — latest agreement
 
 - Public hierarchy: Academy → course → section (раздел) → lesson (урок).
-- The former Engine lesson is now section 01, containing 20 lessons. Event Loop is section 02.
+- In Russian course content, call an interactive diagram «интерактивная схема», not «модель».
+  For other meanings of “model”, use a precise description appropriate to the context.
+- The former Engine lesson is now section 01, containing 19 lessons. Event Loop is section 02.
   Former step pages are individual lessons; use these names consistently in prose, contents,
   navigation, progress, assessments, and future course planning.
 - “Step” remains appropriate for an individual simulation action or diagnostic operation.
@@ -112,6 +121,11 @@ the AST and scanner examples establish the standard for useful interaction.
 
 ## Publication workflow
 
+- On 2026-11-04 Alex approved all 19 Russian Engine lessons and the Academy, course, and
+  section pages. He explicitly authorized their English translation and a bilingual production
+  release through commit, push, and the existing GitHub Pages CI/CD pipeline. This authorization
+  supersedes the local-only restriction for this release; it does not authorize future releases.
+
 - The current Academy work is LOCAL ONLY until Alex explicitly authorizes publication.
 - Run a local server for review when requested; keep an accessible local URL for Alex.
 - Do not push, deploy, or change hosting as part of lesson authoring or fixes.
@@ -123,8 +137,11 @@ the AST and scanner examples establish the standard for useful interaction.
 ## Academy information architecture
 
 - Main navigation order: Home, Academy, Portfolio, Services, About.
-- `/academy/` lists actual courses. Initially show only Basic → Advanced JavaScript.
+  The Russian label for Academy is “Обучение”; English keeps “Academy”.
+- `/academy/` lists actual courses. Initially show only “Продвинутый JavaScript” / “Advanced JavaScript”.
 - `/academy/javascript/` is the curriculum. Section 01 is JavaScript Engine; Event Loop is 02.
+- Only section 01 is currently visible. Keep sections 02–11 commented out in `src/data/academy.ts`,
+  preserving their names and descriptions for future work. Do not restore the removed learning-order sidebar.
 - A section has an introduction, shared table of contents, and separate lesson URLs.
 - Use `src/content/academy/<locale>/<course>/<lesson>/<step>.md` as the source of lesson theory.
 - Use the Astro content collection/schema and shared components; no iframe or independent HTML site.
@@ -144,10 +161,10 @@ the AST and scanner examples establish the standard for useful interaction.
 - Preserve the approved Event Loop v2 reference's strengths: full theory, step navigation,
   Call Stack simulation, visible intermediate states, responsive layout, light/dark themes.
 - Explain concepts before tests; never start with a diagnostic quiz.
-- End with self-checks and open practical/interview questions. Do not treat page visits or an
-  automatic quiz result as proof of mastery or a teacher's grade.
-- Teacher assessment: theory 25, mechanisms 25, application 25, explanation 25 = 100 points.
-  Only record actual supplied answers/grades. Never invent completion or scores.
+- End the section with a self-check quiz. Alex removed the separate free-text/interview lesson;
+  do not recreate it or require written answers or instructor assessment unless explicitly requested.
+  Do not treat page visits or an automatic quiz result as proof of mastery. Never invent completion
+  or scores.
 
 ## Evidence and technical accuracy — mandatory
 
@@ -218,7 +235,8 @@ Read `docs/I18N.md` before changing site content or routes.
 - English is the default at `/` and every unprefixed page. Russian uses `/ru/`.
   Never redirect the root to Russian based on browser language or stored preference.
 - Keep the EN/RU switch beside the theme control; it must open the same page in the selected
-  language. Navigation stays within that language. Shared theme and learner state remain intact.
+  language. Use a dropdown showing only the current locale label when closed. Navigation stays
+  within that language. Shared theme and learner state remain intact.
 - Locale definitions live in `src/i18n/locales.ts`; dictionaries in `src/i18n/messages/`.
   New languages are registered here, not implemented with scattered en/ru conditionals.
 - For a bilingual release, publish equivalent approved content for registered languages;

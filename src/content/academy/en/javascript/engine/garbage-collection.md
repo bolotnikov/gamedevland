@@ -3,27 +3,39 @@
   "course": "javascript",
   "lesson": "engine",
   "order": 14,
-  "title": "GC looks for reachable objects",
+  "title": "GC finds reachable objects",
   "concept": "Reachability",
-  "description": "Garbage does not mean “an object that has not been used recently.”",
-  "takeaway": "Unreachability makes memory eligible for collection, but does not determine collection time.",
+  "description": "Garbage consists of objects the program can no longer access through references.",
+  "takeaway": "If no reference path from the roots leads to an object, GC can release its memory. The engine decides when that happens.",
   "sources": [
     {
       "title": "V8 · Orinoco GC",
       "url": "https://v8.dev/blog/trash-talk",
-      "note": "Reachability, generations, and parallel/concurrent collector work."
+      "note": "Following references from the roots: reachable objects are retained; unreachable objects can be collected."
+    },
+    {
+      "title": "ECMA-262 · PutValue",
+      "url": "https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-putvalue",
+      "note": "Assigning a new value to an object property. Writing null replaces the reference without deleting the object itself."
     }
   ],
-  "simulation": "gc",
+  "simulation": "reachability-graph",
   "locale": "en",
   "translationKey": "javascript/engine/garbage-collection"
 }
 ---
 
-A collector starts at roots, such as live execution state and global relationships, then follows references. Objects it can reach must be preserved. A cycle of two objects does not by itself make them immortal if there is no longer an external path to them.
 
-Our teaching graph contains a root, a scene, a player, and a temporary object. Let’s remove the scene relationship and run the **marking model** to see which nodes are no longer reachable.
+[The garbage collector (GC)](https://v8.dev/blog/trash-talk#marking) starts from the roots and follows references. The objects it finds are still accessible to the program, so it retains them. Memory occupied by the remaining objects can be released.
 
-Real [V8](https://v8.dev/blog/trash-talk) does much more: it accounts for generations and uses several techniques, including parallel and concurrent work. These reduce latency, but do not eliminate all pauses.
+<aside class="lesson-note" aria-labelledby="gc-roots-note-title">
+  <span class="lesson-note__label">Term</span><h3 id="gc-roots-note-title">Roots</h3>
+  <p>The starting points from which GC checks object references. Examples include the global object and the data of current function calls.</p>
+</aside>
 
-The button below **does not run the browser’s GC**. Assigning `x = null` does not guarantee that memory will be freed immediately. Both allocation frequency and data lifetime matter for frames; introduce pooling after measurement.
+The example contains the chain **root → scene → player**. These objects are accessible only through the connections shown.
+
+The buttons [replace a reference with `null`](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-putvalue):
+
+- **Scene → player:** the player becomes unreachable; the scene remains accessible.
+- **Root → scene:** both objects become unreachable.

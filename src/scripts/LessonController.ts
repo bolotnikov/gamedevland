@@ -5,7 +5,7 @@ const lessonStateSchema = z.object({
 	version: z.literal(1),
 	current: z.string().max(120),
 	completed: z.array(z.string().max(120)).max(100),
-	answers: z.string().max(200_000),
+	answers: z.string().max(200_000), // Retain legacy drafts when reading and saving existing progress.
 	quiz: z.record(z.string(), z.enum(['0', '1', '2'])),
 });
 type LessonState = z.infer<typeof lessonStateSchema>;
@@ -50,7 +50,6 @@ export class LessonController {
 				resume.textContent = this.i18n.t("Начать урок →");
 			}
 		});
-		this.setupAnswers();
 		this.setupQuiz();
 		document.addEventListener('keydown', (event) => {
 			if (!current || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
@@ -68,7 +67,7 @@ export class LessonController {
 			if (!raw) return fallback;
 			const decoded = lessonStateSchema.safeParse(JSON.parse(raw));
 			if (!decoded.success) return fallback;
-			return { ...decoded.data, completed: [...new Set(decoded.data.completed.filter((slug) => this.slugs.includes(slug)))] };
+			return { ...decoded.data, current: this.slugs.includes(decoded.data.current) ? decoded.data.current : '', completed: [...new Set(decoded.data.completed.filter((slug) => this.slugs.includes(slug)))] };
 		} catch { return fallback; }
 	}
 
@@ -90,32 +89,6 @@ export class LessonController {
 				resume.textContent = done === this.slugs.length ? this.i18n.t("Вернуться к уроку →") : this.i18n.t("Продолжить урок →");
 			}
 		}
-	}
-
-	private setupAnswers(): void {
-		const textarea = this.root?.querySelector<HTMLTextAreaElement>('[data-mentor-answers]');
-		if (!textarea) return;
-		textarea.value = this.state.answers;
-		const status = this.root?.querySelector('[data-answer-status]');
-		textarea.addEventListener('input', () => {
-			this.state.answers = textarea.value;
-			this.save();
-			if (status) status.textContent = this.storageAvailable ? this.i18n.t("Черновик сохранён в этом браузере.") : this.i18n.t("Хранилище недоступно. Перед выходом необходимо скачать или скопировать ответы.");
-		});
-		const text = () => this.i18n.t("GameDev.Land Academy — JavaScript Engine\nОтветы для разбора преподавателем\n\n{value0}", {value0: textarea.value});
-		this.root?.querySelector('[data-copy-answers]')?.addEventListener('click', async () => {
-			try { await navigator.clipboard.writeText(text()); if (status) status.textContent = this.i18n.t("Скопировано. Ответы можно вставить в чат для разбора."); }
-			catch { textarea.focus(); textarea.select(); if (status) status.textContent = this.i18n.t("Текст выделен. Для копирования доступно сочетание Ctrl/Cmd+C; также можно скачать .txt."); }
-		});
-		this.root?.querySelector('[data-download-answers]')?.addEventListener('click', () => {
-			const url = URL.createObjectURL(new Blob([text()], { type: 'text/plain;charset=utf-8' }));
-			const link = document.createElement('a');
-			link.href = url;
-			link.download = 'javascript-engine-answers.txt';
-			link.click();
-			window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-			if (status) status.textContent = this.i18n.t("Подготовлен файл с ответами.");
-		});
 	}
 
 	private setupQuiz(): void {

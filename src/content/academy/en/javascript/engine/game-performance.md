@@ -3,10 +3,10 @@
   "course": "javascript",
   "lesson": "engine",
   "order": 17,
-  "title": "From engine internals to game decisions",
-  "concept": "Engineering practice",
-  "description": "Measure first: startup, a hot path, or memory retention?",
-  "takeaway": "Optimization should address a confirmed problem; its effect must be checked in the target environment.",
+  "title": "Game performance",
+  "concept": "Practical diagnosis",
+  "description": "What to check when a game starts slowly, stutters, or uses more and more memory.",
+  "takeaway": "First, identify where the game spends time or memory. Then change the relevant part and repeat the same check.",
   "sources": [
     {
       "title": "Chrome DevTools · Performance",
@@ -16,7 +16,12 @@
     {
       "title": "Chrome DevTools · Memory",
       "url": "https://developer.chrome.com/docs/devtools/memory-problems",
-      "note": "Official tools for diagnosing memory use, leaks, and frequent collections."
+      "note": "Official tools for diagnosing memory use, leaks, and frequent garbage collections."
+    },
+    {
+      "title": "Chrome DevTools · Network",
+      "url": "https://developer.chrome.com/docs/devtools/network",
+      "note": "Inspecting file sizes and download times."
     }
   ],
   "simulation": "performance",
@@ -25,10 +30,21 @@
 }
 ---
 
-Understanding V8 helps formulate testable hypotheses. Slow startup suggests examining bundle size, parsing/compilation, and initialization. An expensive `update()` calls for locating the specific function and work structure. Memory growth between scenes calls for investigating object retention.
+If a game runs slowly, first determine **where the delay occurs**: loading files, executing code, or rendering frames.
 
-**These are different symptoms.** Rewriting objects for “correct hidden classes” need not fix a slow network startup. An object pool will not remove a listener that keeps an old scene alive.
+<aside class="lesson-note" aria-labelledby="devtools-note-title">
+  <span class="lesson-note__label">Term</span><h3 id="devtools-note-title">Chrome DevTools</h3>
+  <p>Chrome's built-in developer tools. They show what a page loads, where it spends time, and how much memory it uses.</p>
+</aside>
 
-For an experiment, we will fix the device and scenario, record [a profile](https://developer.chrome.com/docs/devtools/performance), change one meaningful factor, and compare results. We also need to account for warmup: initial execution and steady-state execution answer different questions.
+We use the following panels to investigate:
 
-The panel lists the next diagnostic step for each symptom. Any illustrative values are not benchmark results or promises of a speedup. The goal is to connect mechanisms with observable HTML5 game behavior.
+- **[Network](https://developer.chrome.com/docs/devtools/network):** which files the game loads, their sizes, and how long the downloads take.
+- **[Performance](https://developer.chrome.com/docs/devtools/performance):** a recording of the page's activity. It helps identify a slow function or measure the time spent rendering a frame.
+- **[Memory](https://developer.chrome.com/docs/devtools/memory-problems):** snapshots of objects in memory. Compare the state before opening a scene and after closing it to see which objects remain and what still refers to them.
+
+For example, if `window` still holds the closed scene's event handler, the scene may remain in memory. We examined this connection in the lesson on memory leaks. Increasing memory use alone does not prove a leak: we need to find objects that the game no longer needs but still retains.
+
+In the interactive diagram, we will select a problem and see where to start investigating.
+
+After changing the code, repeat the same actions on the same device and compare the results. For example: does the first scene open faster, has stuttering stopped, and have old scenes stopped accumulating in memory?

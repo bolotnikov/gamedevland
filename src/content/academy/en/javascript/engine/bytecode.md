@@ -3,10 +3,10 @@
   "course": "javascript",
   "lesson": "engine",
   "order": 6,
-  "title": "Bytecode: the virtual machine’s language",
+  "title": "Bytecode: instructions for Ignition",
   "concept": "AST → instructions",
-  "description": "An intermediate representation that is different from machine code.",
-  "takeaway": "V8 bytecode is an internal program representation; the CPU does not execute it as native instructions.",
+  "description": "How the bytecode generator turns an AST into instructions for Ignition.",
+  "takeaway": "Bytecode contains instructions for Ignition. The bytecode generator creates them from the AST produced by the parser.",
   "sources": [
     {
       "title": "V8 · Ignition",
@@ -16,16 +16,40 @@
     {
       "title": "V8 · Ignition design",
       "url": "https://v8.dev/blog/ignition-interpreter",
-      "note": "The motivation for bytecode and the design of the V8 interpreter."
+      "note": "The purpose of bytecode and the design of V8's interpreter."
+    },
+    {
+      "title": "V8 · Embedding the virtual machine",
+      "url": "https://v8.dev/docs/embed#advanced-guide",
+      "note": "The official documentation calls V8 itself a virtual machine and describes how to embed it in an application."
+    },
+    {
+      "title": "V8 · Generating bytecode from an AST",
+      "url": "https://v8.dev/blog/background-compilation#building-a-background-thread-bytecode-compiler",
+      "note": "The generator takes the parser's AST and produces a sequence of instructions for Ignition."
     }
   ],
-  "simulation": "bytecode",
   "locale": "en",
   "translationKey": "javascript/engine/bytecode"
 }
 ---
 
-Bytecode consists of compact instructions for a virtual machine. Instead of the source notation “add values,” there is a sequence of operations: obtain an argument, load a value, add, and return the result.
+
+Bytecode contains compact instructions for the **[Ignition](https://v8.dev/docs/ignition)** interpreter. They describe the operations to perform: obtain a value, add numbers, call a function, or return a result.
+
+<aside class="lesson-note" aria-labelledby="bytecode-generator-note-title">
+  <span class="lesson-note__label">Term</span><h3 id="bytecode-generator-note-title">Bytecode generator</h3>
+  <p><a href="https://v8.dev/blog/background-compilation#building-a-background-thread-bytecode-compiler">The V8 component that takes an AST from the parser and generates bytecode.</a> It walks the tree and writes instructions for the program's constructs.</p>
+</aside>
+
+<div class="bytecode-origin" role="img" aria-label="The parser builds an AST, the bytecode generator turns the tree into instructions, and Ignition executes them">
+  <div><strong>Parser</strong><span>Builds the AST</span></div><b aria-hidden="true">→</b><div class="is-generator"><strong>Bytecode generator</strong><span>AST → instructions</span></div><b aria-hidden="true">→</b><div><strong>Ignition</strong><span>Executes instructions</span></div>
+</div>
+
+<aside class="lesson-note" aria-labelledby="virtual-machine-note-title">
+  <span class="lesson-note__label">Term</span><h3 id="virtual-machine-note-title">Virtual machine</h3>
+  <p>A software system that executes JavaScript and manages memory and function calls. The term refers to <a href="https://v8.dev/docs/embed#advanced-guide">V8</a> itself: “engine” and “virtual machine” are two names for the same system here. <strong>Ignition</strong> is the bytecode interpreter within that system.</p>
+</aside>
 
 ```js
 function add(a, b) {
@@ -33,8 +57,6 @@ function add(a, b) {
 }
 ```
 
-The panel below shows **pseudobytecode**, not the output of a particular V8 version. Real [Ignition](https://v8.dev/docs/ignition) has an accumulator, virtual-machine registers, specialized instructions, and supporting data. Their format can change.
+For this function, the generator produces instructions whose meaning is: obtain `a`, add ` b`, and return the result. Bytecode describes these operations; Ignition executes them.
 
-Distinguish three things: **program text**, **bytecode for an interpreter**, and **machine code for a CPU**. A compact intermediate representation helps execution begin without immediately running an expensive optimizing compiler.
-
-The simulation uses arguments `2` and `3`. Let’s follow the instructions in order and determine which step produces the result. A general addition operation must still respect JavaScript’s type semantics.
+In the [next lesson](../interpreter/) we will step through these instructions and see how the result changes.

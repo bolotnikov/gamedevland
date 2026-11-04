@@ -4,8 +4,9 @@ Updated: 2026-11-03.
 
 ## Current delivery scope
 
-One catalog card: **Basic → Advanced JavaScript**. Only section 01 is implemented, with 20 lessons.
+One catalog card: **Advanced JavaScript** (**Продвинутый JavaScript** in Russian). Only section 01 is implemented, with 19 lessons.
 Each course has its own curriculum; each section has individual lesson pages with shared contents.
+Sections 02–11 are preserved as comments in `src/data/academy.ts` and are hidden from the public curriculum.
 Future topics should be added as real courses when requested, not empty catalog cards.
 
 ## JavaScript curriculum

@@ -37,11 +37,15 @@ JavaScript — язык программирования. Чтобы понят�
 
 ## ECMAScript: правила языка
 
+<a id="ecmascript-language-rules" class="translation-anchor" aria-hidden="true"></a>
+
 Основные правила JavaScript описаны в **[спецификации ECMAScript — ECMA-262](https://tc39.es/ecma262/multipage/)**. Она определяет синтаксис и поведение языка: как объявляются переменные, вызываются функции, работают объекты и операторы.
 
 Спецификация описывает, что должна делать программа. Она не требует определённого интерпретатора или компилятора.
 
 ## Движок: реализация языка
+
+<a id="engine-implementing-the-language" class="translation-anchor" aria-hidden="true"></a>
 
 **Движок JavaScript** — программа, которая реализует эти правила: подготавливает и исполняет код, управляет объектами и памятью. CPU выполняет машинные инструкции; движок организует выполнение JavaScript через интерпретацию или компиляцию.
 
@@ -67,6 +71,8 @@ JavaScript — язык программирования. Чтобы понят�
 **[V8](https://v8.dev/)** — один из таких движков. **[JavaScriptCore](https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html)** и **[SpiderMonkey](https://spidermonkey.dev/)** — другие реализации того же языка.
 
 ## Runtime: среда исполнения
+
+<a id="runtime-the-execution-environment" class="translation-anchor" aria-hidden="true"></a>
 
 **[Runtime](https://tc39.es/ecma262/multipage/overview.html#sec-hosts-and-implementations)** — окружение, в которое встроен движок. Среда организует запуск программы и предоставляет дополнительные API.
 
