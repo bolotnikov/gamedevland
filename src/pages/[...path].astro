@@ -11,6 +11,10 @@ import Academy from '../views/academy/index.astro';
 import Course from '../views/academy/javascript/index.astro';
 import Lesson from '../views/academy/javascript/engine/index.astro';
 import Step from '../views/academy/javascript/engine/[step].astro';
+import SdkCourse from '../views/academy/sdk/index.astro';
+import SdkSection from '../views/academy/sdk/section.astro';
+import SdkStep from '../views/academy/sdk/step.astro';
+import { sdkCourse } from '../data/sdkCourse';
 import { locales, type LocaleCode } from '../i18n/locales';
 import { Locale } from '../i18n/Locale';
 
@@ -19,6 +23,8 @@ type Route =
  | { kind: 'game'; entry: CollectionEntry<'games'> }
  | { kind: 'article'; entry: CollectionEntry<'articles'> }
  | { kind: 'tutorial'; entry: CollectionEntry<'tutorials'> }
+ | { kind: 'sdk-course' }
+ | { kind: 'sdk-section'; section: string }
  | { kind: 'step'; entry: CollectionEntry<'academy'>; steps: CollectionEntry<'academy'>[]; index: number };
 interface Props { route: Route }
 export async function getStaticPaths() {
@@ -26,6 +32,7 @@ export async function getStaticPaths() {
  const games = await getCollection('games', ({data}) => !data.draft);
  const tutorials = await getCollection('tutorials');
  const academy = await getCollection('academy');
+ const publishedAcademy = academy.filter(({data}) => !data.draft && (data.course !== 'sdk' || sdkCourse.sections.some((section) => section.slug === data.lesson && section.published)));
  const assertTranslations = (name: string, entries: readonly { id: string; data: { locale: LocaleCode; translationKey: string } }[]) => {
   const reference = entries.filter(({data}) => data.locale === 'en').map(({data})=>data.translationKey).sort();
   for (const language of locales) {
@@ -37,7 +44,11 @@ export async function getStaticPaths() {
  assertTranslations('articles', articles);
  assertTranslations('games', games);
  assertTranslations('tutorials', tutorials);
- assertTranslations('academy', academy);
+ assertTranslations('academy', publishedAcademy);
+ for (const entry of academy.filter(({data}) => data.draft)) {
+  if (entry.data.course !== 'sdk' || entry.data.locale !== 'ru') throw new Error(`Unsupported Academy draft: ${entry.id}`);
+  if (entry.id !== `${entry.data.locale}/${entry.data.translationKey}`) throw new Error(`Invalid draft identity: ${entry.id}`);
+ }
  const paths: { params: { path: string | undefined }; props: Props }[] = [];
  for (const language of locales) {
   const i18n = new Locale(language.code);
@@ -48,13 +59,31 @@ export async function getStaticPaths() {
   const series=new Set(localTutorials.map(({data})=>data.seriesSlug));
   for(const entry of articles.filter(({data})=>data.locale===language.code&&!series.has(data.translationKey))) add(`/articles/${entry.data.translationKey}`,{kind:'article',entry});
   for(const entry of localTutorials) add(`/articles/${entry.data.translationKey.replace(/\/index$/,'')}`,{kind:'tutorial',entry});
-  const steps=academy.filter(({data})=>data.locale===language.code).sort((a,b)=>a.data.order-b.data.order);
-  if(steps.some((step,index)=>step.data.order!==index+1))throw new Error(`Invalid step ordering for ${language.code}`);
-  for(const [index,entry] of steps.entries()) add(`/academy/${entry.data.translationKey}`,{kind:'step',entry,steps,index});
+  const visible=publishedAcademy.filter(({data})=>data.locale===language.code);
+  const groups = new Map<string, CollectionEntry<'academy'>[]>();
+  for (const entry of visible) {
+   const key = `${entry.data.course}/${entry.data.lesson}`;
+   const group = groups.get(key) ?? [];
+   group.push(entry);
+   groups.set(key, group);
+  }
+  for (const [key, entries] of groups) {
+   const steps=entries.sort((a,b)=>a.data.order-b.data.order);
+   if(steps.some((step,index)=>step.data.order!==index+1))throw new Error(`Invalid step ordering for ${language.code}/${key}`);
+   for(const [index,entry] of steps.entries()) add(`/academy/${entry.data.translationKey}`,{kind:'step',entry,steps,index});
+  }
+  if (groups.has('sdk/foundations')) {
+   add('/academy/sdk', {kind:'sdk-course'});
+   for (const section of sdkCourse.sections.filter((entry) => entry.published)) {
+    if (!groups.has(`sdk/${section.slug}`)) throw new Error(`Empty SDK section: ${section.slug}`);
+    add(`/academy/sdk/${section.slug}`, {kind:'sdk-section',section:section.slug});
+   }
+  }
  }
  return paths;
 }
 const { route } = Astro.props;
+
 ---
 {route.kind === 'home' && <Home/>}
 {route.kind === 'about' && <About/>}
@@ -66,4 +95,6 @@ const { route } = Astro.props;
 {route.kind === 'game' && <Game game={route.entry}/>}
 {route.kind === 'article' && <Article article={route.entry}/>}
 {route.kind === 'tutorial' && <Tutorial tutorial={route.entry}/>}
-{route.kind === 'step' && <Step step={route.entry} steps={route.steps} index={route.index}/>}
+{route.kind === 'sdk-course' && <SdkCourse/>}
+{route.kind === 'sdk-section' && <SdkSection sectionSlug={route.section}/>}
+{route.kind === 'step' && (route.entry.data.course === 'sdk' ? <SdkStep step={route.entry} steps={route.steps} index={route.index}/> : <Step step={route.entry} steps={route.steps} index={route.index}/>)}

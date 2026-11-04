@@ -1,0 +1,26 @@
+---
+import { sdkApi } from '../../data/sdkApi';
+const guides = {
+	assets: ['foundations/asset-manifest', 'Ресурсы и наборы'],
+	audio: ['presentation/audio', 'Звук'],
+	commands: ['scene-flow/commands', 'Команды'],
+	configs: ['foundations/config-store', 'Конфигурация и сохранения'],
+	core: ['foundations/game-config', 'Запуск движка'],
+	di: ['scene-flow/dependency-injection', 'Внедрение зависимостей'],
+	errors: ['scene-flow/diagnostics', 'Диагностика'],
+	events: ['scene-flow/events', 'События'],
+	fsm: ['scene-flow/fsm', 'Конечный автомат'],
+	input: ['presentation/input', 'Ввод'],
+	interactions: ['presentation/drag', 'Перетаскивание'],
+	layouts: ['presentation/layouts', 'Вёрстка и узлы'],
+	physics: ['presentation/physics', 'Физика'],
+	particles: ['presentation/particles', 'Частицы'],
+	platforms: ['integrations/platforms', 'Платформы'],
+	prefabs: ['presentation/prefabs', 'Префабы'],
+	scenes: ['scene-flow/scenes', 'Сцены'],
+	screen: ['presentation/screen', 'Адаптивность'],
+	tween: ['presentation/tweens', 'Анимации'],
+	validation: ['foundations/schema-decoder', 'Проверка данных'],
+} as const;
+---
+<section class="sdk-api" aria-labelledby="sdk-api-heading"><h2 id="sdk-api-heading">Публичные экспорты движка</h2><p>20 модулей · {sdkApi.reduce((sum, group) => sum + group.exports.length, 0)} экспортов. В каждом модуле можно открыть урок с примерами. Метка «тип» обозначает описание данных для TypeScript.</p>{sdkApi.map((group) => <details class="sdk-api__module" id={`api-${group.name}`}><summary><code>@gamedevland/engine/{group.name}</code><span>{group.exports.length}</span></summary><a class="sdk-api__guide" href={`/ru/academy/sdk/${guides[group.name][0]}/`}>{guides[group.name][1]} →</a><ul>{group.exports.map((item) => <li><code>{item.name}</code><small>{item.kind === 'type' ? 'тип' : 'API'}</small></li>)}</ul></details>)}<h3>Инструменты Vite</h3><p><code>createGameViteConfig</code>, <code>GameViteConfig</code>, <code>GameViteConfigFactory</code>, <code>GameViteConfigFactoryOptions</code></p><p>Команды <code>gamedevland poki pack</code> и <code>gamedevland poki upload</code> разобраны в <a href="/ru/academy/sdk/integrations/build-tooling/">уроке о сборке</a>.</p></section>

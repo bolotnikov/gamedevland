@@ -1,0 +1,43 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import CodeBlockEnhancer from '../../../components/article/CodeBlockEnhancer.astro';
+import SdkProgress from '../../../components/academy/SdkProgress.astro';
+import { sdkCourse } from '../../../data/sdkCourse';
+import { Locale } from '../../../i18n/Locale';
+import '../../../styles/academy.css';
+import '../../../styles/sdk-course.css';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+interface Props { step: CollectionEntry<'academy'>; steps: CollectionEntry<'academy'>[]; index: number }
+const { step, steps, index } = Astro.props;
+const { Content } = await render(step);
+const section = sdkCourse.sections.find(({slug}) => slug === step.data.lesson);
+if (!section) throw new Error(`Unknown SDK section: ${step.data.lesson}`);
+const sectionIndex = sdkCourse.sections.indexOf(section);
+const previous = steps[index - 1];
+const next = steps[index + 1];
+const slug = step.data.translationKey.split('/').at(-1);
+const base = i18n.path(`/academy/sdk/${section.slug}/`);
+// SDK implementation references remain research evidence, not required course reading.
+const sources = step.data.sources.filter(({ url }) => !url.startsWith('https://github.com/gamedevland/sdk/'));
+const takeaway = typeof step.data.takeaway === 'string' ? [step.data.takeaway] : step.data.takeaway ?? [];
+---
+<Layout title={`${step.data.title} — GameDevLand SDK`} description={step.data.description} canonicalPath={`/academy/${step.data.translationKey}/`}>
+	<Header title="GameDevLand SDK" description="" current="academy" navigationOnly/>
+	<main class="lesson-shell container" data-lesson-step={slug} data-lesson-id={`sdk:${section.slug}`} data-lesson-path={`/academy/sdk/${section.slug}`} data-step-slugs={steps.map(({data}) => data.translationKey.split('/').at(-1)).join(',')} data-completed-message={t("Все уроки раздела отмечены. К материалам можно вернуться в любое время.")}>
+		<aside class="lesson-sidebar"><a class="lesson-sidebar__back" href={i18n.path("/academy/sdk/")}>{t("← К программе курса")}</a><div class="lesson-sidebar__heading"><span class="academy-eyebrow">{t('SDK / Раздел {value0}', {value0: String(sectionIndex + 1).padStart(2, '0')})}</span><a href={base}>{t(section.title)}</a><SdkProgress total={steps.length}/></div><details class="lesson-toc" open><summary>{t("Содержание раздела ")}<span>{t('Уроков: {value0}', {value0: steps.length})}</span></summary><nav aria-label={t("Уроки раздела")}>{steps.map((entry) => <a href={i18n.path(`/academy/${entry.data.translationKey}/`)} class:list={['lesson-toc__link', entry.id === step.id && 'is-current']} aria-current={entry.id === step.id ? 'page' : undefined} data-step-link={entry.data.translationKey.split('/').at(-1)}><span>{String(entry.data.order).padStart(2,'0')}</span><strong>{entry.data.title}</strong><span class="step-done" aria-label={t("Урок отмечен")}>✓</span></a>)}</nav></details></aside>
+		<div class="lesson-content"><nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Обучение")}</a><span>/</span><a href={i18n.path("/academy/sdk/")}>SDK</a><span>/</span><a href={base}>{t(section.title)}</a></nav><div class="step-topline"><span class="academy-eyebrow">{step.data.concept}</span><span class="step-position">{String(step.data.order).padStart(2,'0')} <span>/ {steps.length}</span></span></div>
+			<article class="lesson-article"><h1>{step.data.title}</h1><p class="step-description">{step.data.description}</p><div class="article-prose lesson-prose"><Content/></div></article>
+			{takeaway.length > 0 && <aside class="lesson-takeaway" aria-label={t("Основной вывод")}><span>{t("Основной вывод")}</span><ul>{takeaway.map((item) => <li>{item}</li>)}</ul></aside>}
+			{sources.length > 0 && <section class="lesson-sources" aria-label={t("Источники")}><h2>{t("Источники ")}<span>↗</span></h2>{sources.map((source) => <a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.title}<span>↗</span></strong><span>{source.note}</span></a>)}</section>}
+			<nav class="step-pagination" aria-label={t("Управление уроком")}><a class="academy-button is-secondary" href={previous ? i18n.path(`/academy/${previous.data.translationKey}/`) : base}>← {previous ? t('Назад') : t('О разделе')}</a><span>{t('{value0} из {value1}', {value0: step.data.order, value1: steps.length})}</span>{next ? <a class="academy-button" href={i18n.path(`/academy/${next.data.translationKey}/`)} data-complete-step>{t("Отметить и продолжить →")}</a> : <button class="academy-button" type="button" data-complete-step>{t("Отметить урок ✓")}</button>}</nav>
+			<p class="completion-message" aria-live="polite" data-completion-message></p>
+			{!next && <a class="sdk-next-section" href={i18n.path('/academy/sdk/')}>{t('К программе курса →')}</a>}
+			<noscript><p>{t("Текст, схемы и навигация доступны без JavaScript. Для сохранения отметок необходим JavaScript.")}</p></noscript>
+		</div>
+	</main><Footer/><CodeBlockEnhancer/>
+	<script>import { LessonController } from '../../../scripts/LessonController'; new LessonController();</script>
+</Layout>

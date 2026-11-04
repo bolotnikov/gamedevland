@@ -1,0 +1,14 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+---
+<div class="sdk-mark" role="img" aria-label={t("GameDevLand SDK — общая основа для разных HTML5-игр: пазлов, платформеров, гонок и других жанров")}>
+	<div class="sdk-mark__games" aria-hidden="true">
+		<div class="sdk-mark__game is-puzzle"><div class="sdk-mark__scene"><i></i><i></i><i></i></div><span>{t("Пазл")}</span></div>
+		<div class="sdk-mark__game is-platformer"><div class="sdk-mark__scene"><i class="sdk-mark__player"></i><i class="sdk-mark__platform"></i><i class="sdk-mark__platform"></i></div><span>{t("Платформер")}</span></div>
+		<div class="sdk-mark__game is-racing"><div class="sdk-mark__scene"><i class="sdk-mark__road"></i><i class="sdk-mark__car"></i></div><span>{t("Гонки")}</span></div>
+	</div>
+	<div class="sdk-mark__connections" aria-hidden="true"><i></i><i></i><i></i></div>
+	<div class="sdk-mark__base" aria-hidden="true"><strong>GameDevLand SDK</strong><span>{t("Общая основа HTML5-игр")}</span><small>{t("Сцены · ресурсы · ввод · звук")}</small></div>
+</div>

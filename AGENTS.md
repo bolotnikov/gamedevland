@@ -126,6 +126,12 @@ the AST and scanner examples establish the standard for useful interaction.
   release through commit, push, and the existing GitHub Pages CI/CD pipeline. This authorization
   supersedes the local-only restriction for this release; it does not authorize future releases.
 
+- On 2026-11-04 Alex approved SDK section 01 “Startup and data”, explicitly requested its
+  English translation and bilingual production release through commit, push and GitHub Pages
+  CI/CD. Publish only section 01 (12 lessons); show SDK sections 02–04 as disabled In Progress
+  cards with no links or arrows. Translate shared course UI and the course illustration too.
+  This authorization applies to this release only; later SDK sections remain unpublished.
+
 - The current Academy work is LOCAL ONLY until Alex explicitly authorizes publication.
 - Run a local server for review when requested; keep an accessible local URL for Alex.
 - Do not push, deploy, or change hosting as part of lesson authoring or fixes.
@@ -161,10 +167,56 @@ the AST and scanner examples establish the standard for useful interaction.
 - Preserve the approved Event Loop v2 reference's strengths: full theory, step navigation,
   Call Stack simulation, visible intermediate states, responsive layout, light/dark themes.
 - Explain concepts before tests; never start with a diagnostic quiz.
-- End the section with a self-check quiz. Alex removed the separate free-text/interview lesson;
+- End JavaScript sections with a self-check quiz. SDK sections have no quizzes or assessment
+  lessons. Alex removed the separate free-text/interview lesson;
   do not recreate it or require written answers or instructor assessment unless explicitly requested.
   Do not treat page visits or an automatic quiz result as proof of mastery. Never invent completion
   or scores.
+
+## SDK course version policy
+
+Teach the current SDK API without release numbers or changelog framing in public lessons,
+diagrams, takeaways, quizzes, installation commands, reference headings and course cards.
+Install current SDK packages without a version suffix. Preserve verified source links and
+internal audit records; update examples and explanations when the SDK changes.
+
+## SDK material scope and interaction
+
+The SDK course is practical teaching material and API documentation. Do not add end-of-section
+quizzes, knowledge-check lessons or assessment forms. This overrides general Academy assessment
+requirements for this course only; preserve the approved JavaScript self-check.
+Use an interactive element only when manipulating it clarifies a complex mechanism or an API
+nuance better than prose, code and a static graphic. Do not add controls merely to demonstrate
+basic validation or draw a board from width/height. Keep the removed JSON board editor out of
+this material. Default to concise explanations, real code examples and static graphics.
+Keep each SDK lesson close to one desktop screen, with at most a little scrolling. A short
+explanation and lightweight diagram usually suffice. Do not turn an overview into a long
+walkthrough with many config/code excerpts; use focused later lessons for the details.
+
+## SDK course voice and examples
+
+Present GameDevLand SDK as a universal SDK that can be connected to HTML5 game projects
+across genres. Teach practical use of its API without tying the course or its overview graphics
+to Block Puzzle. Specific games may illustrate individual API mechanisms; they do not define
+the SDK or serve as a required course project. Avoid tours of engine implementation files.
+When the reason for an API mechanism is not obvious, begin with a short, visibly separate
+“Зачем это нужно” callout using the shared lesson-note style. Explain the practical problem
+and benefit before the API details. Move an existing motivating introduction into the callout
+instead of repeating it. Do not add a redundant block to obvious setup instructions.
+Explain what we add or call and what happens as a result.
+Use natural, concise tutorial prose; avoid formulaic introductions such as “teaching example
+implementing the contract from types.ts”. New examples need a clear purpose, not a formal
+provenance label on every snippet. Do not present invented classes as existing game code.
+
+When quoting Block Puzzle code, link the exact game file next to the excerpt. Verify the
+linked revision; indicate omissions or adaptations briefly and naturally when needed.
+One link to the SDK repository root in the first lesson is enough. Do not add implementation
+file links to every API name, example or reference entry. Verify API behavior against SDK
+sources during research and retain that evidence in content metadata; these implementation
+references are excluded from the rendered SDK bibliography. This SDK-specific policy takes
+precedence over the general public source-link requirement below. Relevant game files and
+other useful official references remain visible under “Источники”. External links open in
+a new tab with noopener/noreferrer through the shared renderer.
 
 ## Evidence and technical accuracy — mandatory
 
@@ -193,6 +245,34 @@ the AST and scanner examples establish the standard for useful interaction.
   adding an official source (e.g. official docs of a newly introduced library).
 
 ## UI and accessibility
+
+### Educational graphics (Alex's latest update, 2026-11-04)
+
+- Use visual-first explanations: each lesson combines clear theory, real code examples,
+  and meaningful educational graphics. Match the graphic to the mechanism.
+- Follow the approved JavaScript Engine visual language: semantic HTML/CSS, clear grouping,
+  short labels, connected flows, distinct color accents, and concept-specific compositions.
+  Alex rejected the generated SVG flowcharts and withdrew the SVG-first requirement.
+  Do not reintroduce SVG diagrams or replace approved graphics with SVG during this work.
+- Use HTML/CSS and JavaScript components, with Canvas where frequent redraws justify it.
+  Keep graphics self-contained, with readable typography, meaningful arrows, and a visible
+  hierarchy. Avoid monotonous sequences of rounded rectangles filled with prose. Verify
+  both themes and narrow screens; labels and connectors must remain readable.
+- Separate responsibility maps from execution traces. A responsibility graphic must explain
+  who owns a concrete decision; an execution graphic must show one concrete input/result.
+  Do not mix game rules, scene orchestration, visual structure, and a catalog of engine systems
+  in one overview. Use distinct groups, visible heading hierarchy, and purposeful spacing;
+  an enclosing border alone does not establish that hierarchy.
+- Keep useful interactive diagrams, including user-authored input. Actions should change an
+  input, result, execution state, or hypothesis. For complex processes, expose intermediate
+  states with suitable previous/next/reset or play/pause controls. Add only controls that
+  serve the actual interaction; static relationships do not need playback buttons.
+- Highlight the executing instruction and active objects when tracing execution. Keep motion
+  bounded and respect reduced motion. Use labels as well as color for state changes.
+- Verify technical claims against primary sources. Identify conceptual diagrams and simulated
+  execution, and distinguish them from actual engine/runtime measurements.
+- Preserve approved JavaScript Engine lessons during SDK authoring. Proposed visual revisions
+  belong in a separate Russian Markdown review document; no SVG migration is requested.
 
 - Shared site-wide light/dark theme; use semantic CSS tokens and persist one global preference.
 - All existing blog/portfolio pages must remain legible in both themes.

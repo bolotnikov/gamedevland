@@ -15,7 +15,13 @@ for (const collection of ['articles', 'games', 'tutorials', 'academy']) {
  const originals = files(join(base, 'en')).filter((file) => file.endsWith('.md'));
  const expected = originals.map((file) => relative(join(base, 'en'), file)).sort();
  for (const language of languages) {
-  const actual = files(join(base, language)).filter((file) => file.endsWith('.md')).map((file) => relative(join(base, language), file)).sort();
+  const actual = files(join(base, language)).filter((file) => file.endsWith('.md')).filter((file) => {
+   if (collection !== 'academy' || !relative(join(base, language), file).startsWith('sdk/')) return true;
+   const text = readFileSync(file, 'utf8');
+   if (!/^\s*"draft": true,?$/m.test(text)) return true;
+   assert.ok(language === 'ru', `Untranslated SDK drafts must remain Russian-only: ${file}`);
+   return false;
+  }).map((file) => relative(join(base, language), file)).sort();
   assert.deepEqual(actual, expected, `${collection}/${language}: missing or extra translations`);
  }
  for (const file of originals) {

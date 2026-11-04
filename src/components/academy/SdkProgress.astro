@@ -1,0 +1,12 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+interface Props { total: number }
+const { total } = Astro.props;
+---
+<div class="lesson-progress sdk-progress">
+	<div><span>{t("Отмечено уроков")}</span><strong data-progress-count>0 / {total}</strong></div>
+	<progress value="0" max={total} data-lesson-progress aria-label={t("Отмечено уроков")}></progress>
+	<small data-progress-status>{t("Отметки хранятся в этом браузере")}</small>
+</div>

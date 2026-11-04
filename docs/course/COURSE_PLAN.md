@@ -37,3 +37,21 @@ groups are now called sections; their former steps are the individual lessons.
 
 Likely later courses include TypeScript, game architecture, PixiJS, Three.js, game patterns,
 data structures, and AI-assisted engineering. Confirm their concrete syllabus when authoring.
+
+## GameDevLand SDK — foundations bilingual release (2026-11-04)
+
+| Section | Lessons | Scope |
+| --- | --- | --- |
+| 01 — Foundations | 12 | Architecture, existing project, entry-point walkthrough, GameConfig, boot/loading walkthrough, assets, decoding, configs, persistence, localization, new project |
+| 02 — Scene flow | 12 | Scenes, DI/providers/scopes, services/domain, events, FSM, commands, placement, async ownership, runtime/pause, diagnostics |
+| 03 — Presentation and runtime systems | 15 | Layouts, nodes/rendering, screen, components, actions, prefabs, input/drag, tweens, audio, particles/filters, physics, API reference |
+| 04 — Platforms and external APIs | 3 | Platform adapters, loading signals, Poki build/tooling |
+
+Every lesson has primary-source references and an HTML/CSS infographic. The FSM queue trace
+demonstrates execution order. There are no quizzes or JSON board editor;
+this material focuses on practical API use. Add interaction only for a complex mechanism or
+API nuance that benefits from user action.
+The API reference indexes 338 exports across 20 public Engine modules and the Vite entry point.
+Section 01 is approved and translated for bilingual publication. Sections 02–04 remain
+Russian drafts: visible In Progress cards, no public routes. The course illustration, shared
+UI and all 12 foundations lessons are available in English and Russian.

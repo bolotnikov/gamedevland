@@ -45,7 +45,28 @@ claim. Distinguish ECMA-262 semantics from V8 internals and browser host behavio
 anchors when practical. Independently authored articles are not allowed references.
 Date-sensitive details must be rechecked. Mark conceptual diagrams/pseudobytecode explicitly.
 
+For SDK lessons, teach practical API use in plain tutorial prose. Present the SDK as a universal
+foundation for HTML5 games across genres; a specific game is an API example, not a required
+course project. Keep each lesson close to
+one desktop screen, with only a little scrolling. Prefer a short text block and lightweight
+diagram; avoid long chains of excerpts and repeated summaries in overview lessons. Start concept lessons with a
+short “Зачем это нужно” callout when the purpose needs explanation. Describe the problem and
+benefit, then introduce the API. Reuse existing motivation without duplicating it; setup
+instructions with an obvious goal do not require an extra callout. Introduce code by what it
+does, not by a formal “teaching contract” label. Link the exact Block Puzzle file alongside
+quoted game code, with a brief natural indication when adapting or shortening it. Do not
+present new examples as existing game files. One SDK repository root link in the first lesson
+is enough; implementation links belong in research metadata, not repeated public reading.
+The SDK renderer hides those implementation references and labels useful game/official links
+“Источники”. The shared renderer supplies external-link target/rel attributes.
+
 ## Interaction
+
+Use the approved JavaScript Engine graphics as the reference: HTML/CSS, concise labels,
+clear relationships, distinct color accents, and concept-specific layouts. Alex withdrew
+the SVG-first requirement after reviewing the SDK diagrams; do not use SVG diagrams for
+this work. Preserve useful JavaScript/Canvas interactions, including user input. Graphics
+must be self-contained, theme-aware, readable on narrow screens, and technically accurate.
 
 First decide whether interaction helps explain the mechanism. Use a static infographic for
 relationships that can be understood at a glance. No interaction for recoloring alone, no
@@ -74,6 +95,10 @@ External references use a new tab; the shared Markdown renderer sets target and 
 - Links to official evidence after each step.
 
 ## Assessment
+
+SDK material is practical API documentation: omit quizzes and knowledge-check lessons. Add
+interaction only when it clarifies a complex mechanism or API nuance; basic JSON validation
+does not need an interactive form. The rules below apply to JavaScript assessments.
 
 Self-check: targeted questions, explanatory feedback, links to remediation, no invented grade.
 Do not require written answers or instructor assessment unless Alex explicitly requests them.

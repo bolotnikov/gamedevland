@@ -23,6 +23,8 @@ const {
 } = Astro.props;
 
 const currentPath = i18n.path(canonicalPath ?? Astro.url.pathname);
+const availableLocales = Astro.locals.availableLocales ?? locales.map(({ code }) => code);
+const pageLocales = locales.filter(({ code }) => availableLocales.includes(code));
 const canonicalUrl = Astro.site ? new URL(currentPath, Astro.site).toString() : undefined;
 const imageUrl = image && Astro.site ? new URL(image, Astro.site).toString() : undefined;
 ---
@@ -52,10 +54,11 @@ const imageUrl = image && Astro.site ? new URL(image, Astro.site).toString() : u
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-		{locales.map((language) => <link rel="alternate" hreflang={language.code} href={new URL(i18n.path(currentPath, language.code), Astro.site ?? Astro.url.origin)}/>)}
-		<link rel="alternate" hreflang="x-default" href={new URL(i18n.path(currentPath, 'en'), Astro.site ?? Astro.url.origin)}/>
+		{Astro.locals.academyDraft && <meta name="robots" content="noindex, nofollow"/>}
+		{pageLocales.map((language) => <link rel="alternate" hreflang={language.code} href={new URL(i18n.path(currentPath, language.code), Astro.site ?? Astro.url.origin)}/>)}
+		{availableLocales.includes('en') && <link rel="alternate" hreflang="x-default" href={new URL(i18n.path(currentPath, 'en'), Astro.site ?? Astro.url.origin)}/>}
 		<meta property="og:locale" content={i18n.dateLocale.replace('-', '_')}/>
-		{locales.filter(({code})=>code!==i18n.code).map((language)=><meta property="og:locale:alternate" content={language.dateLocale.replace('-','_')}/>)}
+		{pageLocales.filter(({code})=>code!==i18n.code).map((language)=><meta property="og:locale:alternate" content={language.dateLocale.replace('-','_')}/>)}
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content={ogType} />

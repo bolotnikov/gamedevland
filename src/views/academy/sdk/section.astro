@@ -1,0 +1,32 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import SdkProgress from '../../../components/academy/SdkProgress.astro';
+import { sdkCourse } from '../../../data/sdkCourse';
+import { Content } from '../../../i18n/Content';
+import { Locale } from '../../../i18n/Locale';
+import '../../../styles/academy.css';
+import '../../../styles/sdk-course.css';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+interface Props { sectionSlug: string }
+const { sectionSlug } = Astro.props;
+const section = sdkCourse.sections.find(({slug}) => slug === sectionSlug);
+if (!section) throw new Error(`Unknown SDK section: ${sectionSlug}`);
+const steps = await Content.steps(i18n.code, 'sdk', section.slug);
+const first = steps[0];
+if (!first) throw new Error(`Empty SDK section: ${section.slug}`);
+const position = sdkCourse.sections.indexOf(section) + 1;
+---
+<Layout title={`${t(section.title)} — GameDevLand SDK`} description={t(section.description)} canonicalPath={`/academy/sdk/${section.slug}/`}>
+	<Header title="GameDevLand SDK" description="" current="academy" navigationOnly/>
+	<main class="academy-page container" data-lesson-overview data-lesson-id={`sdk:${section.slug}`} data-lesson-path={`/academy/sdk/${section.slug}`} data-step-slugs={steps.map(({data}) => data.translationKey.split('/').at(-1)).join(',')}>
+		<nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Обучение")}</a><span>/</span><a href={i18n.path("/academy/sdk/")}>SDK</a><span>/</span><span>{t('Раздел {value0}', {value0: String(position).padStart(2, '0')})}</span></nav>
+		<div class="lesson-intro"><div><span class="academy-eyebrow">{t('GameDevLand SDK / Раздел {value0}', {value0: String(position).padStart(2, '0')})}</span><h1>{t(section.title)}</h1><p>{t(section.outcome)}</p><div class="academy-chips"><span class="academy-chip">{t('Уроков: {value0}', {value0: steps.length})}</span><span class="academy-chip">{t("Код · схемы · примеры")}</span></div><a class="academy-button" href={i18n.path(`/academy/${first.data.translationKey}/`)} data-resume-link>{t("Начать раздел →")}</a></div><aside class="lesson-intro__map"><h2>{t("Перед началом")}</h2><p>{t(section.prerequisites)}</p><SdkProgress total={steps.length}/></aside></div>
+		<button type="button" class="progress-reset" data-reset-progress>{t("Сбросить отметки раздела")}</button>
+		<div class="academy-section-heading"><h2>{t("Уроки раздела")}</h2><span>{t("Можно открыть любой урок")}</span></div>
+		<ol class="lesson-step-grid">{steps.map((step) => <li><a href={i18n.path(`/academy/${step.data.translationKey}/`)} data-step-link={step.data.translationKey.split('/').at(-1)}><span class="step-grid__number">{String(step.data.order).padStart(2,'0')}</span><span><small>{step.data.concept}</small><strong>{step.data.title}</strong></span><span class="step-done" aria-label={t("Урок отмечен")}>✓</span></a></li>)}</ol>
+	</main><Footer/>
+	<script>import { LessonController } from '../../../scripts/LessonController'; new LessonController();</script>
+</Layout>

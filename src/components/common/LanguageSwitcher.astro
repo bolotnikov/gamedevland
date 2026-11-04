@@ -3,6 +3,7 @@ import { Locale } from '../../i18n/Locale';
 import { locales } from '../../i18n/locales';
 const i18n = Locale.forPath(Astro.url.pathname);
 const currentLanguage = locales.find(({ code }) => code === i18n.code);
+const availableLocales = Astro.locals.availableLocales ?? locales.map(({ code }) => code);
 if (!currentLanguage) throw new Error(`Unknown current locale: ${i18n.code}`);
 ---
 <details class="language-switcher" data-language-switcher>
@@ -11,7 +12,7 @@ if (!currentLanguage) throw new Error(`Unknown current locale: ${i18n.code}`);
 		<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
 	</summary>
 	<nav class="language-switcher__menu" aria-label={i18n.t('Language')}>
-		{locales.map((language) => <a href={i18n.path(Astro.url.pathname, language.code)} lang={language.code} hreflang={language.code} aria-current={language.code === i18n.code ? 'page' : undefined} aria-label={language.name} data-language-link><span>{language.label}</span><span>{language.name}</span>{language.code === i18n.code && <span class="language-switcher__check" aria-hidden="true">✓</span>}</a>)}
+		{locales.filter(({ code }) => availableLocales.includes(code)).map((language) => <a href={i18n.path(Astro.url.pathname, language.code)} lang={language.code} hreflang={language.code} aria-current={language.code === i18n.code ? 'page' : undefined} aria-label={language.name} data-language-link><span>{language.label}</span><span>{language.name}</span>{language.code === i18n.code && <span class="language-switcher__check" aria-hidden="true">✓</span>}</a>)}
 	</nav>
 </details>
 <script>

@@ -84,20 +84,22 @@ const academy = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/academy' }),
 	schema: z.object({
 		...localized,
-		course: z.literal('javascript'),
-		lesson: z.literal('engine'),
+		course: z.enum(['javascript', 'sdk']),
+		lesson: z.enum(['engine', 'foundations', 'scene-flow', 'presentation', 'integrations']),
+		draft: z.boolean().default(false),
 		order: z.number().int().positive(),
 		title: z.string(),
 		concept: z.string(),
 		description: z.string(),
 		takeaway: z.union([z.string(), z.array(z.string())]).nullish(),
-		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'token-scanner', 'ast', 'lazy', 'bytecode', 'interpreter', 'interpreter-trace', 'jit', 'deopt', 'stack', 'frames', 'heap', 'heap-trace', 'references', 'reference-trace', 'gc', 'reachability-graph', 'leak', 'threads', 'performance', 'recap']).optional(),
+		simulation: z.enum(['runtime', 'pipeline', 'tokens', 'token-scanner', 'ast', 'lazy', 'bytecode', 'interpreter', 'interpreter-trace', 'jit', 'deopt', 'stack', 'frames', 'heap', 'heap-trace', 'references', 'reference-trace', 'gc', 'reachability-graph', 'leak', 'threads', 'performance', 'recap', 'sdk-placement']).optional(),
 		assessment: z.literal('quiz').optional(),
 		sources: z.array(z.object({
 			title: z.string(),
 			url: z.url().refine((value) => {
 				const url = new URL(value);
-				return url.protocol === 'https:' && ['tc39.es', 'v8.dev', 'developer.chrome.com', 'html.spec.whatwg.org', 'dom.spec.whatwg.org', '262.ecma-international.org'].includes(url.hostname);
+				const sdkSource = url.hostname === 'github.com' && /^\/gamedevland\/(sdk|block-puzzle)(\/|$)/.test(url.pathname);
+				return url.protocol === 'https:' && (sdkSource || ['tc39.es', 'v8.dev', 'developer.chrome.com', 'html.spec.whatwg.org', 'dom.spec.whatwg.org', '262.ecma-international.org'].includes(url.hostname));
 			}, 'Academy sources must use official documentation or specifications.'),
 			note: z.string(),
 		})).min(1),

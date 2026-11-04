@@ -16,6 +16,12 @@ const externalLinkOptions = {
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://gamedev.land',
+	vite: {
+		server: {
+			// Poll source and content-store files when native file events are missed.
+			watch: { usePolling: true, interval: 300 },
+		},
+	},
 	markdown: {
 		shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
 		rehypePlugins: [rehypeRaw, [rehypeExternalLinks, externalLinkOptions]],

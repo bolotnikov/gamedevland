@@ -12,8 +12,9 @@ type LessonState = z.infer<typeof lessonStateSchema>;
 
 export class LessonController {
 	private readonly i18n = Locale.fromDocument();
-	private readonly key = 'gamedevland:academy:javascript:engine:v1';
 	private readonly root = document.querySelector<HTMLElement>('[data-lesson-step], [data-lesson-overview]');
+	private readonly key = `gamedevland:academy:${this.root?.dataset['lessonId'] ?? 'javascript:engine'}:v1`;
+	private readonly path = this.root?.dataset['lessonPath'] ?? '/academy/javascript/engine';
 	private readonly slugs = this.root?.dataset['stepSlugs']?.split(',') ?? [];
 	private state = this.read();
 	private storageAvailable = true;
@@ -35,7 +36,7 @@ export class LessonController {
 			const message = this.root?.querySelector('[data-completion-message]');
 			if (message && current === this.slugs.at(-1)) {
 				message.textContent = this.state.completed.length === this.slugs.length
-					? this.i18n.t("Все шаги просмотрены. Ответы можно отправить в чат для разбора и оценки.")
+					? this.root?.dataset['completedMessage'] ?? this.i18n.t("Все шаги просмотрены. Ответы можно отправить в чат для разбора и оценки.")
 					: this.i18n.t("Отмечено {value0} из {value1} шагов. К оставшимся можно вернуться через оглавление.", {value0: this.state.completed.length, value1: this.slugs.length});
 			}
 		});
@@ -46,7 +47,7 @@ export class LessonController {
 			this.render();
 			const resume = this.root?.querySelector<HTMLAnchorElement>('[data-resume-link]');
 			if (resume) {
-				resume.href = this.i18n.path(`/academy/javascript/engine/${this.slugs[0] ?? ''}/`);
+				resume.href = this.i18n.path(`${this.path}/${this.slugs[0] ?? ''}/`);
 				resume.textContent = this.i18n.t("Начать урок →");
 			}
 		});
@@ -85,7 +86,7 @@ export class LessonController {
 		if (this.slugs.includes(this.state.current)) {
 			const resume = this.root?.querySelector<HTMLAnchorElement>('[data-resume-link]');
 			if (resume) {
-				resume.href = this.i18n.path(`/academy/javascript/engine/${this.state.current}/`);
+				resume.href = this.i18n.path(`${this.path}/${this.state.current}/`);
 				resume.textContent = done === this.slugs.length ? this.i18n.t("Вернуться к уроку →") : this.i18n.t("Продолжить урок →");
 			}
 		}

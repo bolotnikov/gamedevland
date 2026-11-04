@@ -1,0 +1,27 @@
+---
+const codeStart = 'playing: {\n  on: {\n    [BlockPuzzleEvents.PlacementRequested]: {\n';
+const codeEnd = '    },\n  },\n}';
+---
+<section class="sdk-placement" data-sdk-placement aria-labelledby="placement-title">
+	<h2 id="placement-title">Один запрос размещения</h2><p>Учебная трассировка порядка FSM. Нажатие выполняет одну стадию; события сервиса попадают в очередь. Правила поля здесь не вычисляются.</p>
+	<fieldset><legend>Ответ сервиса на запрос</legend><label><input type="radio" name="placement-result" value="accepted" checked/> Размещение принято, ходы есть</label><label><input type="radio" name="placement-result" value="rejected"/> Размещение отклонено</label></fieldset>
+	<div class="sdk-placement__state"><span>Состояние FSM</span><strong data-fsm-state>playing</strong></div>
+	<div class="sdk-fsm-map" aria-label="Состояния одного хода">
+		<div class="sdk-fsm-node tone-cyan is-current" data-fsm-node="playing"><span>Ожидание хода</span><strong>playing</strong><small>Принимает запрос игрока</small></div>
+		<div class="sdk-fsm-edge"><span>↓</span><code>PlacementRequested</code><small>команда → смена состояния</small></div>
+		<div class="sdk-fsm-node tone-violet" data-fsm-node="resolvingPlacement"><span>Результат размещения</span><strong>resolvingPlacement</strong><small>Обрабатывает ответ сервиса</small></div>
+		<div class="sdk-fsm-branches"><div class="sdk-fsm-branch is-rejected"><code>PlacementRejected</code><span>↶ <strong>playing</strong></span><small>Отказ · поле не изменилось</small></div><div class="sdk-fsm-branch is-accepted"><code>PlacementCompleted</code><span>↓</span><div class="sdk-fsm-node tone-green" data-fsm-node="checkingMoves"><strong>checkingMoves</strong><small>Проверка доступных ходов</small></div><code>MovesAvailable</code><span>↶ <strong>playing</strong></span></div></div>
+	</div>
+	<p>Ожидают в очереди: <code data-fsm-queue>нет событий</code></p>
+	<pre aria-label="Переход из конфигурации Block Puzzle"><code>{codeStart}
+<span data-fsm-code="target">      target: 'resolvingPlacement',</span>
+<span data-fsm-code="command">      actions: ['PlaceBlockCommand'],</span>
+{codeEnd}</code></pre>
+	<ol class="sdk-placement__log" data-fsm-log aria-label="Порядок выполнения"><li>FSM ожидает PlacementRequested.</li></ol>
+	<div class="sdk-placement__controls"><button type="button" class="academy-button" data-fsm-advance>Отправить PlacementRequested</button><button type="button" class="academy-button is-secondary" data-fsm-previous disabled>← Назад</button><button type="button" class="academy-button is-secondary" data-fsm-reset>Сбросить</button></div>
+	<p class="sdk-placement__status" aria-live="polite" data-fsm-status>Команда ещё не запущена.</p>
+</section>
+<script>
+	import { SdkPlacementController } from '../../scripts/SdkPlacementController';
+	document.querySelectorAll<HTMLElement>('[data-sdk-placement]').forEach((root) => new SdkPlacementController(root));
+</script>

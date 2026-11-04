@@ -87,3 +87,91 @@ includes diagram text, exercises, metadata, and feedback. Existing English versi
 until translation is requested. The site's English default and `/ru/` URL scheme are unchanged.
 This authoring order supersedes earlier simultaneous EN/RU authoring requirements. Read
 `docs/I18N.md` for the distinction between draft authoring and bilingual release checks.
+
+## SDK course (2026-11-04)
+
+Alex requested a complete independent Russian course for GameDevLand SDK. The local draft
+has 42 lessons in four sections (12 foundations, 12 scene flow, 15 presentation/runtime,
+3 platform integrations).
+It documents Engine 0.0.8 and Vite 0.1.2 at SDK commit 9976b87 / sdk-2026-11-04.
+Block Puzzle examples use public revision d1dd4e3 (Engine 0.0.5 / Vite 0.0.4); adapted examples
+are labelled separately. Existing articles remain unchanged. English translation and publication
+are not authorized. SDK routes and the Russian catalog card exist only in Astro development mode.
+
+Alex withdrew the SVG-first requirement after viewing the initial diagrams. SDK graphics now
+follow the approved JavaScript Engine HTML/CSS style, with useful user input and interactions.
+See ENGINE_VISUAL_REVIEW_RU.md for proposed improvements across all 19 Engine lessons;
+the approved lessons have not been rewritten.
+
+The SDK overview keeps the module map and a single short API-boundary example. Project
+setup remains in block-puzzle.md; the main.ts / Engine.run walkthrough has its own lesson
+(entry-point.md), immediately after setup. Keep these lessons focused when revising them.
+
+SDK lessons describe the current API without release numbers or changelog framing. This
+applies to prose, code installation commands, diagrams, takeaways, quizzes, the API reference
+and course cards. Install current SDK packages without a version suffix. Preserve verified
+source links and internal audit records; update the course when the SDK changes. Identify
+original Block Puzzle excerpts accurately without turning lessons into migration guides.
+
+Foundations teach local engine/game behavior only. Keep platform loading signals, adverts,
+external SDK adapters and platform packaging in the separate integrations section. The basic
+boot lesson covers resource readiness and opening the game scene; it does not teach platform APIs.
+
+## SDK tutorial voice — 2026-11-04
+
+Alex clarified that the course teaches practical SDK API use, primarily through Block Puzzle.
+Use short, natural introductions describing the action and result; remove formal per-snippet
+contract/provenance commentary. Quoted game code keeps an adjacent link to its actual game
+file. New examples must not be presented as code already in Block Puzzle. Link the SDK root
+once in the first lesson; implementation source links remain internal research evidence and
+are excluded from the rendered SDK bibliography and API map. The API map links to relevant
+course lessons rather than engine implementation declarations.
+
+## SDK documentation focus — 2026-11-04
+
+Alex removed the JSON board-size editor from the schema-decoder lesson and all four SDK
+knowledge-check lessons. This material teaches practical SDK use as tutorial/documentation,
+without end-of-section assessment. Retain useful execution traces, but add interaction only
+when it explains a complex mechanism or API nuance more clearly than static text/code/graphics.
+The existing JavaScript assessments remain unchanged.
+
+## SDK motivation — 2026-11-04
+
+Alex requested an explicit motivation block at the start of schema-decoder, config-store and
+persistence, and wherever another SDK mechanism needs its purpose explained. Use the shared
+green lesson-note with “Зачем это нужно”: a concise practical problem and benefit before the
+API. Avoid repeating the callout in the next paragraph or adding filler to clear setup steps.
+
+## SDK startup sequence — 2026-11-04
+
+Alex rejected the expanded boot walkthrough as too long. Keep boot.md to one short text
+callout and a lightweight three-stage static diagram: Engine.run/preload → boot service →
+game transition. Link relevant game files in the diagram; omit detailed config/code excerpts,
+API tables, additional takeaway and a repeated bibliography. Aim for roughly one desktop
+screen, with only a little scrolling. Do not expand this lesson into a full loading tutorial.
+Keep platform readiness signals in integrations.
+
+The foundations order is architecture → block-puzzle → entry-point → game-config → boot →
+asset-manifest → asset-bundles → schema-decoder → config-store → persistence → locales →
+new-project. The empty-project lesson concludes the section rather than interrupting the
+Block Puzzle launch story. URLs and slug-based progress identities are unchanged.
+
+## SDK universal positioning — 2026-11-04
+
+Alex clarified that GameDevLand SDK is a universal SDK for HTML5 games across genres.
+This supersedes the earlier Block Puzzle-first positioning. Course descriptions and overview
+graphics must show the reusable SDK foundation, without implying one required game project.
+Specific games may remain examples of individual API mechanisms. The shared catalog/course
+graphic now connects several game genres to one SDK; existing lesson excerpts remain intact.
+
+## SDK foundations bilingual release — 2026-11-04
+
+Alex approved all 12 lessons of SDK foundations and explicitly authorized English translation,
+commit, push and production CI/CD. Shared Academy/course/section UI, accessibility labels,
+source notes and the puzzle/platformer/racing course illustration are bilingual. Preserve
+the approved Russian content and all code examples, IDs, links and numerical values.
+
+SDK sections 02–04 remain Russian drafts in the repository, with no generated public routes.
+Both course pages show them as noninteractive cards labelled In Progress (В разработке),
+without hrefs, keyboard link targets or arrows. Only foundations is available in either locale.
+Publication is controlled by section metadata and published content, not development mode.
