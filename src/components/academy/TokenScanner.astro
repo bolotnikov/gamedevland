@@ -1,0 +1,66 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+// Fixed teaching example shared by both languages.
+const tokens = [
+	{ value: 'const', separator: ' ', description: t("Ключевое слово"), note: t("const — ключевое слово объявления константы.") },
+	{ value: 'hp', separator: ' ', description: t("Идентификатор"), note: t("hp — идентификатор: имя переменной.") },
+	{ value: '=', separator: ' ', description: t("Знак присваивания"), note: t("= — знак присваивания. Сканер распознаёт его, но пока ничего не присваивает.") },
+	{ value: '10', separator: '', description: t("Числовой литерал"), note: t("10 — числовой литерал.") },
+	{ value: ';', separator: '', description: t("Конец объявления"), note: t("; завершает это объявление. Все пять токенов выделены; значение hp ещё не вычислялось.") },
+];
+const counts = Array.from({ length: tokens.length + 1 }, (_, count) => count);
+---
+<section class="simulation token-scanner" data-simulation aria-label={t("Как сканер выделяет токены")}>
+	<h2>{t("Как сканер выделяет токены")}</h2>
+	<p class="simulation__hint">{t("Одно нажатие — один токен.")}</p>
+	{counts.map((count) => (
+		<div data-simulation-state hidden={count !== 0} data-next-label={count === tokens.length ? t("Все токены выделены") : t("Выделить следующий токен →")} data-state-counter={t("Выделено {value0} из {value1}", {value0: count, value1: tokens.length})}>
+			<div class="token-scanner__source">
+				<h3>{t("Исходный текст")}</h3>
+				<code aria-label="const hp = 10;">{tokens.map((token, index) => <><span class:list={{'is-recognized': index < count, 'is-current': index === count - 1}}>{token.value}</span>{token.separator}</>)}</code>
+			</div>
+			<div class="token-scanner__output">
+				<h3>{t("Токены")}</h3>
+				{count === 0 ? <p class="token-scanner__empty">{t("Пока ни одного токена.")}</p> : <ol aria-label={t("Распознанные токены")}>
+					{tokens.slice(0, count).map((token, index) => <li class:list={{'is-current': index === count - 1}}><code>{token.value}</code><span>{token.description}</span></li>)}
+				</ol>}
+			</div>
+			<p class="simulation__note" data-state-note>{tokens[count - 1]?.note ?? t("Исходный текст ещё не разобран. Начнём с первого токена.")}</p>
+		</div>
+	))}
+	<div class="simulation__controls token-scanner__controls">
+		<button class="academy-button is-secondary" type="button" data-simulation-reset>{t("↺ Сначала")}</button>
+		<span class="simulation__count" data-simulation-count>{t("Выделено 0 из 5")}</span>
+		<button class="academy-button" type="button" data-simulation-next>{t("Выделить следующий токен →")}</button>
+	</div>
+	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
+</section>
+
+<style>
+	.token-scanner h3 { font-size: 11px; line-height: 1.7; margin: 0 0 12px; color: var(--color-muted-foreground); font-weight: 500; }
+	.token-scanner__source { padding: 18px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-code); margin: 20px 0; }
+	.token-scanner__source > code { display: block; font: 500 clamp(18px, 2.6vw, 28px)/1.8 ui-monospace, monospace; white-space: pre-wrap; color: var(--color-muted-foreground); }
+	.token-scanner__source code > span { padding: 2px; border-bottom: 2px solid transparent; border-radius: 4px; }
+	.token-scanner__source .is-recognized { color: var(--color-foreground); }
+	.token-scanner__source code > .is-current { color: var(--color-cyan); border-bottom-color: var(--color-cyan); background: color-mix(in srgb, var(--color-cyan) 15%, var(--color-code)); }
+	.token-scanner__output { min-height: 112px; }
+	.token-scanner__output ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+	.token-scanner__output li { min-width: 0; display: flex; flex-direction: column; gap: 9px; padding: 14px 12px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-code); }
+	.token-scanner__output li.is-current { border-color: var(--color-cyan); background: color-mix(in srgb, var(--color-cyan) 7%, var(--color-code)); }
+	.token-scanner__output li > code { font: 500 18px/1.6 ui-monospace, monospace; color: var(--color-foreground); }
+	.token-scanner__output li.is-current > code { color: var(--color-cyan); }
+	.token-scanner__output li > span, .token-scanner__empty { color: var(--color-muted-foreground); font-size: 11px; line-height: 1.7; }
+	.token-scanner__empty { padding: 18px; border: 1px dashed var(--color-border); border-radius: 8px; margin: 0; }
+	.token-scanner .simulation__note { min-height: 42px; margin: 18px 0; padding: 0; }
+	.token-scanner__controls { flex-wrap: wrap; }
+	@media (max-width: 600px) {
+		.token-scanner__source { padding: 14px; }
+		.token-scanner__output ol { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+		.token-scanner__output li { flex-direction: row; align-items: center; gap: 12px; padding: 8px 12px; }
+		.token-scanner__output li > code { flex: 0 0 60px; font-size: 15px; }
+		.token-scanner__controls { display: grid; grid-template-columns: 1fr auto; }
+		.token-scanner__controls [data-simulation-next] { grid-column: 1 / -1; width: 100%; }
+	}
+</style>

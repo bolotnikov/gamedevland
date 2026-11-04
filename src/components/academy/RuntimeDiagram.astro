@@ -1,0 +1,30 @@
+---
+import type { Simulation } from '../../data/engineSimulations';
+import type { Locale } from '../../i18n/Locale';
+
+interface Props { state: Simulation['states'][number]; i18n: Locale }
+const { state, i18n } = Astro.props;
+const t = i18n.t.bind(i18n);
+const [language, engine, host] = state.columns;
+const languageItem = language?.items[0];
+const engineItem = engine?.items[0];
+const hostItem = host?.items[0];
+if (!languageItem || !engineItem || !hostItem) throw new Error('Runtime diagram requires language, engine, and host nodes.');
+---
+<div class="runtime-map" role="group" aria-label={t('Язык, движок и среда исполнения')}>
+	<div class:list={['runtime-map__language', 'runtime-map__node', `tone-${languageItem.tone ?? 'cyan'}`]}>
+		<span class="runtime-map__index" aria-hidden="true">01</span>
+		<div><small>{language.label}</small><strong>{languageItem.label}</strong><p>{languageItem.detail}</p></div>
+		<span class="runtime-map__symbol" aria-hidden="true">{ }</span>
+	</div>
+	<div class="runtime-map__connector"><span aria-hidden="true">↓</span>{t('Движок реализует правила языка')}</div>
+	<div class:list={['runtime-map__host', `tone-${hostItem.tone ?? 'cyan'}`]}>
+		<div class="runtime-map__host-heading"><span class="runtime-map__index" aria-hidden="true">03</span><div><small>{host.label}</small><strong>{hostItem.label}</strong><p>{hostItem.detail}</p></div></div>
+		<div class:list={['runtime-map__engine', 'runtime-map__node', `tone-${engineItem.tone ?? 'cyan'}`]}>
+			<span class="runtime-map__index" aria-hidden="true">02</span>
+			<div><small>{engine.label}</small><strong>{engineItem.label}</strong><p>{engineItem.detail}</p></div>
+			<span class="runtime-map__symbol" aria-hidden="true">V8</span>
+		</div>
+		<p class="runtime-map__caption">{t('Среда встраивает движок и предоставляет внешние API')}</p>
+	</div>
+</div>

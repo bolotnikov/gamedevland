@@ -1,0 +1,138 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+interface Props { variant: 'heap' | 'references' }
+const { variant } = Astro.props;
+// Fixed teaching states show language behavior, not the browser's physical memory.
+const canReassign = variant === 'references';
+const updatedHp = canReassign ? 50 : 80;
+const lines = [
+	'const player = { hp: 100 };',
+	`${canReassign ? 'let' : 'const'} target = player;`,
+	`target.hp = ${updatedHp};`,
+	...(canReassign ? ['target = null;'] : []),
+];
+const notes = [
+	t("Строки примера ещё не выполнены. Начнём с создания объекта."),
+	t("В куче создан объект #1 со свойством hp: 100. Переменная player получила ссылку на него."),
+	t("В target скопировано объектное значение из player. Теперь обе переменные ссылаются на #1. Второй объект не создаётся."),
+	t("По ссылке из target движок обращается к объекту #1 и изменяет его свойство hp: 100 → {value0}. Обе ссылки сохранились, поэтому player.hp и target.hp читают {value1}.", {value0: updatedHp, value1: updatedHp}),
+	t("Значение target заменено на null. Только её ссылка исчезла. player по-прежнему ссылается на объект #1; сам объект и его hp не изменились."),
+];
+const counts = Array.from({ length: lines.length + 1 }, (_, count) => count);
+---
+<section class="simulation heap-trace" data-simulation aria-label={t("Выполнение кода: переменные и объект в куче")}>
+	<h2>{t("Выполнение по строкам")}</h2>
+	<p class="simulation__hint">{t("Интерактивная схема. #1 — условная метка объекта, не адрес памяти.")}</p>
+	{counts.map((count) => {
+		const created = count >= 1;
+		const copied = count >= 2;
+		const changed = count === 3;
+		const cleared = canReassign && count === 4;
+		const hp = count >= 3 ? updatedHp : 100;
+		const nextLabel = count === lines.length ? t("Все строки выполнены") : t("Выполнить строку {value0} →", {value0: count + 1});
+		return <div data-simulation-state hidden={count !== 0} data-next-label={nextLabel} data-state-counter={t("Выполнено {value0} из {value1}", {value0: count, value1: lines.length})}>
+			<ol class="heap-trace__source" aria-label={t("Код примера")}>
+				{lines.map((line, index) => <li class:list={{'is-current': index === count - 1, 'is-next': index === count, 'is-executed': index < count}} aria-current={index === count - 1 ? 'step' : undefined}>
+					<span class="heap-trace__line-number" aria-hidden="true">{index + 1}</span><code>{line}</code>
+					<span class="heap-trace__line-status">{index === count - 1 ? t("✓ Выполнена") : index < count ? '✓' : index === count ? t("Следующая") : ''}</span>
+				</li>)}
+			</ol>
+			<div class="heap-trace__memory">
+				<div class="heap-trace__variables">
+					<h3>{t("Переменные")}</h3>
+					<div class:list={['heap-trace__variable', !created && 'is-pending', count === 1 && 'is-changed']}>
+						<code>player</code><span>{created ? t("Ссылка на #1") : t("Строка ещё не выполнена")}</span>
+						{created && <b class="heap-trace__arrow" aria-label={t("ссылается на объект #1")}>→</b>}
+					</div>
+					<div class:list={['heap-trace__variable', !copied && 'is-pending', cleared && 'is-null', (count === 2 || cleared) && 'is-changed', changed && 'is-accessed']}>
+						<code>target</code><span>{cleared ? t("null · ссылки больше нет") : copied ? t("Ссылка на #1") : t("Строка ещё не выполнена")}</span>
+						{copied && !cleared && <b class="heap-trace__arrow" aria-label={t("ссылается на объект #1")}>→</b>}
+						{cleared && <small>{t("Было: ссылка на #1")}</small>}
+					</div>
+				</div>
+				<div class="heap-trace__heap">
+					<h3>{t("Heap · куча")}</h3>
+					{created ? <div class:list={['heap-trace__object', count === 1 && 'is-created']}>
+						<strong>{t("Объект #1")}</strong><span>{count === 1 ? t("Выделена память под объект") : t("Тот же объект · копии нет")}</span>
+						<div class:list={['heap-trace__property', changed && 'is-changed']}><code>hp:</code>{changed && <><del>100</del><span aria-label={t("теперь")}>→</span></>}<b>{hp}</b></div>
+					</div> : <div class="heap-trace__empty">{t("Объект примера ещё не создан")}</div>}
+				</div>
+			</div>
+			<dl class="heap-trace__readings" aria-label={t("Какие значения доступны после выполненной строки")}>
+				<div><dt><code>player.hp</code></dt><dd>{created ? hp : '—'}</dd></div>
+				<div><dt><code>target.hp</code></dt><dd>{cleared ? t("Недоступно: target — null") : copied ? hp : '—'}</dd></div>
+			</dl>
+			<p class="simulation__note" data-state-note>{notes[count]}</p>
+		</div>;
+	})}
+	<div class="simulation__controls heap-trace__controls">
+		<div><button class="academy-button is-secondary" type="button" data-simulation-reset>{t("↺ Сначала")}</button><button class="academy-button is-secondary" type="button" data-simulation-previous disabled>{t("← Назад")}</button></div>
+		<span class="simulation__count" data-simulation-count>{t("Выполнено 0 из")} {lines.length}</span>
+		<button class="academy-button" type="button" data-simulation-next>{t("Выполнить строку 1 →")}</button>
+	</div>
+	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
+</section>
+
+<style>
+	.heap-trace__source { list-style: none; margin: 20px 0; padding: 10px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-code); }
+	.heap-trace__source li { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 9px 10px; border: 1px solid transparent; border-radius: 6px; color: var(--color-muted-foreground); }
+	.heap-trace__source code { font: 12px/1.8 ui-monospace, monospace; overflow-wrap: anywhere; }
+	.heap-trace__line-number, .heap-trace__line-status { font-size: 10px; line-height: 1.8; }
+	.heap-trace__source .is-executed { color: var(--color-foreground); }
+	.heap-trace__source .is-next { border-style: dashed; border-color: var(--color-border); }
+	.heap-trace__source .is-current { border-color: var(--color-green); background: color-mix(in srgb, var(--color-green) 9%, var(--color-code)); }
+	.heap-trace__source .is-current .heap-trace__line-status { color: var(--color-green); }
+	.heap-trace__memory { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); align-items: stretch; gap: 44px; }
+	.heap-trace h3 { margin: 0 0 12px; font-size: 12px; line-height: 1.7; font-weight: 500; color: var(--color-muted-foreground); }
+	.heap-trace__variables { display: grid; grid-template-rows: auto 1fr 1fr; gap: 12px; }
+	.heap-trace__variables h3 { margin: 0; }
+	.heap-trace__variable { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 14px; border: 1px solid color-mix(in srgb, var(--color-cyan) 45%, var(--color-border)); border-radius: 9px; background: color-mix(in srgb, var(--color-cyan) 5%, var(--color-code)); }
+	.heap-trace__variable code { font: 500 17px/1.6 ui-monospace, monospace; color: var(--color-cyan); }
+	.heap-trace__variable > span, .heap-trace__variable small { color: var(--color-muted-foreground); font-size: 11px; line-height: 1.7; }
+	.heap-trace__variable small { text-decoration: line-through; }
+	.heap-trace__variable.is-pending, .heap-trace__variable.is-null { background: var(--color-code); border-color: var(--color-border); border-style: dashed; }
+	.heap-trace__variable.is-pending code, .heap-trace__variable.is-null code { color: var(--color-muted-foreground); }
+	.heap-trace__arrow { position: absolute; top: 50%; right: -35px; transform: translateY(-50%); font-size: 27px; line-height: 1; color: var(--color-cyan); font-weight: 400; }
+	.heap-trace__variable.is-accessed, .heap-trace__variable.is-changed { border-style: solid; border-color: var(--color-green); }
+	.heap-trace__variable.is-accessed .heap-trace__arrow { color: var(--color-green); }
+	.heap-trace__heap { padding: 16px; border: 1px dashed color-mix(in srgb, var(--color-violet) 50%, var(--color-border)); border-radius: 12px; background: color-mix(in srgb, var(--color-violet) 4%, var(--color-code)); }
+	.heap-trace__object, .heap-trace__empty { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; min-height: 166px; padding: 16px 12px; border: 1px solid var(--color-violet); border-radius: 9px; background: var(--color-code); }
+	.heap-trace__object > strong { font-size: 16px; line-height: 1.7; color: var(--color-violet); }
+	.heap-trace__object > span, .heap-trace__empty { font-size: 11px; line-height: 1.7; text-align: center; color: var(--color-muted-foreground); }
+	.heap-trace__empty { border-color: var(--color-border); border-style: dashed; }
+	.heap-trace__object.is-created { border-color: var(--color-green); }
+	.heap-trace__property { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; padding: 10px; border: 1px solid transparent; border-radius: 7px; font: 22px/1.5 ui-monospace, monospace; color: var(--color-foreground); }
+	.heap-trace__property b { font-weight: 500; }
+	.heap-trace__property del, .heap-trace__property > span { font-size: 16px; color: var(--color-muted-foreground); }
+	.heap-trace__property.is-changed { border-color: var(--color-green); background: color-mix(in srgb, var(--color-green) 8%, var(--color-code)); }
+	.heap-trace__property.is-changed b { color: var(--color-green); }
+	.heap-trace__readings { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 0; }
+	.heap-trace__readings > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; padding: 10px 14px; background: var(--color-code); border: 1px solid var(--color-border); border-radius: 8px; }
+	.heap-trace__readings dt { font-size: 12px; line-height: 1.7; color: var(--color-muted-foreground); }
+	.heap-trace__readings dd { margin: 0; color: var(--color-foreground); font-size: 13px; line-height: 1.7; }
+	.heap-trace .simulation__note { min-height: 64px; margin: 16px 0; padding: 0; }
+	.heap-trace__controls { flex-wrap: wrap; }
+	.heap-trace__controls > div { display: flex; gap: 6px; }
+	@media (max-width: 600px) {
+		.heap-trace { padding: 16px; }
+		.heap-trace__source { padding: 6px; }
+		.heap-trace__source li { grid-template-columns: 12px minmax(0, 1fr); gap: 2px 6px; padding: 8px 6px; }
+		.heap-trace__source code { font-size: 11px; }
+		.heap-trace__line-status { grid-column: 2; min-height: 18px; }
+		.heap-trace__memory { gap: 27px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+		.heap-trace__variable { padding: 10px 6px; }
+		.heap-trace__variable code { font-size: 14px; }
+		.heap-trace__variable > span, .heap-trace__variable small { font-size: 10px; }
+		.heap-trace__arrow { right: -24px; font-size: 22px; }
+		.heap-trace__heap { padding: 10px 6px; }
+		.heap-trace__object, .heap-trace__empty { padding: 12px 4px; }
+		.heap-trace__object > strong { font-size: 13px; }
+		.heap-trace__object > span { font-size: 10px; }
+		.heap-trace__property { gap: 4px; padding: 6px 2px; font-size: 19px; }
+		.heap-trace__readings { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+		.heap-trace__controls { display: grid; grid-template-columns: 1fr auto; }
+		.heap-trace__controls [data-simulation-next] { grid-column: 1 / -1; width: 100%; }
+	}
+</style>

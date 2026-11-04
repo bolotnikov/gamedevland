@@ -1,0 +1,75 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+// Teaching pseudobytecode shared by both languages; these are not V8 opcodes.
+const instructions = [
+	{ code: 'LOAD a', action: t("Загрузить a"), effect: '— → 2' },
+	{ code: 'ADD b', action: t("Прибавить b"), effect: '2 + 3 → 5' },
+	{ code: 'RETURN', action: t("Вернуть значение"), effect: t("Возвращено 5") },
+];
+const states = [
+	{ value: '—', before: undefined, note: t("Аргументы заданы: a = 2, b = 3. В аккумуляторе пока нет значения."), next: t("Выполнить LOAD a →") },
+	{ value: '2', before: '—', note: t("Ignition прочитал LOAD a. Обработчик записал значение a — число 2 — в аккумулятор."), next: t("Выполнить ADD b →") },
+	{ value: '5', before: '2', note: t("Обработчик ADD b прибавил значение b — число 3. В аккумуляторе теперь 5."), next: t("Выполнить RETURN →") },
+	{ value: '5', before: undefined, note: t("Обработчик RETURN вернул значение аккумулятора — 5. Вызов функции завершён."), next: t("Вызов завершён") },
+];
+---
+<section class="simulation interpreter-trace" data-simulation aria-label={t("Выполнение байткода функции add")}>
+	<h2>{t("Выполнение add(2, 3)")}</h2>
+	<pre class="interpreter-trace__source"><code>function add(a, b) {'{'}
+  return a + b;
+{'}'}
+add(2, 3);</code></pre>
+	<p class="simulation__hint">{t("Учебный псевдобайткод: названия инструкций условные. Одно нажатие — одна инструкция.")}</p>
+	{states.map((state, index) => (
+		<div data-simulation-state hidden={index !== 0} data-next-label={state.next} data-state-counter={`${index} / 3`}>
+			<ol class="interpreter-trace__instructions" aria-label={t("Инструкции байткода и их выполнение")}>
+				{instructions.map((instruction, line) => (
+					<li class:list={{'is-executed': line < index, 'is-latest': line === index - 1, 'is-next': line === index}}>
+						<div><code>{instruction.code}</code><small>{line < index ? t("✓ Выполнена") : line === index ? t("→ Следующая") : t("Ожидает")}</small></div>
+						<span>{line < index ? instruction.effect : instruction.action}</span>
+					</li>
+				))}
+			</ol>
+			<div class="interpreter-trace__value">
+				<span>{index === 3 ? t("Результат функции") : t("Аккумулятор")}</span>
+				<div>{state.before !== undefined && <><span>{state.before}</span><span aria-label={t("теперь")}>→</span></>}<strong>{state.value}</strong></div>
+			</div>
+			<p class="simulation__note" data-state-note>{state.note}</p>
+		</div>
+	))}
+	<div class="simulation__controls interpreter-trace__controls">
+		<button class="academy-button is-secondary" type="button" data-simulation-reset>{t("↺ Сначала")}</button>
+		<span class="simulation__count" data-simulation-count>0 / 3</span>
+		<button class="academy-button" type="button" data-simulation-next>{t("Выполнить LOAD a →")}</button>
+	</div>
+	<span class="sr-only" aria-live="polite" data-simulation-announcement></span>
+</section>
+
+<style>
+	.interpreter-trace__source { margin: 18px 0; padding: 14px 16px; border-radius: 8px; background: var(--color-code); color: var(--color-foreground); white-space: pre-wrap; font: 12px/1.8 ui-monospace, monospace; }
+	.interpreter-trace__source code { font: inherit; }
+	.interpreter-trace__instructions { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 8px; }
+	.interpreter-trace__instructions li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 16px; border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-muted-foreground); }
+	.interpreter-trace__instructions code { font: 600 13px/1.7 ui-monospace, monospace; }
+	.interpreter-trace__instructions small { display: block; margin-top: 3px; font-size: 10px; line-height: 1.7; }
+	.interpreter-trace__instructions li > span { font-size: 13px; line-height: 1.7; }
+	.interpreter-trace__instructions .is-next { border-style: dashed; border-color: var(--color-cyan); }
+	.interpreter-trace__instructions .is-next code { color: var(--color-cyan); }
+	.interpreter-trace__instructions .is-executed { color: var(--color-foreground); }
+	.interpreter-trace__instructions .is-latest { border-color: var(--color-green); background: color-mix(in srgb, var(--color-green) 7%, var(--color-card)); }
+	.interpreter-trace__instructions .is-latest > span { color: var(--color-green); font-weight: 600; }
+	.interpreter-trace__value { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; margin-top: 12px; border-bottom: 1px solid var(--color-border); }
+	.interpreter-trace__value > span { font-size: 12px; color: var(--color-muted-foreground); }
+	.interpreter-trace__value > div { display: flex; align-items: center; gap: 12px; font: 24px/1.4 ui-monospace, monospace; }
+	.interpreter-trace__value strong { font-weight: 600; color: var(--color-green); }
+	.interpreter-trace__value div > span { color: var(--color-muted-foreground); font-size: 18px; }
+	.interpreter-trace .simulation__note { margin: 14px 0 20px; padding: 0; min-height: 44px; }
+	.interpreter-trace__controls { flex-wrap: wrap; }
+	@media (max-width: 600px) {
+		.interpreter-trace__instructions li { padding: 10px 12px; }
+		.interpreter-trace__controls { display: grid; grid-template-columns: 1fr auto; }
+		.interpreter-trace__controls [data-simulation-next] { grid-column: 1 / -1; width: 100%; }
+	}
+</style>

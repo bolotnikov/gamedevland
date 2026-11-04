@@ -1,0 +1,10 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+---
+<div class="engine-mark" aria-hidden="true">
+	<div class="engine-mark__orbit orbit-one"></div><div class="engine-mark__orbit orbit-two"></div>
+	<div class="engine-mark__chip"><span class="chip-label">{t("INSIDE THE ENGINE")}</span><strong>{t("JS")}</strong><span class="chip-code">{t("parse · execute · optimize")}</span></div>
+	<span class="engine-mark__tag tag-ast">{t("AST ")}<i>↗</i></span><span class="engine-mark__tag tag-jit">{t("JIT ")}<i>⚡</i></span><span class="engine-mark__tag tag-v8">{t("V8 ")}<i>●</i></span>
+</div>

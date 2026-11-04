@@ -1,0 +1,69 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Home from '../views/index.astro';
+import About from '../views/about.astro';
+import Services from '../views/services.astro';
+import Games from '../views/games/index.astro';
+import Game from '../views/games/[slug].astro';
+import Article from '../views/articles/[slug].astro';
+import Tutorial from '../views/Tutorial.astro';
+import Academy from '../views/academy/index.astro';
+import Course from '../views/academy/javascript/index.astro';
+import Lesson from '../views/academy/javascript/engine/index.astro';
+import Step from '../views/academy/javascript/engine/[step].astro';
+import { locales, type LocaleCode } from '../i18n/locales';
+import { Locale } from '../i18n/Locale';
+
+type Route =
+ | { kind: 'home' | 'about' | 'services' | 'games' | 'academy' | 'course' | 'lesson' }
+ | { kind: 'game'; entry: CollectionEntry<'games'> }
+ | { kind: 'article'; entry: CollectionEntry<'articles'> }
+ | { kind: 'tutorial'; entry: CollectionEntry<'tutorials'> }
+ | { kind: 'step'; entry: CollectionEntry<'academy'>; steps: CollectionEntry<'academy'>[]; index: number };
+interface Props { route: Route }
+export async function getStaticPaths() {
+ const articles = await getCollection('articles', ({data}) => !data.draft);
+ const games = await getCollection('games', ({data}) => !data.draft);
+ const tutorials = await getCollection('tutorials');
+ const academy = await getCollection('academy');
+ const assertTranslations = (name: string, entries: readonly { id: string; data: { locale: LocaleCode; translationKey: string } }[]) => {
+  const reference = entries.filter(({data}) => data.locale === 'en').map(({data})=>data.translationKey).sort();
+  for (const language of locales) {
+   const actual = entries.filter(({data})=>data.locale===language.code).map(({data})=>data.translationKey).sort();
+   if (new Set(actual).size !== actual.length || JSON.stringify(actual) !== JSON.stringify(reference)) throw new Error(`Incomplete ${name} translations for ${language.code}`);
+  }
+  for (const entry of entries) if (entry.id !== `${entry.data.locale}/${entry.data.translationKey.replace(/\/index$/, '')}`) throw new Error(`Invalid localized content identity: ${entry.id}; expected ${entry.data.locale}/${entry.data.translationKey}`);
+ };
+ assertTranslations('articles', articles);
+ assertTranslations('games', games);
+ assertTranslations('tutorials', tutorials);
+ assertTranslations('academy', academy);
+ const paths: { params: { path: string | undefined }; props: Props }[] = [];
+ for (const language of locales) {
+  const i18n = new Locale(language.code);
+  const add = (url: string, route: Route) => paths.push({params:{path:i18n.path(url).replace(/^\//,'').replace(/\/$/,'') || undefined},props:{route}});
+  for(const [url,kind] of [['/','home'],['/about','about'],['/services','services'],['/games','games'],['/academy','academy'],['/academy/javascript','course'],['/academy/javascript/engine','lesson']] as const) add(url,{kind});
+  for(const entry of games.filter(({data})=>data.locale===language.code)) add(`/games/${entry.data.translationKey}`,{kind:'game',entry});
+  const localTutorials=tutorials.filter(({data})=>data.locale===language.code);
+  const series=new Set(localTutorials.map(({data})=>data.seriesSlug));
+  for(const entry of articles.filter(({data})=>data.locale===language.code&&!series.has(data.translationKey))) add(`/articles/${entry.data.translationKey}`,{kind:'article',entry});
+  for(const entry of localTutorials) add(`/articles/${entry.data.translationKey.replace(/\/index$/,'')}`,{kind:'tutorial',entry});
+  const steps=academy.filter(({data})=>data.locale===language.code).sort((a,b)=>a.data.order-b.data.order);
+  if(steps.some((step,index)=>step.data.order!==index+1))throw new Error(`Invalid step ordering for ${language.code}`);
+  for(const [index,entry] of steps.entries()) add(`/academy/${entry.data.translationKey}`,{kind:'step',entry,steps,index});
+ }
+ return paths;
+}
+const { route } = Astro.props;
+---
+{route.kind === 'home' && <Home/>}
+{route.kind === 'about' && <About/>}
+{route.kind === 'services' && <Services/>}
+{route.kind === 'games' && <Games/>}
+{route.kind === 'academy' && <Academy/>}
+{route.kind === 'course' && <Course/>}
+{route.kind === 'lesson' && <Lesson/>}
+{route.kind === 'game' && <Game game={route.entry}/>}
+{route.kind === 'article' && <Article article={route.entry}/>}
+{route.kind === 'tutorial' && <Tutorial tutorial={route.entry}/>}
+{route.kind === 'step' && <Step step={route.entry} steps={route.steps} index={route.index}/>}

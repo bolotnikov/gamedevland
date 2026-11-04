@@ -1,0 +1,8 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import ArticleSeriesLayout from '../layouts/ArticleSeriesLayout.astro';
+interface Props { tutorial: CollectionEntry<'tutorials'> }
+const { tutorial } = Astro.props;
+const { Content } = await render(tutorial);
+---
+<ArticleSeriesLayout frontmatter={tutorial.data}><Content /></ArticleSeriesLayout>

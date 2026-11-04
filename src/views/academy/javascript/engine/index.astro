@@ -1,0 +1,25 @@
+---
+import { Locale } from '../../../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import { Content } from '../../../../i18n/Content';
+import Layout from '../../../../layouts/Layout.astro';
+import Header from '../../../../components/common/Header.astro';
+import Footer from '../../../../components/common/Footer.astro';
+import LessonProgress from '../../../../components/academy/LessonProgress.astro';
+import '../../../../styles/academy.css';
+const steps = await Content.steps(i18n.code);
+const first = steps[0];
+if (!first) throw new Error('Engine lesson requires content.');
+---
+<Layout title={t("Как работает JavaScript Engine — Academy")} description={t("Первый урок: V8, AST, байткод, Ignition, JIT, Call Stack, Memory Heap и GC. 20 интерактивных шагов.")} lang={i18n.code} canonicalPath="/academy/javascript/engine/">
+	<Header title={t("JavaScript Engine")} description="" current="academy" navigationOnly/>
+	<main class="academy-page container" data-lesson-overview data-total={steps.length} data-step-slugs={steps.map((entry) => entry.data.translationKey.split('/').at(-1)).join(',')}>
+		<nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Academy")}</a><span>/</span><a href={i18n.path("/academy/javascript/")}>{t("JavaScript")}</a><span>/</span><span>{t("Урок 01")}</span></nav>
+		<div class="lesson-intro"><div><span class="academy-eyebrow">{t("Урок 01 / Под капотом JavaScript")}</span><h1>{t("Как работает")}<br/><span>{t("JavaScript Engine")}</span></h1><p>{t("От строки кода до выполняемой программы.")}<br/>{t("Последовательно рассмотрим устройство движка на примерах и интерактивных моделях.")}</p><div class="academy-chips"><span class="academy-chip">{steps.length}{t(" шагов")}</span><span class="academy-chip">{t("~60–90 минут с практикой")}</span><span class="academy-chip">{t("ECMA-262 + V8")}</span></div><a class="academy-button" href={i18n.path(`/academy/${first.data.translationKey}/`)} data-resume-link>{t("Начать урок →")}</a></div><div class="lesson-intro__map"><span class="academy-eyebrow">{t("Основные механизмы движка")}</span><div>{t("Source ")}<span>→</span>{t(" AST ")}<span>→</span>{t(" Bytecode")}</div><div>{t("Ignition ")}<span>↔</span>{t(" JIT")}</div><div>{t("Call Stack ")}<span>+</span>{t(" Memory Heap")}</div><LessonProgress total={steps.length}/></div></div>
+		<button type="button" class="progress-reset" data-reset-progress>{t("Сбросить отметки шагов")}</button>
+		<div class="academy-section-heading"><h2>{t("Содержание урока")}</h2><span>{t("Шаги доступны отдельно и в последовательном порядке")}</span></div>
+		<ol class="lesson-step-grid">{steps.map((step) => <li><a href={i18n.path(`/academy/${step.data.translationKey}/`)} data-step-link={step.data.translationKey.split('/').at(-1)}><span class="step-grid__number">{String(step.data.order).padStart(2,'0')}</span><span><small>{step.data.concept}</small><strong>{step.data.title}</strong></span><span class="step-done" aria-label={t("Шаг пройден")}>✓</span></a></li>)}</ol>
+	</main><Footer/>
+	<script>import { LessonController } from '../../../../scripts/LessonController'; new LessonController();</script>
+</Layout>

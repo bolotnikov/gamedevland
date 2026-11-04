@@ -1,9 +1,12 @@
 ---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
 interface Props {
 	title: string;
 	description: string;
-	badgeLabel?: string;
-	releaseLabel?: string;
+	badgeLabel?: string | undefined;
+	releaseLabel?: string | undefined;
 	genre: string;
 	technologies: string[];
 	iconImage: string;
@@ -29,12 +32,12 @@ const { title, description, badgeLabel, releaseLabel, genre, technologies, iconI
 			<p>{description}</p>
 			{
 				technologies.length > 0 && (
-					<ul class="game-card__stack" aria-label="Main technologies">
+					<ul class="game-card__stack" aria-label={t("Main technologies")}>
 						{technologies.slice(0, 3).map((technology) => <li>{technology}</li>)}
 					</ul>
 				)
 			}
-			<span class="game-card__cta">View game <span aria-hidden="true">&rarr;</span></span>
+			<span class="game-card__cta">{t("View game ")}<span aria-hidden="true">{t("&rarr;")}</span></span>
 		</div>
 	</a>
 </article>

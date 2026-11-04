@@ -9,10 +9,24 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "typecheck": "astro check",
+    "lint": "eslint src scripts/check-locales.mjs astro.config.mjs eslint.config.js",
+    "check:locales": "node scripts/check-locales.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "globals": "^17.14.0",
+    "rehype-external-links": "^3.0.0",
+    "rehype-raw": "^7.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1"
   }
 }
