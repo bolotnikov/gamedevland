@@ -1,0 +1,83 @@
+{
+  "game": "Rings",
+  "sourceRevision": "4f4b63e",
+  "platform": "web",
+  "screenshotSource": "Live browser captures of the current compiled game; no simulated gameplay or generated screenshots",
+  "encoder": {
+    "name": "Sharp",
+    "webpQuality": 90,
+    "iconQuality": 94,
+    "effort": 6
+  },
+  "files": [
+    {
+      "source": "gameplay-land.jpg",
+      "target": "cover.webp",
+      "scene": "Level 7 gameplay",
+      "width": 1280,
+      "height": 720,
+      "bytes": 74948,
+      "inputSha256": "6c33a3293e1a538bfc50970177cf559e440af762be234a26aa655ba01148e95a",
+      "outputSha256": "40e4301a384622133e986004056092e98f6e1fb5f3c07d19c943840ee8ec75fb"
+    },
+    {
+      "source": "gameplay-port.jpg",
+      "target": "screens/port/gameplay.webp",
+      "scene": "Level 7 gameplay",
+      "width": 720,
+      "height": 1280,
+      "bytes": 51302,
+      "inputSha256": "ad420d2ded0637cbec902b3dc7f8779a4118bf3081490106e1a27a9d401a56b5",
+      "outputSha256": "7e0ee261e9163f6e7e1ddd4c9c88cbf92f14498dab39532e6b946f3fa77e2436"
+    },
+    {
+      "source": "complex-land.jpg",
+      "target": "screens/land/complex.webp",
+      "scene": "Level 27 gameplay",
+      "width": 1280,
+      "height": 720,
+      "bytes": 87682,
+      "inputSha256": "a0b6d0aee8ea705163d6e544db82277d370a4af621501172a9fc94ac6534e203",
+      "outputSha256": "ab9c2d4dd023837b5807ea1542dabbbd92f0d9650beb436288742fe7b86192db"
+    },
+    {
+      "source": "complex-port.jpg",
+      "target": "screens/port/complex.webp",
+      "scene": "Level 27 gameplay",
+      "width": 720,
+      "height": 1280,
+      "bytes": 70254,
+      "inputSha256": "0b40401878771c97e46632d6ab6331f43e0dd3744a22255caee0c79340e4a442",
+      "outputSha256": "7fa20411bf9cf754f1e70f7e1a7810ac3d6f7bb47fcd22d4c3c57de15dad495f"
+    },
+    {
+      "source": "boosters-land.jpg",
+      "target": "screens/land/boosters.webp",
+      "scene": "Magic Hat introduction",
+      "width": 1280,
+      "height": 720,
+      "bytes": 32038,
+      "inputSha256": "5fc8643d23884d4d979dc98eb1d3c9eaf9b3525a8b91f9c5200b34b1f4460b68",
+      "outputSha256": "41d229c9cc52e0c469c98cfbfe8ec46f5d49055c31cd102a13fe66784644fb4b"
+    },
+    {
+      "source": "boosters-port.jpg",
+      "target": "screens/port/boosters.webp",
+      "scene": "Magic Hat introduction",
+      "width": 720,
+      "height": 1280,
+      "bytes": 34512,
+      "inputSha256": "f6192f2a6d475e42b3ae8e70e41c215c1b7f0e4bfe715d2853207e1e6ea34d18",
+      "outputSha256": "7e5a0e21a9980667d48c21514e080d381a888cab8591f04ec8fc4b70047ed8de"
+    },
+    {
+      "source": "rings/output/imagegen/poki-rings-icon-v1.png",
+      "target": "icon.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 50070,
+      "inputSha256": "94d1b82134443cc1c9f0756a494ebd4c90d37db6f1658207e3df68b5f7b5d97e",
+      "outputSha256": "b27772160ed88d150f54fb0acae691507ae00ad374d5ee0db484e411c67b14f2"
+    }
+  ]
+}

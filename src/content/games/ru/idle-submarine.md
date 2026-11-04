@@ -37,7 +37,7 @@ screenshots:
     landscapeAlt: Карточки улучшений топливного бака, двигателя и насоса расположены в ряд над прогрессом подлодки
     portraitSrc: /assets/games/idle-submarine/screens/port/upgrades.webp
     portraitAlt: Карточки улучшений топливного бака, двигателя и насоса расположены друг под другом над прогрессом подлодки на телефоне
-playableUrl: https://gamedevland.github.io/idle-submarine/
+playableUrl: https://gamedevland.github.io/idle-submarine/?v=fa99827
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 0
