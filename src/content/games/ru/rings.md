@@ -20,8 +20,8 @@ roles:
   - Архитектура и игровые системы
   - Создание 100 уровней
   - Интерфейс и адаптивная вёрстка
-iconImage: /assets/games/rings/icon.webp
-iconAlt: Два золотых кольца с замком на синей сцене
+iconImage: /assets/games/rings/icon-rings.webp
+iconAlt: Два разомкнутых кольца золотого и медного цвета, соединённые креплением на синей сцене
 coverImage: /assets/games/rings/cover.webp
 coverAlt: Сцепленные металлические кольца на сцене Rings, таймер и панель усилителей
 screenshots:

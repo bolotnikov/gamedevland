@@ -20,8 +20,8 @@ roles:
   - Architecture and gameplay systems
   - Creating 100 levels
   - UI and responsive layouts
-iconImage: /assets/games/rings/icon.webp
-iconAlt: Two gold rings joined by a lock on a blue stage
+iconImage: /assets/games/rings/icon-rings.webp
+iconAlt: Two open gold and copper rings joined by a fastener on a blue stage
 coverImage: /assets/games/rings/cover.webp
 coverAlt: Interlocking metal rings on the Rings stage, with a timer and booster panel
 screenshots:
