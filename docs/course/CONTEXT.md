@@ -175,3 +175,18 @@ SDK sections 02–04 remain Russian drafts in the repository, with no generated 
 Both course pages show them as noninteractive cards labelled In Progress (В разработке),
 without hrefs, keyboard link targets or arrows. Only foundations is available in either locale.
 Publication is controlled by section metadata and published content, not development mode.
+
+## SDK local review — 2026-11-05
+
+Alex requested local review access to the 30 Russian lessons in sections 02–04.
+Astro dev serves these drafts at their Russian URLs and links them from the Russian curriculum.
+Draft pages use Russian-only language metadata and noindex. The production build continues
+to use the published section flags and shows 02–04 as disabled cards.
+
+## SDK game architecture bilingual release — 2026-11-05
+
+Alex approved the Russian game architecture section and authorized publication of its
+13 lessons in Russian and English. Both versions use the same lesson order, source URLs,
+code examples, and interactive FSM steps. Foundations and game architecture are published.
+Presentation and integrations are available in Russian during local development. The
+production curriculum shows both as disabled In Progress cards.

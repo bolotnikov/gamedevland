@@ -4,14 +4,13 @@
   "translationKey": "sdk/scene-flow/providers",
   "course": "sdk",
   "lesson": "scene-flow",
-  "draft": true,
-  "order": 3,
-  "title": "Регистрируем классы и фабрики",
+  "draft": false,
+  "order": 4,
+  "title": "DI-провайдеры и время жизни",
   "concept": "Провайдеры и время жизни",
-  "description": "Разделим общие сервисы и новые экземпляры поведения узлов.",
+  "description": "Укажем, когда создавать новый объект, а когда возвращать готовый.",
   "takeaway": [
-    "Состояние узла требует отдельного экземпляра поведения.",
-    "Singleton привязан к контейнеру-владельцу регистрации."
+    "Singleton сохраняет созданный объект. Transient создаёт новый при каждом запросе."
   ],
   "sources": [
     {
@@ -35,18 +34,14 @@
 
 <aside class="lesson-note is-green" aria-labelledby="lesson-purpose">
   <h3 id="lesson-purpose">Зачем это нужно</h3>
-  <p>Некоторые сервисы должны быть общими для игры, а компонентам разных узлов нужны отдельные экземпляры. Правила регистрации определяют, как создавать объект и когда использовать уже созданный.</p>
+  <p>Некоторые объекты можно создать один раз и использовать в разных частях игры. В других случаях при каждом запросе нужен новый объект. При регистрации в DI-контейнере мы выбираем подходящий способ.</p>
 </aside>
 
-Провайдер — правило создания зависимости. `ValuesGroupRegistrar` предлагает явные способы регистрации:
+Для каждого такого объекта добавляем в DI-контейнер правило — **провайдер**. В нём указываем токен и способ получения объекта: вернуть готовое значение, создать объект из класса или вызвать фабрику. При регистрации также выбираем, сохранять объект для следующих запросов или создавать каждый раз новый.
 
-<figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>singletonValue</strong><span>Одно готовое значение</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>singletonClass</strong><span>Один экземпляр класса без аргументов</span></div></div><div class="sdk-figure__item tone-green"><div><strong>singletonFactory</strong><span>Один результат фабрики с зависимостями</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>transientClass</strong><span>Новый экземпляр класса на каждый запрос</span></div></div></div><figcaption>Время жизни выбирается по владельцу состояния.</figcaption></figure>
+Например, сервис прогресса может быть общим для всей игры. А если на экране два счётчика, каждому нужен свой компонент, чтобы управлять своим текстом.
 
-В глобальном DI Block Puzzle элементы, компоненты и команды регистрируются отдельными группами. Сокращённые фрагменты методов `BlockPuzzleGlobalDi` из [di.providers.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts):
-
-```ts
-group.add('Container', ContainerNode).add('Text', TextNode);
-```
+<figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>singletonValue</strong><span>Возвращает готовое значение</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>singletonClass</strong><span>Создаёт объект из класса один раз</span></div></div><div class="sdk-figure__item tone-green"><div><strong>singletonFactory</strong><span>Вызывает фабрику один раз</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>transientClass</strong><span>Создаёт объект из класса при каждом запросе</span></div></div></div><figcaption>Singleton сохраняет объект, transient создаёт новый.</figcaption></figure>
 
 Сокращённая регистрация компонента в [di.providers.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L59):
 
@@ -54,27 +49,6 @@ group.add('Container', ContainerNode).add('Text', TextNode);
 group.add('BlockPuzzleScoreComponent', BlockPuzzleScoreComponent);
 ```
 
-Сокращённая регистрация команды в [di.providers.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L71):
+Компонент регистрируем в `ComponentsGroup` под тем же именем, что и `type` в JSON. Узел — это элемент экрана, например текст счётчика. Если подключить этот компонент к двум текстовым узлам, SDK создаст два отдельных объекта компонента — по одному для каждого текста.
 
-```ts
-group.add('PlaceBlockCommand', PlaceBlockCommand);
-```
-
-Это три разных параметра `group`: `ElementFactoriesGroup`, `ComponentsGroup` и `CommandsGroup`. Имена совпадают с `type` в JSON и именами команд в FSM. Эти группы создают нужные transient-регистрации; компоненты разных узлов не должны делить один экземпляр.
-
-Для действия игра использует регистрацию через общий registrar в том же [di.providers.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L126):
-
-```ts
-registrar.transientClass<BaseAction>(
-  DiTokens.action('PlayParticlesAction'),
-  PlayParticlesAction,
-);
-```
-
-Сервис прогресса, напротив, зарегистрирован как singleton: он общий для игры. `singletonFactory` пригодится, когда его конструктору нужен репозиторий.
-
-## Область singleton
-
-Singleton хранится в контейнере, которому принадлежит его провайдер. Глобальная регистрация остаётся общей при переходах сцен. Регистрация внутри DI сцены создаёт один экземпляр для этого входа в сцену. При новом входе создаётся новая область.
-
-По умолчанию повторная регистрация токена — ошибка. Явные разрешённые замены описываются через `override`; защищённые системные токены переопределять нельзя. Обычной игре достаточно корректно объявить зависимости один раз.
+При глобальной регистрации singleton остаётся общим для игры. При регистрации в контейнере сцены он создаётся заново при каждом входе.

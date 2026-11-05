@@ -189,9 +189,17 @@ Use an interactive element only when manipulating it clarifies a complex mechani
 nuance better than prose, code and a static graphic. Do not add controls merely to demonstrate
 basic validation or draw a board from width/height. Keep the removed JSON board editor out of
 this material. Default to concise explanations, real code examples and static graphics.
-Keep each SDK lesson close to one desktop screen, with at most a little scrolling. A short
-explanation and lightweight diagram usually suffice. Do not turn an overview into a long
-walkthrough with many config/code excerpts; use focused later lessons for the details.
+Keep each SDK lesson to one main idea and close to one desktop screen, with at most a little
+scrolling. Start with a short paragraph, show one focused code example where it helps, and
+use a compact infographic or useful interactive diagram. If the explanation needs several
+distinct examples or topics, split it into short lessons. Check the rendered lesson in the
+local site, including the space taken up by code and graphics.
+
+Across the site, follow Alex's PixiJS tutorials when writing or revising prose. Name the
+file, method, or object involved, say what we do and what happens, then move on. Prefer
+«контейнер создаёт сервис при входе в сцену» to abstract phrases like «точка сборки» or
+«предусмотренные границы API». Define essential new terms before using them. Keep only
+what the reader needs to understand the example.
 
 ## SDK course voice and examples
 

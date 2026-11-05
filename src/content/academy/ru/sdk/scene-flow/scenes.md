@@ -4,9 +4,9 @@
   "translationKey": "sdk/scene-flow/scenes",
   "course": "sdk",
   "lesson": "scene-flow",
-  "draft": true,
+  "draft": false,
   "order": 1,
-  "title": "Жизненный цикл сцены",
+  "title": "Сцены и SceneManager",
   "concept": "SceneConfig и BaseScene",
   "description": "Сцена собирает окружение, а игровое поведение передаёт другим объектам.",
   "takeaway": [
@@ -54,7 +54,36 @@ export class GameSceneDefinition {
 
 `BaseScene` предоставляет общий жизненный цикл. `FsmDrivenScene` дополняет его событиями готовности и обновления, чтобы игровой сценарий оставался в FSM.
 
-<figure class="sdk-figure is-flow is-long"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>preload</strong><span>Загрузка SceneConfig.assets</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>onEnter</strong><span>Создание DI сцены → сборка layout</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>Подготовка</strong><span>Конфиги сцены → запуск сервисов → активация компонентов</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>create</strong><span>Запуск FSM уже выполнен; FsmDrivenScene отправляет SceneReady</span></div></div><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">05</span><div><strong>onExit</strong><span>Остановка FSM → сервисы → частицы и layout → очистка связей DI</span></div></div></div><figcaption>Порядок входа важен: компоненты активируются после подготовки сервисов.</figcaption></figure>
+<figure class="sdk-figure is-flow is-scene-lifecycle" aria-label="Жизненный цикл сцены с layout">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-cyan">
+      <span class="sdk-figure__index">01</span>
+      <div><strong>preload()</strong><span>Загружает ресурсы из <code>SceneConfig.assets</code>.</span></div>
+    </div>
+    <div class="sdk-figure__item tone-violet">
+      <span class="sdk-figure__index">02</span>
+      <div>
+        <strong>onEnter()</strong>
+        <ol class="sdk-scene-enter-steps">
+          <li>Создаёт DI сцены и собирает layout</li>
+          <li>Подготавливает конфиги и запускает сервисы</li>
+          <li>Активирует компоненты и запускает FSM, если она задана</li>
+          <li>Вызывает <code>create()</code>. В <code>FsmDrivenScene</code> этот метод отправляет <code>SceneReady</code>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="sdk-figure__item tone-amber">
+      <span class="sdk-figure__index">03</span>
+      <div><strong>onExit()</strong><span>Останавливает FSM, освобождает сервисы, частицы, layout и DI сцены.</span></div>
+    </div>
+  </div>
+</figure>
+
+<aside class="lesson-note" aria-labelledby="scene-layout-requirement">
+  <span class="lesson-note__label">Важно</span>
+  <h3 id="scene-layout-requirement">Сцена с FSM</h3>
+  <p>В <code>BaseScene</code> сервисы и FSM запускаются при заданном <code>layout</code>. В пустом проекте из первого раздела сцена работает без вёрстки. Для сцены с FSM укажем <code>layout</code> и выберем <code>FsmDrivenScene</code>.</p>
+</aside>
 
 Класс `GameScene` в публичном проекте лишь передаёт конфигурацию базовому классу. Логику размещения фигур в него добавлять не требуется.
 
@@ -63,5 +92,3 @@ export class GameSceneDefinition {
 `SceneManager.start(key)` открывает начальную сцену. `replace(key, options)` заменяет верхнюю; `push` добавляет сцену в стек, а `pop` убирает верхнюю. Обновляется только верхняя неприостановленная сцена. Переходы проходят через очередь и имеют таймаут жизненных хуков.
 
 Через `options.params` передаются входные данные новой сцены. Команда читает их через `sceneParams` и проверяет `decodeSceneParams`; параметры перехода не заменяют состояние текущей партии.
-
-Важно: сервисы, layout и FSM стандартной BaseScene подготавливаются в ветке с `layout`. Пустой пример первого раздела специально использовал BaseScene без этих возможностей. Для сцены с FSM определим layout и выберем FsmDrivenScene.

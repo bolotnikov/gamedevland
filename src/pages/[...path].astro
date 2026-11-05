@@ -17,6 +17,7 @@ import SdkStep from '../views/academy/sdk/step.astro';
 import { sdkCourse } from '../data/sdkCourse';
 import { locales, type LocaleCode } from '../i18n/locales';
 import { Locale } from '../i18n/Locale';
+import { Content } from '../i18n/Content';
 
 type Route =
  | { kind: 'home' | 'about' | 'services' | 'games' | 'academy' | 'course' | 'lesson' }
@@ -32,7 +33,8 @@ export async function getStaticPaths() {
  const games = await getCollection('games', ({data}) => !data.draft);
  const tutorials = await getCollection('tutorials');
  const academy = await getCollection('academy');
- const publishedAcademy = academy.filter(({data}) => !data.draft && (data.course !== 'sdk' || sdkCourse.sections.some((section) => section.slug === data.lesson && section.published)));
+ const publishedAcademy = academy.filter(({data}) => Content.isAcademyPublished(data));
+ const visibleAcademy = academy.filter(({data}) => Content.isAcademyVisible(data));
  const assertTranslations = (name: string, entries: readonly { id: string; data: { locale: LocaleCode; translationKey: string } }[]) => {
   const reference = entries.filter(({data}) => data.locale === 'en').map(({data})=>data.translationKey).sort();
   for (const language of locales) {
@@ -59,7 +61,7 @@ export async function getStaticPaths() {
   const series=new Set(localTutorials.map(({data})=>data.seriesSlug));
   for(const entry of articles.filter(({data})=>data.locale===language.code&&!series.has(data.translationKey))) add(`/articles/${entry.data.translationKey}`,{kind:'article',entry});
   for(const entry of localTutorials) add(`/articles/${entry.data.translationKey.replace(/\/index$/,'')}`,{kind:'tutorial',entry});
-  const visible=publishedAcademy.filter(({data})=>data.locale===language.code);
+  const visible=visibleAcademy.filter(({data})=>data.locale===language.code);
   const groups = new Map<string, CollectionEntry<'academy'>[]>();
   for (const entry of visible) {
    const key = `${entry.data.course}/${entry.data.lesson}`;
@@ -74,8 +76,11 @@ export async function getStaticPaths() {
   }
   if (groups.has('sdk/foundations')) {
    add('/academy/sdk', {kind:'sdk-course'});
-   for (const section of sdkCourse.sections.filter((entry) => entry.published)) {
-    if (!groups.has(`sdk/${section.slug}`)) throw new Error(`Empty SDK section: ${section.slug}`);
+   for (const section of sdkCourse.sections) {
+    if (!groups.has(`sdk/${section.slug}`)) {
+     if (section.published) throw new Error(`Empty SDK section: ${section.slug}`);
+     continue;
+    }
     add(`/academy/sdk/${section.slug}`, {kind:'sdk-section',section:section.slug});
    }
   }
@@ -83,7 +88,11 @@ export async function getStaticPaths() {
  return paths;
 }
 const { route } = Astro.props;
-
+if ((route.kind === 'step' && route.entry.data.draft)
+ || (route.kind === 'sdk-section' && sdkCourse.sections.some((section) => section.slug === route.section && !section.published))) {
+ Astro.locals.availableLocales = ['ru'];
+ Astro.locals.academyDraft = true;
+}
 ---
 {route.kind === 'home' && <Home/>}
 {route.kind === 'about' && <About/>}

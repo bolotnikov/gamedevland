@@ -4,14 +4,13 @@
   "translationKey": "sdk/scene-flow/scene-di",
   "course": "sdk",
   "lesson": "scene-flow",
-  "draft": true,
-  "order": 4,
-  "title": "DI внутри сцены",
+  "draft": false,
+  "order": 5,
+  "title": "Зависимости сцены — Scene DI",
   "concept": "SceneDiDefinition",
-  "description": "Свяжем создание сервисов и участие в жизненном цикле.",
+  "description": "Укажем, как создать сервис и когда его запускать.",
   "takeaway": [
-    "Провайдер создаёт сервис; lifecycle-список подключает его к сцене.",
-    "Глобальные зависимости доступны из дочернего контейнера."
+    "Сервис сцены может использовать общие зависимости игры."
   ],
   "sources": [
     {
@@ -52,12 +51,10 @@ protected override registerServices(services: SceneServiceTokenRegistry): void {
 }
 ```
 
-`registerProviders` отвечает на вопрос «как создать объект». `registerServices` указывает, каким объектам движок должен вызывать хуки сцены. Одного провайдера для этого недостаточно.
+`registerProviders` задаёт, как создать сервис. В `registerServices` перечислим сервисы, у которых SDK должен вызвать методы входа и выхода.
 
 <figure class="sdk-figure is-tree"><div class="sdk-scope"><div class="sdk-scope__global"><span>Общее для игры</span><strong>Глобальный DI</strong><p>Системы · прогресс · фабрики поведения</p></div><div class="sdk-scope__scenes"><div><span>Сцена boot</span><strong>Загрузка</strong></div><div><span>Сцена game</span><strong>Gameplay · Geometry · Audio</strong></div></div></div><figcaption>Дочерний контейнер сначала ищет локальную регистрацию, затем обращается к родителю.</figcaption></figure>
 
-Geometry зарегистрирован провайдером, но не добавлен в lifecycle-список: это вычисления координат без самостоятельного обновления. Gameplay и Audio участвуют во входе и выходе сцены.
+`Geometry` только рассчитывает координаты. Его можно запросить по токену, даже если его нет в `registerServices`.
 
-`GameDiDefinition` собирает одно `GlobalDiDefinition` и список `SceneDiDefinition`. При запуске движок проверяет, что ключи сцен совпадают и все объявленные сервисы зарегистрированы. Пустой список определений или неизвестный токен обнаруживаются при запуске.
-
-Сценовый сервис может получить глобальный прогресс через родительский контейнер. Обратная зависимость нежелательна: глобальный сервис не должен удерживать объект партии после выхода из игровой сцены.
+`GameDiDefinition` объединяет регистрации игры и её сцен. SDK сверяет ключи сцен и проверяет, что для каждого сервиса есть регистрация.

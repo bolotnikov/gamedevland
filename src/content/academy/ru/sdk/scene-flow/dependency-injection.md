@@ -4,14 +4,13 @@
   "translationKey": "sdk/scene-flow/dependency-injection",
   "course": "sdk",
   "lesson": "scene-flow",
-  "draft": true,
+  "draft": false,
   "order": 2,
-  "title": "Внедрение зависимостей",
+  "title": "Dependency Injection и токены",
   "concept": "DI и токены",
-  "description": "Объект получает готовые зависимости вместо самостоятельного поиска и создания.",
+  "description": "Получим игровой сервис по токену.",
   "takeaway": [
-    "Токен описывает, что требуется.",
-    "Фабрика явно определяет, как получить зависимость."
+    "Токен — ключ, по которому контейнер находит нужный объект."
   ],
   "sources": [
     {
@@ -20,54 +19,43 @@
       "note": "Категории типизированных токенов и SystemServices."
     },
     {
-      "title": "SDK · DiContainer.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
-      "note": "Разрешение зависимостей."
-    },
-    {
       "title": "Block Puzzle · BlockPuzzleServices.ts",
       "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts",
       "note": "Токены сервисов игры."
+    },
+    {
+      "title": "Block Puzzle · StartBlockPuzzleSessionCommand.ts",
+      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts",
+      "note": "Запрос игрового сервиса по токену."
     }
   ]
 }
 ---
 
-<aside class="lesson-note is-green" aria-labelledby="lesson-purpose">
-  <h3 id="lesson-purpose">Зачем это нужно</h3>
-  <p>Игровому сервису нужны настройки и другие сервисы. Передадим их снаружи, чтобы он занимался своей задачей, а не созданием всего окружения.</p>
+<aside class="lesson-note" aria-labelledby="dependency-injection">
+  <span class="lesson-note__label">Термин</span>
+  <h3 id="dependency-injection">Внедрение зависимостей (Dependency Injection, DI)</h3>
+  <p>Объект получает извне всё, что ему нужно для работы. Например, настройки или другой сервис можно передать через конструктор. Такие настройки и сервисы называют зависимостями.</p>
 </aside>
 
-`DI` связывает запрос зависимости с её реализацией. Например, сервис игрового процесса получает размеры поля и сервис прогресса в конструкторе; ему не нужно загружать JSON или выбирать браузерное хранилище.
-
-<aside class="lesson-note" aria-labelledby="dependency-injection"><span class="lesson-note__label">Термин</span><h3 id="dependency-injection">Внедрение зависимостей</h3><p>Передача объекту того, что нужно для работы. Здесь контейнер создаёт объекты по явно зарегистрированным правилам.</p></aside>
-
-Токен — ключ, по которому контейнер находит зависимость. В [BlockPuzzleServices.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts) он типизирован:
+Токен — ключ, по которому контейнер находит объект. В Block Puzzle команда запуска партии передаёт токен `Gameplay` в `getSceneService` и получает игровой сервис. Ниже показаны только нужные строки из [BlockPuzzleServices.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts#L7-L13) и [StartBlockPuzzleSessionCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts#L5-L9).
 
 ```ts
-import { DiTokens } from '@gamedevland/engine/di';
-
-import type { BlockPuzzleAudioService } from './services/BlockPuzzleAudioService';
-import type { BlockPuzzleGameplayService } from './services/BlockPuzzleGameplayService';
-import type { BlockPuzzleGeometryService } from './services/BlockPuzzleGeometryService';
-
+// BlockPuzzleServices.ts
 export class BlockPuzzleServices {
-  static readonly Audio = DiTokens.service<BlockPuzzleAudioService>(
-    'BlockPuzzleAudioService',
-  );
   static readonly Gameplay = DiTokens.service<BlockPuzzleGameplayService>(
     'BlockPuzzleGameplayService',
   );
-  static readonly Geometry = DiTokens.service<BlockPuzzleGeometryService>(
-    'BlockPuzzleGeometryService',
-  );
 }
+
+// StartBlockPuzzleSessionCommand.ts
+this.getSceneService(BlockPuzzleServices.Gameplay).startSession();
 ```
 
-<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>Запрос</strong><span>container.get(BlockPuzzleServices.Gameplay)</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>Токен</strong><span>service:BlockPuzzleGameplayService</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>Регистрация</strong><span>Фабрика Gameplay и её зависимости</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>Экземпляр</strong><span>Готовый сервис для вызова команды</span></div></div></div><figcaption>Токен сохраняет тип зависимости; фабрика определяет, как её создать.</figcaption></figure>
-
-`DiTokens.service<T>(name)` создаёт объект с ключом `service:name`. Другие категории — `element`, `component`, `action` и `command`. Для встроенных систем доступны `SystemServices.AssetManager`, `ConfigStore`, `Tweens` и остальные системные токены.
-
-Контейнер не анализирует параметры конструктора автоматически. `useClass` создаёт объект без аргументов. Если нужны аргументы, используем `useFactory` и явно получаем их через контейнер.
-
-Сам объект игрового процесса зависит от небольшого набора параметров, а не от всего DI. Это помогает читать его контракт и проверять правила отдельно от движка. Контейнер остаётся в точке сборки проекта и на предусмотренных границах API.
+<figure class="sdk-figure is-flow" aria-label="Как команда получает игровой сервис">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-violet"><div><strong>Токен</strong><span>BlockPuzzleServices.Gameplay</span></div></div>
+    <div class="sdk-figure__item tone-cyan"><div><strong>Запрос</strong><span>getSceneService передаёт токен контейнеру</span></div></div>
+    <div class="sdk-figure__item tone-green"><div><strong>Готовый сервис</strong><span>Команда вызывает startSession()</span></div></div>
+  </div>
+</figure>

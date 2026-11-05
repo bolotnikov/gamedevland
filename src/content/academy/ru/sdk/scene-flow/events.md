@@ -4,14 +4,13 @@
   "translationKey": "sdk/scene-flow/events",
   "course": "sdk",
   "lesson": "scene-flow",
-  "draft": true,
-  "order": 6,
-  "title": "Передаём события",
+  "draft": false,
+  "order": 7,
+  "title": "События и EventBus",
   "concept": "EventBus",
   "description": "Отправитель сообщает факт, а подписчики выбирают свою реакцию.",
   "takeaway": [
-    "emit получает data; подписчик читает payload.",
-    "Подписка имеет владельца и явную отписку."
+    "Отправляем данные в data, читаем их в event.payload."
   ],
   "sources": [
     {
@@ -66,8 +65,6 @@ const off = this.node.events.on(BlockPuzzleEvents.ScoreChanged, (event) => {
 
 <figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>Отправитель</strong><span>emit({ type, data })</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>EventBus</strong><span>Преобразует data → payload</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>Подписчик</strong><span>AppEvent → декодер → действие</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>FSM</strong><span>EngineEventBridge ставит событие в очередь активной FSM</span></div></div></div><figcaption>Шина меняет оболочку события; сама полезная нагрузка не становится проверенной автоматически.</figcaption></figure>
 
-`on(type, handler)` подписывает на конкретное событие, `onAny(handler)` — на все. Оба возвращают функцию отписки. Возврат Promise из подписчика не превращает `emit` в ожидаемую транзакцию: `emit` возвращает `void`.
+`on` подписывает на одно событие, а `onAny` — на все. Оба метода возвращают функцию отписки.
 
-Синхронные исключения подписчиков EventBus перехватывает. Promise подписчика он не ожидает; отклонение нельзя считать автоматически обработанным. Для последовательного сценария используем команды FSM, а для асинхронной подписки явно обрабатываем результат.
-
-Имя события описывает запрос или факт. `PlacementRequested` ещё не подтверждает ход; `PlacementCompleted` означает, что сервис применил изменения.
+`emit` не ждёт завершения асинхронных обработчиков. Если нужен строгий порядок выполнения, используем команды FSM.

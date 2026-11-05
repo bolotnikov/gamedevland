@@ -4,14 +4,13 @@
   "translationKey": "sdk/scene-flow/commands",
   "course": "sdk",
   "lesson": "scene-flow",
-  "draft": true,
-  "order": 8,
-  "title": "Команда выполняет одну операцию",
+  "draft": false,
+  "order": 9,
+  "title": "Команды сцены",
   "concept": "BaseCommand и BaseTypedCommand",
-  "description": "Соединим событие FSM с типизированным вызовом сервиса.",
+  "description": "Передадим команде координаты и слот фигуры.",
   "takeaway": [
-    "Команда — короткий шаг сценария.",
-    "Структура входа проверяется до выполнения операции."
+    "Декодер проверяет данные события до вызова команды."
   ],
   "sources": [
     {
@@ -35,24 +34,10 @@
 
 <aside class="lesson-note is-green" aria-labelledby="lesson-purpose">
   <h3 id="lesson-purpose">Зачем это нужно</h3>
-  <p>Событие может требовать нескольких операций над игровыми сервисами. Оформим такую реакцию отдельной командой: FSM задаёт порядок, а команда выполняет конкретный шаг сценария.</p>
+  <p>FSM решает, когда запускать команду. Команда берёт данные события и передаёт их игровому сервису.</p>
 </aside>
 
-`CommandBus` находит команду по имени из FSM, создаёт её через DI и передаёт контекст сцены. Команда не должна заново находить весь игровой мир.
-
-Команда Block Puzzle из [CheckBlockPuzzleMovesCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/CheckBlockPuzzleMovesCommand.ts):
-
-```ts
-import { BaseCommand } from '@gamedevland/engine/commands';
-
-import { BlockPuzzleServices } from '../BlockPuzzleServices';
-
-export class CheckBlockPuzzleMovesCommand extends BaseCommand {
-  override run(): void {
-    this.getSceneService(BlockPuzzleServices.Gameplay).emitMoveAvailability();
-  }
-}
-```
+`CommandBus` находит команду по имени из FSM и передаёт ей доступ к текущей сцене.
 
 Для размещения нужны слот и координаты. В [PlaceBlockCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts) используется `BaseTypedCommand`:
 
@@ -80,10 +65,8 @@ export class PlaceBlockCommand extends BaseTypedCommand<PlaceBlockCommandPayload
 
 <figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>FSM</strong><span>Запускает PlaceBlockCommand с событием</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>inputDecoder</strong><span>Проверяет slotId и anchor</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>execute</strong><span>Получает проверенный payload</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>Gameplay.place</strong><span>Проверяет фигуру и свободные клетки, применяет ход</span></div></div></div><figcaption>Проверка структуры происходит до execute; проверка правил — внутри сервиса и домена.</figcaption></figure>
 
-Контекст предоставляет `engine`, `layout`, `assets`, `sceneDi` и `sceneParams`. `getSceneService(token)` возвращает обязательную зависимость и сообщает об ошибке, если регистрация отсутствует.
+В `CommandsGroup` укажем то же имя команды, что и в конфиге FSM.
 
-Имя команды должно быть зарегистрировано в `CommandsGroup`. В новом проекте лучше сохранить явное стабильное имя, совпадающее с конфигурацией FSM. Не нужно запускать команду через `new` из компонента: тогда пришлось бы вручную подготавливать её контекст.
+`BaseTypedCommand` проверяет данные через `inputDecoder` перед вызовом `execute`.
 
-`BaseTypedCommand` сам извлекает payload из оболочки события FSM. Не следует повторять это в `execute` или приводить `unknown` к интерфейсу. Одна схема `PlacementRequest` используется и для проверки, и для вывода типа.
-
-Команда может возвращать Promise. FSM дождётся её завершения; поэтому длительная анимация внутри команды также задержит последующие события этой FSM.
+Если команда возвращает Promise, FSM ждёт её завершения перед обработкой следующего события.
