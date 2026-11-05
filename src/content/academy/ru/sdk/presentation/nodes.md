@@ -4,14 +4,13 @@
   "translationKey": "sdk/presentation/nodes",
   "course": "sdk",
   "lesson": "presentation",
-  "draft": true,
+  "draft": false,
   "order": 2,
-  "title": "Узел и его отображение",
-  "concept": "NodeBase и PixiJS",
-  "description": "Узел связывает объект PixiJS с компонентами, вводом и временем жизни.",
+  "title": "Как найти и изменить элемент экрана",
+  "concept": "NodeBase",
+  "description": "Найдём счётчик и игровое поле по именам из JSON.",
   "takeaway": [
-    "NodeBase владеет поведением узла; view — его объект PixiJS.",
-    "Игровые визуальные изменения остаются в компонентах и действиях."
+    "Путь поиска повторяет вложенность в JSON."
   ],
   "sources": [
     {
@@ -38,27 +37,9 @@
 }
 ---
 
-`NodeBase` — базовый объект визуального дерева SDK. Он хранит `view`, то есть объект PixiJS, и предоставляет фасады для событий, ввода, компонентов, действий и анимаций.
+<aside class="lesson-note" aria-labelledby="node-term"><span class="lesson-note__label">Термин</span><h3 id="node-term">Узел</h3><p>Элемент вёрстки. Например, Text показывает текст, а Container объединяет несколько элементов. За отрисовку отвечает связанный объект PixiJS, доступный как view.</p></aside>
 
-Это два связанных уровня:
-
-<figure class="sdk-figure is-layers"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Компонент / действие</strong><span>Меняет текст, масштаб, текстуру или запускает эффект</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Узел SDK</strong><span>NodeBase: методы, дети, input, tweens, lifecycle</span></div></div><div class="sdk-figure__item tone-green"><div><strong>view</strong><span>Container, Sprite, Text, Graphics или MeshRope PixiJS</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>Renderer</strong><span>Движок создаёт WebGL renderer и выводит дерево на canvas</span></div></div></div><figcaption>Игровое визуальное поведение работает с узлом; рендеринг выполняет PixiJS.</figcaption></figure>
-
-## Готовые типы
-
-| Узел | Назначение |
-| --- | --- |
-| Container | Группировка дочерних узлов |
-| Sprite | Изображение |
-| Text | Текст |
-| Graphics | Фигура, в том числе прямоугольная область |
-| TilingSprite | Повторяющаяся текстура |
-| TexturedRope | Текстура вдоль цепочки точек |
-| Empty | Логический узел без собственной графики |
-
-Типы нужно зарегистрировать в DI проекта. Block Puzzle использует первые четыре; остальные доступны для других игр.
-
-Например, из компонента корневого узла найдём поле и счётчик, затем изменим их:
+В примере `board` находится внутри `gameplay`, а `score` лежит прямо в корне. Из компонента корневого узла найдём оба элемента, обновим счётчик и покажем поле.
 
 ```ts
 const board = this.node.getChildContainer('gameplay.board');
@@ -67,8 +48,10 @@ label.setText('120');
 board.setVisible(true);
 ```
 
-Пути здесь относительны узлу `root`. `SceneLayout.getText('root.score')` ищет по полному ID. Методы поиска сообщают об отсутствии узла; для получения типа компонента есть `getComponent(ExpectedClass)`, который проверяет экземпляр.
-
-`Text.setText`, `Sprite.setTextureByAssetId`, `setPosition`, `setScale`, `setTint` и другие фасады сохраняют мутации рядом с визуальным владельцем. Если требуется новый тип представления, регистрируется фабрика узла со статическим `create`. Для поведения уже существующего Sprite обычно достаточно компонента.
-
-Фабрика создаёт узел, layout задаёт его свойства, а PixiJS выводит изображение. Прямую работу с `view` оставляем компонентам или действиям, которым она действительно нужна.
+<figure class="sdk-figure is-compare">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-cyan"><div><strong>root</strong><span>Начинаем поиск здесь</span></div></div>
+    <div class="sdk-figure__item tone-violet"><div><strong>gameplay.board</strong><span>Показываем поле</span></div></div>
+    <div class="sdk-figure__item tone-green"><div><strong>score</strong><span>Меняем текст счётчика</span></div></div>
+  </div>
+</figure>

@@ -190,3 +190,10 @@ Alex approved the Russian game architecture section and authorized publication o
 code examples, and interactive FSM steps. Foundations and game architecture are published.
 Presentation and integrations are available in Russian during local development. The
 production curriculum shows both as disabled In Progress cards.
+
+## SDK layouts and platforms bilingual release — 2026-11-05
+
+Alex approved the Russian layouts and platforms sections and authorized their English
+translation and publication. All four SDK sections are available in both languages.
+The 20 new lesson pairs share code examples, source URLs, diagrams, and term notes.
+The SDK reference lists the same modules in both languages and links to localized lessons.

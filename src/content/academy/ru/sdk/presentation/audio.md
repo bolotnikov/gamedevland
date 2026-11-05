@@ -4,14 +4,13 @@
   "translationKey": "sdk/presentation/audio",
   "course": "sdk",
   "lesson": "presentation",
-  "draft": true,
+  "draft": false,
   "order": 12,
-  "title": "Звук реагирует на события игры",
+  "title": "Звук при размещении фигуры",
   "concept": "AudioManager",
-  "description": "Разделим музыку, эффекты, загрузку и политику паузы.",
+  "description": "Воспроизведём короткий звук после успешного хода.",
   "takeaway": [
-    "Игровые события выбирают звук; AudioManager управляет воспроизведением.",
-    "Снятие подписки и остановка фоновой музыки — отдельные решения владельца."
+    "playSfx запускает эффект, playMusic запускает музыку."
   ],
   "sources": [
     {
@@ -33,9 +32,7 @@
 }
 ---
 
-`AudioManager` предоставляет каналы музыки и звуковых эффектов. Сервис игры связывает события партии со звуками; алгоритм размещения не зависит от аудиобиблиотеки.
-
-Сокращённый фрагмент подписки из метода `onEnter` файла [BlockPuzzleAudioService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts#L20):
+Добавим звук в список ресурсов. В Block Puzzle сервис звука слушает `PlacementCompleted`. По этому событию он вызывает `engine.audio.playSfx` с именем звука. При выходе из сцены сервис снимает подписку. [BlockPuzzleAudioService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts#L20)
 
 ```ts
 ctx.engine.events.on(BlockPuzzleEvents.PlacementCompleted, () => {
@@ -43,18 +40,10 @@ ctx.engine.events.on(BlockPuzzleEvents.PlacementCompleted, () => {
 });
 ```
 
-Полный сервис сохраняет функцию отписки в `eventOffs` и вызывает её на выходе. Его `playSfx` обращается к `sceneContext.engine.audio.playSfx(assetId)`.
-
-<figure class="sdk-figure is-compare"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>music</strong><span>playMusic → фоновая композиция → настройки канала</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>sfx</strong><span>playSfx → отдельный эффект → handle конкретного воспроизведения</span></div></div></div><figcaption>Музыка и эффекты используют один менеджер, но разные каналы управления.</figcaption></figure>
-
-Перед воспроизведением аудиоресурс должен быть зарегистрирован и подготовлен. `preloadInBackground` прогревает источник. Браузер может требовать пользовательский жест для начала звука; `unlock()` позволяет разблокировать аудио в подходящем обработчике ввода.
-
-`playMusic` и `playSfx` могут вернуть `undefined`, например при выключенном канале. Если handle получен, доступны `stopByHandle`, `pauseByHandle`, `setHandleVolume`, `setHandleRate` и `seekHandle`.
-
-## Настройки и очистка
-
-`setMasterVolume`, `setChannelVolume` и `applyVolumeOverrides` управляют уровнем звука. `setMusicEnabled`, `setSfxEnabled` и `setMuted` задают пользовательскую политику. Runtime-пауза и platform-muted учитываются менеджером отдельно.
-
-`stopAll(channel)` останавливает воспроизведения канала, `unloadSource(id)` освобождает источник. Не следует останавливать всю музыку при удалении любого компонента кнопки: действие очистки должно соответствовать владельцу.
-
-В исходном Block Puzzle выход AudioService снимает подписки. Для новой сцены отдельно решаем, должна ли фоновая музыка продолжаться через переход или принадлежать только ей.
+<figure class="sdk-figure is-flow">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-cyan"><div><strong>PlacementCompleted</strong><span>Фигура размещена</span></div></div>
+    <div class="sdk-figure__item tone-violet"><div><strong>playSfx</strong><span>Запускаем звук по ID</span></div></div>
+    <div class="sdk-figure__item tone-green"><div><strong>Звук</strong><span>Игрок слышит подтверждение</span></div></div>
+  </div>
+</figure>

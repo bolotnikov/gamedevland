@@ -24,7 +24,7 @@ const base = i18n.path(`/academy/sdk/${section.slug}/`);
 const PlacementTrace = step.data.simulation === 'sdk-placement'
 	? (await import('../../../components/academy/SdkPlacementTrace.astro')).default
 	: undefined;
-const ApiReference = import.meta.env.DEV && slug === 'api-reference'
+const ApiReference = slug === 'api-reference'
 	? (await import('../../../components/academy/SdkApiReference.astro')).default
 	: undefined;
 // SDK implementation references remain research evidence, not required course reading.

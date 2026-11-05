@@ -4,14 +4,13 @@
   "translationKey": "sdk/presentation/tweens",
   "course": "sdk",
   "lesson": "presentation",
-  "draft": true,
+  "draft": false,
   "order": 11,
-  "title": "Анимация с явным владельцем",
+  "title": "Анимация счётчика",
   "concept": "Tweens",
-  "description": "Движок обновляет анимацию, компонент определяет её время жизни.",
+  "description": "Увеличим счётчик при начислении очков.",
   "takeaway": [
-    "Твин имеет владельца и определённую очистку.",
-    "Завершение Promise не всегда означает достижение конечного значения."
+    "При отключении компонента остановим анимацию через killOwnedTweens()."
   ],
   "sources": [
     {
@@ -33,11 +32,9 @@
 }
 ---
 
-Tween плавно изменяет числовые свойства за заданное время. SDK использует GSAP за фасадом TweenManager и предоставляет узлу короткие методы `node.tweens`.
+<aside class="lesson-note" aria-labelledby="tween-term"><span class="lesson-note__label">Термин</span><h3 id="tween-term">Твин (tween)</h3><p>Плавное изменение свойства за заданное время. Например, уменьшение масштаба с 1,18 до 1.</p></aside>
 
-<aside class="lesson-note" aria-labelledby="tween-term"><span class="lesson-note__label">Термин</span><h3 id="tween-term">Твин (tween)</h3><p>Изменение свойства от начального значения к конечному во времени. Например, возвращение масштаба счётчика после прибавления очков.</p></aside>
-
-Фрагмент метода `playScorePop` из [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L70):
+При начислении очков увеличим масштаб счётчика. Затем `scaleTo` вернёт прежний размер за `popDuration` секунд. Перед новой анимацией остановим предыдущую. [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L70)
 
 ```ts
 this.killOwnedTweens();
@@ -49,14 +46,10 @@ this.ownTween(
 );
 ```
 
-<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>ScoreChanged</strong><span>Получены score и delta</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>Начальное значение</strong><span>Масштаб увеличен на popScale</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>Tween</strong><span>Плавное возвращение к baseScale</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>Disable / detach</strong><span>Owned-твин остановлен владельцем</span></div></div></div><figcaption>Перед новым эффектом предыдущий останавливается. baseScale берётся из актуальной responsive-вёрстки.</figcaption></figure>
-
-В `TweenOptions` длительность и задержка задаются в секундах. `delayMs` — отдельный метод с миллисекундами. Для координат есть `moveTo`, `moveBy`, `moveAlongPath`, для прозрачности — `alphaTo`, для масштаба — `scaleTo`. `from`, `to`, `fromTo` работают с числовыми свойствами.
-
-`timeline(setup)` собирает несколько стадий через TimelineBuilder. Handle поддерживает `pause`, `resume`, `reverse`, `progress`, `timeScale`, `seek` и `kill`. Через `groupId` можно объединить несколько анимаций для очистки.
-
-## Завершение и остановка
-
-`await handle` завершается и при обычном окончании, и при `kill`. Это не доказательство, что объект достиг конечной точки. Если после ожидания есть следующая стадия, проверим область жизни или отмену.
-
-`ownTween` очищает анимацию при detach. При временном отключении компонента явный `killOwnedTweens()` остаётся ответственностью `onDisable`, как в счётчике игры. Общая runtime-пауза согласована с TweenManager, поэтому игровой tween не должен продолжать движение во время паузы.
+<figure class="sdk-figure is-flow">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-cyan"><div><strong>Новые очки</strong><span>Увеличиваем счётчик</span></div></div>
+    <div class="sdk-figure__item tone-violet"><div><strong>scaleTo</strong><span>Плавно уменьшаем</span></div></div>
+    <div class="sdk-figure__item tone-green"><div><strong>baseScale</strong><span>Счётчик вернулся к прежнему размеру</span></div></div>
+  </div>
+</figure>

@@ -4,14 +4,13 @@
   "translationKey": "sdk/presentation/custom-actions",
   "course": "sdk",
   "lesson": "presentation",
-  "draft": true,
+  "draft": false,
   "order": 7,
-  "title": "Создаём собственное действие",
+  "title": "Своё действие для плавного скрытия",
   "concept": "BaseTypedAction",
-  "description": "Опишем статическую длительность и проверяемый вход одного запуска.",
+  "description": "Меняем прозрачность элемента за заданное время.",
   "takeaway": [
-    "Настройки экземпляра и вход запуска имеют отдельные схемы.",
-    "ownTween задаёт владельца анимации."
+    "Длительность берём из JSON, конечную прозрачность передаём при запуске."
   ],
   "sources": [
     {
@@ -33,7 +32,7 @@
 }
 ---
 
-`BaseTypedAction<TConfig, TInput>` проверяет две границы: `data` из JSON и payload запуска. Добавим действие `FadeAction`, которое плавно меняет прозрачность узла:
+Создадим `FadeAction`. `configDecoder` проверяет длительность из JSON, `inputDecoder` — прозрачность, переданную в `runAction`.
 
 ```ts
 import { BaseTypedAction } from '@gamedevland/engine/layouts';
@@ -58,22 +57,12 @@ export class FadeAction extends BaseTypedAction<
 }
 ```
 
-Зарегистрируем `FadeAction` в DI, чтобы движок мог создавать его по имени:
+Зарегистрируем класс как `FadeAction`. В `actions.fade` укажем `type: 'FadeAction'` и `data: { duration: 0.2 }`. Вызов `runAction('fade', { alpha: 0 })` скроет узел за 0,2 секунды.
 
-```ts
-registrar.transientClass(DiTokens.action('FadeAction'), FadeAction);
-```
-
-`DiTokens` импортируем из `@gamedevland/engine/di`. В layout подключим действие к узлу и зададим длительность:
-
-```json
-"actions": {
-  "fade": { "type": "FadeAction", "data": { "duration": 0.2 } }
-}
-```
-
-<figure class="sdk-figure is-compare"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Настройка экземпляра</strong><span>duration: 0.2 → configDecoder</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Вход запуска</strong><span>alpha: 0 → inputDecoder → execute</span></div></div></div><figcaption>Один класс можно использовать на разных узлах с разной настройкой длительности.</figcaption></figure>
-
-Из компонента этого узла вызовем `await this.node.runAction('fade', { alpha: 0 })`. За 0.2 секунды прозрачность дойдёт до нуля. `ownTween` связывает анимацию с действием: cancel и detach останавливают её.
-
-FadeAction после ожидания не выполняет новых мутаций. Если действие содержит несколько последовательных стадий, между ними используем `continueActionScope` или проверку версии, чтобы отменённый запуск не продолжил работу. При необходимости `onCancel` восстанавливает локальное визуальное состояние; базовый cancel сам по себе не обязан возвращать alpha к исходному значению.
+<figure class="sdk-figure is-flow">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-cyan"><div><strong>Настройка</strong><span>duration: 0.2</span></div></div>
+    <div class="sdk-figure__item tone-violet"><div><strong>Запуск</strong><span>alpha: 0</span></div></div>
+    <div class="sdk-figure__item tone-green"><div><strong>Результат</strong><span>Узел плавно исчезает</span></div></div>
+  </div>
+</figure>

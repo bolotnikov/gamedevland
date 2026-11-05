@@ -4,14 +4,13 @@
   "translationKey": "sdk/presentation/api-reference",
   "course": "sdk",
   "lesson": "presentation",
-  "draft": true,
+  "draft": false,
   "order": 15,
-  "title": "Карта публичного API",
+  "title": "Справочник методов и типов SDK",
   "concept": "Справочник",
-  "description": "Найдём нужный модуль и урок с примерами его использования.",
+  "description": "Найдём нужный класс или тип и урок с примером.",
   "takeaway": [
-    "Импортируем API из пакета нужной подсистемы.",
-    "При работе с объектом учитываем его параметры, время жизни и очистку."
+    "Модули находятся в пакете @gamedevland/engine."
   ],
   "sources": [
     {
@@ -33,7 +32,7 @@
 }
 ---
 
-SDK предоставляет корневой импорт `@gamedevland/engine` и публичные пути подсистем. Импортируем через эти входы, не через внутренние папки `src` или `dist`. Например:
+Откроем нужный модуль в списке ниже. Например, классы для сцен находятся в `scenes`, для анимации — в `tween`. Рядом с каждым модулем есть ссылка на урок.
 
 ```ts
 import { Engine } from '@gamedevland/engine';
@@ -41,16 +40,3 @@ import { BaseTypedCommand } from '@gamedevland/engine/commands';
 import { SchemaDecoder } from '@gamedevland/engine/validation';
 import type { GameConfig } from '@gamedevland/engine/core';
 ```
-
-<figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Запуск и данные</strong><span>core · assets · configs · validation</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Управление</strong><span>scenes · di · events · fsm · commands · errors</span></div></div><div class="sdk-figure__item tone-green"><div><strong>Представление</strong><span>layouts · prefabs · screen · input · interactions · tween</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>Игровые системы</strong><span>audio · particles · physics · platforms</span></div></div></div><figcaption>Выбираем задачу и находим нужный модуль.</figcaption></figure>
-
-Ниже перечислено API всех 20 модулей движка. У каждого модуля есть ссылка на урок с объяснением и примерами.
-
-## Как пользоваться картой
-
-1. Выберем модуль по задаче: например, `audio` для звука.
-2. Откроем связанный урок и найдём пример вызова.
-3. Уточним параметры и результат метода через подсказки TypeScript в редакторе.
-4. Учтём, когда объект создаётся и кто освобождает его ресурсы.
-
-Пути подсистем помогают организовать импорт. Устанавливать каждый модуль отдельно не нужно: все они входят в `@gamedevland/engine`.

@@ -201,6 +201,11 @@ file, method, or object involved, say what we do and what happens, then move on.
 «предусмотренные границы API». Define essential new terms before using them. Keep only
 what the reader needs to understand the example.
 
+Name sections after concrete topics readers can recognize. In the overview, say what we will
+build or run, such as a screen from JSON or a build for Poki. Define unfamiliar terms in a
+short, styled «Термин» note before using them. If a diagram already shows the sequence,
+keep the text focused on what the reader needs to do.
+
 ## SDK course voice and examples
 
 Present GameDevLand SDK as a universal SDK that can be connected to HTML5 game projects

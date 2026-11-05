@@ -4,14 +4,13 @@
   "translationKey": "sdk/presentation/typed-components",
   "course": "sdk",
   "lesson": "presentation",
-  "draft": true,
+  "draft": false,
   "order": 5,
-  "title": "Пишем типизированный компонент",
+  "title": "Проверка настроек компонента",
   "concept": "BaseTypedComponent",
-  "description": "Проверим data из JSON до использования его полей.",
+  "description": "Проверим масштаб и длительность анимации счётчика.",
   "takeaway": [
-    "Конфигурация компонента и payload события проверяются разными схемами.",
-    "Авторские значения остаются в JSON."
+    "Проверенные значения доступны в this.config."
   ],
   "sources": [
     {
@@ -33,14 +32,7 @@
 }
 ---
 
-<aside class="lesson-note is-green" aria-labelledby="lesson-purpose">
-  <h3 id="lesson-purpose">Зачем это нужно</h3>
-  <p>Настройки компонента приходят из JSON, где могут отсутствовать поля или оказаться неверные значения. Проверим их до запуска поведения, чтобы дальше работать с готовыми данными нужного типа.</p>
-</aside>
-
-`BaseTypedComponent<TConfig, TNode>` декодирует config перед `onInit`. Подкласс получает проверенное `this.config` и нужный тип узла.
-
-В [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L14) схема счётчика требует допустимый масштаб и длительность. Сокращённый каркас:
+Укажем в `configDecoder`, какие значения допустимы в `data` из JSON. В примере масштаб должен быть не меньше 1, а длительность не меньше 0. SDK проверит настройки до `onInit`. [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L14)
 
 ```ts
 const ConfigDecoder = SchemaDecoder.object({
@@ -58,28 +50,10 @@ export class BlockPuzzleScoreComponent extends BaseTypedComponent<
 }
 ```
 
-Полная реализация также подписывается на ScoreChanged, проверяет payload и обновляет Text.
-
-<figure class="sdk-figure is-compare"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>data в JSON</strong><span>popScale, popDuration → configDecoder → this.config</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Событие ScoreChanged</strong><span>event.payload → схема события → score и delta</span></div></div></div><figcaption>Статические настройки и события приходят по разным границам и проверяются отдельно.</figcaption></figure>
-
-Для простого примера создадим `CaptionComponent`: он проверит настройку и выведет текст на узле.
-
-```ts
-import { BaseTypedComponent } from '@gamedevland/engine/layouts';
-import type { Text } from '@gamedevland/engine/layouts';
-import { SchemaDecoder } from '@gamedevland/engine/validation';
-
-export class CaptionComponent extends BaseTypedComponent<{ text: string }, Text> {
-  protected override readonly configDecoder = SchemaDecoder.object({
-    text: SchemaDecoder.string({ nonEmpty: true }),
-  });
-
-  protected override onReady(): void {
-    this.node.setText(this.config.text);
-  }
-}
-```
-
-Зарегистрируем его через `ComponentsGroup.add('CaptionComponent', CaptionComponent)`. В Text-узле добавим `components.caption` с `type: 'CaptionComponent'` и `data: { text: 'Начать игру' }`. Текст появится после активации дерева.
-
-Generic `Text` описывает ожидаемый узел, но не заменяет правильное размещение компонента. Подключение к Container вместо Text — ошибка композиции. Для универсального компонента с требованиями к типу узла нужна явная проверка на границе.
+<figure class="sdk-figure is-flow">
+  <div class="sdk-figure__body">
+    <div class="sdk-figure__item tone-cyan"><div><strong>data</strong><span>Настройки в JSON</span></div></div>
+    <div class="sdk-figure__item tone-violet"><div><strong>configDecoder</strong><span>Проверяет числа</span></div></div>
+    <div class="sdk-figure__item tone-green"><div><strong>this.config</strong><span>Компонент получает настройки</span></div></div>
+  </div>
+</figure>
