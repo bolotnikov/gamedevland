@@ -19,8 +19,8 @@ roles:
   - Gameplay systems and balance
   - UI and responsive layouts
   - Vector graphics and audio
-iconImage: /assets/games/ai-defender/icon.webp
-iconAlt: A cyan processor inside a gold shield
+iconImage: /assets/games/ai-defender/icon-neon.webp
+iconAlt: Three robots fight viruses from behind a shield
 coverImage: /assets/games/ai-defender/cover.webp
 coverAlt: The AI Defender logo and a glowing shield on a circuit board
 screenshots:

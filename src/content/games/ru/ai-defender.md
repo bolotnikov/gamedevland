@@ -19,8 +19,8 @@ roles:
   - Игровые системы и баланс
   - Интерфейс и адаптивная вёрстка
   - Векторная графика и звуковое оформление
-iconImage: /assets/games/ai-defender/icon.webp
-iconAlt: Бирюзовый процессор внутри золотого щита
+iconImage: /assets/games/ai-defender/icon-neon.webp
+iconAlt: Три робота за щитом сражаются с вирусами
 coverImage: /assets/games/ai-defender/cover.webp
 coverAlt: Логотип AI Defender и светящийся щит на фоне электронной платы
 screenshots:
