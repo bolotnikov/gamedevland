@@ -43,6 +43,7 @@ const games = await Content.games(i18n.code);
 							technologies={game.data.technologies}
 							iconImage={game.data.iconImage}
 							iconAlt={game.data.iconAlt}
+							squareIcon={game.data.translationKey === 'ai-defender'}
 							href={i18n.path(`/games/${game.data.translationKey}`)}
 						/>
 					))

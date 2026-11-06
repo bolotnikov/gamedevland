@@ -11,14 +11,15 @@ interface Props {
 	technologies: string[];
 	iconImage: string;
 	iconAlt: string;
+	squareIcon?: boolean;
 	href: string;
 }
 
-const { title, description, badgeLabel, releaseLabel, genre, technologies, iconImage, iconAlt, href } = Astro.props;
+const { title, description, badgeLabel, releaseLabel, genre, technologies, iconImage, iconAlt, squareIcon, href } = Astro.props;
 ---
 
 <article class="game-card">
-	<a class="game-card__link" href={href}>
+	<a class:list={['game-card__link', { 'game-card__link--square-icon': squareIcon }]} href={href}>
 		<div class="game-card__media">
 			<img src={iconImage} alt={iconAlt} width="900" height="900" loading="eager" />
 		</div>
@@ -65,6 +66,11 @@ const { title, description, badgeLabel, releaseLabel, genre, technologies, iconI
 		transform: translateY(-3px);
 		border-color: rgba(16, 24, 40, 0.18);
 		box-shadow: var(--shadow-card-hover);
+	}
+
+	.game-card__link--square-icon {
+		border-start-start-radius: 0;
+		border-start-end-radius: 0;
 	}
 
 	.game-card__link:focus-visible {

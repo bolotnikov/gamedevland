@@ -44,7 +44,8 @@ const releaseLabel = game.data.releaseDate
 						)
 					}
 					<div class="game-hero__title-row">
-						<img src={game.data.iconImage} alt="" width="72" height="72" />
+						<img class:list={{ 'game-hero__icon--square': game.data.translationKey === 'ai-defender' }}
+							src={game.data.iconImage} alt="" width="72" height="72" />
 						<div>
 							{
 								game.data.releasePlatform && (
@@ -193,6 +194,10 @@ const releaseLabel = game.data.releaseDate
 		flex: 0 0 auto;
 		border-radius: 8px;
 		box-shadow: var(--shadow-card);
+	}
+
+	.game-hero__title-row > img.game-hero__icon--square {
+		border-radius: 0;
 	}
 
 	.game-hero__title-row p {
