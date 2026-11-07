@@ -4,8 +4,7 @@
 .academy-eyebrow { display: block; color: var(--color-cyan); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; line-height: 1.6; }
 .academy-page h1 { margin: 20px 0; font-size: clamp(2.6rem, 5.6vw, 4.4rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.08; }
 .academy-page h1 > span { color: var(--color-cyan); }
-.academy-page__intro { padding: 42px 0 58px; max-width: 850px; }
-.academy-page__intro > p, .course-hero > div > p, .lesson-intro > div > p { max-width: 630px; font-size: 18px; line-height: 1.8; color: var(--color-muted-foreground); }
+.course-hero > div > p, .lesson-intro > div > p { max-width: 630px; font-size: 18px; line-height: 1.8; color: var(--color-muted-foreground); }
 .academy-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 22px; }
 .academy-section-heading h2 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -.03em; }
 .academy-section-heading > span { font-size: 12px; color: var(--color-muted-foreground); }
@@ -193,9 +192,8 @@
 }
 @media (max-width: 600px) {
   .academy-page { padding-top: 24px; }
-  .academy-page__intro { padding: 24px 0 36px; }
   .academy-page h1 { font-size: 37px; }
-  .academy-page__intro > p, .course-hero > div > p, .lesson-intro > div > p { font-size: 15px; }
+  .course-hero > div > p, .lesson-intro > div > p { font-size: 15px; }
   .academy-section-heading { align-items: flex-start; }
   .academy-section-heading > span { font-size: 10px; text-align: right; max-width: 140px; line-height: 1.6; }
   .course-card { grid-template-columns: 1fr; }

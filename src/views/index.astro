@@ -19,9 +19,8 @@ const sdkSteps = await Content.steps(i18n.code, 'sdk');
 const cyberSteps = await Content.steps(i18n.code, 'cyber-ui');
 ---
 <Layout title={t("Курсы — GameDev.Land")} description={t("Интерактивные курсы для разработчиков HTML5-игр: глубокая теория, наглядные модели и инженерная практика.")} lang={i18n.code} canonicalPath="/">
-	<Header title={t("Academy")} description="" current="home" navigationOnly />
+	<Header title={t("Глубокое понимание разработки игр.")} description={t("Инженерные знания для тех, кто строит игры.")} current="home" />
 	<main class="academy-page container">
-		<div class="academy-page__intro"><span class="academy-eyebrow">{t("GameDev.Land / Academy")}</span><h1>{t("Глубокое понимание.")}<br/><span>{t("Осознанная разработка.")}</span></h1><p>{t("Инженерные знания для тех, кто строит игры.")}</p></div>
 		<div class="academy-section-heading"><h2>{t("Курсы")}</h2><span>{t("Курсов: {value0}", {value0: 1 + Number(sdkSteps.length > 0) + Number(cyberSteps.length > 0)})}</span></div>
 
 		{sdkSteps.length > 0 && <a href={i18n.path("/academy/sdk/")} class="course-card"><div class="course-card__art is-sdk"><SdkMark/><span class="course-card__series">TYPESCRIPT / HTML5</span></div><div class="course-card__body"><div class="academy-chips"><span class="academy-chip">TypeScript · PixiJS</span></div><h2>{sdkCourse.title}</h2><p>{t(sdkCourse.description)}</p><div class="course-card__meta"><span>{t("{value0} раздела · {value1} уроков", {value0: sdkCourse.sections.length, value1: sdkSteps.length})}</span><span>Engine · Vite</span></div><div class="course-card__cta">{t("Открыть курс ")}<span>↗</span></div></div></a>}
