@@ -16,7 +16,8 @@ npm run preview
 
 ## Deployment
 
-GitHub Actions builds the Astro project and deploys the generated `dist/` directory to GitHub Pages.
+Pushes to `main` trigger GitHub Actions to build the Astro project and deploy the generated
+`dist/` directory to GitHub Pages. Run typecheck, lint, build, and locale checks before merging.
 
 The custom domain is stored in `public/CNAME` so it is copied into `dist/` during the build.
 
@@ -36,10 +37,6 @@ Read `AGENTS.md` and `docs/course/` before creating lessons. Theory lives in
 `src/content/academy/`; diagrams and assessments use native Astro components.
 Every step cites official documentation/specifications. Theme is shared across the site.
 Progress and answer drafts are browser-local; there is no account or server-side grading.
-
-Academy changes are currently for local review only. Do not push/deploy until authorized.
-Alex has authorized a commit/push checkpoint to a `codex/` review branch with `[skip ci]`;
-production publication and CI/CD remain unauthorized. Do not merge the checkpoint into `main`.
 
 ## Languages
 
