@@ -28,6 +28,9 @@ const PlacementTrace = step.data.simulation === 'sdk-placement'
 const ApiReference = definition.id === 'sdk' && slug === 'api-reference'
 	? (await import('../../../components/academy/SdkApiReference.astro')).default
 	: undefined;
+const CyberPreview = definition.id === 'cyber-ui'
+	? (await import('../../../components/academy/CyberPreview.astro')).default
+	: undefined;
 // SDK implementation references remain research evidence, not required course reading.
 const sources = step.data.sources.filter(({ url }) => !url.startsWith('https://github.com/gamedevland/sdk/'));
 const takeaway = typeof step.data.takeaway === 'string' ? [step.data.takeaway] : step.data.takeaway ?? [];
@@ -37,7 +40,7 @@ const takeaway = typeof step.data.takeaway === 'string' ? [step.data.takeaway] :
 	<main class="lesson-shell container" data-lesson-step={slug} data-lesson-id={`${definition.id}:${section.slug}`} data-lesson-path={`/academy/${definition.id}/${section.slug}`} data-step-slugs={steps.map(({data}) => data.translationKey.split('/').at(-1)).join(',')} data-completed-message={t("Все уроки раздела отмечены. К материалам можно вернуться в любое время.")}>
 		<aside class="lesson-sidebar"><a class="lesson-sidebar__back" href={i18n.path(`/academy/${definition.id}/`)}>{t("← К программе курса")}</a><div class="lesson-sidebar__heading"><span class="academy-eyebrow">{`${definition.id === 'sdk' ? 'SDK' : definition.title} / ${t('Раздел {value0}', {value0: String(sectionIndex + 1).padStart(2, '0')})}`}</span><a href={base}>{(definition.id === 'sdk' ? t(section.title) : section.title)}</a><SdkProgress total={steps.length}/></div><details class="lesson-toc" open><summary>{t("Содержание раздела ")}<span>{t('Уроков: {value0}', {value0: steps.length})}</span></summary><nav aria-label={t("Уроки раздела")}>{steps.map((entry) => <a href={i18n.path(`/academy/${entry.data.translationKey}/`)} class:list={['lesson-toc__link', entry.id === step.id && 'is-current']} aria-current={entry.id === step.id ? 'page' : undefined} data-step-link={entry.data.translationKey.split('/').at(-1)}><span>{String(entry.data.order).padStart(2,'0')}</span><strong>{entry.data.title}</strong><span class="step-done" aria-label={t("Урок отмечен")}>✓</span></a>)}</nav></details></aside>
 		<div class="lesson-content"><nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Обучение")}</a><span>/</span><a href={i18n.path(`/academy/${definition.id}/`)}>{definition.id === 'sdk' ? 'SDK' : definition.title}</a><span>/</span><a href={base}>{(definition.id === 'sdk' ? t(section.title) : section.title)}</a></nav><div class="step-topline"><span class="academy-eyebrow">{step.data.concept}</span><span class="step-position">{String(step.data.order).padStart(2,'0')} <span>/ {steps.length}</span></span></div>
-			<article class="lesson-article"><h1>{step.data.title}</h1><p class="step-description">{step.data.description}</p><div class="article-prose lesson-prose"><Content/></div></article>
+			<article class="lesson-article"><h1>{step.data.title}</h1><p class="step-description">{step.data.description}</p>{CyberPreview && slug && <CyberPreview lesson={slug}/>}<div class="article-prose lesson-prose"><Content/></div></article>
 			{PlacementTrace && <PlacementTrace/>}
 			{ApiReference && <ApiReference/>}
 			{takeaway.length > 0 && <aside class="lesson-takeaway" aria-label={t("Основной вывод")}><span>{t("Основной вывод")}</span><ul>{takeaway.map((item) => <li>{item}</li>)}</ul></aside>}
