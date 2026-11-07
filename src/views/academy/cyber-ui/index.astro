@@ -1,0 +1,23 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import CyberUiMark from '../../../components/academy/CyberUiMark.astro';
+import { cyberUiCourse as course } from '../../../data/cyberUiCourse';
+import { Content } from '../../../i18n/Content';
+import { Locale } from '../../../i18n/Locale';
+import '../../../styles/academy.css';
+import '../../../styles/sdk-course.css';
+const locale = Locale.forPath(Astro.url.pathname);
+const steps = await Content.steps(locale.code, course.id);
+const section = course.sections[0];
+---
+<Layout title="Cyber UI Toolkit — Обучение" description={course.description} canonicalPath="/academy/cyber-ui/">
+  <Header title={course.title} description="" current="academy" navigationOnly/>
+  <main class="academy-page container sdk-course">
+    <nav class="academy-breadcrumb" aria-label="Навигация"><a href={locale.path('/academy/')}>Обучение</a><span>/</span><span>{course.title}</span></nav>
+    <div class="course-hero"><div><span class="academy-eyebrow">Курс / TypeScript · PixiJS 8</span><h1>{course.title}</h1><p>{course.description}</p><div class="academy-chips"><span class="academy-chip">1 раздел · {steps.length} уроков</span><span class="academy-chip">Core + SDK</span></div><a class="academy-button" href={locale.path('/academy/cyber-ui/interface/')}>Начать курс →</a></div><CyberUiMark/></div>
+    <section aria-labelledby="cyber-program"><div class="academy-section-heading"><h2 id="cyber-program">Программа курса</h2></div><ol class="curriculum"><li><a href={locale.path('/academy/cyber-ui/interface/')}><span class="curriculum__number">01</span><div><span class="academy-eyebrow">Уроков: {steps.length}</span><h3>{section.title}</h3><p>{section.description}</p></div><span class="curriculum__arrow" aria-hidden="true">↗</span></a></li></ol></section>
+    <div class="sdk-reading-grid"><section><h2>Что соберём</h2><p>Панель с кнопкой, плашкой счётчика и векторными иконками. Затем добавим бинарный фон, загрузчик и искажение поверхности. Последние уроки показывают интеграцию с компонентами и действиями SDK.</p><p>Тулкит рисует оформление. Приложение задаёт размеры, текст, нажатия, доступность и время анимации.</p></section><section><h2>Перед началом</h2><p>{section.prerequisites}</p><ul class="sdk-links"><li><a href="https://github.com/gamedevland/cyber-ui-toolkit" target="_blank" rel="noopener noreferrer">Исходники и README ↗</a></li><li><a href="https://pixijs.com/8.x/guides/components/scene-objects/graphics" target="_blank" rel="noopener noreferrer">PixiJS: Graphics ↗</a></li></ul></section></div>
+  </main><Footer/>
+</Layout>

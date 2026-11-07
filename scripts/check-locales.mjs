@@ -16,10 +16,10 @@ for (const collection of ['articles', 'games', 'tutorials', 'academy']) {
  const expected = originals.map((file) => relative(join(base, 'en'), file)).sort();
  for (const language of languages) {
   const actual = files(join(base, language)).filter((file) => file.endsWith('.md')).filter((file) => {
-   if (collection !== 'academy' || !relative(join(base, language), file).startsWith('sdk/')) return true;
+   if (collection !== 'academy' || !['sdk/', 'cyber-ui/'].some(prefix => relative(join(base, language), file).startsWith(prefix))) return true;
    const text = readFileSync(file, 'utf8');
    if (!/^\s*"draft": true,?$/m.test(text)) return true;
-   assert.ok(language === 'ru', `Untranslated SDK drafts must remain Russian-only: ${file}`);
+   assert.ok(language === 'ru', `Untranslated Academy drafts must remain Russian-only: ${file}`);
    return false;
   }).map((file) => relative(join(base, language), file)).sort();
   assert.deepEqual(actual, expected, `${collection}/${language}: missing or extra translations`);
@@ -41,7 +41,8 @@ for (const file of pages) {
  const html = readFileSync(file, 'utf8');
  const current = /<html[^>]*lang="([^"]+)"/.exec(html)?.[1];
  assert.ok(languages.includes(current), `Unknown page language: ${file}`);
- for (const language of languages) {
+ const draft = /<meta(?=[^>]*name="robots")(?=[^>]*content="noindex, nofollow")/.test(html);
+ for (const language of draft ? [current] : languages) {
   const alternate = new RegExp(`<link(?=[^>]*rel="alternate")(?=[^>]*hreflang="${language}")(?=[^>]*href="([^"]+)")[^>]*>`).exec(html)?.[1];
   assert.ok(alternate, `Missing ${language} alternate: ${file}`);
   const url = new URL(alternate);

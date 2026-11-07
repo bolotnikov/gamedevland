@@ -14,6 +14,8 @@ import Step from '../views/academy/javascript/engine/[step].astro';
 import SdkCourse from '../views/academy/sdk/index.astro';
 import SdkSection from '../views/academy/sdk/section.astro';
 import SdkStep from '../views/academy/sdk/step.astro';
+import CyberUiCourse from '../views/academy/cyber-ui/index.astro';
+import { cyberUiCourse } from '../data/cyberUiCourse';
 import { sdkCourse } from '../data/sdkCourse';
 import { locales, type LocaleCode } from '../i18n/locales';
 import { Locale } from '../i18n/Locale';
@@ -24,6 +26,7 @@ type Route =
  | { kind: 'game'; entry: CollectionEntry<'games'> }
  | { kind: 'article'; entry: CollectionEntry<'articles'> }
  | { kind: 'tutorial'; entry: CollectionEntry<'tutorials'> }
+ | { kind: 'cyber-ui-course' | 'cyber-ui-section' }
  | { kind: 'sdk-course' }
  | { kind: 'sdk-section'; section: string }
  | { kind: 'step'; entry: CollectionEntry<'academy'>; steps: CollectionEntry<'academy'>[]; index: number };
@@ -48,7 +51,7 @@ export async function getStaticPaths() {
  assertTranslations('tutorials', tutorials);
  assertTranslations('academy', publishedAcademy);
  for (const entry of academy.filter(({data}) => data.draft)) {
-  if (entry.data.course !== 'sdk' || entry.data.locale !== 'ru') throw new Error(`Unsupported Academy draft: ${entry.id}`);
+  if (!['sdk', 'cyber-ui'].includes(entry.data.course) || entry.data.locale !== 'ru') throw new Error(`Unsupported Academy draft: ${entry.id}`);
   if (entry.id !== `${entry.data.locale}/${entry.data.translationKey}`) throw new Error(`Invalid draft identity: ${entry.id}`);
  }
  const paths: { params: { path: string | undefined }; props: Props }[] = [];
@@ -74,6 +77,10 @@ export async function getStaticPaths() {
    if(steps.some((step,index)=>step.data.order!==index+1))throw new Error(`Invalid step ordering for ${language.code}/${key}`);
    for(const [index,entry] of steps.entries()) add(`/academy/${entry.data.translationKey}`,{kind:'step',entry,steps,index});
   }
+  if (groups.has('cyber-ui/interface')) {
+   add('/academy/cyber-ui', { kind: 'cyber-ui-course' });
+   add('/academy/cyber-ui/interface', { kind: 'cyber-ui-section' });
+  }
   if (groups.has('sdk/foundations')) {
    add('/academy/sdk', {kind:'sdk-course'});
    for (const section of sdkCourse.sections) {
@@ -88,7 +95,8 @@ export async function getStaticPaths() {
  return paths;
 }
 const { route } = Astro.props;
-if ((route.kind === 'step' && route.entry.data.draft)
+if (route.kind === 'cyber-ui-course' || route.kind === 'cyber-ui-section'
+ || (route.kind === 'step' && route.entry.data.draft)
  || (route.kind === 'sdk-section' && sdkCourse.sections.some((section) => section.slug === route.section && !section.published))) {
  Astro.locals.availableLocales = ['ru'];
  Astro.locals.academyDraft = true;
@@ -104,6 +112,8 @@ if ((route.kind === 'step' && route.entry.data.draft)
 {route.kind === 'game' && <Game game={route.entry}/>}
 {route.kind === 'article' && <Article article={route.entry}/>}
 {route.kind === 'tutorial' && <Tutorial tutorial={route.entry}/>}
+{route.kind === 'cyber-ui-course' && <CyberUiCourse/>}
+{route.kind === 'cyber-ui-section' && <SdkSection sectionSlug="interface" definition={cyberUiCourse}/>}
 {route.kind === 'sdk-course' && <SdkCourse/>}
 {route.kind === 'sdk-section' && <SdkSection sectionSlug={route.section}/>}
-{route.kind === 'step' && (route.entry.data.course === 'sdk' ? <SdkStep step={route.entry} steps={route.steps} index={route.index}/> : <Step step={route.entry} steps={route.steps} index={route.index}/>)}
+{route.kind === 'step' && (route.entry.data.course !== 'javascript' ? <SdkStep step={route.entry} steps={route.steps} index={route.index} definition={route.entry.data.course === 'cyber-ui' ? cyberUiCourse : sdkCourse}/> : <Step step={route.entry} steps={route.steps} index={route.index}/>)}

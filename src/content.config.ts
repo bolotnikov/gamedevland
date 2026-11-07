@@ -84,8 +84,8 @@ const academy = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/academy' }),
 	schema: z.object({
 		...localized,
-		course: z.enum(['javascript', 'sdk']),
-		lesson: z.enum(['engine', 'foundations', 'scene-flow', 'presentation', 'integrations']),
+		course: z.enum(['javascript', 'sdk', 'cyber-ui']),
+		lesson: z.enum(['engine', 'foundations', 'scene-flow', 'presentation', 'integrations', 'interface']),
 		draft: z.boolean().default(false),
 		order: z.number().int().positive(),
 		title: z.string(),
@@ -98,8 +98,8 @@ const academy = defineCollection({
 			title: z.string(),
 			url: z.url().refine((value) => {
 				const url = new URL(value);
-				const sdkSource = url.hostname === 'github.com' && /^\/gamedevland\/(sdk|block-puzzle)(\/|$)/.test(url.pathname);
-				return url.protocol === 'https:' && (sdkSource || ['tc39.es', 'v8.dev', 'developer.chrome.com', 'html.spec.whatwg.org', 'dom.spec.whatwg.org', '262.ecma-international.org'].includes(url.hostname));
+				const sdkSource = url.hostname === 'github.com' && /^\/gamedevland\/(sdk|block-puzzle|cyber-ui-toolkit)(\/|$)/.test(url.pathname);
+				return url.protocol === 'https:' && (sdkSource || ['pixijs.com', 'pixijs.download', 'docs.npmjs.com', 'tc39.es', 'v8.dev', 'developer.chrome.com', 'html.spec.whatwg.org', 'dom.spec.whatwg.org', '262.ecma-international.org'].includes(url.hostname));
 			}, 'Academy sources must use official documentation or specifications.'),
 			note: z.string(),
 		})).min(1),
