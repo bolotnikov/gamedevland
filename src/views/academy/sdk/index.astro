@@ -15,7 +15,7 @@ const steps = await Content.steps(i18n.code, 'sdk');
 <Layout title={t('GameDevLand SDK — Обучение')} description={t(sdkCourse.description)} canonicalPath="/academy/sdk/">
 	<Header title="GameDevLand SDK" description="" current="academy" navigationOnly/>
 	<main class="academy-page container sdk-course">
-		<nav class="academy-breadcrumb" aria-label={t('Навигация')}><a href={i18n.path('/academy/')}>{t('Обучение')}</a><span>/</span><span>GameDevLand SDK</span></nav>
+		<nav class="academy-breadcrumb" aria-label={t('Навигация')}><a href={i18n.path("/")}>{t("Home")}</a><span>/</span><span>GameDevLand SDK</span></nav>
 		<div class="course-hero"><div><span class="academy-eyebrow">{t('Курс / TypeScript · HTML5')}</span><h1>GameDevLand SDK</h1><p>{t(sdkCourse.description)}</p><div class="academy-chips"><span class="academy-chip">{t('{value0} раздела · {value1} уроков', {value0: sdkCourse.sections.length, value1: steps.length})}</span><span class="academy-chip">Engine · Vite</span><span class="academy-chip">{t('Русский и английский')}</span></div><a class="academy-button" href={i18n.path('/academy/sdk/foundations/')}>{t('Начать курс →')}</a></div><SdkMark/></div>
 		<section aria-labelledby="sdk-program"><div class="academy-section-heading"><h2 id="sdk-program">{t('Программа курса')}</h2></div><ol class="curriculum">{sdkCourse.sections.map((section, index) => {
 			const lessonCount = steps.filter(({data}) => data.lesson === section.slug).length;

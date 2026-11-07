@@ -1,0 +1,55 @@
+---
+import { CyberPreviewCatalog } from '../../scripts/cyber-ui/CyberPreviewCatalog';
+import { Locale } from '../../i18n/Locale';
+const locale = Locale.forPath(Astro.url.pathname);
+const t = locale.t.bind(locale);
+interface Props { lesson: string }
+const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
+---
+<section class="cyber-preview" data-cyber-preview={definition.slug} aria-label={t("Результат выполнения примера")}>
+  <div class="cyber-preview__heading"><h2>{t("Результат")}</h2><span>PixiJS · Cyber UI</span></div>
+  <p class="cyber-preview__description">{definition.description}</p>
+  <div class="cyber-preview__viewport" data-cyber-viewport><span>{t("Загрузка Canvas…")}</span></div>
+  <fieldset class="cyber-preview__controls" data-cyber-controls disabled>
+    <legend class="sr-only">{t("Управление примером")}</legend>
+    {definition.controls.map(control => <div class="cyber-preview__field" data-cyber-field>
+      <label for={`cyber-${definition.slug}-${control.id}`}>{control.label}</label>
+      {control.kind === 'select'
+        ? <select id={`cyber-${definition.slug}-${control.id}`} data-cyber-control={control.id}>{control.options.map(option => <option value={option.value}>{option.label}</option>)}</select>
+        : control.kind === 'checkbox'
+          ? <input id={`cyber-${definition.slug}-${control.id}`} type="checkbox" data-cyber-control={control.id} checked={control.checked}/>
+          : control.kind === 'color' || control.kind === 'text'
+            ? <input id={`cyber-${definition.slug}-${control.id}`} type={control.kind} data-cyber-control={control.id} value={control.value} maxlength={control.kind === 'text' ? 32 : undefined}/>
+            : control.kind === 'range' ? <><input id={`cyber-${definition.slug}-${control.id}`} type="range" data-cyber-control={control.id} min={control.min} max={control.max} step={control.step} value={control.value}/><output for={`cyber-${definition.slug}-${control.id}`}>{control.value}</output></> : null}
+    </div>)}
+  </fieldset>
+  <p class="cyber-preview__status" data-cyber-status role="status" aria-live={definition.motion ? 'off' : 'polite'}>{t("Подготовка примера…")}</p>
+  <noscript><p>{t("Для Canvas-примера необходим JavaScript. Код урока доступен ниже.")}</p></noscript>
+</section>
+<script>
+  import { CyberPreviewController } from '../../scripts/cyber-ui/CyberPreviewController';
+  document.querySelectorAll<HTMLElement>('[data-cyber-preview]').forEach(element => new CyberPreviewController(element));
+</script>
+<style>
+.cyber-preview { margin: 24px 0 32px; min-width: 0; padding: 18px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-card); }
+.cyber-preview__heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cyber-preview__heading h2 { margin: 0; font-size: 16px; line-height: 1.5; }
+.cyber-preview__heading > span { color: var(--color-muted-foreground); font: 11px ui-monospace, monospace; }
+.cyber-preview__description { color: var(--color-muted-foreground); font-size: 13px; line-height: 1.7; margin: 10px 0 16px; }
+.cyber-preview__viewport { aspect-ratio: 480 / 320; display: grid; place-items: center; overflow: hidden; background: #07111d; border: 1px solid #26384e; border-radius: 8px; color: #a0b2c8; font-size: 13px; }
+.cyber-preview__viewport :global(canvas) { display: block; width: 100% !important; height: auto !important; }
+.cyber-preview__controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0 0; padding: 0; border: 0; min-width: 0; }
+.cyber-preview__controls:has(> legend:only-child) { display: none; }
+.cyber-preview__controls label { font-size: 12px; color: var(--color-foreground); }
+.cyber-preview__controls select, .cyber-preview__controls input[type='text'] { max-width: 100%; padding: 8px 10px; border: 1px solid var(--color-border); border-radius: 6px; color: var(--color-foreground); background: var(--color-secondary); font-size: 12px; cursor: pointer; }
+ .cyber-preview__field { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.cyber-preview__field[hidden] { display: none; }
+.cyber-preview__controls input[type='color'] { width: 36px; height: 30px; padding: 2px; border: 1px solid var(--color-border); border-radius: 5px; background: var(--color-secondary); cursor: pointer; }
+.cyber-preview__controls input[type='text'] { width: 180px; min-width: 0; }
+.cyber-preview__controls :is(button, select, input):focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 3px; }
+.cyber-preview__controls input { accent-color: var(--color-cyan); }
+.cyber-preview__controls input[type='range'] { width: 100px; max-width: 100%; }
+.cyber-preview__controls output { min-width: 22px; font: 12px ui-monospace, monospace; }
+.cyber-preview__status { margin: 12px 0 0; min-height: 2.8em; color: var(--color-muted-foreground); font: 11px/1.6 ui-monospace, monospace; overflow-wrap: anywhere; }
+@media(max-width: 600px) { .cyber-preview { padding: 12px; } .cyber-preview__heading > span { font-size: 10px; } }
+</style>

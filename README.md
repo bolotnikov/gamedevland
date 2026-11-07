@@ -16,24 +16,27 @@ npm run preview
 
 ## Deployment
 
-GitHub Actions builds the Astro project and deploys the generated `dist/` directory to GitHub Pages.
+Pushes to `main` trigger GitHub Actions to build the Astro project and deploy the generated
+`dist/` directory to GitHub Pages. Run typecheck, lint, build, and locale checks before merging.
 
 The custom domain is stored in `public/CNAME` so it is copied into `dist/` during the build.
 
 ## Academy
 
-- `/academy/` — course catalog.
-- `/academy/javascript/` — Basic → Advanced JavaScript curriculum.
-- `/academy/javascript/engine/` — lesson 01, 20 separate Markdown steps.
+- `/` — course catalog: GameDevLand SDK, Cyber UI Toolkit, Advanced JavaScript.
+- `/academy/sdk/` — SDK curriculum with four sections and 45 lessons.
+- `/academy/cyber-ui/` — the single-section toolkit course with 11 lessons and eight Canvas examples.
+- `/academy/javascript/` — Advanced JavaScript curriculum.
+- `/academy/javascript/engine/` — section 01 with 19 lessons.
+
+The former `/academy/` catalog and Cyber UI section overview redirect to their replacements.
+Archived articles and tutorial chapters retain their URLs and content, but are no longer
+listed on the home page or linked from the portfolio.
 
 Read `AGENTS.md` and `docs/course/` before creating lessons. Theory lives in
 `src/content/academy/`; diagrams and assessments use native Astro components.
 Every step cites official documentation/specifications. Theme is shared across the site.
 Progress and answer drafts are browser-local; there is no account or server-side grading.
-
-Academy changes are currently for local review only. Do not push/deploy until authorized.
-Alex has authorized a commit/push checkpoint to a `codex/` review branch with `[skip ci]`;
-production publication and CI/CD remain unauthorized. Do not merge the checkpoint into `main`.
 
 ## Languages
 

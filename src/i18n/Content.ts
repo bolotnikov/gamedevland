@@ -11,7 +11,7 @@ export class Content {
 	}
 	static isAcademyVisible(data: CollectionEntry<'academy'>['data']): boolean {
 		return this.isAcademyPublished(data)
-			|| (import.meta.env.DEV && data.course === 'sdk' && data.locale === 'ru' && data.draft);
+			|| ((import.meta.env.DEV || import.meta.env.MODE === 'academy-preview') && ['sdk', 'cyber-ui'].includes(data.course) && data.locale === 'ru' && data.draft);
 	}
 	static async steps(locale: LocaleCode, course = 'javascript', lesson?: string) {
 		return (await getCollection('academy', ({ data }) => data.locale === locale

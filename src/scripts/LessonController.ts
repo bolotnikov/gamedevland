@@ -13,6 +13,7 @@ type LessonState = z.infer<typeof lessonStateSchema>;
 export class LessonController {
 	private readonly i18n = Locale.fromDocument();
 	private readonly root = document.querySelector<HTMLElement>('[data-lesson-step], [data-lesson-overview]');
+	private readonly startLabel = this.root?.querySelector('[data-resume-link]')?.textContent ?? this.i18n.t('Начать урок →');
 	private readonly key = `gamedevland:academy:${this.root?.dataset['lessonId'] ?? 'javascript:engine'}:v1`;
 	private readonly path = this.root?.dataset['lessonPath'] ?? '/academy/javascript/engine';
 	private readonly slugs = this.root?.dataset['stepSlugs']?.split(',') ?? [];
@@ -48,7 +49,7 @@ export class LessonController {
 			const resume = this.root?.querySelector<HTMLAnchorElement>('[data-resume-link]');
 			if (resume) {
 				resume.href = this.i18n.path(`${this.path}/${this.slugs[0] ?? ''}/`);
-				resume.textContent = this.i18n.t("Начать урок →");
+				resume.textContent = this.startLabel;
 			}
 		});
 		this.setupQuiz();

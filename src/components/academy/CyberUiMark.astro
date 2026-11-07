@@ -1,0 +1,22 @@
+---
+import { Locale } from '../../i18n/Locale';
+const locale = Locale.forPath(Astro.url.pathname);
+---
+<div class="cyber-mark" role="img" aria-label={locale.t('Панель, плашка и кнопка в киберстиле')}>
+  <div class="cyber-mark__header"><span>CYBER UI</span><i aria-hidden="true">● ● ●</i></div>
+  <div class="cyber-mark__content"><span class="cyber-mark__chip">◈ 1 250</span><div class="cyber-mark__lines" aria-hidden="true"><i></i><i></i><i></i></div><span class="cyber-mark__button">▶ START</span></div>
+  <span class="cyber-mark__caption">Graphics + palette + state</span>
+</div>
+<style>
+.cyber-mark { width: min(100%, 340px); margin: auto; padding: 18px; color: var(--color-cyan); border: 1px solid currentColor; border-radius: 4px 22px 4px 22px; background: linear-gradient(140deg, color-mix(in srgb, var(--color-cyan) 12%, var(--color-card)), var(--color-card)); }
+.cyber-mark__header { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border); font: 600 12px ui-monospace, monospace; letter-spacing: .08em; }
+.cyber-mark__header i { font-size: 8px; font-style: normal; }
+.cyber-mark__content { display: grid; justify-items: start; gap: 20px; padding: 20px 0; }
+.cyber-mark__chip { padding: 7px 15px; border: 1px solid var(--color-border); color: var(--color-foreground); font: 12px ui-monospace, monospace; }
+.cyber-mark__lines { width: 85%; display: grid; gap: 8px; }
+.cyber-mark__lines i { height: 4px; width: 100%; background: color-mix(in srgb, var(--color-cyan) 20%, transparent); }
+.cyber-mark__lines i:nth-child(2) { width: 72%; }
+.cyber-mark__lines i:nth-child(3) { width: 46%; }
+.cyber-mark__button { padding: 13px 30px; color: var(--color-background); background: var(--color-cyan); clip-path: polygon(0 0, 93% 0, 100% 25%, 100% 100%, 7% 100%, 0 75%); font: 600 13px ui-monospace, monospace; }
+.cyber-mark__caption { display: block; padding-top: 14px; border-top: 1px solid var(--color-border); color: var(--color-muted-foreground); font: 10px ui-monospace, monospace; }
+</style>
