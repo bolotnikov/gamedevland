@@ -8,7 +8,7 @@ import type { CyberPanelVariant } from './types';
 export class CyberSurfaceExample extends CyberExample {
   private readonly settings = new CyberPanelSettings();
   get status(): string {
-    return `${this.settings.variant} · ${this.settings.glass && this.settings.variant !== 'plate' && this.settings.state !== 'locked' ? 'стекло' : 'плоская поверхность'} · ${this.settings.width} × ${this.settings.variant === 'square' ? Math.min(this.settings.width, 224) : this.settings.height}`;
+    return `${this.settings.variant} · ${this.settings.glass && this.settings.variant !== 'plate' && this.settings.state !== 'locked' ? this.locale.t('стекло') : this.locale.t('плоская поверхность')} · ${this.settings.width} × ${this.settings.variant === 'square' ? Math.min(this.settings.width, 224) : this.settings.height}`;
   }
   override get canvasHeight(): number {
     return 500;
@@ -79,7 +79,7 @@ export class CyberSurfaceExample extends CyberExample {
       const g = cell.addChild(new Graphics());
       g.position.set((cellWidth - w) / 2, (72 - h) / 2);
       CyberPanelSkin.draw(g, item.variant, w, h, item.variant !== 'plate', t);
-      const label = CyberDrawing.label(cell, item.label, cellWidth / 2, 82, 10, t.muted);
+      const label = CyberDrawing.label(cell, this.locale.t(item.label), cellWidth / 2, 82, 10, t.muted);
       label.anchor.set(0.5, 0);
     }
   }

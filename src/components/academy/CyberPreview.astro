@@ -1,14 +1,17 @@
 ---
 import { CyberPreviewCatalog } from '../../scripts/cyber-ui/CyberPreviewCatalog';
+import { Locale } from '../../i18n/Locale';
+const locale = Locale.forPath(Astro.url.pathname);
+const t = locale.t.bind(locale);
 interface Props { lesson: string }
-const definition = CyberPreviewCatalog.get(Astro.props.lesson);
+const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
 ---
-<section class="cyber-preview" data-cyber-preview={definition.slug} aria-label="Результат выполнения примера">
-  <div class="cyber-preview__heading"><h2>Результат</h2><span>PixiJS · Cyber UI</span></div>
+<section class="cyber-preview" data-cyber-preview={definition.slug} aria-label={t("Результат выполнения примера")}>
+  <div class="cyber-preview__heading"><h2>{t("Результат")}</h2><span>PixiJS · Cyber UI</span></div>
   <p class="cyber-preview__description">{definition.description}</p>
-  <div class="cyber-preview__viewport" data-cyber-viewport><span>Загрузка Canvas…</span></div>
+  <div class="cyber-preview__viewport" data-cyber-viewport><span>{t("Загрузка Canvas…")}</span></div>
   <fieldset class="cyber-preview__controls" data-cyber-controls disabled>
-    <legend class="sr-only">Управление примером</legend>
+    <legend class="sr-only">{t("Управление примером")}</legend>
     {definition.controls.map(control => <div class="cyber-preview__field" data-cyber-field>
       <label for={`cyber-${definition.slug}-${control.id}`}>{control.label}</label>
       {control.kind === 'select'
@@ -20,8 +23,8 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson);
             : control.kind === 'range' ? <><input id={`cyber-${definition.slug}-${control.id}`} type="range" data-cyber-control={control.id} min={control.min} max={control.max} step={control.step} value={control.value}/><output for={`cyber-${definition.slug}-${control.id}`}>{control.value}</output></> : null}
     </div>)}
   </fieldset>
-  <p class="cyber-preview__status" data-cyber-status role="status" aria-live={definition.motion ? 'off' : 'polite'}>Подготовка примера…</p>
-  <noscript><p>Для Canvas-примера необходим JavaScript. Код урока доступен ниже.</p></noscript>
+  <p class="cyber-preview__status" data-cyber-status role="status" aria-live={definition.motion ? 'off' : 'polite'}>{t("Подготовка примера…")}</p>
+  <noscript><p>{t("Для Canvas-примера необходим JavaScript. Код урока доступен ниже.")}</p></noscript>
 </section>
 <script>
   import { CyberPreviewController } from '../../scripts/cyber-ui/CyberPreviewController';

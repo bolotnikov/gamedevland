@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/sdk-components",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 10,
   "title": "Компонент GameDevLand SDK",
   "concept": "ToolkitComponent",

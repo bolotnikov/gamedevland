@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/host-contract",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 2,
   "title": "Кто управляет интерфейсом",
   "concept": "Границы ответственности",

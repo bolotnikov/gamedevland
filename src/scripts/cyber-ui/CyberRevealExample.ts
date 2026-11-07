@@ -14,7 +14,7 @@ export class CyberRevealExample extends CyberExample {
   private duration = 240;
   private opened = true;
   get status(): string {
-    return `PanelTransition · ${this.axis} · ${this.duration} мс`;
+    return `PanelTransition · ${this.axis} · ${this.duration} ${this.locale.t('мс')}`;
   }
   resize(width: number, height: number): void {
     this.width = width;

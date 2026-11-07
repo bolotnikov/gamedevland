@@ -1,7 +1,9 @@
+import { Locale } from '../../i18n/Locale';
 import { Container } from 'pixi.js';
 
 /** A compiled example owns only its scene objects; the host owns the renderer and clock. */
 export abstract class CyberExample {
+  protected readonly locale = Locale.fromDocument();
   readonly root = new Container();
   onChange: () => void = () => {};
   setActive(active: boolean): void {

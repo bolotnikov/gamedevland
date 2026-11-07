@@ -11,8 +11,8 @@ import '../../../styles/academy.css';
 import '../../../styles/sdk-course.css';
 const i18n = Locale.forPath(Astro.url.pathname);
 const t = i18n.t.bind(i18n);
-interface Props { sectionSlug: string; definition?: AcademyCourse }
-const { sectionSlug, definition = sdkCourse } = Astro.props;
+interface Props { sectionSlug: string; definition?: AcademyCourse; courseOverview?: boolean }
+const { sectionSlug, definition = sdkCourse, courseOverview = false } = Astro.props;
 const section = definition.sections.find(({slug}) => slug === sectionSlug);
 if (!section) throw new Error(`Unknown Academy section: ${sectionSlug}`);
 const steps = await Content.steps(i18n.code, definition.id, section.slug);
@@ -22,13 +22,13 @@ const position = definition.sections.indexOf(section) + 1;
 const outcome = Astro.locals.academyDraft ? section.outcome : t(section.outcome);
 const prerequisites = Astro.locals.academyDraft ? section.prerequisites : t(section.prerequisites);
 ---
-<Layout title={`${(definition.id === 'sdk' ? t(section.title) : section.title)} — ${definition.title}`} description={(definition.id === 'sdk' ? t(section.description) : section.description)} canonicalPath={`/academy/${definition.id}/${section.slug}/`}>
+<Layout title={courseOverview ? `${definition.title} — GameDev.Land` : `${t(section.title)} — ${definition.title}`} description={t(section.description)} canonicalPath={courseOverview ? `/academy/${definition.id}/` : `/academy/${definition.id}/${section.slug}/`}>
 	<Header title={definition.title} description="" current="academy" navigationOnly/>
 	<main class="academy-page container" data-lesson-overview data-lesson-id={`${definition.id}:${section.slug}`} data-lesson-path={`/academy/${definition.id}/${section.slug}`} data-step-slugs={steps.map(({data}) => data.translationKey.split('/').at(-1)).join(',')}>
-		<nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/academy/")}>{t("Обучение")}</a><span>/</span><a href={i18n.path(`/academy/${definition.id}/`)}>{definition.id === 'sdk' ? 'SDK' : definition.title}</a><span>/</span><span>{t('Раздел {value0}', {value0: String(position).padStart(2, '0')})}</span></nav>
-		<div class="lesson-intro"><div><span class="academy-eyebrow">{`${definition.title} / ${t('Раздел {value0}', {value0: String(position).padStart(2, '0')})}`}</span><h1>{(definition.id === 'sdk' ? t(section.title) : section.title)}</h1><p>{outcome}</p><div class="academy-chips"><span class="academy-chip">{t('Уроков: {value0}', {value0: steps.length})}</span><span class="academy-chip">{t("Код · схемы · примеры")}</span></div><a class="academy-button" href={i18n.path(`/academy/${first.data.translationKey}/`)} data-resume-link>{t("Начать раздел →")}</a></div><aside class="lesson-intro__map"><h2>{t("Перед началом")}</h2><p>{prerequisites}</p><SdkProgress total={steps.length}/></aside></div>
-		<button type="button" class="progress-reset" data-reset-progress>{t("Сбросить отметки раздела")}</button>
-		<div class="academy-section-heading"><h2>{t("Уроки раздела")}</h2><span>{t("Можно открыть любой урок")}</span></div>
+		<nav class="academy-breadcrumb" aria-label={t("Навигация")}><a href={i18n.path("/")}>{t("Home")}</a><span>/</span>{!courseOverview && <><a href={i18n.path(`/academy/${definition.id}/`)}>{definition.id === 'sdk' ? 'SDK' : definition.title}</a><span>/</span><span>{t('Раздел {value0}', {value0: String(position).padStart(2, '0')})}</span></>} {courseOverview && <span>{definition.title}</span>}</nav>
+		<div class="lesson-intro"><div><span class="academy-eyebrow">{courseOverview ? t('Курс / TypeScript · PixiJS 8') : `${definition.title} / ${t('Раздел {value0}', {value0: String(position).padStart(2, '0')})}`}</span><h1>{(courseOverview ? definition.title : t(section.title))}</h1><p>{outcome}</p><div class="academy-chips"><span class="academy-chip">{t('Уроков: {value0}', {value0: steps.length})}</span><span class="academy-chip">{t("Код · схемы · примеры")}</span></div><a class="academy-button" href={i18n.path(`/academy/${first.data.translationKey}/`)} data-resume-link>{t(courseOverview ? 'Начать курс →' : 'Начать раздел →')}</a></div><aside class="lesson-intro__map"><h2>{t("Перед началом")}</h2><p>{prerequisites}</p><SdkProgress total={steps.length}/></aside></div>
+		<button type="button" class="progress-reset" data-reset-progress>{t(courseOverview ? 'Сбросить отметки курса' : 'Сбросить отметки раздела')}</button>
+		<div class="academy-section-heading"><h2>{t(courseOverview ? 'Уроки курса' : 'Уроки раздела')}</h2><span>{t("Можно открыть любой урок")}</span></div>
 		<ol class="lesson-step-grid">{steps.map((step) => <li><a href={i18n.path(`/academy/${step.data.translationKey}/`)} data-step-link={step.data.translationKey.split('/').at(-1)}><span class="step-grid__number">{String(step.data.order).padStart(2,'0')}</span><span><small>{step.data.concept}</small><strong>{step.data.title}</strong></span><span class="step-done" aria-label={t("Урок отмечен")}>✓</span></a></li>)}</ol>
 	</main><Footer/>
 	<script>import { LessonController } from '../../../scripts/LessonController'; new LessonController();</script>

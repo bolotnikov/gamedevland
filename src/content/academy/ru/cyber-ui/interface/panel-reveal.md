@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/panel-reveal",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 11,
   "title": "Появление панели",
   "concept": "PanelReveal",

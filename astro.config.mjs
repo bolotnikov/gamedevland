@@ -16,6 +16,12 @@ const externalLinkOptions = {
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://gamedev.land',
+	redirects: {
+		'/academy/': '/',
+		'/ru/academy/': '/ru/',
+		'/academy/cyber-ui/interface/': '/academy/cyber-ui/',
+		'/ru/academy/cyber-ui/interface/': '/ru/academy/cyber-ui/',
+	},
 	vite: {
 		optimizeDeps: {
 			include: ['pixi.js', '@gamedevland/cyber-ui',

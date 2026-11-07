@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/binary-field",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 6,
   "title": "Бинарный фон",
   "concept": "BinaryField",

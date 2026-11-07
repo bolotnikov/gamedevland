@@ -1,3 +1,4 @@
+import { Locale } from '../../i18n/Locale';
 import { CyberPreviewCatalog } from './CyberPreviewCatalog';
 import type { CyberPreviewHost } from './CyberPreviewHost';
 
@@ -35,7 +36,7 @@ export class CyberPreviewController {
     try {
       const slug = this.element.dataset['cyberPreview'];
       if (!slug) throw new Error('Missing Cyber UI lesson slug');
-      const definition = CyberPreviewCatalog.get(slug);
+      const definition = CyberPreviewCatalog.get(slug, Locale.fromDocument());
       const { CyberPreviewHost } = await import('./CyberPreviewHost');
       if (this.disposed) return;
       const host = await CyberPreviewHost.create(this.element, definition);
@@ -49,9 +50,9 @@ export class CyberPreviewController {
       if (this.disposed) return;
       const status = this.element.querySelector('[data-cyber-status]');
       if (status)
-        status.textContent = 'Canvas не удалось запустить. Код примера остаётся доступен ниже.';
+        status.textContent = Locale.fromDocument().t('Canvas не удалось запустить. Код примера остаётся доступен ниже.');
       const viewport = this.element.querySelector('[data-cyber-viewport]');
-      if (viewport) viewport.textContent = 'Canvas недоступен';
+      if (viewport) viewport.textContent = Locale.fromDocument().t('Canvas недоступен');
       this.element.dataset['ready'] = 'error';
       console.error('Cyber UI preview failed', error);
     }

@@ -10,6 +10,8 @@
 .academy-section-heading h2 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -.03em; }
 .academy-section-heading > span { font-size: 12px; color: var(--color-muted-foreground); }
 .course-card { display: grid; grid-template-columns: 1fr 1.05fr; overflow: hidden; max-width: 100%; border: 1px solid var(--color-border); border-radius: 24px; background: var(--color-card); text-decoration: none; box-shadow: var(--shadow-card); transition: border-color .2s, transform .2s; }
+.course-card + .course-card { margin-top: 28px; }
+.course-card:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 5px; }
 .course-card:hover { border-color: var(--color-cyan); transform: translateY(-3px); }
 .course-card__art { position: relative; display: grid; place-items: center; min-height: 365px; overflow: hidden; background: radial-gradient(ellipse at 50% 42%, #28c1ce1f, transparent 65%), var(--color-code); border-right: 1px solid var(--color-border); }
 .course-card__series { position: absolute; bottom: 24px; left: 28px; color: var(--color-muted-foreground); font: 11px ui-monospace, monospace; letter-spacing: .15em; }

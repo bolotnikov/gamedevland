@@ -11,7 +11,7 @@ export class CyberBinaryExample extends CyberExample {
   private opacity = 0.25;
   private color = CyberPreset.palette.accent;
   get status(): string {
-    return `BinaryField · ${this.rate} кадров/с · размер ${this.cell}`;
+    return `BinaryField · ${this.locale.t('{value0} кадров/с · размер {value1}', {value0: this.rate, value1: this.cell})}`;
   }
   resize(width: number, height: number): void {
     this.width = width;

@@ -127,14 +127,6 @@ const releaseLabel = game.data.releaseDate
 
 		<section class="container">
 			<GameMediaShowcase screenshots={game.data.screenshots} promoVideo={game.data.promoVideo} />
-			{
-				game.data.articleUrl && (
-					<div class="game-page__workshop">
-						<p>{t("Development notes")}</p>
-						<a href={i18n.path(game.data.articleUrl)}>{t("Read the development article ")}<span aria-hidden="true">{t("&rarr;")}</span></a>
-					</div>
-				)
-			}
 		</section>
 	</main>
 

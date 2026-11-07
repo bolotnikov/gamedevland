@@ -19,8 +19,7 @@ const { title, description, current = 'home', compact = false, navigationOnly = 
 		<nav class="top-nav" aria-label={t("Main navigation")}>
 			<a class="brand-pill" href={i18n.path("/")}>{t("GameDev.Land")}</a>
 			<div class="top-nav__links">
-				<a class:list={['top-nav__link', current === 'home' && 'is-active']} href={i18n.path("/")}>{t("Home")}</a>
-				<a class:list={['top-nav__link', current === 'academy' && 'is-active']} href={i18n.path("/academy/")}>{t("Academy")}</a>
+				<a class:list={['top-nav__link', (current === 'home' || current === 'academy') && 'is-active']} href={i18n.path("/")}>{t("Home")}</a>
 				<a class:list={['top-nav__link', current === 'games' && 'is-active']} href={i18n.path("/games")}>{t("Portfolio")}</a>
 				<a class:list={['top-nav__link', current === 'services' && 'is-active']} href={i18n.path("/services")}>{t("Services")}</a>
 				<a class:list={['top-nav__link', current === 'about' && 'is-active']} href={i18n.path("/about")}>{t("About")}</a>

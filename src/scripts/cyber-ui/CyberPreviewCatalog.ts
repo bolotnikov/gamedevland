@@ -1,3 +1,4 @@
+import type { Locale } from '../../i18n/Locale';
 import type { CyberControl, CyberPreviewDefinition } from './types';
 
 /** Authored controls describe visible parameters, never renderer lifecycle operations. */
@@ -202,9 +203,19 @@ export class CyberPreviewCatalog {
     return this.entries.some((entry) => entry.slug === slug);
   }
 
-  static get(slug: string): CyberPreviewDefinition {
+  static get(slug: string, locale: Locale): CyberPreviewDefinition {
     const entry = this.entries.find((entry) => entry.slug === slug);
     if (!entry) throw new Error(`Unknown Cyber UI lesson: ${slug}`);
-    return entry;
+    return {
+      ...entry,
+      description: locale.t(entry.description),
+      controls: entry.controls.map(control => ({
+        ...control,
+        label: locale.t(control.label),
+        ...(control.kind === 'select' ? {
+          options: control.options.map(option => ({ ...option, label: locale.t(option.label) })),
+        } : {}),
+      })),
+    };
   }
 }

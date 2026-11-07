@@ -18,7 +18,7 @@ export class CyberButtonExample extends CyberExample {
     this.settings.text = 'START';
   }
   get status(): string {
-    return `${this.variant} · нажатий: ${this.taps}`;
+    return `${this.variant} · ${this.locale.t('нажатий: {value0}', {value0: this.taps})}`;
   }
   resize(width: number, height: number): void {
     this.width = width;

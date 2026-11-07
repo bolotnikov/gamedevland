@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/panels",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 3,
   "title": "Панель и плашка",
   "concept": "TerminalGlass · TerminalUi",

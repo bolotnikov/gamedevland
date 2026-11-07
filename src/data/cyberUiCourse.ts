@@ -1,6 +1,6 @@
 import type { AcademyCourse } from './academyCourse';
 
-/** Russian review material; draft lessons are excluded from production output. */
+/** Shared course metadata; public-facing text is translated through Locale. */
 export const cyberUiCourse = {
   id: 'cyber-ui',
   title: 'Cyber UI Toolkit',

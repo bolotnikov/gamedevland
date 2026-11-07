@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/text-echo",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 8,
   "title": "Цветовое эхо текста",
   "concept": "TextEcho",

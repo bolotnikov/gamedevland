@@ -1,4 +1,8 @@
-<div class="cyber-mark" role="img" aria-label="Панель, плашка и кнопка в киберстиле">
+---
+import { Locale } from '../../i18n/Locale';
+const locale = Locale.forPath(Astro.url.pathname);
+---
+<div class="cyber-mark" role="img" aria-label={locale.t('Панель, плашка и кнопка в киберстиле')}>
   <div class="cyber-mark__header"><span>CYBER UI</span><i aria-hidden="true">● ● ●</i></div>
   <div class="cyber-mark__content"><span class="cyber-mark__chip">◈ 1 250</span><div class="cyber-mark__lines" aria-hidden="true"><i></i><i></i><i></i></div><span class="cyber-mark__button">▶ START</span></div>
   <span class="cyber-mark__caption">Graphics + palette + state</span>

@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/icons-theme",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 5,
   "title": "Иконки и палитра",
   "concept": "TerminalIcon · CyberPreset",

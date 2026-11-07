@@ -39,6 +39,11 @@ assert.ok(existsSync('dist/index.html'), 'Run npm run build before checking outp
 const pages = files('dist').filter((file) => file.endsWith('.html'));
 for (const file of pages) {
  const html = readFileSync(file, 'utf8');
+ const redirect = /<meta(?=[^>]*http-equiv="refresh")[^>]*content="[^"]*url=([^"]+)/i.exec(html)?.[1];
+ if (redirect) {
+  assert.ok(existsSync(join('dist', new URL(redirect, 'https://gamedev.land').pathname, 'index.html')), `Missing redirect target: ${file}`);
+  continue;
+ }
  const current = /<html[^>]*lang="([^"]+)"/.exec(html)?.[1];
  assert.ok(languages.includes(current), `Unknown page language: ${file}`);
  const draft = /<meta(?=[^>]*name="robots")(?=[^>]*content="noindex, nofollow")/.test(html);

@@ -36,10 +36,10 @@ export class CyberMotionExample extends CyberExample {
   }
   get status(): string {
     return this.lesson === 'triangle-loader'
-      ? `TriangleLoader · радиус ${this.radius} · частиц ${this.count}`
+      ? `TriangleLoader · ${this.locale.t('радиус {value0} · частиц {value1}', {value0: this.radius, value1: this.count})}`
       : this.lesson === 'text-echo'
-        ? `TextEcho · смещение ${this.shift}`
-        : `SurfaceGlitch · ${this.settings.variant} · ${this.duration} мс`;
+        ? `TextEcho · ${this.locale.t('смещение {value0}', {value0: this.shift})}`
+        : `SurfaceGlitch · ${this.settings.variant} · ${this.duration} ${this.locale.t('мс')}`;
   }
   resize(width: number, height: number): void {
     this.width = width;

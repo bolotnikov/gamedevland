@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/glitch-lifecycle",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 9,
   "title": "Искажение и жизненный цикл",
   "concept": "SurfaceGlitch · UiEffect",

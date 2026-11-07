@@ -4,7 +4,7 @@
   "translationKey": "cyber-ui/interface/triangle-loader",
   "course": "cyber-ui",
   "lesson": "interface",
-  "draft": true,
+  "draft": false,
   "order": 7,
   "title": "Анимированный загрузчик",
   "concept": "TriangleLoader",

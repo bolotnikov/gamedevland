@@ -37,7 +37,7 @@ export class CyberIconExample extends CyberExample {
     'flag',
   ];
   get status(): string {
-    return `TerminalUi.icon() · size: ${this.size} · 27 иконок`;
+    return `TerminalUi.icon() · size: ${this.size} · ${this.locale.t('27 иконок')}`;
   }
   resize(width: number, height: number): void {
     this.width = width;
