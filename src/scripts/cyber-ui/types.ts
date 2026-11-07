@@ -1,6 +1,4 @@
 export type CyberLesson =
-  | 'installation'
-  | 'host-contract'
   | 'panels'
   | 'buttons'
   | 'icons-theme'
@@ -8,16 +6,21 @@ export type CyberLesson =
   | 'triangle-loader'
   | 'text-echo'
   | 'glitch-lifecycle'
-  | 'sdk-components'
-  | 'panel-reveal'
-  | 'api-reference';
+  | 'panel-reveal';
+
+export type CyberPanelVariant = 'window' | 'plate' | 'square' | 'card' | 'research' | 'module';
 export type CyberControl =
-  | { readonly kind: 'button'; readonly id: string; readonly label: string }
   | {
       readonly kind: 'checkbox';
       readonly id: string;
       readonly label: string;
       readonly checked: boolean;
+    }
+  | {
+      readonly kind: 'color' | 'text';
+      readonly id: string;
+      readonly label: string;
+      readonly value: string;
     }
   | {
       readonly kind: 'range';

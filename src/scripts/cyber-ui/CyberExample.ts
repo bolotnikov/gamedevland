@@ -10,6 +10,9 @@ export abstract class CyberExample {
   protected width = 480;
   protected height = 320;
   protected reduced = false;
+  get canvasHeight(): number {
+    return 320;
+  }
   abstract get status(): string;
   abstract resize(width: number, height: number): void;
   control(id: string, value: string): void {

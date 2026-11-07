@@ -1,5 +1,5 @@
-import { CyberPreset, TerminalGlass } from '@gamedevland/cyber-ui';
-import { Graphics, Text } from 'pixi.js';
+import { CyberPreset } from '@gamedevland/cyber-ui';
+import { Text } from 'pixi.js';
 import type { Container } from 'pixi.js';
 
 export class CyberDrawing {
@@ -17,14 +17,6 @@ export class CyberDrawing {
     label.position.set(x, y);
     label.eventMode = 'none';
     return label;
-  }
-
-  static panel(parent: Container, x: number, y: number, width: number, height: number): Graphics {
-    const t = CyberPreset.palette;
-    const g = parent.addChild(new Graphics());
-    g.position.set(x, y);
-    TerminalGlass.draw(g, 0, 0, width, height, 12, t.panel, t.panelEdge, t.accent, t.text);
-    return g;
   }
 
   static clear(parent: Container): void {

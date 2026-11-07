@@ -18,8 +18,8 @@ export default defineConfig({
 	site: 'https://gamedev.land',
 	vite: {
 		optimizeDeps: {
-			include: ['pixi.js', '@gamedevland/cyber-ui', '@gamedevland/cyber-ui-sdk',
-				'@gamedevland/engine/layouts', '@gamedevland/engine/validation', '@gamedevland/engine/tween'],
+			include: ['pixi.js', '@gamedevland/cyber-ui',
+				'@gamedevland/engine/tween'],
 		},
 		server: {
 			// Poll source and content-store files when native file events are missed.

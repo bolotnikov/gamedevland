@@ -6,6 +6,7 @@ import { CyberExample } from './CyberExample';
 
 export class CyberIconExample extends CyberExample {
   private size = 24;
+  private color = CyberPreset.palette.accent;
   private static readonly icons: readonly TerminalIcon[] = [
     'chip',
     'battle',
@@ -44,10 +45,9 @@ export class CyberIconExample extends CyberExample {
     this.draw();
   }
   override control(id: string, value: string): void {
-    if (id === 'size') {
-      this.size = Number(value);
-      this.draw();
-    }
+    if (id === 'size') this.size = Number(value);
+    if (id === 'accent') this.color = Number.parseInt(value.slice(1), 16);
+    this.draw();
   }
   private draw(): void {
     CyberDrawing.clear(this.root);
@@ -58,14 +58,7 @@ export class CyberIconExample extends CyberExample {
     for (const [index, icon] of CyberIconExample.icons.entries()) {
       const x = 12 + cellWidth * ((index % columns) + 0.5);
       const y = 12 + Math.floor(index / columns) * cellHeight + cellHeight * 0.35;
-      TerminalUi.icon(
-        g,
-        icon,
-        x,
-        y,
-        this.size,
-        icon === 'heart' ? CyberPreset.palette.danger : CyberPreset.palette.accent,
-      );
+      TerminalUi.icon(g, icon, x, y, this.size, this.color);
       const label = CyberDrawing.label(
         this.root,
         icon,

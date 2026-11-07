@@ -6,6 +6,7 @@ import Footer from '../../../components/common/Footer.astro';
 import CodeBlockEnhancer from '../../../components/article/CodeBlockEnhancer.astro';
 import SdkProgress from '../../../components/academy/SdkProgress.astro';
 import type { AcademyCourse } from '../../../data/academyCourse';
+import { CyberPreviewCatalog } from '../../../scripts/cyber-ui/CyberPreviewCatalog';
 import { sdkCourse } from '../../../data/sdkCourse';
 import { Locale } from '../../../i18n/Locale';
 import '../../../styles/academy.css';
@@ -28,7 +29,7 @@ const PlacementTrace = step.data.simulation === 'sdk-placement'
 const ApiReference = definition.id === 'sdk' && slug === 'api-reference'
 	? (await import('../../../components/academy/SdkApiReference.astro')).default
 	: undefined;
-const CyberPreview = definition.id === 'cyber-ui'
+const CyberPreview = definition.id === 'cyber-ui' && slug && CyberPreviewCatalog.has(slug)
 	? (await import('../../../components/academy/CyberPreview.astro')).default
 	: undefined;
 // SDK implementation references remain research evidence, not required course reading.

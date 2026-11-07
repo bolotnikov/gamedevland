@@ -13,7 +13,6 @@ export class CyberPreviewHost {
   private readonly status: HTMLElement;
   private observer?: ResizeObserver;
   private example?: CyberExample;
-  private playing: boolean;
   private reduced = this.motion.matches;
   private visible = true;
   private ready = false;
@@ -28,7 +27,6 @@ export class CyberPreviewHost {
     if (!viewport || !status) throw new Error('Cyber UI preview is missing its host elements');
     this.viewport = viewport;
     this.status = status;
-    this.playing = definition.motion && definition.slug !== 'glitch-lifecycle';
   }
 
   static async create(
@@ -87,7 +85,6 @@ export class CyberPreviewHost {
     this.observer.observe(this.viewport);
     const options = { signal: this.listeners.signal };
     this.element.addEventListener('input', (event) => this.input(event), options);
-    this.element.addEventListener('click', (event) => this.click(event), options);
     document.addEventListener('visibilitychange', () => this.syncClock(), options);
     this.motion.addEventListener(
       'change',
@@ -101,6 +98,19 @@ export class CyberPreviewHost {
     );
     this.app.ticker.add(this.tick);
     this.resize();
+    this.syncControls();
+    for (const control of this.definition.controls) {
+      const input = this.element.querySelector<HTMLInputElement | HTMLSelectElement>(
+        `[data-cyber-control="${control.id}"]`,
+      );
+      if (input)
+        this.example.control(
+          control.id,
+          input instanceof HTMLInputElement && input.type === 'checkbox'
+            ? String(input.checked)
+            : input.value,
+        );
+    }
     this.syncClock();
     this.element.dataset['ready'] = 'true';
     this.element.querySelector('[data-cyber-controls]')?.removeAttribute('disabled');
@@ -108,14 +118,15 @@ export class CyberPreviewHost {
 
   private readonly tick = (ticker: Ticker): void => {
     this.example?.update(Math.min(ticker.deltaMS / 1000, 0.1));
-    this.updateStatus();
   };
 
   private resize(): void {
     const width = Math.max(320, Math.round(this.viewport.clientWidth));
-    this.app.renderer.resize(width, 320);
-    this.example?.resize(width, 320);
-    this.viewport.style.aspectRatio = `${width} / 320`;
+    const height = this.example?.canvasHeight ?? 320;
+    this.app.renderer.resize(width, height);
+    this.example?.resize(width, height);
+    this.viewport.style.aspectRatio = `${width} / ${height}`;
+    this.syncControls();
     this.render();
   }
 
@@ -128,50 +139,64 @@ export class CyberPreviewHost {
       input instanceof HTMLInputElement && input.type === 'checkbox'
         ? String(input.checked)
         : input.value;
-    if (id === 'reduced') {
-      this.reduced = value === 'true';
-      this.example?.setReducedMotion(this.reduced);
-    } else this.example?.control(id, value);
+    this.example?.control(id, value);
     if (input instanceof HTMLInputElement && input.type === 'range') {
       const output = input.parentElement?.querySelector('output');
       if (output) output.value = value;
     }
+    this.syncControls();
     this.syncClock();
     this.render();
   }
 
-  private click(event: MouseEvent): void {
-    if (!(event.target instanceof Element)) return;
-    const button = event.target.closest<HTMLButtonElement>('button[data-cyber-action]');
-    const action = button?.dataset['cyberAction'];
-    if (!action) return;
-    if (action === 'play') this.playing = !this.playing;
-    else if (action === 'step') {
-      this.playing = false;
-      if (!this.reduced) {
-        this.example?.setActive(true);
-        this.example?.update(0.09);
+  private syncControls(): void {
+    const value = (id: string) =>
+      this.element.querySelector<HTMLInputElement | HTMLSelectElement>(
+        `[data-cyber-control="${id}"]`,
+      )?.value;
+    const square = value('panel') === 'square' || value('variant') === 'icon';
+    const variant = value('variant');
+    const checked = (id: string) =>
+      this.element.querySelector<HTMLInputElement>(`[data-cyber-control="${id}"]`)?.checked ??
+      false;
+    for (const control of this.definition.controls) {
+      const input = this.element.querySelector<HTMLInputElement | HTMLSelectElement>(
+        `[data-cyber-control="${control.id}"]`,
+      );
+      if (!input) continue;
+      const hidden =
+        (control.id === 'state' && value('panel') === 'plate') ||
+        (control.id === 'selected' &&
+          variant !== undefined &&
+          ['primary', 'danger', 'utility', 'line'].includes(variant)) ||
+        (control.id === 'surface' &&
+          variant !== undefined &&
+          (['nav', 'utility', 'line'].includes(variant) ||
+            (variant === 'primary' && checked('enabled')) ||
+            (variant === 'segment' && !checked('selected')))) ||
+        (control.id === 'glass' && (value('panel') === 'plate' || value('state') === 'locked')) ||
+        ((control.id === 'height' || control.id === 'text') && square);
+      const field = input.closest<HTMLElement>('[data-cyber-field]');
+      if (field) field.hidden = hidden;
+      input.disabled = hidden;
+      if (control.kind === 'range' && control.id === 'width' && input instanceof HTMLInputElement) {
+        input.max = String(
+          Math.min(control.max, this.app.screen.width - 64, square ? 224 : control.max),
+        );
+        const effective = input.value;
+        this.example?.control('width', effective);
+        const output = field?.querySelector('output');
+        if (output) output.value = effective;
       }
-    } else this.example?.control(action, '');
-    this.syncClock();
-    this.render();
+    }
   }
 
   private syncClock(): void {
     if (!this.ready || this.disposed) return;
-    const active = this.playing && !this.reduced && this.visible && !document.hidden;
+    const active = this.definition.motion && !this.reduced && this.visible && !document.hidden;
     this.example?.setActive(active);
     if (active) this.app.start();
     else this.app.stop();
-    const play = this.element.querySelector<HTMLButtonElement>('[data-cyber-action="play"]');
-    if (play) {
-      play.textContent = this.playing ? 'Пауза' : 'Продолжить';
-      play.disabled = this.reduced;
-    }
-    const step = this.element.querySelector<HTMLButtonElement>('[data-cyber-action="step"]');
-    if (step) step.disabled = this.reduced;
-    const reduced = this.element.querySelector<HTMLInputElement>('[data-cyber-control="reduced"]');
-    if (reduced) reduced.checked = this.reduced;
   }
 
   private render(): void {

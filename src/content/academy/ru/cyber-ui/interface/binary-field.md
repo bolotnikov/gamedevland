@@ -8,7 +8,7 @@
   "order": 6,
   "title": "Бинарный фон",
   "concept": "BinaryField",
-  "description": "Получим воспроизводимый узор из seed и номера кадра.",
+  "description": "Добавим автоматически меняющийся бинарный фон.",
   "takeaway": [
     "draw добавляет контуры; цвет и прозрачность задаёт fill."
   ],
@@ -26,14 +26,24 @@
 
 ```ts
 import { Graphics } from 'pixi.js';
+import type { Ticker } from 'pixi.js';
 import { BinaryField, CyberPreset } from '@gamedevland/cyber-ui';
 
 const pattern = app.stage.addChild(new Graphics());
 const bounds = { x: 24, y: 24, w: 360, h: 120 };
-BinaryField.draw(pattern.clear(), bounds, 12, 9, 7291, 0);
-pattern.fill({ color: CyberPreset.palette.accent, alpha: 0.18 });
+let seconds = 0;
+let frame = -1;
+const tick = (ticker: Ticker) => {
+  seconds += ticker.deltaMS / 1000;
+  const next = Math.floor(seconds * 8);
+  if (next === frame) return;
+  frame = next;
+  BinaryField.draw(pattern.clear(), bounds, 12, 9, 7291, frame);
+  pattern.fill({ color: CyberPreset.palette.accent, alpha: 0.25 });
+};
+app.ticker.add(tick);
 ```
 
 После `bounds` идут срез угла, размер ячейки, seed и номер кадра. Размер ячейки — не меньше 1. Для почти пустых границ шириной или высотой до 2 единиц внутренний узор не строится.
 
-Для анимации накапливай секунды в своём владельце экрана и вычисляй `Math.floor(elapsedSeconds * 8)`. Перестраивай рисунок, когда этот номер изменился. При паузе не меняй время, при reduced motion оставь кадр `0`. Не используй случайный seed на каждом кадре: потеряется воспроизводимость.
+Узор обновляется восемь раз в секунду. При удалении экрана убираем callback через `app.ticker.remove(tick)`. При reduced motion оставляем кадр `0`. Seed сохраняется между кадрами: меняется номер кадра, а не источник случайных чисел.

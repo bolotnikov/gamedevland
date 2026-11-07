@@ -9,15 +9,16 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson);
   <div class="cyber-preview__viewport" data-cyber-viewport><span>Загрузка Canvas…</span></div>
   <fieldset class="cyber-preview__controls" data-cyber-controls disabled>
     <legend class="sr-only">Управление примером</legend>
-    {definition.controls.map(control => control.kind === 'button'
-      ? <button type="button" data-cyber-action={control.id}>{control.label}</button>
-      : <label>{control.label}{control.kind === 'select'
-        ? <select data-cyber-control={control.id}>{control.options.map(option => <option value={option.value}>{option.label}</option>)}</select>
+    {definition.controls.map(control => <div class="cyber-preview__field" data-cyber-field>
+      <label for={`cyber-${definition.slug}-${control.id}`}>{control.label}</label>
+      {control.kind === 'select'
+        ? <select id={`cyber-${definition.slug}-${control.id}`} data-cyber-control={control.id}>{control.options.map(option => <option value={option.value}>{option.label}</option>)}</select>
         : control.kind === 'checkbox'
-          ? <input type="checkbox" data-cyber-control={control.id} checked={control.checked}/>
-          : <><input type="range" data-cyber-control={control.id} min={control.min} max={control.max} step={control.step} value={control.value}/><output>{control.value}</output></>}
-      </label>)}
-    {definition.motion && <><button type="button" data-cyber-action="play">Пауза</button>{definition.slug !== 'glitch-lifecycle' && <button type="button" data-cyber-action="step">Шаг +0.09 с</button>}<label>Без движения<input type="checkbox" data-cyber-control="reduced"/></label></>}
+          ? <input id={`cyber-${definition.slug}-${control.id}`} type="checkbox" data-cyber-control={control.id} checked={control.checked}/>
+          : control.kind === 'color' || control.kind === 'text'
+            ? <input id={`cyber-${definition.slug}-${control.id}`} type={control.kind} data-cyber-control={control.id} value={control.value} maxlength={control.kind === 'text' ? 32 : undefined}/>
+            : control.kind === 'range' ? <><input id={`cyber-${definition.slug}-${control.id}`} type="range" data-cyber-control={control.id} min={control.min} max={control.max} step={control.step} value={control.value}/><output for={`cyber-${definition.slug}-${control.id}`}>{control.value}</output></> : null}
+    </div>)}
   </fieldset>
   <p class="cyber-preview__status" data-cyber-status role="status" aria-live={definition.motion ? 'off' : 'polite'}>Подготовка примера…</p>
   <noscript><p>Для Canvas-примера необходим JavaScript. Код урока доступен ниже.</p></noscript>
@@ -36,9 +37,12 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson);
 .cyber-preview__viewport :global(canvas) { display: block; width: 100% !important; height: auto !important; }
 .cyber-preview__controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0 0; padding: 0; border: 0; min-width: 0; }
 .cyber-preview__controls:has(> legend:only-child) { display: none; }
-.cyber-preview__controls label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--color-foreground); }
-.cyber-preview__controls button, .cyber-preview__controls select { max-width: 100%; padding: 8px 10px; border: 1px solid var(--color-border); border-radius: 6px; color: var(--color-foreground); background: var(--color-secondary); font-size: 12px; cursor: pointer; }
-.cyber-preview__controls button:disabled { opacity: .5; cursor: default; }
+.cyber-preview__controls label { font-size: 12px; color: var(--color-foreground); }
+.cyber-preview__controls select, .cyber-preview__controls input[type='text'] { max-width: 100%; padding: 8px 10px; border: 1px solid var(--color-border); border-radius: 6px; color: var(--color-foreground); background: var(--color-secondary); font-size: 12px; cursor: pointer; }
+ .cyber-preview__field { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.cyber-preview__field[hidden] { display: none; }
+.cyber-preview__controls input[type='color'] { width: 36px; height: 30px; padding: 2px; border: 1px solid var(--color-border); border-radius: 5px; background: var(--color-secondary); cursor: pointer; }
+.cyber-preview__controls input[type='text'] { width: 180px; min-width: 0; }
 .cyber-preview__controls :is(button, select, input):focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 3px; }
 .cyber-preview__controls input { accent-color: var(--color-cyan); }
 .cyber-preview__controls input[type='range'] { width: 100px; max-width: 100%; }
