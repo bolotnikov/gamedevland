@@ -9,9 +9,10 @@ interface Props {
 	current?: 'home' | 'academy' | 'games' | 'services' | 'about';
 	compact?: boolean;
 	navigationOnly?: boolean;
+	accentTitle?: boolean;
 }
 
-const { title, description, current = 'home', compact = false, navigationOnly = false } = Astro.props;
+const { title, description, current = 'home', compact = false, navigationOnly = false, accentTitle = false } = Astro.props;
 ---
 
 <header class:list={['site-header', compact && 'is-compact']}>
@@ -32,9 +33,16 @@ const { title, description, current = 'home', compact = false, navigationOnly = 
 
 		{!navigationOnly && <div class="hero-block">
 			<div class="hero-block__inner">
-				<h1>{title}</h1>
+				<h1 class:list={[accentTitle && 'is-accent']}>{title}</h1>
 				<p>{description}</p>
 			</div>
 		</div>}
 	</div>
 </header>
+
+<style>
+.hero-block h1.is-accent {
+	color: var(--color-cyan);
+	text-shadow: 0 0 32px color-mix(in srgb, var(--color-cyan) 18%, transparent);
+}
+</style>
