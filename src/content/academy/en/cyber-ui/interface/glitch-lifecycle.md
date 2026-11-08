@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 9,
+  "order": 14,
   "title": "Distortion and lifecycle",
   "concept": "SurfaceGlitch · UiEffect",
   "description": "Add strips while preserving ownership of the original surface.",
-  "takeaway": [
-    "The effect removes its masks and copies, preserving the original Graphics."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · SurfaceGlitch",
@@ -37,13 +34,18 @@ const surface = app.stage.addChild(new Graphics()
   .rect(0, 0, 220, 56).fill(CyberPreset.palette.accent));
 const glitch = new SurfaceGlitch(CyberPreset.glitch);
 glitch.show('menu', [{ surface, x: 0, y: 0, w: 220, h: 56 }], 200);
-glitch.update(0.2);
+const tick = (ticker: import('pixi.js').Ticker) => {
+  glitch.update(ticker.deltaMS / 1000);
+};
+app.ticker.add(tick);
+// On screen removal: app.ticker.remove(tick); glitch.dispose();
 ```
 
 The last argument of `show()` is a delay in milliseconds; `update()` takes seconds. Calling `show()` again with the same key updates targets without restarting the schedule; a new key starts it over. The effect picks up changes to the original surface’s geometry and transform.
 
-<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>show → update</strong><span>Attach a target and advance time</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>hide / pause</strong><span>Remove temporary strips</span></div></div><div class="sdk-figure__item tone-green"><div><strong>dispose</strong><span>Release the effect’s resources</span></div></div></div></figure>
 
 The shared `UiEffect` contract is `update`, `setActive`, `setReducedMotion`, and `dispose`. The last call is idempotent; the others throw after disposal. Reduced motion removes glitch distortion immediately. The application passes the preference, including when it changes.
 
 We dispose of the effect before destroying surfaces. The target’s mask must remain unchanged while the glitch owns it. Text, neighboring objects, and snapshots of arbitrary containers are outside this effect’s scope.
+
+`GlitchOptions`: `durationMs` is pulse duration, `minDelayMs` is the minimum pause, `spreadMs` is pause variation, and `seed` is an integer 0–4294967295. `GlitchTarget` contains `surface` and local `x`, `y`, `w`, `h`. `hide()` releases targets and removes temporary strips.

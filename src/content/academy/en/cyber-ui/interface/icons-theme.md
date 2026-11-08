@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 5,
+  "order": 7,
   "title": "Icons and palette",
   "concept": "TerminalIcon · CyberPreset",
   "description": "Add vector symbols and change the accent color.",
-  "takeaway": [
-    "Icon coordinates specify the center, not the top-left corner."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · TerminalUi",
@@ -46,4 +43,10 @@ Icons consist of vector lines and shapes. They need no image atlas. Color is an 
 
 `CyberPreset.palette` is frozen. We make a copy, change the fields we need, and pass the same palette to surfaces and buttons. Names such as `accent`, `danger`, and `text` describe each color’s purpose, so changing the theme does not require rewriting elements.
 
-The 27 names include `chip`, `battle`, `agents`, `skills`, `gear`, `credit`, `play`, `check`, `repair`, `scan`, and the `left`/`right` arrows. The full union is available in editor suggestions and the README.
+The complete `TerminalIcon` set:
+
+```text
+chip battle agents skills quests gear bolt calendar credit capsule key left right exit play lock chest check speed target burst repair heart scan snow boss flag
+```
+
+`ButtonPalette` fields are `background`, `panel`, `inset`, `panelEdge`, `signal`, `focus`, `accent`, `steel`, `sapphire`, `text`, `muted`, and `danger`. Button variants use different fields: `signal` for the nav rail, `sapphire` for the active segment, and `focus` for the selected icon border. `CyberPreset` also provides `triangle`, `trianglePalette`, `textEcho`, and `glitch`.

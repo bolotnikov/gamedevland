@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 8,
+  "order": 13,
   "title": "Цветовое эхо текста",
   "concept": "TextEcho",
   "description": "Сдвинем два готовых текстовых объекта.",
-  "takeaway": [
-    "Содержимое и шрифт текста принадлежат приложению."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · TextEcho",
@@ -37,10 +34,14 @@ const title = app.stage.addChild(new Text({
 copy.anchor.set(0.5);
 title.anchor.set(0.5);
 const effect = new TextEcho(CyberPreset.textEcho);
-effect.update(0.09);
-effect.draw(title, copy, 240, 120);
+const tick = (ticker: import('pixi.js').Ticker) => {
+  effect.update(ticker.deltaMS / 1000);
+  effect.draw(title, copy, 240, 120);
+};
+app.ticker.add(tick);
+// On screen removal: app.ticker.remove(tick); effect.dispose();
 ```
 
-В рабочем экране вызывай `update(deltaSeconds)` и `draw()` из своего обновления. Параметры `frameMs`, `cycleMs`, `shift` управляют периодом и величиной сдвига. `offset(phaseOffsetMs)` позволяет получить сдвиг без изменения объектов.
+В рабочем экране вызываем `update(deltaSeconds)` и `draw()` из своего обновления. Параметры `frameMs`, `cycleMs`, `shift` управляют периодом и величиной сдвига. `draw(primary, echo, x, y, enabled, phaseOffsetMs)` также принимает необязательные `enabled` (по умолчанию `true`) и сдвиг фазы в мс (по умолчанию `0`). `offset(phaseOffsetMs)` возвращает сдвиг без изменения объектов.
 
-`setReducedMotion(true)` даёт нулевой сдвиг и скрывает копию при следующем `draw()`. `setActive(false)` останавливает время, но не скрывает замороженный кадр. При удалении экрана вызови `dispose()` до уничтожения текста.
+`setReducedMotion(true)` даёт нулевой сдвиг и скрывает копию при следующем `draw()`. `setActive(false)` останавливает время, но не скрывает замороженный кадр. При удалении экрана вызываем `dispose()` до уничтожения текста.

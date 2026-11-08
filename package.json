@@ -13,11 +13,12 @@
     "typecheck": "astro check",
     "lint": "eslint src scripts/check-locales.mjs astro.config.mjs eslint.config.js",
     "check:locales": "node scripts/check-locales.mjs",
-    "build:academy-preview": "astro build --mode academy-preview"
+    "build:academy-preview": "astro build --mode academy-preview",
+    "check:cyber-ui": "node scripts/check-cyber-ui.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
-    "@gamedevland/cyber-ui": "0.1.0",
+    "@gamedevland/cyber-ui": "0.2.0",
     "@gamedevland/engine": "0.0.11",
     "astro": "^6.1.6",
     "pixi.js": "8.22.0"
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
+    "@gamedevland/cyber-ui-sdk": "0.2.0",
     "eslint": "^10.14.0",
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.14.0",

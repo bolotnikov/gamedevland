@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 6,
+  "order": 9,
   "title": "Binary background",
   "concept": "BinaryField",
   "description": "Add an automatically changing binary background.",
-  "takeaway": [
-    "draw adds contours; fill sets color and opacity."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · BinaryField",

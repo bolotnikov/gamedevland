@@ -6,54 +6,62 @@
   "lesson": "interface",
   "draft": false,
   "order": 4,
-  "title": "Кнопка и её состояние",
+  "title": "Кнопки и состояния",
   "concept": "ButtonSurface",
-  "description": "Соединим оформление кнопки с областью нажатия.",
-  "takeaway": [
-    "enabled меняет рисунок; блокировку ввода задаёт приложение."
-  ],
+  "description": "Соединим все варианты оформления с вводом и подписью.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · ButtonSurface",
       "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/ButtonSurface.ts",
-      "note": "Варианты и визуальные состояния."
-    },
-    {
-      "title": "PixiJS · Events",
-      "url": "https://pixijs.com/8.x/guides/components/events",
-      "note": "eventMode, hitArea и pointertap."
+      "note": "Параметры и поведение публичного API."
     }
   ]
 }
 ---
 
-`ButtonSurface.draw()` рисует кнопку от локальной точки `(0, 0)`. Для работы нажатия отдельно зададим [область ввода](https://pixijs.com/8.x/guides/components/events).
+`ButtonSurface.draw()` рисует от локальной точки `(0, 0)`. Обязательные поля: `width`, `height`, `variant`, `enabled`, `selected`. `explicitAccent` включает полоску модуля, `ready` добавляет акцент доступной награды поверх выбранного оформления.
 
 ```ts
-import { Graphics, Rectangle } from 'pixi.js';
-import { ButtonSurface, CyberPreset, TerminalUi } from '@gamedevland/cyber-ui';
+import { Graphics, Rectangle, Text } from 'pixi.js';
+import { ButtonSurface, CyberPreset } from '@gamedevland/cyber-ui';
 
 const button = app.stage.addChild(new Graphics());
 const t = CyberPreset.palette;
-button.position.set(48, 160);
-ButtonSurface.draw(button, {
-  width: 220, height: 56, variant: 'primary',
-  enabled: true, selected: false,
-}, t);
-TerminalUi.icon(button, 'play', 28, 28, 20, t.background);
-button.hitArea = new Rectangle(0, 0, 220, 56);
-button.eventMode = 'static';
-button.on('pointertap', () => { console.log('Start requested'); });
+const label = button.addChild(new Text({ text: 'CLAIM', style: { fill: t.text, fontSize: 18 } }));
+label.anchor.set(0.5);
+label.position.set(110, 28);
+label.eventMode = 'none';
+let enabled = true;
+function redraw() {
+  ButtonSurface.draw(button.clear(), {
+    width: 220, height: 56, variant: 'module', enabled, selected: false,
+    explicitAccent: true, ready: true,
+  }, t);
+  button.eventMode = enabled ? 'static' : 'none';
+  button.hitArea = new Rectangle(0, 0, 220, 56);
+  button.alpha = enabled ? 1 : 0.42;
+}
+button.on('pointertap', () => { enabled = false; redraw(); });
+redraw();
 ```
 
-Это ввод обычного Pixi-проекта. В SDK используется `node.input`. Текст, клавиатурная навигация, focus и действие кнопки остаются у приложения.
+<details><summary>Все варианты ButtonSurface</summary>
 
-| Вариант | Когда применять |
+| Вариант | Оформление |
 | --- | --- |
-| `primary`, `danger` | Основное или опасное действие |
-| `module`, `icon` | Карточка модуля или кнопка с иконкой |
-| `nav`, `segment` | Выбранный пункт или сегмент |
-| `switch` | Подложка переключателя |
-| `utility`, `line` | Нижняя линия или отсутствие подложки |
+| `primary` | Сплошной акцент при `enabled`; иначе стекло |
+| `module` | Стекло и боковая полоска при enabled, selected или explicitAccent |
+| `danger` | Стекло с цветом danger |
+| `icon` | Скруглённая подложка; selected меняет заливку и рамку |
+| `nav` | Только лёгкая активная заливка и верхняя полоска |
+| `segment` | Только заливка выбранного сегмента |
+| `tab` | Отдельная рамка, заливка и активное подчёркивание |
+| `switch` | Стеклянная подложка; ползунок добавляется через toggle |
+| `utility` | Нижняя линия |
+| `line` | Без подложки |
 
-У `nav` и `segment` рисунок появляется при `selected: true`. Для ползунка переключателя дополнительно вызови `ButtonSurface.toggle(button, 220, 56, selected, t)`. При смене состояния очисти рисунок и обнови ввод и подпись.
+</details>
+
+`enabled` меняет оформление, но не отключает [ввод PixiJS](https://pixijs.com/8.x/guides/components/events). Поэтому обновляем `eventMode`, прозрачность и подпись в приложении. В SDK используем `node.input`.
+
+Для `switch` после `draw()` добавляем `ButtonSurface.toggle(button, width, height, selected, palette)`. Hover, pressed, клавиатурный focus и hit area принадлежат приложению. Общие подложки `nav` и `segment` разбираются в следующем уроке.

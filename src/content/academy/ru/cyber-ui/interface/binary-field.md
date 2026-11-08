@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 6,
+  "order": 9,
   "title": "Бинарный фон",
   "concept": "BinaryField",
   "description": "Добавим автоматически меняющийся бинарный фон.",
-  "takeaway": [
-    "draw добавляет контуры; цвет и прозрачность задаёт fill."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · BinaryField",

@@ -7,8 +7,7 @@ interface Props { lesson: string }
 const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
 ---
 <section class="cyber-preview" data-cyber-preview={definition.slug} aria-label={t("Результат выполнения примера")}>
-  <div class="cyber-preview__heading"><h2>{t("Результат")}</h2><span>PixiJS · Cyber UI</span></div>
-  <p class="cyber-preview__description">{definition.description}</p>
+  <div class="cyber-preview__heading"><h2>{t("Результат")}</h2></div>
   <div class="cyber-preview__viewport" data-cyber-viewport><span>{t("Загрузка Canvas…")}</span></div>
   <fieldset class="cyber-preview__controls" data-cyber-controls disabled>
     <legend class="sr-only">{t("Управление примером")}</legend>
@@ -34,9 +33,7 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
 .cyber-preview { margin: 24px 0 32px; min-width: 0; padding: 18px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-card); }
 .cyber-preview__heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .cyber-preview__heading h2 { margin: 0; font-size: 16px; line-height: 1.5; }
-.cyber-preview__heading > span { color: var(--color-muted-foreground); font: 11px ui-monospace, monospace; }
-.cyber-preview__description { color: var(--color-muted-foreground); font-size: 13px; line-height: 1.7; margin: 10px 0 16px; }
-.cyber-preview__viewport { aspect-ratio: 480 / 320; display: grid; place-items: center; overflow: hidden; background: #07111d; border: 1px solid #26384e; border-radius: 8px; color: #a0b2c8; font-size: 13px; }
+.cyber-preview__viewport { margin-top: 14px; aspect-ratio: 480 / 320; display: grid; place-items: center; overflow: hidden; background: #07111d; border: 1px solid #26384e; border-radius: 8px; color: #a0b2c8; font-size: 13px; }
 .cyber-preview__viewport :global(canvas) { display: block; width: 100% !important; height: auto !important; }
 .cyber-preview__controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0 0; padding: 0; border: 0; min-width: 0; }
 .cyber-preview__controls:has(> legend:only-child) { display: none; }
@@ -51,5 +48,5 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
 .cyber-preview__controls input[type='range'] { width: 100px; max-width: 100%; }
 .cyber-preview__controls output { min-width: 22px; font: 12px ui-monospace, monospace; }
 .cyber-preview__status { margin: 12px 0 0; min-height: 2.8em; color: var(--color-muted-foreground); font: 11px/1.6 ui-monospace, monospace; overflow-wrap: anywhere; }
-@media(max-width: 600px) { .cyber-preview { padding: 12px; } .cyber-preview__heading > span { font-size: 10px; } }
+@media(max-width: 600px) { .cyber-preview { padding: 12px; } }
 </style>

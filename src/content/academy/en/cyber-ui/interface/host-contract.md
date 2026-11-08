@@ -9,9 +9,6 @@
   "title": "Who controls the interface",
   "concept": "Responsibilities",
   "description": "Separate appearance, data, and interaction.",
-  "takeaway": [
-    "The toolkit draws; the application provides meaning, input, and time."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · README",

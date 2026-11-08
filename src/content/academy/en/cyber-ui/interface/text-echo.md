@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 8,
+  "order": 13,
   "title": "Text color echo",
   "concept": "TextEcho",
   "description": "Offset two existing text objects.",
-  "takeaway": [
-    "The application owns text content and fonts."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · TextEcho",
@@ -37,8 +34,12 @@ const title = app.stage.addChild(new Text({
 copy.anchor.set(0.5);
 title.anchor.set(0.5);
 const effect = new TextEcho(CyberPreset.textEcho);
-effect.update(0.09);
-effect.draw(title, copy, 240, 120);
+const tick = (ticker: import('pixi.js').Ticker) => {
+  effect.update(ticker.deltaMS / 1000);
+  effect.draw(title, copy, 240, 120);
+};
+app.ticker.add(tick);
+// On screen removal: app.ticker.remove(tick); effect.dispose();
 ```
 
 In a running screen, we call `update(deltaSeconds)` and `draw()` from our update loop. The `frameMs`, `cycleMs`, and `shift` parameters control the period and offset. `offset(phaseOffsetMs)` returns the offset without changing the objects.

@@ -10,11 +10,11 @@ export class CyberRevealExample extends CyberExample {
   private readonly panel = this.root.addChild(new Container());
   private readonly tweens = new GsapTweenManager();
   private readonly settings = new CyberPanelSettings();
-  private axis: 'down' | 'right' | 'zoom' = 'down';
+  private axis: 'down' | 'right' | 'zoom' | undefined = 'down';
   private duration = 240;
   private opened = true;
   get status(): string {
-    return `PanelTransition · ${this.axis} · ${this.duration} ${this.locale.t('мс')}`;
+    return `PanelTransition · ${this.axis ?? 'none'} · ${this.duration} ${this.locale.t('мс')}`;
   }
   resize(width: number, height: number): void {
     this.width = width;
@@ -31,8 +31,8 @@ export class CyberRevealExample extends CyberExample {
   }
   override control(id: string, value: string): void {
     this.settings.set(id, value);
-    if (id === 'axis' && (value === 'down' || value === 'right' || value === 'zoom'))
-      this.axis = value;
+    if (id === 'axis')
+      this.axis = value === 'down' || value === 'right' || value === 'zoom' ? value : undefined;
     if (id === 'duration') this.duration = Number(value);
     if (id === 'opened') this.opened = value === 'true';
     this.paint();
@@ -45,7 +45,7 @@ export class CyberRevealExample extends CyberExample {
   private paint(): void {
     CyberDrawing.clear(this.panel);
     const g = this.panel.addChild(new Graphics());
-    CyberPanelSkin.draw(g, 'window', this.width - 64, 176, true, this.settings.palette);
+    CyberPanelSkin.draw(g, 'glass', this.width - 64, 176, this.settings.palette);
     CyberDrawing.label(this.panel, 'COMMAND CENTER', 20, 32, 18, this.settings.accent);
   }
   private finishStatic(): void {

@@ -27,15 +27,11 @@ export class CyberPreviewCatalog {
       id: 'panel',
       label: 'Вид панели',
       options: [
-        { value: 'window', label: 'Окно с тенью' },
-        { value: 'plate', label: 'Плоская плашка' },
-        { value: 'square', label: 'Квадратная кнопка' },
-        { value: 'card', label: 'Карточка агента' },
-        { value: 'research', label: 'Ячейка исследования' },
-        { value: 'module', label: 'Кнопка модуля' },
+        { value: 'glass', label: 'TerminalGlass' },
+        { value: 'panel', label: 'PanelSurface' },
+        { value: 'plate', label: 'TerminalUi.plate' },
       ],
     },
-    { kind: 'checkbox', id: 'glass', label: 'Стеклянная поверхность', checked: true },
     this.accent,
     this.surface,
     { kind: 'range', id: 'width', label: 'Ширина', min: 72, max: 360, step: 8, value: 280 },
@@ -45,22 +41,9 @@ export class CyberPreviewCatalog {
     {
       slug: 'panels',
       description:
-        'Шесть поверхностей из интерфейса AI Defender. Сверху — выбранная панель с редактируемыми параметрами.',
+        'Три поверхности toolkit: стекло, информационная панель и плашка. Размеры и цвета меняют реальный рисунок.',
       motion: false,
-      controls: [
-        ...this.panelControls,
-        this.text,
-        {
-          kind: 'select',
-          id: 'state',
-          label: 'Состояние',
-          options: [
-            { value: 'normal', label: 'Обычное' },
-            { value: 'selected', label: 'Выбранное' },
-            { value: 'locked', label: 'Заблокированное' },
-          ],
-        },
-      ],
+      controls: [...this.panelControls, this.text],
     },
     {
       slug: 'buttons',
@@ -79,6 +62,7 @@ export class CyberPreviewCatalog {
             'icon',
             'nav',
             'segment',
+            'tab',
             'switch',
             'utility',
             'line',
@@ -91,8 +75,100 @@ export class CyberPreviewCatalog {
         { kind: 'range', id: 'height', label: 'Высота', min: 40, max: 120, step: 8, value: 56 },
         { kind: 'checkbox', id: 'enabled', label: 'Доступна', checked: true },
         { kind: 'checkbox', id: 'selected', label: 'Выбрана', checked: false },
+        { kind: 'checkbox', id: 'ready', label: 'Награда доступна', checked: false },
+        { kind: 'checkbox', id: 'explicitAccent', label: 'Полоса модуля', checked: false },
       ],
     },
+    {
+      slug: 'selectors',
+      description:
+        'Нажатие меняет выбранный пункт. Навигация использует общую стеклянную панель, сегменты — одну рамку, вкладки — отдельные поверхности.',
+      motion: false,
+      controls: [
+        {
+          kind: 'select',
+          id: 'variant',
+          label: 'Селектор',
+          options: ['nav', 'segment', 'tab'].map((value) => ({ value, label: value })),
+        },
+        {
+          kind: 'select',
+          id: 'item',
+          label: 'Выбранный пункт',
+          options: ['1', '2', '3'].map((label, index) => ({ value: String(index), label })),
+        },
+        this.accent,
+      ],
+    },
+    {
+      slug: 'button-price',
+      description:
+        'Длина подписи, сумма и ширина меняют масштаб всей строки. Иконка остаётся между подписью и ценой.',
+      motion: false,
+      controls: [
+        { kind: 'text', id: 'text', label: 'Подпись', value: 'UPGRADE' },
+        { kind: 'text', id: 'amount', label: 'Цена', value: '250' },
+        { kind: 'range', id: 'width', label: 'Ширина', min: 80, max: 360, step: 8, value: 248 },
+        this.accent,
+      ],
+    },
+    {
+      slug: 'surface-details',
+      description:
+        'Декор дописывается поверх плашки. Для clippedRect положение полосы меняется ползунком.',
+      motion: false,
+      controls: [
+        {
+          kind: 'select',
+          id: 'detail',
+          label: 'Декор',
+          options: ['focus', 'traces', 'etch', 'clippedRect'].map((value) => ({
+            value,
+            label: value,
+          })),
+        },
+        this.accent,
+        {
+          kind: 'range',
+          id: 'progress',
+          label: 'Положение полосы',
+          min: 0,
+          max: 1,
+          step: 0.01,
+          value: 0.5,
+        },
+      ],
+    },
+    ...(['signal-brackets', 'terminal-sweep', 'fault-glyph', 'signal-lost'] as const).map(
+      (slug) => ({
+        slug,
+        description:
+          'Ползунок задаёт кадр эффекта: можно вернуться к началу и сравнить промежуточные состояния.',
+        motion: false,
+        controls: [
+          this.accent,
+          {
+            kind: 'range' as const,
+            id: 'progress',
+            label: 'Прогресс',
+            min: 0,
+            max: slug === 'terminal-sweep' ? 0.99 : 1,
+            step: 0.01,
+            value: 0.5,
+          },
+          ...(slug === 'terminal-sweep'
+            ? [
+                {
+                  kind: 'select' as const,
+                  id: 'direction',
+                  label: 'Направление',
+                  options: ['down', 'right'].map((value) => ({ value, label: value })),
+                },
+              ]
+            : []),
+        ],
+      }),
+    ),
     {
       slug: 'icons-theme',
       description: 'Полный набор векторных иконок. Размер и цвет применяются ко всем знакам.',
@@ -184,7 +260,7 @@ export class CyberPreviewCatalog {
           kind: 'select',
           id: 'axis',
           label: 'Направление',
-          options: ['down', 'right', 'zoom'].map((value) => ({ value, label: value })),
+          options: ['down', 'right', 'zoom', 'none'].map((value) => ({ value, label: value })),
         },
         {
           kind: 'range',
@@ -209,12 +285,33 @@ export class CyberPreviewCatalog {
     return {
       ...entry,
       description: locale.t(entry.description),
-      controls: entry.controls.map(control => ({
+      controls: [
+        ...entry.controls,
+        ...(entry.motion
+          ? [{ kind: 'checkbox' as const, id: 'paused', label: 'Пауза', checked: false }]
+          : []),
+        ...(entry.motion ||
+        ['signal-brackets', 'terminal-sweep', 'fault-glyph', 'signal-lost'].includes(entry.slug)
+          ? [
+              {
+                kind: 'checkbox' as const,
+                id: 'reduced',
+                label: 'Уменьшить движение',
+                checked: false,
+              },
+            ]
+          : []),
+      ].map((control) => ({
         ...control,
         label: locale.t(control.label),
-        ...(control.kind === 'select' ? {
-          options: control.options.map(option => ({ ...option, label: locale.t(option.label) })),
-        } : {}),
+        ...(control.kind === 'select'
+          ? {
+              options: control.options.map((option) => ({
+                ...option,
+                label: locale.t(option.label),
+              })),
+            }
+          : {}),
       })),
     };
   }

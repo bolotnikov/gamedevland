@@ -36,9 +36,9 @@ export class CyberMotionExample extends CyberExample {
   }
   get status(): string {
     return this.lesson === 'triangle-loader'
-      ? `TriangleLoader · ${this.locale.t('радиус {value0} · частиц {value1}', {value0: this.radius, value1: this.count})}`
+      ? `TriangleLoader · ${this.locale.t('радиус {value0} · частиц {value1}', { value0: this.radius, value1: this.count })}`
       : this.lesson === 'text-echo'
-        ? `TextEcho · ${this.locale.t('смещение {value0}', {value0: this.shift})}`
+        ? `TextEcho · ${this.locale.t('смещение {value0}', { value0: this.shift })}`
         : `SurfaceGlitch · ${this.settings.variant} · ${this.duration} ${this.locale.t('мс')}`;
   }
   resize(width: number, height: number): void {
@@ -103,14 +103,14 @@ export class CyberMotionExample extends CyberExample {
     this.copy.style.fontSize = this.title.style.fontSize;
     if (this.effect instanceof SurfaceGlitch) {
       const w = Math.min(s.width, this.width - 64);
-      const h = s.variant === 'square' ? Math.min(w, 224) : s.height;
-      const actualW = s.variant === 'square' ? h : w;
+      const h = s.height;
+      const actualW = w;
       // Release temporary strips before rebuilding the borrowed source geometry.
       this.effect.hide();
       this.surface.clear();
-      CyberPanelSkin.draw(this.surface, s.variant, actualW, h, s.glass, s.palette);
+      CyberPanelSkin.draw(this.surface, s.variant, actualW, h, s.palette);
       this.surface.position.set((this.width - actualW) / 2, (this.height - h) / 2);
-      this.title.text = s.variant === 'square' ? '' : 'SIGNAL ONLINE';
+      this.title.text = 'SIGNAL ONLINE';
       this.title.position.set(this.width / 2, this.height / 2 + h * 0.15);
       this.effect.show('panel', [{ surface: this.surface, x: 0, y: 0, w: actualW, h }], 0);
     }

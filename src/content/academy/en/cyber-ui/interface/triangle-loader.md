@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 7,
+  "order": 10,
   "title": "Animated loader",
   "concept": "TriangleLoader",
   "description": "Connect the triangle to the existing ticker.",
-  "takeaway": [
-    "update takes seconds; draw takes the current local dimensions."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · TriangleLoader",
@@ -56,3 +53,18 @@ loader.dispose();
 ```
 
 Then we can destroy `emblem` and `dust`. The toolkit does not destroy the surfaces passed to it.
+
+<details><summary>TriangleOptions settings</summary>
+
+| Field | Purpose |
+| --- | --- |
+| `cycleMs`, `spinDelayMs`, `spinDurationMs` | Motion period, delay before spinning, spin duration in ms |
+| `layers`, `layerGap`, `layerLift` | Outline count (1–32), gap, lift |
+| `strokeWidth`, `haloWidth` | Line and halo widths |
+| `haloAlpha`, `echoAlpha` | Halo and echo alpha [0, 1] |
+| `particles`, `particleSize`, `particleSpread`, `particleAlpha` | Count (0–1024), size, spread, alpha [0, 1] |
+| `seed` | Integer 0–4294967295 for repeatable geometry |
+
+`TriangleLayout` contains `x`, `y`, positive `radius` and `scale`. `TrianglePalette` contains `accent`, `secondary`, `highlight`, `text`. Copy `CyberPreset.triangle` and `CyberPreset.trianglePalette` to customize settings. `outerRadius(radius)` calculates clearance for outer layers before scaling.
+
+</details>
