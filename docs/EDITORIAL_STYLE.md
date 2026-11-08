@@ -33,6 +33,9 @@ The site's default English URL is independent of the language used for authoring
 
 ## Voice
 
+- Do not use periods at the end of titles or headings, or separate heading fragments with periods.
+  This applies to both Russian and English. Keep question marks where the heading is a question.
+
 - Keep text and UI concise and minimal. No grandiose phrasing, promotional labels, or stacks
   of headings describing the presentation. One useful heading is enough; often none is needed.
 - Write in a measured, polite, technical tone. Formality must not become bureaucratic or obscure.

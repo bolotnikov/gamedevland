@@ -1,0 +1,69 @@
+---
+import { Locale } from '../../i18n/Locale';
+interface Props { touch?: boolean; }
+const { touch = false } = Astro.props;
+const i18n = Locale.forPath(Astro.url.pathname);
+// Assets are copied unchanged from public/assets/runner.zip.
+---
+<div class:list={['port-scene', touch && 'port-scene--touch']} role="img" aria-label={i18n.t('Illustrative platformer scene with a character, platforms and gems')}>
+ <div class="scene-content" aria-hidden="true">
+  <div class="scene-ground scene-ground--left"></div>
+  <div class="scene-ground scene-ground--right"></div>
+  <div class="scene-platform"></div>
+  <img class="scene-hero" src="/assets/services/flash-port/hero.png" alt="" width="96" height="96"/>
+  <img class="scene-gem scene-gem--one" src="/assets/services/flash-port/diamond.png" alt="" width="35" height="28"/>
+  <img class="scene-gem scene-gem--two" src="/assets/services/flash-port/diamond.png" alt="" width="35" height="28"/>
+  {touch && <div class="scene-controls"><span>‹</span><span>›</span><span>↑</span></div>}
+ </div>
+</div>
+<style>
+.port-scene {
+ position: relative;
+ aspect-ratio: 4 / 3;
+ overflow: hidden;
+ background: #cff0fc url('/assets/services/flash-port/bg.png') center 50% / cover;
+}
+.scene-content { position: absolute; inset: 0; }
+.scene-ground {
+ position: absolute;
+ bottom: 0;
+ height: 23%;
+ background: url('/assets/services/flash-port/platform.png') left top / 35px 35px repeat-x;
+}
+.scene-ground--left { left: 0; width: 45%; }
+.scene-ground--right { right: 0; width: 38%; }
+.scene-platform {
+ position: absolute;
+ bottom: 48%;
+ left: 48%;
+ width: 31%;
+ height: 13%;
+ background: url('/assets/services/flash-port/platform.png') left top / 20px 20px repeat-x;
+}
+.scene-hero { position: absolute; bottom: 23%; left: 17%; width: min(34px, 25%); height: auto; }
+.scene-gem { position: absolute; width: 15px; height: 12px; }
+.scene-gem--one { bottom: 68%; left: 59%; }
+.scene-gem--two { bottom: 36%; right: 11%; }
+.port-scene--touch { aspect-ratio: 9 / 16; border-radius: 14px; }
+.port-scene--touch .scene-ground { height: 28%; background-size: 35px 35px; background-repeat: repeat; }
+.port-scene--touch .scene-hero { bottom: 28%; width: min(30px, 26%); left: 13%; }
+.port-scene--touch .scene-platform { bottom: 52%; }
+.port-scene--touch .scene-gem--one { bottom: 68%; }
+.port-scene--touch .scene-gem--two { bottom: 40%; }
+.scene-controls { position: absolute; bottom: 4%; inset-inline: 6%; display: flex; gap: 5px; }
+.scene-controls span {
+ display: grid;
+ place-items: center;
+ width: min(24px, 24%);
+ aspect-ratio: 1;
+ border: 1px solid #ffffffa0;
+ border-radius: 50%;
+ background: #133348b8;
+ color: #fff;
+ font: 16px/1 sans-serif;
+}
+.scene-controls span:last-child { margin-left: auto; }
+@media (max-width: 380px) {
+ .scene-controls span { font-size: 12px; }
+}
+</style>

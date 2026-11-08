@@ -1418,6 +1418,18 @@ body:has(.svc-page) {
 	}
 }
 
+@media(max-width:360px) {
+	.svc-hero h1,.overview-hero h1 {
+		font-size:2rem;
+	}
+	.svc-process ol {
+		grid-template-columns:1fr;
+	}
+	.svc-process .process-line i {
+		display:none;
+	}
+}
+
 @media(prefers-reduced-motion:reduce) {
 	.svc-page * {
 		transition:none!important;

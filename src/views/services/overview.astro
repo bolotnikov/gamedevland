@@ -12,8 +12,8 @@ import { ServiceCatalog } from '../../data/ServiceCatalog';
 const servicePages = new ServiceCatalog(i18n).pages();
 import '../../styles/services.css';
 const groups = [
- { id: 'development', number: '01', title: t("Create a new game"), description: t("From an idea or brief to a working project."), className: 'group-development' },
- { id: 'publishing', number: '02', title: t("Bring a game to new platforms"), description: t("Porting, technical adaptation and release support."), className: 'group-publishing' },
+ { id: 'development', number: '01', title: t("Professional game development"), description: t("From an idea or brief to a working project."), className: 'group-development' },
+ { id: 'publishing', number: '02', title: t("Porting and publishing"), description: t("Porting, technical adaptation and release support."), className: 'group-publishing' },
 ];
 const lead = servicePages.find(page => page.group === 'lead');
 if (!lead) throw new Error('Missing Tech Lead service');
@@ -22,7 +22,7 @@ if (!lead) throw new Error('Missing Tech Lead service');
  <Header title={t("Services")} description={t("HTML5 game development and publishing")} current="services" navigationOnly/>
  <main class="svc-page svc-overview">
   <section class="container svc-hero overview-hero" aria-labelledby="services-title">
-   <div class="svc-hero-copy"><span class="svc-eyebrow"><span class="svc-square" aria-hidden="true"></span>{t("GameDev.Land / Services")}</span><h1 id="services-title">{t("We build games.")}<br/><em>{t("Reach")}<br/>{t("new platforms.")}</em></h1><p class="svc-intro">{t("HTML5 games and playable ads, porting existing projects to the browser, and publishing support.")}</p><div class="svc-hero-actions"><a class="svc-button" href="#directions">{t("Explore services")} <span aria-hidden="true">↓</span></a><a class="svc-text-link" href="#contact">{t("Discuss a project")} <span aria-hidden="true">↗</span></a></div><div class="svc-byline"><span></span>{t("Alexander Bolotnikov · HTML5 developer and Tech Lead")}</div></div>
+   <div class="svc-hero-copy"><span class="svc-eyebrow"><span class="svc-square" aria-hidden="true"></span>{t("GameDev.Land / Services")}</span><h1 id="services-title">{t("HTML5 games")}<br/><em>{t("Playable Ads")}</em></h1><p class="svc-intro">{t("Development, porting existing projects to the browser, and publishing support.")}</p><div class="svc-hero-actions"><a class="svc-button" href="#directions">{t("Explore services")} <span aria-hidden="true">↓</span></a><a class="svc-text-link" href="#contact">{t("Discuss a project")} <span aria-hidden="true">↗</span></a></div><div class="svc-byline"><span></span>{t("Alexander Bolotnikov · HTML5 developer and Tech Lead")}</div></div>
    <ServiceGraphic kind="overview"/>
   </section>
   <div class="svc-strip"><div class="container"><span>{t("Development from scratch")}</span><i aria-hidden="true">/</i><span>{t("HTML5 porting")}</span><i aria-hidden="true">/</i><span>{t("Adaptation and publishing")}</span></div></div>

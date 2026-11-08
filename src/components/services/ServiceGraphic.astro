@@ -3,9 +3,29 @@ import { Locale } from '../../i18n/Locale';
 const i18n = Locale.forPath(Astro.url.pathname);
 const t = i18n.t.bind(i18n);
 import type { ServiceGraphic } from '../../data/services';
+import FlashPortScene from './FlashPortScene.astro';
 interface Props { kind: ServiceGraphic | 'overview'; }
 const { kind } = Astro.props;
 const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games"), 'Poki'];
+const showcase = kind === 'games' ? {
+ title: 'AI Defender',
+ landscape: '/assets/games/ai-defender/screens/land/battle.webp',
+ landscapeWidth: 1920, landscapeHeight: 1080,
+ portrait: '/assets/games/ai-defender/screens/port/battle.webp',
+ portraitWidth: 1080, portraitHeight: 1920,
+ landscapeAlt: t('Landscape gameplay in AI Defender'),
+ portraitAlt: t('Portrait gameplay in AI Defender'),
+ caption: t('AI Defender — an original project in development'),
+} : kind === 'playable' ? {
+ title: 'Idle Submarine',
+ landscape: '/assets/games/idle-submarine/cover.webp',
+ landscapeWidth: 1536, landscapeHeight: 1024,
+ portrait: '/assets/games/idle-submarine/screens/port/gameplay.webp',
+ portraitWidth: 390, portraitHeight: 844,
+ landscapeAlt: t('Landscape version of Idle Submarine'),
+ portraitAlt: t('Portrait gameplay in Idle Submarine'),
+ caption: t('Idle Submarine — an original project in development'),
+} : undefined;
 ---
 <figure class:list={['service-graphic', `graphic--${kind}`]}>
  {kind === 'overview' && <>
@@ -18,26 +38,17 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
   </div>
   <figcaption>{t("Original games: Idle Submarine and Rings · in development")}</figcaption>
  </>}
- {kind === 'games' && <>
+ {showcase && <>
   <div class="game-art">
    <span class="art-kicker">{t("One project · different screens")}</span>
-   <div class="browser game-browser"><div class="browser-bar"><i></i><i></i><i></i><span>Idle Submarine</span></div><img src="/assets/games/idle-submarine/cover.webp" alt={t("Landscape version of Idle Submarine")} width="960" height="540" fetchpriority="high"/></div>
-   <div class="phone game-phone"><img src="/assets/games/idle-submarine/screens/port/gameplay.webp" alt={t("Portrait version of the same game")} width="540" height="960"/></div>
+   <div class="browser game-browser">
+    <div class="browser-bar"><i></i><i></i><i></i><span>{showcase.title}</span></div>
+    <img src={showcase.landscape} alt={showcase.landscapeAlt} width={showcase.landscapeWidth} height={showcase.landscapeHeight} fetchpriority="high"/>
+   </div>
+   <div class="phone game-phone"><img src={showcase.portrait} alt={showcase.portraitAlt} width={showcase.portraitWidth} height={showcase.portraitHeight}/></div>
    <span class="game-art-label">{t("Mouse + touch")}</span>
   </div>
-  <figcaption>{t("Idle Submarine — an original project in development")}</figcaption>
- </>}
- {kind === 'playable' && <>
-  <div class="playable-art">
-   <span class="art-kicker">{t("A short gameplay scenario")}</span>
-   <div class="ad-frames">
-    <div class="ad-frame"><span class="frame-step">{t("01 / Engagement")}</span><div class="mini-board">{Array.from({length: 16}, (_, i) => <span class:list={['tile', [1, 4, 5, 6, 10].includes(i) && 'tile--filled']}></span>)}</div><span class="ad-hint">{t("Clear mechanics")}</span></div>
-    <span class="frame-arrow" aria-hidden="true">→</span>
-    <div class="ad-frame ad-frame--active"><span class="frame-step">{t("02 / Interaction")}</span><div class="mini-board">{Array.from({length: 16}, (_, i) => <span class:list={['tile', [4, 5, 6, 7].includes(i) && 'tile--complete', [1, 10].includes(i) && 'tile--filled']}></span>)}</div><span class="ad-hint">{t("Visible result")}</span></div>
-   </div>
-   <div class="ad-end"><span>{t("03 / End card")}</span><b>{t("Open the game")} <span aria-hidden="true">↗</span></b></div>
-  </div>
-  <figcaption>{t("Playable structure: mechanics → interaction → click-through")}</figcaption>
+  <figcaption>{showcase.caption}</figcaption>
  </>}
  {kind === 'port' && <>
   <div class="port-art">
@@ -51,13 +62,24 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
  </>}
  {kind === 'flash' && <>
   <div class="flash-art">
-   <span class="art-kicker">{t("Keep the mechanics and character")}</span>
+   <span class="art-kicker">{t("Same game, a new platform")}</span>
    <div class="flash-compare">
-    <div class="retro-window"><div class="retro-bar">{t("Flash / original")}</div><div class="pixel-scene"><div class="pixel-cloud"></div><div class="pixel-character"></div><div class="pixel-ground"></div></div><span>{t("Keyboard")}</span></div>
-    <span class="compare-arrow" aria-hidden="true">→</span>
-    <div class="modern-window"><div class="modern-bar">{t("HTML5 / new version")}</div><div class="pixel-scene modern-scene"><div class="pixel-cloud"></div><div class="pixel-character"></div><div class="pixel-ground"></div><div class="touch-controls"><span>‹</span><span>›</span><span>↑</span></div></div><span>{t("Keyboard + touch")}</span></div>
+    <div class="flash-before">
+     <span class="flash-version-label">{t("Before / Flash")}</span>
+     <div class="flash-editor">
+      <div class="flash-editor-bar"><span class="flash-file-icon" aria-hidden="true">f</span><span>game.fla</span><span class="flash-window-controls" aria-hidden="true">− ×</span></div>
+      <FlashPortScene/>
+      <div class="flash-timeline" aria-hidden="true"><span></span>{Array.from({length: 8}, (_, i) => <i class:list={[i === 3 && 'is-current']}></i>)}</div>
+     </div>
+     <span class="flash-device-label">{t("Keyboard")}</span>
+    </div>
+    <span class="flash-transfer-arrow" aria-hidden="true">→</span>
+    <div class="flash-after">
+     <span class="flash-version-label">{t("After / HTML5")}</span>
+     <div class="flash-phone"><span class="flash-phone-camera" aria-hidden="true"></span><FlashPortScene touch/></div>
+     <span class="flash-device-label">{t("Mouse + touch")}</span>
+    </div>
    </div>
-   <p class="art-bottom-line">{t("Logic · levels · graphics · sound")}</p>
   </div>
   <figcaption>{t("Illustrative porting example, not a client case study")}</figcaption>
  </>}
@@ -85,6 +107,10 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
 	margin:0;
 	min-width:0;
 	--art-accent:var(--color-cyan)
+}
+
+.graphic--playable {
+	--art-accent:var(--color-violet)
 }
 
 .service-graphic>div {
@@ -255,98 +281,30 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
 
 .game-art-label {
 	position:absolute;
-	bottom:25px;
-	left:30px;
+	z-index:2;
+	bottom:18px;
+	left:22px;
+	padding:7px 10px;
+	border:1px solid var(--color-border);
+	border-radius:7px;
+	background:var(--color-card);
 	color:var(--color-cyan);
 	font-size:12px
 }
 
-.playable-art {
-	--art-accent:var(--color-violet);
-	padding:28px
-}
 
-.ad-frames {
-	display:flex;
-	gap:12px;
-	align-items:center
-}
 
-.ad-frame {
-	flex:1;
-	min-width:0;
-	border:1px solid var(--color-border);
-	border-radius:12px;
-	padding:15px;
-	background:var(--color-background)
-}
 
-.ad-frame--active {
-	border-color:var(--color-violet)
-}
 
-.frame-step {
-	font-size:10px;
-	color:var(--color-muted-foreground)
-}
 
-.mini-board {
-	display:grid;
-	grid-template-columns:repeat(4,1fr);
-	gap:4px;
-	max-width:150px;
-	margin:20px auto
-}
 
-.tile {
-	aspect-ratio:1;
-	border-radius:4px;
-	background:var(--color-secondary);
-	border:1px solid var(--color-border)
-}
 
-.tile--filled {
-	background:var(--color-violet);
-	border-color:var(--color-violet);
-	box-shadow:inset 0 3px 0 #ffffff33
-}
 
-.tile--complete {
-	background:var(--color-green);
-	border-color:var(--color-green);
-	box-shadow:0 0 10px color-mix(in srgb,var(--color-green) 30%,transparent)
-}
 
-.ad-hint {
-	display:block;
-	font-size:10px;
-	text-align:center
-}
 
-.frame-arrow {
-	font-size:23px;
-	color:var(--color-violet)
-}
 
-.ad-end {
-	margin-top:20px;
-	display:flex;
-	align-items:center;
-	justify-content:space-between;
-	gap:15px;
-	border-top:1px solid var(--color-border);
-	padding-top:20px
-}
 
-.ad-end>span {
-	font-size:10px;
-	color:var(--color-muted-foreground)
-}
 
-.ad-end b {
-	font-size:12px;
-	color:var(--color-violet)
-}
 
 .port-art {
 	padding:28px
@@ -434,132 +392,78 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
 }
 
 .flash-art {
-	padding:28px;
-	--art-accent:var(--color-amber)
+ padding:28px;
+ --art-accent:var(--color-amber)
 }
-
 .flash-compare {
-	display:flex;
-	gap:12px;
-	align-items:center;
-	margin-top:40px
+ display:grid;
+ grid-template-columns:minmax(0,1.3fr) 28px minmax(0,1fr);
+ align-items:center;
+ gap:14px;
+ margin-top:22px
 }
-
-.retro-window,.modern-window {
-	flex:1;
-	min-width:0;
-	border:1px solid var(--color-line);
-	background:var(--color-background)
+.flash-version-label {
+ display:block;
+ margin-bottom:14px;
+ color:var(--color-foreground);
+ font-size:12px;
+ font-weight:500
 }
-
-.retro-bar,.modern-bar {
-	padding:10px 8px;
-	font-size:10px;
-	border-bottom:1px solid var(--color-border)
+.flash-before,.flash-after { min-width:0; }
+.flash-after { text-align:center; }
+.flash-editor {
+ overflow:hidden;
+ border:1px solid var(--color-line);
+ border-radius:6px;
+ background:var(--color-secondary);
+ box-shadow:0 14px 30px #020a2320;
+ transform:rotate(-2deg)
 }
-
-.retro-bar {
-	font-family:monospace;
-	background:var(--color-secondary)
+.flash-editor-bar {
+ display:flex;
+ align-items:center;
+ gap:7px;
+ height:27px;
+ padding:0 8px;
+ color:var(--color-muted-foreground);
+ font:10px/1.5 monospace
 }
-
-.modern-window {
-	border-radius:12px;
-	overflow:hidden;
-	border-color:var(--color-cyan)
+.flash-file-icon {
+ display:grid;
+ place-items:center;
+ width:15px;
+ height:16px;
+ border-radius:2px;
+ background:#b7463f;
+ color:#fff;
+ font:italic 600 14px/1 serif
 }
-
-.modern-bar {
-	color:var(--color-cyan)
+.flash-window-controls { margin-left:auto; font-size:11px; }
+.flash-timeline {
+ display:flex;
+ align-items:center;
+ gap:3px;
+ height:32px;
+ padding:7px 8px;
+ border-top:1px solid var(--color-border)
 }
-
-.pixel-scene {
-	height:145px;
-	position:relative;
-	background:#133348;
-	overflow:hidden
+.flash-timeline>span { width:20%; height:4px; margin-right:4px; background:var(--color-line); }
+.flash-timeline i { flex:1; height:15px; border:1px solid var(--color-line); background:var(--color-card); }
+.flash-timeline i.is-current { border-color:var(--color-amber); background:color-mix(in srgb,var(--color-amber) 35%,var(--color-card)); }
+.flash-phone {
+ position:relative;
+ max-width:137px;
+ margin-inline:auto;
+ padding:5px;
+ border:1px solid var(--color-line);
+ border-radius:20px;
+ background:#142238;
+ box-shadow:0 16px 30px #020a2330;
+ transform:rotate(3deg)
 }
-
-.pixel-ground {
-	height:22px;
-	position:absolute;
-	bottom:0;
-	left:0;
-	right:0;
-	background:#367c73;
-	border-top:6px solid #a4d28b
-}
-
-.pixel-character {
-	position:absolute;
-	bottom:22px;
-	left:35%;
-	height:34px;
-	width:24px;
-	background:#ffcc75;
-	box-shadow:8px -12px 0 -3px #ffcc75,9px 0 0 -3px #e88669
-}
-
-.pixel-cloud {
-	width:40px;
-	height:12px;
-	position:absolute;
-	top:30px;
-	left:20px;
-	background:#c6e2e8;
-	box-shadow:12px -8px 0 #c6e2e8
-}
-
-.modern-scene {
-	background:linear-gradient(#12324e,#295d6e)
-}
-
-.modern-scene .pixel-character {
-	border-radius:6px
-}
-
-.touch-controls {
-	position:absolute;
-	bottom:6px;
-	display:flex;
-	gap:5px;
-	padding:5px;
-	width:100%
-}
-
-.touch-controls span {
-	display:grid;
-	place-items:center;
-	border:1px solid #e3ffff66;
-	color:white;
-	width:22px;
-	height:22px;
-	border-radius:50%;
-	background:#153345aa
-}
-
-.touch-controls span:last-child {
-	margin-left:auto
-}
-
-.retro-window>span,.modern-window>span {
-	display:block;
-	text-align:center;
-	font-size:9px;
-	padding:10px 3px
-}
-
-.compare-arrow {
-	color:var(--color-amber);
-	font-size:24px
-}
-
-.art-bottom-line {
-	text-align:center;
-	font-size:11px;
-	color:var(--color-muted-foreground);
-	margin:28px 0 0
-}
+.flash-phone-camera { position:absolute; z-index:2; top:10px; left:calc(50% - 13px); width:26px; height:5px; border-radius:5px; background:#142238; }
+.flash-device-label { display:block; margin-top:15px; color:var(--color-muted-foreground); font-size:11px; }
+.flash-transfer-arrow { color:var(--color-amber); font-size:28px; text-align:center; }
 
 .publishing-art {
 	padding:28px
@@ -764,6 +668,12 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
 }
 
 @media(max-width:600px) {
+ .flash-compare { grid-template-columns:minmax(0,1.3fr) 22px minmax(0,1fr); gap:10px; margin-top:24px; }
+ .flash-version-label { font-size:11px; }
+ .flash-device-label { font-size:10px; }
+ .flash-editor-bar { gap:5px; padding-inline:6px; font-size:9px; }
+ .flash-transfer-arrow { font-size:23px; }
+
 	.service-graphic>div {
 		min-height:350px;
 		border-radius:18px
@@ -780,29 +690,8 @@ const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games
 	.game-phone {
 		top:100px
 	}
-	.playable-art,.port-art,.flash-art,.publishing-art,.lead-art,.game-art {
+	.port-art,.flash-art,.publishing-art,.lead-art,.game-art {
 		padding:22px
-	}
-	.ad-frame {
-		padding:10px
-	}
-	.ad-frames {
-		gap:7px
-	}
-	.frame-step {
-		font-size:9px
-	}
-	.ad-end {
-		flex-direction:column;
-		align-items:flex-start;
-		gap:9px
-	}
-	.flash-compare {
-		gap:7px;
-		margin-top:30px
-	}
-	.pixel-scene {
-		height:130px
 	}
 	.publish-outputs {
 		grid-template-columns:repeat(2,minmax(0,1fr));

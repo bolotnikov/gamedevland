@@ -17,9 +17,11 @@ export class ServiceCatalog {
    tags: page.tags.map(tag => t(tag)),
    scopeTitle: t(page.scopeTitle),
    scope: page.scope.map(item => ({title: t(item.title), text: t(item.text)})),
-   process: page.process.map(item => ({title: t(item.title), text: t(item.text)})),
-   result: t(page.result),
-   note: t(page.note),
+   ...(page.delivery ? {delivery: {
+    steps: page.delivery.steps.map(item => ({title: t(item.title), text: t(item.text)})),
+    result: t(page.delivery.result),
+    note: t(page.delivery.note),
+   }} : {}),
    faq: page.faq.map(item => ({question: t(item.question), answer: t(item.answer)})),
    contact: t(page.contact),
   }));
