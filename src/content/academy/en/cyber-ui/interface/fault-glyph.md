@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 15,
-  "title": "Fault symbol",
+  "order": 12,
+  "title": "Animated error glyph",
   "concept": "FaultGlyph",
-  "description": "Draw a warning symbol and set its distortion.",
+  "description": "Add a warning symbol with distortion.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · FaultGlyph",
@@ -19,17 +19,8 @@
 }
 ---
 
-`FaultGlyph.draw()` builds a warning symbol from three horizontal sections. `distortion` shifts these sections and adds colored fragments. A value of `0` produces an intact, still symbol.
+`FaultGlyph.draw()` draws a warning symbol. The `distortion` parameter shifts parts of the symbol and adds colored fragments. The example changes this value over time, so the symbol moves.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, FaultGlyph } from '@gamedevland/cyber-ui';
+A larger `distortion` produces a stronger effect. At `0`, the symbol stays intact. Position uses the center coordinates; `scale` sets the size.
 
-const g = app.stage.addChild(new Graphics());
-const t = CyberPreset.palette;
-FaultGlyph.draw(g.clear(), 240, 160, t.danger, t.signal, 1, 8, 6);
-```
-
-Arguments are `Graphics`, center `x/y`, primary color, echo color, alpha in `[0, 1]`, distortion, and positive scale. Scale is optional and defaults to `1`.
-
-Warning text and application behavior remain host-owned. For reduced motion, supply distortion `0`; this helper has no separate lifecycle.
+When motion is disabled, draw the symbol with zero distortion.

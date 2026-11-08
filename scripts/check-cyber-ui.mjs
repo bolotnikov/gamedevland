@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
 
 const root = resolve(import.meta.dirname, '..');
@@ -86,6 +87,57 @@ try {
     writeFileSync(path, context + sample + '\nexport {};\n');
     files.push(path);
   }
+  // Compile the exact API snippets displayed by the interactive examples.
+  const loadGenerator = async (name) => {
+    const source = readFileSync(join(root, 'src/scripts/cyber-ui', `${name}.ts`), 'utf8');
+    const { outputText } = ts.transpileModule(source, {
+      compilerOptions: { target: options.target, module: options.module },
+    });
+    const path = join(temporary, `${name}.mjs`);
+    writeFileSync(path, outputText);
+    return (await import(pathToFileURL(path).href))[name];
+  };
+  const CyberApiSnippet = await loadGenerator('CyberApiSnippet');
+  const CyberPreviewCatalog = await loadGenerator('CyberPreviewCatalog');
+  const locale = { code: 'en', t: (text) => text };
+  let interactive = 0;
+  for (const name of pages) {
+    const slug = name.replace('.md', '');
+    if (!CyberPreviewCatalog.has(slug)) continue;
+    const definition = CyberPreviewCatalog.get(slug, locale);
+    const defaults = Object.fromEntries(definition.controls.map((control) => [
+      control.id,
+      control.kind === 'checkbox' ? control.checked
+        : control.kind === 'select' ? control.options[0].value : control.value,
+    ]));
+    const variants = [{}];
+    if (slug === 'panels') {
+      for (const panel of ['glass', 'panel', 'plate'])
+        for (const decoration of ['none', 'focus', 'traces', 'etch', 'clippedRect', 'sweep'])
+          variants.push({ panel, decoration });
+      variants.push({ decoration: 'sweep', direction: 'right', duration: 2400 });
+    }
+    if (slug === 'buttons') {
+      for (const variant of ['primary', 'module', 'danger', 'icon', 'nav', 'segment', 'tab', 'switch', 'utility', 'line'])
+        for (const enabled of [true, false]) variants.push({ variant, enabled, selected: true });
+      for (const variant of ['primary', 'module', 'danger'])
+        variants.push({ variant, priced: true, text: 'UPGRADE "A"', amount: '1250' });
+    }
+    if (slug === 'selectors')
+      for (const variant of ['nav', 'segment', 'tab'])
+        for (const item of ['0', '1', '2']) variants.push({ variant, item });
+    if (definition.motion) variants.push({ reduced: true }, { paused: true });
+    variants.push({ accent: '#ff9b64', surface: '#18202d' });
+    for (const variant of variants) {
+      const values = { ...defaults, ...variant };
+      const sample = CyberApiSnippet.create(slug, values, 377, 320, values.reduced === true, values.paused === true);
+      assert.ok(!/\bApplication\b|CyberExample|CyberDrawing|requestAnimationFrame/.test(sample), `Application code leaked into ${slug}`);
+      assert.ok(sample.split('\n').length <= 50, `API snippet is too long: ${slug}`);
+      const path = join(temporary, `interactive-${interactive++}-${slug}.ts`);
+      writeFileSync(path, sample);
+      files.push(path);
+    }
+  }
   const program = ts.createProgram(files, options);
   const diagnostics = ts.getPreEmitDiagnostics(program);
   if (diagnostics.length) {
@@ -99,7 +151,7 @@ try {
     process.exitCode = 1;
   } else
     console.log(
-      `Cyber UI: ${pages.length} bilingual lessons, public exports covered, ${files.length} TypeScript examples checked.`,
+      `Cyber UI: ${pages.length} bilingual lessons, public exports covered, ${files.length} TypeScript examples checked (${interactive} interactive variants).`,
     );
 } finally {
   rmSync(temporary, { recursive: true, force: true });

@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 19,
-  "title": "Revealing a panel",
+  "order": 15,
+  "title": "Opening and closing a panel",
   "concept": "PanelReveal",
-  "description": "Attach an action to a separate wrapper.",
+  "description": "Add motion and an opacity change when a window opens.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · PanelReveal",
@@ -19,9 +19,13 @@
 }
 ---
 
-`PanelReveal` uses SDK tweens. To keep animation and layout from changing the same transform at once, we give the panel a separate `Container` for its reveal.
+`PanelTransition.origin()` defines the starting state of a panel reveal. `down` expands it vertically, `right` horizontally, and `zoom` scales the whole panel. Without an axis, the panel appears with a small shift and no compression.
 
-In `GlobalDiDefinition.registerServices()`, we register the action:
+The example's toggle opens and closes the panel. Direction and duration control its animation.
+
+<details><summary>PanelReveal action for GameDevLand SDK</summary>
+
+Register the action in `registerServices()`:
 
 ```ts
 import { DiTokens } from '@gamedevland/engine/di';
@@ -30,7 +34,7 @@ import { PanelReveal } from '@gamedevland/cyber-ui-sdk';
 registrar.transientClass(DiTokens.action('PanelReveal'), PanelReveal);
 ```
 
-Then add it to the wrapper in the layout:
+Attach it to a separate panel container:
 
 ```json
 {
@@ -39,7 +43,7 @@ Then add it to the wrapper in the layout:
 }
 ```
 
-From the component that owns this node, we call:
+Run it from that node's component:
 
 ```ts
 void this.node.runAction('reveal', {
@@ -50,8 +54,8 @@ void this.node.runAction('reveal', {
 });
 ```
 
-`duration` and `delay` use milliseconds; `offset` uses local units. Valid ranges are 1–2000 for duration, 0–1000 for delay, and 0–16 for offset. The axis can be `down`, `right`, or `zoom`. Without an axis, the action changes opacity and position without compression. `closing: true` starts closing.
+`duration` is 1-2000 ms; `delay` is 0-1000 ms; `offset` is 0-16. `axis` selects the direction; `closing: true` closes the panel. `pivotX` and `pivotY` define the point around which it compresses.
 
-The action accounts for the original position, scale, and opacity. Running it again replaces its tweens; cancellation restores the original state. Other code must not move this wrapper during the animation. With reduced motion, we choose a static state. The call schedules tweens; its completion does not mean the animation has ended.
+Keep other code from moving this container while the action runs. Running it again replaces the animation; cancellation restores the original position.
 
-`pivotX` and `pivotY` are the local point used to calculate displacement during compression; both default to `0`. In a standalone Pixi project, use `PanelTransition.origin({ offset: 8, axis: 'zoom', pivotX: 160, pivotY: 90, closing: false })`: the result contains `x`, `y`, `scaleX`, `scaleY`, and `alpha`. The application interpolates and applies these values.
+</details>

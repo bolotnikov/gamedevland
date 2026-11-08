@@ -74,6 +74,8 @@ const imageUrl = image && Astro.site ? new URL(image, Astro.site).toString() : u
 		<slot />
 		<script>
 			import { ThemeController } from '../scripts/ThemeController';
+			import { LanguagePreferenceController } from '../scripts/LanguagePreferenceController';
+			new LanguagePreferenceController();
 			new ThemeController();
 		</script>
 	</body>

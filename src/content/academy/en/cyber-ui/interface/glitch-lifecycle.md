@@ -5,47 +5,35 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 14,
-  "title": "Distortion and lifecycle",
+  "order": 11,
+  "title": "Surface distortion",
   "concept": "SurfaceGlitch · UiEffect",
-  "description": "Add strips while preserving ownership of the original surface.",
+  "description": "Add brief horizontal strip shifts to a panel.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · SurfaceGlitch",
       "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/SurfaceGlitch.ts",
-      "note": "Registering targets and deterministic time."
+      "note": "Target registration and deterministic timing."
     },
     {
       "title": "PixiJS · Graphics",
       "url": "https://pixijs.com/8.x/guides/components/scene-objects/graphics",
-      "note": "Sharing GraphicsContext and destruction."
+      "note": "Shared GraphicsContext and destruction."
     }
   ]
 }
 ---
 
-`SurfaceGlitch` shifts strips of a live surface. It temporarily adds masks and geometry copies. The original `Graphics` must be in a container and have no mask of its own.
+`SurfaceGlitch` briefly shifts individual strips of a `Graphics` object. Pass the panel and its dimensions to `show()`, then call `update()` every frame.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, SurfaceGlitch } from '@gamedevland/cyber-ui';
+Add the panel to the scene first and keep it free of its own mask. The effect distorts only its drawing: a separate label next to the panel stays in place.
 
-const surface = app.stage.addChild(new Graphics()
-  .rect(0, 0, 220, 56).fill(CyberPreset.palette.accent));
-const glitch = new SurfaceGlitch(CyberPreset.glitch);
-glitch.show('menu', [{ surface, x: 0, y: 0, w: 220, h: 56 }], 200);
-const tick = (ticker: import('pixi.js').Ticker) => {
-  glitch.update(ticker.deltaMS / 1000);
-};
-app.ticker.add(tick);
-// On screen removal: app.ticker.remove(tick); glitch.dispose();
-```
+`hide()` removes the distortion. When the effect is no longer needed, call `dispose()` before removing the panel.
 
-The last argument of `show()` is a delay in milliseconds; `update()` takes seconds. Calling `show()` again with the same key updates targets without restarting the schedule; a new key starts it over. The effect picks up changes to the original surface’s geometry and transform.
+<details><summary>Settings and restarting</summary>
 
+`durationMs` sets the pulse duration, `minDelayMs` the minimum pause, `spreadMs` the pause variation, and `seed` the initial value for a repeatable animation.
 
-The shared `UiEffect` contract is `update`, `setActive`, `setReducedMotion`, and `dispose`. The last call is idempotent; the others throw after disposal. Reduced motion removes glitch distortion immediately. The application passes the preference, including when it changes.
+Pass a list of panels and a delay in milliseconds to `show(key, targets, revealDelayMs)`. The same `key` updates the list without restarting; a different key restarts the effect. Each list item contains `surface` and its local `x`, `y`, `w`, and `h`.
 
-We dispose of the effect before destroying surfaces. The target’s mask must remain unchanged while the glitch owns it. Text, neighboring objects, and snapshots of arbitrary containers are outside this effect’s scope.
-
-`GlitchOptions`: `durationMs` is pulse duration, `minDelayMs` is the minimum pause, `spreadMs` is pause variation, and `seed` is an integer 0–4294967295. `GlitchTarget` contains `surface` and local `x`, `y`, `w`, `h`. `hide()` releases targets and removes temporary strips.
+</details>

@@ -1,0 +1,22 @@
+/* Reading styles are scoped to Cyber UI lessons. */
+[data-lesson-id='cyber-ui:interface'] .cyber-packages .sdk-boundary__modules { margin-top: 0; }
+[data-lesson-id='cyber-ui:interface'] .cyber-packages .sdk-boundary__module-group { display: flex; flex-direction: column; }
+[data-lesson-id='cyber-ui:interface'] .cyber-packages .cyber-packages__name { margin: -4px 0 16px; line-height: 1.5; }
+[data-lesson-id='cyber-ui:interface'] .cyber-packages .cyber-packages__name code { font-size: 12px; }
+[data-lesson-id='cyber-ui:interface'] .cyber-packages li strong { color: var(--module-color); font-size: 13px; font-weight: 500; }
+[data-lesson-id='cyber-ui:interface'] .cyber-packages ul { margin-bottom: 16px; }
+[data-lesson-id='cyber-ui:interface'] .cyber-packages .cyber-packages__use { margin: auto 0 0; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--module-color) 25%, var(--color-border)); color: var(--color-muted-foreground); font-size: 12px; line-height: 1.6; }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose table { width: 100%; margin: 24px 0; border: 1px solid var(--color-border); border-collapse: separate; border-spacing: 0; border-radius: 10px; table-layout: fixed; background: var(--color-card); text-align: left; font-size: 13px; line-height: 1.65; }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose :is(th, td) { padding: 14px 16px; vertical-align: top; overflow-wrap: anywhere; }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose th { border-bottom: 1px solid var(--color-border); background: var(--color-secondary); color: var(--color-foreground); font-size: 12px; font-weight: 600; }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose td { color: var(--color-muted-foreground); }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose tbody tr + tr td { border-top: 1px solid var(--color-border); }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose :is(th, td) + :is(th, td) { border-left: 1px solid var(--color-border); }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose :is(th, td) code { white-space: normal; overflow-wrap: anywhere; font-size: 12px; }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose td:first-child { color: var(--color-foreground); }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose details { padding: 16px 18px; border-radius: 10px; background: var(--color-card); }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose summary { font-size: 13px; line-height: 1.6; }
+[data-lesson-id='cyber-ui:interface'] .lesson-prose summary:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 5px; }
+@media (max-width: 680px) {
+  [data-lesson-id='cyber-ui:interface'] .lesson-prose :is(th, td) { padding: 11px 12px; }
+}

@@ -21,6 +21,7 @@ export class LanguageSwitcherController {
 	private updateLinks(): void {
 		for (const link of this.root.querySelectorAll<HTMLAnchorElement>('[data-language-link]')) {
 			const url = new URL(link.href);
+			url.search = location.search;
 			url.hash = location.hash;
 			link.href = url.toString();
 		}

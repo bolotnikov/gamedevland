@@ -8,7 +8,7 @@
   "order": 3,
   "title": "Panels and plates",
   "concept": "PanelSurface · TerminalGlass · TerminalUi",
-  "description": "Choose a surface for information, a window, and a counter.",
+  "description": "Choose a surface, add decorative lines and a scanning sweep.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · PanelSurface",
@@ -29,28 +29,25 @@
 }
 ---
 
-`PanelSurface.draw()` draws a quiet information panel with a side rail. `TerminalGlass.draw()` adds beveled corners, highlights, and translucent layers. `TerminalUi.plate()` suits a simple plate or counter.
+`TerminalGlass` suits a window, `PanelSurface` an information block, and a simple `plate` a counter. Circuit traces, etched lines, and corner accents can be added over a panel. The Decoration control shows these options.
 
-All three append geometry to [Graphics](https://pixijs.com/8.x/guides/components/scene-objects/graphics). Clear the drawing once before rebuilding it.
+The scanning sweep moves from top to bottom or left to right. Its direction and duration set the panel's animation.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, PanelSurface, TerminalGlass, TerminalUi } from '@gamedevland/cyber-ui';
+Call `clear()` once before redrawing. Then draw the surface and its decoration: clearing between them would remove the lines already drawn.
 
-const g = app.stage.addChild(new Graphics());
-const t = CyberPreset.palette;
-g.clear();
-PanelSurface.draw(g, { x: 24, y: 24, w: 200, h: 120 }, {
-  surface: t.panel, edge: t.panelEdge, accent: t.accent,
-});
-TerminalGlass.draw(g, 240, 24, 200, 120, 12,
-  t.panel, t.panelEdge, t.accent, t.text);
-TerminalUi.plate(g, 24, 168, 160, 36, 7, t.inset, t.panelEdge);
-TerminalUi.icon(g, 'credit', 44, 186, 18, t.accent);
-```
+<details><summary>Drawing methods</summary>
 
-`PanelSurface` takes `UiBounds` (`x`, `y`, `w`, `h`) and `PanelPalette` (`surface`, `edge`, `accent`).
+| Method | Adds |
+| --- | --- |
+| `PanelSurface.draw()` | A rectangular panel with a side rail |
+| `TerminalGlass.draw()` | Glass with cut corners and highlights |
+| `TerminalUi.plate()` | A simple plate |
+| `TerminalUi.traces()` | Circuit board traces |
+| `TerminalUi.etch()` | Short decorative lines |
+| `TerminalGlass.focus()` | Corner accents and a top rail |
+| `TerminalUi.clippedRect()` | A strip clipped to the panel's cut corners |
+| `TerminalSweep.draw()` | A moving scanning sweep |
 
-For `TerminalGlass`, position and size are followed by corner cut, fill, edge, accent, and light color. For `plate`, they are followed by corner cut, fill, edge, and optional fill alpha. The corner cut is limited by surface dimensions.
+`PanelSurface` takes dimensions `{ x, y, w, h }` and colors `{ surface, edge, accent }`. `TerminalGlass` and `plate` also take a corner cut size. After `clippedRect()`, call `fill()` or `stroke()` to draw its path.
 
-The application owns text and content placement. Use `ButtonSurface` for buttons. Portraits and game cards are compositions of these primitives, rather than separate toolkit panels.
+</details>

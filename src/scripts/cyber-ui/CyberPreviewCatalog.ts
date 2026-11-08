@@ -101,74 +101,23 @@ export class CyberPreviewCatalog {
       ],
     },
     {
-      slug: 'button-price',
-      description:
-        'Длина подписи, сумма и ширина меняют масштаб всей строки. Иконка остаётся между подписью и ценой.',
-      motion: false,
-      controls: [
-        { kind: 'text', id: 'text', label: 'Подпись', value: 'UPGRADE' },
-        { kind: 'text', id: 'amount', label: 'Цена', value: '250' },
-        { kind: 'range', id: 'width', label: 'Ширина', min: 80, max: 360, step: 8, value: 248 },
-        this.accent,
-      ],
+      slug: 'signal-brackets',
+      description: 'Скобки движутся вокруг эмблемы.',
+      motion: true,
+      controls: [this.accent, { kind: 'range', id: 'duration', label: 'Длительность, мс', min: 600, max: 3600, step: 100, value: 2400 }],
     },
     {
-      slug: 'surface-details',
-      description:
-        'Декор дописывается поверх плашки. Для clippedRect положение полосы меняется ползунком.',
-      motion: false,
-      controls: [
-        {
-          kind: 'select',
-          id: 'detail',
-          label: 'Декор',
-          options: ['focus', 'traces', 'etch', 'clippedRect'].map((value) => ({
-            value,
-            label: value,
-          })),
-        },
-        this.accent,
-        {
-          kind: 'range',
-          id: 'progress',
-          label: 'Положение полосы',
-          min: 0,
-          max: 1,
-          step: 0.01,
-          value: 0.5,
-        },
-      ],
+      slug: 'fault-glyph',
+      description: 'Знак ошибки искажается автоматически.',
+      motion: true,
+      controls: [this.accent, { kind: 'range', id: 'distortion', label: 'Сила искажения', min: 0, max: 20, step: 1, value: 12 }],
     },
-    ...(['signal-brackets', 'terminal-sweep', 'fault-glyph', 'signal-lost'] as const).map(
-      (slug) => ({
-        slug,
-        description:
-          'Ползунок задаёт кадр эффекта: можно вернуться к началу и сравнить промежуточные состояния.',
-        motion: false,
-        controls: [
-          this.accent,
-          {
-            kind: 'range' as const,
-            id: 'progress',
-            label: 'Прогресс',
-            min: 0,
-            max: slug === 'terminal-sweep' ? 0.99 : 1,
-            step: 0.01,
-            value: 0.5,
-          },
-          ...(slug === 'terminal-sweep'
-            ? [
-                {
-                  kind: 'select' as const,
-                  id: 'direction',
-                  label: 'Направление',
-                  options: ['down', 'right'].map((value) => ({ value, label: value })),
-                },
-              ]
-            : []),
-        ],
-      }),
-    ),
+    {
+      slug: 'signal-lost',
+      description: 'Анимация потери сигнала повторяется автоматически.',
+      motion: true,
+      controls: [this.accent, { kind: 'range', id: 'duration', label: 'Длительность, мс', min: 600, max: 3600, step: 100, value: 1200 }],
+    },
     {
       slug: 'icons-theme',
       description: 'Полный набор векторных иконок. Размер и цвет применяются ко всем знакам.',
@@ -181,7 +130,7 @@ export class CyberPreviewCatalog {
     {
       slug: 'binary-field',
       description:
-        'Бинарный фон анимируется автоматически. Частота, размер символов и цвет меняются без перезапуска времени.',
+        'Бинарный фон анимируется автоматически. Меняем частоту, размер символов и цвет.',
       motion: true,
       controls: [
         this.accent,
@@ -279,8 +228,28 @@ export class CyberPreviewCatalog {
     return this.entries.some((entry) => entry.slug === slug);
   }
 
+  private static revised(entry: CyberPreviewDefinition): CyberPreviewDefinition {
+    if (entry.slug === 'panels') return { ...entry, motion: true, controls: [
+      ...entry.controls,
+      { kind: 'select', id: 'decoration', label: 'Оформление', options: [
+        { value: 'none', label: 'Без украшений' }, { value: 'focus', label: 'Выделение углов' },
+        { value: 'traces', label: 'Дорожки' }, { value: 'etch', label: 'Штрихи' },
+        { value: 'clippedRect', label: 'Полоса' }, { value: 'sweep', label: 'Сканирование' },
+      ] },
+      { kind: 'select', id: 'direction', label: 'Направление', options: [{ value: 'down', label: 'Сверху вниз' }, { value: 'right', label: 'Слева направо' }] },
+      { kind: 'range', id: 'duration', label: 'Длительность, мс', min: 400, max: 3200, step: 100, value: 1600 },
+      { kind: 'range', id: 'progress', label: 'Положение полосы', min: 0, max: 1, step: 0.01, value: 0.5 },
+    ] };
+    if (entry.slug === 'buttons') return { ...entry, controls: [
+      ...entry.controls,
+      { kind: 'checkbox', id: 'priced', label: 'Показать цену', checked: false },
+      { kind: 'text', id: 'amount', label: 'Цена', value: '250' },
+    ] };
+    return entry;
+  }
   static get(slug: string, locale: Locale): CyberPreviewDefinition {
-    const entry = this.entries.find((entry) => entry.slug === slug);
+    const stored = this.entries.find((entry) => entry.slug === slug);
+    const entry = stored ? this.revised(stored) : undefined;
     if (!entry) throw new Error(`Unknown Cyber UI lesson: ${slug}`);
     return {
       ...entry,
@@ -290,8 +259,7 @@ export class CyberPreviewCatalog {
         ...(entry.motion
           ? [{ kind: 'checkbox' as const, id: 'paused', label: 'Пауза', checked: false }]
           : []),
-        ...(entry.motion ||
-        ['signal-brackets', 'terminal-sweep', 'fault-glyph', 'signal-lost'].includes(entry.slug)
+        ...(entry.motion
           ? [
               {
                 kind: 'checkbox' as const,
@@ -301,18 +269,16 @@ export class CyberPreviewCatalog {
               },
             ]
           : []),
-      ].map((control) => ({
-        ...control,
-        label: locale.t(control.label),
-        ...(control.kind === 'select'
-          ? {
-              options: control.options.map((option) => ({
-                ...option,
-                label: locale.t(option.label),
-              })),
-            }
-          : {}),
-      })),
+      ].map((control): CyberControl => {
+        const label = locale.t(control.label);
+        if (control.kind === 'select') return {
+          ...control, label,
+          options: control.options.map(option => ({ ...option, label: locale.t(option.label) })),
+        };
+        if (locale.code === 'ru' && entry.slug === 'buttons' && control.id === 'text' && control.kind === 'text')
+          return { ...control, label, value: 'НАЧАТЬ' };
+        return { ...control, label };
+      }),
     };
   }
 }

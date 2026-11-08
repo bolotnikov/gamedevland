@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 14,
-  "title": "Искажение и жизненный цикл",
+  "order": 11,
+  "title": "Искажение поверхности",
   "concept": "SurfaceGlitch · UiEffect",
-  "description": "Добавим полосы и сохраним владение исходной поверхностью.",
+  "description": "Добавим короткие сдвиги полос на панели.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · SurfaceGlitch",
@@ -24,28 +24,16 @@
 }
 ---
 
-`SurfaceGlitch` сдвигает полосы живой поверхности. Он временно добавляет маски и копии геометрии. Исходный `Graphics` должен быть добавлен в контейнер и не иметь собственной маски.
+`SurfaceGlitch` на короткое время сдвигает отдельные полосы `Graphics`. Укажем панель и её размеры в `show()`, а затем будем вызывать `update()` каждый кадр.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, SurfaceGlitch } from '@gamedevland/cyber-ui';
+Панель должна быть добавлена на сцену и не иметь своей маски. Эффект искажает только её рисунок: отдельная подпись рядом с панелью остаётся на месте.
 
-const surface = app.stage.addChild(new Graphics()
-  .rect(0, 0, 220, 56).fill(CyberPreset.palette.accent));
-const glitch = new SurfaceGlitch(CyberPreset.glitch);
-glitch.show('menu', [{ surface, x: 0, y: 0, w: 220, h: 56 }], 200);
-const tick = (ticker: import('pixi.js').Ticker) => {
-  glitch.update(ticker.deltaMS / 1000);
-};
-app.ticker.add(tick);
-// On screen removal: app.ticker.remove(tick); glitch.dispose();
-```
+`hide()` убирает искажение. Когда эффект больше не нужен, вызываем `dispose()` перед удалением панели.
 
-Последний аргумент `show()` — задержка в миллисекундах, а `update()` принимает секунды. Повторный `show()` с тем же ключом обновляет цели без перезапуска расписания; новый ключ начинает его заново. Изменения геометрии и transform исходной поверхности подхватываются эффектом.
+<details><summary>Настройки и повторный запуск</summary>
 
+`durationMs` задаёт длительность импульса, `minDelayMs` — минимальную паузу, `spreadMs` — разброс паузы, `seed` — начальное значение для повторяемой анимации.
 
-Общий контракт `UiEffect`: `update`, `setActive`, `setReducedMotion`, `dispose`. Последний вызов идемпотентен, остальные после освобождения выбрасывают ошибку. Reduced motion у glitch удаляет искажение сразу. Предпочтение передаёт приложение, в том числе при его изменении.
+В `show(key, targets, revealDelayMs)` передаём список панелей и задержку в миллисекундах. Одинаковый `key` обновляет список без перезапуска; другой ключ начинает эффект заново. Каждый элемент списка содержит `surface` и его локальные `x`, `y`, `w`, `h`.
 
-Сначала освобождаем эффект, затем уничтожаем поверхности. Не меняем маску цели, пока ей владеет glitch. Текст, соседние объекты и снимки произвольных контейнеров в этот эффект не входят.
-
-`GlitchOptions`: `durationMs` — длительность импульса, `minDelayMs` — минимальная пауза, `spreadMs` — разброс паузы, `seed` — целое число 0–4294967295. `GlitchTarget` содержит `surface` и локальные `x`, `y`, `w`, `h`. `hide()` снимает цели и убирает временные полосы.
+</details>

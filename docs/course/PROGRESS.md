@@ -95,3 +95,21 @@ remain unchanged; editorial approval is not a learner assessment.
   SDK pages checked for untranslated prose/labels, code parity and local link targets.
 - Browser QA: English course illustration, locked cards/click behavior, both themes, narrow
   layout, section language switch and a 12-lesson table of contents. Publication authorized.
+
+
+### Cyber UI, publishing services, and language preference - 2026-11-08
+
+- Alex approved the concise Russian Cyber UI course and requested its English translation
+  and production release. Both languages now have 16 lessons and 12 Canvas examples.
+- Merged panel decoration/sweep lessons, button pricing, and SDK effects into their main
+  topics; old URLs redirect to the corresponding lesson in each language.
+- Each interactive lesson shows its short description, then Canvas and controls beside
+  highlighted public API code. Controls update both; application setup stays in installation.
+- Error glyph, signal loss, and emblem brackets animate. Irrelevant controls are hidden.
+- Added the approved bilingual publishing support page content and landscape AI Defender
+  screenshot to services. The portfolio keeps its approved square game icon.
+- At the root, saved language takes priority over supported browser languages, with EN
+  fallback. Explicit localized links stay addressable; manual choices are persisted.
+- Validation covers public exports, matching bilingual code, 93 interactive API variants,
+  11 language preference cases, production build, and locale metadata. Browser QA includes
+  both languages, layouts, language persistence, and image roles.

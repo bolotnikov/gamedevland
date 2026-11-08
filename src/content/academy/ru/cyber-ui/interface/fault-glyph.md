@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 15,
-  "title": "Знак ошибки",
+  "order": 12,
+  "title": "Анимированный знак ошибки",
   "concept": "FaultGlyph",
-  "description": "Нарисуем предупреждение и зададим искажение.",
+  "description": "Добавим предупреждение с искажением.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · FaultGlyph",
@@ -19,17 +19,8 @@
 }
 ---
 
-`FaultGlyph.draw()` строит знак предупреждения из трёх горизонтальных частей. `distortion` сдвигает их и добавляет цветные фрагменты. При `0` получается неподвижный целый знак.
+`FaultGlyph.draw()` рисует знак предупреждения. Параметр `distortion` сдвигает части знака и добавляет цветные фрагменты. В примере это значение меняется со временем, поэтому знак движется.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, FaultGlyph } from '@gamedevland/cyber-ui';
+Чем больше `distortion`, тем сильнее искажение. При `0` знак остаётся целым. Положение задаётся координатами центра, размер — параметром `scale`.
 
-const g = app.stage.addChild(new Graphics());
-const t = CyberPreset.palette;
-FaultGlyph.draw(g.clear(), 240, 160, t.danger, t.signal, 1, 8, 6);
-```
-
-Аргументы: `Graphics`, центр `x/y`, основной цвет, цвет эха, прозрачность `[0, 1]`, искажение и положительный масштаб. Масштаб необязателен, по умолчанию `1`.
-
-Текст предупреждения и его игровое действие задаёт приложение. При reduced motion передаём `distortion: 0`; отдельного lifecycle у этого helper нет.
+Если движение отключено, рисуем знак с нулевым искажением.

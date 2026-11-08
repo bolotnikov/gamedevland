@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 13,
-  "title": "Text color echo",
+  "order": 10,
+  "title": "Colored text echo",
   "concept": "TextEcho",
-  "description": "Offset two existing text objects.",
+  "description": "Add a colored copy that shifts slightly behind the text.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · TextEcho",
@@ -19,29 +19,14 @@
 }
 ---
 
-`TextEcho` does not create a label. The application passes the main `Text` and its colored copy with matching content and anchor. The effect changes their positions and the copy’s visibility.
+For `TextEcho`, create two matching `Text` objects: the main label and a copy in another color. The effect shifts them in opposite directions and briefly reveals the copy.
 
-```ts
-import { Text } from 'pixi.js';
-import { CyberPreset, TextEcho } from '@gamedevland/cyber-ui';
+`frameMs` sets the duration of one shift, `cycleMs` its repeat period, and `shift` its distance. Text, font, and color remain regular PixiJS properties.
 
-const copy = app.stage.addChild(new Text({
-  text: 'SYSTEM READY', style: { fill: 0xffd65c },
-}));
-const title = app.stage.addChild(new Text({
-  text: 'SYSTEM READY', style: { fill: 0x70ccff },
-}));
-copy.anchor.set(0.5);
-title.anchor.set(0.5);
-const effect = new TextEcho(CyberPreset.textEcho);
-const tick = (ticker: import('pixi.js').Ticker) => {
-  effect.update(ticker.deltaMS / 1000);
-  effect.draw(title, copy, 240, 120);
-};
-app.ticker.add(tick);
-// On screen removal: app.ticker.remove(tick); effect.dispose();
-```
+`setReducedMotion(true)` hides the copy. `setActive(false)` pauses the animation on the current frame.
 
-In a running screen, we call `update(deltaSeconds)` and `draw()` from our update loop. The `frameMs`, `cycleMs`, and `shift` parameters control the period and offset. `offset(phaseOffsetMs)` returns the offset without changing the objects.
+<details><summary>Additional parameters</summary>
 
-`setReducedMotion(true)` produces zero offset and hides the copy on the next `draw()`. `setActive(false)` stops time but does not hide the frozen frame. When removing the screen, we call `dispose()` before destroying the text.
+In `draw(primary, echo, x, y, enabled, phaseOffsetMs)`, `enabled` can disable the echo and `phaseOffsetMs` can shift its starting phase. The effect is enabled by default, with a phase offset of `0`. `offset(phaseOffsetMs)` returns the displacement without drawing.
+
+</details>

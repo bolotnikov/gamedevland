@@ -5,66 +5,42 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 10,
+  "order": 8,
   "title": "Animated loader",
   "concept": "TriangleLoader",
-  "description": "Connect the triangle to the existing ticker.",
+  "description": "Add a rotating triangle and particles.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · TriangleLoader",
       "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TriangleLoader.ts",
-      "note": "Loader settings and borrowed Graphics."
+      "note": "Loader settings and borrowed Graphics objects."
     },
     {
       "title": "PixiJS · Ticker",
       "url": "https://pixijs.com/8.x/guides/components/ticker",
-      "note": "Subscriptions and deltaMS."
+      "note": "Ticker subscription and deltaMS."
     }
   ]
 }
 ---
 
-The loader receives two separate `Graphics` objects: triangle contours and particles. It clears them when drawing. Time comes from the existing [application ticker](https://pixijs.com/8.x/guides/components/ticker).
+`TriangleLoader` draws in two `Graphics` objects: one for the triangle and one for particles. Reserve these objects for the loader: it clears both whenever it draws.
 
-```ts
-import { Graphics } from 'pixi.js';
-import type { Ticker } from 'pixi.js';
-import { CyberPreset, TriangleLoader } from '@gamedevland/cyber-ui';
+Call `update()` and `draw()` every frame. `update()` takes seconds, so divide PixiJS `ticker.deltaMS` by `1000`.
 
-const emblem = app.stage.addChild(new Graphics());
-const dust = app.stage.addChild(new Graphics());
-const loader = new TriangleLoader(CyberPreset.triangle);
-const tick = (ticker: Ticker) => {
-  loader.update(ticker.deltaMS / 1000);
-  loader.draw(emblem, dust,
-    { x: app.screen.width / 2, y: 120, radius: 64, scale: 1 },
-    CyberPreset.trianglePalette);
-};
-app.ticker.add(tick);
-```
-
-Dividing by `1000` converts milliseconds to seconds. `ticker.deltaTime` is a different measure and cannot be passed as seconds. Changing dimensions in `draw()` does not reset the animation.
-
-When removing the screen, we first remove the callback and dispose of the effect:
-
-```ts
-app.ticker.remove(tick);
-loader.dispose();
-```
-
-Then we can destroy `emblem` and `dust`. The toolkit does not destroy the surfaces passed to it.
+When the loader is no longer needed, remove its ticker handler and call `dispose()`. The `Graphics` objects can then be removed from the scene.
 
 <details><summary>TriangleOptions settings</summary>
 
 | Field | Purpose |
 | --- | --- |
-| `cycleMs`, `spinDelayMs`, `spinDurationMs` | Motion period, delay before spinning, spin duration in ms |
-| `layers`, `layerGap`, `layerLift` | Outline count (1–32), gap, lift |
-| `strokeWidth`, `haloWidth` | Line and halo widths |
-| `haloAlpha`, `echoAlpha` | Halo and echo alpha [0, 1] |
-| `particles`, `particleSize`, `particleSpread`, `particleAlpha` | Count (0–1024), size, spread, alpha [0, 1] |
-| `seed` | Integer 0–4294967295 for repeatable geometry |
+| `cycleMs`, `spinDelayMs`, `spinDurationMs` | Motion period, delay before rotation, rotation duration in ms |
+| `layers`, `layerGap`, `layerLift` | Outline count (1-32), gap, and lift |
+| `strokeWidth`, `haloWidth` | Line and halo width |
+| `haloAlpha`, `echoAlpha` | Halo and echo opacity [0, 1] |
+| `particles`, `particleSize`, `particleSpread`, `particleAlpha` | Count (0-1024), size, spread, and opacity [0, 1] |
+| `seed` | Integer from 0 to 4294967295 for a repeatable pattern |
 
-`TriangleLayout` contains `x`, `y`, positive `radius` and `scale`. `TrianglePalette` contains `accent`, `secondary`, `highlight`, `text`. Copy `CyberPreset.triangle` and `CyberPreset.trianglePalette` to customize settings. `outerRadius(radius)` calculates clearance for outer layers before scaling.
+`TriangleLayout` contains `x`, `y`, and positive `radius` and `scale`. `TrianglePalette` contains `accent`, `secondary`, `highlight`, and `text`. For custom settings, copy `CyberPreset.triangle` and `CyberPreset.trianglePalette`. `outerRadius(radius)` calculates the space needed by the outer layers at scale 1.
 
 </details>

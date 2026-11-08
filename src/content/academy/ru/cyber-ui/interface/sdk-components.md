@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 17,
-  "title": "Компонент GameDevLand SDK",
+  "order": 14,
+  "title": "Подключение к GameDevLand SDK",
   "concept": "ToolkitComponent",
-  "description": "Нарисуем панель в узле из layout JSON.",
+  "description": "Добавим загрузчик в компонент движка.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · SDK guide",
@@ -24,75 +24,60 @@
 }
 ---
 
-Адаптер `@gamedevland/cyber-ui-sdk` нужен только для GameDevLand SDK. `ToolkitComponent` связывает эффекты core с обновлением, паузой и удалением узла. Для обычного PixiJS-проекта он не требуется.
+Этот урок нужен для игры на GameDevLand SDK. В обычном PixiJS-проекте достаточно примеров из предыдущих уроков.
 
-Компонент рисует в `this.node.view`. Размеры находятся в проверенных настройках, положение задаётся родительским layout. Полный типизированный [CyberPanel](https://github.com/gamedevland/cyber-ui-toolkit/blob/main/examples/sdk/src/CyberPanel.ts) есть среди примеров пакета.
-
-Зарегистрируем класс в `GlobalDiDefinition.registerComponents()`:
-
-Создадим компонент `CyberPanel.ts`:
-
-<details><summary>Код примера</summary>
+Создадим компонент `LoadingEmblem`. Он рисует треугольник в двух дочерних узлах. Вызов `ownEffect()` позволяет движку обновлять эффект вместе с компонентом, ставить его на паузу и удалять при закрытии сцены.
 
 ```ts
-import { CyberPreset, TerminalGlass } from '@gamedevland/cyber-ui';
+import { CyberPreset, TriangleLoader } from '@gamedevland/cyber-ui';
 import { ToolkitComponent } from '@gamedevland/cyber-ui-sdk';
+import type { Container } from '@gamedevland/engine/layouts';
 import { SchemaDecoder as S } from '@gamedevland/engine/validation';
-
-import type { Graphics } from '@gamedevland/engine/layouts';
 import type { InferDecoded } from '@gamedevland/engine/validation';
 
-const configDecoder = S.object({
-  width: S.number({ min: 48 }),
-  height: S.number({ min: 28 }),
-  cut: S.number({ min: 0 }),
-});
+const configDecoder = S.object({ radius: S.number({ min: 1 }) });
 
-/** Attach to a Graphics node; its parent owns positioning and application input. */
-export class CyberPanel extends ToolkitComponent<InferDecoded<typeof configDecoder>, Graphics> {
+export class LoadingEmblem extends ToolkitComponent<InferDecoded<typeof configDecoder>, Container> {
   protected readonly configDecoder = configDecoder;
+  private readonly loader = new TriangleLoader(CyberPreset.triangle);
 
   protected override onReady(): void {
-    const { width, height, cut } = this.config;
-    const palette = CyberPreset.palette;
-    TerminalGlass.draw(
-      this.node.view.clear(),
-      0,
-      0,
-      width,
-      height,
-      cut,
-      palette.panel,
-      palette.panelEdge,
-      palette.accent,
-      palette.text,
+    this.ownEffect(this.loader);
+  }
+  protected override onUpdate(deltaSeconds: number): void {
+    super.onUpdate(deltaSeconds);
+    this.loader.draw(
+      this.node.getChildGraphics('emblem').view,
+      this.node.getChildGraphics('dust').view,
+      { x: 0, y: 0, radius: this.config.radius, scale: 1 },
+      CyberPreset.trianglePalette,
     );
+  }
+  setMotionPreference(reduced: boolean): void {
+    this.setUiReducedMotion(reduced);
   }
 }
 ```
 
-</details>
-
-Зарегистрируем его в `GlobalDiDefinition.registerComponents()`:
+Зарегистрируем компонент в `registerComponents()`:
 
 ```ts
-group.add('CyberPanel', CyberPanel);
+group.add('LoadingEmblem', LoadingEmblem);
 ```
 
-Подключим к узлу `Graphics`:
+Добавим его к контейнеру в layout:
 
 ```json
 {
-  "type": "Graphics",
-  "components": {
-    "panel": {
-      "type": "CyberPanel",
-      "data": { "width": 320, "height": 180, "cut": 12 }
-    }
+  "type": "Container",
+  "components": { "loading": { "type": "LoadingEmblem", "data": { "radius": 64 } } },
+  "children": {
+    "emblem": { "type": "Graphics" },
+    "dust": { "type": "Graphics" }
   }
 }
 ```
 
-Фабрика элемента `Graphics` также должна быть зарегистрирована в проекте. Текст добавляется отдельными узлами, ввод проходит через `node.input`, намерение игрока — через события и FSM.
+Настройку движения передаём через `setMotionPreference()`. В `onUpdate()` сначала вызываем `super.onUpdate(deltaSeconds)`: он обновляет эффект, после чего можно нарисовать новый кадр.
 
-Эффекты и паузу подключим в следующем уроке.
+`uiViewport` возвращает размеры игрового экрана (`width`, `height`), размеры в браузере (`cssWidth`, `cssHeight`) и масштаб (`scale`).

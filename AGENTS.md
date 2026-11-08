@@ -102,7 +102,7 @@ Preserve the original reference articles unless Alex requests their revision.
   or spend time/tokens preparing an English counterpart. Preserve existing English versions
   until translation is requested; they may temporarily differ from the Russian draft.
 - This workflow supersedes earlier instructions to author/update EN and RU together. It does
-  not change the site's default language: `/` stays English; Russian pages use `/ru/`.
+  not change the URL scheme: unprefixed pages are English; Russian pages use `/ru/`.
 - Translation-parity checks are release requirements, not permission to translate drafts.
   If a new Russian-only draft needs a preview path, support that narrowly when needed rather
   than inventing English filler or blocking Russian authoring on translation.
@@ -120,6 +120,10 @@ The approved Memory Heap lesson complements this baseline with plain-language ex
 the AST and scanner examples establish the standard for useful interaction.
 
 ## Publication workflow
+
+- On 2026-11-08 Alex authorized English translation and production release of the revised
+  Cyber UI course, publishing service page, service landscape screenshot, portfolio icon
+  correction, and remembered browser-language selection. This applies to this release only.
 
 - On 2026-11-04 Alex approved all 19 Russian Engine lessons and the Academy, course, and
   section pages. He explicitly authorized their English translation and a bilingual production
@@ -325,8 +329,10 @@ and both themes on Academy and existing pages. Report limits honestly.
 
 Read `docs/I18N.md` before changing site content or routes.
 
-- English is the default at `/` and every unprefixed page. Russian uses `/ru/`.
-  Never redirect the root to Russian based on browser language or stored preference.
+- Unprefixed pages contain English; Russian uses `/ru/`. On 2026-11-08 Alex requested
+  automatic language selection at `/`: saved choice, then a supported browser language,
+  then EN fallback. Persist automatic and manual choices. Explicit language URLs stay
+  directly addressable; keep static canonical and alternate URLs for both languages.
 - Keep the EN/RU switch beside the theme control; it must open the same page in the selected
   language. Use a dropdown showing only the current locale label when closed. Navigation stays
   within that language. Shared theme and learner state remain intact.

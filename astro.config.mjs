@@ -16,6 +16,7 @@ const externalLinkOptions = {
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://gamedev.land',
+	devToolbar: { enabled: false },
 	redirects: {
 		'/academy/': '/',
 		'/ru/academy/': '/ru/',
