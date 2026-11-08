@@ -15,6 +15,8 @@ export class CyberPreviewHost {
   private example?: CyberExample;
   private reduced = this.motion.matches;
   private visible = true;
+  private paused = false;
+  private requestedReduced = false;
   private ready = false;
   private disposed = false;
 
@@ -89,8 +91,9 @@ export class CyberPreviewHost {
     this.motion.addEventListener(
       'change',
       (event) => {
-        this.reduced = event.matches;
+        this.reduced = event.matches || this.requestedReduced;
         this.example?.setReducedMotion(this.reduced);
+        this.syncControls();
         this.syncClock();
         this.render();
       },
@@ -139,12 +142,18 @@ export class CyberPreviewHost {
       input instanceof HTMLInputElement && input.type === 'checkbox'
         ? String(input.checked)
         : input.value;
-    this.example?.control(id, value);
+    if (id === 'paused') this.paused = value === 'true';
+    else if (id === 'reduced') {
+      this.requestedReduced = value === 'true';
+      this.reduced = this.motion.matches || this.requestedReduced;
+      this.example?.setReducedMotion(this.reduced);
+    } else this.example?.control(id, value);
     if (input instanceof HTMLInputElement && input.type === 'range') {
       const output = input.parentElement?.querySelector('output');
       if (output) output.value = value;
     }
-    this.syncControls();
+    if (this.example && this.app.screen.height !== this.example.canvasHeight) this.resize();
+    else this.syncControls();
     this.syncClock();
     this.render();
   }
@@ -154,7 +163,7 @@ export class CyberPreviewHost {
       this.element.querySelector<HTMLInputElement | HTMLSelectElement>(
         `[data-cyber-control="${id}"]`,
       )?.value;
-    const square = value('panel') === 'square' || value('variant') === 'icon';
+    const square = value('variant') === 'icon';
     const variant = value('variant');
     const checked = (id: string) =>
       this.element.querySelector<HTMLInputElement>(`[data-cyber-control="${id}"]`)?.checked ??
@@ -165,16 +174,29 @@ export class CyberPreviewHost {
       );
       if (!input) continue;
       const hidden =
-        (control.id === 'state' && value('panel') === 'plate') ||
+        (this.reduced &&
+          (control.id === 'paused' ||
+            (control.id === 'progress' &&
+              ['signal-brackets', 'fault-glyph', 'signal-lost'].includes(this.definition.slug)) ||
+            (this.definition.slug === 'text-echo' && ['shift', 'secondary'].includes(control.id)) ||
+            (this.definition.slug === 'binary-field' && control.id === 'rate') ||
+            (this.definition.slug === 'panel-reveal' &&
+              ['axis', 'duration'].includes(control.id)) ||
+            (['fault-glyph', 'signal-lost'].includes(this.definition.slug) &&
+              control.id === 'accent'))) ||
         (control.id === 'selected' &&
           variant !== undefined &&
           ['primary', 'danger', 'utility', 'line'].includes(variant)) ||
         (control.id === 'surface' &&
           variant !== undefined &&
-          (['nav', 'utility', 'line'].includes(variant) ||
+          (['nav', 'segment', 'utility', 'line'].includes(variant) ||
             (variant === 'primary' && checked('enabled')) ||
-            (variant === 'segment' && !checked('selected')))) ||
-        (control.id === 'glass' && (value('panel') === 'plate' || value('state') === 'locked')) ||
+            (['tab', 'icon'].includes(variant) && checked('selected')))) ||
+        (control.id === 'explicitAccent' &&
+          (variant !== 'module' || checked('enabled') || checked('selected'))) ||
+        (control.id === 'progress' &&
+          value('detail') !== undefined &&
+          value('detail') !== 'clippedRect') ||
         ((control.id === 'height' || control.id === 'text') && square);
       const field = input.closest<HTMLElement>('[data-cyber-field]');
       if (field) field.hidden = hidden;
@@ -193,7 +215,8 @@ export class CyberPreviewHost {
 
   private syncClock(): void {
     if (!this.ready || this.disposed) return;
-    const active = this.definition.motion && !this.reduced && this.visible && !document.hidden;
+    const active =
+      this.definition.motion && !this.paused && !this.reduced && this.visible && !document.hidden;
     this.example?.setActive(active);
     if (active) this.app.start();
     else this.app.stop();
@@ -203,6 +226,13 @@ export class CyberPreviewHost {
     if (this.ready && !this.disposed) {
       this.app.render();
       this.updateStatus();
+      for (const control of this.definition.controls) {
+        const value = this.example?.controlValue(control.id);
+        const input = this.element.querySelector<HTMLSelectElement>(
+          `select[data-cyber-control="${control.id}"]`,
+        );
+        if (input && value !== undefined) input.value = value;
+      }
     }
   }
   private updateStatus(): void {

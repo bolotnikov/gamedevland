@@ -6,12 +6,9 @@
   "lesson": "interface",
   "draft": false,
   "order": 1,
-  "title": "Adding the toolkit",
+  "title": "Install for PixiJS or the SDK",
   "concept": "Core and SDK",
-  "description": "Install the package and draw the first panel.",
-  "takeaway": [
-    "Core works with PixiJS 8 without GameDevLand SDK."
-  ],
+  "description": "Choose a package and run the UI without a game engine.",
   "sources": [
     {
       "title": "Cyber UI Toolkit",
@@ -27,13 +24,22 @@
 }
 ---
 
-`@gamedevland/cyber-ui` draws panels, buttons, and icons in [PixiJS Graphics](https://pixijs.com/8.x/guides/components/scene-objects/graphics) objects. Core is enough for a regular Pixi project. We will use `@gamedevland/cyber-ui-sdk` later for components and actions in our SDK.
+The two packages separate drawing from game-engine integration.
+
+| Package | Provides | When to use it |
+| --- | --- | --- |
+| `@gamedevland/cyber-ui` | Panels, buttons, icons, and every visual effect | Any PixiJS 8 project |
+| `@gamedevland/cyber-ui-sdk` | `ToolkitComponent` and the `PanelReveal` action | A GameDevLand SDK project |
+
+Without the SDK, the entire core visual API works the same way. The application manages layout, input, effect updates, pause, and cleanup. The adapter connects effects to the SDK component lifecycle and adds an action using SDK tweens.
+
+For a standalone TypeScript/Vite project, install only PixiJS and core:
 
 ```bash
 npm install pixi.js @gamedevland/cyber-ui
 ```
 
-Let’s create an application in a TypeScript/Vite project and add a panel:
+Create `main.ts` and add a panel:
 
 ```ts
 import { Application, Graphics } from 'pixi.js';
@@ -49,6 +55,12 @@ TerminalGlass.draw(panel, 24, 24, 432, 272, 12,
   t.panel, t.panelEdge, t.accent, t.text);
 ```
 
-The panel uses vector geometry, so it needs no images. In the following examples, `app` refers to this application. In an SDK project, we use existing scene nodes instead of creating a second `Application`.
+The following examples use this `app`. For animation, pass `ticker.deltaMS / 1000` to `effect.update()`. On screen removal, unregister the callback and call `effect.dispose()`.
 
-Development requires Node.js 22.12+. The packages are available on npm. To install a local build, run `npm run pack` in the toolkit repository and pass the resulting `.tgz` to `npm install`.
+For a GameDevLand SDK project, also install the adapter and a compatible engine:
+
+```bash
+npm install pixi.js @gamedevland/cyber-ui @gamedevland/cyber-ui-sdk @gamedevland/engine@0.0.11
+```
+
+Use existing SDK nodes and its update loop; no second `Application` is needed. The final lessons cover adapter components and actions. Development requires Node.js 22.12+.

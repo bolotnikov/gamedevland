@@ -1,4 +1,4 @@
-import { ButtonSurface, TerminalGlass, TerminalUi } from '@gamedevland/cyber-ui';
+import { ButtonSurface, TerminalUi } from '@gamedevland/cyber-ui';
 import type { ButtonVariant } from '@gamedevland/cyber-ui';
 import { Container, Graphics, Rectangle } from 'pixi.js';
 import { CyberDrawing } from './CyberDrawing';
@@ -11,14 +11,19 @@ export class CyberButtonExample extends CyberExample {
   private enabled = true;
   private selected = false;
   private taps = 0;
+  private ready = false;
+  private explicitAccent = false;
   constructor() {
     super();
     this.settings.width = 216;
     this.settings.height = 56;
     this.settings.text = 'START';
   }
+  override get canvasHeight(): number {
+    return this.variant === 'icon' ? Math.min(this.settings.width, 224) + 64 : 160;
+  }
   get status(): string {
-    return `${this.variant} · ${this.locale.t('нажатий: {value0}', {value0: this.taps})}`;
+    return `${this.variant} · ${this.locale.t('нажатий: {value0}', { value0: this.taps })}`;
   }
   resize(width: number, height: number): void {
     this.width = width;
@@ -35,12 +40,15 @@ export class CyberButtonExample extends CyberExample {
         case 'icon':
         case 'nav':
         case 'segment':
+        case 'tab':
         case 'switch':
         case 'utility':
         case 'line':
           this.variant = value;
       }
     }
+    if (id === 'ready') this.ready = value === 'true';
+    if (id === 'explicitAccent') this.explicitAccent = value === 'true';
     if (id === 'enabled') this.enabled = value === 'true';
     if (id === 'selected') this.selected = value === 'true';
     this.draw();
@@ -63,11 +71,11 @@ export class CyberButtonExample extends CyberExample {
         variant: this.variant,
         enabled: this.enabled,
         selected: this.selected,
+        ready: this.ready,
+        explicitAccent: this.explicitAccent,
       },
       t,
     );
-    if (this.variant === 'module' && this.selected)
-      TerminalGlass.focus(surface, 0, 0, w, h, t.accent);
     if (this.variant === 'switch') ButtonSurface.toggle(surface, w, h, this.selected, t);
     const color = this.variant === 'primary' && this.enabled ? t.background : t.accent;
     TerminalUi.icon(

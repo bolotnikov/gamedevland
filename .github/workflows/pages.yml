@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate Cyber UI examples
+        run: npm run check:cyber-ui
+
       - name: Build site
         run: npm run build
 

@@ -21,6 +21,10 @@ export abstract class CyberExample {
     void id;
     void value;
   }
+  controlValue(id: string): string | undefined {
+    void id;
+    return undefined;
+  }
   update(deltaSeconds: number): void {
     void deltaSeconds;
   }

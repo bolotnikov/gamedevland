@@ -5,13 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 5,
+  "order": 7,
   "title": "Иконки и палитра",
   "concept": "TerminalIcon · CyberPreset",
   "description": "Добавим векторные знаки и изменим акцент.",
-  "takeaway": [
-    "Координаты иконки задают центр, а не левый верхний угол."
-  ],
   "sources": [
     {
       "title": "Cyber UI Toolkit · TerminalUi",
@@ -46,4 +43,10 @@ TerminalUi.icon(g, 'lock', 112, 32, 24, palette.muted);
 
 `CyberPreset.palette` заморожена. Создаём копию и меняем нужные поля, затем передаём одну палитру поверхностям и кнопкам. Названия `accent`, `danger`, `text` описывают назначение цвета, поэтому тема меняется без переписывания элементов.
 
-Среди 27 имён есть `chip`, `battle`, `agents`, `skills`, `gear`, `credit`, `play`, `check`, `repair`, `scan` и стрелки `left`/`right`. Полный union доступен в подсказках редактора и README.
+Полный набор `TerminalIcon`:
+
+```text
+chip battle agents skills quests gear bolt calendar credit capsule key left right exit play lock chest check speed target burst repair heart scan snow boss flag
+```
+
+Палитра `ButtonPalette`: `background`, `panel`, `inset`, `panelEdge`, `signal`, `focus`, `accent`, `steel`, `sapphire`, `text`, `muted`, `danger`. Варианты кнопок используют разные поля: `signal` — полоса nav, `sapphire` — активный сегмент, `focus` — рамка выбранной icon-кнопки. `CyberPreset` также предоставляет `triangle`, `trianglePalette`, `textEcho`, `glitch`.

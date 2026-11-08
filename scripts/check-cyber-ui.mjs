@@ -1,0 +1,106 @@
+import assert from 'node:assert/strict';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import ts from 'typescript';
+
+const root = resolve(import.meta.dirname, '..');
+const directory = join(root, 'src/content/academy/en/cyber-ui/interface');
+const pages = readdirSync(directory).filter((name) => name.endsWith('.md'));
+const reference = readFileSync(join(directory, 'api-reference.md'), 'utf8');
+const options = {
+  target: ts.ScriptTarget.ES2022,
+  module: ts.ModuleKind.ESNext,
+  moduleResolution: ts.ModuleResolutionKind.Bundler,
+  strict: true,
+  skipLibCheck: true,
+  noEmit: true,
+  exactOptionalPropertyTypes: true,
+};
+const blocks = (text) => [...text.matchAll(/```(ts|json)\n([\s\S]*?)```/g)];
+const orders = new Set();
+for (const name of pages) {
+  const en = readFileSync(join(directory, name), 'utf8');
+  const ru = readFileSync(join(root, 'src/content/academy/ru/cyber-ui/interface', name), 'utf8');
+  const metadata = JSON.parse(en.split('---')[1]);
+  assert.ok(!orders.has(metadata.order), `Duplicate order: ${name}`);
+  orders.add(metadata.order);
+  assert.deepEqual(
+    blocks(en).map((match) => match[0]),
+    blocks(ru).map((match) => match[0]),
+    `Code differs: ${name}`,
+  );
+  for (const block of blocks(en)) if (block[1] === 'json') JSON.parse(block[2]);
+}
+assert.deepEqual(
+  [...orders].sort((a, b) => a - b),
+  pages.map((_, index) => index + 1),
+);
+for (const name of ['@gamedevland/cyber-ui', '@gamedevland/cyber-ui-sdk']) {
+  const resolved = ts.resolveModuleName(
+    name,
+    join(root, 'check.ts'),
+    options,
+    ts.sys,
+  ).resolvedModule;
+  assert.ok(resolved, `Cannot resolve ${name}`);
+  const source = ts.createSourceFile(
+    resolved.resolvedFileName,
+    readFileSync(resolved.resolvedFileName, 'utf8'),
+    ts.ScriptTarget.Latest,
+  );
+  for (const statement of source.statements) {
+    if (
+      !ts.isExportDeclaration(statement) ||
+      !statement.exportClause ||
+      !ts.isNamedExports(statement.exportClause)
+    )
+      continue;
+    for (const specifier of statement.exportClause.elements)
+      assert.ok(
+        reference.includes('`' + specifier.name.text + '`'),
+        `Missing API reference: ${specifier.name.text}`,
+      );
+  }
+}
+const cache = join(root, 'node_modules/.cache');
+mkdirSync(cache, { recursive: true });
+const temporary = mkdtempSync(join(cache, 'cyber-docs-'));
+try {
+  const files = [];
+  for (const name of pages) {
+    let sample = blocks(readFileSync(join(directory, name), 'utf8'))
+      .filter((block) => block[1] === 'ts')
+      .map((block) => block[2])
+      .join('\n');
+    if (!sample) continue;
+    let context =
+      name === 'installation.md' ? '' : "declare const app: import('pixi.js').Application;\n";
+    if (name === 'sdk-components.md')
+      context += "declare const group: import('@gamedevland/engine/di').ComponentsGroup;\n";
+    if (name === 'panel-reveal.md') {
+      context +=
+        "declare const registrar: import('@gamedevland/engine/di').ValuesGroupRegistrar;\ndeclare const node: import('@gamedevland/engine/layouts').NodeBase;\n";
+      sample = sample.replaceAll('this.node', 'node');
+    }
+    const path = join(temporary, name.replace('.md', '.ts'));
+    writeFileSync(path, context + sample + '\nexport {};\n');
+    files.push(path);
+  }
+  const program = ts.createProgram(files, options);
+  const diagnostics = ts.getPreEmitDiagnostics(program);
+  if (diagnostics.length) {
+    console.error(
+      ts.formatDiagnosticsWithColorAndContext(diagnostics, {
+        getCanonicalFileName: (path) => path,
+        getCurrentDirectory: () => root,
+        getNewLine: () => '\n',
+      }),
+    );
+    process.exitCode = 1;
+  } else
+    console.log(
+      `Cyber UI: ${pages.length} bilingual lessons, public exports covered, ${files.length} TypeScript examples checked.`,
+    );
+} finally {
+  rmSync(temporary, { recursive: true, force: true });
+}

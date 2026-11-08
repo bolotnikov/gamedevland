@@ -6,54 +6,62 @@
   "lesson": "interface",
   "draft": false,
   "order": 4,
-  "title": "Buttons and their state",
+  "title": "Buttons and states",
   "concept": "ButtonSurface",
-  "description": "Connect a button’s appearance to its hit area.",
-  "takeaway": [
-    "enabled changes the drawing; the application controls whether input is blocked."
-  ],
+  "description": "Connect every skin variant to input and a label.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · ButtonSurface",
       "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/ButtonSurface.ts",
-      "note": "Variants and visual states."
-    },
-    {
-      "title": "PixiJS · Events",
-      "url": "https://pixijs.com/8.x/guides/components/events",
-      "note": "eventMode, hitArea, and pointertap."
+      "note": "Public API parameters and behavior."
     }
   ]
 }
 ---
 
-`ButtonSurface.draw()` draws a button from the local point `(0, 0)`. To handle presses, we set up its [hit area](https://pixijs.com/8.x/guides/components/events) separately.
+`ButtonSurface.draw()` paints from local `(0, 0)`. Required fields are `width`, `height`, `variant`, `enabled`, and `selected`. `explicitAccent` enables the module rail; `ready` overlays an available-reward highlight on the chosen skin.
 
 ```ts
-import { Graphics, Rectangle } from 'pixi.js';
-import { ButtonSurface, CyberPreset, TerminalUi } from '@gamedevland/cyber-ui';
+import { Graphics, Rectangle, Text } from 'pixi.js';
+import { ButtonSurface, CyberPreset } from '@gamedevland/cyber-ui';
 
 const button = app.stage.addChild(new Graphics());
 const t = CyberPreset.palette;
-button.position.set(48, 160);
-ButtonSurface.draw(button, {
-  width: 220, height: 56, variant: 'primary',
-  enabled: true, selected: false,
-}, t);
-TerminalUi.icon(button, 'play', 28, 28, 20, t.background);
-button.hitArea = new Rectangle(0, 0, 220, 56);
-button.eventMode = 'static';
-button.on('pointertap', () => { console.log('Start requested'); });
+const label = button.addChild(new Text({ text: 'CLAIM', style: { fill: t.text, fontSize: 18 } }));
+label.anchor.set(0.5);
+label.position.set(110, 28);
+label.eventMode = 'none';
+let enabled = true;
+function redraw() {
+  ButtonSurface.draw(button.clear(), {
+    width: 220, height: 56, variant: 'module', enabled, selected: false,
+    explicitAccent: true, ready: true,
+  }, t);
+  button.eventMode = enabled ? 'static' : 'none';
+  button.hitArea = new Rectangle(0, 0, 220, 56);
+  button.alpha = enabled ? 1 : 0.42;
+}
+button.on('pointertap', () => { enabled = false; redraw(); });
+redraw();
 ```
 
-This is input handling for a regular Pixi project. The SDK uses `node.input`. Text, keyboard navigation, focus, and the button’s action remain the application’s responsibility.
+<details><summary>All ButtonSurface variants</summary>
 
-| Variant | Use |
+| Variant | Skin |
 | --- | --- |
-| `primary`, `danger` | Main or destructive action |
-| `module`, `icon` | Module card or icon button |
-| `nav`, `segment` | Selected navigation item or segment |
-| `switch` | Toggle background |
-| `utility`, `line` | Bottom line or no background |
+| `primary` | Solid accent when enabled; glass otherwise |
+| `module` | Glass with a side rail when enabled, selected, or explicitAccent |
+| `danger` | Glass using danger color |
+| `icon` | Rounded inset; selected changes fill and edge |
+| `nav` | Subtle active fill and top rail only |
+| `segment` | Selected segment fill only |
+| `tab` | Separate border, fill, and active underline |
+| `switch` | Glass background; add the knob with toggle |
+| `utility` | Bottom rule |
+| `line` | No background |
 
-For `nav` and `segment`, the drawing appears when `selected: true`. To add the toggle thumb, we also call `ButtonSurface.toggle(button, 220, 56, selected, t)`. When state changes, we clear the drawing and update input and the label.
+</details>
+
+`enabled` changes appearance but does not disable [PixiJS input](https://pixijs.com/8.x/guides/components/events). The application updates `eventMode`, opacity, and label styling. SDK projects use `node.input`.
+
+For `switch`, append `ButtonSurface.toggle(button, width, height, selected, palette)` after `draw()`. Hover, pressed state, keyboard focus, and hit areas belong to the application. The next lesson covers shared `nav` and `segment` backgrounds.

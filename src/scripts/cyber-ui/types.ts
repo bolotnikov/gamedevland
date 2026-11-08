@@ -1,4 +1,11 @@
 export type CyberLesson =
+  | 'selectors'
+  | 'button-price'
+  | 'surface-details'
+  | 'signal-brackets'
+  | 'terminal-sweep'
+  | 'fault-glyph'
+  | 'signal-lost'
   | 'panels'
   | 'buttons'
   | 'icons-theme'
@@ -8,7 +15,7 @@ export type CyberLesson =
   | 'glitch-lifecycle'
   | 'panel-reveal';
 
-export type CyberPanelVariant = 'window' | 'plate' | 'square' | 'card' | 'research' | 'module';
+export type CyberPanelVariant = 'glass' | 'panel' | 'plate';
 export type CyberControl =
   | {
       readonly kind: 'checkbox';
