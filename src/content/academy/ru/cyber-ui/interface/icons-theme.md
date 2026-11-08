@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 7,
-  "title": "Иконки и палитра",
+  "order": 6,
+  "title": "Иконки и цвета",
   "concept": "TerminalIcon · CyberPreset",
-  "description": "Добавим векторные знаки и изменим акцент.",
+  "description": "Выберем иконку и изменим цвет интерфейса.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · TerminalUi",
@@ -24,29 +24,15 @@
 }
 ---
 
-В `TerminalUi.icon()` передаём имя, центр, размер и цвет. Тип `TerminalIcon` ограничивает доступные имена — опечатка обнаружится при проверке TypeScript.
+`TerminalUi.icon()` рисует иконку по имени. После имени передаём координаты её центра, размер и цвет. Тип `TerminalIcon` помогает выбрать допустимое имя в редакторе.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, TerminalUi } from '@gamedevland/cyber-ui';
-import type { TerminalIcon } from '@gamedevland/cyber-ui';
+Цвета по умолчанию находятся в `CyberPreset.palette`. Чтобы изменить тему, создаём копию палитры: `{ ...CyberPreset.palette, accent: 0x68e0cb }`. Саму исходную палитру менять нельзя.
 
-const palette = { ...CyberPreset.palette, accent: 0x68e0cb };
-const g = app.stage.addChild(new Graphics());
-const icon: TerminalIcon = 'gear';
-TerminalUi.icon(g, icon, 32, 32, 24, palette.accent);
-TerminalUi.icon(g, 'heart', 72, 32, 24, palette.danger);
-TerminalUi.icon(g, 'lock', 112, 32, 24, palette.muted);
-```
-
-Иконки состоят из векторных линий и фигур. Им не нужен атлас изображений. Цвет задаётся числом RGB, например `0x68e0cb`.
-
-`CyberPreset.palette` заморожена. Создаём копию и меняем нужные поля, затем передаём одну палитру поверхностям и кнопкам. Названия `accent`, `danger`, `text` описывают назначение цвета, поэтому тема меняется без переписывания элементов.
-
-Полный набор `TerminalIcon`:
+<details><summary>Все иконки и цвета</summary>
 
 ```text
 chip battle agents skills quests gear bolt calendar credit capsule key left right exit play lock chest check speed target burst repair heart scan snow boss flag
 ```
+`ButtonPalette` содержит `background`, `panel`, `inset`, `panelEdge`, `signal`, `focus`, `accent`, `steel`, `sapphire`, `text`, `muted`, `danger`. Например, `signal` задаёт полоску выбранного `nav`, а `sapphire` — заливку выбранного `segment`.
 
-Палитра `ButtonPalette`: `background`, `panel`, `inset`, `panelEdge`, `signal`, `focus`, `accent`, `steel`, `sapphire`, `text`, `muted`, `danger`. Варианты кнопок используют разные поля: `signal` — полоса nav, `sapphire` — активный сегмент, `focus` — рамка выбранной icon-кнопки. `CyberPreset` также предоставляет `triangle`, `trianglePalette`, `textEcho`, `glitch`.
+</details>

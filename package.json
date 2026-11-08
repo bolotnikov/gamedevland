@@ -14,7 +14,8 @@
     "lint": "eslint src scripts/check-locales.mjs astro.config.mjs eslint.config.js",
     "check:locales": "node scripts/check-locales.mjs",
     "build:academy-preview": "astro build --mode academy-preview",
-    "check:cyber-ui": "node scripts/check-cyber-ui.mjs"
+    "check:cyber-ui": "node scripts/check-cyber-ui.mjs",
+    "check:language": "node scripts/check-language-preference.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
@@ -33,6 +34,7 @@
     "rehype-external-links": "^3.0.0",
     "rehype-raw": "^7.0.0",
     "sharp": "0.34.5",
+    "shiki": "^4.0.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.72.1"
   }

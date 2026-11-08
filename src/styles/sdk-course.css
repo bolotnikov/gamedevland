@@ -234,8 +234,3 @@
 .sdk-section-status { display: inline-block; padding: 4px 9px; border: 1px dashed var(--color-border); border-radius: 5px; color: var(--color-muted-foreground); background: var(--color-background); font-size: 11px; line-height: 1.5; }
 
 .sdk-progress [data-progress-count] { white-space: nowrap; flex-shrink: 0; }
-
-/* Keep public API names readable without widening Cyber UI lessons on phones. */
-[data-lesson-id='cyber-ui:interface'] .lesson-prose table { max-width: 100%; }
-[data-lesson-id='cyber-ui:interface'] .lesson-prose :is(th, td) { overflow-wrap: anywhere; }
-[data-lesson-id='cyber-ui:interface'] .lesson-prose :is(th, td) code { white-space: normal; overflow-wrap: anywhere; }

@@ -6,9 +6,9 @@
   "lesson": "interface",
   "draft": false,
   "order": 4,
-  "title": "Кнопки и состояния",
+  "title": "Кнопки",
   "concept": "ButtonSurface",
-  "description": "Соединим все варианты оформления с вводом и подписью.",
+  "description": "Настроим вид, подпись, цену и доступность кнопки.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · ButtonSurface",
@@ -19,31 +19,11 @@
 }
 ---
 
-`ButtonSurface.draw()` рисует от локальной точки `(0, 0)`. Обязательные поля: `width`, `height`, `variant`, `enabled`, `selected`. `explicitAccent` включает полоску модуля, `ready` добавляет акцент доступной награды поверх выбранного оформления.
+`ButtonSurface` рисует фон кнопки. Подпись, иконку и обработчик нажатия добавляем отдельно. В поле «Вид кнопки» можно сравнить все варианты оформления.
 
-```ts
-import { Graphics, Rectangle, Text } from 'pixi.js';
-import { ButtonSurface, CyberPreset } from '@gamedevland/cyber-ui';
+Флаг `enabled` меняет рисунок, но сам по себе не блокирует нажатия. В примере вместе с ним меняется `eventMode`: недоступная кнопка не реагирует на клик.
 
-const button = app.stage.addChild(new Graphics());
-const t = CyberPreset.palette;
-const label = button.addChild(new Text({ text: 'CLAIM', style: { fill: t.text, fontSize: 18 } }));
-label.anchor.set(0.5);
-label.position.set(110, 28);
-label.eventMode = 'none';
-let enabled = true;
-function redraw() {
-  ButtonSurface.draw(button.clear(), {
-    width: 220, height: 56, variant: 'module', enabled, selected: false,
-    explicitAccent: true, ready: true,
-  }, t);
-  button.eventMode = enabled ? 'static' : 'none';
-  button.hitArea = new Rectangle(0, 0, 220, 56);
-  button.alpha = enabled ? 1 : 0.42;
-}
-button.on('pointertap', () => { enabled = false; redraw(); });
-redraw();
-```
+Для кнопки покупки включим цену. `ButtonPrice.layout()` расположит подпись, значок валюты и сумму в одной строке. Если строка не помещается, он уменьшит её целиком. После смены языка или суммы заново измеряем текст и пересчитываем положение элементов.
 
 <details><summary>Все варианты ButtonSurface</summary>
 
@@ -62,6 +42,4 @@ redraw();
 
 </details>
 
-`enabled` меняет оформление, но не отключает [ввод PixiJS](https://pixijs.com/8.x/guides/components/events). Поэтому обновляем `eventMode`, прозрачность и подпись в приложении. В SDK используем `node.input`.
-
-Для `switch` после `draw()` добавляем `ButtonSurface.toggle(button, width, height, selected, palette)`. Hover, pressed, клавиатурный focus и hit area принадлежат приложению. Общие подложки `nav` и `segment` разбираются в следующем уроке.
+`selected` выделяет выбранную кнопку, `ready` — доступную награду. Для `switch` после фона рисуем ползунок через `ButtonSurface.toggle()`. `explicitAccent` позволяет оставить полоску модуля, даже когда кнопка недоступна.

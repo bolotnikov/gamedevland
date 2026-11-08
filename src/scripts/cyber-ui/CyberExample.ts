@@ -12,6 +12,7 @@ export abstract class CyberExample {
   protected width = 480;
   protected height = 320;
   protected reduced = false;
+  get animated(): boolean { return true; }
   get canvasHeight(): number {
     return 320;
   }

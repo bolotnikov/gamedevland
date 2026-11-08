@@ -37,6 +37,9 @@ jobs:
       - name: Validate Cyber UI examples
         run: npm run check:cyber-ui
 
+      - name: Validate language preference
+        run: npm run check:language
+
       - name: Build site
         run: npm run build
 

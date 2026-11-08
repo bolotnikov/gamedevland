@@ -6,9 +6,9 @@
   "lesson": "interface",
   "draft": false,
   "order": 1,
-  "title": "Установка: PixiJS или SDK",
+  "title": "Подключение к проекту",
   "concept": "Core и SDK",
-  "description": "Выберем пакет и запустим интерфейс без игрового движка.",
+  "description": "Выберем пакет и нарисуем первую панель.",
   "sources": [
     {
       "title": "Cyber UI Toolkit",
@@ -24,22 +24,32 @@
 }
 ---
 
-Два пакета отделяют оформление от интеграции с игровым движком.
+У Cyber UI Toolkit два пакета. Основной содержит панели, кнопки, иконки и эффекты. Его можно использовать в любом проекте на PixiJS. Второй — необязательный адаптер для GameDevLand SDK.
 
-| Пакет | Что делает | Когда нужен |
-| --- | --- | --- |
-| `@gamedevland/cyber-ui` | Панели, кнопки, иконки и все визуальные эффекты | Любой проект на PixiJS 8 |
-| `@gamedevland/cyber-ui-sdk` | `ToolkitComponent` и действие `PanelReveal` | Проект на GameDevLand SDK |
+<figure class="sdk-boundary cyber-packages">
+  <div class="sdk-boundary__modules">
+    <section class="sdk-boundary__module-group is-cyan">
+      <h4>Основной пакет</h4>
+      <p class="cyber-packages__name"><code>@gamedevland/cyber-ui</code></p>
+      <ul><li><strong>Панели</strong></li><li><strong>Кнопки</strong></li><li><strong>Иконки</strong></li><li><strong>Эффекты</strong></li></ul>
+      <p class="cyber-packages__use">Работает с PixiJS 8. Движок не нужен.</p>
+    </section>
+    <section class="sdk-boundary__module-group is-green">
+      <h4>Необязательный SDK-адаптер</h4>
+      <p class="cyber-packages__name"><code>@gamedevland/cyber-ui-sdk</code></p>
+      <ul><li><code>ToolkitComponent</code><span>Эффекты в компонентах движка</span></li><li><code>PanelReveal</code><span>Появление и закрытие панелей</span></li></ul>
+      <p class="cyber-packages__use">Добавляется к основному пакету в проектах на GameDevLand SDK.</p>
+    </section>
+  </div>
+</figure>
 
-Без SDK весь визуальный API core работает так же. Приложение само задаёт layout, ввод, обновление эффектов, паузу и очистку. Адаптер подключает эффекты к lifecycle компонентов SDK и добавляет действие на его твинах.
-
-Для обычного TypeScript/Vite-проекта устанавливаем только PixiJS и core:
+Если движок не нужен, достаточно PixiJS и основного пакета:
 
 ```bash
 npm install pixi.js @gamedevland/cyber-ui
 ```
 
-Создадим `main.ts` и добавим панель:
+Добавим в `main.ts` приложение PixiJS и стеклянную панель:
 
 ```ts
 import { Application, Graphics } from 'pixi.js';
@@ -55,12 +65,12 @@ TerminalGlass.draw(panel, 24, 24, 432, 272, 12,
   t.panel, t.panelEdge, t.accent, t.text);
 ```
 
-В следующих примерах `app` — это приложение. Для анимации передаём `ticker.deltaMS / 1000` в `effect.update()`, при удалении экрана снимаем callback и вызываем `effect.dispose()`.
+В остальных примерах используем этот же `app`.
 
-Для проекта на GameDevLand SDK устанавливаем также адаптер и совместимый движок:
+Для игры на GameDevLand SDK устанавливаем ещё и адаптер:
 
 ```bash
 npm install pixi.js @gamedevland/cyber-ui @gamedevland/cyber-ui-sdk @gamedevland/engine@0.0.11
 ```
 
-В нём используем существующие узлы и цикл обновления SDK: второй `Application` не нужен. Компоненты и действия адаптера разбираются в конце курса. Для разработки нужен Node.js 22.12+.
+В такой игре рисуем в уже созданных узлах сцены. Адаптер помогает обновлять эффекты и останавливать их при закрытии сцены. Его подключение разберём в уроке про SDK.

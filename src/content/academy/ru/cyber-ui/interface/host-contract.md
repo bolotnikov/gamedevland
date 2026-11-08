@@ -6,9 +6,9 @@
   "lesson": "interface",
   "draft": false,
   "order": 2,
-  "title": "Кто управляет интерфейсом",
-  "concept": "Границы ответственности",
-  "description": "Разделим оформление, данные и взаимодействие.",
+  "title": "Как использовать элементы интерфейса",
+  "concept": "Элементы PixiJS",
+  "description": "Добавим оформление к объектам PixiJS.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · README",
@@ -24,15 +24,13 @@
 }
 ---
 
-Тулкит получает готовую поверхность и параметры. Он не выбирает размер экрана, не загружает шрифты и не вызывает игровые команды. Поэтому одну панель можно использовать в меню, магазине или боевом HUD.
+Библиотека рисует в обычном `Graphics`. Создаём объект, добавляем его на сцену и вызываем нужный метод — например, `TerminalGlass.draw()` для панели. Текст добавляем отдельным `Text`, нажатия обрабатываем средствами PixiJS или движка.
 
-<figure class="sdk-boundary">
-  <div class="sdk-boundary__modules">
-    <section class="sdk-boundary__module-group is-cyan"><h4>Приложение решает</h4><ul><li><code>layout</code><span>Размеры и положение</span></li><li><code>content</code><span>Текст и данные</span></li><li><code>input</code><span>Нажатие и действие</span></li><li><code>time</code><span>Пауза и движение</span></li></ul></section>
-    <section class="sdk-boundary__module-group is-green"><h4>Тулкит рисует</h4><ul><li><code>surface</code><span>Фон и грани</span></li><li><code>icon</code><span>Векторный знак</span></li><li><code>state</code><span>Выделение элемента</span></li><li><code>effect</code><span>Кадр анимации</span></li></ul></section>
-  </div><figcaption>Объекты сцены остаются у приложения. Эффект освобождает только созданные им ресурсы.</figcaption>
-</figure>
+<figure class="sdk-boundary"><div class="sdk-boundary__modules">
+<section class="sdk-boundary__module-group is-cyan"><h4>Библиотека</h4><ul><li><code>Graphics</code><span>Рисует панель и иконки</span></li><li><code>update()</code><span>Обновляет эффект</span></li></ul></section>
+<section class="sdk-boundary__module-group is-green"><h4>Код игры</h4><ul><li><code>Text</code><span>Добавляет подпись</span></li><li><code>pointertap</code><span>Обрабатывает нажатие</span></li></ul></section>
+</div></figure>
 
-Координаты — локальные логические единицы [контейнера](https://pixijs.com/8.x/guides/components/scene-objects/container). Если родитель масштабирован вдвое, панель и её иконки масштабируются вместе. Передавать физические пиксели canvas вместо локальных размеров не нужно.
+Координаты задаются относительно [контейнера](https://pixijs.com/8.x/guides/components/scene-objects/container). Если увеличить контейнер вдвое, вместе с ним увеличатся панель, текст и иконки.
 
-Статичную поверхность перерисовываем при изменении размера, палитры или состояния. Постоянный вызов из ticker нужен анимации, а не неподвижной рамке.
+Неподвижную панель достаточно перерисовать при смене размера или цвета. Анимацию обновляем каждый кадр.

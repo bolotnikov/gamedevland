@@ -9,6 +9,8 @@ npm ci
 npm run dev
 npm run typecheck
 npm run lint
+npm run check:cyber-ui
+npm run check:language
 npm run build
 npm run check:locales
 npm run preview
@@ -25,7 +27,7 @@ The custom domain is stored in `public/CNAME` so it is copied into `dist/` durin
 
 - `/` — course catalog: GameDevLand SDK, Cyber UI Toolkit, Advanced JavaScript.
 - `/academy/sdk/` — SDK curriculum with four sections and 45 lessons.
-- `/academy/cyber-ui/` — the single-section toolkit course with 21 lessons and 15 Canvas examples.
+- `/academy/cyber-ui/` — the single-section toolkit course with 16 lessons and 12 Canvas examples.
 - `/academy/javascript/` — Advanced JavaScript curriculum.
 - `/academy/javascript/engine/` — section 01 with 19 lessons.
 
@@ -40,7 +42,8 @@ Progress and answer drafts are browser-local; there is no account or server-side
 
 ## Languages
 
-English is the default at `/`. Russian pages use `/ru/`. The header language switch opens
+English content uses unprefixed URLs; Russian uses `/ru/`. At `/`, saved language takes
+priority over the browser language, with EN fallback; the choice is remembered. The header language switch opens
 an equivalent page. Translation sources live in `src/content/<collection>/en/` and `ru/`;
 shared UI messages live in `src/i18n/messages/`. See `docs/I18N.md` for the architecture,
 adding a locale, and validation. `src/pages/[...path].astro` generates all static routes;

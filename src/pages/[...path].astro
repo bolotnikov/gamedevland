@@ -21,8 +21,10 @@ import { sdkCourse } from '../data/sdkCourse';
 import { locales, type LocaleCode } from '../i18n/locales';
 import { Locale } from '../i18n/Locale';
 import { Content } from '../i18n/Content';
+import { CyberUiRoutes } from '../data/CyberUiRoutes';
 
 type Route =
+ | { kind: 'redirect'; destination: string }
  | { kind: 'home' | 'about' | 'services' | 'games' | 'course' | 'lesson' }
  | { kind: 'game'; entry: CollectionEntry<'games'> }
  | { kind: 'article'; entry: CollectionEntry<'articles'> }
@@ -80,6 +82,7 @@ export async function getStaticPaths() {
    if(steps.some((step,index)=>step.data.order!==index+1))throw new Error(`Invalid step ordering for ${language.code}/${key}`);
    for(const [index,entry] of steps.entries()) add(`/academy/${entry.data.translationKey}`,{kind:'step',entry,steps,index});
   }
+  for (const [from, to] of Object.entries(CyberUiRoutes.redirects)) add(`/academy/cyber-ui/interface/${from}`, { kind: 'redirect', destination: i18n.path(`/academy/cyber-ui/interface/${to}/`) });
   if (groups.has('cyber-ui/interface')) {
    add('/academy/cyber-ui', { kind: 'cyber-ui-course' });
   }
@@ -97,6 +100,7 @@ export async function getStaticPaths() {
  return paths;
 }
 const { route } = Astro.props;
+if (route.kind === 'redirect') return Astro.redirect(route.destination);
 if ((route.kind === 'step' && route.entry.data.draft)
  || (route.kind === 'sdk-section' && sdkCourse.sections.some((section) => section.slug === route.section && !section.published))) {
  Astro.locals.availableLocales = ['ru'];

@@ -6,9 +6,9 @@
   "lesson": "interface",
   "draft": false,
   "order": 4,
-  "title": "Buttons and states",
+  "title": "Buttons",
   "concept": "ButtonSurface",
-  "description": "Connect every skin variant to input and a label.",
+  "description": "Set a button's style, label, price, and availability.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · ButtonSurface",
@@ -19,49 +19,27 @@
 }
 ---
 
-`ButtonSurface.draw()` paints from local `(0, 0)`. Required fields are `width`, `height`, `variant`, `enabled`, and `selected`. `explicitAccent` enables the module rail; `ready` overlays an available-reward highlight on the chosen skin.
+`ButtonSurface` draws the button's background. We add the label, icon, and tap handler separately. The Button type control shows every style.
 
-```ts
-import { Graphics, Rectangle, Text } from 'pixi.js';
-import { ButtonSurface, CyberPreset } from '@gamedevland/cyber-ui';
+The `enabled` flag changes the drawing but does not block input on its own. In the example, it also changes `eventMode`, so an unavailable button does not respond to taps.
 
-const button = app.stage.addChild(new Graphics());
-const t = CyberPreset.palette;
-const label = button.addChild(new Text({ text: 'CLAIM', style: { fill: t.text, fontSize: 18 } }));
-label.anchor.set(0.5);
-label.position.set(110, 28);
-label.eventMode = 'none';
-let enabled = true;
-function redraw() {
-  ButtonSurface.draw(button.clear(), {
-    width: 220, height: 56, variant: 'module', enabled, selected: false,
-    explicitAccent: true, ready: true,
-  }, t);
-  button.eventMode = enabled ? 'static' : 'none';
-  button.hitArea = new Rectangle(0, 0, 220, 56);
-  button.alpha = enabled ? 1 : 0.42;
-}
-button.on('pointertap', () => { enabled = false; redraw(); });
-redraw();
-```
+For a purchase button, enable Show price. `ButtonPrice.layout()` arranges the label, currency icon, and amount in one row. If the row does not fit, it scales the whole row down. After changing the language or amount, measure the text again and recalculate the positions.
 
 <details><summary>All ButtonSurface variants</summary>
 
-| Variant | Skin |
+| Variant | Appearance |
 | --- | --- |
-| `primary` | Solid accent when enabled; glass otherwise |
+| `primary` | Solid accent when `enabled`; glass otherwise |
 | `module` | Glass with a side rail when enabled, selected, or explicitAccent |
-| `danger` | Glass using danger color |
-| `icon` | Rounded inset; selected changes fill and edge |
-| `nav` | Subtle active fill and top rail only |
-| `segment` | Selected segment fill only |
+| `danger` | Glass using the danger color |
+| `icon` | Rounded surface; selected changes the fill and border |
+| `nav` | Subtle active fill and a top rail |
+| `segment` | Fill on the selected segment only |
 | `tab` | Separate border, fill, and active underline |
-| `switch` | Glass background; add the knob with toggle |
-| `utility` | Bottom rule |
+| `switch` | Glass background; add its thumb with toggle |
+| `utility` | A bottom line |
 | `line` | No background |
 
 </details>
 
-`enabled` changes appearance but does not disable [PixiJS input](https://pixijs.com/8.x/guides/components/events). The application updates `eventMode`, opacity, and label styling. SDK projects use `node.input`.
-
-For `switch`, append `ButtonSurface.toggle(button, width, height, selected, palette)` after `draw()`. Hover, pressed state, keyboard focus, and hit areas belong to the application. The next lesson covers shared `nav` and `segment` backgrounds.
+`selected` highlights a selected button; `ready` marks an available reward. For `switch`, draw the thumb after the background with `ButtonSurface.toggle()`. `explicitAccent` keeps the module rail visible even when the button is unavailable.

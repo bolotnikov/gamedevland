@@ -1,5 +1,6 @@
-import { CyberDrawingExample } from './CyberDrawingExample';
-import { CyberPriceExample } from './CyberPriceExample';
+import { CyberFaultExample } from './CyberFaultExample';
+import { CyberSignalExample } from './CyberSignalExample';
+import { CyberBracketsExample } from './CyberBracketsExample';
 import { CyberSelectorExample } from './CyberSelectorExample';
 import { CyberBinaryExample } from './CyberBinaryExample';
 import { CyberButtonExample } from './CyberButtonExample';
@@ -14,14 +15,12 @@ export class CyberExampleFactory {
     switch (lesson) {
       case 'selectors':
         return new CyberSelectorExample();
-      case 'button-price':
-        return new CyberPriceExample();
-      case 'surface-details':
       case 'signal-brackets':
-      case 'terminal-sweep':
+        return new CyberBracketsExample();
       case 'fault-glyph':
+        return new CyberFaultExample();
       case 'signal-lost':
-        return new CyberDrawingExample(lesson);
+        return new CyberSignalExample();
       case 'panels':
         return new CyberSurfaceExample();
       case 'buttons':

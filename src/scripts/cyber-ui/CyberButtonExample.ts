@@ -1,4 +1,4 @@
-import { ButtonSurface, TerminalUi } from '@gamedevland/cyber-ui';
+import { ButtonPrice, ButtonSurface, TerminalUi } from '@gamedevland/cyber-ui';
 import type { ButtonVariant } from '@gamedevland/cyber-ui';
 import { Container, Graphics, Rectangle } from 'pixi.js';
 import { CyberDrawing } from './CyberDrawing';
@@ -13,6 +13,8 @@ export class CyberButtonExample extends CyberExample {
   private taps = 0;
   private ready = false;
   private explicitAccent = false;
+  private priced = false;
+  private amount = '250';
   constructor() {
     super();
     this.settings.width = 216;
@@ -47,11 +49,19 @@ export class CyberButtonExample extends CyberExample {
           this.variant = value;
       }
     }
+    if (id === 'priced') this.priced = value === 'true';
+    if (id === 'amount') this.amount = value;
     if (id === 'ready') this.ready = value === 'true';
     if (id === 'explicitAccent') this.explicitAccent = value === 'true';
     if (id === 'enabled') this.enabled = value === 'true';
     if (id === 'selected') this.selected = value === 'true';
     this.draw();
+  }
+  override controlValue(id: string): string | undefined {
+    return id === 'enabled' ? String(this.enabled) : undefined;
+  }
+  private get showPrice(): boolean {
+    return this.priced && ['primary', 'module', 'danger'].includes(this.variant);
   }
   private draw(): void {
     CyberDrawing.clear(this.root);
@@ -78,15 +88,27 @@ export class CyberButtonExample extends CyberExample {
     );
     if (this.variant === 'switch') ButtonSurface.toggle(surface, w, h, this.selected, t);
     const color = this.variant === 'primary' && this.enabled ? t.background : t.accent;
-    TerminalUi.icon(
-      surface,
-      this.variant === 'icon' ? 'gear' : 'play',
-      this.variant === 'icon' ? w / 2 : Math.min(w * 0.14, 28),
-      h / 2,
-      this.variant === 'icon' ? w * 0.5 : Math.min(20, w * 0.25),
-      color,
-    );
-    if (w > 80 && this.variant !== 'icon') {
+    if (!this.showPrice)
+      TerminalUi.icon(
+        surface,
+        this.variant === 'icon' ? 'gear' : 'play',
+        this.variant === 'icon' ? w / 2 : Math.min(w * 0.14, 28),
+        h / 2,
+        this.variant === 'icon' ? w * 0.5 : Math.min(20, w * 0.25),
+        color,
+      );
+    if (this.showPrice) {
+      const label = CyberDrawing.label(button, s.text, 0, h / 2, 18, color);
+      const amount = CyberDrawing.label(button, this.amount, 0, h / 2, 18, color);
+      const row = ButtonPrice.layout(w, label.width, amount.width, 18, 8, 12);
+      label.anchor.set(0.5);
+      amount.anchor.set(0.5);
+      label.scale.set(row.scale);
+      amount.scale.set(row.scale);
+      label.position.x = row.labelX;
+      amount.position.x = row.amountX;
+      TerminalUi.icon(surface, 'credit', row.iconX, h / 2, row.iconSize, color);
+    } else if (w > 80 && this.variant !== 'icon') {
       const label = CyberDrawing.label(
         button,
         s.text,
@@ -108,6 +130,8 @@ export class CyberButtonExample extends CyberExample {
     button.hitArea = new Rectangle(0, 0, w, h);
     button.on('pointertap', () => {
       this.taps++;
+      this.enabled = false;
+      this.draw();
       this.onChange();
     });
   }

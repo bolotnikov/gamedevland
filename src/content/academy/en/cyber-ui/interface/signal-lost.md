@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 16,
-  "title": "Signal lost overlay",
+  "order": 13,
+  "title": "Signal loss animation",
   "concept": "SignalLost",
-  "description": "Combine an effect frame with a separate label.",
+  "description": "Show a dimmed screen, strips, and an error message.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · SignalLost",
@@ -24,23 +24,8 @@
 }
 ---
 
-`SignalLost.draw()` adds dimming, tears, and a fault symbol. The application supplies progress in `[0, 1]`, retaining control over timing and activation.
+`SignalLost.draw()` draws a signal loss screen: it dims the background and adds strips and an error symbol. The example repeats the animation with a short pause.
 
-```ts
-import { Graphics, Text } from 'pixi.js';
-import { CyberPreset, SignalLost } from '@gamedevland/cyber-ui';
+For one playback, increase `progress` from `0` to `1`. The drawing disappears completely at the end. Create the label as a separate `Text` object; the method returns its position `x/y`, opacity `fade`, and displacement `shift`.
 
-const overlay = app.stage.addChild(new Graphics());
-const label = app.stage.addChild(new Text({ text: 'SIGNAL LOST', style: { fontSize: 24 } }));
-label.anchor.set(0.5);
-const t = CyberPreset.palette;
-const sample = SignalLost.draw(overlay.clear(), app.screen.width, app.screen.height, 0.5, {
-  background: t.background, danger: t.danger, accent: t.accent, highlight: t.signal,
-});
-label.position.set(sample.x + sample.shift * 4, sample.y + 48);
-label.alpha = sample.fade;
-```
-
-The result contains label center `x/y`, label alpha `fade`, and displacement `shift`. At progress `1`, the effect is fully faded. Restart from `0` for another run.
-
-This helper has no reduced-motion flag. Use a static warning instead, such as `FaultGlyph` with zero distortion and separate text. The example slider exposes frames without automatic flashes.
+When motion is disabled, show a static error symbol and text instead.

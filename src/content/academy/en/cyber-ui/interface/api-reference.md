@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 21,
-  "title": "Public API reference",
+  "order": 16,
+  "title": "API reference",
   "concept": "Core · SDK adapter",
-  "description": "Every class, method, and type linked to an example.",
+  "description": "Find a method and an example of its use.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · core exports",
@@ -24,34 +24,34 @@
 }
 ---
 
-All public core and adapter classes are listed below. Each link opens a short lesson with an example. Import from `@gamedevland/cyber-ui`; import `ToolkitComponent`, `PanelReveal`, and `UiViewport` from `@gamedevland/cyber-ui-sdk`.
+This reference lists the library's classes and types. Follow a link to its example. The core package is `@gamedevland/cyber-ui`; `ToolkitComponent`, `PanelReveal`, and `UiViewport` come from `@gamedevland/cyber-ui-sdk`.
 
 <details><summary>Classes and methods</summary>
 
-| API | Methods and fields | Purpose |
+| API | Methods and fields | Use |
 | --- | --- | --- |
 | [`TerminalUi`](/academy/cyber-ui/interface/panels/) | `plate, icon, traces, etch, clippedRect` | Plates, icons, decoration, and paths |
 | [`TerminalGlass`](/academy/cyber-ui/interface/panels/) | `draw, focus` | Glass and accents |
-| [`PanelSurface`](/academy/cyber-ui/interface/panels/) | `draw` | Information panel |
-| [`ButtonSurface`](/academy/cyber-ui/interface/buttons/) | `draw, segmentTrack, toggle` | 10 button variants and group backgrounds |
-| [`ButtonPrice`](/academy/cyber-ui/interface/button-price/) | `layout` | Measured label and price row |
-| [`CyberPreset`](/academy/cyber-ui/interface/icons-theme/) | `palette, triangle, trianglePalette, textEcho, glitch` | Frozen defaults |
-| [`BinaryField`](/academy/cyber-ui/interface/binary-field/) | `draw` | Pattern from seed and integer frame |
+| [`PanelSurface`](/academy/cyber-ui/interface/panels/) | `draw` | Information panels |
+| [`ButtonSurface`](/academy/cyber-ui/interface/buttons/) | `draw, segmentTrack, toggle` | 10 button variants and shared tracks |
+| [`ButtonPrice`](/academy/cyber-ui/interface/buttons/) | `layout` | Button label and price |
+| [`CyberPreset`](/academy/cyber-ui/interface/icons-theme/) | `palette, triangle, trianglePalette, textEcho, glitch` | Default colors and settings |
+| [`BinaryField`](/academy/cyber-ui/interface/binary-field/) | `draw` | Pattern from a seed and an integer frame |
 | [`TriangleLoader`](/academy/cyber-ui/interface/triangle-loader/) | `update, draw, outerRadius` | Outlines and particles |
 | [`SignalBrackets`](/academy/cyber-ui/interface/signal-brackets/) | `draw` | Brackets around an emblem |
-| [`TerminalSweep`](/academy/cyber-ui/interface/terminal-sweep/) | `draw` | Scan down/right |
-| [`TextEcho`](/academy/cyber-ui/interface/text-echo/) | `update, draw, offset` | Offset for main text and copy |
-| [`SurfaceGlitch`](/academy/cyber-ui/interface/glitch-lifecycle/) | `show, update, hide` | Slices of a live Graphics |
+| [`TerminalSweep`](/academy/cyber-ui/interface/panels/) | `draw` | Scanning down/right |
+| [`TextEcho`](/academy/cyber-ui/interface/text-echo/) | `update, draw, offset` | Main text and echo displacement |
+| [`SurfaceGlitch`](/academy/cyber-ui/interface/glitch-lifecycle/) | `show, update, hide` | Strips over a live Graphics object |
 | [`FaultGlyph`](/academy/cyber-ui/interface/fault-glyph/) | `draw` | Warning symbol |
-| [`SignalLost`](/academy/cyber-ui/interface/signal-lost/) | `draw` | Fault overlay and label position |
+| [`SignalLost`](/academy/cyber-ui/interface/signal-lost/) | `draw` | Error screen and label position |
 | [`PanelTransition`](/academy/cyber-ui/interface/panel-reveal/) | `origin` | Opening and closing geometry |
-| [`AnimatedEffect`](/academy/cyber-ui/interface/custom-effects/) | `elapsedSeconds, update, setActive, setReducedMotion, dispose` | Clock and lifecycle base |
+| [`AnimatedEffect`](/academy/cyber-ui/interface/api-reference/) | `elapsedSeconds, update, setActive, setReducedMotion, dispose` | Effect time and pause |
 | [`ToolkitComponent`](/academy/cyber-ui/interface/sdk-components/) | `ownEffect, setUiReducedMotion, uiViewport` | SDK adapter component |
 | [`PanelReveal`](/academy/cyber-ui/interface/panel-reveal/) | `runAction` | SDK adapter action |
 
 </details>
 
-`TriangleLoader`, `TextEcho`, and `SurfaceGlitch` also expose `elapsedSeconds`, `setActive()`, `setReducedMotion()`, and `dispose()`. They inherit the shared lifecycle from `AnimatedEffect`.
+`TriangleLoader`, `TextEcho`, and `SurfaceGlitch` also provide `elapsedSeconds`, `setActive()`, `setReducedMotion()`, and `dispose()`. These methods come from `AnimatedEffect`.
 
 <details><summary>Types and fields</summary>
 
@@ -72,16 +72,43 @@ All public core and adapter classes are listed below. Each link opens a short le
 | [`BracketOptions`](/academy/cyber-ui/interface/signal-brackets/) | `cycleMs, travel, scale, jitter, distanceRatio, maxDistance, halfHeight, bevel, strokeWidth, alpha, peakAlpha, markerSize, markerAlpha` |
 | [`SignalPalette`](/academy/cyber-ui/interface/signal-lost/) | `background, danger, accent, highlight` |
 | [`PanelTransitionInput`](/academy/cyber-ui/interface/panel-reveal/) | `offset, axis?, pivotX?, pivotY?, closing?` |
-| [`UiEffect`](/academy/cyber-ui/interface/custom-effects/) | `update, setActive, setReducedMotion, dispose` |
+| [`UiEffect`](/academy/cyber-ui/interface/api-reference/) | `update, setActive, setReducedMotion, dispose` |
 | [`UiViewport`](/academy/cyber-ui/interface/sdk-components/) | `width, height, cssWidth, cssHeight, scale` |
 
 </details>
 
-## Shared rules
+## General rules
 
-- Position and dimensions use local logical PixiJS units. Surfaces use the top-left corner; icons use the center.
+- Coordinates and dimensions use local PixiJS logical units. Surfaces start at the top left; icons use their center.
 - `update()` takes seconds; `*Ms` fields and `SignalBrackets` time use milliseconds. `TerminalSweep` progress is `[0, 1)`; `SignalLost` progress is `[0, 1]`.
-- Drawing appends geometry. Clear a layer before rebuilding it; `TriangleLoader.draw()` clears its two dedicated surfaces itself.
-- Colors are numeric RGB. Decode external JSON through the application before calling typed APIs.
-- The application owns text, layout, input, fonts, audio, pause, and reduced motion. Dispose effects before destroying their borrowed objects.
+- Drawing appends geometry. Clear the layer before rebuilding it; `TriangleLoader.draw()` clears its two dedicated surfaces itself.
+- Colors are RGB numbers, such as `0x68e0cb`.
+- Before removing scene objects, call `dispose()` on their effects.
 
+<details><summary>Creating a custom effect</summary>
+
+`AnimatedEffect` helps build a new animation: it tracks time and pauses updates.
+
+```ts
+import { AnimatedEffect } from '@gamedevland/cyber-ui';
+
+export class PulsePhase extends AnimatedEffect {
+  get alpha(): number {
+    this.assertLive();
+    return this.reducedMotion ? 1 : 0.8 + 0.2 * Math.sin(this.elapsedSeconds * 2);
+  }
+}
+
+const effect = new PulsePhase();
+effect.update(0.1);
+console.log(effect.alpha);
+effect.setActive(false);
+effect.update(1);
+console.log(effect.elapsedSeconds); // 0.1
+// Before releasing the screen:
+effect.dispose();
+```
+
+Custom behavior can override `onFrame()`, `onActivityChanged()`, `onMotionChanged()`, and `onDispose()`.
+
+</details>

@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 17,
-  "title": "A GameDevLand SDK component",
+  "order": 14,
+  "title": "Connecting to GameDevLand SDK",
   "concept": "ToolkitComponent",
-  "description": "Draw a panel in a node from layout JSON.",
+  "description": "Add the loader to an engine component.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · SDK guide",
@@ -24,75 +24,60 @@
 }
 ---
 
-The `@gamedevland/cyber-ui-sdk` adapter is only needed for GameDevLand SDK. `ToolkitComponent` connects core effects to node updates, pause, and removal. A standalone PixiJS project does not need it.
+This lesson is for games using GameDevLand SDK. The preceding examples are enough for a regular PixiJS project.
 
-The component draws in `this.node.view`. Validated settings hold the dimensions; the parent layout sets the position. A complete typed [CyberPanel](https://github.com/gamedevland/cyber-ui-toolkit/blob/main/examples/sdk/src/CyberPanel.ts) is included in the package examples.
-
-We register the class in `GlobalDiDefinition.registerComponents()`:
-
-Create the `CyberPanel.ts` component:
-
-<details><summary>Example code</summary>
+Create a `LoadingEmblem` component. It draws the triangle in two child nodes. `ownEffect()` lets the engine update the effect with the component, pause it, and dispose of it when the scene closes.
 
 ```ts
-import { CyberPreset, TerminalGlass } from '@gamedevland/cyber-ui';
+import { CyberPreset, TriangleLoader } from '@gamedevland/cyber-ui';
 import { ToolkitComponent } from '@gamedevland/cyber-ui-sdk';
+import type { Container } from '@gamedevland/engine/layouts';
 import { SchemaDecoder as S } from '@gamedevland/engine/validation';
-
-import type { Graphics } from '@gamedevland/engine/layouts';
 import type { InferDecoded } from '@gamedevland/engine/validation';
 
-const configDecoder = S.object({
-  width: S.number({ min: 48 }),
-  height: S.number({ min: 28 }),
-  cut: S.number({ min: 0 }),
-});
+const configDecoder = S.object({ radius: S.number({ min: 1 }) });
 
-/** Attach to a Graphics node; its parent owns positioning and application input. */
-export class CyberPanel extends ToolkitComponent<InferDecoded<typeof configDecoder>, Graphics> {
+export class LoadingEmblem extends ToolkitComponent<InferDecoded<typeof configDecoder>, Container> {
   protected readonly configDecoder = configDecoder;
+  private readonly loader = new TriangleLoader(CyberPreset.triangle);
 
   protected override onReady(): void {
-    const { width, height, cut } = this.config;
-    const palette = CyberPreset.palette;
-    TerminalGlass.draw(
-      this.node.view.clear(),
-      0,
-      0,
-      width,
-      height,
-      cut,
-      palette.panel,
-      palette.panelEdge,
-      palette.accent,
-      palette.text,
+    this.ownEffect(this.loader);
+  }
+  protected override onUpdate(deltaSeconds: number): void {
+    super.onUpdate(deltaSeconds);
+    this.loader.draw(
+      this.node.getChildGraphics('emblem').view,
+      this.node.getChildGraphics('dust').view,
+      { x: 0, y: 0, radius: this.config.radius, scale: 1 },
+      CyberPreset.trianglePalette,
     );
+  }
+  setMotionPreference(reduced: boolean): void {
+    this.setUiReducedMotion(reduced);
   }
 }
 ```
 
-</details>
-
-Register it in `GlobalDiDefinition.registerComponents()`:
+Register the component in `registerComponents()`:
 
 ```ts
-group.add('CyberPanel', CyberPanel);
+group.add('LoadingEmblem', LoadingEmblem);
 ```
 
-Then attach it to a `Graphics` node:
+Attach it to a container in the layout:
 
 ```json
 {
-  "type": "Graphics",
-  "components": {
-    "panel": {
-      "type": "CyberPanel",
-      "data": { "width": 320, "height": 180, "cut": 12 }
-    }
+  "type": "Container",
+  "components": { "loading": { "type": "LoadingEmblem", "data": { "radius": 64 } } },
+  "children": {
+    "emblem": { "type": "Graphics" },
+    "dust": { "type": "Graphics" }
   }
 }
 ```
 
-The `Graphics` element factory must also be registered in the project. Text uses separate nodes, input goes through `node.input`, and player intent goes through events and the FSM.
+Pass the motion preference through `setMotionPreference()`. In `onUpdate()`, call `super.onUpdate(deltaSeconds)` first: it updates the effect, then we draw the new frame.
 
-The next lesson connects effects and pause.
+`uiViewport` returns the game screen dimensions (`width`, `height`), browser dimensions (`cssWidth`, `cssHeight`), and scale (`scale`).

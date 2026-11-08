@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 16,
-  "title": "Экран потери сигнала",
+  "order": 13,
+  "title": "Анимация потери сигнала",
   "concept": "SignalLost",
-  "description": "Соединим кадр эффекта с отдельной подписью.",
+  "description": "Покажем затемнение, полосы и сообщение об ошибке.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · SignalLost",
@@ -24,23 +24,8 @@
 }
 ---
 
-`SignalLost.draw()` рисует затемнение, полосы и знак ошибки. Приложение передаёт прогресс `[0, 1]`, поэтому длительность и запуск остаются под его управлением.
+`SignalLost.draw()` рисует экран потери сигнала: затемняет фон, добавляет полосы и знак ошибки. В примере анимация повторяется с небольшой паузой.
 
-```ts
-import { Graphics, Text } from 'pixi.js';
-import { CyberPreset, SignalLost } from '@gamedevland/cyber-ui';
+Для одного проигрывания увеличиваем `progress` от `0` до `1`. В конце рисунок полностью исчезает. Надпись создаём отдельным `Text`; метод возвращает её положение `x/y`, прозрачность `fade` и смещение `shift`.
 
-const overlay = app.stage.addChild(new Graphics());
-const label = app.stage.addChild(new Text({ text: 'SIGNAL LOST', style: { fontSize: 24 } }));
-label.anchor.set(0.5);
-const t = CyberPreset.palette;
-const sample = SignalLost.draw(overlay.clear(), app.screen.width, app.screen.height, 0.5, {
-  background: t.background, danger: t.danger, accent: t.accent, highlight: t.signal,
-});
-label.position.set(sample.x + sample.shift * 4, sample.y + 48);
-label.alpha = sample.fade;
-```
-
-Результат содержит центр подписи `x/y`, её прозрачность `fade` и величину смещения `shift`. При прогрессе `1` эффект полностью исчезает. Повторный запуск начинается с `0`.
-
-У helper нет флага reduced motion. В таком режиме используем статичное предупреждение, например `FaultGlyph` с нулевым искажением, и отдельный текст. Ползунок в примере позволяет изучить кадры без автоматических вспышек.
+Если движение отключено, вместо анимации показываем неподвижный знак ошибки и текст.

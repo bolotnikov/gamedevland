@@ -1,9 +1,6 @@
 export type CyberLesson =
   | 'selectors'
-  | 'button-price'
-  | 'surface-details'
   | 'signal-brackets'
-  | 'terminal-sweep'
   | 'fault-glyph'
   | 'signal-lost'
   | 'panels'

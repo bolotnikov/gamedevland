@@ -6,14 +6,14 @@
   "lesson": "interface",
   "draft": false,
   "order": 2,
-  "title": "Who controls the interface",
-  "concept": "Responsibilities",
-  "description": "Separate appearance, data, and interaction.",
+  "title": "Using UI elements",
+  "concept": "PixiJS elements",
+  "description": "Add visual styles to PixiJS objects.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · README",
       "url": "https://github.com/gamedevland/cyber-ui-toolkit#readme",
-      "note": "Local dimensions and resource ownership contracts."
+      "note": "Local dimensions and resource ownership."
     },
     {
       "title": "PixiJS · Container",
@@ -24,15 +24,13 @@
 }
 ---
 
-The toolkit receives a surface and its parameters. It does not choose the screen size, load fonts, or call game commands. The same panel can therefore appear in a menu, shop, or combat HUD.
+The library draws in a regular `Graphics` object. We create the object, add it to the scene, and call a method such as `TerminalGlass.draw()` for a panel. Text uses a separate `Text` object; PixiJS or the game engine handles input.
 
-<figure class="sdk-boundary">
-  <div class="sdk-boundary__modules">
-    <section class="sdk-boundary__module-group is-cyan"><h4>The application decides</h4><ul><li><code>layout</code><span>Size and position</span></li><li><code>content</code><span>Text and data</span></li><li><code>input</code><span>Press and action</span></li><li><code>time</code><span>Pause and motion</span></li></ul></section>
-    <section class="sdk-boundary__module-group is-green"><h4>The toolkit draws</h4><ul><li><code>surface</code><span>Background and edges</span></li><li><code>icon</code><span>Vector symbol</span></li><li><code>state</code><span>Item selection</span></li><li><code>effect</code><span>Animation frame</span></li></ul></section>
-  </div><figcaption>Scene objects remain owned by the application. An effect releases only the resources it creates.</figcaption>
-</figure>
+<figure class="sdk-boundary"><div class="sdk-boundary__modules">
+<section class="sdk-boundary__module-group is-cyan"><h4>Library</h4><ul><li><code>Graphics</code><span>Draws panels and icons</span></li><li><code>update()</code><span>Updates an effect</span></li></ul></section>
+<section class="sdk-boundary__module-group is-green"><h4>Game code</h4><ul><li><code>Text</code><span>Adds a label</span></li><li><code>pointertap</code><span>Handles a tap</span></li></ul></section>
+</div></figure>
 
-Coordinates use the [container’s](https://pixijs.com/8.x/guides/components/scene-objects/container) local logical units. If the parent is scaled by two, the panel and its icons scale together. There is no need to pass physical canvas pixels instead of local dimensions.
+Coordinates are relative to the [container](https://pixijs.com/8.x/guides/components/scene-objects/container). Scaling it by two scales the panel, text, and icons together.
 
-We redraw a static surface when its size, palette, or state changes. Animation needs continuous ticker updates; a stationary frame does not.
+A static panel needs redrawing only when its size or color changes. Animation updates every frame.

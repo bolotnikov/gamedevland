@@ -8,7 +8,7 @@
   "order": 3,
   "title": "Панели и плашки",
   "concept": "PanelSurface · TerminalGlass · TerminalUi",
-  "description": "Выберем поверхность для информации, окна и счётчика.",
+  "description": "Выберем подложку, добавим линии и сканирующую полосу.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · PanelSurface",
@@ -29,28 +29,25 @@
 }
 ---
 
-`PanelSurface.draw()` рисует спокойную информационную панель с боковой полоской. `TerminalGlass.draw()` добавляет срезанные углы, световые грани и полупрозрачные слои. `TerminalUi.plate()` подходит для простой плашки или счётчика.
+Для окна подойдёт `TerminalGlass`, для информационного блока — `PanelSurface`, для счётчика — простая `plate`. Поверх панели можно добавить дорожки, штрихи и выделение углов. В примере эти варианты выбираются в поле «Оформление».
 
-Все три дописывают геометрию в [Graphics](https://pixijs.com/8.x/guides/components/scene-objects/graphics). Очищаем рисунок один раз перед перестроением.
+Сканирующая полоса движется сверху вниз или слева направо. Меняем направление и длительность прохода, чтобы подобрать анимацию для панели.
 
-```ts
-import { Graphics } from 'pixi.js';
-import { CyberPreset, PanelSurface, TerminalGlass, TerminalUi } from '@gamedevland/cyber-ui';
+Перед перерисовкой вызываем `clear()` один раз. Затем добавляем подложку и все её украшения: очистка между ними удалит уже нарисованные линии.
 
-const g = app.stage.addChild(new Graphics());
-const t = CyberPreset.palette;
-g.clear();
-PanelSurface.draw(g, { x: 24, y: 24, w: 200, h: 120 }, {
-  surface: t.panel, edge: t.panelEdge, accent: t.accent,
-});
-TerminalGlass.draw(g, 240, 24, 200, 120, 12,
-  t.panel, t.panelEdge, t.accent, t.text);
-TerminalUi.plate(g, 24, 168, 160, 36, 7, t.inset, t.panelEdge);
-TerminalUi.icon(g, 'credit', 44, 186, 18, t.accent);
-```
+<details><summary>Методы рисования</summary>
 
-У `PanelSurface` размеры передаются как `UiBounds` (`x`, `y`, `w`, `h`), цвета — как `PanelPalette` (`surface`, `edge`, `accent`).
+| Метод | Что добавляет |
+| --- | --- |
+| `PanelSurface.draw()` | Прямоугольную панель с боковой полоской |
+| `TerminalGlass.draw()` | Стекло со срезанными углами и бликами |
+| `TerminalUi.plate()` | Простую плашку |
+| `TerminalUi.traces()` | Дорожки, похожие на линии платы |
+| `TerminalUi.etch()` | Короткие декоративные штрихи |
+| `TerminalGlass.focus()` | Угловые акценты и верхнюю полоску |
+| `TerminalUi.clippedRect()` | Полосу, которая учитывает срезанные края панели |
+| `TerminalSweep.draw()` | Движущуюся сканирующую полосу |
 
-У `TerminalGlass` после координат и размеров идут срез угла, заливка, рамка, акцент и светлый цвет. У `plate` — срез, заливка, рамка и необязательная прозрачность заливки. Срез автоматически ограничивается размером поверхности.
+`PanelSurface` принимает размеры `{ x, y, w, h }` и цвета `{ surface, edge, accent }`. У `TerminalGlass` и `plate` также задаётся размер срезанного угла. Для контура `clippedRect()` отдельно вызываем `fill()` или `stroke()`.
 
-Текст и расположение содержимого задаёт приложение. Для кнопок применяем `ButtonSurface`; портреты и игровые карточки собираем из этих примитивов, они не являются отдельными панелями toolkit.
+</details>

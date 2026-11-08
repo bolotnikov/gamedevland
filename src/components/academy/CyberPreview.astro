@@ -6,7 +6,8 @@ const t = locale.t.bind(locale);
 interface Props { lesson: string }
 const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
 ---
-<section class="cyber-preview" data-cyber-preview={definition.slug} aria-label={t("Результат выполнения примера")}>
+<section class="cyber-preview has-code" data-cyber-preview={definition.slug} aria-label={t("Результат выполнения примера")}>
+  <div class="cyber-preview__workspace"><div class="cyber-preview__demo">
   <div class="cyber-preview__heading"><h2>{t("Результат")}</h2></div>
   <div class="cyber-preview__viewport" data-cyber-viewport><span>{t("Загрузка Canvas…")}</span></div>
   <fieldset class="cyber-preview__controls" data-cyber-controls disabled>
@@ -23,6 +24,12 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
     </div>)}
   </fieldset>
   <p class="cyber-preview__status" data-cyber-status role="status" aria-live={definition.motion ? 'off' : 'polite'}>{t("Подготовка примера…")}</p>
+  </div>
+  <div class="cyber-preview__code">
+    <div class="cyber-preview__code-heading"><h3>{t('Код примера')}</h3><button type="button" data-cyber-copy>{t('Copy')}</button></div>
+    <pre tabindex="0" aria-label={t('Код примера')}><code data-cyber-code>{t('Загрузка кода…')}</code></pre>
+  </div>
+  </div>
   <noscript><p>{t("Для Canvas-примера необходим JavaScript. Код урока доступен ниже.")}</p></noscript>
 </section>
 <script>
@@ -49,4 +56,25 @@ const definition = CyberPreviewCatalog.get(Astro.props.lesson, locale);
 .cyber-preview__controls output { min-width: 22px; font: 12px ui-monospace, monospace; }
 .cyber-preview__status { margin: 12px 0 0; min-height: 2.8em; color: var(--color-muted-foreground); font: 11px/1.6 ui-monospace, monospace; overflow-wrap: anywhere; }
 @media(max-width: 600px) { .cyber-preview { padding: 12px; } }
+.cyber-preview__code { margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 16px; }
+.cyber-preview__code-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.cyber-preview__code-heading h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.cyber-preview__code-heading button { border: 1px solid var(--color-border); border-radius: 6px; padding: 7px 12px; background: var(--color-secondary); color: var(--color-foreground); font: inherit; font-size: 12px; cursor: pointer; }
+.cyber-preview__code pre { margin: 0; max-height: 380px; overflow: auto; padding: 16px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-background); color: var(--color-foreground); font: 12px/1.75 ui-monospace, monospace; tab-size: 2; }
+.cyber-preview__code :global(.cyber-code-token) { color: var(--shiki-light); font-style: var(--shiki-light-font-style, normal); font-weight: var(--shiki-light-font-weight, normal); }
+:global(html[data-theme='dark']) .cyber-preview__code :global(.cyber-code-token) { color: var(--shiki-dark); font-style: var(--shiki-dark-font-style, normal); font-weight: var(--shiki-dark-font-weight, normal); }
+.cyber-preview__code pre:focus-visible, .cyber-preview__code button:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 3px; }
+.cyber-preview:has([data-cyber-code]) .cyber-preview__status { margin: 0; min-height: 0; font-size: 0; }
+.cyber-preview__workspace { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.cyber-preview.has-code .cyber-preview__workspace { grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr); gap: 18px; align-items: start; }
+.cyber-preview__demo { min-width: 0; }
+.cyber-preview.has-code .cyber-preview__code { display: flex; flex-direction: column; min-width: 0; min-height: 0; margin: 0; border-top: 0; border-left: 1px solid var(--color-border); padding: 0 0 0 18px; }
+.cyber-preview.has-code .cyber-preview__heading, .cyber-preview.has-code .cyber-preview__code-heading { min-height: 32px; margin: 0; }
+.cyber-preview.has-code .cyber-preview__heading h2, .cyber-preview.has-code .cyber-preview__code-heading h3 { font-size: 14px; }
+.cyber-preview.has-code .cyber-preview__code pre { height: auto; min-height: 240px; max-height: 560px; margin-top: 14px; }
+@media (max-width: 1100px) {
+  .cyber-preview.has-code .cyber-preview__workspace { grid-template-columns: minmax(0, 1fr); }
+  .cyber-preview.has-code .cyber-preview__code { border-left: 0; border-top: 1px solid var(--color-border); padding: 16px 0 0; }
+  .cyber-preview.has-code .cyber-preview__code pre { height: auto; min-height: 0; max-height: 380px; }
+}
 </style>

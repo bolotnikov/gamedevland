@@ -5,10 +5,10 @@
   "course": "cyber-ui",
   "lesson": "interface",
   "draft": false,
-  "order": 10,
+  "order": 8,
   "title": "Анимированный загрузчик",
   "concept": "TriangleLoader",
-  "description": "Подключим треугольник к существующему ticker.",
+  "description": "Добавим вращающийся треугольник и частицы.",
   "sources": [
     {
       "title": "Cyber UI Toolkit · TriangleLoader",
@@ -24,35 +24,11 @@
 }
 ---
 
-Загрузчик получает два отдельных `Graphics`: контуры треугольника и частицы. Он сам очищает их при отрисовке. Время берём из существующего [ticker приложения](https://pixijs.com/8.x/guides/components/ticker).
+`TriangleLoader` рисует в двух объектах `Graphics`: в одном — треугольник, в другом — частицы. Эти объекты используем только для загрузчика: при каждом рисовании он очищает их.
 
-```ts
-import { Graphics } from 'pixi.js';
-import type { Ticker } from 'pixi.js';
-import { CyberPreset, TriangleLoader } from '@gamedevland/cyber-ui';
+В каждом кадре вызываем `update()` и `draw()`. В `update()` передаём секунды, поэтому время PixiJS `ticker.deltaMS` делим на `1000`.
 
-const emblem = app.stage.addChild(new Graphics());
-const dust = app.stage.addChild(new Graphics());
-const loader = new TriangleLoader(CyberPreset.triangle);
-const tick = (ticker: Ticker) => {
-  loader.update(ticker.deltaMS / 1000);
-  loader.draw(emblem, dust,
-    { x: app.screen.width / 2, y: 120, radius: 64, scale: 1 },
-    CyberPreset.trianglePalette);
-};
-app.ticker.add(tick);
-```
-
-Деление на `1000` переводит миллисекунды в секунды. `ticker.deltaTime` — другой показатель, передавать его как секунды нельзя. Изменение размеров в `draw()` не сбрасывает анимацию.
-
-При удалении экрана сначала убираем callback и освобождаем эффект:
-
-```ts
-app.ticker.remove(tick);
-loader.dispose();
-```
-
-После этого можно уничтожать `emblem` и `dust`. Тулкит не уничтожает переданные ему поверхности.
+Когда загрузчик больше не нужен, убираем обработчик из ticker и вызываем `dispose()`. Сами объекты `Graphics` после этого можно удалить со сцены.
 
 <details><summary>Настройки TriangleOptions</summary>
 
@@ -63,8 +39,8 @@ loader.dispose();
 | `strokeWidth`, `haloWidth` | Толщина линии и ореола |
 | `haloAlpha`, `echoAlpha` | Прозрачность ореола и копии [0, 1] |
 | `particles`, `particleSize`, `particleSpread`, `particleAlpha` | Количество (0–1024), размер, разброс, прозрачность [0, 1] |
-| `seed` | Целое число 0–4294967295 для повторяемой геометрии |
+| `seed` | Целое число 0–4294967295 для повторяемого рисунка |
 
-`TriangleLayout` содержит `x`, `y`, положительные `radius` и `scale`. `TrianglePalette` содержит `accent`, `secondary`, `highlight`, `text`. Настройки получаем копированием `CyberPreset.triangle` и `CyberPreset.trianglePalette`. `outerRadius(radius)` вычисляет свободное место для наружных слоёв до применения масштаба.
+`TriangleLayout` содержит `x`, `y`, положительные `radius` и `scale`. `TrianglePalette` содержит `accent`, `secondary`, `highlight`, `text`. Для своих настроек копируем `CyberPreset.triangle` и `CyberPreset.trianglePalette`. `outerRadius(radius)` вычисляет свободное место для наружных слоёв при масштабе 1.
 
 </details>

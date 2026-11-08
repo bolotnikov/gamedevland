@@ -11,6 +11,7 @@ import { sdkCourse } from '../../../data/sdkCourse';
 import { Locale } from '../../../i18n/Locale';
 import '../../../styles/academy.css';
 import '../../../styles/sdk-course.css';
+import '../../../styles/cyber-ui-course.css';
 const i18n = Locale.forPath(Astro.url.pathname);
 const t = i18n.t.bind(i18n);
 interface Props { step: CollectionEntry<'academy'>; steps: CollectionEntry<'academy'>[]; index: number; definition?: AcademyCourse }
