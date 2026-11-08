@@ -1,0 +1,846 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import type { ServiceGraphic } from '../../data/services';
+interface Props { kind: ServiceGraphic | 'overview'; }
+const { kind } = Astro.props;
+const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games"), 'Poki'];
+---
+<figure class:list={['service-graphic', `graphic--${kind}`]}>
+ {kind === 'overview' && <>
+  <div class="overview-art">
+   <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+   <div class="browser overview-browser"><div class="browser-bar"><i></i><i></i><i></i><span>GameDev.Land / HTML5</span></div><img src="/assets/games/idle-submarine/cover.webp" alt={t("An Idle Submarine gameplay scene with a yellow submarine")} width="960" height="540" fetchpriority="high"/></div>
+   <div class="phone overview-phone"><img src="/assets/games/rings/screens/port/gameplay.webp" alt={t("Portrait version of Rings")} width="540" height="960"/></div>
+   <div class="floating-label label-code"><b>&lt;/&gt;</b><span>{t("Idea → HTML5")}</span></div>
+   <div class="floating-label label-publish"><span class="status-dot"></span><span>{t("Adaptation → release")}</span></div>
+  </div>
+  <figcaption>{t("Original games: Idle Submarine and Rings · in development")}</figcaption>
+ </>}
+ {kind === 'games' && <>
+  <div class="game-art">
+   <span class="art-kicker">{t("One project · different screens")}</span>
+   <div class="browser game-browser"><div class="browser-bar"><i></i><i></i><i></i><span>Idle Submarine</span></div><img src="/assets/games/idle-submarine/cover.webp" alt={t("Landscape version of Idle Submarine")} width="960" height="540" fetchpriority="high"/></div>
+   <div class="phone game-phone"><img src="/assets/games/idle-submarine/screens/port/gameplay.webp" alt={t("Portrait version of the same game")} width="540" height="960"/></div>
+   <span class="game-art-label">{t("Mouse + touch")}</span>
+  </div>
+  <figcaption>{t("Idle Submarine — an original project in development")}</figcaption>
+ </>}
+ {kind === 'playable' && <>
+  <div class="playable-art">
+   <span class="art-kicker">{t("A short gameplay scenario")}</span>
+   <div class="ad-frames">
+    <div class="ad-frame"><span class="frame-step">{t("01 / Engagement")}</span><div class="mini-board">{Array.from({length: 16}, (_, i) => <span class:list={['tile', [1, 4, 5, 6, 10].includes(i) && 'tile--filled']}></span>)}</div><span class="ad-hint">{t("Clear mechanics")}</span></div>
+    <span class="frame-arrow" aria-hidden="true">→</span>
+    <div class="ad-frame ad-frame--active"><span class="frame-step">{t("02 / Interaction")}</span><div class="mini-board">{Array.from({length: 16}, (_, i) => <span class:list={['tile', [4, 5, 6, 7].includes(i) && 'tile--complete', [1, 10].includes(i) && 'tile--filled']}></span>)}</div><span class="ad-hint">{t("Visible result")}</span></div>
+   </div>
+   <div class="ad-end"><span>{t("03 / End card")}</span><b>{t("Open the game")} <span aria-hidden="true">↗</span></b></div>
+  </div>
+  <figcaption>{t("Playable structure: mechanics → interaction → click-through")}</figcaption>
+ </>}
+ {kind === 'port' && <>
+  <div class="port-art">
+   <span class="art-kicker">{t("From an existing project to a web version")}</span>
+   <div class="source-project"><span class="source-mark">C#</span><div><b>{t("Unity / another engine")}</b><span>{t("Logic · scenes · assets")}</span></div></div>
+   <div class="transfer"><span></span><b>{t("Review → port → adapt")}</b><span></span></div>
+   <div class="browser port-browser"><div class="browser-bar"><i></i><i></i><i></i><span>{t("HTML5 / browser")}</span></div><div class="web-output"><span class="web-mark">&lt;/&gt;</span><div><b>{t("Web version of the game")}</b><span>{t("Controls · UI · SDK")}</span></div></div></div>
+   <div class="output-devices"><span>{t("Desktop")}</span><span>{t("Mobile")}</span><span>{t("Площадки")}</span></div>
+  </div>
+  <figcaption>{t("Porting overview · technical approach chosen after review")}</figcaption>
+ </>}
+ {kind === 'flash' && <>
+  <div class="flash-art">
+   <span class="art-kicker">{t("Keep the mechanics and character")}</span>
+   <div class="flash-compare">
+    <div class="retro-window"><div class="retro-bar">{t("Flash / original")}</div><div class="pixel-scene"><div class="pixel-cloud"></div><div class="pixel-character"></div><div class="pixel-ground"></div></div><span>{t("Keyboard")}</span></div>
+    <span class="compare-arrow" aria-hidden="true">→</span>
+    <div class="modern-window"><div class="modern-bar">{t("HTML5 / new version")}</div><div class="pixel-scene modern-scene"><div class="pixel-cloud"></div><div class="pixel-character"></div><div class="pixel-ground"></div><div class="touch-controls"><span>‹</span><span>›</span><span>↑</span></div></div><span>{t("Keyboard + touch")}</span></div>
+   </div>
+   <p class="art-bottom-line">{t("Logic · levels · graphics · sound")}</p>
+  </div>
+  <figcaption>{t("Illustrative porting example, not a client case study")}</figcaption>
+ </>}
+ {kind === 'publishing' && <>
+  <div class="publishing-art">
+   <span class="art-kicker">{t("Preparation for each platform")}</span>
+   <div class="publish-source"><span>&lt;/&gt;</span><div><b>{t("HTML5 game")}</b><small>{t("Existing project")}</small></div></div>
+   <div class="publish-bridge"><span>{t("Adaptation")}</span><span>SDK</span><span>{t("Builds")}</span></div>
+   <div class="publish-outputs">{platforms.map((name, index) => <div><span class="platform-mark">{['C', 'GD', 'P', t("Y"), 'p'][index]}</span><b>{name}</b></div>)}</div>
+  </div>
+  <figcaption>{t("Target platforms · selection and terms agreed for each game")}</figcaption>
+ </>}
+ {kind === 'lead' && <>
+  <div class="lead-art">
+   <span class="art-kicker">{t("Technical leadership")}</span>
+   <div class="lead-person"><img src="/ava2.jpg" alt={t("Alexander Bolotnikov")} width="100" height="100"/><div><b>{t("Alexander Bolotnikov")}</b><span>Tech Lead · HTML5</span></div></div>
+   <div class="lead-branches"><div><span>01</span><b>{t("Team")}</b><small>{t("Reviews and growth")}</small></div><div><span>02</span><b>{t("Architecture")}</b><small>{t("Decisions and tools")}</small></div></div>
+   <div class="lead-delivery"><span class="status-dot"></span><b>{t("Develop → test → release")}</b></div>
+  </div>
+  <figcaption>{t("Responsibility for people, technology and process")}</figcaption>
+ </>}
+</figure>
+<style>
+.service-graphic {
+	margin:0;
+	min-width:0;
+	--art-accent:var(--color-cyan)
+}
+
+.service-graphic>div {
+	position:relative;
+	min-height:390px;
+	border:1px solid var(--color-border);
+	border-radius:24px;
+	background:radial-gradient(ellipse at 80% 15%,color-mix(in srgb,var(--art-accent) 12%,transparent),transparent 65%),var(--color-card);
+	overflow:hidden
+}
+
+.service-graphic figcaption {
+	color:var(--color-muted-foreground);
+	font-size:11px;
+	line-height:1.6;
+	margin:14px 8px 0;
+	text-align:center
+}
+
+.browser {
+	overflow:hidden;
+	border:1px solid var(--color-line);
+	border-radius:13px;
+	background:var(--color-card);
+	box-shadow:0 24px 45px #020a231f
+}
+
+.browser-bar {
+	height:30px;
+	display:flex;
+	align-items:center;
+	gap:5px;
+	padding:0 10px;
+	background:var(--color-secondary);
+	color:var(--color-muted-foreground)
+}
+
+.browser-bar i {
+	height:5px;
+	width:5px;
+	border-radius:50%;
+	background:var(--color-line)
+}
+
+.browser-bar span {
+	margin-left:auto;
+	margin-right:auto;
+	font-size:9px
+}
+
+.browser img {
+	width:100%;
+	height:auto
+}
+
+.phone {
+	position:absolute;
+	overflow:hidden;
+	border:5px solid #142238;
+	border-radius:22px;
+	box-shadow:0 20px 32px #020a2345;
+	background:#142238
+}
+
+.phone img {
+	width:100%;
+	height:auto
+}
+
+.art-orbit {
+	position:absolute;
+	border:1px dashed color-mix(in srgb,var(--color-cyan) 25%,transparent);
+	border-radius:50%;
+	width:440px;
+	height:440px;
+	top:-10px;
+	left:30px
+}
+
+.orbit-two {
+	width:300px;
+	height:300px;
+	top:60px;
+	left:100px
+}
+
+.overview-browser {
+	position:absolute;
+	top:75px;
+	left:7%;
+	width:78%;
+	transform:rotate(-5deg)
+}
+
+.overview-phone {
+	width:27%;
+	right:5%;
+	top:100px;
+	transform:rotate(9deg)
+}
+
+.floating-label {
+	position:absolute;
+	display:flex;
+	align-items:center;
+	gap:10px;
+	padding:13px 16px;
+	border:1px solid var(--color-border);
+	border-radius:11px;
+	background:var(--color-card);
+	box-shadow:var(--shadow-card);
+	font-size:12px
+}
+
+.label-code {
+	top:28px;
+	left:8%;
+	transform:rotate(-4deg)
+}
+
+.label-code b {
+	color:var(--color-cyan);
+	font-size:20px
+}
+
+.label-publish {
+	bottom:26px;
+	left:15%;
+	transform:rotate(-2deg)
+}
+
+.status-dot {
+	display:inline-block;
+	width:7px;
+	height:7px;
+	flex-shrink:0;
+	background:var(--color-green);
+	border-radius:50%;
+	box-shadow:0 0 0 4px color-mix(in srgb,var(--color-green) 10%,transparent)
+}
+
+.art-kicker {
+	display:block;
+	font-size:11px;
+	line-height:1.5;
+	color:var(--color-muted-foreground);
+	margin-bottom:25px
+}
+
+.game-art {
+	padding:28px
+}
+
+.game-browser {
+	position:absolute;
+	top:100px;
+	left:6%;
+	width:78%;
+	transform:rotate(-3deg)
+}
+
+.game-phone {
+	width:25%;
+	right:6%;
+	top:78px;
+	transform:rotate(5deg)
+}
+
+.game-art-label {
+	position:absolute;
+	bottom:25px;
+	left:30px;
+	color:var(--color-cyan);
+	font-size:12px
+}
+
+.playable-art {
+	--art-accent:var(--color-violet);
+	padding:28px
+}
+
+.ad-frames {
+	display:flex;
+	gap:12px;
+	align-items:center
+}
+
+.ad-frame {
+	flex:1;
+	min-width:0;
+	border:1px solid var(--color-border);
+	border-radius:12px;
+	padding:15px;
+	background:var(--color-background)
+}
+
+.ad-frame--active {
+	border-color:var(--color-violet)
+}
+
+.frame-step {
+	font-size:10px;
+	color:var(--color-muted-foreground)
+}
+
+.mini-board {
+	display:grid;
+	grid-template-columns:repeat(4,1fr);
+	gap:4px;
+	max-width:150px;
+	margin:20px auto
+}
+
+.tile {
+	aspect-ratio:1;
+	border-radius:4px;
+	background:var(--color-secondary);
+	border:1px solid var(--color-border)
+}
+
+.tile--filled {
+	background:var(--color-violet);
+	border-color:var(--color-violet);
+	box-shadow:inset 0 3px 0 #ffffff33
+}
+
+.tile--complete {
+	background:var(--color-green);
+	border-color:var(--color-green);
+	box-shadow:0 0 10px color-mix(in srgb,var(--color-green) 30%,transparent)
+}
+
+.ad-hint {
+	display:block;
+	font-size:10px;
+	text-align:center
+}
+
+.frame-arrow {
+	font-size:23px;
+	color:var(--color-violet)
+}
+
+.ad-end {
+	margin-top:20px;
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	gap:15px;
+	border-top:1px solid var(--color-border);
+	padding-top:20px
+}
+
+.ad-end>span {
+	font-size:10px;
+	color:var(--color-muted-foreground)
+}
+
+.ad-end b {
+	font-size:12px;
+	color:var(--color-violet)
+}
+
+.port-art {
+	padding:28px
+}
+
+.source-project {
+	display:flex;
+	align-items:center;
+	gap:16px;
+	padding:20px;
+	border:1px solid var(--color-border);
+	border-radius:12px;
+	background:var(--color-background)
+}
+
+.source-mark {
+	display:grid;
+	place-items:center;
+	font-size:24px;
+	width:54px;
+	height:54px;
+	border-radius:10px;
+	background:color-mix(in srgb,var(--color-violet) 12%,var(--color-card));
+	color:var(--color-violet)
+}
+
+.source-project b,.web-output b {
+	font-size:14px;
+	display:block
+}
+
+.source-project div>span,.web-output div>span {
+	font-size:11px;
+	color:var(--color-muted-foreground);
+	display:block;
+	margin-top:7px
+}
+
+.transfer {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	gap:6px;
+	margin:8px 0;
+	color:var(--color-cyan)
+}
+
+.transfer span {
+	height:10px;
+	width:1px;
+	background:var(--color-cyan)
+}
+
+.transfer span:last-child:after {
+	content:'↓';
+	position:relative;
+	top:-5px;
+	left:-4px
+}
+
+.transfer b {
+	font-size:10px;
+	font-weight:500
+}
+
+.web-output {
+	padding:20px;
+	display:flex;
+	align-items:center;
+	gap:16px
+}
+
+.web-mark {
+	font-size:24px;
+	color:var(--color-cyan)
+}
+
+.output-devices {
+	display:flex;
+	justify-content:center;
+	gap:22px;
+	font-size:10px;
+	color:var(--color-muted-foreground);
+	margin-top:16px
+}
+
+.flash-art {
+	padding:28px;
+	--art-accent:var(--color-amber)
+}
+
+.flash-compare {
+	display:flex;
+	gap:12px;
+	align-items:center;
+	margin-top:40px
+}
+
+.retro-window,.modern-window {
+	flex:1;
+	min-width:0;
+	border:1px solid var(--color-line);
+	background:var(--color-background)
+}
+
+.retro-bar,.modern-bar {
+	padding:10px 8px;
+	font-size:10px;
+	border-bottom:1px solid var(--color-border)
+}
+
+.retro-bar {
+	font-family:monospace;
+	background:var(--color-secondary)
+}
+
+.modern-window {
+	border-radius:12px;
+	overflow:hidden;
+	border-color:var(--color-cyan)
+}
+
+.modern-bar {
+	color:var(--color-cyan)
+}
+
+.pixel-scene {
+	height:145px;
+	position:relative;
+	background:#133348;
+	overflow:hidden
+}
+
+.pixel-ground {
+	height:22px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	background:#367c73;
+	border-top:6px solid #a4d28b
+}
+
+.pixel-character {
+	position:absolute;
+	bottom:22px;
+	left:35%;
+	height:34px;
+	width:24px;
+	background:#ffcc75;
+	box-shadow:8px -12px 0 -3px #ffcc75,9px 0 0 -3px #e88669
+}
+
+.pixel-cloud {
+	width:40px;
+	height:12px;
+	position:absolute;
+	top:30px;
+	left:20px;
+	background:#c6e2e8;
+	box-shadow:12px -8px 0 #c6e2e8
+}
+
+.modern-scene {
+	background:linear-gradient(#12324e,#295d6e)
+}
+
+.modern-scene .pixel-character {
+	border-radius:6px
+}
+
+.touch-controls {
+	position:absolute;
+	bottom:6px;
+	display:flex;
+	gap:5px;
+	padding:5px;
+	width:100%
+}
+
+.touch-controls span {
+	display:grid;
+	place-items:center;
+	border:1px solid #e3ffff66;
+	color:white;
+	width:22px;
+	height:22px;
+	border-radius:50%;
+	background:#153345aa
+}
+
+.touch-controls span:last-child {
+	margin-left:auto
+}
+
+.retro-window>span,.modern-window>span {
+	display:block;
+	text-align:center;
+	font-size:9px;
+	padding:10px 3px
+}
+
+.compare-arrow {
+	color:var(--color-amber);
+	font-size:24px
+}
+
+.art-bottom-line {
+	text-align:center;
+	font-size:11px;
+	color:var(--color-muted-foreground);
+	margin:28px 0 0
+}
+
+.publishing-art {
+	padding:28px
+}
+
+.publish-source {
+	margin:0 auto;
+	max-width:225px;
+	display:flex;
+	gap:15px;
+	align-items:center;
+	border:1px solid var(--color-cyan);
+	border-radius:12px;
+	padding:17px;
+	background:var(--color-background)
+}
+
+.publish-source>span {
+	font-size:28px;
+	color:var(--color-cyan)
+}
+
+.publish-source b {
+	font-size:15px
+}
+
+.publish-source small {
+	display:block;
+	font-size:10px;
+	color:var(--color-muted-foreground);
+	margin-top:5px
+}
+
+.publish-bridge {
+	position:relative;
+	display:flex;
+	justify-content:center;
+	gap:8px;
+	margin:27px 0;
+	padding:12px 0;
+	border-top:1px solid var(--color-line);
+	border-bottom:1px solid var(--color-line)
+}
+
+.publish-bridge:before,.publish-bridge:after {
+	content:'';
+	width:1px;
+	height:28px;
+	background:var(--color-line);
+	position:absolute;
+	left:50%;
+	top:-28px
+}
+
+.publish-bridge:after {
+	top:auto;
+	bottom:-28px
+}
+
+.publish-bridge span {
+	padding:6px 10px;
+	font-size:10px;
+	background:var(--color-secondary);
+	border-radius:5px
+}
+
+.publish-outputs {
+	display:grid;
+	grid-template-columns:repeat(6,1fr);
+	gap:10px;
+	position:relative
+}
+
+.publish-outputs>div {
+	grid-column:span 2;
+	display:flex;
+	align-items:center;
+	gap:7px;
+	padding:12px 8px;
+	border:1px solid var(--color-border);
+	border-radius:8px;
+	background:var(--color-card);
+	z-index:1
+}
+
+.publish-outputs>div:nth-child(4) {
+	grid-column:2/span 2
+}
+
+.publish-outputs b {
+	font-size:11px;
+	font-weight:500
+}
+
+.platform-mark {
+	font-size:11px;
+	display:grid;
+	place-items:center;
+	width:25px;
+	height:25px;
+	flex-shrink:0;
+	background:var(--color-secondary);
+	border-radius:6px;
+	color:var(--color-cyan)
+}
+
+.lead-art {
+	padding:28px;
+	--art-accent:var(--color-violet)
+}
+
+.lead-person {
+	display:flex;
+	align-items:center;
+	gap:18px;
+	padding:10px 0 28px;
+	position:relative
+}
+
+.lead-person img {
+	width:70px;
+	height:70px;
+	object-fit:cover;
+	border-radius:50%;
+	border:3px solid var(--color-card);
+	box-shadow:0 0 0 1px var(--color-border)
+}
+
+.lead-person b {
+	display:block;
+	font-size:15px
+}
+
+.lead-person div>span {
+	display:block;
+	font-size:11px;
+	color:var(--color-violet);
+	margin-top:8px
+}
+
+.lead-branches {
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:18px;
+	border-top:1px solid var(--color-line);
+	padding-top:20px
+}
+
+.lead-branches>div {
+	padding:17px;
+	border:1px solid var(--color-border);
+	border-radius:10px;
+	background:var(--color-background)
+}
+
+.lead-branches span {
+	display:block;
+	font-size:10px;
+	color:var(--color-violet);
+	margin-bottom:15px
+}
+
+.lead-branches b {
+	display:block;
+	font-size:14px
+}
+
+.lead-branches small {
+	display:block;
+	font-size:10px;
+	line-height:1.5;
+	color:var(--color-muted-foreground);
+	margin-top:8px
+}
+
+.lead-delivery {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	gap:12px;
+	margin-top:25px
+}
+
+.lead-delivery b {
+	font-size:11px;
+	font-weight:500
+}
+
+@media(min-width:1100px) {
+	.overview-art {
+		min-height:440px!important
+	}
+	.overview-browser {
+		top:95px
+	}
+	.overview-phone {
+		top:110px
+	}
+	.label-publish {
+		bottom:35px
+	}
+}
+
+@media(max-width:600px) {
+	.service-graphic>div {
+		min-height:350px;
+		border-radius:18px
+	}
+	.overview-browser {
+		top:85px
+	}
+	.overview-phone {
+		top:90px
+	}
+	.game-browser {
+		top:110px
+	}
+	.game-phone {
+		top:100px
+	}
+	.playable-art,.port-art,.flash-art,.publishing-art,.lead-art,.game-art {
+		padding:22px
+	}
+	.ad-frame {
+		padding:10px
+	}
+	.ad-frames {
+		gap:7px
+	}
+	.frame-step {
+		font-size:9px
+	}
+	.ad-end {
+		flex-direction:column;
+		align-items:flex-start;
+		gap:9px
+	}
+	.flash-compare {
+		gap:7px;
+		margin-top:30px
+	}
+	.pixel-scene {
+		height:130px
+	}
+	.publish-outputs {
+		grid-template-columns:repeat(2,minmax(0,1fr));
+		gap:8px
+	}
+	.publish-outputs>div {
+		grid-column:auto;
+		flex-direction:column;
+		padding:12px 5px;
+		gap:7px
+	}
+	.publish-outputs>div:nth-child(4) {
+		grid-column:auto
+	}
+	.publish-outputs>div:last-child {
+		grid-column:1/-1;
+		flex-direction:row;
+		justify-content:center
+	}
+	.publish-outputs b {
+		font-size:11px
+	}
+	.platform-mark {
+		width:24px;
+		height:24px;
+		font-size:11px
+	}
+	.lead-person b {
+		font-size:13px
+	}
+	.lead-branches {
+		gap:12px
+	}
+	.lead-branches>div {
+		padding:13px
+	}
+	.lead-branches b {
+		font-size:13px
+	}
+}
+</style>

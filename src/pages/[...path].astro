@@ -2,7 +2,10 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Home from '../views/index.astro';
 import About from '../views/about.astro';
-import Services from '../views/services.astro';
+import Services from '../views/services/overview.astro';
+import ServiceLanding from '../views/services/landing.astro';
+import type { ServicePage } from '../data/services';
+import { ServiceCatalog } from '../data/ServiceCatalog';
 import Games from '../views/games/index.astro';
 import Game from '../views/games/[slug].astro';
 import Article from '../views/articles/[slug].astro';
@@ -27,6 +30,7 @@ type Route =
  | { kind: 'cyber-ui-course' }
  | { kind: 'sdk-course' }
  | { kind: 'sdk-section'; section: string }
+ | { kind: 'service'; page: ServicePage }
  | { kind: 'step'; entry: CollectionEntry<'academy'>; steps: CollectionEntry<'academy'>[]; index: number };
 interface Props { route: Route }
 export async function getStaticPaths() {
@@ -57,6 +61,7 @@ export async function getStaticPaths() {
   const i18n = new Locale(language.code);
   const add = (url: string, route: Route) => paths.push({params:{path:i18n.path(url).replace(/^\//,'').replace(/\/$/,'') || undefined},props:{route}});
   for(const [url,kind] of [['/','home'],['/about','about'],['/services','services'],['/games','games'],['/academy/javascript','course'],['/academy/javascript/engine','lesson']] as const) add(url,{kind});
+  for (const page of new ServiceCatalog(i18n).pages()) add(`/services/${page.slug}`, {kind: 'service', page});
   for(const entry of games.filter(({data})=>data.locale===language.code)) add(`/games/${entry.data.translationKey}`,{kind:'game',entry});
   const localTutorials=tutorials.filter(({data})=>data.locale===language.code);
   const series=new Set(localTutorials.map(({data})=>data.seriesSlug));
@@ -101,6 +106,7 @@ if ((route.kind === 'step' && route.entry.data.draft)
 {route.kind === 'home' && <Home/>}
 {route.kind === 'about' && <About/>}
 {route.kind === 'services' && <Services/>}
+{route.kind === 'service' && <ServiceLanding page={route.page}/>}
 {route.kind === 'games' && <Games/>}
 {route.kind === 'course' && <Course/>}
 {route.kind === 'lesson' && <Lesson/>}

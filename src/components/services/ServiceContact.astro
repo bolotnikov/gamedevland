@@ -1,0 +1,13 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+interface Props { title?: string; action?: string; description: string; subject?: string; }
+const { title = t("Have a project in mind?"), action = t("Email about a project"), description, subject = t("GameDev.Land project") } = Astro.props;
+const email = `mailto:alexander.bolotnikov@gmail.com?subject=${encodeURIComponent(subject)}`;
+---
+<section class="svc-contact" id="contact" aria-labelledby="contact-heading">
+ <div class="contact-orbit" aria-hidden="true"></div>
+ <div><span class="svc-eyebrow">{t("Начнём с разговора")}</span><h2 id="contact-heading">{title}</h2><p>{description}</p></div>
+ <div class="contact-actions"><a class="svc-button" href={email}>{action}<span aria-hidden="true">↗</span></a><a class="contact-email" href={email}>alexander.bolotnikov@gmail.com</a><a class="contact-linkedin" href="https://www.linkedin.com/in/alexander-bolotnikov-html5/" target="_blank" rel="noopener noreferrer">{t("Or on LinkedIn")} <span aria-hidden="true">↗</span></a></div>
+</section>

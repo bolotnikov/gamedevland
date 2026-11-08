@@ -1,0 +1,38 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import ServiceGraphic from '../../components/services/ServiceGraphic.astro';
+import ServiceContact from '../../components/services/ServiceContact.astro';
+import ServiceProof from '../../components/services/ServiceProof.astro';
+import type { ServicePage } from '../../data/services';
+import { ServiceCatalog } from '../../data/ServiceCatalog';
+const servicePages = new ServiceCatalog(i18n).pages();
+import '../../styles/services.css';
+interface Props { page: ServicePage; }
+const { page } = Astro.props;
+const related = page.related.map(slug => {
+ const target = servicePages.find(service => service.slug === slug);
+ if (!target) throw new Error(`Unknown related service: ${slug}`);
+ return target;
+});
+---
+<Layout title={`${page.label} — GameDev.Land`} description={page.description} canonicalPath={`/services/${page.slug}/`}>
+ <Header title={page.label} description={page.description} current="services" navigationOnly/>
+ <main class:list={['svc-page', 'svc-landing', `service-${page.graphic}`]}>
+  <div class="container svc-breadcrumb"><a href={i18n.path('/services/')}>{t("Services")}</a><span aria-hidden="true">/</span><span>{page.label}</span></div>
+  <section class="container svc-hero" aria-labelledby="service-title"><div class="svc-hero-copy"><span class="svc-eyebrow"><span class="svc-square" aria-hidden="true"></span>{page.label}</span><h1 id="service-title">{page.title}<br/><em>{page.accent}</em></h1><p class="svc-intro">{page.description}</p><div class="svc-hero-actions"><a class="svc-button" href="#contact">{page.action} <span aria-hidden="true">↗</span></a><a class="svc-text-link" href="#scope">{t("What is included")} <span aria-hidden="true">↓</span></a></div><ul class="svc-tags">{page.tags.map(tag => <li>{tag}</li>)}</ul></div><ServiceGraphic kind={page.graphic}/></section>
+  <div class="container">
+   <section class="svc-scope" id="scope" aria-labelledby="scope-title"><div class="svc-section-heading"><div><span class="svc-eyebrow">{t("Scope of work")}</span><h2 id="scope-title">{page.scopeTitle}</h2></div></div><div class="svc-scope-grid">{page.scope.map((item,index) => <article><span class="scope-index">0{index+1}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section>
+   <section class="svc-process" aria-labelledby="process-title"><div class="svc-section-heading"><div><span class="svc-eyebrow">{t("The process")}</span><h2 id="process-title">{page.graphic === 'lead' ? t("How we start the conversation") : t("From the first conversation to delivery")}</h2></div></div><ol>{page.process.map((step,index) => <li><div class="process-line"><span>0{index+1}</span><i aria-hidden="true"></i></div><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol><div class="svc-result"><span>{t("Result")}</span><p>{page.result}</p></div><p class="svc-process-note">{page.note}</p></section>
+   <ServiceProof leadership={page.graphic === 'lead' || page.graphic === 'playable'}/>
+   <section class="svc-faq" aria-labelledby="faq-title"><div><span class="svc-eyebrow">{t("Before we start")}</span><h2 id="faq-title">{t("A few key questions")}</h2></div><div>{page.faq.map(item => <details><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></section>
+   <ServiceContact title={page.graphic === 'lead' ? t("Discuss a role?") : t("Discuss the project?")} action={page.action} description={page.contact} subject={page.label}/>
+   <nav class="svc-related" aria-label={t("Related services")}><span>{t("Also worth exploring")}</span><div>{related.map(service => <a href={i18n.path(`/services/${service.slug}/`)}>{service.label} <span aria-hidden="true">↗</span></a>)}</div></nav>
+  </div>
+ </main>
+ <Footer/>
+</Layout>
