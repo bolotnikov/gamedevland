@@ -39,6 +39,7 @@ const screenshotSchema = z.object({
 const promoVideoSchema = z.object({
 	mp4: z.string(),
 	poster: z.string(),
+	aspectRatio: z.enum(['16 / 9', '9 / 16']).default('16 / 9'),
 });
 
 const games = defineCollection({
