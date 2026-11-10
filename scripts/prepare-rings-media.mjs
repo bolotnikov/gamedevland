@@ -26,9 +26,9 @@ for (const [source, target, width, height, scene] of entries) {
  report.push({ source, target, scene, width, height, bytes: data.length, inputSha256: createHash('sha256').update(input).digest('hex'), outputSha256: createHash('sha256').update(data).digest('hex') });
 }
 const input = await readFile(icon);
-const data = await sharp(input).resize(512, 512, { fit: 'inside', withoutEnlargement: true }).webp({ quality: 94, effort: 6 }).toBuffer();
-await writeFile(join(output, 'icon-rings.webp'), data);
-report.push({ source: basename(icon), target: 'icon.webp', width: 512, height: 512, bytes: data.length, inputSha256: createHash('sha256').update(input).digest('hex'), outputSha256: createHash('sha256').update(data).digest('hex') });
+const data = await sharp(input).resize(512, 512, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 94, mozjpeg: true }).toBuffer();
+await writeFile(join(output, 'icon-rings.jpg'), data);
+report.push({ source: basename(icon), target: 'icon-rings.jpg', width: 512, height: 512, bytes: data.length, inputSha256: createHash('sha256').update(input).digest('hex'), outputSha256: createHash('sha256').update(data).digest('hex') });
 await mkdir('docs/portfolio', { recursive: true });
-await writeFile('docs/portfolio/rings-media.json', JSON.stringify({ game: 'Rings', sourceRevision: '4f4b63e', platform: 'web', screenshotSource: 'Live browser captures of the current compiled game; no simulated gameplay or generated screenshots', encoder: { name: 'Sharp', webpQuality: 90, iconQuality: 94, effort: 6 }, files: report }, null, 2) + '\n');
+await writeFile('docs/portfolio/rings-media.json', JSON.stringify({ game: 'Rings', sourceRevision: '4f4b63e', platform: 'web', screenshotSource: 'Live browser captures of the current compiled game; no simulated gameplay or generated screenshots', encoder: { name: 'Sharp', webpQuality: 90, iconFormat: 'jpeg', iconQuality: 94, mozjpeg: true, effort: 6 }, files: report }, null, 2) + '\n');
 console.log(`${report.length} images prepared, ${report.reduce((sum, file) => sum + file.bytes, 0)} bytes.`);

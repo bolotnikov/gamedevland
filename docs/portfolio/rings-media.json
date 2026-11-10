@@ -7,7 +7,9 @@
     "name": "Sharp",
     "webpQuality": 90,
     "iconQuality": 94,
-    "effort": 6
+    "effort": 6,
+    "iconFormat": "jpeg",
+    "mozjpeg": true
   },
   "files": [
     {
@@ -71,13 +73,13 @@
       "outputSha256": "7e5a0e21a9980667d48c21514e080d381a888cab8591f04ec8fc4b70047ed8de"
     },
     {
-      "source": "IconRings.jpg",
-      "target": "icon-rings.webp",
+      "source": "rings-3d-poki-icon-v2.png",
+      "target": "icon-rings.jpg",
       "width": 512,
       "height": 512,
-      "bytes": 39324,
-      "inputSha256": "97bfb4b5fbb2ab3c77c2b79d853ea16cf82bebb6384663b40617f26e5869c58c",
-      "outputSha256": "c02ed50157ab5dcaa84b35bef452c1d133e26a743fdb887922b60bcbb462e29c"
+      "bytes": 46980,
+      "inputSha256": "4c8fcce8c761ff0c71b7404bbd02d495d11420befe2776e1dcec56ea0187932a",
+      "outputSha256": "f65bf741b08933c1d4c70e5e4a2605ce70dceb7ea111234f6dd67b9c9a00964c"
     }
   ]
 }

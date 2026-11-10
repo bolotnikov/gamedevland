@@ -21,7 +21,7 @@ roles:
   - Интеграция Three.js и PixiJS
   - Создание 100 пространственных уровней
   - Интерфейс, обучение и визуальные эффекты
-iconImage: /assets/games/rings/icon-rings.webp
+iconImage: /assets/games/rings/icon-rings.jpg
 coverImage: /assets/games/rings/cover.webp
 playableUrl: https://gamedevland.github.io/rings/
 orientation: adaptive
