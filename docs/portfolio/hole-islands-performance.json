@@ -1,0 +1,166 @@
+{
+  "method": "Visible Chrome requestAnimationFrame cadence during normal movement, no profiler instrumentation or video recording",
+  "viewport": {
+    "width": 720,
+    "height": 1280
+  },
+  "canvases": [
+    {
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "width": 720,
+      "height": 1280
+    }
+  ],
+  "entitiesAtStart": 616,
+  "initial": {
+    "status": "playing",
+    "celebrationElapsed": 0,
+    "celebrationControl": 1,
+    "x": 0,
+    "z": 14.2,
+    "radius": 0.42,
+    "size": 1,
+    "speed": 2.4,
+    "growth": 0,
+    "growthCurrent": 0,
+    "growthRequired": 24,
+    "growthRemaining": 24,
+    "nextSize": 2,
+    "growthFraction": 0,
+    "timeLeft": 180,
+    "elapsed": 0,
+    "goals": [
+      {
+        "kind": "blueberry",
+        "count": 280,
+        "label": "Blueberries",
+        "icon": "images/ui/icon-blueberry.webp",
+        "remaining": 280
+      },
+      {
+        "kind": "blackberry",
+        "count": 280,
+        "label": "Blackberries",
+        "icon": "images/ui/generated-78-fruit-blackberry.webp",
+        "remaining": 280
+      },
+      {
+        "kind": "fig",
+        "count": 12,
+        "label": "Figs",
+        "icon": "images/ui/icon-fig.webp",
+        "remaining": 12
+      }
+    ],
+    "collected": 0,
+    "targetCount": 572,
+    "stars": 0,
+    "boosters": [
+      {
+        "kind": "bigger-hole",
+        "remaining": 0,
+        "available": true
+      },
+      {
+        "kind": "magnet",
+        "remaining": 0,
+        "available": true
+      },
+      {
+        "kind": "goal-finder",
+        "remaining": 0,
+        "available": true
+      },
+      {
+        "kind": "time-freeze",
+        "remaining": 0,
+        "available": true
+      }
+    ]
+  },
+  "final": {
+    "status": "playing",
+    "celebrationElapsed": 0,
+    "celebrationControl": 1,
+    "x": 2.7348625025558553,
+    "z": 1.3155747785424419,
+    "radius": 0.42,
+    "size": 1,
+    "speed": 2.4,
+    "growth": 23,
+    "growthCurrent": 23,
+    "growthRequired": 24,
+    "growthRemaining": 1,
+    "nextSize": 2,
+    "growthFraction": 0.9583333333333334,
+    "timeLeft": 167.99999999999045,
+    "elapsed": 12.000000000000176,
+    "goals": [
+      {
+        "kind": "blueberry",
+        "count": 280,
+        "label": "Blueberries",
+        "icon": "images/ui/icon-blueberry.webp",
+        "remaining": 268
+      },
+      {
+        "kind": "blackberry",
+        "count": 280,
+        "label": "Blackberries",
+        "icon": "images/ui/generated-78-fruit-blackberry.webp",
+        "remaining": 269
+      },
+      {
+        "kind": "fig",
+        "count": 12,
+        "label": "Figs",
+        "icon": "images/ui/icon-fig.webp",
+        "remaining": 12
+      }
+    ],
+    "collected": 23,
+    "targetCount": 572,
+    "stars": 0,
+    "boosters": [
+      {
+        "kind": "bigger-hole",
+        "remaining": 0,
+        "available": true
+      },
+      {
+        "kind": "magnet",
+        "remaining": 0,
+        "available": true
+      },
+      {
+        "kind": "goal-finder",
+        "remaining": 0,
+        "available": true
+      },
+      {
+        "kind": "time-freeze",
+        "remaining": 0,
+        "available": true
+      }
+    ]
+  },
+  "samples": 1437,
+  "seconds": 12.008300000000002,
+  "renderCalls": 1438,
+  "renderFps": 119.75050590008577,
+  "averageFps": 119.66723016580198,
+  "p50Ms": 8.300000000000182,
+  "p95Ms": 9.199999999998909,
+  "p99Ms": 9.599999999998545,
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+  "host": {
+    "chip": "Apple M1 Pro",
+    "model": "MacBookPro18,1"
+  },
+  "chrome": "157.0.8103.50",
+  "sourceRevision": "59dc63e93ea092a7a42c6157350a9e353f425259",
+  "limitations": "Visible desktop Chrome, local development QA entry, 12-second sample. Counts render submissions and requestAnimationFrame intervals, not GPU presentation. The scene starts with 616 bodies; the sample collects 23. Not a physical mobile-device or human playtest."
+}

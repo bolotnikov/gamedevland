@@ -1,0 +1,34 @@
+[
+  {
+    "locale": "ru",
+    "width": 1440,
+    "http": 200,
+    "h1": "Hole Islands",
+    "brokenImages": [],
+    "canvases": 3,
+    "video": {
+      "duration": 25.732031,
+      "width": 720,
+      "height": 1280,
+      "aspectRatio": "9 / 16"
+    },
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "http": 200,
+    "h1": "Hole Islands",
+    "brokenImages": [],
+    "canvases": 3,
+    "video": {
+      "duration": 25.732031,
+      "width": 720,
+      "height": 1280,
+      "aspectRatio": "9 / 16"
+    },
+    "overflow": false,
+    "errors": []
+  }
+]

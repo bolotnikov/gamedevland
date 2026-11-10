@@ -1,0 +1,115 @@
+{
+  "game": "Hole Islands",
+  "sourceRevision": "59dc63e93ea092a7a42c6157350a9e353f425259",
+  "screenshotSource": "Visible desktop Chrome running the current campaign through its QA entry; native game scenes, normal FSM movement and unchanged physics. QA toolbar hidden; no generated or composited gameplay.",
+  "viewportNote": "Portrait viewport with touch enabled is a desktop-browser capture, not a physical-phone test.",
+  "videoSource": "Four continuous Chrome screencasts of levels 3, 4, 5 and 9, joined with straight cuts; H.264 at 30 fps without audio.",
+  "encoder": {
+    "name": "Sharp",
+    "webpQuality": 90,
+    "iconQuality": 94,
+    "effort": 6
+  },
+  "files": [
+    {
+      "source": "level-3-port.png",
+      "target": "screens/port/level-3.webp",
+      "level": 3,
+      "width": 720,
+      "height": 1280,
+      "bytes": 101444,
+      "inputSha256": "e00e3d9efa92f69f0d6cec2f10f591845575bff2ce5a4d45f51f90e79c713272",
+      "outputSha256": "21eaf9ac051fed400b375c0939fe795ff7449a9218e781ccdccdaef16309f34c"
+    },
+    {
+      "source": "level-3-land.png",
+      "target": "screens/land/level-3.webp",
+      "level": 3,
+      "width": 1280,
+      "height": 720,
+      "bytes": 124038,
+      "inputSha256": "40cf20340527dc1f397a56dd04a4492906508d66a2d95c28b24e2ff649e18b77",
+      "outputSha256": "2c4da3c30753aa938562e7d27afc82b50322b0028e01a88a833da176088fd5de"
+    },
+    {
+      "source": "level-4-port.png",
+      "target": "screens/port/level-4.webp",
+      "level": 4,
+      "width": 720,
+      "height": 1280,
+      "bytes": 97422,
+      "inputSha256": "fd9d174b42872fa494a5a595d3a778c08391154cb28f75a71a2e8b139e580dcc",
+      "outputSha256": "a33eccd5f8f4d529cb89fb64450c7e19db506a8510d051d4328c743bee48029c"
+    },
+    {
+      "source": "level-4-land.png",
+      "target": "screens/land/level-4.webp",
+      "level": 4,
+      "width": 1280,
+      "height": 720,
+      "bytes": 105294,
+      "inputSha256": "434f5c115d4cf30b9396b8b029bd79b1247dd166e071f63d5ac20646ae70abb6",
+      "outputSha256": "b4539fbffff1f34a842b1f37a13bf673a846388b7f2f50440bcfc9c008d595c8"
+    },
+    {
+      "source": "level-5-port.png",
+      "target": "screens/port/level-5.webp",
+      "level": 5,
+      "width": 720,
+      "height": 1280,
+      "bytes": 123682,
+      "inputSha256": "905404633cdf330b47f88c0ac74918027cdaa3ddf01690174554d8f84fc5c477",
+      "outputSha256": "21181b1690f8ca61af521a4ae355b0f1a4a575335c401cff2e71f7aa2222dd1e"
+    },
+    {
+      "source": "level-5-land.png",
+      "target": "screens/land/level-5.webp",
+      "level": 5,
+      "width": 1280,
+      "height": 720,
+      "bytes": 147284,
+      "inputSha256": "1670e029f94fd70507f1faf25b13c70bbdde5fbaa9b258aed32fe73e9bb2da28",
+      "outputSha256": "bb923a466aa129414bd03831f99158f12ac1adcb75ee4b9a7a28bba40d775996"
+    },
+    {
+      "source": "level-9-port.png",
+      "target": "screens/port/level-9.webp",
+      "level": 9,
+      "width": 720,
+      "height": 1280,
+      "bytes": 156696,
+      "inputSha256": "f8206c64ba2efc8f1a3b0c01d5d48f8535115fa5d4e0488a294a082b8d81e166",
+      "outputSha256": "1c06bd0da1ea59d68a19b8ce37eef1c1b4d835157508061a240d4a3bddd29cfe"
+    },
+    {
+      "source": "level-9-land.png",
+      "target": "screens/land/level-9.webp",
+      "level": 9,
+      "width": 1280,
+      "height": 720,
+      "bytes": 199958,
+      "inputSha256": "f168c543828804aecccf5eeb36c9f4a59b778e0a8408da03f5b4cc05499f3e40",
+      "outputSha256": "3c6bb5969133d17b9c22d7c812321ebeb4b568757955c8c90d82d2459c8487d5"
+    },
+    {
+      "source": "Hole Islands Tropical Fruit Vortex.png",
+      "target": "icon.webp",
+      "bytes": 88522,
+      "inputSha256": "d85d233c025284be6466593858d34216c6a0b34c985e4356292219c70f984563",
+      "outputSha256": "521f0d3c5b0fc6914c437e2cda74dc698f76a920a17f5668d1e15411ffea48d6"
+    },
+    {
+      "source": "hole-islands-logo-v2.webp",
+      "target": "logo.webp",
+      "bytes": 50780,
+      "inputSha256": "cc03ea689d29a1cfb66d156be0ca2fc3c99fa4db2dd95285db6371289ca4417d",
+      "outputSha256": "cc056dce47b9ff74c9a8297be61b5d22d386797e28547191160547dfc4a71d99"
+    },
+    {
+      "source": "gameplay.mp4",
+      "target": "gameplay.mp4",
+      "bytes": 4143429,
+      "outputSha256": "1e60bfb4d9086554ef8bd23f741d2e0aed475221313fc48c21dd7bd538e67e45"
+    }
+  ]
+}

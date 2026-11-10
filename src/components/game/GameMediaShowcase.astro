@@ -13,6 +13,7 @@ interface Screenshot {
 interface PromoVideo {
 	mp4: string;
 	poster: string;
+	aspectRatio?: '16 / 9' | '9 / 16';
 }
 
 interface Props {
@@ -65,7 +66,9 @@ const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 		promoVideo && (
 			<div class="media-showcase__video">
 				<h3>{t("Gameplay preview")}</h3>
-				<video controls playsinline preload="metadata" poster={promoVideo.poster}>
+				<video controls playsinline preload="metadata" poster={promoVideo.poster}
+					class:list={{ 'is-portrait': promoVideo.aspectRatio === '9 / 16' }}
+					style={{ aspectRatio: promoVideo.aspectRatio }}>
 					<source src={promoVideo.mp4} type="video/mp4" />
 					<a href={promoVideo.mp4}>{t("Open the gameplay video")}</a>
 				</video>
@@ -158,6 +161,11 @@ const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 		border-radius: 8px;
 		background: #0d1117;
 		object-fit: contain;
+	}
+
+	video.is-portrait {
+		width: min(100%, 480px);
+		margin-inline: auto;
 	}
 
 	@media (max-width: 720px) {
