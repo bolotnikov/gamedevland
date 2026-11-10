@@ -1,0 +1,71 @@
+{
+  "capturedAt": "2026-11-10T17:01:34.529Z",
+  "sourceRevision": "424bfffe52d6b929a3c0cb42c9fcaf95de0c5ed1",
+  "source": "Real browser screenshots of the running Rings 3D build; no offline composition renders",
+  "files": [
+    {
+      "level": 1,
+      "orientation": "port",
+      "width": 527,
+      "height": 908,
+      "path": "public/assets/games/rings/screens/port/level-001.webp",
+      "sha256": "6b4a18214209cdba77800e61d0f2ce6a61f6c1ef37e25a255d4b99b3269f0a7b"
+    },
+    {
+      "level": 25,
+      "orientation": "port",
+      "width": 527,
+      "height": 908,
+      "path": "public/assets/games/rings/screens/port/level-025.webp",
+      "sha256": "de9fdbfd5ddb3181f822008ac777ad009026e70c0fdf7ba0de50d88041a5df75"
+    },
+    {
+      "level": 45,
+      "orientation": "port",
+      "width": 527,
+      "height": 908,
+      "path": "public/assets/games/rings/screens/port/level-045.webp",
+      "sha256": "6b13c453a1a30c495193db2a3ebb9ac8571c5741d6d281819c32e044e48cede5"
+    },
+    {
+      "level": 98,
+      "orientation": "port",
+      "width": 527,
+      "height": 908,
+      "path": "public/assets/games/rings/screens/port/level-098.webp",
+      "sha256": "02d6d57d4bf092b462c5daf51ad1bab31bf868ed0fb1bcefbc501f4b5239ff98"
+    },
+    {
+      "level": 1,
+      "orientation": "land",
+      "width": 1280,
+      "height": 720,
+      "path": "public/assets/games/rings/screens/land/level-001.webp",
+      "sha256": "1fa3991ab555e58ed0d36430a78d52ee8bcde2f26889a4551755cc4976a28f35"
+    },
+    {
+      "level": 25,
+      "orientation": "land",
+      "width": 1280,
+      "height": 720,
+      "path": "public/assets/games/rings/screens/land/level-025.webp",
+      "sha256": "e1d3cb509b9360b124a034d76254e0de4c67cb11b33b471cde64ecade2b5a30c"
+    },
+    {
+      "level": 45,
+      "orientation": "land",
+      "width": 1280,
+      "height": 720,
+      "path": "public/assets/games/rings/screens/land/level-045.webp",
+      "sha256": "69d5b620146ba177d82973442c412604cd975d968232a8a54aff46ca1a561d9f"
+    },
+    {
+      "level": 98,
+      "orientation": "land",
+      "width": 1280,
+      "height": 720,
+      "path": "public/assets/games/rings/screens/land/level-098.webp",
+      "sha256": "61330675e376010ad793c980b9cc11ac170951a317d38c01ce57b4cb7aab6847"
+    }
+  ]
+}
