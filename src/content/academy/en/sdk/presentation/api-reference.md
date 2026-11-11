@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/index.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/index.ts",
       "note": "Public exports at the package root."
     },
     {
       "title": "SDK · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/package.json",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "Declared import paths and distribution files."
     },
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/src/index.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/index.ts",
       "note": "Build tools API."
     }
   ]

@@ -15,12 +15,12 @@
   "sources": [
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "Channels, playback handles, pausing, and unloadSource."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/audio/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/types.ts",
       "note": "Playback options and return value."
     },
     {
@@ -39,6 +39,8 @@ ctx.engine.events.on(BlockPuzzleEvents.PlacementCompleted, () => {
   this.playSfx(AudioAssetIds.Placed);
 });
 ```
+
+Set `music` and `sfx` channel levels and per-file volumes in the JSON selected by `system.audio.volumeConfigId`. Request music after loading assets and settings. If the browser blocks playback, the SDK retries on the first eligible player interaction; no scene-specific first-tap handler is needed. Repeating `playMusic` for the same active or loading track does not create another instance.
 
 <figure class="sdk-figure is-flow">
   <div class="sdk-figure__body">

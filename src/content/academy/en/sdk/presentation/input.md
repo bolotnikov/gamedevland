@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/input/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/input/types.ts",
       "note": "Events and coordinates."
     },
     {
       "title": "SDK · NodeInput.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/internal/NodeInput.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/internal/NodeInput.ts",
       "note": "onTap and unsubscribe functions."
     },
     {
       "title": "SDK · InputRouter.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/input/InputRouter.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/input/InputRouter.ts",
       "note": "Routing and propagation."
     },
     {
       "title": "SDK · BrowserInputGuard.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/input/BrowserInputGuard.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/input/BrowserInputGuard.ts",
       "note": "Suppressing browser actions."
     }
   ]
@@ -41,8 +41,10 @@ Attach a component to the button. `node.input.onTap` handles mouse clicks and ta
 
 ```ts
 import { BaseComponent } from '@gamedevland/engine/layouts';
+import { Container } from '@gamedevland/engine/renderers/pixi';
 
-export class RestartButtonComponent extends BaseComponent {
+export class RestartButtonComponent extends BaseComponent<Container> {
+  protected readonly nodeType = Container;
   private off: (() => void) | undefined;
 
   protected override onEnable(): void {

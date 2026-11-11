@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · TypedStateStore.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/TypedStateStore.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/TypedStateStore.ts",
       "note": "Проверка сохранения и восстановление defaults."
     },
     {
       "title": "SDK · PersistentStorageCoordinator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/PersistentStorageCoordinator.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/PersistentStorageCoordinator.ts",
       "note": "Координация backend хранилищ."
     },
     {
@@ -44,12 +44,12 @@
 
 ```ts
 import {
-  PersistentStorageAdapter, StorageNamespace, TypedStateStore,
+  StorageNamespace, TypedStateStore,
 } from '@gamedevland/engine/configs';
 import { SchemaDecoder } from '@gamedevland/engine/validation';
 
 const store = new TypedStateStore({
-  adapter: new PersistentStorageAdapter(),
+  adapter: engine.storage,
   namespace: new StorageNamespace('sdk-game'),
   key: 'progress-v1',
   decoder: SchemaDecoder.object({
@@ -68,7 +68,9 @@ store.save({ bestScore: Math.max(progress.bestScore, 100) });
 
 `load()` возвращает значения по умолчанию, если записи нет, JSON повреждён или схема не подходит. `save()` сначала проверяет значение; неверные данные не должны тихо попадать в хранилище. `clear()` удаляет запись.
 
-`PersistentStorageAdapter` работает с координатором сохранений, который движок подготавливает через `system.persistence`. Доступны также LocalStorageAdapter и IndexedDbStorageAdapter. Наличие нескольких хранилищ не означает, что к приложению добавлен собственный сервер синхронизации.
+`engine` — экземпляр, возвращённый `Engine.run`. Его `storage` — готовый адаптер сохранений этой игры. В DI этот же готовый адаптер доступен через `di.get(SystemServices.PersistentStorage)`.
+
+В `system.persistence` зададим `namespace` и политику. По умолчанию `platform-exclusive` использует хранилище площадки без подстановки браузерных записей; без хранилища площадки используются браузерные. Политика `mirror` пишет в оба, а при отсутствии ключа на площадке использует браузерную запись. Namespace существующей игры сохраняем: его смена изменит ключи доступа к прогрессу.
 
 В Block Puzzle глобальный сервис прогресса использует репозиторий. Сервис сцены передаёт ему итог партии. Благодаря этому замена способа хранения не затрагивает расчёт очков и отображение результата.
 

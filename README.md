@@ -26,7 +26,7 @@ The custom domain is stored in `public/CNAME` so it is copied into `dist/` durin
 ## Academy
 
 - `/` — course catalog: GameDevLand SDK, Cyber UI Toolkit, Advanced JavaScript.
-- `/academy/sdk/` — SDK curriculum with four sections and 45 lessons.
+- `/academy/sdk/` — SDK curriculum with five sections and 52 lessons.
 - `/academy/cyber-ui/` — the single-section toolkit course with 16 lessons and 12 Canvas examples.
 - `/academy/javascript/` — Advanced JavaScript curriculum.
 - `/academy/javascript/engine/` — section 01 with 19 lessons.

@@ -26,7 +26,7 @@
     },
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
       "note": "Engine.run creates the engine, prepares the canvas and passes GameConfig to startup."
     }
   ]
@@ -45,7 +45,7 @@ void Engine.run('#app', BlockPuzzleGameConfig.config);
 
 The first argument, `'#app'`, points to the HTML container `<div id="app"></div>`: the engine adds its canvas there. The second argument is the [game configuration](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts). It defines system settings, assets, scenes and project dependencies.
 
-`Engine.run` creates and prepares the engine using these settings, then opens the initial scene. In Block Puzzle, `scenes.initial` is `'boot'`, so the project's loading scene opens first.
+`Engine.run` creates and prepares the engine using these settings, then opens the initial scene. The method returns the engine instance; `await engine.destroy()` stops it and releases its resources. Select the renderer in `GameConfig.system.renderer`, as shown in the next lesson. In Block Puzzle, `scenes.initial` is `'boot'`, so the project's loading scene opens first.
 
 <figure class="sdk-figure is-flow" aria-label="The project passes configuration to Engine.run; the SDK prepares the engine and opens the boot scene selected by the project">
   <div class="sdk-figure__body">

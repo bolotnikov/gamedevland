@@ -113,3 +113,38 @@ remain unchanged; editorial approval is not a learner assessment.
 - Validation covers public exports, matching bilingual code, 93 interactive API variants,
   11 language preference cases, production build, and locale metadata. Browser QA includes
   both languages, layouts, language persistence, and image roles.
+
+### SDK renderers — Russian review — 2026-11-11
+
+- Alex requested a local SDK course update against the latest releases and explicitly asked
+  for a separate explanatory lesson for each of the four renderer compositions.
+- Verified npm Engine 0.0.13 / tooling 0.2.2 and local release `sdk-2026-11-10` (`be74f9d`).
+  Public lessons teach current APIs without release numbers.
+- Added seven Russian-only drafts: renderer comparison, Pixi-only, Three-only, Three + Pixi,
+  Pixi + Three-as-texture, GLB ownership, and ordered presentation. Dev/academy-preview shows
+  52 lessons (12/13/15/7/5) in five sections; production still includes the approved 45 lesson identities.
+- Corrected renderer selection, concrete Pixi imports, required component/action `nodeType`,
+  engine-owned storage, strict asset loading/eviction, localization, autoplay, optional Matter,
+  scene cancellation/warmup, focus behavior, diagnostics, and Playgama setup.
+- Regenerated the Russian API reference from TypeScript public exports: 24 modules, 347
+  exports with pinned declaration evidence. English retains the approved reference/content.
+- Alex requested a separate rendering section after reviewing the initial layout. All seven
+  Russian drafts now live under `/ru/academy/sdk/rendering/`; presentation retains 15 lessons.
+  Preserved published lesson URLs/progress IDs/order and added preview redirects for all seven
+  previously shared draft URLs. The new section is Russian-only and unpublished.
+- Styled the renderer comparison table with spaced cells, row borders and wrapping for long
+  module names. Verified desktop/narrow layouts in light/dark themes without horizontal overflow.
+- Alex will review Russian text locally and authorize translation and deployment separately.
+  No commit, push, translation, or deployment is authorized/performed for this revision.
+
+### SDK renderer release authorization and English translation — 2026-11-11
+
+- Alex approved the Russian course changes and explicitly requested English translation and deploy.
+- Translated changes in 22 existing lessons and seven new rendering lessons; code blocks, IDs,
+  asset paths, numbers and source URLs remain equivalent. Added an anchor alias for the new
+  diagnostics heading to preserve fragment navigation when switching languages.
+- Published rendering in both locales and consolidated the API catalog into one current source.
+  Course inventory is five sections, 52 lessons; presentation retains its 15 lessons.
+- Local typecheck/lint/build/locales, Cyber UI examples and language-preference checks passed.
+  Browser QA checked the English section/comparison, language switching and narrow table layout.
+- Release scope excludes existing AI Defender portfolio and media preparation edits.

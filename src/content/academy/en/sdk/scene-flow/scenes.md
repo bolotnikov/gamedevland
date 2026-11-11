@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "The order of scene entry and exit."
     },
     {
       "title": "SDK · SceneManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneManager.ts",
       "note": "The transition queue, scene stack, and parameters."
     },
     {
@@ -67,7 +67,7 @@ export class GameSceneDefinition {
         <ol class="sdk-scene-enter-steps">
           <li>Creates the scene DI container and builds the layout</li>
           <li>Prepares the configurations and starts services</li>
-          <li>Activates components and starts the FSM if configured</li>
+          <li>Activates components, prepares shaders and textures, then starts the FSM if configured</li>
           <li>Calls <code>create()</code>. In <code>FsmDrivenScene</code>, this method sends <code>SceneReady</code>.</li>
         </ol>
       </div>
@@ -89,6 +89,6 @@ In the public project, `GameScene` simply passes the configuration to its base c
 
 <h2 id="переходы-между-сценами">Scene transitions</h2>
 
-`SceneManager.start(key)` opens the initial scene. `replace(key, options)` replaces the top scene, `push` adds a scene to the stack, and `pop` removes the top one. Only the top scene updates, and only while it is unpaused. Transitions run through a queue, and lifecycle hooks have a timeout.
+`SceneManager.start(key)` opens the initial scene. `replace(key, options)` replaces the top scene, `push` adds a scene to the stack, and `pop` removes the top one. Only the top scene updates, and only while it is unpaused. Transitions run through a queue, and lifecycle hooks have a timeout. Time spent in a hidden tab does not count toward that timeout. If entry fails, the SDK also cleans up the partially started service.
 
 Pass input to the new scene through `options.params`. A command reads it from `sceneParams` and validates it with `decodeSceneParams`. Transition parameters are separate from the current session state.

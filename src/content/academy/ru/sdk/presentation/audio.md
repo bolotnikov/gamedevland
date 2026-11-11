@@ -15,12 +15,12 @@
   "sources": [
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "Каналы, handles, пауза и unloadSource."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/audio/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/types.ts",
       "note": "Параметры воспроизведения и результат."
     },
     {
@@ -39,6 +39,8 @@ ctx.engine.events.on(BlockPuzzleEvents.PlacementCompleted, () => {
   this.playSfx(AudioAssetIds.Placed);
 });
 ```
+
+Громкость каналов `music` и `sfx` и отдельных файлов задаём в JSON, выбранном через `system.audio.volumeConfigId`. Музыку запрашиваем после загрузки ресурсов и настроек. Если браузер блокирует запуск, SDK повторит его при первом подходящем действии игрока; отдельный обработчик первого нажатия в сцене не нужен. Повторный `playMusic` для той же активной или загружаемой дорожки не создаёт второй экземпляр.
 
 <figure class="sdk-figure is-flow">
   <div class="sdk-figure__body">

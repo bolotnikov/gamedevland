@@ -103,3 +103,57 @@ All changes remain local. No push or deployment performed.
   internal links resolve and external references open in a new tab. Code blocks are intact.
 - English was deliberately not synchronized: translation awaits Alex's separate request
   after Russian approval. This is local review material; no push or deployment performed.
+
+## SDK renderers — Russian review — 2026-11-11
+
+- Source of truth: published Engine 0.0.13 and Vite 0.2.2; SDK tag `sdk-2026-11-10`,
+  commit `be74f9d`. Read changelogs, renderer/runtime migration notes, package exports,
+  renderer implementations, component lifecycle, storage, assets, locales, and platform APIs.
+- Typecheck: passed, 0 errors/warnings; the existing `webkitUserSelect` deprecation hint remains.
+- Lint and `git diff --check`: passed.
+- Production build: passed, 336 pages; seven untranslated drafts excluded. Academy preview:
+  passed, 351 pages (seven lessons, their overview, and seven draft URL redirects). Builds wrote to `/tmp/gamedevland-sdk-production-check` and
+  `/tmp/gamedevland-sdk-academy-preview`; repository `dist/` was not edited.
+- Compiled five complete lesson examples (typed component, typed action, input component,
+  ordered presentation, persistence) against the current SDK sources. No lesson code executed.
+  `engine.storage` and `SystemServices.PersistentStorage` are already adapters; neither
+  should be passed as a coordinator to `new PersistentStorageAdapter(...)`.
+- Verified new source paths and generated API declaration locations against the local release.
+- Browser: Russian course contents, Three lesson, desktop light theme, narrow dark theme,
+  and course navigation. No horizontal document overflow at the sampled narrow width;
+  viewport override/theme restored. This does not claim gameplay/GPU/device verification.
+- `npm run check:locales` intentionally fails at RU/EN code parity (`game-config.md` first):
+  Russian examples now target the current SDK; English remains approved older content.
+  Do not weaken the release check or translate drafts to silence it. Run it again after the
+  separately authorized translation, before publication.
+- The dev server is available at `http://127.0.0.1:4321/ru/academy/sdk/`.
+  Existing AI Defender portfolio/media changes were left intact and excluded from the SDK patch.
+
+### Rendering section and table follow-up — 2026-11-11
+
+- Moved all seven Russian drafts into their own rendering section; published foundations and
+  presentation retain 12 and 15 lessons. Dev curriculum has five sections and 52 lessons.
+- Draft-only section titles/descriptions use their Russian authored metadata. No English
+  translations/filler were added; production/English retain four sections and 45 lessons.
+- Shared visible-section selection keeps course counts, section numbers and breadcrumbs aligned.
+- The comparison table has explicit column widths, padding, row borders and code wrapping.
+  Browser checks at wide/narrow sizes covered both themes. At the sampled narrow viewport,
+  document and all table cells had scrollWidth equal to clientWidth; no column overlap observed.
+- Desktop/mobile screenshots: `/tmp/gamedevland-sdk-rendering-desktop.jpg` and
+  `/tmp/gamedevland-sdk-rendering-mobile.jpg`. Browser theme/viewport restored.
+- Typecheck, lint, production build, academy-preview build and diff whitespace checks passed.
+  Release locale parity still awaits the explicitly separate English translation task.
+
+## SDK bilingual release candidate — 2026-11-11
+
+- Russian content approved; English translation and deployment explicitly authorized by Alex.
+- Typecheck: 0 errors/warnings (the existing `webkitUserSelect` deprecation hint remains).
+- Lint, production build and locale parity passed: 157 content pairs, 370 generated HTML files
+  including existing public redirects; all fenced code blocks match between RU and EN.
+- Cyber UI validation passed: 16 bilingual lessons, 97 TypeScript examples, 93 interactive
+  variants. Language-preference validation passed all 11 cases.
+- Browser checks covered the English rendering section and comparison table, RU/EN switching,
+  and light/dark responsive layout. At the sampled narrow width, document and table cells had
+  no horizontal overflow. These are documentation checks, not gameplay/GPU/device benchmarks.
+- Publication uses the existing `Deploy GitHub Pages` workflow triggered by a push to `main`.
+  A separate release checkout is validated before push to exclude unrelated local portfolio edits.

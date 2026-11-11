@@ -10,13 +10,13 @@
   "concept": "GameConfig",
   "description": "Connect engine systems, assets, scenes and DI in one place.",
   "takeaway": [
-    "GameConfig is the application's composition root.",
+    "GameConfig connects systems, assets and scenes.",
     "Geometry and rule values live in separate game configurations."
   ],
   "sources": [
     {
       "title": "SDK · GameConfig.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/GameConfig.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
       "note": "Configuration fields and types."
     },
     {
@@ -30,11 +30,12 @@
 
 `GameConfig` describes game startup. It is passed to `Engine.run` and defines which systems and scenes to prepare. In Block Puzzle, it is the static field `BlockPuzzleGameConfig.config`.
 
-A shortened version of [game.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts#L10):
+Configure startup using the example in [game.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts#L10):
 
 ```ts
 static readonly config: GameConfig = {
   system: {
+    renderer: new PixiRendererModule(),
     canvasBackground: '#1d57c8',
     screen: {
       land: { width: 960, height: 540 },
@@ -52,6 +53,8 @@ static readonly config: GameConfig = {
   di: new BlockPuzzleDiDefinitionRoot(),
 };
 ```
+
+Import `PixiRendererModule` from `@gamedevland/engine/renderers/pixi`. The required `system.renderer` field selects rendering and registers the standard node types. The game does not need to register `Container`, `Sprite` and `Text` again in DI.
 
 <figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>system</strong><span>Screen, audio, startup policy and persistence</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>assets</strong><span>Known assets and what to load before the first scene</span></div></div><div class="sdk-figure__item tone-green"><div><strong>scenes</strong><span>Initial key and scene definitions</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>di</strong><span>Classes and factories used to supply dependencies</span></div></div></div><figcaption>The configuration connects project parts; it does not contain the piece placement rules.</figcaption></figure>
 

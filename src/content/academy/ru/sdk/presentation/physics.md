@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · PhysicsWorld.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/physics/PhysicsWorld.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/PhysicsWorld.ts",
       "note": "Тела, шаг, управление и столкновения."
     },
     {
       "title": "SDK · PhysicsSceneService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/physics/PhysicsSceneService.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/PhysicsSceneService.ts",
       "note": "Фиксированный шаг и lifecycle мира."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/physics/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/types.ts",
       "note": "Snapshots и параметры интеграции."
     }
   ]
@@ -34,10 +34,14 @@
 
 <aside class="lesson-note" aria-labelledby="physics-body"><span class="lesson-note__label">Термин</span><h3 id="physics-body">Физическое тело</h3><p>Объект для расчёта движения и столкновений. Например, круг, который можно показать на экране спрайтом шара.</p></aside>
 
+Для встроенной 2D-физики подключим `MatterPhysicsModule` из `@gamedevland/engine/physics` через `system.modules: [new MatterPhysicsModule()]`. Renderer сам физику не подключает.
+
 Создадим мир и добавим круглое тело. `world.step(1 / 60)` выполнит расчёт за одну шестидесятую секунды. В `snapshots` получим новые координаты. В сцене можно поручить обновление `PhysicsSceneService`.
 
 ```ts
-const manager = new PhysicsManager();
+import { PhysicsServices } from '@gamedevland/engine/physics';
+
+const manager = engine.di.get(PhysicsServices.Manager);
 const world = manager.createWorld({ worldId: 'demo', config: {} });
 world.setBounds({ x: 0, y: 0, width: 540, height: 960 });
 const ball = world.addCircleBody({

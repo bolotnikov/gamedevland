@@ -55,3 +55,18 @@ The API reference indexes 338 exports across 20 public Engine modules and the Vi
 Section 01 is approved and translated for bilingual publication. Sections 02–04 remain
 Russian drafts: visible In Progress cards, no public routes. The course illustration, shared
 UI and all 12 foundations lessons are available in English and Russian.
+
+## GameDevLand SDK — rendering bilingual release (2026-11-11)
+
+Alex approved Russian content and authorized English translation and deployment.
+
+| Section | Lessons | Scope |
+| --- | --- | --- |
+| 01 — Startup and data | 12 | Startup, configuration, assets, decoding, saves and localization |
+| 02 — Game architecture | 13 | Scenes, DI, events, FSM, commands, lifecycle and diagnostics |
+| 03 — Layout, input and effects | 15 | JSON layout, components, input, animation, audio, particles, physics and API reference |
+| 04 — Rendering modes | 7 | Comparison, four renderer compositions, GLB and camera/world/UI ordering |
+| 05 — Platforms and builds | 5 | Host platforms, loading, ads, Poki packaging and upload |
+
+All five sections have equivalent English/Russian content. The API reference contains 347
+public exports across 24 Engine entry points, plus the Vite entry point.

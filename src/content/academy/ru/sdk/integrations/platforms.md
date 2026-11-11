@@ -15,23 +15,28 @@
   "sources": [
     {
       "title": "SDK · PlatformCatalog.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/shared/PlatformCatalog.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/shared/PlatformCatalog.ts",
       "note": "Поддерживаемые платформы."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/types.ts",
       "note": "Сигналы, реклама и результат награды."
     },
     {
       "title": "SDK · PlatformManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/PlatformManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/PlatformManager.ts",
       "note": "Вызовы адаптера и рекламные hooks."
     },
     {
       "title": "SDK · GameViteConfigFactory.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/src/GameViteConfigFactory.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/GameViteConfigFactory.ts",
       "note": "Выбор платформенной сборки."
+    },
+    {
+      "title": "SDK · PlaygamaPlatformAdapter.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/internal/playgama/PlaygamaPlatformAdapter.ts",
+      "note": "Bridge: инициализация, сохранения, реклама и пауза площадки."
     }
   ]
 }
@@ -40,6 +45,10 @@
 <aside class="lesson-note" aria-labelledby="platform-term"><span class="lesson-note__label">Термин</span><h3 id="platform-term">Игровая площадка</h3><p>Сайт, на котором запускается игра. Площадка может показывать рекламу и получать от игры сигналы о загрузке и ходе партии.</p></aside>
 
 Для Poki зададим `VITE_PLATFORM=poki` при сборке. Из кода игры вызываем одни и те же методы `PlatformManager`. Например, `gameplayStart()` сообщает о начале партии, а `gameplayStop()` — о её завершении.
+
+Для Playgama Bridge выберем `VITE_PLATFORM=playgama`. Добавим `playgama-bridge-config.json` в `game/public/`; минимальное содержимое — `{}`. Инструменты сборки подключат Bridge перед игрой. В коде продолжаем использовать `engine.platform`; Bridge определяет площадку запуска.
+
+Сохранения Bridge подготавливаются до завершения инициализации платформы. При политике `platform-exclusive` движок использует их без подстановки браузерных записей. `namespace` задаём через `system.persistence`.
 
 <figure class="sdk-figure is-flow">
   <div class="sdk-figure__body">

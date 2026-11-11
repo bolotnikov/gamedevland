@@ -15,30 +15,32 @@
   "sources": [
     {
       "title": "SDK · NodeBase.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/NodeBase.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NodeBase.ts",
       "note": "Node access methods and lookup."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/types.ts",
       "note": "Contracts for built-in node types."
     },
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
       "note": "Creating the WebGL renderer."
     },
     {
       "title": "SDK · TexturedRope.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/TexturedRope.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/TexturedRope.ts",
       "note": "A specialized node with geometry and points."
     }
   ]
 }
 ---
 
-<aside class="lesson-note" aria-labelledby="node-term"><span class="lesson-note__label">Term</span><h3 id="node-term">Node</h3><p>An element in a layout. For example, Text displays text, and Container groups elements. The associated PixiJS object renders it and is available as view.</p></aside>
+<aside class="lesson-note" aria-labelledby="node-term"><span class="lesson-note__label">Term</span><h3 id="node-term">Node</h3><p>An element in a layout. For example, Text displays text, and Container groups elements. The shared NodeBase from /layouts does not depend on rendering. Pixi and Three nodes expose their rendering object as view.</p></aside>
 
+
+Use `layout.requireNode(id, Text)` to search the whole layout: it immediately checks the node exists and has the expected class. Import concrete `Text` and `Container` classes from `@gamedevland/engine/renderers/pixi`.
 
 In this example, `board` is inside `gameplay`, while `score` is directly under the root. From the root node’s component, find both elements, update the score text, and show the board.
 

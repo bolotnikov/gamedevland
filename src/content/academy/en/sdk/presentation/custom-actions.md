@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseTypedAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseTypedAction.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/actions/BaseTypedAction.ts",
       "note": "The two schemas and the call to execute."
     },
     {
       "title": "SDK · BaseAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/actions/BaseAction.ts",
       "note": "Owned tweens, scope, and cancellation."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/tween/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/tween/types.ts",
       "note": "TweenHandle and alphaTo."
     }
   ]
@@ -36,12 +36,15 @@ Create `FadeAction`. `configDecoder` validates the duration from JSON, and `inpu
 
 ```ts
 import { BaseTypedAction } from '@gamedevland/engine/layouts';
+import { NodeBase } from '@gamedevland/engine/renderers/pixi';
 import { SchemaDecoder } from '@gamedevland/engine/validation';
 
 export class FadeAction extends BaseTypedAction<
   { duration: number },
-  { alpha: number }
+  { alpha: number },
+  NodeBase
 > {
+  protected readonly nodeType = NodeBase;
   protected override readonly configDecoder = SchemaDecoder.object({
     duration: SchemaDecoder.number({ min: 0 }),
   });

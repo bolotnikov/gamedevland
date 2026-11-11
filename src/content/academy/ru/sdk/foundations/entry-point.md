@@ -26,7 +26,7 @@
     },
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
       "note": "Engine.run создаёт движок, подготавливает canvas и передаёт GameConfig в запуск."
     }
   ]
@@ -45,7 +45,7 @@ void Engine.run('#app', BlockPuzzleGameConfig.config);
 
 Первый аргумент, `'#app'`, указывает на контейнер `<div id="app"></div>` в HTML: туда движок добавит canvas. Второй аргумент — [конфигурация игры](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts). Она задаёт настройки систем, ресурсы, сцены и зависимости проекта.
 
-`Engine.run` создаёт и подготавливает движок по этим данным, затем открывает начальную сцену. В Block Puzzle поле `scenes.initial` равно `'boot'`, поэтому сначала запускается загрузочная сцена проекта.
+`Engine.run` создаёт и подготавливает движок по этим данным, затем открывает начальную сцену. Метод возвращает экземпляр движка; `await engine.destroy()` завершает его работу и освобождает ресурсы. Выбор рендера задаётся в `GameConfig.system.renderer`, как показано в следующем уроке. В Block Puzzle поле `scenes.initial` равно `'boot'`, поэтому сначала запускается загрузочная сцена проекта.
 
 <figure class="sdk-figure is-flow" aria-label="Проект передаёт конфигурацию в Engine.run, SDK подготавливает движок и открывает выбранную проектом сцену boot">
   <div class="sdk-figure__body">

@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · AssetManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/assets/AssetManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManager.ts",
       "note": "loadBundle, loadRequiredBundle, load, has, get and loading controls."
     },
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "Scene preloading and the absence of automatic shared asset removal."
     },
     {
@@ -72,8 +72,10 @@ assets: {
 
 This is part of a scene definition. Bundle names and IDs must exist in the manifest. `loadBundle` rejects unknown names, so a typo is detected immediately.
 
-`load(ids)` loads individual IDs. `has(id)` checks for a loaded result, and `get(id)` returns it. For JSON, we then use a decoder; for images, a standard node or TextureAssetResolver.
+`load(ids)` loads individual IDs. `has(id)` checks for a loaded result, and `get(id)` returns it. For JSON, we then use a decoder; for images, a standard Pixi node or `TextureAssetResolver` from `@gamedevland/engine/renderers/pixi`.
 
 After loading, `loadRequiredBundle(name)` checks that every result is present. An ordinary `loadBundle` call does not guarantee that every file loaded: individual loader failures are handled inside the coordinator. Use `loadRequiredBundle` for required assets.
 
-Leaving a scene does not clear the shared asset cache: the next scene may use the same files. AssetManager has no public `evict` method.
+For required individual files, use `loadRequired(ids, { signal })`; `loadRequiredBundle(name, { signal })` accepts the same cancellation signal. `BaseScene.preload` uses required loading for assets listed in `SceneConfig.assets`.
+
+Leaving a scene does not clear the shared cache: the next scene may use the same files. `assets.unload(id)` explicitly removes an asset. Release all GLB instances first; an asset with live instances stays in the cache.

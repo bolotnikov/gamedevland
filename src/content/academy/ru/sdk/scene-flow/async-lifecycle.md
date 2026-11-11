@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseCommand.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/BaseCommand.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/commands/BaseCommand.ts",
       "note": "Проверка scene scope и detached-операции."
     },
     {
       "title": "SDK · BaseComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/BaseComponent.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
       "note": "Ожидание ресурсов и завершение detach."
     },
     {
       "title": "SDK · BaseAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/actions/BaseAction.ts",
       "note": "Отмена и область жизни действия."
     }
   ]
@@ -55,4 +55,6 @@ spawned.node.setVisible(true);
 
 <figure class="sdk-figure is-compare"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Владелец активен</strong><span>Операция завершилась → результат используется</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Владелец удалён</strong><span>Операция завершилась → ресурс освобождён → продолжение пропущено</span></div></div></div><figcaption>Проверка после await не отменяет сетевой запрос; она ограничивает применение результата.</figcaption></figure>
 
-В своём `onDetach` вызываем `super.onDetach()`, чтобы SDK остановил анимации, добавленные через `ownTween`.
+Для отменяемых запросов сервис получает `ctx.signal`: после `await` проверим `ctx.signal?.throwIfAborted()` перед применением результата. Отмена не может принудительно остановить произвольный Promise.
+
+`ownDisposer` регистрирует синхронную очистку до удаления компонента; `scopeSignal` действует до detach. Отключение компонента не завершает этот срок жизни. В своём `onDetach` вызываем `super.onDetach()`, чтобы SDK отменил сигнал и освободил зарегистрированные ресурсы.

@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · ParticlesManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/particles/ParticlesManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/particles/ParticlesManager.ts",
       "note": "Emitter lifetime and subtree cleanup."
     },
     {
       "title": "SDK · ParticleEmitterComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/ParticleEmitterComponent.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/ParticleEmitterComponent.ts",
       "note": "A persistent emitter on a node."
     },
     {
       "title": "SDK · DisplacementFilterComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/DisplacementFilterComponent.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/DisplacementFilterComponent.ts",
       "note": "Filter ownership and shared textures."
     },
     {
@@ -39,6 +39,8 @@
 
 <aside class="lesson-note" aria-labelledby="particle-preset"><span class="lesson-note__label">Term</span><h3 id="particle-preset">Particle preset</h3><p>A file that describes how particles look and move, including how many appear and how quickly they disappear.</p></aside>
 
+
+Import `ParticleEmitterComponent`, `DisplacementFilterComponent` and `PlayParticlesAction` from `@gamedevland/engine/renderers/pixi`. They work with Pixi nodes; a Three node component creates Three effects.
 
 When a line clears, run the action with the cell coordinates. With `space: 'local'`, the coordinates are relative to the effect container. [BlockPuzzleBoardEffectsComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts#L54)
 

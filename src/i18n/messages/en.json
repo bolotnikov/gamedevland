@@ -766,7 +766,7 @@
   "Подписка удерживает сцену": "The subscription retains the scene",
   "Обработчик события": "Event handler",
   "Доступна через обработчик": "Accessible through the handler",
-  "Универсальный SDK для HTML5-игр на TypeScript. Подключение к проекту, сцены, ресурсы, вёрстка и игровые системы.": "A general-purpose SDK for HTML5 games in TypeScript. Project integration, scenes, assets, layouts and game systems.",
+  "Универсальный SDK для HTML5-игр на TypeScript. Подключение к проекту, сцены, ресурсы, вёрстка и игровые системы.": "An SDK for TypeScript HTML5 games with PixiJS and Three.js. Project startup, scenes, assets and game systems.",
   "Запуск и данные": "Startup and data",
   "Установка, конфигурация игры, загрузка ресурсов, проверка данных, сохранения и локализация.": "Installation, game configuration, asset loading, data validation, persistence and localization.",
   "Подключим SDK к проекту и разберём запуск игры. Проследим путь от файла ресурса до проверенных данных.": "Connect the SDK to a project and examine game startup. Trace the path from an asset file to validated data.",
@@ -785,7 +785,7 @@
   "В разработке": "In Progress",
   "Уроков: {value0}": "Lessons: {value0}",
   "Что потребуется": "Prerequisites",
-  "Основы TypeScript, классов, Promise и npm. Опыт с PixiJS пригодится в третьем разделе. Для нового проекта — Node.js 22.12+ или 24.": "Basic TypeScript, classes, Promise and npm. PixiJS experience will help in section 03. For a new project, use Node.js 22.12+ or 24.",
+  "Основы TypeScript, классов, Promise и npm. Опыт с PixiJS пригодится в третьем разделе. Для нового проекта — Node.js 22.12+ или 24.": "Basic TypeScript, classes, Promise and npm. Familiarity with PixiJS or Three.js helps with the rendering lessons. A new project requires Node.js 22.12+ or 24.",
   "Разберём подключение SDK и работу с его API. Уроки можно изучать по порядку или выбирать в содержании раздела.": "Explore SDK integration and its API. Read lessons in order or choose them from the section contents.",
   "Пакеты и примеры": "Packages and examples",
   "Пример игры: Block Puzzle · исходники ↗": "Example game: Block Puzzle · source ↗",
@@ -1338,5 +1338,12 @@
   "Общение с площадками": "Platform communication",
   "Ведём переговоры, подаём игру, сопровождаем модерацию и работаем с замечаниями до выпуска.": "We handle negotiations, submit the game, manage the review process and address feedback through to release.",
   "Маркетинг и SEO": "Marketing and SEO",
-  "Оформляем страницы игры, подбираем ключевые слова, готовим локализации и ведём продвижение.": "We set up game pages, choose keywords, prepare localizations and manage promotion."
+  "Оформляем страницы игры, подбираем ключевые слова, готовим локализации и ведём продвижение.": "We set up game pages, choose keywords, prepare localizations and manage promotion.",
+  "Режимы рендеринга": "Rendering modes",
+  "PixiJS, Three.js, совместная отрисовка, модели GLB и обновление камеры, мира и UI.": "PixiJS, Three.js, combined rendering, GLB models and camera, world and UI updates.",
+  "Выберем один из четырёх режимов отрисовки. Подключим 3D-модели и зададим порядок обновления камеры, мира и интерфейса.": "Choose one of four rendering modes, load 3D models and set the update order for the camera, world and UI.",
+  "Первые три раздела; знакомство с PixiJS или Three.js.": "The first three sections and familiarity with PixiJS or Three.js.",
+  "Pixi-only": "Pixi-only",
+  "Three-only": "Three-only",
+  "Three + Pixi": "Three + Pixi"
 }

@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "SDK · README.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/README.md",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/README.md",
       "note": "The purpose of the two packages and the SDK boundaries."
     },
     {
       "title": "Engine · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/package.json",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "The exports field lists the public engine modules."
     },
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "The public playSfx method for playing sound effects."
     }
   ]
 }
 ---
 
-[GameDevLand SDK](https://github.com/gamedevland/sdk) provides ready-made modules for HTML5 game development. Different games can share these modules while keeping their logic in separate projects. The `@gamedevland/engine` package runs in the browser, while `@gamedevland/vite` handles project startup and builds.
+[GameDevLand SDK](https://github.com/gamedevland/sdk) provides ready-made modules for HTML5 game development. Different games can share these modules while keeping their logic in separate projects. The `@gamedevland/engine` package runs in the browser, while `@gamedevland/vite` handles project startup and builds. Rendering can use PixiJS, Three.js, Three with a Pixi UI, or Three inside a Pixi texture.
 
 <aside class="lesson-note" aria-labelledby="sdk-definition">
   <span class="lesson-note__label">Term</span>
@@ -76,7 +76,8 @@
         <section class="sdk-boundary__module-group is-cyan" aria-labelledby="sdk-modules-cyan">
           <h4 id="sdk-modules-cyan">Screen and input</h4>
           <ul>
-            <li><code>layouts</code><span>Nodes, components and actions</span></li>
+            <li><code>layouts</code><span>Shared nodes, components and actions</span></li>
+            <li><code>renderers</code><span>Pixi, Three and their combined rendering</span></li>
             <li><code>prefabs</code><span>Creating nodes from templates</span></li>
             <li><code>screen</code><span>Screen size and adaptation</span></li>
             <li><code>input</code><span>Pointer and wheel events</span></li>

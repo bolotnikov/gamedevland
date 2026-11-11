@@ -13,6 +13,9 @@ export class Content {
 		return this.isAcademyPublished(data)
 			|| ((import.meta.env.DEV || import.meta.env.MODE === 'academy-preview') && ['sdk', 'cyber-ui'].includes(data.course) && data.locale === 'ru' && data.draft);
 	}
+	static sdkSections(steps: readonly CollectionEntry<'academy'>[]) {
+		return sdkCourse.sections.filter((section) => section.published || steps.some(({ data }) => data.course === 'sdk' && data.lesson === section.slug));
+	}
 	static async steps(locale: LocaleCode, course = 'javascript', lesson?: string) {
 		return (await getCollection('academy', ({ data }) => data.locale === locale
 			&& data.course === course && (lesson === undefined || data.lesson === lesson)

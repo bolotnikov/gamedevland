@@ -16,48 +16,43 @@
   "sources": [
     {
       "title": "SDK · LocalesService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/LocalesService.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/LocalesService.ts",
       "note": "Язык, lookup, параметры и поведение при отсутствии ключа."
     },
     {
       "title": "SDK · LocaleCatalog.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/common/LocaleCatalog.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/common/LocaleCatalog.ts",
       "note": "Поддерживаемые коды и ID словарей."
     },
     {
       "title": "SDK · LocalesBootstrapBootTask.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/boot/LocalesBootstrapBootTask.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/boot/LocalesBootstrapBootTask.ts",
       "note": "Выбор языка при старте; словари загружаются отдельно."
     }
   ]
 }
 ---
 
-`LocalesService` получает переводы из ConfigStore. Каталог `LocaleCatalog` поддерживает `en` и `ru`; для них ожидаются ID `json/locales/en.json` и `json/locales/ru.json`.
+`LocalesService` получает переводы из ConfigStore. Загрузим словари `json/locales/en.json` и `json/locales/ru.json` до первого чтения строки. В русском словаре запишем `"score": "Очки: {value}"`.
 
-В отличие от курса на сайте, это локализация самой игры. Публичный Block Puzzle оставляет часть надписей прямо в layout. Следующий пример показывает, как подключить словари в новом проекте.
-
-Оба JSON включим в манифест как `json` и загрузим до обращения к `LocalesService`. В русский словарь добавим надписи для кнопки и счётчика:
-
-```json
-{
-  "restart": "Начать заново",
-  "score": "Очки: {value}"
-}
-```
-
-В компоненте выберем язык и подставим очки в перевод. Здесь `label` — узел Text, а `SystemServices` импортирован из `@gamedevland/engine/di`:
+После загрузки настроим выбор языка. Здесь `locales` — сервис по токену `SystemServices.LocalesService` из `@gamedevland/engine/di`:
 
 ```ts
-const locales = this.node.engine.di.get(SystemServices.LocalesService);
+locales.initialize({
+  supportedLocales: ['en', 'ru'],
+  defaultLocale: 'en',
+  deviceLocale: engine.platform.getPreferredLocale(),
+  storageKey: 'sdk-game:language',
+});
+
 locales.setLang('ru');
 label.setText(locales.t('score', { value: 120 }));
 ```
 
-<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>Язык</strong><span>ru</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>Ключ и параметры</strong><span>score + { value: 120 }</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>Словарь</strong><span>«Очки: {value}»</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>Результат</strong><span>«Очки: 120»</span></div></div></div><figcaption>Сервис выбирает строку; визуальный компонент применяет её к Text.</figcaption></figure>
+`initialize` выбирает сохранённый язык, затем подсказку площадки, язык браузера или заданный default. `setLang` сохраняет ручной выбор.
 
-`setLang` меняет текущий язык, но не переписывает автоматически уже нарисованные Text-узлы. Компонент должен повторно установить строки. `getLang()` возвращает текущий язык, `has(key)` проверяет наличие перевода.
+<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Язык</strong><span>ru</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Ключ и параметры</strong><span>score + { value: 120 }</span></div></div><div class="sdk-figure__item tone-green"><div><strong>Text</strong><span>«Очки: 120»</span></div></div></div></figure>
 
-При поиске строки сервис проверяет текущий словарь и fallback. Если ключ не найден, возвращает сам ключ. Отсутствующий словарь — другая ситуация: обращение к неподготовленному файлу не заменяется автоматически успешной загрузкой.
+Для обновления надписей используем `locales.subscribe(handler)` и снимаем подписку при отключении компонента. Смена языка сама не переписывает Text-узлы. После установки перевода `label.fitTo(width, height)` может уменьшить шрифт до заданных границ.
 
-При старте движок может выбрать язык с учётом подсказки платформы. Словари для используемого порядка поиска должны быть подготовлены заранее. Добавление нового языка потребует обновления каталога SDK; одного файла `de.json` недостаточно.
+Каталог также поддерживает `es`, `pt-BR`, `de`, `fr`, `it`, `tr`, `zh-CN`, `ja` и `ko`; игра выбирает свой набор в `supportedLocales`. Для каждого используемого языка нужен подготовленный словарь. Если ключа нет в текущем словаре и fallback-словарях, `t` возвращает ключ.

@@ -121,6 +121,11 @@ the AST and scanner examples establish the standard for useful interaction.
 
 ## Publication workflow
 
+- On 2026-11-11 Alex approved the Russian SDK update, including the separate seven-lesson
+  rendering section and its responsive comparison table. He explicitly authorized English
+  translation, commit, push and deployment through the existing GitHub Pages workflow.
+  This authorization covers the SDK course update only, excluding unrelated portfolio edits.
+
 - On 2026-11-08 Alex authorized English translation and production release of the revised
   Cyber UI course, publishing service page, service landscape screenshot, portfolio icon
   correction, and remembered browser-language selection. This applies to this release only.

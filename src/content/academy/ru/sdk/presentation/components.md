@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/BaseComponent.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
       "note": "Хуки, включение и базовая очистка."
     },
     {
       "title": "SDK · NodeComponents.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/internal/NodeComponents.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/internal/NodeComponents.ts",
       "note": "Порядок ready/enable и поиск по классу."
     },
     {
       "title": "SDK · BuiltTreeActivator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/build/BuiltTreeActivator.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/build/BuiltTreeActivator.ts",
       "note": "Активация детей раньше родителя."
     }
   ]
@@ -33,6 +33,8 @@
 ---
 
 <aside class="lesson-note" aria-labelledby="component-term"><span class="lesson-note__label">Термин</span><h3 id="component-term">Компонент</h3><p>Класс, который добавляет элементу экрана поведение. Например, слушает событие об изменении очков и обновляет текст.</p></aside>
+
+Компонент указывает класс своего узла: например, `BaseComponent<Text>` с `protected readonly nodeType = Text`. `Text` импортируем из `@gamedevland/engine/renderers/pixi`. SDK проверит тип до вызова хуков компонента.
 
 В `components` добавим счётчик. `score` — имя компонента на этом узле, `type` — имя класса, зарегистрированного в DI. [layout.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json)
 

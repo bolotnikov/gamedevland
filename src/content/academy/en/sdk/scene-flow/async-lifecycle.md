@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseCommand.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/BaseCommand.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/commands/BaseCommand.ts",
       "note": "Scene scope checks and detached operations."
     },
     {
       "title": "SDK · BaseComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/BaseComponent.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
       "note": "Awaiting resources and completing detach."
     },
     {
       "title": "SDK · BaseAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/actions/BaseAction.ts",
       "note": "Action cancellation and lifetime."
     }
   ]
@@ -55,4 +55,6 @@ If the component has been disabled, the method releases the prefab and returns `
 
 <figure class="sdk-figure is-compare"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Owner is active</strong><span>Operation completes → use the result</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Owner has been removed</strong><span>Operation completes → release the resource → skip the rest</span></div></div></div><figcaption>The check after await lets the network request finish and controls whether its result is used.</figcaption></figure>
 
-Call `super.onDetach()` in your `onDetach` method so the SDK stops animations registered through `ownTween`.
+For cancellable requests, a service receives `ctx.signal`: after `await`, check `ctx.signal?.throwIfAborted()` before applying the result. Cancellation cannot forcibly stop an arbitrary Promise.
+
+`ownDisposer` registers synchronous cleanup until the component is removed; `scopeSignal` lasts until detach. Disabling a component does not end this lifetime. Call `super.onDetach()` from an overridden `onDetach` so the SDK aborts the signal and releases registered resources.

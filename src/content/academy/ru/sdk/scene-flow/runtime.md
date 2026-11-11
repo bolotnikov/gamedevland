@@ -15,29 +15,29 @@
   "sources": [
     {
       "title": "SDK · RuntimeSystemPhase.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/runtime/RuntimeSystemPhase.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/runtime/RuntimeSystemPhase.ts",
       "note": "Порядок фаз обновления."
     },
     {
       "title": "SDK · EnginePauseController.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/runtime/EnginePauseController.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/runtime/EnginePauseController.ts",
       "note": "Объединение причин паузы."
     },
     {
       "title": "SDK · RuntimeActivity.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/runtime/RuntimeActivity.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/runtime/RuntimeActivity.ts",
       "note": "Наблюдаемое состояние активности."
     },
     {
       "title": "SDK · SceneService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneService.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneService.ts",
       "note": "Контракт обновления сервиса."
     }
   ]
 }
 ---
 
-SDK обновляет вёрстку, сервисы сцены, физику, частицы и твины в заданном порядке. Игровой код подключается к обновлению через методы компонентов и сервисов.
+SDK обновляет вёрстку, сервисы сцены, физику, частицы и твины в заданном порядке. Затем выполняет обновления представления в порядке `camera → world → ui` и рисует кадр. Все выбранные рендеры используют один цикл обновления. Игровой код подключается к обновлению через методы компонентов и сервисов.
 
 <figure class="sdk-figure is-flow is-long"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">01</span><div><strong>layout</strong><span>Обновление узлов и включённых компонентов</span></div></div><div class="sdk-figure__item tone-violet"><span class="sdk-figure__index">02</span><div><strong>scene</strong><span>Сервисы сцены; FsmDrivenScene отправляет SceneTick</span></div></div><div class="sdk-figure__item tone-green"><span class="sdk-figure__index">03</span><div><strong>physics</strong><span>Сервисы физической фазы</span></div></div><div class="sdk-figure__item tone-amber"><span class="sdk-figure__index">04</span><div><strong>particles</strong><span>Обновление частиц</span></div></div><div class="sdk-figure__item tone-cyan"><span class="sdk-figure__index">05</span><div><strong>tweens</strong><span>Обновление анимаций движка</span></div></div></div><figcaption>Один кадр стандартного scheduler. dt в хуках сцены и компонентов передаётся в секундах.</figcaption></figure>
 
@@ -45,7 +45,7 @@ SDK обновляет вёрстку, сервисы сцены, физику, 
 
 ## Причины паузы
 
-Пауза может происходить из-за неактивной страницы, ручного действия, платформы или рекламы. Итоговая пауза сохраняется, пока активна хотя бы одна причина. Завершение рекламы не должно возобновлять игру, если вкладка всё ещё неактивна.
+Пауза может происходить из-за неактивной страницы, ручного действия, платформы или рекламы. Итоговая пауза сохраняется, пока активна хотя бы одна причина. Завершение рекламы не должно возобновлять игру, если вкладка всё ещё неактивна. Потеря фокуса при видимой странице сама по себе игру не останавливает.
 
 `TweenManager.delayMs` останавливает отсчёт на время игровой паузы.
 

@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · AssetManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/assets/AssetManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManager.ts",
       "note": "loadBundle, loadRequiredBundle, load, has, get и управление загрузкой."
     },
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "Preload сцены и отсутствие автоматического удаления общих assets."
     },
     {
@@ -72,8 +72,10 @@ assets: {
 
 Это фрагмент описания сцены. Имена наборов и ID должны присутствовать в манифесте. `loadBundle` отклоняет неизвестное имя, поэтому опечатка обнаруживается сразу.
 
-`load(ids)` загружает отдельные ID. `has(id)` проверяет наличие загруженного результата, `get(id)` возвращает его. Для JSON дальше используем декодер, а для картинок — стандартный узел или TextureAssetResolver.
+`load(ids)` загружает отдельные ID. `has(id)` проверяет наличие загруженного результата, `get(id)` возвращает его. Для JSON дальше используем декодер, а для картинок — стандартный Pixi-узел или `TextureAssetResolver` из `@gamedevland/engine/renderers/pixi`.
 
 `loadRequiredBundle(name)` после загрузки проверяет наличие каждого результата. Обычный `loadBundle` сам по себе не гарантирует, что все файлы загрузились: сбои отдельных загрузчиков учитываются внутри координатора. Для обязательных ресурсов выбираем `loadRequiredBundle`.
 
-Выход из сцены не очищает общий кэш assets: следующая сцена может использовать те же файлы. Публичного метода `evict` в AssetManager нет.
+Для обязательных отдельных файлов есть `loadRequired(ids, { signal })`; `loadRequiredBundle(name, { signal })` принимает тот же сигнал отмены. `BaseScene.preload` использует обязательную загрузку ресурсов из `SceneConfig.assets`.
+
+Выход из сцены не очищает общий кэш: следующая сцена может использовать те же файлы. Явное удаление выполняет `assets.unload(id)`. Перед удалением GLB освободим все его экземпляры; при живых экземплярах ресурс остаётся в кэше.

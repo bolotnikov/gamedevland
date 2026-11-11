@@ -16,13 +16,13 @@
   "sources": [
     {
       "title": "SDK · AssetManifestBuilder.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/assets/AssetManifestBuilder.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestBuilder.ts",
       "note": "ID and grouping rules."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/assets/types.ts",
-      "note": "AssetDescriptor, BundleDescriptor and the four asset types."
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/types.ts",
+      "note": "AssetDescriptor, BundleDescriptor and asset types."
     },
     {
       "title": "Block Puzzle · assets.manifest.ts",
@@ -66,4 +66,4 @@ const bundles = [{
 
 `blockUrl` is the image URL imported with `?url`. Import the `BundleDescriptor` type from `@gamedevland/engine/assets`. For larger collections, `AssetManifestBuilder` assembles bundles without listing every file manually.
 
-`BundleBuildPolicy` determines grouping. The game separates music and effects into `audio-music` and `audio-sfx`. The asset type selects the loader: `image`, `audio`, `json` or `font`. The SDK prepares the loaded image for a node; components do not need to create the texture individually.
+`BundleBuildPolicy` determines grouping. The game separates music and effects into `audio-music` and `audio-sfx`. The asset type selects the loader: `image`, `audio`, `json`, `font` or `model`. For GLB files, pass URLs in the `models` field of `AssetManifestBuilder`; the model loader is registered with the Three module. The SDK prepares the loaded image for a node; components do not need to create the texture individually.

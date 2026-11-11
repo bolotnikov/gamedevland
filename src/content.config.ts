@@ -86,7 +86,7 @@ const academy = defineCollection({
 	schema: z.object({
 		...localized,
 		course: z.enum(['javascript', 'sdk', 'cyber-ui']),
-		lesson: z.enum(['engine', 'foundations', 'scene-flow', 'presentation', 'integrations', 'interface']),
+		lesson: z.enum(['engine', 'foundations', 'scene-flow', 'presentation', 'rendering', 'integrations', 'interface']),
 		draft: z.boolean().default(false),
 		order: z.number().int().positive(),
 		title: z.string(),

@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "SDK · README.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/README.md",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/README.md",
       "note": "Назначение двух пакетов и границы SDK."
     },
     {
       "title": "Engine · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/package.json",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "Поле exports перечисляет публичные модули движка."
     },
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "Публичный метод playSfx для воспроизведения звуковых эффектов."
     }
   ]
 }
 ---
 
-[GameDevLand SDK](https://github.com/gamedevland/sdk) предоставляет готовые модули для разработки HTML5-игр. На его основе можно создавать разные игры, сохраняя их логику в отдельных проектах. Пакет `@gamedevland/engine` работает в браузере, а `@gamedevland/vite` подготавливает запуск и сборку проекта.
+[GameDevLand SDK](https://github.com/gamedevland/sdk) предоставляет готовые модули для разработки HTML5-игр. На его основе можно создавать разные игры, сохраняя их логику в отдельных проектах. Пакет `@gamedevland/engine` работает в браузере, а `@gamedevland/vite` подготавливает запуск и сборку проекта. Для отрисовки можно выбрать PixiJS, Three.js, Three с Pixi-интерфейсом или Three внутри Pixi-текстуры.
 
 <aside class="lesson-note" aria-labelledby="sdk-definition">
   <span class="lesson-note__label">Термин</span>
@@ -76,7 +76,8 @@
         <section class="sdk-boundary__module-group is-cyan" aria-labelledby="sdk-modules-cyan">
           <h4 id="sdk-modules-cyan">Экран и ввод</h4>
           <ul>
-            <li><code>layouts</code><span>Узлы, компоненты и действия</span></li>
+            <li><code>layouts</code><span>Общие узлы, компоненты и действия</span></li>
+            <li><code>renderers</code><span>Pixi, Three и их совместная работа</span></li>
             <li><code>prefabs</code><span>Создание узлов из шаблонов</span></li>
             <li><code>screen</code><span>Размеры и адаптация экрана</span></li>
             <li><code>input</code><span>События указателя и колеса</span></li>

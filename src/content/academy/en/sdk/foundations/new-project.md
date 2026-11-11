@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "SDK · ProjectCreator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-07-playgama/packages/vite/src/project/ProjectCreator.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/project/ProjectCreator.ts",
       "note": "Creating a directory from the template, installing dependencies and command options."
     },
     {
       "title": "SDK · Empty project template",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-07-playgama/packages/vite/templates/empty",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/templates/empty",
       "note": "Project files, configuration, empty scene, JSON assets and validation commands."
     }
   ]
@@ -39,7 +39,7 @@ To create files without installing dependencies, add `--no-install`, then run `n
 <a id="файлы-проекта" class="translation-anchor" aria-hidden="true"></a>
 ## Project files
 
-The template already includes configuration, DI, a JSON layout and an FSM with one `ready` state. The files are ready for game logic:
+The template selects `PixiRendererModule` and imports from `@gamedevland/engine/renderers/pixi`. It already includes configuration, DI, a JSON layout and an FSM with one `ready` state. The files are ready for game logic:
 
 <figure class="sdk-figure is-matrix" aria-label="Main files in the generated project">
   <div class="sdk-figure__body">

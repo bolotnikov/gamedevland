@@ -10,13 +10,13 @@
   "concept": "GameConfig",
   "description": "В одном месте свяжем системы движка, ресурсы, сцены и DI.",
   "takeaway": [
-    "GameConfig — точка сборки приложения.",
+    "GameConfig связывает системы, ресурсы и сцены.",
     "Значения геометрии и правил хранятся в отдельных конфигурациях игры."
   ],
   "sources": [
     {
       "title": "SDK · GameConfig.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/GameConfig.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
       "note": "Поля и типы конфигурации."
     },
     {
@@ -30,11 +30,12 @@
 
 `GameConfig` — описание запуска игры. Он передаётся в `Engine.run` и задаёт, какие системы и сцены подготовить. В Block Puzzle это статическое поле `BlockPuzzleGameConfig.config`.
 
-Сокращённая структура [game.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts#L10):
+Настроим запуск по примеру [game.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts#L10):
 
 ```ts
 static readonly config: GameConfig = {
   system: {
+    renderer: new PixiRendererModule(),
     canvasBackground: '#1d57c8',
     screen: {
       land: { width: 960, height: 540 },
@@ -52,6 +53,8 @@ static readonly config: GameConfig = {
   di: new BlockPuzzleDiDefinitionRoot(),
 };
 ```
+
+`PixiRendererModule` импортируем из `@gamedevland/engine/renderers/pixi`. Поле `system.renderer` обязательно: оно выбирает способ отрисовки и регистрирует стандартные типы узлов. Повторно регистрировать `Container`, `Sprite` и `Text` в DI игры не нужно.
 
 <figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>system</strong><span>Экран, звук, политика старта и сохранений</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>assets</strong><span>Какие ресурсы известны и что загрузить до первой сцены</span></div></div><div class="sdk-figure__item tone-green"><div><strong>scenes</strong><span>Начальный ключ и описания сцен</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>di</strong><span>Какими классами и фабриками удовлетворять зависимости</span></div></div></div><figcaption>Конфигурация связывает части проекта; правила размещения фигур в неё не входят.</figcaption></figure>
 

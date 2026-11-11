@@ -197,3 +197,23 @@ Alex approved the Russian layouts and platforms sections and authorized their En
 translation and publication. All four SDK sections are available in both languages.
 The 20 new lesson pairs share code examples, source URLs, diagrams, and term notes.
 The SDK reference lists the same modules in both languages and links to localized lessons.
+
+
+## SDK rendering section — Russian review — 2026-11-11
+
+Alex requested a separate section for renderer modes rather than expanding presentation.
+The unpublished Russian `rendering` section contains seven lessons: comparison, Pixi-only,
+Three-only, Three + Pixi, Pixi + Three-as-texture, GLB, and camera/world/UI presentation order.
+It appears as section 04 in dev/academy-preview; integrations follows it. Published/English
+navigation omits this untranslated section. Foundations/presentation retain 12/15 lessons.
+Old draft URLs redirect locally to the new section. Translation and deployment await separate
+explicit authorization after Alex's Russian review.
+
+## SDK rendering bilingual release — 2026-11-11
+
+Alex approved the Russian revision and explicitly authorized English translation and deployment.
+The rendering section is now published in both languages. SDK has five sections and 52 lessons
+(12/13/15/7/5). All seven rendering lessons, section metadata, diagrams, API guide links and updated
+existing examples have English equivalents. Shared API data indexes 347 exports in 24 modules.
+The earlier Russian-only preview restrictions are superseded for this approved SDK release.
+Unrelated AI Defender portfolio/media work remains excluded.

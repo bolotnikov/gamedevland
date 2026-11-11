@@ -15,23 +15,28 @@
   "sources": [
     {
       "title": "SDK · PlatformCatalog.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/shared/PlatformCatalog.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/shared/PlatformCatalog.ts",
       "note": "Supported platforms."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/types.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/types.ts",
       "note": "Signals, ads, and the reward result."
     },
     {
       "title": "SDK · PlatformManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/PlatformManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/PlatformManager.ts",
       "note": "Adapter calls and ad hooks."
     },
     {
       "title": "SDK · GameViteConfigFactory.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/src/GameViteConfigFactory.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/GameViteConfigFactory.ts",
       "note": "Selecting the platform build."
+    },
+    {
+      "title": "SDK · PlaygamaPlatformAdapter.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/internal/playgama/PlaygamaPlatformAdapter.ts",
+      "note": "Bridge initialization, saves, advertising and host pause."
     }
   ]
 }
@@ -41,6 +46,10 @@
 
 
 For Poki, set `VITE_PLATFORM=poki` when building. The game calls the same `PlatformManager` methods across platforms. For example, `gameplayStart()` signals that a session has started and `gameplayStop()` signals that it has ended.
+
+For Playgama Bridge, select `VITE_PLATFORM=playgama`. Add `playgama-bridge-config.json` to `game/public/`; its minimal content is `{}`. The build tools load Bridge before the game. Game code continues to use `engine.platform`; Bridge detects the host platform.
+
+Bridge saves are prepared before platform initialization finishes. With `platform-exclusive`, the engine uses them without substituting browser records. Set the `namespace` through `system.persistence`.
 
 <figure class="sdk-figure is-flow">
   <div class="sdk-figure__body">

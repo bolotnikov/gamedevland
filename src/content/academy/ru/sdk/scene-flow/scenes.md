@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "Реальный порядок входа и выхода."
     },
     {
       "title": "SDK · SceneManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneManager.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneManager.ts",
       "note": "Очередь переходов, стек и параметры."
     },
     {
@@ -67,7 +67,7 @@ export class GameSceneDefinition {
         <ol class="sdk-scene-enter-steps">
           <li>Создаёт DI сцены и собирает layout</li>
           <li>Подготавливает конфиги и запускает сервисы</li>
-          <li>Активирует компоненты и запускает FSM, если она задана</li>
+          <li>Активирует компоненты, подготавливает шейдеры и текстуры, затем запускает FSM, если она задана</li>
           <li>Вызывает <code>create()</code>. В <code>FsmDrivenScene</code> этот метод отправляет <code>SceneReady</code>.</li>
         </ol>
       </div>
@@ -89,6 +89,6 @@ export class GameSceneDefinition {
 
 ## Переходы между сценами
 
-`SceneManager.start(key)` открывает начальную сцену. `replace(key, options)` заменяет верхнюю; `push` добавляет сцену в стек, а `pop` убирает верхнюю. Обновляется только верхняя неприостановленная сцена. Переходы проходят через очередь и имеют таймаут жизненных хуков.
+`SceneManager.start(key)` открывает начальную сцену. `replace(key, options)` заменяет верхнюю; `push` добавляет сцену в стек, а `pop` убирает верхнюю. Обновляется только верхняя неприостановленная сцена. Переходы проходят через очередь и имеют таймаут жизненных хуков. Время скрытой вкладки в этот таймаут не входит. При неудачном входе SDK вызывает очистку и у частично запущенного сервиса.
 
 Через `options.params` передаются входные данные новой сцены. Команда читает их через `sceneParams` и проверяет `decodeSceneParams`; параметры перехода не заменяют состояние текущей партии.

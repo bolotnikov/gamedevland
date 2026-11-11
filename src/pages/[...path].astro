@@ -21,6 +21,7 @@ import { sdkCourse } from '../data/sdkCourse';
 import { locales, type LocaleCode } from '../i18n/locales';
 import { Locale } from '../i18n/Locale';
 import { Content } from '../i18n/Content';
+import { SdkRoutes } from '../data/SdkRoutes';
 import { CyberUiRoutes } from '../data/CyberUiRoutes';
 
 type Route =
@@ -85,6 +86,9 @@ export async function getStaticPaths() {
   for (const [from, to] of Object.entries(CyberUiRoutes.redirects)) add(`/academy/cyber-ui/interface/${from}`, { kind: 'redirect', destination: i18n.path(`/academy/cyber-ui/interface/${to}/`) });
   if (groups.has('cyber-ui/interface')) {
    add('/academy/cyber-ui', { kind: 'cyber-ui-course' });
+  }
+  if (groups.has('sdk/rendering')) {
+   for (const [from, to] of Object.entries(SdkRoutes.redirects)) add(`/academy/sdk/${from}`, { kind: 'redirect', destination: i18n.path(`/academy/sdk/${to}/`) });
   }
   if (groups.has('sdk/foundations')) {
    add('/academy/sdk', {kind:'sdk-course'});
