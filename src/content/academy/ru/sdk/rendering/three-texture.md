@@ -11,40 +11,44 @@
   "description": "Нарисуем 3D-объект внутри Pixi-экрана.",
   "sources": [
     {
-      "title": "SDK · PixiThreeTextureRendererModule.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/PixiThreeTextureRendererModule.ts",
-      "note": "Pixi как основной renderer и загрузчик GLB."
+      "title": "SDK · ThreeViewport.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewport.ts",
+      "note": "Декларативный viewport и доступ к Three-layout."
     },
     {
-      "title": "SDK · ThreeTextureSurface.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/ThreeTextureSurface.ts",
-      "note": "Создание текстуры, render, resize, ограничения resolution и очистка."
+      "title": "SDK · ThreeViewportComponent.ts",
+      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewportComponent.ts",
+      "note": "Подготовка сцены, перерисовка, resize и очистка."
     }
   ]
 }
 ---
 
-Для вращающегося предмета в меню или 3D-поля внутри Pixi-игры выберем `PixiThreeTextureRendererModule` из `@gamedevland/engine/renderers/hybrid`. Нужны `pixi.js`, `three` и `@types/three`.
+Для 3D-предмета в меню или поля внутри Pixi-игры выберем `PixiThreeTextureRendererModule` из `@gamedevland/engine/renderers/hybrid`: `system.renderer: new PixiThreeTextureRendererModule()`. Нужны `pixi.js`, `three` и `@types/three`.
 
-В `GameConfig` зададим `system.renderer: new PixiThreeTextureRendererModule()`. Компонент Pixi-спрайта создаёт `ThreeTextureSurface`: отдельный Three canvas, который не добавляется на страницу. Его изображение становится текстурой спрайта.
+В JSON layout добавим `ThreeViewport`. SDK создаст отдельный Three canvas и назначит его изображение текстурой Pixi-спрайта:
 
-Внутри компонента подготовим собственные `scene` и `camera` из Three.js. Затем свяжем их со спрайтом; размер и плотность берём из проверенного JSON-конфига компонента:
-
-```ts
-const surface = new ThreeTextureSurface({
-  width: this.config.width,
-  height: this.config.height,
-  resolution: this.config.resolution,
-});
-this.ownDisposer(() => surface.dispose());
-this.node.setTexture(surface.texture);
-surface.render(scene, camera);
+```json
+{
+  "itemPreview": {
+    "type": "ThreeViewport",
+    "props": {
+      "width": 400,
+      "height": 400,
+      "resolution": 1.5,
+      "sceneLayout": "json/layouts/previews/item.json",
+      "camera": "world.camera"
+    }
+  }
+}
 ```
 
-`ThreeTextureSurface` импортируем из `/renderers/hybrid`. Компонент наследует `BaseTypedComponent<Config, Sprite>` и задаёт `nodeType = Sprite`; `Sprite` импортируем из `/renderers/pixi`.
+`sceneLayout` — id JSON-ассета с Three-нодами: группами, моделями, камерой и светом. `camera` указывает на камеру внутри этого файла. Посмотрим [пример Three-layout](https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/examples/three-viewport/preview.json). У каждого viewport свой граф и свои id; `children` у самого `ThreeViewport` не задаём.
 
-<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Three-сцена</strong><span>render(scene, camera)</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Текстура</strong><span>Копия изображения</span></div></div><div class="sdk-figure__item tone-green"><div><strong>Pixi-спрайт</strong><span>Положение, масштаб, прозрачность и ввод</span></div></div></div></figure>
+<figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Three-layout</strong><span>Модели, камера и свет</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Текстура</strong><span>Копия изображения Three-сцены</span></div></div><div class="sdk-figure__item tone-green"><div><strong>ThreeViewport</strong><span>Положение, масштаб, прозрачность и ввод Pixi</span></div></div></div></figure>
 
-После изменения 3D-сцены снова вызовем `render`; для неподвижного изображения повторная загрузка пикселей не нужна. При изменении размеров вызовем `surface.resize(width, height, resolution)` и обновим камеру. Допустимая `resolution` — от 0,25 до 2.
+В `onReady` компонента получим ноды через `viewport.world.requireNode(id, ThreeNode)`. По умолчанию изображение обновляется по запросу: после изменения 3D-объектов вызовем `viewport.invalidate()`. Для постоянной анимации зададим `renderMode: "always"` в props.
 
-Ввод остаётся на Pixi-спрайте: объекты внутри изображения автоматически не получают Three-raycast. Компонент отдельно освобождает свои геометрию, материалы и экземпляры GLB; `surface.dispose()` освобождает только renderer и Pixi-текстуру. Не уничтожаем общие ресурсы GLB вручную. Передача изображения между WebGL-контекстами требует копирования пикселей.
+`viewport.resize(width, height, resolution)` меняет размер текстуры и проекцию камеры. Допустимая `resolution` — от 0,25 до 2. При уничтожении ноды SDK освобождает вложенный layout, экземпляры GLB, renderer и текстуру. Ресурсы, созданные игровым компонентом, освобождает сам компонент.
+
+Ввод остаётся на Pixi-спрайте: Three-raycast внутри изображения автоматически не выполняется. Передача изображения требует копирования пикселей. Для собственного рендера через код остаётся `ThreeTextureSurface`.

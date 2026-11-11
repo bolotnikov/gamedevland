@@ -148,3 +148,10 @@ remain unchanged; editorial approval is not a learner assessment.
 - Local typecheck/lint/build/locales, Cyber UI examples and language-preference checks passed.
   Browser QA checked the English section/comparison, language switching and narrow table layout.
 - Release scope excludes existing AI Defender portfolio and media preparation edits.
+
+### Declarative Three textures — 2026-11-11
+
+- Alex requested the ThreeViewport lesson update in RU/EN and production deployment.
+- Replaced manual surface setup with JSON layout, scoped scene IDs, on-demand/continuous rendering, resize and resource ownership.
+- Preserved the lesson URL, translation key and learner progress identity; added ThreeViewport to the public API catalog.
+- Local typecheck, lint, build, locale parity, Cyber UI and language-preference checks passed. Browser QA covered RU/EN at desktop/narrow widths in light/dark themes, without horizontal page overflow or JavaScript errors.

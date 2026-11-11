@@ -1,4 +1,4 @@
-/** Public exports verified against sdk-2026-11-10 (be74f9d), 2026-11-11. */
+/** Public exports verified against sdk-2026-11-10; ThreeViewport added from sdk-2026-11-11. */
 export const sdkApi = [
 	{ name: "assets", exports: [
 		{"name":"AssetDescriptor","kind":"type","url":"https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/types.ts#L20"},
@@ -394,5 +394,6 @@ export const sdkApi = [
 		{"name":"HybridRoot","kind":"runtime","url":"https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRoot.ts#L8"},
 		{"name":"PixiThreeTextureRendererModule","kind":"runtime","url":"https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/PixiThreeTextureRendererModule.ts#L9"},
 		{"name":"ThreeTextureSurface","kind":"runtime","url":"https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/ThreeTextureSurface.ts#L7"},
+		{"name":"ThreeViewport","kind":"runtime","url":"https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewport.ts#L8"},
 	] },
 ] as const;
