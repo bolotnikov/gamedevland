@@ -1,13 +1,32 @@
 import type { Locale } from '../i18n/Locale';
-import { servicePages, type ServicePage } from './services';
+import { servicePages, serviceOverview, serviceOverviewShowcase, type ServicePage, type ServiceShowcase } from './services';
 
 export class ServiceCatalog {
  constructor(private readonly locale: Locale) {}
+
+ overview() {
+  const t = this.locale.t.bind(this.locale);
+  return {
+   title: t(serviceOverview.title), description: t(serviceOverview.description), header: t(serviceOverview.header),
+   intro: t(serviceOverview.intro), strip: t(serviceOverview.strip),
+   porting: t(serviceOverview.porting), portingDescription: t(serviceOverview.portingDescription),
+  };
+ }
+
+ overviewShowcase(): ServiceShowcase {
+  return this.showcase(serviceOverviewShowcase);
+ }
+
+ private showcase(showcase: ServiceShowcase): ServiceShowcase {
+  const t = this.locale.t.bind(this.locale);
+  return {...showcase, landscapeAlt: t(showcase.landscapeAlt), portraitAlt: t(showcase.portraitAlt), caption: t(showcase.caption)};
+ }
 
  pages(): ServicePage[] {
   const t = this.locale.t.bind(this.locale);
   return servicePages.map(page => ({
    ...page,
+   ...(page.showcase ? {showcase: this.showcase(page.showcase)} : {}),
    label: t(page.label),
    title: t(page.title),
    accent: t(page.accent),

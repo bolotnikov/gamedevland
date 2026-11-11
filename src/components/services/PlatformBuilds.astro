@@ -1,0 +1,89 @@
+---
+import { Locale } from '../../i18n/Locale';
+const i18n = Locale.forPath(Astro.url.pathname);
+const t = i18n.t.bind(i18n);
+import { ServicePlatforms } from '../../data/ServicePlatforms';
+interface Props { kind: 'games' | 'playable'; }
+const {kind} = Astro.props;
+const games = kind === 'games';
+const platforms = games ? ServicePlatforms.games : ServicePlatforms.ads;
+const stages = games
+ ? [{title: 'SDK площадки', text: 'Реклама · события · сохранения'}, {title: 'Адаптация', text: 'Экран · управление · загрузка'}, {title: 'Проверка сборки', text: 'Браузеры и целевые устройства'}]
+ : [{title: 'Формат сети', text: 'HTML или ZIP · размер файла'}, {title: 'Интеграция', text: 'Запуск · пауза · переход в магазин'}, {title: 'Проверка сборки', text: 'Ориентации · звук · загрузка'}];
+---
+<section class:list={['platform-builds', !games && 'is-ads']} id="platforms" aria-labelledby="platforms-title">
+ <div class="svc-section-heading">
+  <div><span class="svc-eyebrow">{t("Сборка и адаптация")}</span><h2 id="platforms-title">{t(games ? 'Одна игра — разные площадки' : 'Один playable — разные рекламные сети')}</h2></div>
+ </div>
+ <p class="platforms-intro">{t(games ? 'Подготовлю игру для любой из этих площадок: подключу SDK, адаптирую поведение и соберу нужную версию.' : 'Подготовлю отдельные сборки под выбранные сети и рекламные платформы — с их форматом, ограничениями и интерфейсами.')}</p>
+ <div class="build-map">
+  <div class="build-input">
+   <span class="build-step">{t("01 / Исходный проект")}</span>
+   <div class:list={['build-symbol', games ? 'symbol-game' : 'symbol-ad']} aria-hidden="true">
+    {games ? <div class="build-game-grid">{Array.from({length: 9}, (_, index) => <i class:list={[index % 3 === 0 && 'is-lit']}></i>)}</div> : <div class="build-phone"><span>▶</span><i></i></div>}
+   </div>
+   <h3>{t(games ? 'HTML5 игра' : 'Playable ad')}</h3>
+   <p>{t(games ? 'Механика, контент и интерфейс' : 'Механика, графика и сценарий')}</p>
+   <ol class="build-stages">{stages.map((stage, index) => <li><span aria-hidden="true">0{index + 1}</span><div><b>{t(stage.title)}</b><small>{t(stage.text)}</small></div></li>)}</ol>
+  </div>
+  <div class="build-branch" aria-hidden="true"><span>→</span></div>
+  <div class="build-destinations">
+   <div class="build-output-heading"><span class="build-step">{t("02 / Готовые сборки")}</span><span class="build-count">{platforms.length} {t(games ? 'площадок' : 'сетей и платформ')}</span></div>
+   <ul class="platform-grid">{platforms.map(platform => <li><a href={platform.url} target="_blank" rel="noopener noreferrer" class={`tone-${platform.tone}`}><span class="platform-initial" aria-hidden="true">{platform.mark}</span><span class="platform-name"><b>{t(platform.name)}</b>{platform.note && <small>{t(platform.note)}</small>}</span><span class="platform-link" aria-hidden="true">↗</span></a></li>)}</ul>
+   <p class="build-output-note">{t(games ? 'Отдельная конфигурация и интеграция для каждой площадки.' : 'Эти и другие сети — по требованиям выбранной площадки.')}</p>
+  </div>
+ </div>
+ <p class="platforms-caption">{t(games ? 'Список площадок согласуем для проекта. Публикацией и аккаунтами занимается заказчик.' : 'Формат и доступ к размещению зависят от сети и рекламного аккаунта. Названия ведут к официальной документации.')}</p>
+ {!games && <details class="network-history"><summary>{t("А что с ironSource и AdColony?")}<span aria-hidden="true">+</span></summary><div><p><a href="https://unity.com/products/ironsource-ads-sunset" target="_blank" rel="noopener noreferrer">ironSource Ads</a>{t(" прекратила прямые рекламные кампании 30 апреля 2026 года. Программатик через ironSource Exchange продолжает работать; формат уточняем для выбранного способа размещения.")}</p><p><a href="https://affle.com/affle_news/affle-announces-strategic-acquisition-of-adcolony-technology-assets-and-trademark-from-dt" target="_blank" rel="noopener noreferrer">{t("Бренд и технологические активы AdColony перешли к Affle")}</a>{t(" в 2026 году. Требования к новым сборкам согласуем отдельно.")}</p></div></details>}
+</section>
+<style>
+.platform-builds { padding:48px 0 64px; border-top:1px solid var(--color-border); }
+.platforms-intro { max-width:720px; margin-bottom:28px; font-size:15px; line-height:1.8; color:var(--color-muted-foreground); }
+.build-map { display:grid; grid-template-columns:minmax(240px,.8fr) 64px minmax(0,1.65fr); align-items:stretch; }
+.build-input { padding:24px; background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--svc-accent) 12%,transparent),transparent 65%),var(--color-card); border:1px solid var(--color-border); border-radius:20px; }
+.build-step { font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--color-muted-foreground); font-weight:600; }
+.build-symbol { height:124px; display:grid; place-items:center; }
+.build-game-grid { display:grid; grid-template-columns:repeat(3,19px); gap:5px; transform:rotate(-8deg); }
+.build-game-grid i { width:19px; height:19px; border:1px solid color-mix(in srgb,var(--svc-accent) 40%,transparent); background:color-mix(in srgb,var(--svc-accent) 13%,var(--color-card)); border-radius:4px; box-shadow:3px 3px 0 color-mix(in srgb,var(--svc-accent) 10%,transparent); }
+.build-game-grid .is-lit { background:var(--svc-accent); }
+.build-phone { width:58px; height:96px; border:2px solid var(--svc-accent); border-radius:12px; display:grid; place-items:center; position:relative; transform:rotate(-8deg); box-shadow:8px 8px 0 color-mix(in srgb,var(--svc-accent) 12%,transparent); }
+.build-phone span { font-size:22px; color:var(--svc-accent); }
+.build-phone i { width:20px; height:4px; border-radius:3px; position:absolute; bottom:8px; background:var(--svc-accent); }
+.build-input h3 { text-align:center; font-size:22px; margin-bottom:6px; }
+.build-input>p { text-align:center; font-size:12px; color:var(--color-muted-foreground); line-height:1.6; margin-bottom:26px; }
+.build-stages { padding:0; margin:0; list-style:none; display:grid; gap:20px; }
+.build-stages li { display:flex; gap:12px; align-items:flex-start; }
+.build-stages li>span { font-size:10px; color:var(--svc-accent); border:1px solid color-mix(in srgb,var(--svc-accent) 35%,var(--color-border)); border-radius:50%; width:25px; height:25px; flex-shrink:0; display:grid; place-items:center; }
+.build-stages b { display:block; font-size:12px; font-weight:600; margin:3px 0 5px; }
+.build-stages small { display:block; font-size:11px; line-height:1.5; color:var(--color-muted-foreground); }
+.build-branch { display:flex; align-items:center; position:relative; }
+.build-branch::before { content:''; height:1px; background:var(--svc-accent); width:100%; }
+.build-branch::after { content:''; position:absolute; height:75%; right:0; width:15px; border:1px solid color-mix(in srgb,var(--svc-accent) 45%,var(--color-border)); border-right:0; border-radius:14px 0 0 14px; }
+.build-branch span { position:absolute; left:18px; font-size:22px; color:var(--svc-accent); background:var(--color-background); }
+.build-destinations { padding:24px; border:1px solid var(--color-border); border-radius:20px; background:var(--color-card); min-width:0; }
+.build-output-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px; }
+.build-count { color:var(--svc-accent); font-size:10px; padding:6px 9px; background:color-mix(in srgb,var(--svc-accent) 8%,var(--color-card)); border-radius:20px; white-space:nowrap; }
+.platform-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; list-style:none; margin:0; padding:0; }
+.platform-grid a { --brand:var(--color-cyan); display:flex; align-items:center; gap:11px; padding:14px 12px; min-height:69px; border:1px solid var(--color-border); border-radius:11px; text-decoration:none; background:linear-gradient(115deg,color-mix(in srgb,var(--brand) 4%,var(--color-card)),var(--color-card)); transition:border-color .2s,transform .2s; }
+.platform-grid a:hover { border-color:var(--brand); transform:translateY(-2px); }
+.platform-grid .tone-violet { --brand:var(--color-violet); }
+.platform-grid .tone-amber { --brand:var(--color-amber); }
+.platform-grid .tone-green { --brand:var(--color-green); }
+.platform-initial { flex-shrink:0; width:32px; height:32px; display:grid; place-items:center; border-radius:9px; color:var(--brand); background:color-mix(in srgb,var(--brand) 12%,var(--color-card)); font-size:14px; font-weight:600; }
+.platform-name { min-width:0; }
+.platform-name b { font-size:12px; line-height:1.5; font-weight:600; overflow-wrap:anywhere; display:block; }
+.platform-name small { display:block; font-size:9px; color:var(--color-muted-foreground); line-height:1.5; margin-top:3px; }
+.platform-link { margin-left:auto; font-size:12px; color:var(--color-muted-foreground); }
+.build-output-note { font-size:11px; color:var(--color-muted-foreground); line-height:1.7; margin:20px 0 0; }
+.platforms-caption { font-size:12px; color:var(--color-muted-foreground); line-height:1.8; margin:18px 0 0; }
+.network-history { margin-top:20px; border-top:1px solid var(--color-border); }
+.network-history summary { display:flex; justify-content:space-between; cursor:pointer; gap:12px; padding:18px 0; font-size:12px; list-style:none; }
+.network-history summary::-webkit-details-marker { display:none; }
+.network-history[open] summary>span { transform:rotate(45deg); }
+.network-history p { color:var(--color-muted-foreground); font-size:12px; line-height:1.8; max-width:800px; }
+.network-history a { color:var(--svc-accent); }
+@media(min-width:1050px) { .is-ads .platform-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .is-ads .build-map { grid-template-columns:minmax(240px,.7fr) 64px minmax(0,2fr); } .is-ads .platform-grid a { padding:12px 10px; gap:8px; } }
+@media(max-width:760px) { .build-map { grid-template-columns:1fr; } .build-input { display:grid; grid-template-columns:110px 1fr; column-gap:18px; } .build-input>.build-step { grid-column:1 / -1; margin-bottom:18px; } .build-symbol { grid-column:1; grid-row:2 / 5; height:auto; } .build-input h3,.build-input>p { text-align:left; } .build-input h3 { font-size:20px; } .build-input>p { margin-bottom:18px; } .build-stages { grid-column:2; gap:14px; } .build-branch { height:44px; justify-content:center; } .build-branch::before { height:100%; width:1px; } .build-branch::after { display:none; } .build-branch span { left:auto; transform:rotate(90deg); font-size:20px; } }
+@media(max-width:480px) { .platform-builds { padding:30px 0 44px; } .build-input,.build-destinations { padding:18px; } .build-input { grid-template-columns:58px 1fr; gap:12px; } .build-game-grid { grid-template-columns:repeat(3,13px); gap:3px; } .build-game-grid i { width:13px; height:13px; } .build-phone { width:40px; height:70px; } .build-stages { gap:12px; } .build-stages li { gap:8px; } .build-stages li>span { display:none; } .build-input h3 { font-size:18px; } .build-output-heading { align-items:flex-start; gap:8px; } .build-count { white-space:normal; text-align:right; padding:0; background:none; } .platform-grid { gap:8px; } .platform-grid a { gap:8px; padding:10px 8px; min-height:65px; } .platform-initial { width:24px; height:28px; font-size:11px; border-radius:6px; } .platform-name b { font-size:11px; } .platform-link { display:none; } }
+@media(prefers-reduced-motion:reduce) { .platform-grid a { transition:none; } }
+</style>

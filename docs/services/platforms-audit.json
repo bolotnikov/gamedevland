@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-11-11",
+  "scope": "Bilingual service revision; translation and production deployment authorized by Alex on 2026-11-11",
+  "evidenceModule": "src/data/ServicePlatforms.ts",
+  "policy": "List confirmed playable destinations, not every advertising company. Export requirements and access depend on the account and placement. Platform links in the infographic point to official references.",
+  "corrections": [
+    {
+      "name": "ironSource Ads",
+      "finding": "Direct demand ended on 2026-04-30. ironSource Exchange programmatic demand and LevelPlay mediation are separate and remain supported. Do not list legacy ironSource Ads as an active direct campaign destination.",
+      "sources": [
+        "https://unity.com/products/ironsource-ads-sunset",
+        "https://docs.unity.com/en-us/grow/is-ads/ironsource-ads-sunset"
+      ]
+    },
+    {
+      "name": "AdColony",
+      "finding": "Affle announced the acquisition of selected technology assets and the trademark on 2026-06-15; DT described the sale the following day. AdColony is not an alias of DT Exchange. New AdColony playable requirements were not independently confirmed, so it is explained in a note rather than advertised as a verified build target.",
+      "sources": [
+        "https://affle.com/affle_news/affle-announces-strategic-acquisition-of-adcolony-technology-assets-and-trademark-from-dt",
+        "https://www.digitalturbine.com/blog/one-platform-full-focus"
+      ]
+    },
+    {
+      "name": "Liftoff",
+      "finding": "Official Liftoff playable documentation remains hosted under support.vungle.com. Use Liftoff with Vungle as a recognizable secondary label, not duplicate targets.",
+      "sources": [
+        "https://support.vungle.com/hc/en-us/articles/360035348091-Get-Started-With-Liftoff-Creative"
+      ]
+    },
+    {
+      "name": "TikTok Ad Network",
+      "finding": "The current official documentation names TikTok Ad Network, formerly TikTok Pangle. TikTok in-app and ad-network placements have separate references.",
+      "sources": [
+        "https://ads.tiktok.com/resources/help/article/available-ad-formats-for-pangle",
+        "https://ads.tiktok.com/resources/help/article/playable-ads?lang=en-gb"
+      ]
+    }
+  ],
+  "coverage": {
+    "gamePlatforms": [
+      "Playgama",
+      "Yandex Games",
+      "GameDistribution",
+      "Poki",
+      "GamePix",
+      "GameMonetize",
+      "CrazyGames"
+    ],
+    "playableDestinations": [
+      "Unity Ads",
+      "AppLovin",
+      "Liftoff",
+      "Mintegral",
+      "Moloco",
+      "Chartboost",
+      "InMobi",
+      "Meta",
+      "Google Ads",
+      "TikTok",
+      "TikTok Ad Network",
+      "Snapchat"
+    ]
+  },
+  "excludedAtUserRequest": [
+    "DT Exchange",
+    "Yandex Direct"
+  ]
+}

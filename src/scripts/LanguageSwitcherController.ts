@@ -15,6 +15,7 @@ export class LanguageSwitcherController {
 			if (event.relatedTarget instanceof Node && !root.contains(event.relatedTarget)) root.open = false;
 		});
 		this.updateLinks();
+		root.addEventListener('toggle', () => this.updateLinks());
 		window.addEventListener('hashchange', () => this.updateLinks());
 	}
 

@@ -121,6 +121,13 @@ the AST and scanner examples establish the standard for useful interaction.
 
 ## Publication workflow
 
+- On 2026-11-11 Alex approved finishing the service revision and explicitly authorized English
+  translation, commit, push and deployment to gamedev.land through the existing GitHub Pages
+  workflow. Remove standalone publishing, combine Unity/Flash porting with no materials
+  selector, show game/ad build destinations (excluding Yandex Direct and DT Exchange from
+  playable ads), and use Hole Islands / Rings 3D service screenshots. This release excludes
+  unrelated portfolio edits.
+
 - On 2026-11-11 Alex approved the Russian SDK update, including the separate seven-lesson
   rendering section and its responsive comparison table. He explicitly authorized English
   translation, commit, push and deployment through the existing GitHub Pages workflow.

@@ -64,7 +64,11 @@ export async function getStaticPaths() {
   const i18n = new Locale(language.code);
   const add = (url: string, route: Route) => paths.push({params:{path:i18n.path(url).replace(/^\//,'').replace(/\/$/,'') || undefined},props:{route}});
   for(const [url,kind] of [['/','home'],['/about','about'],['/services','services'],['/games','games'],['/academy/javascript','course'],['/academy/javascript/engine','lesson']] as const) add(url,{kind});
-  for (const page of new ServiceCatalog(i18n).pages()) add(`/services/${page.slug}`, {kind: 'service', page});
+  const serviceCatalog = new ServiceCatalog(i18n);
+  for (const page of serviceCatalog.pages()) add(`/services/${page.slug}`, {kind: 'service', page});
+  add('/services/unity-to-html5', {kind: 'redirect', destination: i18n.path('/services/game-porting/?from=unity')});
+  add('/services/flash-to-html5', {kind: 'redirect', destination: i18n.path('/services/game-porting/?from=flash')});
+  add('/services/html5-game-publishing', {kind: 'redirect', destination: i18n.path('/services/html5-game-development/#platforms')});
   for(const entry of games.filter(({data})=>data.locale===language.code)) add(`/games/${entry.data.translationKey}`,{kind:'game',entry});
   const localTutorials=tutorials.filter(({data})=>data.locale===language.code);
   const series=new Set(localTutorials.map(({data})=>data.seriesSlug));

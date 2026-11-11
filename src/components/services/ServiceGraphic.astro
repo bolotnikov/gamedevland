@@ -2,43 +2,22 @@
 import { Locale } from '../../i18n/Locale';
 const i18n = Locale.forPath(Astro.url.pathname);
 const t = i18n.t.bind(i18n);
-import type { ServiceGraphic } from '../../data/services';
-import FlashPortScene from './FlashPortScene.astro';
-interface Props { kind: ServiceGraphic | 'overview'; }
-const { kind } = Astro.props;
-const platforms = ['CrazyGames', 'GameDistribution', 'Playgama', t("Yandex Games"), 'Poki'];
-const showcase = kind === 'games' ? {
- title: 'AI Defender',
- landscape: '/assets/games/ai-defender/screens/land/battle49-swarm.webp',
- landscapeWidth: 1920, landscapeHeight: 1080,
- portrait: '/assets/games/ai-defender/screens/port/battle.webp',
- portraitWidth: 1080, portraitHeight: 1920,
- landscapeAlt: t('Landscape gameplay in AI Defender'),
- portraitAlt: t('Portrait gameplay in AI Defender'),
- caption: t('AI Defender — an original project in development'),
-} : kind === 'playable' ? {
- title: 'Idle Submarine',
- landscape: '/assets/games/idle-submarine/cover.webp',
- landscapeWidth: 1536, landscapeHeight: 1024,
- portrait: '/assets/games/idle-submarine/screens/port/gameplay.webp',
- portraitWidth: 390, portraitHeight: 844,
- landscapeAlt: t('Landscape version of Idle Submarine'),
- portraitAlt: t('Portrait gameplay in Idle Submarine'),
- caption: t('Idle Submarine — an original project in development'),
-} : undefined;
+import type { ServiceGraphic, ServiceShowcase } from '../../data/services';
+interface Props { kind: ServiceGraphic | 'overview'; showcase?: ServiceShowcase | undefined; }
+const { kind, showcase } = Astro.props;
 ---
 <figure class:list={['service-graphic', `graphic--${kind}`]}>
- {kind === 'overview' && <>
+ {kind === 'overview' && showcase && <>
   <div class="overview-art">
    <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-   <div class="browser overview-browser"><div class="browser-bar"><i></i><i></i><i></i><span>GameDev.Land / HTML5</span></div><img src="/assets/games/idle-submarine/cover.webp" alt={t("An Idle Submarine gameplay scene with a yellow submarine")} width="960" height="540" fetchpriority="high"/></div>
-   <div class="phone overview-phone"><img src="/assets/games/rings/screens/port/gameplay.webp" alt={t("Portrait version of Rings")} width="540" height="960"/></div>
+   <div class="browser overview-browser"><div class="browser-bar"><i></i><i></i><i></i><span>GameDev.Land / HTML5</span></div><img src={showcase.landscape} alt={showcase.landscapeAlt} width={showcase.landscapeWidth} height={showcase.landscapeHeight} fetchpriority="high"/></div>
+   <div class="phone overview-phone"><img src={showcase.portrait} alt={showcase.portraitAlt} width={showcase.portraitWidth} height={showcase.portraitHeight}/></div>
    <div class="floating-label label-code"><b>&lt;/&gt;</b><span>{t("Idea → HTML5")}</span></div>
    <div class="floating-label label-publish"><span class="status-dot"></span><span>{t("Adaptation → release")}</span></div>
   </div>
-  <figcaption>{t("Original games: Idle Submarine and Rings · in development")}</figcaption>
+  <figcaption>{showcase.caption}</figcaption>
  </>}
- {showcase && <>
+ {showcase && kind !== 'overview' && <>
   <div class="game-art">
    <span class="art-kicker">{t("One project · different screens")}</span>
    <div class="browser game-browser">
@@ -53,44 +32,12 @@ const showcase = kind === 'games' ? {
  {kind === 'port' && <>
   <div class="port-art">
    <span class="art-kicker">{t("From an existing project to a web version")}</span>
-   <div class="source-project"><span class="source-mark">C#</span><div><b>{t("Unity / another engine")}</b><span>{t("Logic · scenes · assets")}</span></div></div>
+   <div class="source-project"><span class="source-mark">→</span><div><b>{t("Unity · Flash")}</b><span>{t("Logic · scenes · assets")}</span></div></div>
    <div class="transfer"><span></span><b>{t("Review → port → adapt")}</b><span></span></div>
    <div class="browser port-browser"><div class="browser-bar"><i></i><i></i><i></i><span>{t("HTML5 / browser")}</span></div><div class="web-output"><span class="web-mark">&lt;/&gt;</span><div><b>{t("Web version of the game")}</b><span>{t("Controls · UI · SDK")}</span></div></div></div>
    <div class="output-devices"><span>{t("Desktop")}</span><span>{t("Mobile")}</span><span>{t("Площадки")}</span></div>
   </div>
   <figcaption>{t("Porting overview · technical approach chosen after review")}</figcaption>
- </>}
- {kind === 'flash' && <>
-  <div class="flash-art">
-   <span class="art-kicker">{t("Same game, a new platform")}</span>
-   <div class="flash-compare">
-    <div class="flash-before">
-     <span class="flash-version-label">{t("Before / Flash")}</span>
-     <div class="flash-editor">
-      <div class="flash-editor-bar"><span class="flash-file-icon" aria-hidden="true">f</span><span>game.fla</span><span class="flash-window-controls" aria-hidden="true">− ×</span></div>
-      <FlashPortScene/>
-      <div class="flash-timeline" aria-hidden="true"><span></span>{Array.from({length: 8}, (_, i) => <i class:list={[i === 3 && 'is-current']}></i>)}</div>
-     </div>
-     <span class="flash-device-label">{t("Keyboard")}</span>
-    </div>
-    <span class="flash-transfer-arrow" aria-hidden="true">→</span>
-    <div class="flash-after">
-     <span class="flash-version-label">{t("After / HTML5")}</span>
-     <div class="flash-phone"><span class="flash-phone-camera" aria-hidden="true"></span><FlashPortScene touch/></div>
-     <span class="flash-device-label">{t("Mouse + touch")}</span>
-    </div>
-   </div>
-  </div>
-  <figcaption>{t("Illustrative porting example, not a client case study")}</figcaption>
- </>}
- {kind === 'publishing' && <>
-  <div class="publishing-art">
-   <span class="art-kicker">{t("Preparation for each platform")}</span>
-   <div class="publish-source"><span>&lt;/&gt;</span><div><b>{t("HTML5 game")}</b><small>{t("Existing project")}</small></div></div>
-   <div class="publish-bridge"><span>{t("Adaptation")}</span><span>SDK</span><span>{t("Builds")}</span></div>
-   <div class="publish-outputs">{platforms.map((name, index) => <div><span class="platform-mark">{['C', 'GD', 'P', t("Y"), 'p'][index]}</span><b>{name}</b></div>)}</div>
-  </div>
-  <figcaption>{t("Target platforms · selection and terms agreed for each game")}</figcaption>
  </>}
  {kind === 'lead' && <>
   <div class="lead-art">
@@ -391,185 +338,6 @@ const showcase = kind === 'games' ? {
 	margin-top:16px
 }
 
-.flash-art {
- padding:28px;
- --art-accent:var(--color-amber)
-}
-.flash-compare {
- display:grid;
- grid-template-columns:minmax(0,1.3fr) 28px minmax(0,1fr);
- align-items:center;
- gap:14px;
- margin-top:22px
-}
-.flash-version-label {
- display:block;
- margin-bottom:14px;
- color:var(--color-foreground);
- font-size:12px;
- font-weight:500
-}
-.flash-before,.flash-after { min-width:0; }
-.flash-after { text-align:center; }
-.flash-editor {
- overflow:hidden;
- border:1px solid var(--color-line);
- border-radius:6px;
- background:var(--color-secondary);
- box-shadow:0 14px 30px #020a2320;
- transform:rotate(-2deg)
-}
-.flash-editor-bar {
- display:flex;
- align-items:center;
- gap:7px;
- height:27px;
- padding:0 8px;
- color:var(--color-muted-foreground);
- font:10px/1.5 monospace
-}
-.flash-file-icon {
- display:grid;
- place-items:center;
- width:15px;
- height:16px;
- border-radius:2px;
- background:#b7463f;
- color:#fff;
- font:italic 600 14px/1 serif
-}
-.flash-window-controls { margin-left:auto; font-size:11px; }
-.flash-timeline {
- display:flex;
- align-items:center;
- gap:3px;
- height:32px;
- padding:7px 8px;
- border-top:1px solid var(--color-border)
-}
-.flash-timeline>span { width:20%; height:4px; margin-right:4px; background:var(--color-line); }
-.flash-timeline i { flex:1; height:15px; border:1px solid var(--color-line); background:var(--color-card); }
-.flash-timeline i.is-current { border-color:var(--color-amber); background:color-mix(in srgb,var(--color-amber) 35%,var(--color-card)); }
-.flash-phone {
- position:relative;
- max-width:137px;
- margin-inline:auto;
- padding:5px;
- border:1px solid var(--color-line);
- border-radius:20px;
- background:#142238;
- box-shadow:0 16px 30px #020a2330;
- transform:rotate(3deg)
-}
-.flash-phone-camera { position:absolute; z-index:2; top:10px; left:calc(50% - 13px); width:26px; height:5px; border-radius:5px; background:#142238; }
-.flash-device-label { display:block; margin-top:15px; color:var(--color-muted-foreground); font-size:11px; }
-.flash-transfer-arrow { color:var(--color-amber); font-size:28px; text-align:center; }
-
-.publishing-art {
-	padding:28px
-}
-
-.publish-source {
-	margin:0 auto;
-	max-width:225px;
-	display:flex;
-	gap:15px;
-	align-items:center;
-	border:1px solid var(--color-cyan);
-	border-radius:12px;
-	padding:17px;
-	background:var(--color-background)
-}
-
-.publish-source>span {
-	font-size:28px;
-	color:var(--color-cyan)
-}
-
-.publish-source b {
-	font-size:15px
-}
-
-.publish-source small {
-	display:block;
-	font-size:10px;
-	color:var(--color-muted-foreground);
-	margin-top:5px
-}
-
-.publish-bridge {
-	position:relative;
-	display:flex;
-	justify-content:center;
-	gap:8px;
-	margin:27px 0;
-	padding:12px 0;
-	border-top:1px solid var(--color-line);
-	border-bottom:1px solid var(--color-line)
-}
-
-.publish-bridge:before,.publish-bridge:after {
-	content:'';
-	width:1px;
-	height:28px;
-	background:var(--color-line);
-	position:absolute;
-	left:50%;
-	top:-28px
-}
-
-.publish-bridge:after {
-	top:auto;
-	bottom:-28px
-}
-
-.publish-bridge span {
-	padding:6px 10px;
-	font-size:10px;
-	background:var(--color-secondary);
-	border-radius:5px
-}
-
-.publish-outputs {
-	display:grid;
-	grid-template-columns:repeat(6,1fr);
-	gap:10px;
-	position:relative
-}
-
-.publish-outputs>div {
-	grid-column:span 2;
-	display:flex;
-	align-items:center;
-	gap:7px;
-	padding:12px 8px;
-	border:1px solid var(--color-border);
-	border-radius:8px;
-	background:var(--color-card);
-	z-index:1
-}
-
-.publish-outputs>div:nth-child(4) {
-	grid-column:2/span 2
-}
-
-.publish-outputs b {
-	font-size:11px;
-	font-weight:500
-}
-
-.platform-mark {
-	font-size:11px;
-	display:grid;
-	place-items:center;
-	width:25px;
-	height:25px;
-	flex-shrink:0;
-	background:var(--color-secondary);
-	border-radius:6px;
-	color:var(--color-cyan)
-}
-
 .lead-art {
 	padding:28px;
 	--art-accent:var(--color-violet)
@@ -668,11 +436,6 @@ const showcase = kind === 'games' ? {
 }
 
 @media(max-width:600px) {
- .flash-compare { grid-template-columns:minmax(0,1.3fr) 22px minmax(0,1fr); gap:10px; margin-top:24px; }
- .flash-version-label { font-size:11px; }
- .flash-device-label { font-size:10px; }
- .flash-editor-bar { gap:5px; padding-inline:6px; font-size:9px; }
- .flash-transfer-arrow { font-size:23px; }
 
 	.service-graphic>div {
 		min-height:350px;
@@ -690,34 +453,8 @@ const showcase = kind === 'games' ? {
 	.game-phone {
 		top:100px
 	}
-	.port-art,.flash-art,.publishing-art,.lead-art,.game-art {
+	.port-art,.lead-art,.game-art {
 		padding:22px
-	}
-	.publish-outputs {
-		grid-template-columns:repeat(2,minmax(0,1fr));
-		gap:8px
-	}
-	.publish-outputs>div {
-		grid-column:auto;
-		flex-direction:column;
-		padding:12px 5px;
-		gap:7px
-	}
-	.publish-outputs>div:nth-child(4) {
-		grid-column:auto
-	}
-	.publish-outputs>div:last-child {
-		grid-column:1/-1;
-		flex-direction:row;
-		justify-content:center
-	}
-	.publish-outputs b {
-		font-size:11px
-	}
-	.platform-mark {
-		width:24px;
-		height:24px;
-		font-size:11px
 	}
 	.lead-person b {
 		font-size:13px

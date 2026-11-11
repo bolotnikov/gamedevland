@@ -291,6 +291,20 @@ body:has(.svc-page) {
 	grid-template-columns:repeat(3,minmax(0,1fr));
 }
 
+.svc-service-grid.single-service { grid-template-columns: 1fr; }
+.single-service .svc-service-card {
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	column-gap:40px;
+}
+.single-service .service-card-top { grid-column:1 / -1; }
+.single-service .service-card-art { grid-column:1; grid-row:2 / 5; font-size:clamp(16px,2.3vw,26px); }
+.single-service :is(h3,p,.service-card-bottom) { grid-column:2; }
+
+@media(max-width:760px) {
+	.single-service .svc-service-card { display:flex; }
+}
+
 .svc-service-card {
 	display:flex;
 	flex-direction:column;
