@@ -32,8 +32,10 @@ const screenshotSchema = z.object({
 	title: z.string(),
 	landscapeSrc: z.string(),
 	landscapeAlt: z.string(),
-	portraitSrc: z.string(),
-	portraitAlt: z.string(),
+	portraitSrc: z.string().optional(),
+	portraitAlt: z.string().optional(),
+}).refine((screenshot) => Boolean(screenshot.portraitSrc) === Boolean(screenshot.portraitAlt), {
+	message: 'A portrait screenshot requires both its source and alt text',
 });
 
 const promoVideoSchema = z.object({

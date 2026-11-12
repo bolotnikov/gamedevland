@@ -1,0 +1,113 @@
+{
+  "game": "Hole Marine",
+  "approvedIcon": "icon-approved.jpg",
+  "screenshotSource": "Existing actual Three.js/PixiJS browser canvas captures of levels 6, 11, 26 and 30; no generated gameplay or portrait crops.",
+  "videoSource": "Three straight-cut excerpts of the existing level-30 desktop IAB recording; normal FSM movement and production physics.",
+  "sourceVideo": "art/qa/campaign-v3/browser-level-30.webm",
+  "videoSegments": [
+    {
+      "start": 13,
+      "end": 24
+    },
+    {
+      "start": 44,
+      "end": 61
+    },
+    {
+      "start": 72,
+      "end": 86
+    }
+  ],
+  "videoEncoding": "H.264, 1280x720, 30 fps, CRF 21, yuv420p, faststart; no audio",
+  "videoCommand": "ffmpeg -i <source> -filter_complex \"[0:v]trim=start=13:end=24,setpts=PTS-STARTPTS[a];[0:v]trim=start=44:end=61,setpts=PTS-STARTPTS[b];[0:v]trim=start=72:end=86,setpts=PTS-STARTPTS[c];[a][b][c]concat=n=3:v=1:a=0,fps=30,format=yuv420p[v]\" -map \"[v]\" -an -c:v libx264 -crf 21 -preset medium -movflags +faststart <output>",
+  "coverSource": "Existing generated promotional illustration; kept separate from actual gameplay captures.",
+  "limitations": [
+    "No new game-browser run or physical-phone capture was performed for this listing."
+  ],
+  "encoder": {
+    "name": "Sharp",
+    "webpQuality": 90,
+    "iconQuality": 94,
+    "effort": 6
+  },
+  "files": [
+    {
+      "source": "icon-approved.jpg",
+      "target": "icon.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 63106,
+      "inputSha256": "de727caab5e6a6b5b0d62bef344e17265a39afc7bcae8047622416d0f87a6f74",
+      "outputSha256": "bff0b5368882fad46acbf79b6a9158962597e96abb38bec84b754286f63bea3a"
+    },
+    {
+      "source": "landscape-unbranded.png",
+      "target": "cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 294238,
+      "inputSha256": "ba0628f4da6fcc617f12e155c4eb8b38f96c0e99dad0a3170e540e5972d3feba",
+      "outputSha256": "e24294f24a0aa54378dc63e54dcef319e782a98043988785ebd79d7a6ca83314"
+    },
+    {
+      "source": "hole-marine-logo.png",
+      "target": "logo.webp",
+      "width": 804,
+      "height": 402,
+      "bytes": 88272,
+      "inputSha256": "9031d3bea5e8d1823531cd4b507dfe8f52814bd9443be2483ba719f0c12d2745",
+      "outputSha256": "111710dea024ad582e8e27e9b9d85484fd7e100feedaccd7c7ab742c518c3d31"
+    },
+    {
+      "source": "level-06-gameplay.png",
+      "target": "screens/level-6.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 126732,
+      "inputSha256": "2b481b2ea843cb3b5453fbc39bb5187cc011e7253afad49e08da25373ba68c3b",
+      "outputSha256": "daa6036837640918096b4d7c55621342ad48850228f87428409c98d3b938d43d"
+    },
+    {
+      "source": "browser-level-11-size4.png",
+      "target": "screens/level-11.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 104770,
+      "inputSha256": "35fc6a9bcfca89f3654dac146c2a585939d013ce36073e799ca3e559512ea3ef",
+      "outputSha256": "6a570265744a3ec490af8f17415eecdd5b866af5f435f568d17a79626eed0d46"
+    },
+    {
+      "source": "browser-level-26-size6.png",
+      "target": "screens/level-26.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 113598,
+      "inputSha256": "07ca8ff5fead12d0ac25ac66559f4893b27a25b54ddfee8af2292b644d6d1bf8",
+      "outputSha256": "7f14fd1199f418c3b80ec0bf197ca13e4c026c6c82603058962cd93c18342d0b"
+    },
+    {
+      "source": "browser-level-30-structures.png",
+      "target": "screens/level-30.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 138214,
+      "inputSha256": "0f66274972fdf8b0ff18f8976cee73cee79235f8a1f74c23c78dac52057d84b0",
+      "outputSha256": "68c62f64c32bff79cc9f29faafbb1f59c95af102fc5a29c288d9e023bae24a8b"
+    },
+    {
+      "source": "video-poster.png",
+      "target": "screens/video-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 112822,
+      "inputSha256": "7c1f6d48af90aebf90ee02e6130bc9a0e70cfbc85bcc84f9d0a0dd742ae89952",
+      "outputSha256": "449288b9f56d0937f751a4ddfd6901e876ee6bcf336bbd8f37e156e601e0983c"
+    },
+    {
+      "source": "gameplay.mp4",
+      "target": "gameplay.mp4",
+      "bytes": 13792724,
+      "outputSha256": "73db8e2bd913e68bf30cdb112c6e96f7c47ba227ce50c51f10e6217c95398480"
+    }
+  ]
+}

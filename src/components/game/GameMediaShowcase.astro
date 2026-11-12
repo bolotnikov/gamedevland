@@ -6,8 +6,8 @@ interface Screenshot {
 	title: string;
 	landscapeSrc: string;
 	landscapeAlt: string;
-	portraitSrc: string;
-	portraitAlt: string;
+	portraitSrc?: string | undefined;
+	portraitAlt?: string | undefined;
 }
 
 interface PromoVideo {
@@ -37,7 +37,7 @@ const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 			<div class="media-showcase__gallery">
 				{screenshots.map((screenshot) => (
 					<figure>
-						<div class="media-showcase__pair">
+						<div class:list={['media-showcase__pair', { 'has-portrait': screenshot.portraitSrc }]}>
 							<img
 								class="is-landscape"
 								src={screenshot.landscapeSrc}
@@ -46,14 +46,14 @@ const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 								height="1440"
 								loading="lazy"
 							/>
-							<img
+							{screenshot.portraitSrc && <img
 								class="is-portrait"
 								src={screenshot.portraitSrc}
 								alt={screenshot.portraitAlt}
 								width="1440"
 								height="2560"
 								loading="lazy"
-							/>
+							/>}
 						</div>
 						<figcaption>{screenshot.title}</figcaption>
 					</figure>
@@ -117,9 +117,13 @@ const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 
 	.media-showcase__pair {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(180px, 0.32fr);
+		grid-template-columns: minmax(0, 1fr);
 		gap: 16px;
 		align-items: stretch;
+	}
+
+	.media-showcase__pair.has-portrait {
+		grid-template-columns: minmax(0, 1fr) minmax(180px, 0.32fr);
 	}
 
 	.media-showcase__pair img {
@@ -173,7 +177,7 @@ const hasMedia = screenshots.length > 0 || Boolean(promoVideo);
 			padding-top: 56px;
 		}
 
-		.media-showcase__pair {
+		.media-showcase__pair.has-portrait {
 			grid-template-columns: 1fr;
 		}
 

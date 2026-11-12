@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-12",
+  "environment": "Hidden Codex IAB; local static production preview",
+  "viewports": [
+    "Default desktop viewport",
+    "390x844 responsive desktop-browser viewport"
+  ],
+  "checks": {
+    "portfolioOrder": [
+      "Hole Islands",
+      "Hole Marine",
+      "AI Defender"
+    ],
+    "approvedIcon": "icon1.jpg",
+    "allPageImagesLoaded": true,
+    "videoMetadata": {
+      "seconds": 42,
+      "width": 1280,
+      "height": 720,
+      "audioStreams": 0
+    },
+    "horizontalOverflow": false,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "languageSwitch": "RU to EN; same page and fragment, dark theme retained",
+    "holeIslandsRegression": {
+      "landscapePortraitPairs": 4,
+      "portraitImages": 4
+    }
+  },
+  "commands": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "check:locales": "passed",
+    "check:cyber-ui": "passed",
+    "check:language": "passed"
+  },
+  "locales": {
+    "contentPairs": 158,
+    "htmlPagesChecked": 374
+  },
+  "gameRelease": {
+    "repository": "https://github.com/gamedevland/hole-marine",
+    "url": "https://gamedevland.github.io/hole-marine/",
+    "commit": "f262060"
+  },
+  "limitations": [
+    "Game iframe src was replaced with about:blank by the local QA server response only; production HTML was not modified.",
+    "No new gameplay run, sound verification, physical phone or human playtest. Existing genuine browser captures were used for listing media."
+  ]
+}

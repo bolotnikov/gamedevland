@@ -55,7 +55,7 @@ promoVideo:
 playableUrl: https://gamedevland.github.io/hole-islands/
 orientation: adaptive
 embedAspectRatio: 16 / 9
-order: -2
+order: -3
 draft: false
 ---
 
