@@ -1,0 +1,212 @@
+{
+  "type": "Container",
+  "components": {
+    "card": {
+      "type": "StationCard"
+    }
+  },
+  "children": {
+    "frame": {
+      "type": "Sprite",
+      "props": {
+        "asset": "images/ui/station/card.webp",
+        "anchor": 0
+      }
+    },
+    "title": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 32,
+          "fill": "#FFFFFF",
+          "align": "center",
+          "stroke": {
+            "color": "#073452",
+            "width": 4,
+            "join": "round"
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "Sprite",
+      "props": {
+        "asset": "images/ui/station/engine.webp",
+        "anchor": 0.5
+      }
+    },
+    "levelPanel": {
+      "type": "Graphics"
+    },
+    "level": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 32,
+          "fill": "#FFFFFF",
+          "align": "center",
+          "stroke": {
+            "color": "#073452",
+            "width": 4,
+            "join": "round"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 32,
+          "fill": "#FFFFFF",
+          "align": "center",
+          "stroke": {
+            "color": "#06476D",
+            "width": 2
+          },
+          "wordWrap": false
+        }
+      }
+    },
+    "buy": {
+      "type": "Container",
+      "props": {
+        "interactive": true
+      },
+      "components": {
+        "button": {
+          "type": "StationButton"
+        }
+      },
+      "children": {
+        "hit": {
+          "type": "Graphics"
+        },
+        "skin": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/shared/button.webp",
+            "anchor": 0
+          }
+        },
+        "coin": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/summary/currency.webp",
+            "anchor": 0.5
+          }
+        },
+        "label": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 32,
+              "fill": "#FFFFFF",
+              "align": "center",
+              "stroke": {
+                "color": "#073452",
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        }
+      }
+    },
+    "max": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 32,
+          "fill": "#9FFFB3",
+          "align": "center",
+          "stroke": {
+            "color": "#073452",
+            "width": 4,
+            "join": "round"
+          }
+        }
+      }
+    },
+    "valuePanel": {
+      "type": "Graphics"
+    },
+    "value": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 30,
+          "fill": "#FFFFFF",
+          "align": "center",
+          "stroke": {
+            "color": "#073452",
+            "width": 4,
+            "join": "round"
+          }
+        }
+      }
+    },
+    "nextValue": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 30,
+          "fill": "#C2FF65",
+          "align": "center",
+          "stroke": {
+            "color": "#073452",
+            "width": 4,
+            "join": "round"
+          }
+        }
+      }
+    },
+    "arrow": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 30,
+          "fill": "#00D6FF",
+          "align": "center",
+          "stroke": {
+            "color": "#073452",
+            "width": 4,
+            "join": "round"
+          }
+        }
+      }
+    }
+  }
+}

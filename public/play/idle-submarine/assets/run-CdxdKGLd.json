@@ -1,0 +1,1244 @@
+{
+  "version": "fuel-4",
+  "activeTicks": 600,
+  "flight": {
+    "activeTicks": 720,
+    "cruiseMultiplier": 1.15,
+    "suctionMultiplier": 1.12
+  },
+  "dockingSeconds": 1.4,
+  "dockingTravelDistance": 0.4,
+  "departureSeconds": 2,
+  "maxOffers": 2048,
+  "baseMetersPerSecond": 2,
+  "pullAcceleration": 0.45,
+  "upgrades": [
+    {
+      "id": "fuel",
+      "title": "Fuel Tank",
+      "description": "Increases dive time.",
+      "icon": "images/ui/station/fuel.webp",
+      "cap": 20,
+      "basePrice": "400",
+      "prices": [
+        "400",
+        "590",
+        "875",
+        "1295",
+        "1920",
+        "2840",
+        "4205",
+        "6220",
+        "9210",
+        "13625",
+        "20170",
+        "29850",
+        "44175",
+        "65385",
+        "96765",
+        "143215",
+        "211955",
+        "313695",
+        "464270",
+        "687120"
+      ],
+      "flightPrices": [
+        "95",
+        "135",
+        "205",
+        "335",
+        "495",
+        "670",
+        "870",
+        "1125",
+        "1430",
+        "1815",
+        "2270",
+        "2815",
+        "3455",
+        "4240",
+        "5185",
+        "6330",
+        "7760",
+        "9460",
+        "11550",
+        "14120"
+      ],
+      "step": 1,
+      "reachStep": 0
+    },
+    {
+      "id": "engine",
+      "title": "Engine",
+      "description": "Increases speed.",
+      "icon": "images/ui/station/engine.webp",
+      "cap": 20,
+      "basePrice": "350",
+      "prices": [
+        "350",
+        "520",
+        "765",
+        "1135",
+        "1680",
+        "2485",
+        "3680",
+        "5445",
+        "8055",
+        "11925",
+        "17650",
+        "26120",
+        "38655",
+        "57210",
+        "84670",
+        "125310",
+        "185460",
+        "274485",
+        "406235",
+        "601230"
+      ],
+      "flightPrices": [
+        "85",
+        "130",
+        "195",
+        "320",
+        "470",
+        "640",
+        "830",
+        "1070",
+        "1360",
+        "1730",
+        "2160",
+        "2680",
+        "3290",
+        "4040",
+        "4940",
+        "6030",
+        "7390",
+        "9010",
+        "11000",
+        "13450"
+      ],
+      "step": 0.05,
+      "reachStep": 0
+    },
+    {
+      "id": "pump",
+      "title": "Pump",
+      "description": "Boosts power and reach.",
+      "icon": "images/ui/station/pump.webp",
+      "cap": 20,
+      "basePrice": "450",
+      "prices": [
+        "450",
+        "665",
+        "985",
+        "1460",
+        "2160",
+        "3195",
+        "4730",
+        "7000",
+        "10360",
+        "15330",
+        "22690",
+        "33580",
+        "49700",
+        "73555",
+        "108860",
+        "161115",
+        "238450",
+        "352910",
+        "522305",
+        "773010"
+      ],
+      "flightPrices": [
+        "105",
+        "145",
+        "220",
+        "360",
+        "525",
+        "715",
+        "930",
+        "1200",
+        "1525",
+        "1940",
+        "2420",
+        "3000",
+        "3685",
+        "4525",
+        "5535",
+        "6755",
+        "8275",
+        "10090",
+        "12320",
+        "15065"
+      ],
+      "step": 0.075,
+      "reachStep": 0.025
+    }
+  ],
+  "kinds": [
+    {
+      "id": "pearl",
+      "title": "Pearl",
+      "asset": "images/world/treasures/pearl.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 0,
+      "gold": "10"
+    },
+    {
+      "id": "jade",
+      "title": "Jade",
+      "asset": "images/world/treasures/jade.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 1,
+      "gold": "14"
+    },
+    {
+      "id": "emerald-rare",
+      "title": "Emerald",
+      "asset": "images/world/treasures/emerald.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 2,
+      "gold": "24"
+    },
+    {
+      "id": "lapis-rare",
+      "title": "Lapis",
+      "asset": "images/world/treasures/lapis.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 3,
+      "gold": "34"
+    },
+    {
+      "id": "message-bottle",
+      "title": "Message Bottle",
+      "asset": "images/world/treasures/message-bottle.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 4,
+      "gold": "85"
+    },
+    {
+      "id": "ship-bell",
+      "title": "Ship Bell",
+      "asset": "images/world/treasures/ship-bell.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 5,
+      "gold": "180"
+    },
+    {
+      "id": "quartz",
+      "title": "Quartz",
+      "asset": "images/world/treasures/quartz.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 6,
+      "gold": "12"
+    },
+    {
+      "id": "amber",
+      "title": "Amber",
+      "asset": "images/world/treasures/amber.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 7,
+      "gold": "17"
+    },
+    {
+      "id": "black-pearl-rare",
+      "title": "Black Pearl",
+      "asset": "images/world/treasures/black-pearl.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 8,
+      "gold": "30"
+    },
+    {
+      "id": "garnet-rare",
+      "title": "Garnet",
+      "asset": "images/world/treasures/garnet.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 9,
+      "gold": "42"
+    },
+    {
+      "id": "compass",
+      "title": "Compass",
+      "asset": "images/world/treasures/compass.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 10,
+      "gold": "105"
+    },
+    {
+      "id": "silver-chalice",
+      "title": "Silver Chalice",
+      "asset": "images/world/treasures/silver-chalice.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 11,
+      "gold": "223"
+    },
+    {
+      "id": "ammonite",
+      "title": "Ammonite",
+      "asset": "images/world/treasures/ammonite.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 12,
+      "gold": "15"
+    },
+    {
+      "id": "amethyst",
+      "title": "Amethyst",
+      "asset": "images/world/treasures/amethyst.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 13,
+      "gold": "22"
+    },
+    {
+      "id": "green-crystal-rare",
+      "title": "Green Crystal",
+      "asset": "images/world/treasures/green-crystal.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 14,
+      "gold": "37"
+    },
+    {
+      "id": "sapphire-rare",
+      "title": "Sapphire",
+      "asset": "images/world/treasures/sapphire.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 15,
+      "gold": "52"
+    },
+    {
+      "id": "sea-idol",
+      "title": "Sea Idol",
+      "asset": "images/world/treasures/sea-idol.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 16,
+      "gold": "131"
+    },
+    {
+      "id": "royal-shell",
+      "title": "Royal Shell",
+      "asset": "images/world/treasures/royal-shell.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 17,
+      "gold": "277"
+    },
+    {
+      "id": "turquoise",
+      "title": "Turquoise",
+      "asset": "images/world/treasures/turquoise.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 18,
+      "gold": "19"
+    },
+    {
+      "id": "emerald",
+      "title": "Emerald",
+      "asset": "images/world/treasures/emerald.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 19,
+      "gold": "27"
+    },
+    {
+      "id": "aquamarine-rare",
+      "title": "Aquamarine",
+      "asset": "images/world/treasures/aquamarine.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 20,
+      "gold": "46"
+    },
+    {
+      "id": "opal-rare",
+      "title": "Opal",
+      "asset": "images/world/treasures/opal.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 21,
+      "gold": "65"
+    },
+    {
+      "id": "whale-idol",
+      "title": "Whale Idol",
+      "asset": "images/world/treasures/whale-idol.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 22,
+      "gold": "162"
+    },
+    {
+      "id": "armillary",
+      "title": "Armillary",
+      "asset": "images/world/treasures/armillary.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 23,
+      "gold": "343"
+    },
+    {
+      "id": "lapis",
+      "title": "Lapis",
+      "asset": "images/world/treasures/lapis.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 24,
+      "gold": "24"
+    },
+    {
+      "id": "black-pearl",
+      "title": "Black Pearl",
+      "asset": "images/world/treasures/black-pearl.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 25,
+      "gold": "33"
+    },
+    {
+      "id": "geode-rare",
+      "title": "Geode",
+      "asset": "images/world/treasures/geode.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 26,
+      "gold": "57"
+    },
+    {
+      "id": "obsidian-rare",
+      "title": "Obsidian",
+      "asset": "images/world/treasures/obsidian.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 27,
+      "gold": "80"
+    },
+    {
+      "id": "sapphire-pendant",
+      "title": "Sapphire Pendant",
+      "asset": "images/world/treasures/sapphire-pendant.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 28,
+      "gold": "201"
+    },
+    {
+      "id": "ruby-ring",
+      "title": "Ruby Ring",
+      "asset": "images/world/treasures/ruby-ring.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 29,
+      "gold": "426"
+    },
+    {
+      "id": "garnet",
+      "title": "Garnet",
+      "asset": "images/world/treasures/garnet.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 30,
+      "gold": "29"
+    },
+    {
+      "id": "green-crystal",
+      "title": "Green Crystal",
+      "asset": "images/world/treasures/green-crystal.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 31,
+      "gold": "41"
+    },
+    {
+      "id": "abyss-stone-rare",
+      "title": "Abyss Stone",
+      "asset": "images/world/treasures/abyss-stone.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 32,
+      "gold": "70"
+    },
+    {
+      "id": "rainbow-crystal-rare",
+      "title": "Rainbow Crystal",
+      "asset": "images/world/treasures/rainbow-crystal.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 33,
+      "gold": "100"
+    },
+    {
+      "id": "royal-dagger",
+      "title": "Royal Dagger",
+      "asset": "images/world/treasures/royal-dagger.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 34,
+      "gold": "249"
+    },
+    {
+      "id": "coral-crown",
+      "title": "Coral Crown",
+      "asset": "images/world/treasures/coral-crown.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 35,
+      "gold": "528"
+    },
+    {
+      "id": "sapphire",
+      "title": "Sapphire",
+      "asset": "images/world/treasures/sapphire.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 36,
+      "gold": "36"
+    },
+    {
+      "id": "aquamarine",
+      "title": "Aquamarine",
+      "asset": "images/world/treasures/aquamarine.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 37,
+      "gold": "51"
+    },
+    {
+      "id": "void-crystal-rare",
+      "title": "Void Crystal",
+      "asset": "images/world/treasures/void-crystal.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 38,
+      "gold": "87"
+    },
+    {
+      "id": "pearl-rare",
+      "title": "Pearl",
+      "asset": "images/world/treasures/pearl.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 39,
+      "gold": "124"
+    },
+    {
+      "id": "ancient-mask",
+      "title": "Ancient Mask",
+      "asset": "images/world/treasures/ancient-mask.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 40,
+      "gold": "309"
+    },
+    {
+      "id": "ocean-orb",
+      "title": "Ocean Orb",
+      "asset": "images/world/treasures/ocean-orb.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 41,
+      "gold": "654"
+    },
+    {
+      "id": "opal",
+      "title": "Opal",
+      "asset": "images/world/treasures/opal.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 42,
+      "gold": "45"
+    },
+    {
+      "id": "geode",
+      "title": "Geode",
+      "asset": "images/world/treasures/geode.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 43,
+      "gold": "63"
+    },
+    {
+      "id": "jade-rare",
+      "title": "Jade",
+      "asset": "images/world/treasures/jade.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 44,
+      "gold": "108"
+    },
+    {
+      "id": "quartz-rare",
+      "title": "Quartz",
+      "asset": "images/world/treasures/quartz.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 45,
+      "gold": "153"
+    },
+    {
+      "id": "kraken-idol",
+      "title": "Kraken Idol",
+      "asset": "images/world/treasures/kraken-idol.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 46,
+      "gold": "383"
+    },
+    {
+      "id": "trident",
+      "title": "Trident",
+      "asset": "images/world/treasures/trident.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 47,
+      "gold": "811"
+    },
+    {
+      "id": "obsidian",
+      "title": "Obsidian",
+      "asset": "images/world/treasures/obsidian.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 48,
+      "gold": "56"
+    },
+    {
+      "id": "abyss-stone",
+      "title": "Abyss Stone",
+      "asset": "images/world/treasures/abyss-stone.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 49,
+      "gold": "78"
+    },
+    {
+      "id": "amber-rare",
+      "title": "Amber",
+      "asset": "images/world/treasures/amber.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 50,
+      "gold": "134"
+    },
+    {
+      "id": "ammonite-rare",
+      "title": "Ammonite",
+      "asset": "images/world/treasures/ammonite.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 51,
+      "gold": "190"
+    },
+    {
+      "id": "crystal-crown",
+      "title": "Crystal Crown",
+      "asset": "images/world/treasures/crystal-crown.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 52,
+      "gold": "475"
+    },
+    {
+      "id": "abyss-eye",
+      "title": "Abyss Eye",
+      "asset": "images/world/treasures/abyss-eye.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 53,
+      "gold": "1006"
+    },
+    {
+      "id": "rainbow-crystal",
+      "title": "Rainbow Crystal",
+      "asset": "images/world/treasures/rainbow-crystal.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 54,
+      "gold": "69"
+    },
+    {
+      "id": "void-crystal",
+      "title": "Void Crystal",
+      "asset": "images/world/treasures/void-crystal.webp",
+      "rarity": "common",
+      "unlockDistanceUnits": 55,
+      "gold": "97"
+    },
+    {
+      "id": "amethyst-rare",
+      "title": "Amethyst",
+      "asset": "images/world/treasures/amethyst.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 56,
+      "gold": "166"
+    },
+    {
+      "id": "turquoise-rare",
+      "title": "Turquoise",
+      "asset": "images/world/treasures/turquoise.webp",
+      "rarity": "rare",
+      "unlockDistanceUnits": 57,
+      "gold": "236"
+    },
+    {
+      "id": "pocket-watch",
+      "title": "Pocket Watch",
+      "asset": "images/world/treasures/pocket-watch.webp",
+      "rarity": "epic",
+      "unlockDistanceUnits": 58,
+      "gold": "589"
+    },
+    {
+      "id": "telescope",
+      "title": "Telescope",
+      "asset": "images/world/treasures/telescope.webp",
+      "rarity": "legendary",
+      "unlockDistanceUnits": 59,
+      "gold": "1248"
+    }
+  ],
+  "captureRadiusFactor": 0.35,
+  "distanceUnitsPerNm": 1000,
+  "baseRunDistanceUnits": 2000,
+  "engineDistanceStepUnits": 100,
+  "regions": [
+    {
+      "id": "sunken-wreckage",
+      "title": "Sunken Wreckage",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/sunken-wreckage.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "pearl",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "jade",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "emerald-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "lapis-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "message-bottle",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "ship-bell",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 10000
+    },
+    {
+      "id": "coral-reef",
+      "title": "Coral Reef",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/coral-reef.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "quartz",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "amber",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "black-pearl-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "garnet-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "compass",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "silver-chalice",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 12400
+    },
+    {
+      "id": "crystal-caverns",
+      "title": "Crystal Caverns",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/crystal-caverns.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "ammonite",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "amethyst",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "green-crystal-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "sapphire-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "sea-idol",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "royal-shell",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 15376
+    },
+    {
+      "id": "ancient-ruins",
+      "title": "Ancient Ruins",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/ancient-ruins.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "turquoise",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "emerald",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "aquamarine-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "opal-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "whale-idol",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "armillary",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 19066
+    },
+    {
+      "id": "abyssal-vault",
+      "title": "Abyssal Vault",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/abyssal-vault.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "lapis",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "black-pearl",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "geode-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "obsidian-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "sapphire-pendant",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "ruby-ring",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 23642
+    },
+    {
+      "id": "kelp-gardens",
+      "title": "Kelp Gardens",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/kelp-gardens.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "garnet",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "green-crystal",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "abyss-stone-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "rainbow-crystal-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "royal-dagger",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "coral-crown",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 29316
+    },
+    {
+      "id": "frozen-trench",
+      "title": "Frozen Trench",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/frozen-trench.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "sapphire",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "aquamarine",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "void-crystal-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "pearl-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "ancient-mask",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "ocean-orb",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 36352
+    },
+    {
+      "id": "volcanic-rift",
+      "title": "Volcanic Rift",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/volcanic-rift.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "opal",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "geode",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "jade-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "quartz-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "kraken-idol",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "trident",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 45077
+    },
+    {
+      "id": "lost-city",
+      "title": "Lost City",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/lost-city.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "obsidian",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "abyss-stone",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "amber-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "ammonite-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "crystal-crown",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "abyss-eye",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 55895
+    },
+    {
+      "id": "royal-treasury",
+      "title": "Royal Treasury",
+      "lengthUnits": 5000,
+      "background": "images/world/regions/royal-treasury.webp",
+      "preview": "images/ui/summary/coral-reef.webp",
+      "finds": [
+        {
+          "kindId": "rainbow-crystal",
+          "atPercent": 0,
+          "weight": 32
+        },
+        {
+          "kindId": "void-crystal",
+          "atPercent": 0,
+          "weight": 28
+        },
+        {
+          "kindId": "amethyst-rare",
+          "atPercent": 20,
+          "weight": 14
+        },
+        {
+          "kindId": "turquoise-rare",
+          "atPercent": 40,
+          "weight": 10
+        },
+        {
+          "kindId": "pocket-watch",
+          "atPercent": 60,
+          "weight": 4
+        },
+        {
+          "kindId": "telescope",
+          "atPercent": 80,
+          "weight": 1
+        }
+      ],
+      "valueScale": 69310
+    }
+  ],
+  "departureTravelDistance": 0.9,
+  "scatter": {
+    "minDepth": 0.04,
+    "maxDepth": 0.96,
+    "minSpacing": 0.045,
+    "attempts": 16
+  },
+  "passive": {
+    "rareBase": 0.08,
+    "rareStep": 0.013333333333333334,
+    "valueStep": 0.125
+  },
+  "submarineThresholds": [
+    0,
+    3,
+    9,
+    25,
+    51,
+    88,
+    135,
+    192,
+    259,
+    336,
+    424,
+    522,
+    630
+  ],
+  "hulls": [
+    {
+      "full": "images/world/ships/level-1/full.webp",
+      "body": "images/world/ships/level-1/body.webp",
+      "lip": "images/world/ships/level-1/lip.webp",
+      "blades": "images/world/ships/level-1/blades.webp",
+      "mountX": -0.365625,
+      "mountY": 0.0890625,
+      "anchorX": 0.134375,
+      "anchorY": 0.654891304347826
+    },
+    {
+      "full": "images/world/ships/level-2/full.webp",
+      "body": "images/world/ships/level-2/body.webp",
+      "lip": "images/world/ships/level-2/lip.webp",
+      "blades": "images/world/ships/level-2/blades.webp",
+      "mountX": -0.365625,
+      "mountY": 0.0890625,
+      "anchorX": 0.134375,
+      "anchorY": 0.654891304347826
+    },
+    {
+      "full": "images/world/ships/level-3/full.webp",
+      "body": "images/world/ships/level-3/body.webp",
+      "lip": "images/world/ships/level-3/lip.webp",
+      "blades": "images/world/ships/level-3/blades.webp",
+      "mountX": -0.3453125,
+      "mountY": 0.0875,
+      "anchorX": 0.1546875,
+      "anchorY": 0.6521739130434783
+    },
+    {
+      "full": "images/world/ships/level-4/full.webp",
+      "body": "images/world/ships/level-4/body.webp",
+      "lip": "images/world/ships/level-4/lip.webp",
+      "blades": "images/world/ships/level-4/blades.webp",
+      "mountX": -0.3484375,
+      "mountY": 0.084375,
+      "anchorX": 0.1515625,
+      "anchorY": 0.6467391304347826
+    },
+    {
+      "full": "images/world/ships/level-5/full.webp",
+      "body": "images/world/ships/level-5/body.webp",
+      "lip": "images/world/ships/level-5/lip.webp",
+      "blades": "images/world/ships/level-5/blades.webp",
+      "mountX": -0.43125,
+      "mountY": 0.0859375,
+      "anchorX": 0.06875,
+      "anchorY": 0.6494565217391305
+    },
+    {
+      "full": "images/world/ships/level-6/full.webp",
+      "body": "images/world/ships/level-6/body.webp",
+      "lip": "images/world/ships/level-6/lip.webp",
+      "blades": "images/world/ships/level-6/blades.webp",
+      "mountX": -0.375,
+      "mountY": 0.0859375,
+      "anchorX": 0.125,
+      "anchorY": 0.6494565217391305
+    },
+    {
+      "full": "images/world/ships/level-7/full.webp",
+      "body": "images/world/ships/level-7/body.webp",
+      "lip": "images/world/ships/level-7/lip.webp",
+      "blades": "images/world/ships/level-7/blades.webp",
+      "mountX": -0.38125,
+      "mountY": 0.08125,
+      "anchorX": 0.11875,
+      "anchorY": 0.6413043478260869
+    },
+    {
+      "full": "images/world/ships/level-8/full.webp",
+      "body": "images/world/ships/level-8/body.webp",
+      "lip": "images/world/ships/level-8/lip.webp",
+      "blades": "images/world/ships/level-8/blades.webp",
+      "mountX": -0.346875,
+      "mountY": 0.084375,
+      "anchorX": 0.153125,
+      "anchorY": 0.6467391304347826
+    },
+    {
+      "full": "images/world/ships/level-9/full.webp",
+      "body": "images/world/ships/level-9/body.webp",
+      "lip": "images/world/ships/level-9/lip.webp",
+      "blades": "images/world/ships/level-9/blades.webp",
+      "mountX": -0.375,
+      "mountY": 0.0828125,
+      "anchorX": 0.125,
+      "anchorY": 0.6440217391304348
+    },
+    {
+      "full": "images/world/ships/level-10/full.webp",
+      "body": "images/world/ships/level-10/body.webp",
+      "lip": "images/world/ships/level-10/lip.webp",
+      "blades": "images/world/ships/level-10/blades.webp",
+      "mountX": -0.3609375,
+      "mountY": 0.0828125,
+      "anchorX": 0.1390625,
+      "anchorY": 0.6440217391304348
+    },
+    {
+      "full": "images/world/ships/level-11/full.webp",
+      "body": "images/world/ships/level-11/body.webp",
+      "lip": "images/world/ships/level-11/lip.webp",
+      "blades": "images/world/ships/level-11/blades.webp",
+      "mountX": -0.35625,
+      "mountY": 0.0828125,
+      "anchorX": 0.14375,
+      "anchorY": 0.6440217391304348
+    },
+    {
+      "full": "images/world/ships/level-12/full.webp",
+      "body": "images/world/ships/level-12/body.webp",
+      "lip": "images/world/ships/level-12/lip.webp",
+      "blades": "images/world/ships/level-12/blades.webp",
+      "mountX": -0.3671875,
+      "mountY": 0.0828125,
+      "anchorX": 0.1328125,
+      "anchorY": 0.6440217391304348
+    },
+    {
+      "full": "images/world/ships/level-13/full.webp",
+      "body": "images/world/ships/level-13/body.webp",
+      "lip": "images/world/ships/level-13/lip.webp",
+      "blades": "images/world/ships/level-13/blades.webp",
+      "mountX": -0.3609375,
+      "mountY": 0.084375,
+      "anchorX": 0.1390625,
+      "anchorY": 0.6467391304347826
+    }
+  ],
+  "tutorial": {
+    "stopAhead": 0.12,
+    "holdSeconds": 0.5
+  },
+  "suction": {
+    "startRange": 0.24,
+    "maxRange": 0.4725,
+    "startHalfHeight": 0.1388888888888889,
+    "maxHalfHeight": 0.354375
+  },
+  "population": {
+    "findsPerUnit": 54,
+    "unlockDensity": {
+      "rare": 0.06,
+      "epic": 0.04,
+      "legendary": 0.02
+    }
+  }
+}

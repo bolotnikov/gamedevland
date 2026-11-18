@@ -1,0 +1,1137 @@
+{
+  "root": {
+    "type": "Container",
+    "components": {
+      "composition": {
+        "type": "GameComposition"
+      },
+      "pump": {
+        "type": "PumpInput"
+      }
+    },
+    "children": {
+      "world": {
+        "type": "Container",
+        "components": {
+          "ocean": {
+            "type": "OceanLayers"
+          }
+        },
+        "children": {
+          "scenery": {
+            "type": "Container",
+            "children": {
+              "background": {
+                "type": "Container",
+                "children": {
+                  "tile0": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/background.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile1": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/background.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile2": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/background.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile3": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/background.webp",
+                      "anchor": 0
+                    }
+                  }
+                }
+              },
+              "backgroundFishes": {
+                "type": "Container",
+                "components": {
+                  "traffic": {
+                    "type": "BackgroundFishLayer",
+                    "data": {
+                      "seed": 71531,
+                      "cap": 48,
+                      "initialSingles": 3,
+                      "initialSchools": 2,
+                      "intervalMin": 7,
+                      "intervalMax": 12,
+                      "schoolMin": 5,
+                      "schoolMax": 12,
+                      "singleChance": 0.45,
+                      "speedMin": 0.025,
+                      "speedMax": 0.05,
+                      "singleSizeMin": 0.045,
+                      "singleSizeMax": 0.075,
+                      "schoolSizeMin": 0.018,
+                      "schoolSizeMax": 0.032,
+                      "schoolScaleMin": 0.75,
+                      "schoolScaleMax": 1.35,
+                      "gapX": 0.03,
+                      "gapY": 0.018,
+                      "minY": 0.14,
+                      "maxY": 0.76,
+                      "alphaMin": 0.3,
+                      "alphaMax": 0.6,
+                      "tint": 5277360
+                    }
+                  }
+                }
+              },
+              "rays": {
+                "type": "Graphics",
+                "components": {
+                  "rays": {
+                    "type": "OceanRays"
+                  }
+                }
+              },
+              "dust": {
+                "type": "Graphics",
+                "components": {
+                  "dust": {
+                    "type": "OceanDust"
+                  }
+                }
+              },
+              "middle": {
+                "type": "Container",
+                "children": {
+                  "tile0": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/middle-layer.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile1": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/middle-layer.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile2": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/middle-layer.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile3": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/middle-layer.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile4": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/middle-layer.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "tile5": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/ocean/middle-layer.webp",
+                      "anchor": 0
+                    }
+                  }
+                },
+                "components": {
+                  "waterDisplacement": {
+                    "type": "DisplacementFilter",
+                    "data": {
+                      "noiseAssetId": "images/world/ocean/water-noise.webp",
+                      "strengthX": 12,
+                      "strengthY": 10,
+                      "noiseScaleX": 8,
+                      "noiseScaleY": 8,
+                      "driftXPerSecond": 32,
+                      "driftYPerSecond": 24,
+                      "enabled": true
+                    }
+                  }
+                }
+              }
+            },
+            "props": {
+              "zIndex": 0
+            }
+          },
+          "fishes": {
+            "type": "Container",
+            "components": {
+              "fish": {
+                "type": "FishLayer"
+              }
+            },
+            "props": {
+              "zIndex": 10
+            }
+          },
+          "pumpBubbles": {
+            "type": "Container",
+            "components": {
+              "bubbles": {
+                "type": "PumpBubbles"
+              }
+            },
+            "props": {
+              "zIndex": 20
+            }
+          },
+          "submarineWake": {
+            "type": "Graphics",
+            "components": {
+              "wake": {
+                "type": "SubmarineWake"
+              }
+            },
+            "props": {
+              "zIndex": 30
+            }
+          },
+          "researchBase": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/ui/station/base.webp",
+              "anchor": 0.5
+            },
+            "components": {
+              "base": {
+                "type": "ResearchBase"
+              }
+            }
+          },
+          "submarine": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/world/ships/submarine.webp",
+              "anchor": 0.5,
+              "zIndex": 40
+            },
+            "components": {
+              "rig": {
+                "type": "SubmarineRig",
+                "data": {
+                  "part": "body"
+                }
+              }
+            }
+          },
+          "submarinePropeller": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/world/ships/submarine-blades.webp",
+              "anchor": {
+                "x": 0.7070707070707071,
+                "y": 0.4915254237288136
+              },
+              "visible": false,
+              "zIndex": 45
+            },
+            "components": {
+              "propeller": {
+                "type": "SubmarinePropeller"
+              }
+            }
+          },
+          "treasures": {
+            "type": "Container",
+            "components": {
+              "treasures": {
+                "type": "TreasureLayer"
+              }
+            },
+            "props": {
+              "zIndex": 60
+            }
+          },
+          "suctionFlow": {
+            "type": "Graphics",
+            "components": {
+              "flow": {
+                "type": "SuctionFlow",
+                "data": {
+                  "tailWidthRatio": 0.0025,
+                  "headWidthRatio": 0.003,
+                  "lengthRatio": 0.1,
+                  "maxParticles": 24,
+                  "densityGain": 0.8,
+                  "speedGain": 0.6,
+                  "widthGain": 0.4,
+                  "baseAlpha": 0.6,
+                  "alphaGain": 0.2
+                }
+              }
+            },
+            "props": {
+              "zIndex": 70
+            }
+          },
+          "submarineLip": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/world/ships/intake-lip-tier-01.webp",
+              "anchor": 0.5,
+              "zIndex": 80
+            },
+            "components": {
+              "rig": {
+                "type": "SubmarineRig",
+                "data": {
+                  "part": "lip"
+                }
+              }
+            }
+          }
+        }
+      },
+      "worldMask": {
+        "type": "Graphics"
+      },
+      "rewardText": {
+        "type": "Container",
+        "components": {
+          "rewards": {
+            "type": "CollectionRewardLayer"
+          }
+        }
+      },
+      "menuBackdrop": {
+        "type": "Container",
+        "components": {
+          "backdrop": {
+            "type": "MenuBackdrop"
+          }
+        },
+        "children": {
+          "background": {
+            "type": "Container",
+            "children": {
+              "image": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/results/sunken-wreckage.webp",
+                  "anchor": 0.5
+                }
+              }
+            }
+          },
+          "silhouettes": {
+            "type": "Container",
+            "components": {
+              "traffic": {
+                "type": "BackgroundFishLayer",
+                "data": {
+                  "seed": 83921,
+                  "cap": 48,
+                  "initialSingles": 3,
+                  "initialSchools": 2,
+                  "intervalMin": 7,
+                  "intervalMax": 12,
+                  "schoolMin": 5,
+                  "schoolMax": 12,
+                  "singleChance": 0.45,
+                  "speedMin": 0.025,
+                  "speedMax": 0.05,
+                  "singleSizeMin": 0.032,
+                  "singleSizeMax": 0.055,
+                  "schoolSizeMin": 0.015,
+                  "schoolSizeMax": 0.025,
+                  "schoolScaleMin": 0.75,
+                  "schoolScaleMax": 1.35,
+                  "gapX": 0.03,
+                  "gapY": 0.018,
+                  "minY": 0.14,
+                  "maxY": 0.76,
+                  "alphaMin": 0.14,
+                  "alphaMax": 0.3,
+                  "tint": 273225
+                }
+              }
+            }
+          },
+          "shade": {
+            "type": "Graphics"
+          },
+          "foreground": {
+            "type": "Container",
+            "children": {
+              "stones-left": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/results/stones-left.webp",
+                  "anchor": {
+                    "x": 0,
+                    "y": 1
+                  }
+                }
+              },
+              "stones-right": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/results/stones-right.webp",
+                  "anchor": {
+                    "x": 1,
+                    "y": 1
+                  }
+                }
+              },
+              "plants-left": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/results/plants-left.webp",
+                  "anchor": {
+                    "x": 0,
+                    "y": 1
+                  }
+                }
+              },
+              "plants-right": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/results/plants-right.webp",
+                  "anchor": {
+                    "x": 1,
+                    "y": 1
+                  }
+                }
+              }
+            },
+            "components": {
+              "waterDisplacement": {
+                "type": "DisplacementFilter",
+                "data": {
+                  "noiseAssetId": "images/world/ocean/water-noise.webp",
+                  "strengthX": 10,
+                  "strengthY": 8,
+                  "noiseScaleX": 8,
+                  "noiseScaleY": 8,
+                  "driftXPerSecond": 20,
+                  "driftYPerSecond": 15,
+                  "enabled": true
+                }
+              }
+            }
+          },
+          "veil": {
+            "type": "Graphics"
+          }
+        }
+      },
+      "summary": {
+        "type": "Container",
+        "props": {
+          "interactive": true,
+          "visible": false
+        },
+        "components": {
+          "summary": {
+            "type": "RunSummary"
+          }
+        },
+        "children": {
+          "hit": {
+            "type": "Graphics"
+          },
+          "content": {
+            "type": "Container",
+            "children": {
+              "title": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/summary/results.webp",
+                  "anchor": 0.5
+                }
+              },
+              "listMask": {
+                "type": "Graphics"
+              },
+              "list": {
+                "type": "Container"
+              },
+              "totalGlow": {
+                "type": "Graphics"
+              },
+              "mileage": {
+                "type": "Container",
+                "components": {
+                  "mileage": {
+                    "type": "SummaryMileage"
+                  }
+                },
+                "children": {
+                  "track": {
+                    "type": "Graphics"
+                  },
+                  "fill": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/ui/summary/progress-fill.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "fillMask": {
+                    "type": "Graphics"
+                  },
+                  "milestone0": {
+                    "type": "Container",
+                    "children": {
+                      "glow": {
+                        "type": "Graphics"
+                      },
+                      "icon": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/world/treasures/pearl.webp",
+                          "anchor": 0.5
+                        }
+                      },
+                      "dot": {
+                        "type": "Graphics"
+                      }
+                    }
+                  },
+                  "milestone1": {
+                    "type": "Container",
+                    "children": {
+                      "glow": {
+                        "type": "Graphics"
+                      },
+                      "icon": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/world/treasures/pearl.webp",
+                          "anchor": 0.5
+                        }
+                      },
+                      "dot": {
+                        "type": "Graphics"
+                      }
+                    }
+                  },
+                  "milestone2": {
+                    "type": "Container",
+                    "children": {
+                      "glow": {
+                        "type": "Graphics"
+                      },
+                      "icon": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/world/treasures/pearl.webp",
+                          "anchor": 0.5
+                        }
+                      },
+                      "dot": {
+                        "type": "Graphics"
+                      }
+                    }
+                  },
+                  "milestone3": {
+                    "type": "Container",
+                    "children": {
+                      "glow": {
+                        "type": "Graphics"
+                      },
+                      "icon": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/world/treasures/pearl.webp",
+                          "anchor": 0.5
+                        }
+                      },
+                      "dot": {
+                        "type": "Graphics"
+                      }
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "",
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "LilitaOne",
+                        "fontSize": 34,
+                        "fill": "#FFFFFF",
+                        "stroke": {
+                          "color": "#001B46",
+                          "width": 2,
+                          "join": "round"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "totalSparks": {
+                "type": "Graphics"
+              },
+              "hint": {
+                "type": "Text",
+                "props": {
+                  "text": "Tap to continue",
+                  "anchor": 0.5,
+                  "style": {
+                    "fontFamily": "LilitaOne",
+                    "fontSize": 26,
+                    "fill": "#80B0FF",
+                    "stroke": {
+                      "color": "#001B46",
+                      "width": 2,
+                      "join": "round"
+                    }
+                  }
+                }
+              },
+              "totalCoin": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/summary/currency.webp",
+                  "anchor": 0.5
+                }
+              },
+              "total": {
+                "type": "Text",
+                "props": {
+                  "text": "",
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "style": {
+                    "fontFamily": "LilitaOne",
+                    "fontSize": 96,
+                    "fill": "#FFCF36",
+                    "stroke": {
+                      "color": "#713300",
+                      "width": 3,
+                      "join": "round"
+                    }
+                  }
+                }
+              },
+              "stationBonus": {
+                "type": "Text",
+                "props": {
+                  "text": "",
+                  "anchor": 0.5,
+                  "visible": false,
+                  "style": {
+                    "fontFamily": "LilitaOne",
+                    "fontSize": 30,
+                    "fill": "#FFF2A1",
+                    "stroke": {
+                      "color": "#00324D",
+                      "width": 2,
+                      "join": "round"
+                    }
+                  }
+                }
+              },
+              "rewardButton": {
+                "type": "Container",
+                "props": {
+                  "visible": false
+                },
+                "components": {
+                  "ad": {
+                    "type": "GameDistributionAdButton",
+                    "data": {
+                      "kind": "reward"
+                    }
+                  }
+                },
+                "children": {
+                  "skin": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/ui/shared/button.webp",
+                      "anchor": 0
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "X3",
+                      "anchor": 0.5,
+                      "style": {
+                        "fontFamily": "LilitaOne",
+                        "fontSize": 48,
+                        "fill": "#FFFFFF",
+                        "stroke": {
+                          "color": "#003D46",
+                          "width": 3
+                        }
+                      }
+                    }
+                  },
+                  "caption": {
+                    "type": "Text",
+                    "props": {
+                      "text": "Watch ad",
+                      "anchor": 0.5,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "700",
+                        "fontSize": 18,
+                        "fill": "#FFFFFF"
+                      }
+                    }
+                  },
+                  "hit": {
+                    "type": "Graphics"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "hud": {
+        "type": "Container",
+        "components": {
+          "hud": {
+            "type": "GameHud"
+          }
+        },
+        "children": {
+          "fuel": {
+            "type": "Container",
+            "children": {
+              "track": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/station/fuel-track.webp",
+                  "anchor": 0
+                }
+              },
+              "fill": {
+                "type": "Graphics"
+              },
+              "gloss": {
+                "type": "Graphics"
+              },
+              "icon": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/station/fuel.webp",
+                  "anchor": 0.5
+                }
+              }
+            }
+          }
+        }
+      },
+      "station": {
+        "type": "Container",
+        "components": {
+          "station": {
+            "type": "StationScreen"
+          },
+          "tooltips": {
+            "type": "StationTooltip"
+          }
+        },
+        "children": {
+          "hit": {
+            "type": "Graphics"
+          },
+          "cards": {
+            "type": "Container"
+          },
+          "continue": {
+            "type": "Container",
+            "props": {
+              "interactive": true
+            },
+            "components": {
+              "button": {
+                "type": "StationButton"
+              }
+            },
+            "children": {
+              "hit": {
+                "type": "Graphics"
+              },
+              "skin": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/shared/button.webp",
+                  "anchor": 0
+                }
+              },
+              "coin": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/summary/currency.webp",
+                  "anchor": 0.5
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "text": "",
+                  "anchor": 0.5,
+                  "style": {
+                    "fontFamily": "Rubik",
+                    "fontWeight": "700",
+                    "fontSize": 32,
+                    "fill": "#FFFFFF",
+                    "align": "center",
+                    "stroke": {
+                      "color": "#073452",
+                      "width": 4,
+                      "join": "round"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "error": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "700",
+                "fontSize": 32,
+                "fill": "#FFFFFF",
+                "align": "center",
+                "stroke": {
+                  "color": "#073452",
+                  "width": 4,
+                  "join": "round"
+                },
+                "wordWrap": true
+              }
+            }
+          },
+          "progression": {
+            "type": "Container",
+            "components": {
+              "progression": {
+                "type": "SubmarineLevel"
+              }
+            },
+            "children": {
+              "frame": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/station/submarine-panel.webp",
+                  "anchor": 0
+                }
+              },
+              "hull": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/world/ships/level-1/full.webp",
+                  "anchor": 0.5
+                }
+              },
+              "propeller": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/world/ships/level-1/blades.webp",
+                  "anchor": 0.5
+                }
+              },
+              "glow": {
+                "type": "Graphics"
+              },
+              "title": {
+                "type": "Text",
+                "props": {
+                  "text": "",
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "style": {
+                    "fontFamily": "Rubik",
+                    "fontWeight": "700",
+                    "fontSize": 34,
+                    "fill": "#FFFFFF",
+                    "align": "center",
+                    "stroke": {
+                      "color": "#073452",
+                      "width": 4,
+                      "join": "round"
+                    }
+                  }
+                }
+              },
+              "track": {
+                "type": "Graphics"
+              },
+              "fill": {
+                "type": "Graphics"
+              },
+              "stat0": {
+                "type": "Container",
+                "children": {
+                  "icon": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/world/treasures/amethyst.webp",
+                      "anchor": 0.5
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "",
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "700",
+                        "fontSize": 18,
+                        "fill": "#FFFFFF",
+                        "align": "center",
+                        "stroke": {
+                          "color": "#073452",
+                          "width": 4,
+                          "join": "round"
+                        }
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "Text",
+                    "props": {
+                      "text": "",
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "700",
+                        "fontSize": 31,
+                        "fill": "#FFFFFF",
+                        "align": "center",
+                        "stroke": {
+                          "color": "#073452",
+                          "width": 4,
+                          "join": "round"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "stat1": {
+                "type": "Container",
+                "children": {
+                  "icon": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/ui/summary/currency.webp",
+                      "anchor": 0.5
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "",
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "700",
+                        "fontSize": 18,
+                        "fill": "#FFFFFF",
+                        "align": "center",
+                        "stroke": {
+                          "color": "#073452",
+                          "width": 4,
+                          "join": "round"
+                        }
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "Text",
+                    "props": {
+                      "text": "",
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "700",
+                        "fontSize": 31,
+                        "fill": "#FFFFFF",
+                        "align": "center",
+                        "stroke": {
+                          "color": "#073452",
+                          "width": 4,
+                          "join": "round"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "firstRunTutorial": {
+        "type": "Container",
+        "props": {
+          "visible": false,
+          "interactive": false
+        },
+        "components": {
+          "tutorial": {
+            "type": "FirstRunTutorial"
+          }
+        },
+        "children": {
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "700",
+                "fontSize": 80,
+                "fill": "#FFF48A",
+                "align": "center",
+                "wordWrap": true
+              }
+            }
+          },
+          "rings": {
+            "type": "Graphics"
+          },
+          "hand": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/ui/tutorial/hand.webp",
+              "anchor": {
+                "x": 1,
+                "y": 1
+              }
+            }
+          }
+        }
+      },
+      "gdIntro": {
+        "type": "Container",
+        "props": {
+          "visible": false
+        },
+        "components": {
+          "intro": {
+            "type": "GameDistributionIntro"
+          }
+        },
+        "children": {
+          "shade": {
+            "type": "Graphics"
+          },
+          "title": {
+            "type": "Text",
+            "props": {
+              "text": "Idle Submarine",
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "LilitaOne",
+                "fontSize": 64,
+                "fill": "#FFFFFF",
+                "stroke": {
+                  "color": "#003149",
+                  "width": 4
+                }
+              }
+            }
+          },
+          "play": {
+            "type": "Container",
+            "props": {
+              "visible": true
+            },
+            "components": {
+              "ad": {
+                "type": "GameDistributionAdButton",
+                "data": {
+                  "kind": "play"
+                }
+              }
+            },
+            "children": {
+              "skin": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ui/shared/button.webp",
+                  "anchor": 0
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "text": "Play",
+                  "anchor": 0.5,
+                  "style": {
+                    "fontFamily": "LilitaOne",
+                    "fontSize": 48,
+                    "fill": "#FFFFFF",
+                    "stroke": {
+                      "color": "#003D46",
+                      "width": 3
+                    }
+                  }
+                }
+              },
+              "caption": {
+                "type": "Text",
+                "props": {
+                  "text": "Start dive",
+                  "anchor": 0.5,
+                  "style": {
+                    "fontFamily": "Rubik",
+                    "fontWeight": "700",
+                    "fontSize": 18,
+                    "fill": "#FFFFFF"
+                  }
+                }
+              },
+              "hit": {
+                "type": "Graphics"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

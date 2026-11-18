@@ -36,7 +36,8 @@ for (const collection of ['articles', 'games', 'tutorials', 'academy']) {
  }
 }
 assert.ok(existsSync('dist/index.html'), 'Run npm run build before checking output');
-const pages = files('dist').filter((file) => file.endsWith('.html'));
+// Standalone compiled games are embedded documents with their own locale settings.
+const pages = files('dist').filter((file) => file.endsWith('.html') && !relative('dist', file).startsWith('play/'));
 for (const file of pages) {
  const html = readFileSync(file, 'utf8');
  const redirect = /<meta(?=[^>]*http-equiv="refresh")[^>]*content="[^"]*url=([^"]+)/i.exec(html)?.[1];

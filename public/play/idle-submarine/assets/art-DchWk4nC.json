@@ -1,0 +1,507 @@
+{
+  "background": {
+    "asset": "images/world/ocean/background.webp",
+    "width": 1536,
+    "height": 864
+  },
+  "middle": {
+    "asset": "images/world/ocean/middle-layer.webp",
+    "width": 1536,
+    "height": 405
+  },
+  "submarine": {
+    "asset": "images/world/ships/submarine.webp",
+    "width": 640,
+    "height": 368
+  },
+  "bubble": {
+    "asset": "images/world/ocean/bubble.webp",
+    "width": 160,
+    "height": 160
+  },
+  "items": [
+    {
+      "id": "pearl",
+      "asset": "images/world/treasures/pearl.webp",
+      "width": 177,
+      "height": 168
+    },
+    {
+      "id": "jade",
+      "asset": "images/world/treasures/jade.webp",
+      "width": 169,
+      "height": 176
+    },
+    {
+      "id": "emerald-rare",
+      "asset": "images/world/treasures/emerald.webp",
+      "width": 177,
+      "height": 192
+    },
+    {
+      "id": "lapis-rare",
+      "asset": "images/world/treasures/lapis.webp",
+      "width": 192,
+      "height": 170
+    },
+    {
+      "id": "message-bottle",
+      "asset": "images/world/treasures/message-bottle.webp",
+      "width": 125,
+      "height": 192
+    },
+    {
+      "id": "ship-bell",
+      "asset": "images/world/treasures/ship-bell.webp",
+      "width": 148,
+      "height": 192
+    },
+    {
+      "id": "quartz",
+      "asset": "images/world/treasures/quartz.webp",
+      "width": 159,
+      "height": 192
+    },
+    {
+      "id": "amber",
+      "asset": "images/world/treasures/amber.webp",
+      "width": 192,
+      "height": 174
+    },
+    {
+      "id": "black-pearl-rare",
+      "asset": "images/world/treasures/black-pearl.webp",
+      "width": 176,
+      "height": 178
+    },
+    {
+      "id": "garnet-rare",
+      "asset": "images/world/treasures/garnet.webp",
+      "width": 159,
+      "height": 192
+    },
+    {
+      "id": "compass",
+      "asset": "images/world/treasures/compass.webp",
+      "width": 149,
+      "height": 192
+    },
+    {
+      "id": "silver-chalice",
+      "asset": "images/world/treasures/silver-chalice.webp",
+      "width": 137,
+      "height": 192
+    },
+    {
+      "id": "ammonite",
+      "asset": "images/world/treasures/ammonite.webp",
+      "width": 187,
+      "height": 192
+    },
+    {
+      "id": "amethyst",
+      "asset": "images/world/treasures/amethyst.webp",
+      "width": 174,
+      "height": 192
+    },
+    {
+      "id": "green-crystal-rare",
+      "asset": "images/world/treasures/green-crystal.webp",
+      "width": 129,
+      "height": 192
+    },
+    {
+      "id": "sapphire-rare",
+      "asset": "images/world/treasures/sapphire.webp",
+      "width": 192,
+      "height": 176
+    },
+    {
+      "id": "sea-idol",
+      "asset": "images/world/treasures/sea-idol.webp",
+      "width": 131,
+      "height": 192
+    },
+    {
+      "id": "royal-shell",
+      "asset": "images/world/treasures/royal-shell.webp",
+      "width": 164,
+      "height": 192
+    },
+    {
+      "id": "turquoise",
+      "asset": "images/world/treasures/turquoise.webp",
+      "width": 187,
+      "height": 183
+    },
+    {
+      "id": "emerald",
+      "asset": "images/world/treasures/emerald.webp",
+      "width": 177,
+      "height": 192
+    },
+    {
+      "id": "aquamarine-rare",
+      "asset": "images/world/treasures/aquamarine.webp",
+      "width": 154,
+      "height": 192
+    },
+    {
+      "id": "opal-rare",
+      "asset": "images/world/treasures/opal.webp",
+      "width": 158,
+      "height": 192
+    },
+    {
+      "id": "whale-idol",
+      "asset": "images/world/treasures/whale-idol.webp",
+      "width": 172,
+      "height": 192
+    },
+    {
+      "id": "armillary",
+      "asset": "images/world/treasures/armillary.webp",
+      "width": 163,
+      "height": 192
+    },
+    {
+      "id": "lapis",
+      "asset": "images/world/treasures/lapis.webp",
+      "width": 192,
+      "height": 170
+    },
+    {
+      "id": "black-pearl",
+      "asset": "images/world/treasures/black-pearl.webp",
+      "width": 176,
+      "height": 178
+    },
+    {
+      "id": "geode-rare",
+      "asset": "images/world/treasures/geode.webp",
+      "width": 189,
+      "height": 192
+    },
+    {
+      "id": "obsidian-rare",
+      "asset": "images/world/treasures/obsidian.webp",
+      "width": 154,
+      "height": 192
+    },
+    {
+      "id": "sapphire-pendant",
+      "asset": "images/world/treasures/sapphire-pendant.webp",
+      "width": 100,
+      "height": 192
+    },
+    {
+      "id": "ruby-ring",
+      "asset": "images/world/treasures/ruby-ring.webp",
+      "width": 171,
+      "height": 192
+    },
+    {
+      "id": "garnet",
+      "asset": "images/world/treasures/garnet.webp",
+      "width": 159,
+      "height": 192
+    },
+    {
+      "id": "green-crystal",
+      "asset": "images/world/treasures/green-crystal.webp",
+      "width": 129,
+      "height": 192
+    },
+    {
+      "id": "abyss-stone-rare",
+      "asset": "images/world/treasures/abyss-stone.webp",
+      "width": 191,
+      "height": 192
+    },
+    {
+      "id": "rainbow-crystal-rare",
+      "asset": "images/world/treasures/rainbow-crystal.webp",
+      "width": 146,
+      "height": 192
+    },
+    {
+      "id": "royal-dagger",
+      "asset": "images/world/treasures/royal-dagger.webp",
+      "width": 152,
+      "height": 192
+    },
+    {
+      "id": "coral-crown",
+      "asset": "images/world/treasures/coral-crown.webp",
+      "width": 192,
+      "height": 159
+    },
+    {
+      "id": "sapphire",
+      "asset": "images/world/treasures/sapphire.webp",
+      "width": 192,
+      "height": 176
+    },
+    {
+      "id": "aquamarine",
+      "asset": "images/world/treasures/aquamarine.webp",
+      "width": 154,
+      "height": 192
+    },
+    {
+      "id": "void-crystal-rare",
+      "asset": "images/world/treasures/void-crystal.webp",
+      "width": 134,
+      "height": 192
+    },
+    {
+      "id": "pearl-rare",
+      "asset": "images/world/treasures/pearl.webp",
+      "width": 177,
+      "height": 168
+    },
+    {
+      "id": "ancient-mask",
+      "asset": "images/world/treasures/ancient-mask.webp",
+      "width": 140,
+      "height": 192
+    },
+    {
+      "id": "ocean-orb",
+      "asset": "images/world/treasures/ocean-orb.webp",
+      "width": 154,
+      "height": 192
+    },
+    {
+      "id": "opal",
+      "asset": "images/world/treasures/opal.webp",
+      "width": 158,
+      "height": 192
+    },
+    {
+      "id": "geode",
+      "asset": "images/world/treasures/geode.webp",
+      "width": 189,
+      "height": 192
+    },
+    {
+      "id": "jade-rare",
+      "asset": "images/world/treasures/jade.webp",
+      "width": 169,
+      "height": 176
+    },
+    {
+      "id": "quartz-rare",
+      "asset": "images/world/treasures/quartz.webp",
+      "width": 159,
+      "height": 192
+    },
+    {
+      "id": "kraken-idol",
+      "asset": "images/world/treasures/kraken-idol.webp",
+      "width": 191,
+      "height": 192
+    },
+    {
+      "id": "trident",
+      "asset": "images/world/treasures/trident.webp",
+      "width": 107,
+      "height": 192
+    },
+    {
+      "id": "obsidian",
+      "asset": "images/world/treasures/obsidian.webp",
+      "width": 154,
+      "height": 192
+    },
+    {
+      "id": "abyss-stone",
+      "asset": "images/world/treasures/abyss-stone.webp",
+      "width": 191,
+      "height": 192
+    },
+    {
+      "id": "amber-rare",
+      "asset": "images/world/treasures/amber.webp",
+      "width": 192,
+      "height": 174
+    },
+    {
+      "id": "ammonite-rare",
+      "asset": "images/world/treasures/ammonite.webp",
+      "width": 187,
+      "height": 192
+    },
+    {
+      "id": "crystal-crown",
+      "asset": "images/world/treasures/crystal-crown.webp",
+      "width": 160,
+      "height": 192
+    },
+    {
+      "id": "abyss-eye",
+      "asset": "images/world/treasures/abyss-eye.webp",
+      "width": 166,
+      "height": 192
+    },
+    {
+      "id": "rainbow-crystal",
+      "asset": "images/world/treasures/rainbow-crystal.webp",
+      "width": 146,
+      "height": 192
+    },
+    {
+      "id": "void-crystal",
+      "asset": "images/world/treasures/void-crystal.webp",
+      "width": 134,
+      "height": 192
+    },
+    {
+      "id": "amethyst-rare",
+      "asset": "images/world/treasures/amethyst.webp",
+      "width": 174,
+      "height": 192
+    },
+    {
+      "id": "turquoise-rare",
+      "asset": "images/world/treasures/turquoise.webp",
+      "width": 187,
+      "height": 183
+    },
+    {
+      "id": "pocket-watch",
+      "asset": "images/world/treasures/pocket-watch.webp",
+      "width": 158,
+      "height": 192
+    },
+    {
+      "id": "telescope",
+      "asset": "images/world/treasures/telescope.webp",
+      "width": 192,
+      "height": 148
+    }
+  ],
+  "foreground": {
+    "width": 1672,
+    "height": 941,
+    "parts": [
+      {
+        "id": "stones-left",
+        "asset": "images/world/ocean/stones-left.webp",
+        "width": 592,
+        "height": 486,
+        "plants": {
+          "id": "plants-left",
+          "asset": "images/world/ocean/plants-left.webp"
+        },
+        "sourceWidth": 740,
+        "sourceHeight": 607,
+        "anchorX": 0,
+        "anchorY": 1,
+        "layout": "all",
+        "opaqueRows": [
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111100000000000000000000000000",
+          "11111110000000000000000000000000",
+          "11111110000000000000000000000000",
+          "11111111100000000000000000000000",
+          "11111111111000000000000000000000",
+          "11111111111000000000000000000000",
+          "11111111111100000000000000000000",
+          "11111111111100010000000000000000",
+          "11111111111100110000000000000000",
+          "11111111111110110000000000000000",
+          "11111111111111111000000000000000",
+          "11111111111111111000000000000000",
+          "11111111111111111110000000000000",
+          "11111111111111111110000000000000",
+          "11111111111111111110000000000000",
+          "11111111111111111110000000000000",
+          "11111111111111111110000000000000",
+          "11111111111111111110000000000000",
+          "11111111111111111110110000000000",
+          "11111111111111111110110000000000",
+          "11111111111111111111111000000000",
+          "11111111111111111111111111000000",
+          "11111111111111111111111111110000",
+          "11111111111111111111111111110000",
+          "11111111111111111111111111111000"
+        ]
+      },
+      {
+        "id": "stones-right",
+        "asset": "images/world/ocean/stones-right.webp",
+        "width": 538,
+        "height": 513,
+        "plants": {
+          "id": "plants-right",
+          "asset": "images/world/ocean/plants-right.webp"
+        },
+        "sourceWidth": 672,
+        "sourceHeight": 641,
+        "anchorX": 1,
+        "anchorY": 1,
+        "layout": "all",
+        "opaqueRows": [
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000000",
+          "00000000000000000000000000000011",
+          "00000000000000000000000000000011",
+          "00000000000000000000000000000011",
+          "00000000000000000000000000000011",
+          "00000000000000000000000000000011",
+          "00000000000000000000000000000011",
+          "00000000000000000000000001100111",
+          "00000000000000000000000001110111",
+          "00000000000000000000000111110111",
+          "00000000000000000000000111111111",
+          "00000000000000000000000111111111",
+          "00000000000000000000001111111111",
+          "00000000000000000000011111111111",
+          "00000000000000000000011111111111",
+          "00000000000000000000011111111111",
+          "00000000000000000000011111111111",
+          "00000000000000000000111111111111",
+          "00000000000000000001111111111111",
+          "00000000000000000001111111111111",
+          "00000000000000000011111111111111",
+          "00000000000000000011111111111111",
+          "00000000000000000001111111111111",
+          "00000000000000000001111111111111",
+          "00000000000000000011111111111111",
+          "00011000000000000111111111111111",
+          "00011110000000011111111111111111",
+          "01111110000000111111111111111111",
+          "01111111111110111111111111111111",
+          "01111111111111111111111111111111",
+          "01111111111111111111111111111111"
+        ]
+      }
+    ]
+  },
+  "sandSurface": [
+    0.755,
+    0.765,
+    0.76,
+    0.73,
+    0.69,
+    0.69,
+    0.72,
+    0.75,
+    0.755,
+    0.735,
+    0.74,
+    0.745,
+    0.745,
+    0.74,
+    0.75,
+    0.76,
+    0.76
+  ]
+}
