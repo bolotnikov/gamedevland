@@ -1,0 +1,12 @@
+{
+  "advertisement": {
+    "interstitial": {
+      "placementFallback": "station_continue",
+      "placements": [{ "id": "station_continue" }]
+    },
+    "rewarded": {
+      "placementFallback": "treasure_bonus",
+      "placements": [{ "id": "treasure_bonus" }]
+    }
+  }
+}

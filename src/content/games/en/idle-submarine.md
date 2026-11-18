@@ -37,7 +37,7 @@ screenshots:
     landscapeAlt: Fuel Tank, Engine, and Pump upgrade cards arranged in one row above submarine progression
     portraitSrc: /assets/games/idle-submarine/screens/port/upgrades.webp
     portraitAlt: Fuel Tank, Engine, and Pump upgrade cards stacked above submarine progression on a phone
-playableUrl: https://gamedev.land/play/idle-submarine/?v=6cf006d
+playableUrl: https://gamedev.land/play/idle-submarine/?v=6016452
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 0

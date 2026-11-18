@@ -1,15 +1,87 @@
 {
   "game": "idle-submarine",
   "platform": "web",
-  "builtAt": "2026-11-18T10:24:43Z",
-  "sourceRevision": "6cf006dfa7d21360387d013c8a2d3f8c3157935e",
+  "builtAt": "2026-11-18T11:19:22Z",
+  "sourceRevision": "6016452f2230698c6404c2b374c87a1b6f560a43",
   "sourceWorkingTreeDirty": false,
-  "sourceFingerprint": "8e85a76f8c86ecb16800034c3c0e37e007c36b75a92f968c3fd97930dffc128c",
+  "sourceFingerprint": "b99f499bb84eede3f9a837429f630814be8edb159c800b41a37646b61e247acb",
+  "engineVersion": "0.0.17",
+  "viteToolingVersion": "0.2.7",
   "files": [
+    {
+      "path": "assets/BitmapFont-C4slEqh0.js",
+      "bytes": 69,
+      "sha256": "b9e7ca492c0c60b95503b17c0fe1c2071590369768a5ee42abfb25d08675cfcd"
+    },
+    {
+      "path": "assets/BitmapFont-ChtpFldn.js",
+      "bytes": 33500,
+      "sha256": "a49f9a1bf94a0fc25991dea94a05e0eaf36c4a7d5744f7513e71db3509015b4d"
+    },
+    {
+      "path": "assets/BufferResource-BWsBguj4.js",
+      "bytes": 10564,
+      "sha256": "c6e9f5f7b8412f2b686224d3f4c51d2e43ce9a88ebde18834213565bf3f8b5e4"
+    },
+    {
+      "path": "assets/Cache-CqEcm6ML.js",
+      "bytes": 1098,
+      "sha256": "64c00158e1ec2fff5a406156f30f8256a3c6ee04d00fe41cc83984bdb422f92d"
+    },
+    {
+      "path": "assets/CanvasPool-P7g6e0rG.js",
+      "bytes": 756,
+      "sha256": "426a3f85967bf453fd4ec2e5064d36ef0b153b1ca0b274bce28898e2a6b58a2f"
+    },
+    {
+      "path": "assets/CanvasRenderer-Ban3AWHz.js",
+      "bytes": 77,
+      "sha256": "0f3a738af9991626013acae0520c0fe66ae6f2120f891d092e8cff77ea974903"
+    },
+    {
+      "path": "assets/CanvasRenderer-CCGbz3ar.js",
+      "bytes": 26551,
+      "sha256": "f68939ed748f6e65fe83522ca286a7731b0c786c9d71e6c0db077bd5c0819d1c"
+    },
+    {
+      "path": "assets/FederatedEventTarget-D3WCmmlJ.js",
+      "bytes": 42537,
+      "sha256": "9ae1b85476f33d7c48ff95ff7134902f626cf0501b3daa59e8c38007d01f0d95"
+    },
+    {
+      "path": "assets/Filter-4FvkS7MK.js",
+      "bytes": 38763,
+      "sha256": "d6a605206c922f75bab8ebe6190317b46365618a64ca9fe83c7872317dd29fa0"
+    },
+    {
+      "path": "assets/FilterSystem-Bmhbdv2w.js",
+      "bytes": 39355,
+      "sha256": "98ddc400d6a99b8843a2da4995429e1a30a2105180707805f91755c20d1aee01"
+    },
+    {
+      "path": "assets/GCManagedHash-D82rJrpT.js",
+      "bytes": 25459,
+      "sha256": "69f754114ada234ffb490f9f147422a903549caed0f0e7a5247efa880bcb6299"
+    },
+    {
+      "path": "assets/Geometry-Dc1Yzqvj.js",
+      "bytes": 63025,
+      "sha256": "751ea2e04d806f6b53e3c04ab3ec6694ec55e4694f80fb3fc5a90af075f97a72"
+    },
+    {
+      "path": "assets/GraphicsContext-BIgBKiUn.js",
+      "bytes": 53772,
+      "sha256": "cfedf74436bcbe41827a95d42c7b129705a5c1f73b4ec2ddaea380c034e29cec"
+    },
     {
       "path": "assets/LilitaOne-Regular-DWEPn4H6.ttf",
       "bytes": 28092,
       "sha256": "f5b641c45c69d772ee4eda687bc9fda411d5cad6b0b45371491da4580cbc8d59"
+    },
+    {
+      "path": "assets/RenderTargetSystem-i2rmzfNe.js",
+      "bytes": 51765,
+      "sha256": "590df6877f2799cb966b9db00885a03768cacbe54f5cf691a9e40d64e2f76041"
     },
     {
       "path": "assets/Rubik-Bold-knwvmnvi.woff2",
@@ -20,6 +92,26 @@
       "path": "assets/Rubik-Regular-DXMlahN3.woff2",
       "bytes": 61004,
       "sha256": "3576975848346f284fec6060b739dd7e14da5be93fdde3672fcd03855265762d"
+    },
+    {
+      "path": "assets/WebGLRenderer-CyMS2L-e.js",
+      "bytes": 75,
+      "sha256": "fddff65ed90ec4b75f1726d9f52ce021b93b052f9fb53743a94530960dc5674a"
+    },
+    {
+      "path": "assets/WebGLRenderer-DuXheUSJ.js",
+      "bytes": 68031,
+      "sha256": "f81b274e7d30f67a24b76dd2d6742d7b7ecb8cf8d5942efd3a59ab7503dedbb4"
+    },
+    {
+      "path": "assets/WebGPURenderer-BDbSRS9L.js",
+      "bytes": 38486,
+      "sha256": "93c820a40e09a555dda8399b89838c0d31337aedcc656a6b3a414da07193683f"
+    },
+    {
+      "path": "assets/WebGPURenderer-GB5wplww.js",
+      "bytes": 77,
+      "sha256": "0a8849cf0bff523b6dd690a09a5980f8e8636694957877ec840ba030c5d3b323"
     },
     {
       "path": "assets/abyss-eye-CC7YV1Pq.webp",
@@ -242,6 +334,11 @@
       "sha256": "64b902ab99d824bf524eb7b9f3c2037ae381f5f1183d88515d380b73957eabbb"
     },
     {
+      "path": "assets/browserAll-B3S9G4o9.js",
+      "bytes": 282,
+      "sha256": "0abc25059786f758263d2419bf5f76006d27150b76fdb7be7f4b1ded6e7f11e7"
+    },
+    {
       "path": "assets/bubble-ioQ2ZNHc.webp",
       "bytes": 14212,
       "sha256": "af52f6d36007bf5172dbfcb0ea621d51264b097dd3e6be30b8f51a3e2b91cf3f"
@@ -250,6 +347,11 @@
       "path": "assets/button-CCZ6PxJX.webp",
       "bytes": 14274,
       "sha256": "434e3e8c3a7f38bdb25ae7cb88f4825b504a3e4f7c56ed2b51154e6799d53c78"
+    },
+    {
+      "path": "assets/canvasUtils-De-h0fEY.js",
+      "bytes": 6020,
+      "sha256": "b6021d9773e1fc1d4b2838b46ca64b718a73f377872023b2e143219f0137e284"
     },
     {
       "path": "assets/card-DwpSNLle.webp",
@@ -407,6 +509,11 @@
       "sha256": "c962f35dca5b1f780be6b210bd5ebd0d18de1f4153c35c4ad9bd331ef59a37bf"
     },
     {
+      "path": "assets/getTextureBatchBindGroup-I9c3qADU.js",
+      "bytes": 342,
+      "sha256": "bc5cdfc648c7dd4d45b3bdb99e20492793d0e477acf1f93f6c579d5e6351d21a"
+    },
+    {
       "path": "assets/green-CMfMai-3.webp",
       "bytes": 12390,
       "sha256": "1c796b30971ff1e2bd0dc3656648ead60b3c90ce00d20cb8d441d930f9e8bf7f"
@@ -422,9 +529,14 @@
       "sha256": "62d5a290c51999a10e4b3adb078d8c363d707948fb959862e2a15251e4498c18"
     },
     {
-      "path": "assets/index-aC4YsnzR.js",
-      "bytes": 1394219,
-      "sha256": "4c28717f72dff53fe5363d381a27e10fcd9f102d434bfc563445e62fbaacfcca"
+      "path": "assets/index-kddk0wfN.js",
+      "bytes": 866977,
+      "sha256": "5d35ab72fbdd00ce743f4bbadb64d2751ccff40fc9e1ed493b42f1d433de6f06"
+    },
+    {
+      "path": "assets/init-C9luYBvU.js",
+      "bytes": 124,
+      "sha256": "fe9dea6dd5f37b738a6b48b2992b90888eb1d19fa361ef98c6f30c88841a5447"
     },
     {
       "path": "assets/intake-lip-tier-01-ZbXSxMHs.webp",
@@ -777,6 +889,11 @@
       "sha256": "ef959e65f7fd784a1a1ade9eb19465ce1bf05417a6e6bfd4f14cce3d524c021f"
     },
     {
+      "path": "assets/webworkerAll-p6En0RsW.js",
+      "bytes": 62,
+      "sha256": "d6f0ab78da9cad4a0b2cbc340c1dd975669c751cfd989b81079ead163930d5e2"
+    },
+    {
       "path": "assets/whale-idol-BPYFNtlv.webp",
       "bytes": 10928,
       "sha256": "8c3963cd4634f9853c72db08bca87cf46d96b4c77bd154c9529fbf80992331f4"
@@ -788,13 +905,18 @@
     },
     {
       "path": "index.html",
-      "bytes": 1308,
-      "sha256": "5e815b34258380392b2b227028c0863bb83bd85a3af4782b3943a153def597e1"
+      "bytes": 2907,
+      "sha256": "77216271f70769b6673eb6a677197e4ebb542e419277ae28ed894cdbd1f8ae63"
     },
     {
       "path": "licenses/Rubik-OFL.txt",
       "bytes": 4384,
       "sha256": "472cbe7c25441df63e9c7864b43eb3c0f4b3df950c66a76224e6cfe1eae843fb"
+    },
+    {
+      "path": "playgama-bridge-config.json",
+      "bytes": 274,
+      "sha256": "a4a99dccf210ef01fe11b2272f7dd2350a8521dc7426315e2136547a6cdefc98"
     }
   ]
 }
