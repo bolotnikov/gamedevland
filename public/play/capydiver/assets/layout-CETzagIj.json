@@ -1,0 +1,1575 @@
+{
+  "root": {
+    "type": "Container",
+    "components": {
+      "results": {
+        "type": "VictoryResults"
+      }
+    },
+    "children": {
+      "background": {
+        "type": "Sprite",
+        "props": {
+          "asset": "images/production/victory-backdrop.webp",
+          "anchor": 0.5,
+          "width": 1254,
+          "height": 1254
+        },
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {},
+              "scale": "cover",
+              "position": "center"
+            }
+          },
+          "water": {
+            "type": "DisplacementFilter",
+            "data": {
+              "noiseAssetId": "images/effects/water-noise.webp",
+              "strengthX": 10,
+              "strengthY": 8,
+              "noiseScaleX": 8,
+              "noiseScaleY": 8,
+              "driftXPerSecond": 20,
+              "driftYPerSecond": 14,
+              "enabled": true
+            }
+          }
+        }
+      },
+      "ocean": {
+        "type": "Container",
+        "components": {
+          "life": {
+            "type": "VictoryOcean",
+            "data": {
+              "fishPrefab": "json/prefabs/ui/victory-fish.json",
+              "bubblePrefab": "json/prefabs/ui/victory-bubble.json",
+              "schools": [
+                {
+                  "asset": "images/production/victory-fish-gold.webp",
+                  "count": 5,
+                  "direction": -1,
+                  "facing": -1,
+                  "speed": 22,
+                  "width": 45,
+                  "height": 32,
+                  "y": 0.28,
+                  "phase": 0.23,
+                  "spacing": 56,
+                  "bob": 8,
+                  "alpha": 0.85
+                },
+                {
+                  "asset": "images/production/victory-fish-blue.webp",
+                  "count": 6,
+                  "direction": 1,
+                  "facing": 1,
+                  "speed": 29,
+                  "width": 43,
+                  "height": 21,
+                  "y": 0.55,
+                  "phase": 0.3,
+                  "spacing": 48,
+                  "bob": 6,
+                  "alpha": 0.75
+                }
+              ],
+              "bubbles": {
+                "count": 24,
+                "minSize": 7,
+                "sizeStep": 3.5,
+                "speed": 29,
+                "drift": 13,
+                "alpha": 0.56
+              }
+            }
+          }
+        }
+      },
+      "title": {
+        "type": "Text",
+        "props": {
+          "text": "Level Complete!",
+          "anchor": 0.5,
+          "x": 0,
+          "y": 0,
+          "style": {
+            "fontFamily": "Rubik",
+            "fontWeight": "bold",
+            "fontSize": 72,
+            "fill": "#fff8dc",
+            "stroke": {
+              "color": "#073253",
+              "width": 7.2
+            },
+            "align": "center",
+            "wordWrap": false
+          }
+        },
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "82%",
+                "height": "13%",
+                "y": "3%",
+                "centerX": 0
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "89%",
+                    "height": "10%",
+                    "y": "4%",
+                    "centerX": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "subtitle": {
+        "type": "Container",
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -320.0,
+              "y": -32.5,
+              "width": 640,
+              "height": 65,
+              "color": "#ffffff",
+              "radius": 0,
+              "alpha": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "Heart of the Reef",
+              "anchor": 0.5,
+              "x": 0,
+              "y": 0,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "bold",
+                "fontSize": 48,
+                "fill": "#fff8dc",
+                "stroke": {
+                  "color": "#073253",
+                  "width": 4.800000000000001
+                },
+                "align": "center",
+                "wordWrap": false
+              }
+            }
+          }
+        },
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "72%",
+                "height": "6%",
+                "y": "17%",
+                "centerX": 0
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "82%",
+                    "height": "5%",
+                    "y": "15%",
+                    "centerX": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "capy": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "43%",
+                "height": "55%",
+                "y": "28%",
+                "centerX": "-9%"
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "65%",
+                    "height": "35%",
+                    "y": "26%",
+                    "centerX": "15%"
+                  }
+                }
+              }
+            }
+          },
+          "swim": {
+            "type": "VictoryCapybara",
+            "data": {
+              "bob": 13,
+              "tilt": 0.065,
+              "duration": 1.8,
+              "speed": 0.85
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -375.0,
+              "y": -230.0,
+              "width": 750,
+              "height": 460,
+              "color": "#ffffff",
+              "radius": 0,
+              "alpha": 0
+            }
+          },
+          "motion": {
+            "type": "Container",
+            "children": {
+              "image": {
+                "type": "RigbySkeleton",
+                "props": {
+                  "skeleton": "rigs/capy.skel",
+                  "atlas": "rigs/capy.atlas",
+                  "pages": [
+                    {
+                      "name": "capy.webp",
+                      "asset": "images/production/capy.webp"
+                    }
+                  ],
+                  "animation": "swim",
+                  "loop": true,
+                  "scale": 1.9,
+                  "rotation": -0.12
+                }
+              }
+            }
+          }
+        }
+      },
+      "meter": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "20%",
+                "height": "67%",
+                "y": "25%",
+                "centerX": "-35%"
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "29%",
+                    "height": "42%",
+                    "y": "22%",
+                    "centerX": "-29%"
+                  }
+                }
+              }
+            }
+          },
+          "reveal": {
+            "type": "VictoryMeter",
+            "data": {
+              "x": -30,
+              "bottom": 160,
+              "width": 60,
+              "height": 320,
+              "duration": 2.5,
+              "delay": 0.4,
+              "starDuration": 0.65,
+              "glowAlpha": 0.25
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -70,
+              "y": -185,
+              "width": 215,
+              "height": 440,
+              "color": "#ffffff",
+              "radius": 0,
+              "alpha": 0
+            }
+          },
+          "outline": {
+            "type": "Graphics",
+            "props": {
+              "x": -47,
+              "y": -177,
+              "width": 94,
+              "height": 354,
+              "color": "#042e5a",
+              "radius": 47
+            }
+          },
+          "rim": {
+            "type": "Graphics",
+            "props": {
+              "x": -43,
+              "y": -173,
+              "width": 86,
+              "height": 346,
+              "color": "#22e1f4",
+              "radius": 43
+            }
+          },
+          "rimLight": {
+            "type": "Graphics",
+            "props": {
+              "x": -38,
+              "y": -168,
+              "width": 76,
+              "height": 336,
+              "color": "#b2ffff",
+              "radius": 38
+            }
+          },
+          "track": {
+            "type": "Graphics",
+            "props": {
+              "x": -34,
+              "y": -164,
+              "width": 68,
+              "height": 328,
+              "color": "#07508c",
+              "radius": 34
+            }
+          },
+          "trackInner": {
+            "type": "Graphics",
+            "props": {
+              "x": -30,
+              "y": -160,
+              "width": 60,
+              "height": 320,
+              "color": "#073b70",
+              "radius": 30
+            }
+          },
+          "pile": {
+            "type": "Container",
+            "children": {
+              "coin0": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -17.5,
+                  "y": 151,
+                  "rotation": -0.48
+                }
+              },
+              "coin1": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 14.5,
+                  "y": 151,
+                  "rotation": 0.36
+                }
+              },
+              "coin2": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -14.5,
+                  "y": 124,
+                  "rotation": 0.12
+                }
+              },
+              "coin3": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 17.5,
+                  "y": 124,
+                  "rotation": -0.12
+                }
+              },
+              "coin4": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -17.5,
+                  "y": 97,
+                  "rotation": -0.36
+                }
+              },
+              "coin5": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 14.5,
+                  "y": 97,
+                  "rotation": 0.48
+                }
+              },
+              "coin6": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -14.5,
+                  "y": 70,
+                  "rotation": 0.24
+                }
+              },
+              "coin7": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 17.5,
+                  "y": 70,
+                  "rotation": 0.0
+                }
+              },
+              "coin8": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -17.5,
+                  "y": 43,
+                  "rotation": -0.24
+                }
+              },
+              "coin9": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 14.5,
+                  "y": 43,
+                  "rotation": -0.48
+                }
+              },
+              "coin10": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -14.5,
+                  "y": 16,
+                  "rotation": 0.36
+                }
+              },
+              "coin11": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 17.5,
+                  "y": 16,
+                  "rotation": 0.12
+                }
+              },
+              "coin12": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -17.5,
+                  "y": -11,
+                  "rotation": -0.12
+                }
+              },
+              "coin13": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 14.5,
+                  "y": -11,
+                  "rotation": -0.36
+                }
+              },
+              "coin14": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -14.5,
+                  "y": -38,
+                  "rotation": 0.48
+                }
+              },
+              "coin15": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 17.5,
+                  "y": -38,
+                  "rotation": 0.24
+                }
+              },
+              "coin16": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -17.5,
+                  "y": -65,
+                  "rotation": 0.0
+                }
+              },
+              "coin17": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 14.5,
+                  "y": -65,
+                  "rotation": -0.24
+                }
+              },
+              "coin18": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -14.5,
+                  "y": -92,
+                  "rotation": -0.48
+                }
+              },
+              "coin19": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 17.5,
+                  "y": -92,
+                  "rotation": 0.36
+                }
+              },
+              "coin20": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -17.5,
+                  "y": -119,
+                  "rotation": 0.12
+                }
+              },
+              "coin21": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 14.5,
+                  "y": -119,
+                  "rotation": -0.12
+                }
+              },
+              "coin22": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": -14.5,
+                  "y": -146,
+                  "rotation": -0.36
+                }
+              },
+              "coin23": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/coin.webp",
+                  "anchor": 0.5,
+                  "width": 44,
+                  "height": 42,
+                  "x": 17.5,
+                  "y": -146,
+                  "rotation": 0.48
+                }
+              }
+            }
+          },
+          "fillMask": {
+            "type": "Graphics",
+            "props": {
+              "x": -30,
+              "y": 160,
+              "width": 60,
+              "height": 0,
+              "color": "#ffffff",
+              "radius": 0
+            }
+          },
+          "surface": {
+            "type": "Graphics",
+            "props": {
+              "x": -29,
+              "y": 160,
+              "width": 58,
+              "height": 4,
+              "color": "#fff4a8",
+              "radius": 2,
+              "alpha": 0
+            }
+          },
+          "glass": {
+            "type": "Graphics",
+            "props": {
+              "x": -38,
+              "y": -137,
+              "width": 5,
+              "height": 267,
+              "color": "#dcffff",
+              "radius": 2.5,
+              "alpha": 0.65
+            }
+          },
+          "star0": {
+            "type": "Container",
+            "props": {
+              "x": 72
+            },
+            "children": {
+              "tick": {
+                "type": "Graphics",
+                "props": {
+                  "x": -34,
+                  "y": -3,
+                  "width": 25,
+                  "height": 6,
+                  "color": "#67f8ff",
+                  "radius": 3
+                }
+              },
+              "glow": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/glow.webp",
+                  "anchor": 0.5,
+                  "width": 118,
+                  "height": 118,
+                  "alpha": 0
+                }
+              },
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/star.webp",
+                  "anchor": 0.5,
+                  "width": 59,
+                  "height": 59
+                }
+              },
+              "gold": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/star.webp",
+                  "anchor": 0.5,
+                  "width": 59,
+                  "height": 59,
+                  "alpha": 0
+                }
+              }
+            }
+          },
+          "star1": {
+            "type": "Container",
+            "props": {
+              "x": 72
+            },
+            "children": {
+              "tick": {
+                "type": "Graphics",
+                "props": {
+                  "x": -34,
+                  "y": -3,
+                  "width": 25,
+                  "height": 6,
+                  "color": "#67f8ff",
+                  "radius": 3
+                }
+              },
+              "glow": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/glow.webp",
+                  "anchor": 0.5,
+                  "width": 118,
+                  "height": 118,
+                  "alpha": 0
+                }
+              },
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/star.webp",
+                  "anchor": 0.5,
+                  "width": 59,
+                  "height": 59
+                }
+              },
+              "gold": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/star.webp",
+                  "anchor": 0.5,
+                  "width": 59,
+                  "height": 59,
+                  "alpha": 0
+                }
+              }
+            }
+          },
+          "star2": {
+            "type": "Container",
+            "props": {
+              "x": 72
+            },
+            "children": {
+              "tick": {
+                "type": "Graphics",
+                "props": {
+                  "x": -34,
+                  "y": -3,
+                  "width": 25,
+                  "height": 6,
+                  "color": "#67f8ff",
+                  "radius": 3
+                }
+              },
+              "glow": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/glow.webp",
+                  "anchor": 0.5,
+                  "width": 118,
+                  "height": 118,
+                  "alpha": 0
+                }
+              },
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/star.webp",
+                  "anchor": 0.5,
+                  "width": 59,
+                  "height": 59
+                }
+              },
+              "gold": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/star.webp",
+                  "anchor": 0.5,
+                  "width": 59,
+                  "height": 59,
+                  "alpha": 0
+                }
+              }
+            }
+          },
+          "coin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/production/coin.webp",
+              "anchor": 0.5,
+              "width": 31,
+              "height": 31,
+              "x": -45,
+              "y": 210
+            }
+          },
+          "count": {
+            "type": "Text",
+            "props": {
+              "text": "0 / 0",
+              "anchor": 0.5,
+              "x": 40,
+              "y": 210,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "bold",
+                "fontSize": 30,
+                "fill": "#fff8dc",
+                "stroke": {
+                  "color": "#073253",
+                  "width": 3
+                },
+                "align": "center",
+                "wordWrap": false
+              }
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "COINS",
+              "anchor": 0.5,
+              "x": 30,
+              "y": 244,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "bold",
+                "fontSize": 23,
+                "fill": "#fff8dc",
+                "stroke": {
+                  "color": "#073253",
+                  "width": 3
+                },
+                "align": "center",
+                "wordWrap": false
+              }
+            }
+          }
+        }
+      },
+      "treasures": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "33%",
+                "height": "45%",
+                "y": "29%",
+                "centerX": "29%"
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "87%",
+                    "height": "20%",
+                    "y": "65%",
+                    "centerX": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -235.0,
+              "y": -130.0,
+              "width": 470,
+              "height": 260,
+              "color": "#ffffff",
+              "radius": 0,
+              "alpha": 0
+            }
+          },
+          "heading": {
+            "type": "Text",
+            "props": {
+              "text": "Treasures Found",
+              "anchor": 0.5,
+              "x": 0,
+              "y": -103,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "bold",
+                "fontSize": 42,
+                "fill": "#fff8dc",
+                "stroke": {
+                  "color": "#073253",
+                  "width": 4.2
+                },
+                "align": "center",
+                "wordWrap": false
+              }
+            }
+          },
+          "count": {
+            "type": "Text",
+            "props": {
+              "text": "0 / 0",
+              "anchor": 0.5,
+              "x": 0,
+              "y": -59,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontWeight": "bold",
+                "fontSize": 28,
+                "fill": "#fff8dc",
+                "stroke": {
+                  "color": "#073253",
+                  "width": 3
+                },
+                "align": "center",
+                "wordWrap": false
+              }
+            }
+          },
+          "slot0": {
+            "type": "Container",
+            "props": {
+              "x": -152,
+              "y": 40,
+              "scale": 0.83
+            },
+            "children": {
+              "glow": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/glow.webp",
+                  "anchor": 0.5,
+                  "width": 230,
+                  "height": 230,
+                  "alpha": 0.5
+                }
+              },
+              "icon": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/relic0.webp",
+                  "anchor": 0.5,
+                  "width": 145,
+                  "height": 161,
+                  "visible": false
+                }
+              },
+              "unknown": {
+                "type": "Container",
+                "children": {
+                  "outline": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -73,
+                      "y": -73,
+                      "width": 146,
+                      "height": 146,
+                      "color": "#063562",
+                      "radius": 73
+                    }
+                  },
+                  "rim": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -68,
+                      "y": -68,
+                      "width": 136,
+                      "height": 136,
+                      "color": "#45d5f6",
+                      "radius": 68
+                    }
+                  },
+                  "body": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -62,
+                      "y": -62,
+                      "width": 124,
+                      "height": 124,
+                      "color": "#0c5090",
+                      "radius": 62
+                    }
+                  },
+                  "shine": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -51,
+                      "y": -47,
+                      "width": 30,
+                      "height": 9,
+                      "color": "#b6f7ff",
+                      "radius": 4.5,
+                      "rotation": -0.55,
+                      "alpha": 0.75
+                    }
+                  },
+                  "question": {
+                    "type": "Text",
+                    "props": {
+                      "text": "?",
+                      "anchor": 0.5,
+                      "x": 0,
+                      "y": 4,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 104,
+                        "fill": "#fff8dc",
+                        "stroke": {
+                          "color": "#073253",
+                          "width": 10.4
+                        },
+                        "align": "center",
+                        "wordWrap": false
+                      }
+                    }
+                  }
+                }
+              },
+              "check": {
+                "type": "Container",
+                "props": {
+                  "x": 52,
+                  "y": 54
+                },
+                "children": {
+                  "outline": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -25,
+                      "y": -25,
+                      "width": 50,
+                      "height": 50,
+                      "color": "#08643c",
+                      "radius": 25
+                    }
+                  },
+                  "rim": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -22,
+                      "y": -22,
+                      "width": 44,
+                      "height": 44,
+                      "color": "#efffdb",
+                      "radius": 22
+                    }
+                  },
+                  "body": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -18,
+                      "y": -18,
+                      "width": 36,
+                      "height": 36,
+                      "color": "#3fc65a",
+                      "radius": 18
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "✓",
+                      "anchor": 0.5,
+                      "x": 0,
+                      "y": -1,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 33,
+                        "fill": "#fff8dc",
+                        "stroke": {
+                          "color": "#073253",
+                          "width": 3.3000000000000003
+                        },
+                        "align": "center",
+                        "wordWrap": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "slot1": {
+            "type": "Container",
+            "props": {
+              "x": 0,
+              "y": 40,
+              "scale": 0.83
+            },
+            "children": {
+              "glow": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/glow.webp",
+                  "anchor": 0.5,
+                  "width": 230,
+                  "height": 230,
+                  "alpha": 0.5
+                }
+              },
+              "icon": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/relic0.webp",
+                  "anchor": 0.5,
+                  "width": 145,
+                  "height": 161,
+                  "visible": false
+                }
+              },
+              "unknown": {
+                "type": "Container",
+                "children": {
+                  "outline": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -73,
+                      "y": -73,
+                      "width": 146,
+                      "height": 146,
+                      "color": "#063562",
+                      "radius": 73
+                    }
+                  },
+                  "rim": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -68,
+                      "y": -68,
+                      "width": 136,
+                      "height": 136,
+                      "color": "#45d5f6",
+                      "radius": 68
+                    }
+                  },
+                  "body": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -62,
+                      "y": -62,
+                      "width": 124,
+                      "height": 124,
+                      "color": "#0c5090",
+                      "radius": 62
+                    }
+                  },
+                  "shine": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -51,
+                      "y": -47,
+                      "width": 30,
+                      "height": 9,
+                      "color": "#b6f7ff",
+                      "radius": 4.5,
+                      "rotation": -0.55,
+                      "alpha": 0.75
+                    }
+                  },
+                  "question": {
+                    "type": "Text",
+                    "props": {
+                      "text": "?",
+                      "anchor": 0.5,
+                      "x": 0,
+                      "y": 4,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 104,
+                        "fill": "#fff8dc",
+                        "stroke": {
+                          "color": "#073253",
+                          "width": 10.4
+                        },
+                        "align": "center",
+                        "wordWrap": false
+                      }
+                    }
+                  }
+                }
+              },
+              "check": {
+                "type": "Container",
+                "props": {
+                  "x": 52,
+                  "y": 54
+                },
+                "children": {
+                  "outline": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -25,
+                      "y": -25,
+                      "width": 50,
+                      "height": 50,
+                      "color": "#08643c",
+                      "radius": 25
+                    }
+                  },
+                  "rim": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -22,
+                      "y": -22,
+                      "width": 44,
+                      "height": 44,
+                      "color": "#efffdb",
+                      "radius": 22
+                    }
+                  },
+                  "body": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -18,
+                      "y": -18,
+                      "width": 36,
+                      "height": 36,
+                      "color": "#3fc65a",
+                      "radius": 18
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "✓",
+                      "anchor": 0.5,
+                      "x": 0,
+                      "y": -1,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 33,
+                        "fill": "#fff8dc",
+                        "stroke": {
+                          "color": "#073253",
+                          "width": 3.3000000000000003
+                        },
+                        "align": "center",
+                        "wordWrap": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "slot2": {
+            "type": "Container",
+            "props": {
+              "x": 152,
+              "y": 40,
+              "scale": 0.83
+            },
+            "children": {
+              "glow": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/glow.webp",
+                  "anchor": 0.5,
+                  "width": 230,
+                  "height": 230,
+                  "alpha": 0.5
+                }
+              },
+              "icon": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/relic0.webp",
+                  "anchor": 0.5,
+                  "width": 145,
+                  "height": 161,
+                  "visible": false
+                }
+              },
+              "unknown": {
+                "type": "Container",
+                "children": {
+                  "outline": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -73,
+                      "y": -73,
+                      "width": 146,
+                      "height": 146,
+                      "color": "#063562",
+                      "radius": 73
+                    }
+                  },
+                  "rim": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -68,
+                      "y": -68,
+                      "width": 136,
+                      "height": 136,
+                      "color": "#45d5f6",
+                      "radius": 68
+                    }
+                  },
+                  "body": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -62,
+                      "y": -62,
+                      "width": 124,
+                      "height": 124,
+                      "color": "#0c5090",
+                      "radius": 62
+                    }
+                  },
+                  "shine": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -51,
+                      "y": -47,
+                      "width": 30,
+                      "height": 9,
+                      "color": "#b6f7ff",
+                      "radius": 4.5,
+                      "rotation": -0.55,
+                      "alpha": 0.75
+                    }
+                  },
+                  "question": {
+                    "type": "Text",
+                    "props": {
+                      "text": "?",
+                      "anchor": 0.5,
+                      "x": 0,
+                      "y": 4,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 104,
+                        "fill": "#fff8dc",
+                        "stroke": {
+                          "color": "#073253",
+                          "width": 10.4
+                        },
+                        "align": "center",
+                        "wordWrap": false
+                      }
+                    }
+                  }
+                }
+              },
+              "check": {
+                "type": "Container",
+                "props": {
+                  "x": 52,
+                  "y": 54
+                },
+                "children": {
+                  "outline": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -25,
+                      "y": -25,
+                      "width": 50,
+                      "height": 50,
+                      "color": "#08643c",
+                      "radius": 25
+                    }
+                  },
+                  "rim": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -22,
+                      "y": -22,
+                      "width": 44,
+                      "height": 44,
+                      "color": "#efffdb",
+                      "radius": 22
+                    }
+                  },
+                  "body": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -18,
+                      "y": -18,
+                      "width": 36,
+                      "height": 36,
+                      "color": "#3fc65a",
+                      "radius": 18
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "✓",
+                      "anchor": 0.5,
+                      "x": 0,
+                      "y": -1,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 33,
+                        "fill": "#fff8dc",
+                        "stroke": {
+                          "color": "#073253",
+                          "width": 3.3000000000000003
+                        },
+                        "align": "center",
+                        "wordWrap": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "next": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "34%",
+                "height": "17%",
+                "y": "78%",
+                "centerX": "27%"
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "73%",
+                    "height": "11%",
+                    "y": "86%",
+                    "centerX": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "children": {
+          "press": {
+            "$include": "json/prefabs/ui/victory-next-button.json"
+          }
+        }
+      },
+      "transition": {
+        "type": "Container",
+        "components": {
+          "curtain": {
+            "type": "DiveTransition"
+          }
+        },
+        "children": {
+          "backing": {
+            "type": "Graphics",
+            "props": {
+              "width": 960,
+              "height": 540,
+              "color": "#0a4c6f"
+            },
+            "components": {
+              "fit": {
+                "type": "ResponsiveLayout",
+                "data": {
+                  "area": {},
+                  "resize": "stretch",
+                  "position": "center"
+                }
+              }
+            }
+          },
+          "left": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/production/reef-curtain-left-v3.webp",
+              "anchor": {
+                "x": 0,
+                "y": 0
+              }
+            }
+          },
+          "right": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/production/reef-curtain-left-v3.webp",
+              "anchor": {
+                "x": 0,
+                "y": 0
+              },
+              "scale": {
+                "x": -1,
+                "y": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
