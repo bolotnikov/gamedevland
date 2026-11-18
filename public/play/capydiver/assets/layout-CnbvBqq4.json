@@ -1,0 +1,599 @@
+{
+  "root": {
+    "type": "Container",
+    "components": {
+      "artwork": {
+        "type": "CapyDiverArtwork",
+        "data": {
+          "capy": {
+            "bob": 12,
+            "duration": 2.2,
+            "tilt": 0.035,
+            "timeScale": 0.65
+          },
+          "shine": [
+            {
+              "path": "logo.motion",
+              "from": -650,
+              "to": 600,
+              "duration": 1.15,
+              "period": 5.6,
+              "delay": 1.8,
+              "alpha": 0.4
+            },
+            {
+              "path": "play.motion.press",
+              "from": -400,
+              "to": 350,
+              "duration": 0.85,
+              "period": 3.8,
+              "delay": 2.5,
+              "alpha": 0.36
+            }
+          ],
+          "bubbles": [
+            {
+              "id": "bubble0",
+              "rise": 150,
+              "drift": -38,
+              "duration": 2.8,
+              "delay": 0.0
+            },
+            {
+              "id": "bubble1",
+              "rise": 120,
+              "drift": -42,
+              "duration": 3.04,
+              "delay": 0.36
+            },
+            {
+              "id": "bubble2",
+              "rise": 180,
+              "drift": -46,
+              "duration": 3.28,
+              "delay": 0.72
+            },
+            {
+              "id": "bubble3",
+              "rise": 195,
+              "drift": -50,
+              "duration": 3.5199999999999996,
+              "delay": 1.08
+            },
+            {
+              "id": "bubble4",
+              "rise": 115,
+              "drift": -54,
+              "duration": 3.76,
+              "delay": 1.44
+            },
+            {
+              "id": "bubble5",
+              "rise": 225,
+              "drift": -58,
+              "duration": 4.0,
+              "delay": 1.7999999999999998
+            },
+            {
+              "id": "bubble6",
+              "rise": 240,
+              "drift": -62,
+              "duration": 4.24,
+              "delay": 2.16
+            },
+            {
+              "id": "bubble7",
+              "rise": 255,
+              "drift": -66,
+              "duration": 4.4799999999999995,
+              "delay": 2.52
+            }
+          ],
+          "flares": [
+            {
+              "id": "flareA",
+              "duration": 1.3,
+              "delay": 0.4
+            },
+            {
+              "id": "flareB",
+              "duration": 1.7,
+              "delay": 1.8
+            }
+          ]
+        }
+      }
+    },
+    "children": {
+      "background": {
+        "type": "Sprite",
+        "props": {
+          "asset": "images/boot/back.webp",
+          "anchor": 0.5
+        },
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {},
+              "position": "center",
+              "scale": "cover"
+            }
+          },
+          "waterDisplacement": {
+            "type": "DisplacementFilter",
+            "data": {
+              "noiseAssetId": "images/effects/water-noise.webp",
+              "strengthX": 12,
+              "strengthY": 10,
+              "noiseScaleX": 8,
+              "noiseScaleY": 8,
+              "driftXPerSecond": 24,
+              "driftYPerSecond": 18,
+              "enabled": true
+            }
+          }
+        }
+      },
+      "logo": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "64%",
+                "height": "22%",
+                "y": "10%",
+                "centerX": 0
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "72%",
+                    "height": "18%",
+                    "y": "18.5%"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -480.0,
+              "y": -195.0,
+              "width": 960,
+              "height": 390,
+              "alpha": 0
+            }
+          },
+          "motion": {
+            "type": "Container",
+            "children": {
+              "image": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/boot/logo.webp",
+                  "width": 900,
+                  "height": 396.0,
+                  "anchor": 0.5
+                }
+              },
+              "mask": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/boot/logo.webp",
+                  "width": 900,
+                  "height": 396.0,
+                  "anchor": 0.5
+                }
+              },
+              "shine": {
+                "type": "Graphics",
+                "props": {
+                  "x": -900,
+                  "y": -344.25,
+                  "width": 135.0,
+                  "height": 688.5,
+                  "color": "#ffffff",
+                  "alpha": 0.4,
+                  "rotation": 0.35,
+                  "visible": false
+                }
+              },
+              "flareA": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/spark.webp",
+                  "width": 62,
+                  "height": 62,
+                  "anchor": 0.5,
+                  "x": -315,
+                  "y": -80,
+                  "alpha": 0
+                }
+              },
+              "flareB": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/production/spark.webp",
+                  "width": 42,
+                  "height": 42,
+                  "anchor": 0.5,
+                  "x": 300,
+                  "y": 62,
+                  "alpha": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "capy": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "76%",
+                "height": "39%",
+                "y": "32%",
+                "centerX": 0
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "90%",
+                    "height": "34%",
+                    "y": "39%"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -425.0,
+              "y": -235.0,
+              "width": 850,
+              "height": 640,
+              "alpha": 0
+            }
+          },
+          "motion": {
+            "type": "Container",
+            "children": {
+              "trail": {
+                "type": "Container",
+                "children": {
+                  "bubble0": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 24,
+                      "height": 24,
+                      "anchor": 0.5,
+                      "x": -290,
+                      "y": 65,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble1": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 37,
+                      "height": 37,
+                      "anchor": 0.5,
+                      "x": -225,
+                      "y": -55,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble2": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 18,
+                      "height": 18,
+                      "anchor": 0.5,
+                      "x": -255,
+                      "y": 5,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble3": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 27,
+                      "height": 27,
+                      "anchor": 0.5,
+                      "x": -195,
+                      "y": 110,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble4": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 20,
+                      "height": 20,
+                      "anchor": 0.5,
+                      "x": -170,
+                      "y": -80,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble5": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 15,
+                      "height": 15,
+                      "anchor": 0.5,
+                      "x": -315,
+                      "y": 130,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble6": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 16,
+                      "height": 16,
+                      "anchor": 0.5,
+                      "x": -190,
+                      "y": 50,
+                      "alpha": 0.8
+                    }
+                  },
+                  "bubble7": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/production/bubble.webp",
+                      "width": 30,
+                      "height": 30,
+                      "anchor": 0.5,
+                      "x": -240,
+                      "y": 130,
+                      "alpha": 0.8
+                    }
+                  }
+                }
+              },
+              "image": {
+                "type": "RigbySkeleton",
+                "props": {
+                  "skeleton": "rigs/capy.skel",
+                  "atlas": "rigs/capy.atlas",
+                  "pages": [
+                    {
+                      "name": "capy.webp",
+                      "asset": "images/production/capy.webp"
+                    }
+                  ],
+                  "animation": "swim",
+                  "loop": true,
+                  "scale": 1.9047619047619047
+                }
+              }
+            }
+          }
+        }
+      },
+      "play": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "54%",
+                "height": "19%",
+                "y": "74%",
+                "centerX": 0
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "76%",
+                    "height": "16%",
+                    "y": "73%"
+                  }
+                }
+              }
+            }
+          },
+          "play": {
+            "type": "CapyDiverPlay",
+            "data": {
+              "revealDuration": 0.75,
+              "initialScale": 0.18,
+              "pulseScale": 1.035,
+              "pulseDuration": 1.25,
+              "pressScale": 0.94,
+              "pressDuration": 0.12
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -305.0,
+              "y": -120.0,
+              "width": 610,
+              "height": 240,
+              "alpha": 0
+            }
+          },
+          "motion": {
+            "type": "Container",
+            "children": {
+              "press": {
+                "type": "Container",
+                "children": {
+                  "image": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/boot/play.webp",
+                      "width": 560,
+                      "height": 175.7,
+                      "anchor": 0.5
+                    }
+                  },
+                  "mask": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/boot/play.webp",
+                      "width": 560,
+                      "height": 175.7,
+                      "anchor": 0.5
+                    }
+                  },
+                  "shine": {
+                    "type": "Graphics",
+                    "props": {
+                      "x": -560,
+                      "y": -205.1,
+                      "width": 84.0,
+                      "height": 410.2,
+                      "color": "#ffffff",
+                      "alpha": 0.4,
+                      "rotation": 0.35,
+                      "visible": false
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "Dive",
+                      "anchor": 0.5,
+                      "y": -7,
+                      "style": {
+                        "fontFamily": "Rubik",
+                        "fontWeight": "bold",
+                        "fontSize": 128,
+                        "fill": "#ffffff",
+                        "align": "center",
+                        "dropShadow": {
+                          "color": "#087729",
+                          "alpha": 0.6,
+                          "blur": 0,
+                          "distance": 5,
+                          "angle": 1.5707963267948966
+                        }
+                      }
+                    }
+                  }
+                },
+                "props": {
+                  "interactive": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "loading": {
+        "type": "Container",
+        "components": {
+          "fit": {
+            "type": "ResponsiveLayout",
+            "data": {
+              "area": {
+                "width": "40%",
+                "height": "10%",
+                "y": "78%",
+                "centerX": 0
+              },
+              "scale": "contain",
+              "position": "center",
+              "orientation": {
+                "port": {
+                  "area": {
+                    "width": "63%",
+                    "height": "9%",
+                    "y": "77%"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "children": {
+          "frame": {
+            "type": "Graphics",
+            "props": {
+              "x": -250.0,
+              "y": -50.0,
+              "width": 500,
+              "height": 100,
+              "alpha": 0
+            }
+          },
+          "track": {
+            "type": "Graphics",
+            "props": {
+              "x": -220,
+              "y": 0,
+              "width": 440,
+              "height": 10,
+              "radius": 5,
+              "color": "#073751",
+              "alpha": 0.7
+            }
+          },
+          "fill": {
+            "type": "Graphics",
+            "props": {
+              "x": -220,
+              "y": 0,
+              "width": 440,
+              "height": 10,
+              "radius": 5,
+              "color": "#fff2b5"
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "Loading 0%",
+              "anchor": 0.5,
+              "x": 0,
+              "y": 40,
+              "style": {
+                "fontFamily": "Rubik",
+                "fontSize": 25,
+                "fontWeight": "700",
+                "fill": "#efffff",
+                "dropShadow": {
+                  "color": "#06314b",
+                  "alpha": 0.8,
+                  "blur": 3,
+                  "distance": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,430 @@
+{
+  "type": "Container",
+  "components": {
+    "prompt": {
+      "type": "DiveGuide",
+      "data": {
+        "movement": "guide.swim",
+        "smash": "guide.smash",
+        "space": "guide.space",
+        "period": 0.68,
+        "sink": 4,
+        "knobTravel": 25,
+        "pressedTint": 16768628
+      }
+    }
+  },
+  "children": {
+    "presentation": {
+      "type": "Container",
+      "components": {
+        "fit": {
+          "type": "ResponsiveLayout",
+          "data": {
+            "area": {
+              "width": "94%",
+              "height": 210,
+              "y": 98,
+              "centerX": 0
+            },
+            "scale": {
+              "mode": "contain",
+              "max": 1
+            },
+            "position": {
+              "x": "center",
+              "y": "top"
+            }
+          }
+        }
+      },
+      "children": {
+        "frame": {
+          "type": "Graphics",
+          "props": {
+            "x": -330,
+            "y": -25,
+            "width": 660,
+            "height": 240,
+            "radius": 0,
+            "color": "#ffffff",
+            "alpha": 0
+          }
+        },
+        "label": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontSize": 26,
+              "fontWeight": "bold",
+              "fill": "#f4ffff",
+              "stroke": {
+                "color": "#154b68",
+                "width": 2
+              },
+              "align": "center",
+              "wordWrap": true,
+              "wordWrapWidth": 480
+            }
+          }
+        },
+        "controls": {
+          "type": "Container",
+          "props": {
+            "y": 68
+          },
+          "children": {
+            "wasd": {
+              "type": "Container",
+              "children": {
+                "up": {
+                  "type": "Container",
+                  "props": {
+                    "x": 0,
+                    "y": -22
+                  },
+                  "children": {
+                    "shadow": {
+                      "type": "Graphics",
+                      "props": {
+                        "x": -20,
+                        "y": -16,
+                        "width": 40,
+                        "height": 40,
+                        "radius": 8,
+                        "color": "#154b68",
+                        "alpha": 0.65
+                      }
+                    },
+                    "cap": {
+                      "type": "Container",
+                      "children": {
+                        "face": {
+                          "type": "Graphics",
+                          "props": {
+                            "x": -20,
+                            "y": -20,
+                            "width": 40,
+                            "height": 40,
+                            "radius": 8,
+                            "color": "#f4ffff",
+                            "alpha": 1
+                          }
+                        },
+                        "symbol": {
+                          "type": "Text",
+                          "props": {
+                            "text": "↑",
+                            "y": -1,
+                            "anchor": 0.5,
+                            "style": {
+                              "fontFamily": "Rubik",
+                              "fontSize": 26,
+                              "fontWeight": "bold",
+                              "fill": "#154b68",
+                              "stroke": {
+                                "color": "#154b68",
+                                "width": 2
+                              },
+                              "align": "center",
+                              "wordWrap": true,
+                              "wordWrapWidth": 480
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "type": "Container",
+                  "props": {
+                    "x": -46,
+                    "y": 22
+                  },
+                  "children": {
+                    "shadow": {
+                      "type": "Graphics",
+                      "props": {
+                        "x": -20,
+                        "y": -16,
+                        "width": 40,
+                        "height": 40,
+                        "radius": 8,
+                        "color": "#154b68",
+                        "alpha": 0.65
+                      }
+                    },
+                    "cap": {
+                      "type": "Container",
+                      "children": {
+                        "face": {
+                          "type": "Graphics",
+                          "props": {
+                            "x": -20,
+                            "y": -20,
+                            "width": 40,
+                            "height": 40,
+                            "radius": 8,
+                            "color": "#f4ffff",
+                            "alpha": 1
+                          }
+                        },
+                        "symbol": {
+                          "type": "Text",
+                          "props": {
+                            "text": "←",
+                            "y": -1,
+                            "anchor": 0.5,
+                            "style": {
+                              "fontFamily": "Rubik",
+                              "fontSize": 26,
+                              "fontWeight": "bold",
+                              "fill": "#154b68",
+                              "stroke": {
+                                "color": "#154b68",
+                                "width": 2
+                              },
+                              "align": "center",
+                              "wordWrap": true,
+                              "wordWrapWidth": 480
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "down": {
+                  "type": "Container",
+                  "props": {
+                    "x": 0,
+                    "y": 22
+                  },
+                  "children": {
+                    "shadow": {
+                      "type": "Graphics",
+                      "props": {
+                        "x": -20,
+                        "y": -16,
+                        "width": 40,
+                        "height": 40,
+                        "radius": 8,
+                        "color": "#154b68",
+                        "alpha": 0.65
+                      }
+                    },
+                    "cap": {
+                      "type": "Container",
+                      "children": {
+                        "face": {
+                          "type": "Graphics",
+                          "props": {
+                            "x": -20,
+                            "y": -20,
+                            "width": 40,
+                            "height": 40,
+                            "radius": 8,
+                            "color": "#f4ffff",
+                            "alpha": 1
+                          }
+                        },
+                        "symbol": {
+                          "type": "Text",
+                          "props": {
+                            "text": "↓",
+                            "y": -1,
+                            "anchor": 0.5,
+                            "style": {
+                              "fontFamily": "Rubik",
+                              "fontSize": 26,
+                              "fontWeight": "bold",
+                              "fill": "#154b68",
+                              "stroke": {
+                                "color": "#154b68",
+                                "width": 2
+                              },
+                              "align": "center",
+                              "wordWrap": true,
+                              "wordWrapWidth": 480
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "type": "Container",
+                  "props": {
+                    "x": 46,
+                    "y": 22
+                  },
+                  "children": {
+                    "shadow": {
+                      "type": "Graphics",
+                      "props": {
+                        "x": -20,
+                        "y": -16,
+                        "width": 40,
+                        "height": 40,
+                        "radius": 8,
+                        "color": "#154b68",
+                        "alpha": 0.65
+                      }
+                    },
+                    "cap": {
+                      "type": "Container",
+                      "children": {
+                        "face": {
+                          "type": "Graphics",
+                          "props": {
+                            "x": -20,
+                            "y": -20,
+                            "width": 40,
+                            "height": 40,
+                            "radius": 8,
+                            "color": "#f4ffff",
+                            "alpha": 1
+                          }
+                        },
+                        "symbol": {
+                          "type": "Text",
+                          "props": {
+                            "text": "→",
+                            "y": -1,
+                            "anchor": 0.5,
+                            "style": {
+                              "fontFamily": "Rubik",
+                              "fontSize": 26,
+                              "fontWeight": "bold",
+                              "fill": "#154b68",
+                              "stroke": {
+                                "color": "#154b68",
+                                "width": 2
+                              },
+                              "align": "center",
+                              "wordWrap": true,
+                              "wordWrapWidth": 480
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "joystick": {
+              "type": "Container",
+              "children": {
+                "base": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/production/joystick-ring.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 108,
+                    "height": 108,
+                    "anchor": 0.5,
+                    "alpha": 0.85
+                  }
+                },
+                "knob": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/production/joystick-thumb.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 48,
+                    "height": 48,
+                    "anchor": 0.5,
+                    "alpha": 0.8
+                  }
+                },
+                "finger": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/production/tutorial-finger.webp",
+                    "width": 72,
+                    "height": 75.54098360655738,
+                    "anchor": {
+                      "x": 0.24,
+                      "y": 0.03
+                    }
+                  }
+                }
+              },
+              "props": {
+                "y": 130
+              }
+            },
+            "space": {
+              "type": "Container",
+              "props": {
+                "x": 0,
+                "y": -19
+              },
+              "children": {
+                "shadow": {
+                  "type": "Graphics",
+                  "props": {
+                    "x": -63,
+                    "y": -16,
+                    "width": 126,
+                    "height": 40,
+                    "radius": 8,
+                    "color": "#154b68",
+                    "alpha": 0.65
+                  }
+                },
+                "cap": {
+                  "type": "Container",
+                  "children": {
+                    "face": {
+                      "type": "Graphics",
+                      "props": {
+                        "x": -63,
+                        "y": -20,
+                        "width": 126,
+                        "height": 40,
+                        "radius": 8,
+                        "color": "#f4ffff",
+                        "alpha": 1
+                      }
+                    },
+                    "symbol": {
+                      "type": "Text",
+                      "props": {
+                        "text": "SPACE",
+                        "y": -1,
+                        "anchor": 0.5,
+                        "style": {
+                          "fontFamily": "Rubik",
+                          "fontSize": 19,
+                          "fontWeight": "bold",
+                          "fill": "#154b68",
+                          "stroke": {
+                            "color": "#154b68",
+                            "width": 2
+                          },
+                          "align": "center",
+                          "wordWrap": true,
+                          "wordWrapWidth": 480
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

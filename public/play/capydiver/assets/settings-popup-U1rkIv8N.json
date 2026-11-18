@@ -1,0 +1,207 @@
+{
+  "type": "Container",
+  "props": {
+    "visible": false
+  },
+  "children": {
+    "content": {
+      "type": "Container",
+      "props": {
+        "pivot": {
+          "x": 5.5,
+          "y": -17.75
+        }
+      },
+      "children": {
+        "body": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/production/settings-body.webp",
+            "width": 600,
+            "height": 400,
+            "x": 0,
+            "y": 28,
+            "anchor": 0.5
+          }
+        },
+        "title": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/production/settings-title.webp",
+            "width": 500,
+            "height": 167,
+            "x": -12,
+            "y": -180,
+            "anchor": 0.5
+          }
+        },
+        "heading": {
+          "type": "Text",
+          "props": {
+            "text": "Settings",
+            "x": 18,
+            "y": -163,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "bold",
+              "fontSize": 46,
+              "fill": "#fffafd",
+              "stroke": {
+                "color": "#351b46",
+                "width": 4,
+                "join": "round"
+              },
+              "align": "center"
+            }
+          }
+        },
+        "music": {
+          "type": "Container",
+          "props": {
+            "y": -27
+          },
+          "children": {
+            "base": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/production/settings-row.webp",
+                "width": 460,
+                "height": 94,
+                "x": 0,
+                "y": 0,
+                "anchor": 0.5
+              }
+            },
+            "icon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/production/settings-music.webp",
+                "width": 51,
+                "height": 61,
+                "x": -171,
+                "y": 0,
+                "anchor": 0.5
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "Music",
+                "x": -109,
+                "y": -2,
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "bold",
+                  "fontSize": 32,
+                  "fill": "#fffafd",
+                  "stroke": {
+                    "color": "#351b46",
+                    "width": 4,
+                    "join": "round"
+                  },
+                  "align": "center"
+                }
+              }
+            },
+            "toggle": {
+              "$include": "json/prefabs/ui/settings-toggle.json",
+              "props": {
+                "x": 155
+              }
+            }
+          }
+        },
+        "sound": {
+          "type": "Container",
+          "props": {
+            "y": 80
+          },
+          "children": {
+            "base": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/production/settings-row.webp",
+                "width": 460,
+                "height": 94,
+                "x": 0,
+                "y": 0,
+                "anchor": 0.5
+              }
+            },
+            "icon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/production/settings-sound.webp",
+                "width": 65,
+                "height": 53,
+                "x": -171,
+                "y": 0,
+                "anchor": 0.5
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "Sounds",
+                "x": -109,
+                "y": -2,
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "bold",
+                  "fontSize": 32,
+                  "fill": "#fffafd",
+                  "stroke": {
+                    "color": "#351b46",
+                    "width": 4,
+                    "join": "round"
+                  },
+                  "align": "center"
+                }
+              }
+            },
+            "toggle": {
+              "$include": "json/prefabs/ui/settings-toggle.json",
+              "props": {
+                "x": 155
+              }
+            }
+          }
+        },
+        "close": {
+          "$include": "json/prefabs/ui/settings-close-button.json",
+          "props": {
+            "x": 268,
+            "y": -175
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "fit": {
+      "type": "ResponsiveLayout",
+      "data": {
+        "area": {
+          "width": "92%",
+          "height": "90%",
+          "centerX": 0,
+          "centerY": 0
+        },
+        "scale": {
+          "mode": "contain",
+          "max": 0.82
+        },
+        "position": "center"
+      }
+    }
+  }
+}
