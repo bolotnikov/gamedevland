@@ -8,6 +8,7 @@ import Header from '../../components/common/Header.astro';
 import GameEmbed from '../../components/game/GameEmbed.astro';
 import GameMediaShowcase from '../../components/game/GameMediaShowcase.astro';
 import { GAME_RELEASE_PLATFORM_LABELS } from '../../data/gameReleasePlatform';
+import { PlaygamaPublications } from '../../data/playgamaPublications';
 import Layout from '../../layouts/Layout.astro';
 
 
@@ -15,6 +16,7 @@ import Layout from '../../layouts/Layout.astro';
 interface Props { game: CollectionEntry<'games'> }
 const { game } = Astro.props;
 const { Content } = await render(game);
+const playgama = PlaygamaPublications.find(game.data.translationKey);
 const releaseLabel = game.data.releaseDate
 	? game.data.releaseDate.getUTCFullYear()
 	: game.data.releaseYear;
@@ -52,6 +54,7 @@ const releaseLabel = game.data.releaseDate
 									<p>{t(GAME_RELEASE_PLATFORM_LABELS[game.data.releasePlatform])}</p>
 								)
 							}
+							{playgama && <p>Playgama Sandbox</p>}
 							<h1>{game.data.title}</h1>
 						</div>
 					</div>
@@ -93,6 +96,7 @@ const releaseLabel = game.data.releaseDate
 				title={game.data.title}
 				playableUrl={game.data.playableUrl}
 				externalUrl={game.data.externalUrl}
+				playgama={playgama}
 				orientation={game.data.orientation}
 				embedAspectRatio={game.data.embedAspectRatio}
 				fitToViewport={game.data.fitEmbedToViewport}

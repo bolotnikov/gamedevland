@@ -5,7 +5,7 @@ const t = i18n.t.bind(i18n);
 interface Props {
 	title: string;
 	description: string;
-	badgeLabel?: string | undefined;
+	badgeLabels: readonly string[];
 	releaseLabel?: string | undefined;
 	genre: string;
 	technologies: string[];
@@ -15,7 +15,7 @@ interface Props {
 	href: string;
 }
 
-const { title, description, badgeLabel, releaseLabel, genre, technologies, iconImage, iconAlt, squareIcon, href } = Astro.props;
+const { title, description, badgeLabels, releaseLabel, genre, technologies, iconImage, iconAlt, squareIcon, href } = Astro.props;
 ---
 
 <article class="game-card">
@@ -25,7 +25,7 @@ const { title, description, badgeLabel, releaseLabel, genre, technologies, iconI
 		</div>
 		<div class="game-card__body">
 			<div class="game-card__meta">
-				{badgeLabel && <span class="game-card__status">{badgeLabel}</span>}
+				{badgeLabels.map((label) => <span class="game-card__status">{label}</span>)}
 				<span>{genre}</span>
 				{releaseLabel && <span>{releaseLabel}</span>}
 			</div>

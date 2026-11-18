@@ -7,6 +7,7 @@ import Footer from '../../components/common/Footer.astro';
 import Header from '../../components/common/Header.astro';
 import GameCard from '../../components/game/GameCard.astro';
 import { GAME_RELEASE_PLATFORM_LABELS } from '../../data/gameReleasePlatform';
+import { PlaygamaPublications } from '../../data/playgamaPublications';
 import Layout from '../../layouts/Layout.astro';
 
 const games = await Content.games(i18n.code);
@@ -33,9 +34,10 @@ const games = await Content.games(i18n.code);
 						<GameCard
 							title={game.data.title}
 							description={game.data.description}
-							badgeLabel={game.data.releasePlatform
-								? t(GAME_RELEASE_PLATFORM_LABELS[game.data.releasePlatform])
-								: undefined}
+							badgeLabels={[
+								...(game.data.releasePlatform ? [t(GAME_RELEASE_PLATFORM_LABELS[game.data.releasePlatform])] : []),
+								...(PlaygamaPublications.find(game.data.translationKey) ? ['Playgama Sandbox'] : []),
+							]}
 							releaseLabel={game.data.releaseDate
 								? game.data.releaseDate.getUTCFullYear().toString()
 								: game.data.releaseYear?.toString()}
