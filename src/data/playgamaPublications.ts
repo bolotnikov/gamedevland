@@ -1,14 +1,9 @@
-interface PlaygamaSandbox {
+export interface PlaygamaPublication {
 	readonly title: string;
 	readonly url: string;
 }
 
-export interface PlaygamaPublication {
-	readonly url: string;
-	readonly shareText: string;
-}
-
-const sandboxes: ReadonlyMap<string, PlaygamaSandbox> = new Map([
+const sandboxes: ReadonlyMap<string, PlaygamaPublication> = new Map([
 	['capydiver', { title: 'CapyDiver', url: 'https://playgama.ai/play/j6azogobat4dbr' }],
 	['fish-sort', { title: 'Fish Sort', url: 'https://playgama.ai/play/yjdqkti4uynvbu' }],
 	['ai-defender', { title: 'AI Defender', url: 'https://playgama.ai/play/fznmvgysnpemmf' }],
@@ -20,13 +15,6 @@ const sandboxes: ReadonlyMap<string, PlaygamaSandbox> = new Map([
 
 export class PlaygamaPublications {
 	static find(translationKey: string): PlaygamaPublication | undefined {
-		const sandbox = sandboxes.get(translationKey);
-		if (!sandbox) return undefined;
-
-		const { title, url } = sandbox;
-		return {
-			url,
-			shareText: `Made with AI. Brought to you by #PlaygamaMCP. Fine-tuned by me. ${title} → ${url}\n#playgama #PlaygamaMCP #webdev #gamedev`,
-		};
+		return sandboxes.get(translationKey);
 	}
 }

@@ -65,9 +65,13 @@ const {
 		)
 	}
 	{playgama && (
-		<details class="game-embed__share">
-			<summary>{t("Share your game")}</summary>
-			<p>{playgama.shareText}</p>
+		<details class="game-embed__credit">
+			<summary>{t("Playgama credit")}</summary>
+			<p>
+				Made with AI. Brought to you by #PlaygamaMCP. Fine-tuned by me. {playgama.title} →{' '}
+				<a href={playgama.url} target="_blank" rel="noopener noreferrer">{playgama.url}</a><br />
+				#playgama #PlaygamaMCP #webdev #gamedev
+			</p>
 		</details>
 	)}
 </section>
@@ -143,24 +147,29 @@ const {
 		background: #e5fff3;
 	}
 
-	.game-embed__share {
+	.game-embed__credit {
 		padding: 12px 18px;
 		border-top: 1px solid #263142;
 		color: #ffffff;
 		font-size: 14px;
 	}
 
-	.game-embed__share summary {
+	.game-embed__credit summary {
 		width: fit-content;
 		cursor: pointer;
 		font-weight: 600;
 	}
 
-	.game-embed__share p {
+	.game-embed__credit p {
 		margin: 10px 0 2px;
 		color: #c7d2e2;
-		white-space: pre-wrap;
 		overflow-wrap: anywhere;
+	}
+
+	.game-embed__credit a {
+		color: #d0f4e3;
+		text-decoration: underline;
+		text-underline-offset: 3px;
 	}
 
 	.game-embed__actions > :global(a:focus-visible) {
