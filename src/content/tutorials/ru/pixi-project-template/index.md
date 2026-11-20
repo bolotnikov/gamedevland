@@ -51,7 +51,7 @@ steps:
 - Загрузка и отображение ресурсов
 - Управление сценами, состояниями, анимациями, звуком и экраном
 
-Возьмём пустую структуру проекта из [начальной ветки](https://github.com/bolotnikov/pixi-project-template/tree/initial) и изучим её.
+Рассмотрим структуру проекта в [исходном шаблоне на PixiJS 6](https://github.com/bolotnikov/pixi-project-template/tree/8092a781d02df8af7de5613b21ec2aa40135d7ef).
 
 <a id="11-document-template" class="translation-anchor" aria-hidden="true"></a>
 

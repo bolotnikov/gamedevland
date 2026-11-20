@@ -51,7 +51,7 @@ In this article, our goal is to develop a simple project template that we will u
 - Resource loading and rendering
 - Management of scenes, states, animations, sounds and screen
 
-Let's take an empty project structure from [the initial branch](https://github.com/bolotnikov/pixi-project-template/tree/initial) and examine it.
+Let's examine the project structure in [the original PixiJS 6 template](https://github.com/bolotnikov/pixi-project-template/tree/8092a781d02df8af7de5613b21ec2aa40135d7ef).
 
 <a id="11-шаблон-документа" class="translation-anchor" aria-hidden="true"></a>
 

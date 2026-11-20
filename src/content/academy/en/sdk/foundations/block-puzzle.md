@@ -33,7 +33,7 @@ Open the [Block Puzzle demo](https://bolotnikov.github.io/block-puzzle/). The pl
 Now get the [game source](https://github.com/bolotnikov/block-puzzle). The course uses the public revision `d1dd4e3`, so examples can be checked against unchanged code. Run the commands below to start it locally. The `dev:web` script is defined in [package.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
 
 ```sh
-git clone https://github.com/gamedevland/block-puzzle.git
+git clone https://github.com/bolotnikov/block-puzzle.git
 cd block-puzzle
 git checkout d1dd4e35b3df7d71fcc6a3eca9f5133773f51177
 npm ci

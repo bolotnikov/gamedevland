@@ -33,7 +33,7 @@
 Теперь получим [исходники игры](https://github.com/bolotnikov/block-puzzle). В курсе зафиксирована публичная ревизия `d1dd4e3`: это позволяет сверять примеры с неизменным кодом. Для локального запуска выполним команды ниже. Скрипт `dev:web` определён в [package.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
 
 ```sh
-git clone https://github.com/gamedevland/block-puzzle.git
+git clone https://github.com/bolotnikov/block-puzzle.git
 cd block-puzzle
 git checkout d1dd4e35b3df7d71fcc6a3eca9f5133773f51177
 npm ci
