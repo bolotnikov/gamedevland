@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · SurfaceGlitch",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/SurfaceGlitch.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/SurfaceGlitch.ts",
       "note": "Регистрация целей и детерминированное время."
     },
     {

@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseCommand.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/commands/BaseCommand.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/commands/BaseCommand.ts",
       "note": "Scene scope checks and detached operations."
     },
     {
       "title": "SDK · BaseComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
       "note": "Awaiting resources and completing detach."
     },
     {
       "title": "SDK · BaseAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/actions/BaseAction.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/actions/BaseAction.ts",
       "note": "Action cancellation and lifetime."
     }
   ]

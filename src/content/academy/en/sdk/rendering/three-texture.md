@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "SDK · ThreeViewport.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewport.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewport.ts",
       "note": "Declarative viewport and access to the Three layout."
     },
     {
       "title": "SDK · ThreeViewportComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewportComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewportComponent.ts",
       "note": "Scene preparation, rendering, resize and cleanup."
     }
   ]
@@ -43,7 +43,7 @@ Add a `ThreeViewport` to the JSON layout. The SDK creates a separate Three canva
 }
 ```
 
-`sceneLayout` is the JSON asset ID containing Three nodes: groups, models, a camera and lights. `camera` names a camera inside that file. See the [Three layout example](https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/examples/three-viewport/preview.json). Each viewport has its own graph and IDs; do not declare `children` on the `ThreeViewport` itself.
+`sceneLayout` is the JSON asset ID containing Three nodes: groups, models, a camera and lights. `camera` names a camera inside that file. See the [Three layout example](https://github.com/bolotnikov/sdk/blob/sdk-2026-11-11/examples/three-viewport/preview.json). Each viewport has its own graph and IDs; do not declare `children` on the `ThreeViewport` itself.
 
 <figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Three layout</strong><span>Models, camera and lights</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Texture</strong><span>A copy of the Three scene image</span></div></div><div class="sdk-figure__item tone-green"><div><strong>ThreeViewport</strong><span>Pixi position, scale, opacity and input</span></div></div></div></figure>
 

@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · PixiRendererModule.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/PixiRendererModule.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/PixiRendererModule.ts",
       "note": "Registering the Pixi runtime and standard factories."
     },
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/index.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/index.ts",
       "note": "Imports for concrete Pixi nodes."
     },
     {
       "title": "SDK · NineSliceSprite.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NineSliceSprite.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NineSliceSprite.ts",
       "note": "Panel resizing and border constraints."
     }
   ]

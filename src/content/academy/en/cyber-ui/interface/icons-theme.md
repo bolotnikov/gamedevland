@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · TerminalUi",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TerminalUi.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TerminalUi.ts",
       "note": "The complete icon names and their geometry."
     },
     {
       "title": "Cyber UI Toolkit · CyberPreset",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/CyberPreset.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/CyberPreset.ts",
       "note": "Immutable default settings."
     }
   ]

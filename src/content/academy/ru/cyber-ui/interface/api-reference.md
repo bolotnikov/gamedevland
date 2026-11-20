@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · core exports",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/index.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/index.ts",
       "note": "Публичные экспорты core."
     },
     {
       "title": "Cyber UI Toolkit · SDK exports",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/sdk/src/index.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/sdk/src/index.ts",
       "note": "Публичные экспорты адаптера."
     }
   ]

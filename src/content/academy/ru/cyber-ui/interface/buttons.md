@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · ButtonSurface",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/ButtonSurface.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/ButtonSurface.ts",
       "note": "Параметры и поведение публичного API."
     }
   ]

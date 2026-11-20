@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · HybridRendererModule.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRendererModule.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRendererModule.ts",
       "note": "Registering both renderers."
     },
     {
       "title": "SDK · HybridRuntime.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRuntime.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRuntime.ts",
       "note": "Two canvases with a shared loop and separate trees."
     },
     {
       "title": "SDK · HybridHitTester.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridHitTester.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridHitTester.ts",
       "note": "UI-first hit testing."
     }
   ]

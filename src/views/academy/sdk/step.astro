@@ -37,7 +37,7 @@ const CyberPreview = definition.id === 'cyber-ui' && slug && CyberPreviewCatalog
 	? (await import('../../../components/academy/CyberPreview.astro')).default
 	: undefined;
 // SDK implementation references remain research evidence, not required course reading.
-const sources = step.data.sources.filter(({ url }) => !url.startsWith('https://github.com/gamedevland/sdk/'));
+const sources = step.data.sources.filter(({ url }) => !url.startsWith('https://github.com/bolotnikov/sdk/'));
 const takeaway = typeof step.data.takeaway === 'string' ? [step.data.takeaway] : step.data.takeaway ?? [];
 ---
 <Layout title={`${step.data.title} — ${definition.title}`} description={step.data.description} canonicalPath={`/academy/${step.data.translationKey}/`}>

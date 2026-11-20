@@ -32,10 +32,10 @@ My approach is simple: AI agents write code, but they work inside a predefined a
 That is why I built my own HTML5 game SDK:
 
 - sdk npm packages: <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">@gamedevland/engine</a> and <a href="https://www.npmjs.com/package/@gamedevland/vite" target="_blank" rel="noreferrer">@gamedevland/vite</a>
-- game example: <a href="https://gamedev.land/play/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
-- game repository: <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
+- game example: <a href="https://bolotnikov.github.io/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
+- game repository: <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
 
-<a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> is a complete game built on this SDK. It has a boot scene, preload, layout JSON, prefab JSON, FSM, commands, scene services, a domain model, components, drag-and-drop, score, game over, best score, sounds, and a production build.
+<a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> is a complete game built on this SDK. It has a boot scene, preload, layout JSON, prefab JSON, FSM, commands, scene services, a domain model, components, drag-and-drop, score, game over, best score, sounds, and a production build.
 
 <a id="зачем-нужен-sdk" class="translation-anchor" aria-hidden="true"></a>
 
@@ -52,7 +52,7 @@ Its job is to define the project rules:
 
 After that, an agent does not have to invent the structure every time. It should work inside the existing boundaries.
 
-In <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>, the scene class is almost empty:
+In <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>, the scene class is almost empty:
 
 ```ts
 export class GameScene extends FsmDrivenScene {}
@@ -88,7 +88,7 @@ This matters for AI-assisted development. It is much easier for an agent to chan
 
 ## Example: Placing a Block
 
-Take the main action in <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>: the player drags a shape onto the board.
+Take the main action in <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>: the player drags a shape onto the board.
 
 <a id="проблема" class="translation-anchor" aria-hidden="true"></a>
 
@@ -325,7 +325,7 @@ Next, I want to cover the individual parts and practical details of working with
 - safe tweens and async operations;
 - debug services for DevTools;
 - workflow with Codex, VS Code, Figma, and Photopea;
-- gameplay iterations using <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> as an example;
+- gameplay iterations using <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> as an example;
 - and other similar practical topics.
 
 The main idea: AI is useful in game development when the project has clear boundaries.

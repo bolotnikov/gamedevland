@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "SDK · ThreeViewport.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewport.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewport.ts",
       "note": "Декларативный viewport и доступ к Three-layout."
     },
     {
       "title": "SDK · ThreeViewportComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewportComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-11/packages/engine/src/renderers/hybrid/ThreeViewportComponent.ts",
       "note": "Подготовка сцены, перерисовка, resize и очистка."
     }
   ]
@@ -43,7 +43,7 @@
 }
 ```
 
-`sceneLayout` — id JSON-ассета с Three-нодами: группами, моделями, камерой и светом. `camera` указывает на камеру внутри этого файла. Посмотрим [пример Three-layout](https://github.com/gamedevland/sdk/blob/sdk-2026-11-11/examples/three-viewport/preview.json). У каждого viewport свой граф и свои id; `children` у самого `ThreeViewport` не задаём.
+`sceneLayout` — id JSON-ассета с Three-нодами: группами, моделями, камерой и светом. `camera` указывает на камеру внутри этого файла. Посмотрим [пример Three-layout](https://github.com/bolotnikov/sdk/blob/sdk-2026-11-11/examples/three-viewport/preview.json). У каждого viewport свой граф и свои id; `children` у самого `ThreeViewport` не задаём.
 
 <figure class="sdk-figure is-flow"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>Three-layout</strong><span>Модели, камера и свет</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>Текстура</strong><span>Копия изображения Three-сцены</span></div></div><div class="sdk-figure__item tone-green"><div><strong>ThreeViewport</strong><span>Положение, масштаб, прозрачность и ввод Pixi</span></div></div></div></figure>
 

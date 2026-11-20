@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · ValuesGroupRegistrar.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/ValuesGroupRegistrar.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/ValuesGroupRegistrar.ts",
       "note": "Registration methods."
     },
     {
       "title": "SDK · DiContainer.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
       "note": "Singleton caching in the container that owns the provider and override rules."
     },
     {
       "title": "Block Puzzle · di.providers.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts",
       "note": "Registration of four categories in the game."
     }
   ]
@@ -43,7 +43,7 @@ For example, the game can share one progress service. If there are two counters 
 
 <figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>singletonValue</strong><span>Returns an existing value</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>singletonClass</strong><span>Creates an object from a class once</span></div></div><div class="sdk-figure__item tone-green"><div><strong>singletonFactory</strong><span>Calls the factory once</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>transientClass</strong><span>Creates an object from a class for each request</span></div></div></div><figcaption>A singleton keeps the object. A transient creates a new one.</figcaption></figure>
 
-Here is the shortened component registration. [di.providers.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L59)
+Here is the shortened component registration. [di.providers.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L59)
 
 ```ts
 group.add('BlockPuzzleScoreComponent', BlockPuzzleScoreComponent);

@@ -44,7 +44,7 @@ promoVideo:
   mp4: /assets/games/hole-marine/gameplay.mp4
   aspectRatio: 16 / 9
   poster: /assets/games/hole-marine/screens/video-poster.webp
-playableUrl: https://gamedev.land/play/hole-marine/
+playableUrl: https://bolotnikov.github.io/hole-marine/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: -2

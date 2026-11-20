@@ -38,12 +38,12 @@ In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 <a id="дополнительные-материалы" class="translation-anchor" aria-hidden="true"></a>
 
 ## Additional materials
-- [Complete source code](https://github.com/gamedevland/match3)
-- [Preview demo](https://gamedev.land/play/match3/)
+- [Complete source code](https://github.com/bolotnikov/match3-public)
+- [Preview demo](https://bolotnikov.github.io/match3-public/)
 
 Before starting the development, we need to perform 2 steps:
 
-1️⃣ Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](/articles/pixi-project-template) on how to create a PIXI project template.
+1️⃣ Download our [PIXI project template](https://github.com/bolotnikov/pixi-project-template). You can start working on the game right now or check out [the tutorial](/articles/pixi-project-template) on how to create a PIXI project template.
 
 2️⃣ Download [the assets pack](/assets/match3.zip) for our game. Assets provided by the great website [kenney.nl](https://kenney.nl)
 

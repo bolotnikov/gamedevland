@@ -16,17 +16,17 @@
   "sources": [
     {
       "title": "SDK · LocalesService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/LocalesService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/LocalesService.ts",
       "note": "Язык, lookup, параметры и поведение при отсутствии ключа."
     },
     {
       "title": "SDK · LocaleCatalog.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/common/LocaleCatalog.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/common/LocaleCatalog.ts",
       "note": "Поддерживаемые коды и ID словарей."
     },
     {
       "title": "SDK · LocalesBootstrapBootTask.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/boot/LocalesBootstrapBootTask.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/boot/LocalesBootstrapBootTask.ts",
       "note": "Выбор языка при старте; словари загружаются отдельно."
     }
   ]

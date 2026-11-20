@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · HybridRendererModule.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRendererModule.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRendererModule.ts",
       "note": "Подключение обоих рендеров."
     },
     {
       "title": "SDK · HybridRuntime.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRuntime.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridRuntime.ts",
       "note": "Два canvas с общим циклом и отдельными деревьями."
     },
     {
       "title": "SDK · HybridHitTester.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridHitTester.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/hybrid/HybridHitTester.ts",
       "note": "Приоритет попаданий в интерфейс."
     }
   ]

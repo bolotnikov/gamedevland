@@ -32,7 +32,7 @@ steps:
     title: "Useful links"
 ---
 
-In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games. You can check the final template code in [GitHub](https://github.com/gamedevland/pixi-project-template).
+In this article, our goal is to develop a simple project template that we will use as a foundation for all our future games. You can check the final template code in [GitHub](https://github.com/bolotnikov/pixi-project-template).
 
 <a id="видеоверсия" class="translation-anchor" aria-hidden="true"></a>
 

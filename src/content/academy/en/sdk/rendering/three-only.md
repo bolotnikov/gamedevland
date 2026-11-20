@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · ThreeSchemas.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeSchemas.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeSchemas.ts",
       "note": "Node types, strict properties and camera settings."
     },
     {
       "title": "SDK · ThreeElements.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeElements.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeElements.ts",
       "note": "Creating geometry, materials and cameras."
     },
     {
       "title": "SDK · ThreeHitTester.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeHitTester.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeHitTester.ts",
       "note": "Finding the nearest visible interactive node."
     }
   ]

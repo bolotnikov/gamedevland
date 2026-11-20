@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
       "note": "Запуск, cancel и очистка."
     },
     {
       "title": "SDK · NodeActions.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/internal/NodeActions.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/internal/NodeActions.ts",
       "note": "Именной runAction и cancelAction."
     },
     {
       "title": "Block Puzzle · BlockPuzzleBoardEffectsComponent.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts",
       "note": "Вызов эффекта по клеткам."
     }
   ]
@@ -34,7 +34,7 @@
 
 <aside class="lesson-note" aria-labelledby="action-term"><span class="lesson-note__label">Термин</span><h3 id="action-term">Действие узла</h3><p>Эффект, который запускаем по имени. Например, вспышка при очистке клетки.</p></aside>
 
-В `layout.json` эффект записан под именем `lineClearBurst`. Когда клетка очищается, компонент вызывает `runAction` и передаёт координаты клетки. [layout.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json) · [BlockPuzzleBoardEffectsComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts)
+В `layout.json` эффект записан под именем `lineClearBurst`. Когда клетка очищается, компонент вызывает `runAction` и передаёт координаты клетки. [layout.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json) · [BlockPuzzleBoardEffectsComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts)
 
 ```ts
 this.trackTask(

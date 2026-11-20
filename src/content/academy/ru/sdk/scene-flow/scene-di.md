@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · SceneDiDefinition.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/SceneDiDefinition.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/SceneDiDefinition.ts",
       "note": "Раздельные списки providers и services."
     },
     {
       "title": "SDK · SceneServiceHost.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneServiceHost.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneServiceHost.ts",
       "note": "Вызов lifecycle-хуков зарегистрированных сервисов."
     },
     {
       "title": "Block Puzzle · scene.di.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
       "note": "Geometry без lifecycle и активные сервисы сцены."
     }
   ]
@@ -39,7 +39,7 @@
 
 `SceneDiDefinition` описывает зависимости одной сцены. Её ключ должен совпадать с ключом в `scenes.map`.
 
-В `GameSceneDi` из [scene.di.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts) есть два разных списка. Сокращённый фрагмент для одного сервиса:
+В `GameSceneDi` из [scene.di.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts) есть два разных списка. Сокращённый фрагмент для одного сервиса:
 
 ```ts
 protected override registerProviders(registrar: ValuesGroupRegistrar): void {

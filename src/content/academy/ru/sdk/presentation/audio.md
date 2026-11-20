@@ -15,24 +15,24 @@
   "sources": [
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "Каналы, handles, пауза и unloadSource."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/types.ts",
       "note": "Параметры воспроизведения и результат."
     },
     {
       "title": "Block Puzzle · BlockPuzzleAudioService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts",
       "note": "Подписки на игровые события."
     }
   ]
 }
 ---
 
-Добавим звук в список ресурсов. В Block Puzzle сервис звука слушает `PlacementCompleted`. По этому событию он вызывает `engine.audio.playSfx` с именем звука. При выходе из сцены сервис снимает подписку. [BlockPuzzleAudioService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts#L20)
+Добавим звук в список ресурсов. В Block Puzzle сервис звука слушает `PlacementCompleted`. По этому событию он вызывает `engine.audio.playSfx` с именем звука. При выходе из сцены сервис снимает подписку. [BlockPuzzleAudioService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts#L20)
 
 ```ts
 ctx.engine.events.on(BlockPuzzleEvents.PlacementCompleted, () => {

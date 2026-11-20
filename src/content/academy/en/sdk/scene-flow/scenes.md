@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "The order of scene entry and exit."
     },
     {
       "title": "SDK · SceneManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneManager.ts",
       "note": "The transition queue, scene stack, and parameters."
     },
     {
       "title": "Block Puzzle · scene.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts",
       "note": "Game scene configuration."
     }
   ]
 }
 ---
 
-`SceneConfig` describes the scene's key, class, assets, layout, and FSM. Block Puzzle defines its game scene in this configuration. [scene.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts)
+`SceneConfig` describes the scene's key, class, assets, layout, and FSM. Block Puzzle defines its game scene in this configuration. [scene.config.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts)
 
 ```ts
 import { GameScene } from '../../GameScene';

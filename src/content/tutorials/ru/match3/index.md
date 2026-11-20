@@ -38,12 +38,12 @@ steps:
 <a id="additional-materials" class="translation-anchor" aria-hidden="true"></a>
 
 ## Дополнительные материалы
-- [Полный исходный код](https://github.com/gamedevland/match3)
-- [Демонстрационная версия](https://gamedev.land/play/match3/)
+- [Полный исходный код](https://github.com/bolotnikov/match3-public)
+- [Демонстрационная версия](https://bolotnikov.github.io/match3-public/)
 
 Перед началом разработки нужно выполнить два шага:
 
-1️⃣ Скачайте наш [шаблон проекта PIXI](https://github.com/gamedevland/pixi-project-template). Можно сразу начать работу над игрой или изучить [руководство](/ru/articles/pixi-project-template) по созданию шаблона проекта PIXI.
+1️⃣ Скачайте наш [шаблон проекта PIXI](https://github.com/bolotnikov/pixi-project-template). Можно сразу начать работу над игрой или изучить [руководство](/ru/articles/pixi-project-template) по созданию шаблона проекта PIXI.
 
 2️⃣ Скачайте [набор ресурсов](/assets/match3.zip) для нашей игры. Ресурсы предоставлены замечательным сайтом [kenney.nl](https://kenney.nl)
 

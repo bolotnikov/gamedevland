@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "SDK · BaseComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseComponent.ts",
       "note": "onPresentation, enabled state and subscription cleanup."
     },
     {
       "title": "SDK · PresentationScheduler.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/runtime/PresentationScheduler.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/runtime/PresentationScheduler.ts",
       "note": "camera/world/ui ordering and layout scoping."
     }
   ]

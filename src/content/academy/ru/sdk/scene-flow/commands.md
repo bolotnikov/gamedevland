@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · CommandBus.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/CommandBus.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/CommandBus.ts",
       "note": "Создание команды и привязка контекста."
     },
     {
       "title": "SDK · BaseTypedCommand.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/BaseTypedCommand.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/BaseTypedCommand.ts",
       "note": "Декодирование перед execute."
     },
     {
       "title": "Block Puzzle · PlaceBlockCommand.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts",
       "note": "Команда игры."
     }
   ]
@@ -39,7 +39,7 @@
 
 `CommandBus` находит команду по имени из FSM и передаёт ей доступ к текущей сцене.
 
-Для размещения нужны слот и координаты. В [PlaceBlockCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts) используется `BaseTypedCommand`:
+Для размещения нужны слот и координаты. В [PlaceBlockCommand.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts) используется `BaseTypedCommand`:
 
 ```ts
 import { BaseTypedCommand } from '@gamedevland/engine/commands';

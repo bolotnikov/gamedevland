@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · tokens.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/tokens.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/tokens.ts",
       "note": "Категории типизированных токенов и SystemServices."
     },
     {
       "title": "Block Puzzle · BlockPuzzleServices.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts",
       "note": "Токены сервисов игры."
     },
     {
       "title": "Block Puzzle · StartBlockPuzzleSessionCommand.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts",
       "note": "Запрос игрового сервиса по токену."
     }
   ]
@@ -38,7 +38,7 @@
   <p>Объект получает извне всё, что ему нужно для работы. Например, настройки или другой сервис можно передать через конструктор. Такие настройки и сервисы называют зависимостями.</p>
 </aside>
 
-Токен — ключ, по которому контейнер находит объект. В Block Puzzle команда запуска партии передаёт токен `Gameplay` в `getSceneService` и получает игровой сервис. Ниже показаны только нужные строки из [BlockPuzzleServices.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts#L7-L13) и [StartBlockPuzzleSessionCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts#L5-L9).
+Токен — ключ, по которому контейнер находит объект. В Block Puzzle команда запуска партии передаёт токен `Gameplay` в `getSceneService` и получает игровой сервис. Ниже показаны только нужные строки из [BlockPuzzleServices.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts#L7-L13) и [StartBlockPuzzleSessionCommand.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts#L5-L9).
 
 ```ts
 // BlockPuzzleServices.ts

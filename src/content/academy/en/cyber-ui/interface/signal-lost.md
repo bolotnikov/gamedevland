@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · SignalLost",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/SignalLost.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/SignalLost.ts",
       "note": "Public API parameters and behavior."
     },
     {
       "title": "Cyber UI Toolkit · FaultGlyph",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/FaultGlyph.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/FaultGlyph.ts",
       "note": "Public API parameters and behavior."
     }
   ]

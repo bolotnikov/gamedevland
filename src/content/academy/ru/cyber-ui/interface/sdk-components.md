@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · SDK guide",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/sdk/README.md",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/sdk/README.md",
       "note": "Регистрация компонента и пример layout."
     },
     {
       "title": "Cyber UI Toolkit · ToolkitComponent",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/sdk/src/ToolkitComponent.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/sdk/src/ToolkitComponent.ts",
       "note": "Владение эффектами, reduced motion и detach."
     }
   ]

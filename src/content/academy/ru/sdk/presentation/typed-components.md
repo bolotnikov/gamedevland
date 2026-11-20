@@ -15,24 +15,24 @@
   "sources": [
     {
       "title": "SDK · BaseTypedComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseTypedComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/BaseTypedComponent.ts",
       "note": "Декодирование до onInit."
     },
     {
       "title": "Block Puzzle · BlockPuzzleScoreComponent.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts",
       "note": "Реальный typed-компонент игры."
     },
     {
       "title": "SDK · ComponentsGroup.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/di/ComponentsGroup.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/di/ComponentsGroup.ts",
       "note": "Регистрация типа поведения."
     }
   ]
 }
 ---
 
-Укажем в `configDecoder`, какие значения допустимы в `data` из JSON. В примере масштаб должен быть не меньше 1, а длительность не меньше 0. SDK проверит настройки до `onInit`. Адаптируем пример [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L14):
+Укажем в `configDecoder`, какие значения допустимы в `data` из JSON. В примере масштаб должен быть не меньше 1, а длительность не меньше 0. SDK проверит настройки до `onInit`. Адаптируем пример [BlockPuzzleScoreComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L14):
 
 ```ts
 import { BaseTypedComponent } from '@gamedevland/engine/layouts';

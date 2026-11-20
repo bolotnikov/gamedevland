@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · README",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit#readme",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit#readme",
       "note": "Контракты локальных размеров и владения ресурсами."
     },
     {

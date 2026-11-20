@@ -16,17 +16,17 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/types.ts",
       "note": "Доступные поля FSMConfig."
     },
     {
       "title": "SDK · SceneFSM.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/SceneFSM.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/SceneFSM.ts",
       "note": "Actions перед target, очередь и entry."
     },
     {
       "title": "Block Puzzle · fsm.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts",
       "note": "Состояния исходной игры."
     }
   ]
@@ -42,7 +42,7 @@
 
 <aside class="lesson-note" aria-labelledby="fsm-term"><span class="lesson-note__label">Термин</span><h3 id="fsm-term">Конечный автомат (FSM)</h3><p>Описание поведения через конечный набор состояний и переходов по событиям. Одновременно активно одно состояние.</p></aside>
 
-Фрагмент [fsm.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts#L29):
+Фрагмент [fsm.config.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts#L29):
 
 ```ts
 playing: {

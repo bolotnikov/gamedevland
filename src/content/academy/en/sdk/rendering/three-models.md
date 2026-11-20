@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · AssetManifestTypes.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestTypes.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestTypes.ts",
       "note": "The manifest models field."
     },
     {
       "title": "SDK · GlbLoader.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/GlbLoader.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/GlbLoader.ts",
       "note": "Supported GLB format and limitations."
     },
     {
       "title": "SDK · ModelAsset.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ModelAsset.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ModelAsset.ts",
       "note": "Shared GPU resources and acquire/release."
     }
   ]

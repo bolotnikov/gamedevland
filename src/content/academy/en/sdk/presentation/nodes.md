@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · NodeBase.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NodeBase.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NodeBase.ts",
       "note": "Node access methods and lookup."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/types.ts",
       "note": "Contracts for built-in node types."
     },
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
       "note": "Creating the WebGL renderer."
     },
     {
       "title": "SDK · TexturedRope.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/TexturedRope.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/TexturedRope.ts",
       "note": "A specialized node with geometry and points."
     }
   ]

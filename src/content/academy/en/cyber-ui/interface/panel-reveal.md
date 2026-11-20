@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · PanelReveal",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/sdk/src/PanelReveal.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/sdk/src/PanelReveal.ts",
       "note": "Input decoding, tweens, and transform restoration."
     }
   ]

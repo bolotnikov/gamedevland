@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/types.ts",
       "note": "Формат layout и узла."
     },
     {
       "title": "SDK · LayoutResolver.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/core/LayoutResolver.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/core/LayoutResolver.ts",
       "note": "Разрешение включений и проверка дерева."
     },
     {
       "title": "SDK · IncludeExpander.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/core/transformers/IncludeExpander.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/core/transformers/IncludeExpander.ts",
       "note": "Поверхностное объединение и защита от циклов."
     },
     {
       "title": "Block Puzzle · layout.json",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json",
       "note": "Полный layout Block Puzzle."
     }
   ]
@@ -39,7 +39,7 @@
 
 <aside class="lesson-note" aria-labelledby="layout-term"><span class="lesson-note__label">Термин</span><h3 id="layout-term">Вёрстка сцены (layout)</h3><p>Файл, в котором указано, что появится на экране и какие элементы находятся внутри других.</p></aside>
 
-В `SceneConfig.layout` укажем путь к JSON. В `type` запишем тип элемента, в `props` его настройки, а в `children` вложенные элементы. Пример сокращён. [layout.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json)
+В `SceneConfig.layout` укажем путь к JSON. В `type` запишем тип элемента, в `props` его настройки, а в `children` вложенные элементы. Пример сокращён. [layout.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json)
 
 ```json
 {

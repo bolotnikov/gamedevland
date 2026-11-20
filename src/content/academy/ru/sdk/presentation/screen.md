@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · ScreenManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/screen/ScreenManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/screen/ScreenManager.ts",
       "note": "Размеры и преобразование координат."
     },
     {
       "title": "SDK · ResponsiveLayoutComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/ResponsiveLayoutComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/components/ResponsiveLayoutComponent.ts",
       "note": "Вписывание, ориентация и refresh."
     },
     {
       "title": "Block Puzzle · BlockPuzzleLayoutComponent.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleLayoutComponent.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleLayoutComponent.ts",
       "note": "Геометрия композиции игры."
     }
   ]
@@ -34,7 +34,7 @@
 
 <aside class="lesson-note" aria-labelledby="virtual-screen"><span class="lesson-note__label">Термин</span><h3 id="virtual-screen">Игровые координаты</h3><p>Координаты, в которых расставляем элементы игры. При смене размера окна SDK пересчитывает, где они окажутся на экране.</p></aside>
 
-В Block Puzzle компонент `ResponsiveLayoutComponent` подбирает масштаб поля и фигур. `contain` вписывает их в доступную область, а `padding` оставляет отступы по краям. [layout.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json)
+В Block Puzzle компонент `ResponsiveLayoutComponent` подбирает масштаб поля и фигур. `contain` вписывает их в доступную область, а `padding` оставляет отступы по краям. [layout.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json)
 
 ```json
 "responsiveLayout": {

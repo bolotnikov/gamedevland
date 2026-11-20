@@ -73,4 +73,4 @@ Dash through cargo to reveal rewards and clear the kelp at the exit. Explore sid
 
 The generator builds Bézier curves for slopes, walls and grottos. Rendering, scenery placement and collision share the same contours. The swimmer slides along surfaces on contact, and bubbles rise in world space from a marker on the skeletal rig.
 
-[Public web build repository](https://github.com/gamedevland/capydiver)
+[Public web build repository](https://github.com/bolotnikov/capydiver)

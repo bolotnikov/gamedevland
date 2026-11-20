@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseAction.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/actions/BaseAction.ts",
       "note": "Starting, canceling, and cleaning up an action."
     },
     {
       "title": "SDK · NodeActions.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/internal/NodeActions.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/internal/NodeActions.ts",
       "note": "Running or canceling an action by name."
     },
     {
       "title": "Block Puzzle · BlockPuzzleBoardEffectsComponent.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts",
       "note": "Running an effect for each cell."
     }
   ]
@@ -35,7 +35,7 @@
 <aside class="lesson-note" aria-labelledby="action-term"><span class="lesson-note__label">Term</span><h3 id="action-term">Node action</h3><p>An effect you run by name, such as a flash when a cell is cleared.</p></aside>
 
 
-In `layout.json`, the effect is named `lineClearBurst`. When a cell clears, the component calls `runAction` with the cell coordinates. [layout.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json) · [BlockPuzzleBoardEffectsComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts)
+In `layout.json`, the effect is named `lineClearBurst`. When a cell clears, the component calls `runAction` with the cell coordinates. [layout.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/layouts/scenes/game/layout.json) · [BlockPuzzleBoardEffectsComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts)
 
 ```ts
 this.trackTask(

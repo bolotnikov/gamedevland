@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · RuntimeSystemPhase.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/runtime/RuntimeSystemPhase.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/runtime/RuntimeSystemPhase.ts",
       "note": "Порядок фаз обновления."
     },
     {
       "title": "SDK · EnginePauseController.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/runtime/EnginePauseController.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/runtime/EnginePauseController.ts",
       "note": "Объединение причин паузы."
     },
     {
       "title": "SDK · RuntimeActivity.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/runtime/RuntimeActivity.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/runtime/RuntimeActivity.ts",
       "note": "Наблюдаемое состояние активности."
     },
     {
       "title": "SDK · SceneService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneService.ts",
       "note": "Контракт обновления сервиса."
     }
   ]

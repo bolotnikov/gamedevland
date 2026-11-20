@@ -52,17 +52,17 @@ steps:
 <a id="additional-materials" class="translation-anchor" aria-hidden="true"></a>
 
 ## Дополнительные материалы
-- [Полный исходный код](https://github.com/gamedevland/tower-defense)
-- [Демонстрационная версия](https://gamedev.land/play/tower-defense/)
+- [Полный исходный код](https://github.com/bolotnikov/tower-defense-public)
+- [Демонстрационная версия](https://bolotnikov.github.io/tower-defense-public/)
 
 Перед началом разработки нужно выполнить два шага:
 
-1️⃣ ( Скачайте наш [шаблон проекта PIXI](https://github.com/gamedevland/pixi-project-template). Можно сразу начать работу над игрой или изучить [руководство](/ru/articles/pixi-project-template) по созданию шаблона PIXI.
+1️⃣ ( Скачайте наш [шаблон проекта PIXI](https://github.com/bolotnikov/pixi-project-template). Можно сразу начать работу над игрой или изучить [руководство](/ru/articles/pixi-project-template) по созданию шаблона PIXI.
 
 2️⃣ Скачайте игровые ресурсы:
 
-- [спрайты](https://github.com/gamedevland/tower-defense/tree/main/src/sprites)
-- [тайловую карту](https://github.com/gamedevland/tower-defense/blob/main/src/json/tilemap.json), созданную в редакторе [Tiled](https://www.mapeditor.org/)
+- [спрайты](https://github.com/bolotnikov/tower-defense-public/tree/main/src/sprites)
+- [тайловую карту](https://github.com/bolotnikov/tower-defense-public/blob/main/src/json/tilemap.json), созданную в редакторе [Tiled](https://www.mapeditor.org/)
 
 Мы скачали и распаковали шаблон проекта, в котором продолжим работу. Обычно я начинаю новую игру с фонового изображения. Здесь вместо него используем полную карту уровня, заранее подготовленную в Tiled в формате tilemap. Вся карта состоит из небольших тайлов. Данные уровня хранятся в двух файлах:
 

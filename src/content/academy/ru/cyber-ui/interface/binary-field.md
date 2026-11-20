@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · BinaryField",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/BinaryField.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/BinaryField.ts",
       "note": "Seed, frame и построение узора."
     }
   ]

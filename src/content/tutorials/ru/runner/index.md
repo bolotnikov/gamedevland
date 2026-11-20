@@ -66,12 +66,12 @@ steps:
 <a id="additional-materials" class="translation-anchor" aria-hidden="true"></a>
 
 ## Дополнительные материалы
-- [Полный исходный код](https://github.com/gamedevland/runner)
-- [Демонстрационная версия](https://gamedev.land/play/runner/)
+- [Полный исходный код](https://github.com/bolotnikov/runner)
+- [Демонстрационная версия](https://bolotnikov.github.io/runner/)
 
 Перед началом разработки нужно выполнить два шага:
 
-1️⃣ Скачайте наш [шаблон проекта PIXI](https://github.com/gamedevland/pixi-project-template). Можно сразу начать работу над игрой или изучить [руководство](/ru/articles/pixi-project-template) по созданию шаблона проекта PIXI.
+1️⃣ Скачайте наш [шаблон проекта PIXI](https://github.com/bolotnikov/pixi-project-template). Можно сразу начать работу над игрой или изучить [руководство](/ru/articles/pixi-project-template) по созданию шаблона проекта PIXI.
 
 2️⃣ Скачайте [набор ресурсов](/assets/runner.zip) для игры. Ресурсы предоставлены замечательным сайтом [kenney.nl](https://kenney.nl)
 

@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · ThreeSchemas.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeSchemas.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeSchemas.ts",
       "note": "Типы узлов, строгие свойства и параметры камеры."
     },
     {
       "title": "SDK · ThreeElements.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeElements.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeElements.ts",
       "note": "Создание геометрии, материалов и камер."
     },
     {
       "title": "SDK · ThreeHitTester.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeHitTester.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/three/ThreeHitTester.ts",
       "note": "Поиск ближайшего видимого интерактивного узла."
     }
   ]

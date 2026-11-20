@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "SDK · README.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/README.md",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/README.md",
       "note": "Назначение двух пакетов и границы SDK."
     },
     {
       "title": "Engine · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "Поле exports перечисляет публичные модули движка."
     },
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "Публичный метод playSfx для воспроизведения звуковых эффектов."
     }
   ]
 }
 ---
 
-[GameDevLand SDK](https://github.com/gamedevland/sdk) предоставляет готовые модули для разработки HTML5-игр. На его основе можно создавать разные игры, сохраняя их логику в отдельных проектах. Пакет `@gamedevland/engine` работает в браузере, а `@gamedevland/vite` подготавливает запуск и сборку проекта. Для отрисовки можно выбрать PixiJS, Three.js, Three с Pixi-интерфейсом или Three внутри Pixi-текстуры.
+[GameDevLand SDK](https://github.com/bolotnikov/sdk) предоставляет готовые модули для разработки HTML5-игр. На его основе можно создавать разные игры, сохраняя их логику в отдельных проектах. Пакет `@gamedevland/engine` работает в браузере, а `@gamedevland/vite` подготавливает запуск и сборку проекта. Для отрисовки можно выбрать PixiJS, Three.js, Three с Pixi-интерфейсом или Three внутри Pixi-текстуры.
 
 <aside class="lesson-note" aria-labelledby="sdk-definition">
   <span class="lesson-note__label">Термин</span>

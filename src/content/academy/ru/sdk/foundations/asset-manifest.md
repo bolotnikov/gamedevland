@@ -16,17 +16,17 @@
   "sources": [
     {
       "title": "SDK · AssetManifestBuilder.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestBuilder.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestBuilder.ts",
       "note": "Правила ID и группировки."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/types.ts",
       "note": "AssetDescriptor, BundleDescriptor и типы ресурсов."
     },
     {
       "title": "Block Puzzle · assets.manifest.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts",
       "note": "Полный манифест примера."
     }
   ]
@@ -42,7 +42,7 @@
 
 <aside class="lesson-note" aria-labelledby="asset-id"><span class="lesson-note__label">Термин</span><h3 id="asset-id">Asset ID</h3><p>Имя ресурса внутри игры. Например, images/block.png. Оно не обязано совпадать с URL файла после сборки.</p></aside>
 
-В [assets.manifest.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts#L29) `import.meta.glob` собирает ссылки на файлы, а `AssetManifestBuilder` превращает их в наборы ресурсов. Запишем этот фрагмент с типом результата `glob<string>`:
+В [assets.manifest.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts#L29) `import.meta.glob` собирает ссылки на файлы, а `AssetManifestBuilder` превращает их в наборы ресурсов. Запишем этот фрагмент с типом результата `glob<string>`:
 
 ```ts
 const images = import.meta.glob<string>(

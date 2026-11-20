@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · CommandBus.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/CommandBus.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/CommandBus.ts",
       "note": "Creating a command and attaching its context."
     },
     {
       "title": "SDK · BaseTypedCommand.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/BaseTypedCommand.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/commands/BaseTypedCommand.ts",
       "note": "Decoding before execute."
     },
     {
       "title": "Block Puzzle · PlaceBlockCommand.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts",
       "note": "A command from the game."
     }
   ]
@@ -39,7 +39,7 @@
 
 `CommandBus` looks up the command by the name in the FSM and gives it access to the current scene.
 
-Placement needs a slot and coordinates. The command uses `BaseTypedCommand`. [PlaceBlockCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts)
+Placement needs a slot and coordinates. The command uses `BaseTypedCommand`. [PlaceBlockCommand.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/PlaceBlockCommand.ts)
 
 ```ts
 import { BaseTypedCommand } from '@gamedevland/engine/commands';

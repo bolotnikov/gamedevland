@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · PhysicsWorld.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/PhysicsWorld.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/PhysicsWorld.ts",
       "note": "Тела, шаг, управление и столкновения."
     },
     {
       "title": "SDK · PhysicsSceneService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/PhysicsSceneService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/PhysicsSceneService.ts",
       "note": "Фиксированный шаг и lifecycle мира."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/physics/types.ts",
       "note": "Snapshots и параметры интеграции."
     }
   ]

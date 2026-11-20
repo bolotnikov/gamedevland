@@ -23,7 +23,7 @@ roles:
   - Game design and UI
 iconImage: /assets/games/shaman/icon.png
 iconAlt: Shaman's Way icon with a hooded shaman standing by a mountain lake
-playableUrl: https://gamedev.land/play/shaman/
+playableUrl: https://bolotnikov.github.io/shaman-public/
 orientation: portrait
 embedAspectRatio: 3 / 4
 fitEmbedToViewport: true

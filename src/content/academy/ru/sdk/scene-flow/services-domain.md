@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseSceneService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseSceneService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseSceneService.ts",
       "note": "Доступность контекста сервиса."
     },
     {
       "title": "Block Puzzle · BlockPuzzleGameplayService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts",
       "note": "Сессия, preview и применение хода."
     },
     {
       "title": "Block Puzzle · BlockPuzzleBoard.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/domain/BlockPuzzleBoard.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/domain/BlockPuzzleBoard.ts",
       "note": "Правила поля без зависимости от PixiJS."
     }
   ]
@@ -41,7 +41,7 @@
 
 <aside class="lesson-note" aria-labelledby="domain-model"><span class="lesson-note__label">Термин</span><h3 id="domain-model">Доменная модель</h3><p>Код с правилами игры. В Block Puzzle он определяет, куда можно поставить фигуру, какие линии очистить и сколько очков начислить.</p></aside>
 
-Сервис объединяет несколько операций. Фрагмент метода `place` из [BlockPuzzleGameplayService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L124):
+Сервис объединяет несколько операций. Фрагмент метода `place` из [BlockPuzzleGameplayService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L124):
 
 ```ts
 const placedCells = session.board.place(shape, request.anchor);

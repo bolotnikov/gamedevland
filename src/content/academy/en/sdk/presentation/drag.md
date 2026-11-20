@@ -15,24 +15,24 @@
   "sources": [
     {
       "title": "Block Puzzle · BlockPuzzleDragComponent.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts",
       "note": "The drag gesture and preview in the original game."
     },
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/index.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/index.ts",
       "note": "Public types and classes for dragging."
     },
     {
       "title": "SDK · DragInputBridgeComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/components/DragInputBridgeComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/components/DragInputBridgeComponent.ts",
       "note": "Converting drag phases, pointer cancellation, and coordinates."
     }
   ]
 }
 ---
 
-While the player drags a piece, `BlockPuzzleDragComponent` moves its image. It converts the pointer position to board coordinates and calls `previewPlacement` to highlight cells. Releasing the piece sends `PlacementRequested`, and canceling the gesture clears the highlight. [BlockPuzzleDragComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts)
+While the player drags a piece, `BlockPuzzleDragComponent` moves its image. It converts the pointer position to board coordinates and calls `previewPlacement` to highlight cells. Releasing the piece sends `PlacementRequested`, and canceling the gesture clears the highlight. [BlockPuzzleDragComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts)
 
 <figure class="sdk-figure is-flow">
   <div class="sdk-figure__body">

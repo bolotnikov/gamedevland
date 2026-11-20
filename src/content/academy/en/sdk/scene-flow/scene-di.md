@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · SceneDiDefinition.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/SceneDiDefinition.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/SceneDiDefinition.ts",
       "note": "Separate providers and services lists."
     },
     {
       "title": "SDK · SceneServiceHost.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneServiceHost.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/SceneServiceHost.ts",
       "note": "Calling lifecycle hooks on registered services."
     },
     {
       "title": "Block Puzzle · scene.di.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
       "note": "Geometry without lifecycle hooks and active scene services."
     }
   ]
@@ -39,7 +39,7 @@
 
 `SceneDiDefinition` describes the dependencies for one scene. Its key must match the key in `scenes.map`.
 
-`GameSceneDi` has two separate lists. Here is a shortened example for one service. [scene.di.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts)
+`GameSceneDi` has two separate lists. Here is a shortened example for one service. [scene.di.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts)
 
 ```ts
 protected override registerProviders(registrar: ValuesGroupRegistrar): void {

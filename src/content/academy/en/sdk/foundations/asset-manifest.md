@@ -16,17 +16,17 @@
   "sources": [
     {
       "title": "SDK · AssetManifestBuilder.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestBuilder.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManifestBuilder.ts",
       "note": "ID and grouping rules."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/types.ts",
       "note": "AssetDescriptor, BundleDescriptor and asset types."
     },
     {
       "title": "Block Puzzle · assets.manifest.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts",
       "note": "The example's complete manifest."
     }
   ]
@@ -42,7 +42,7 @@ The manifest lists the game's assets. Each has an `id`, a type and a URL. Code u
 
 <aside class="lesson-note" aria-labelledby="asset-id"><span class="lesson-note__label">Term</span><h3 id="asset-id">Asset ID</h3><p>An asset's name inside the game, such as images/block.png. It does not have to match the file's URL after a build.</p></aside>
 
-In [assets.manifest.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts#L29), `import.meta.glob` collects file URLs and `AssetManifestBuilder` turns them into asset bundles. Here is that fragment with the result type specified through `glob<string>`:
+In [assets.manifest.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/assets.manifest.ts#L29), `import.meta.glob` collects file URLs and `AssetManifestBuilder` turns them into asset bundles. Here is that fragment with the result type specified through `glob<string>`:
 
 ```ts
 const images = import.meta.glob<string>(

@@ -15,19 +15,19 @@
   "sources": [
     {
       "title": "SDK · DiContainer.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
       "note": "Разрешение зависимостей."
     },
     {
       "title": "Block Puzzle · scene.di.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
       "note": "Фабрика игрового сервиса и список сервисов сцены."
     }
   ]
 }
 ---
 
-При входе в сцену SDK запрашивает сервисы из `registerServices`. Для `Gameplay` контейнер вызывает фабрику (`provider.useFactory(this)`). Она передаёт в конструктор настройки поля, фигур, очков и сервис прогресса. [scene.di.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L27-L46)
+При входе в сцену SDK запрашивает сервисы из `registerServices`. Для `Gameplay` контейнер вызывает фабрику (`provider.useFactory(this)`). Она передаёт в конструктор настройки поля, фигур, очков и сервис прогресса. [scene.di.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L27-L46)
 
 ```ts
 registrar.singletonFactory(BlockPuzzleServices.Gameplay, (container) => {

@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · GameConfig.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
       "note": "Configuration fields and types."
     },
     {
       "title": "Block Puzzle · game.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts",
       "note": "Configuration connections in Block Puzzle."
     }
   ]
@@ -30,7 +30,7 @@
 
 `GameConfig` describes game startup. It is passed to `Engine.run` and defines which systems and scenes to prepare. In Block Puzzle, it is the static field `BlockPuzzleGameConfig.config`.
 
-Configure startup using the example in [game.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts#L10):
+Configure startup using the example in [game.config.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts#L10):
 
 ```ts
 static readonly config: GameConfig = {

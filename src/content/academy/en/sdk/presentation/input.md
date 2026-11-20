@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/input/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/input/types.ts",
       "note": "Events and coordinates."
     },
     {
       "title": "SDK · NodeInput.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/internal/NodeInput.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/internal/NodeInput.ts",
       "note": "onTap and unsubscribe functions."
     },
     {
       "title": "SDK · InputRouter.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/input/InputRouter.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/input/InputRouter.ts",
       "note": "Routing and propagation."
     },
     {
       "title": "SDK · BrowserInputGuard.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/input/BrowserInputGuard.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/input/BrowserInputGuard.ts",
       "note": "Suppressing browser actions."
     }
   ]

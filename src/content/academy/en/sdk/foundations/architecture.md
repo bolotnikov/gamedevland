@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "SDK · README.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/README.md",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/README.md",
       "note": "The purpose of the two packages and the SDK boundaries."
     },
     {
       "title": "Engine · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "The exports field lists the public engine modules."
     },
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "The public playSfx method for playing sound effects."
     }
   ]
 }
 ---
 
-[GameDevLand SDK](https://github.com/gamedevland/sdk) provides ready-made modules for HTML5 game development. Different games can share these modules while keeping their logic in separate projects. The `@gamedevland/engine` package runs in the browser, while `@gamedevland/vite` handles project startup and builds. Rendering can use PixiJS, Three.js, Three with a Pixi UI, or Three inside a Pixi texture.
+[GameDevLand SDK](https://github.com/bolotnikov/sdk) provides ready-made modules for HTML5 game development. Different games can share these modules while keeping their logic in separate projects. The `@gamedevland/engine` package runs in the browser, while `@gamedevland/vite` handles project startup and builds. Rendering can use PixiJS, Three.js, Three with a Pixi UI, or Three inside a Pixi texture.
 
 <aside class="lesson-note" aria-labelledby="sdk-definition">
   <span class="lesson-note__label">Term</span>

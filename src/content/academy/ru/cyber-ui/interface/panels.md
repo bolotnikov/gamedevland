@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · PanelSurface",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/PanelSurface.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/PanelSurface.ts",
       "note": "Параметры и поведение публичного API."
     },
     {
       "title": "Cyber UI Toolkit · TerminalGlass",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TerminalGlass.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TerminalGlass.ts",
       "note": "Параметры и поведение публичного API."
     },
     {
       "title": "Cyber UI Toolkit · TerminalUi",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TerminalUi.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TerminalUi.ts",
       "note": "Параметры и поведение публичного API."
     }
   ]

@@ -15,27 +15,27 @@
   "sources": [
     {
       "title": "SDK · PlatformCatalog.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/shared/PlatformCatalog.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/shared/PlatformCatalog.ts",
       "note": "Поддерживаемые платформы."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/types.ts",
       "note": "Сигналы, реклама и результат награды."
     },
     {
       "title": "SDK · PlatformManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/PlatformManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/PlatformManager.ts",
       "note": "Вызовы адаптера и рекламные hooks."
     },
     {
       "title": "SDK · GameViteConfigFactory.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/GameViteConfigFactory.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/vite/src/GameViteConfigFactory.ts",
       "note": "Выбор платформенной сборки."
     },
     {
       "title": "SDK · PlaygamaPlatformAdapter.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/internal/playgama/PlaygamaPlatformAdapter.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/platforms/internal/playgama/PlaygamaPlatformAdapter.ts",
       "note": "Bridge: инициализация, сохранения, реклама и пауза площадки."
     }
   ]

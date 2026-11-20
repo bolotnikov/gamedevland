@@ -48,7 +48,7 @@ screenshots:
 promoVideo:
   mp4: /assets/games/match-fighter/videos/land.mp4
   poster: /assets/games/match-fighter/screens/land/battle.webp
-playableUrl: https://gamedev.land/play/match-fighter/
+playableUrl: https://bolotnikov.github.io/match-fighter/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 5

@@ -16,22 +16,22 @@
   "sources": [
     {
       "title": "SDK · AssetManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManager.ts",
       "note": "loadBundle, loadRequiredBundle, load, has, get and loading controls."
     },
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "Scene preloading and the absence of automatic shared asset removal."
     },
     {
       "title": "Block Puzzle · BootPreloadRequestFactory.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/configs/BootPreloadRequestFactory.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/configs/BootPreloadRequestFactory.ts",
       "note": "The Block Puzzle bundle list."
     },
     {
       "title": "Block Puzzle · BootPreloadService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts",
       "note": "The original runPreload method, which loads bundles sequentially."
     }
   ]
@@ -45,7 +45,7 @@
 
 `AssetManager` registers assets, loads them and stores the results. A bundle is a named group of assets that can be loaded together.
 
-The `runPreload` method in [BootPreloadService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts#L53) loads assets sequentially:
+The `runPreload` method in [BootPreloadService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts#L53) loads assets sequentially:
 
 ```ts
 await this.sceneContext.engine.bootstrapConfigBundles(request.configBundles);

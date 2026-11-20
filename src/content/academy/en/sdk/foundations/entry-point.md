@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "Block Puzzle · main.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts",
       "note": "Importing Engine from the SDK and starting it with the project configuration."
     },
     {
       "title": "Block Puzzle · game.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts",
       "note": "Game settings, assets, dependencies and the initial boot scene."
     },
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
       "note": "Engine.run creates the engine, prepares the canvas and passes GameConfig to startup."
     }
   ]
 }
 ---
 
-In [game/src/main.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts), `Engine` is imported from the SDK and `BlockPuzzleGameConfig` from the game project. The imports and startup call are shown below; the original file's page-load check is omitted:
+In [game/src/main.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts), `Engine` is imported from the SDK and `BlockPuzzleGameConfig` from the game project. The imports and startup call are shown below; the original file's page-load check is omitted:
 
 ```ts
 import { Engine } from '@gamedevland/engine';
@@ -43,7 +43,7 @@ import { BlockPuzzleGameConfig } from './config/game.config';
 void Engine.run('#app', BlockPuzzleGameConfig.config);
 ```
 
-The first argument, `'#app'`, points to the HTML container `<div id="app"></div>`: the engine adds its canvas there. The second argument is the [game configuration](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts). It defines system settings, assets, scenes and project dependencies.
+The first argument, `'#app'`, points to the HTML container `<div id="app"></div>`: the engine adds its canvas there. The second argument is the [game configuration](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts). It defines system settings, assets, scenes and project dependencies.
 
 `Engine.run` creates and prepares the engine using these settings, then opens the initial scene. The method returns the engine instance; `await engine.destroy()` stops it and releases its resources. Select the renderer in `GameConfig.system.renderer`, as shown in the next lesson. In Block Puzzle, `scenes.initial` is `'boot'`, so the project's loading scene opens first.
 

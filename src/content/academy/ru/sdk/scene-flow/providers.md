@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · ValuesGroupRegistrar.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/ValuesGroupRegistrar.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/ValuesGroupRegistrar.ts",
       "note": "Способы регистрации."
     },
     {
       "title": "SDK · DiContainer.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
       "note": "Кэш singleton у владельца провайдера и правила override."
     },
     {
       "title": "Block Puzzle · di.providers.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts",
       "note": "Регистрация четырёх категорий в игре."
     }
   ]
@@ -43,7 +43,7 @@
 
 <figure class="sdk-figure is-matrix"><div class="sdk-figure__body"><div class="sdk-figure__item tone-cyan"><div><strong>singletonValue</strong><span>Возвращает готовое значение</span></div></div><div class="sdk-figure__item tone-violet"><div><strong>singletonClass</strong><span>Создаёт объект из класса один раз</span></div></div><div class="sdk-figure__item tone-green"><div><strong>singletonFactory</strong><span>Вызывает фабрику один раз</span></div></div><div class="sdk-figure__item tone-amber"><div><strong>transientClass</strong><span>Создаёт объект из класса при каждом запросе</span></div></div></div><figcaption>Singleton сохраняет объект, transient создаёт новый.</figcaption></figure>
 
-Сокращённая регистрация компонента в [di.providers.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L59):
+Сокращённая регистрация компонента в [di.providers.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/di.providers.ts#L59):
 
 ```ts
 group.add('BlockPuzzleScoreComponent', BlockPuzzleScoreComponent);

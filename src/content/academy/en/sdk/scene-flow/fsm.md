@@ -16,17 +16,17 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/types.ts",
       "note": "Fields available in FSMConfig."
     },
     {
       "title": "SDK · SceneFSM.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/SceneFSM.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/fsm/SceneFSM.ts",
       "note": "Actions before target, the event queue, and entry."
     },
     {
       "title": "Block Puzzle · fsm.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts",
       "note": "States in the original game."
     }
   ]
@@ -42,7 +42,7 @@
 
 <aside class="lesson-note" aria-labelledby="fsm-term"><span class="lesson-note__label">Term</span><h3 id="fsm-term">Finite state machine (FSM)</h3><p>A finite set of states with rules for switching between them when events arrive. One state is active at a time.</p></aside>
 
-Here is an excerpt from the game configuration. [fsm.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts#L29)
+Here is an excerpt from the game configuration. [fsm.config.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/fsm.config.ts#L29)
 
 ```ts
 playing: {

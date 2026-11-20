@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "Block Puzzle · main.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts",
       "note": "Импорт Engine из SDK и запуск с конфигурацией проекта."
     },
     {
       "title": "Block Puzzle · game.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts",
       "note": "Настройки игры, ресурсы, зависимости и начальная сцена boot."
     },
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/Engine.ts",
       "note": "Engine.run создаёт движок, подготавливает canvas и передаёт GameConfig в запуск."
     }
   ]
 }
 ---
 
-В [game/src/main.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts) `Engine` импортируется из SDK, а `BlockPuzzleGameConfig` — из проекта игры. Ниже показаны импорты и строка запуска; проверка загрузки страницы из исходного файла опущена:
+В [game/src/main.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/main.ts) `Engine` импортируется из SDK, а `BlockPuzzleGameConfig` — из проекта игры. Ниже показаны импорты и строка запуска; проверка загрузки страницы из исходного файла опущена:
 
 ```ts
 import { Engine } from '@gamedevland/engine';
@@ -43,7 +43,7 @@ import { BlockPuzzleGameConfig } from './config/game.config';
 void Engine.run('#app', BlockPuzzleGameConfig.config);
 ```
 
-Первый аргумент, `'#app'`, указывает на контейнер `<div id="app"></div>` в HTML: туда движок добавит canvas. Второй аргумент — [конфигурация игры](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts). Она задаёт настройки систем, ресурсы, сцены и зависимости проекта.
+Первый аргумент, `'#app'`, указывает на контейнер `<div id="app"></div>` в HTML: туда движок добавит canvas. Второй аргумент — [конфигурация игры](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/config/game.config.ts). Она задаёт настройки систем, ресурсы, сцены и зависимости проекта.
 
 `Engine.run` создаёт и подготавливает движок по этим данным, затем открывает начальную сцену. Метод возвращает экземпляр движка; `await engine.destroy()` завершает его работу и освобождает ресурсы. Выбор рендера задаётся в `GameConfig.system.renderer`, как показано в следующем уроке. В Block Puzzle поле `scenes.initial` равно `'boot'`, поэтому сначала запускается загрузочная сцена проекта.
 

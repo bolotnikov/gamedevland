@@ -32,7 +32,7 @@ steps:
     title: Полезные ссылки
 ---
 
-Цель этой статьи — разработать простой шаблон проекта, который станет основой будущих игр. Итоговый код шаблона доступен на [GitHub](https://github.com/gamedevland/pixi-project-template).
+Цель этой статьи — разработать простой шаблон проекта, который станет основой будущих игр. Итоговый код шаблона доступен на [GitHub](https://github.com/bolotnikov/pixi-project-template).
 
 <a id="video-version" class="translation-anchor" aria-hidden="true"></a>
 

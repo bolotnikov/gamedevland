@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "SDK · ProjectCreator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/project/ProjectCreator.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/vite/src/project/ProjectCreator.ts",
       "note": "Creating a directory from the template, installing dependencies and command options."
     },
     {
       "title": "SDK · Empty project template",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/templates/empty",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/vite/templates/empty",
       "note": "Project files, configuration, empty scene, JSON assets and validation commands."
     }
   ]

@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · TextEcho",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TextEcho.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TextEcho.ts",
       "note": "Сдвиг, фаза и скрытие эха."
     }
   ]

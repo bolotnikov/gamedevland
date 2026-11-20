@@ -16,17 +16,17 @@
   "sources": [
     {
       "title": "SDK · TypedStateStore.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/TypedStateStore.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/TypedStateStore.ts",
       "note": "Проверка сохранения и восстановление defaults."
     },
     {
       "title": "SDK · PersistentStorageCoordinator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/PersistentStorageCoordinator.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/configs/services/PersistentStorageCoordinator.ts",
       "note": "Координация backend хранилищ."
     },
     {
       "title": "Block Puzzle · BlockPuzzlePlayerProgressService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/common/services/BlockPuzzlePlayerProgressService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/common/services/BlockPuzzlePlayerProgressService.ts",
       "note": "Сервис прогресса игры."
     }
   ]

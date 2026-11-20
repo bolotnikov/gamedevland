@@ -25,7 +25,7 @@ roles:
   - Game design and UI
 iconImage: /assets/games/block-puzzle/icon.webp
 iconAlt: Block Puzzle prototype with an eight by eight board and three colorful shapes
-playableUrl: https://gamedev.land/play/block-puzzle/
+playableUrl: https://bolotnikov.github.io/block-puzzle/
 articleUrl: /articles/ai-assisted-game-development
 orientation: adaptive
 embedAspectRatio: 16 / 9

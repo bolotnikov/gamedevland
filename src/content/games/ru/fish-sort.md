@@ -47,7 +47,7 @@ screenshots:
 promoVideo:
   mp4: /assets/games/fish-sort/en/videos/land.mp4
   poster: /assets/games/fish-sort/en/screens/land/10.webp
-playableUrl: https://gamedev.land/play/fish-sort-game/
+playableUrl: https://bolotnikov.github.io/fish-sort-game/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 2

@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · GameConfig.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
       "note": "Обязательный выбор renderer."
     },
     {
       "title": "SDK · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "Публичные модули и необязательные зависимости Pixi и Three."
     },
     {
       "title": "SDK · MIGRATION_RENDERERS.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/MIGRATION_RENDERERS.md",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/MIGRATION_RENDERERS.md",
       "note": "Четыре способа подключения рендера."
     }
   ]

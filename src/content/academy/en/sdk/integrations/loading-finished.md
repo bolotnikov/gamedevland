@@ -15,12 +15,12 @@
   "sources": [
     {
       "title": "SDK · Engine.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/Engine.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/core/Engine.ts",
       "note": "Automatic loadingFinished after entering the initial scene and the autoLoadingFinished setting."
     },
     {
       "title": "SDK · PlatformManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/PlatformManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/platforms/PlatformManager.ts",
       "note": "Passing loadingFinished to the platform adapter."
     }
   ]

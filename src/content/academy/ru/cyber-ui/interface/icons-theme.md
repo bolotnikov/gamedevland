@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · TerminalUi",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TerminalUi.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TerminalUi.ts",
       "note": "Полный набор имён и геометрия иконок."
     },
     {
       "title": "Cyber UI Toolkit · CyberPreset",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/CyberPreset.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/CyberPreset.ts",
       "note": "Неизменяемые настройки по умолчанию."
     }
   ]

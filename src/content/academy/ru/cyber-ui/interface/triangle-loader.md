@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · TriangleLoader",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TriangleLoader.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TriangleLoader.ts",
       "note": "Настройки загрузчика и borrowed Graphics."
     },
     {

@@ -16,22 +16,22 @@
   "sources": [
     {
       "title": "SDK · ConfigStore.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/core/ConfigStore.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/core/ConfigStore.ts",
       "note": "Хранение и проверенное чтение."
     },
     {
       "title": "SDK · ConfigEntry.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/ConfigEntry.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/ConfigEntry.ts",
       "note": "Контракт пути json/configs и декодера."
     },
     {
       "title": "SDK · SettingsService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/SettingsService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/SettingsService.ts",
       "note": "Чтение отдельной настройки."
     },
     {
       "title": "Block Puzzle · scene.di.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
       "note": "Конфигурации передаются в конструкторы сервисов."
     }
   ]
@@ -45,7 +45,7 @@
 
 `ConfigStore` хранит конфигурации, подготовленные движком. Чтобы прочитать размеры поля, ему нужны ID файла и декодер. `ConfigEntry` объединяет ID и декодер, чтобы не передавать их каждый раз отдельно.
 
-Фрагмент `BlockPuzzleConfigEntries.Board` из [schemas.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18):
+Фрагмент `BlockPuzzleConfigEntries.Board` из [schemas.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18):
 
 ```ts
 static readonly Board = new ConfigEntry(
@@ -57,7 +57,7 @@ static readonly Board = new ConfigEntry(
 );
 ```
 
-Получение проверенного значения в фабрике сервиса из [scene.di.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L30):
+Получение проверенного значения в фабрике сервиса из [scene.di.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L30):
 
 ```ts
 configs.get(

@@ -32,10 +32,10 @@ AI очень помогает писать код, но одного AI для 
 Поэтому я создал собственный SDK для HTML5-игр:
 
 - пакеты SDK в npm: <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">@gamedevland/engine</a> и <a href="https://www.npmjs.com/package/@gamedevland/vite" target="_blank" rel="noreferrer">@gamedevland/vite</a>
-- пример игры: <a href="https://gamedev.land/play/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
-- репозиторий игры: <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
+- пример игры: <a href="https://bolotnikov.github.io/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
+- репозиторий игры: <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
 
-<a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> — полноценная игра на этом SDK. В ней есть загрузочная сцена, предзагрузка, JSON-вёрстка, JSON-префабы, FSM, команды, сервисы сцены, доменная модель, компоненты, перетаскивание, очки, завершение игры, рекорд, звуки и сборка для продакшена.
+<a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> — полноценная игра на этом SDK. В ней есть загрузочная сцена, предзагрузка, JSON-вёрстка, JSON-префабы, FSM, команды, сервисы сцены, доменная модель, компоненты, перетаскивание, очки, завершение игры, рекорд, звуки и сборка для продакшена.
 
 <a id="why-the-sdk-exists" class="translation-anchor" aria-hidden="true"></a>
 
@@ -52,7 +52,7 @@ AI очень помогает писать код, но одного AI для 
 
 После этого агенту не нужно каждый раз придумывать структуру. Он должен работать внутри существующих границ.
 
-В <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> класс сцены почти пуст:
+В <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> класс сцены почти пуст:
 
 ```ts
 export class GameScene extends FsmDrivenScene {}
@@ -88,7 +88,7 @@ export class GameScene extends FsmDrivenScene {}
 
 ## Пример: размещение блока
 
-Возьмём основное действие в <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>: игрок перетаскивает фигуру на поле.
+Возьмём основное действие в <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>: игрок перетаскивает фигуру на поле.
 
 <a id="the-problem" class="translation-anchor" aria-hidden="true"></a>
 
@@ -325,7 +325,7 @@ export class BlockPuzzleGameplayService extends BaseSceneService {
 - безопасные твины и асинхронные операции;
 - отладочные сервисы для DevTools;
 - процесс работы с Codex, VS Code, Figma и Photopea;
-- итерации игрового процесса на примере <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>;
+- итерации игрового процесса на примере <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a>;
 - и другие подобные практические темы.
 
 Основная мысль: AI полезен в разработке игр, когда у проекта есть чёткие границы.

@@ -15,12 +15,12 @@
   "sources": [
     {
       "title": "SDK · README.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/README.md",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/vite/README.md",
       "note": "Команды, poki.json, проверки, токен и receipt."
     },
     {
       "title": "SDK · GameViteConfigFactory.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/src/GameViteConfigFactory.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/vite/src/GameViteConfigFactory.ts",
       "note": "Root, base, defines и сохранение имён."
     }
   ]

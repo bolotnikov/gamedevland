@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · README.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/README.md",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/vite/README.md",
       "note": "Команды, poki.json, проверки, токен и receipt."
     },
     {
       "title": "SDK · GameViteConfigFactory.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/vite/src/GameViteConfigFactory.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/vite/src/GameViteConfigFactory.ts",
       "note": "Root, base, defines и сохранение имён."
     },
     {
       "title": "Block Puzzle · package.json",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json",
       "note": "Оригинальные команды web-сборки Block Puzzle."
     }
   ]

@@ -15,19 +15,19 @@
   "sources": [
     {
       "title": "SDK · DiContainer.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/DiContainer.ts",
       "note": "Dependency resolution."
     },
     {
       "title": "Block Puzzle · scene.di.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
       "note": "The game service factory and the list of scene services."
     }
   ]
 }
 ---
 
-When a scene opens, the SDK requests the services listed in `registerServices`. For `Gameplay`, the container calls the factory (`provider.useFactory(this)`). The factory passes the board, piece, and scoring settings and the progress service to the constructor. [scene.di.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L27-L46)
+When a scene opens, the SDK requests the services listed in `registerServices`. For `Gameplay`, the container calls the factory (`provider.useFactory(this)`). The factory passes the board, piece, and scoring settings and the progress service to the constructor. [scene.di.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L27-L46)
 
 ```ts
 registrar.singletonFactory(BlockPuzzleServices.Gameplay, (container) => {

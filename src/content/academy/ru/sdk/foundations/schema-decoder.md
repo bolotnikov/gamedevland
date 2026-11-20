@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · SchemaDecoder.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/validation/schema/SchemaDecoder.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/validation/schema/SchemaDecoder.ts",
       "note": "Комбинаторы и выполнение проверки."
     },
     {
       "title": "Block Puzzle · event.schemas.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/event.schemas.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/event.schemas.ts",
       "note": "Граница между формой запроса и правилами размещения."
     }
   ]
@@ -37,7 +37,7 @@
 
 <aside class="lesson-note" aria-labelledby="decoder-term"><span class="lesson-note__label">Термин</span><h3 id="decoder-term">Декодер</h3><p>Функция, которая принимает неизвестные данные и либо возвращает проверенное значение, либо сообщает об ошибке.</p></aside>
 
-В [schemas.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18) ширина и высота поля проверяются как положительные целые числа. Для примера выделим эту проверку в `BoardSchema`:
+В [schemas.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18) ширина и высота поля проверяются как положительные целые числа. Для примера выделим эту проверку в `BoardSchema`:
 
 ```ts
 import { SchemaDecoder } from '@gamedevland/engine/validation';

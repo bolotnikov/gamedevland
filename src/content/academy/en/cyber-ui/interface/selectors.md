@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · ButtonSurface",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/ButtonSurface.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/ButtonSurface.ts",
       "note": "Public API parameters and behavior."
     },
     {
       "title": "Cyber UI Toolkit · TerminalGlass",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TerminalGlass.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TerminalGlass.ts",
       "note": "Public API parameters and behavior."
     }
   ]

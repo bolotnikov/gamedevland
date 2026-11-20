@@ -16,21 +16,21 @@
   "sources": [
     {
       "title": "Block Puzzle · package.json",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json",
       "note": "Версии зависимостей и существующие npm scripts."
     },
     {
       "title": "Block Puzzle · vite.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/vite.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/vite.config.ts",
       "note": "Использование общей конфигурации Vite."
     }
   ]
 }
 ---
 
-Откроем [демо Block Puzzle](https://gamedev.land/play/block-puzzle/). Игрок переносит фигуры на поле 8 × 8. Заполненные строки и столбцы очищаются; когда ни одна фигура не помещается, партия заканчивается.
+Откроем [демо Block Puzzle](https://bolotnikov.github.io/block-puzzle/). Игрок переносит фигуры на поле 8 × 8. Заполненные строки и столбцы очищаются; когда ни одна фигура не помещается, партия заканчивается.
 
-Теперь получим [исходники игры](https://github.com/gamedevland/block-puzzle). В курсе зафиксирована публичная ревизия `d1dd4e3`: это позволяет сверять примеры с неизменным кодом. Для локального запуска выполним команды ниже. Скрипт `dev:web` определён в [package.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
+Теперь получим [исходники игры](https://github.com/bolotnikov/block-puzzle). В курсе зафиксирована публичная ревизия `d1dd4e3`: это позволяет сверять примеры с неизменным кодом. Для локального запуска выполним команды ниже. Скрипт `dev:web` определён в [package.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
 
 ```sh
 git clone https://github.com/gamedevland/block-puzzle.git

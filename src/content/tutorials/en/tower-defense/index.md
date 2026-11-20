@@ -52,17 +52,17 @@ In this course we will create a tower defense game using PixiJS.
 <a id="дополнительные-материалы" class="translation-anchor" aria-hidden="true"></a>
 
 ## Additional materials
-- [Complete source code](https://github.com/gamedevland/tower-defense)
-- [Preview demo](https://gamedev.land/play/tower-defense/)
+- [Complete source code](https://github.com/bolotnikov/tower-defense-public)
+- [Preview demo](https://bolotnikov.github.io/tower-defense-public/)
 
 Before starting the development, we need to make 2 steps:
 
-1️⃣ ( Download our [PIXI project template](https://github.com/gamedevland/pixi-project-template). You can start working on the game right now or check out [the tutorial](/articles/pixi-project-template) on how to create a PIXI project template.
+1️⃣ ( Download our [PIXI project template](https://github.com/bolotnikov/pixi-project-template). You can start working on the game right now or check out [the tutorial](/articles/pixi-project-template) on how to create a PIXI project template.
 
 2️⃣ Download game assets:
 
-- [sprites](https://github.com/gamedevland/tower-defense/tree/main/src/sprites)
-- [tilemap](https://github.com/gamedevland/tower-defense/blob/main/src/json/tilemap.json) created in [Tiled](https://www.mapeditor.org/) editor
+- [sprites](https://github.com/bolotnikov/tower-defense-public/tree/main/src/sprites)
+- [tilemap](https://github.com/bolotnikov/tower-defense-public/blob/main/src/json/tilemap.json) created in [Tiled](https://www.mapeditor.org/) editor
 
 So, we downloaded and unpacked our project template, in which we will continue to work.
 Usually, the first thing I start developing a new game with is creating a background image on the screen.

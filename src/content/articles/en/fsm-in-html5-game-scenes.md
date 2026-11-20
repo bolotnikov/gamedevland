@@ -22,18 +22,18 @@ category: technical
 ---
 
 
-This article shows how I manage scene flow through an FSM in [`@gamedevland/engine`](https://www.npmjs.com/package/@gamedevland/engine), using startup, placement, move validation, game over, and restart from [Block Puzzle](https://github.com/gamedevland/block-puzzle).
+This article shows how I manage scene flow through an FSM in [`@gamedevland/engine`](https://www.npmjs.com/package/@gamedevland/engine), using startup, placement, move validation, game over, and restart from [Block Puzzle](https://github.com/bolotnikov/block-puzzle).
 
 <div class="fsm-link-strip">
   <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">
     <span>SDK</span>
     <strong>@gamedevland/engine</strong>
   </a>
-  <a href="https://gamedev.land/play/block-puzzle/" target="_blank" rel="noreferrer">
+  <a href="https://bolotnikov.github.io/block-puzzle/" target="_blank" rel="noreferrer">
     <span>Play</span>
     <strong>Block Puzzle demo</strong>
   </a>
-  <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">
+  <a href="https://github.com/bolotnikov/block-puzzle" target="_blank" rel="noreferrer">
     <span>Source</span>
     <strong>GitHub repository</strong>
   </a>
@@ -123,7 +123,7 @@ The FSM manages flow. Game rules, layout mutations, and score calculation stay e
 
 The Block Puzzle scene class is one line:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/GameScene.ts" target="_blank" rel="noreferrer"><strong>GameScene.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/GameScene.ts" target="_blank" rel="noreferrer"><strong>GameScene.ts</strong> <span>↗</span></a>
 
 ```ts
 import { FsmDrivenScene } from '@gamedevland/engine/scenes';
@@ -146,7 +146,7 @@ In my SDK, `FsmDrivenScene` connects the scene lifecycle to its FSM. After layou
 
 The FSM configuration is attached in the scene definition:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/scene.config.ts" target="_blank" rel="noreferrer"><strong>scene.config.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/scene.config.ts" target="_blank" rel="noreferrer"><strong>scene.config.ts</strong> <span>↗</span></a>
 
 ```ts
 export class GameSceneDefinition {
@@ -242,7 +242,7 @@ An event does not have to change state. If a transition has `actions` but no `ta
 
 A component can have its own local state. `BlockPuzzleDragComponent`, for example, stores the current phase of its drag interaction:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/components/BlockPuzzleDragComponent.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleDragComponent.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/components/BlockPuzzleDragComponent.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleDragComponent.ts</strong> <span>↗</span></a>
 
 ```ts
 type DragPhase = 'dragging' | 'snapping' | 'returning';
@@ -349,7 +349,7 @@ Block Puzzle uses six states. This diagram is the complete scene flow implemente
 
 When the scene is ready, `FsmDrivenScene` dispatches `SceneReady`. The FSM runs two commands and targets `starting`:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
 
 ```ts
 bootstrapping: {
@@ -378,7 +378,7 @@ After both commands finish, the FSM sets the state to `starting`. `SessionStarte
 
 The command itself stays small. It resolves the scene service from DI and calls one use case:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts" target="_blank" rel="noreferrer"><strong>StartBlockPuzzleSessionCommand.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts" target="_blank" rel="noreferrer"><strong>StartBlockPuzzleSessionCommand.ts</strong> <span>↗</span></a>
 
 ```ts
 export class StartBlockPuzzleSessionCommand extends BaseCommand {
@@ -390,7 +390,7 @@ export class StartBlockPuzzleSessionCommand extends BaseCommand {
 
 `BlockPuzzleGameplayService` creates the runtime session, emits initial data for visual components, and reports that startup has completed:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
 
 ```ts
 startSession(): void {
@@ -427,7 +427,7 @@ startSession(): void {
 
 `BlockPuzzleDragComponent` owns input, preview, and visual movement. After the snap animation, it does not modify the board directly. It emits an event:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/components/BlockPuzzleDragComponent.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleDragComponent.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/components/BlockPuzzleDragComponent.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleDragComponent.ts</strong> <span>↗</span></a>
 
 ```ts
 this.clearPreview();
@@ -446,7 +446,7 @@ this.node.events.emit({
 
 The FSM handles the request in `playing`:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
 
 ```ts
 playing: {
@@ -470,7 +470,7 @@ playing: {
 
 `PlaceBlockCommand` extends `BaseTypedCommand`:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/commands/PlaceBlockCommand.ts" target="_blank" rel="noreferrer"><strong>PlaceBlockCommand.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/commands/PlaceBlockCommand.ts" target="_blank" rel="noreferrer"><strong>PlaceBlockCommand.ts</strong> <span>↗</span></a>
 
 ```ts
 type PlaceBlockCommandPayload = InferDecoded<
@@ -489,7 +489,7 @@ export class PlaceBlockCommand extends BaseTypedCommand<PlaceBlockCommandPayload
 
 The payload schema lives with the other game event contracts:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/event.schemas.ts" target="_blank" rel="noreferrer"><strong>event.schemas.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/event.schemas.ts" target="_blank" rel="noreferrer"><strong>event.schemas.ts</strong> <span>↗</span></a>
 
 ```ts
 static readonly PlacementRequest = SchemaDecoder.object({
@@ -510,7 +510,7 @@ The SDK decodes the event payload before `execute` runs. `InferDecoded` derives 
 
 `BlockPuzzleGameplayService` owns the current session:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
 
 ```ts
 interface BlockPuzzleSession {
@@ -527,7 +527,7 @@ The service coordinates one complete move: it reads the shape from its slot, cal
 
 Placement validity belongs to `BlockPuzzleBoard`:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/domain/BlockPuzzleBoard.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleBoard.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/domain/BlockPuzzleBoard.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleBoard.ts</strong> <span>↗</span></a>
 
 ```ts
 canPlace(shape: ShapeDefinition, anchor: CellCoordinate): boolean {
@@ -540,7 +540,7 @@ canPlace(shape: ShapeDefinition, anchor: CellCoordinate): boolean {
 
 Score calculation belongs to `BlockPuzzleScoreRules`:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/domain/BlockPuzzleScoreRules.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleScoreRules.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/domain/BlockPuzzleScoreRules.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleScoreRules.ts</strong> <span>↗</span></a>
 
 ```ts
 calculate(placedCellCount: number, clearedLineCount: number): number {
@@ -559,7 +559,7 @@ The FSM manages execution order, the command delegates the use case, and the dom
 
 The service emits `PlacementCompleted` or `PlacementRejected`, and the FSM declares both branches:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
 
 ```ts
 resolvingPlacement: {
@@ -583,7 +583,7 @@ resolvingPlacement: {
 
 After every successful move, the game must check whether another placement is available. This should run each time the FSM enters `checkingMoves`, so it is declared as an `entry` action:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/fsm.config.ts" target="_blank" rel="noreferrer"><strong>fsm.config.ts</strong> <span>↗</span></a>
 
 ```ts
 checkingMoves: {
@@ -605,7 +605,7 @@ checkingMoves: {
 
 The command contains one step:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/commands/CheckBlockPuzzleMovesCommand.ts" target="_blank" rel="noreferrer"><strong>CheckBlockPuzzleMovesCommand.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/commands/CheckBlockPuzzleMovesCommand.ts" target="_blank" rel="noreferrer"><strong>CheckBlockPuzzleMovesCommand.ts</strong> <span>↗</span></a>
 
 ```ts
 export class CheckBlockPuzzleMovesCommand extends BaseCommand {
@@ -617,7 +617,7 @@ export class CheckBlockPuzzleMovesCommand extends BaseCommand {
 
 The service queries the domain model and emits the result:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
 
 ```ts
 emitMoveAvailability(): void {
@@ -638,7 +638,7 @@ There is no `if (hasAvailableMove())` inside the FSM. It receives a completed re
 
 The FSM refers to commands by name, so each command must be registered in global DI:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/config/di.providers.ts" target="_blank" rel="noreferrer"><strong>di.providers.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/config/di.providers.ts" target="_blank" rel="noreferrer"><strong>di.providers.ts</strong> <span>↗</span></a>
 
 ```ts
 protected override registerCommands(group: CommandsGroup): void {
@@ -657,7 +657,7 @@ protected override registerCommands(group: CommandsGroup): void {
 
 The gameplay service is registered in the game scene DI scope:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/configs/scene.di.ts" target="_blank" rel="noreferrer"><strong>scene.di.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/configs/scene.di.ts" target="_blank" rel="noreferrer"><strong>scene.di.ts</strong> <span>↗</span></a>
 
 ```ts
 protected override registerServices(services: SceneServiceTokenRegistry): void {
@@ -670,7 +670,7 @@ protected override registerServices(services: SceneServiceTokenRegistry): void {
 
 A scene-scoped service is created when the scene enters and ends with that scene. `BlockPuzzleGameplayService.onExit()` clears the current session:
 
-<a class="fsm-source-link" href="https://github.com/gamedevland/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
+<a class="fsm-source-link" href="https://github.com/bolotnikov/block-puzzle/blob/main/game/src/scenes/game/services/BlockPuzzleGameplayService.ts" target="_blank" rel="noreferrer"><strong>BlockPuzzleGameplayService.ts</strong> <span>↗</span></a>
 
 ```ts
 protected override onExit(): void {

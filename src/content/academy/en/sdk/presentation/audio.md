@@ -15,24 +15,24 @@
   "sources": [
     {
       "title": "SDK · AudioManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/AudioManager.ts",
       "note": "Channels, playback handles, pausing, and unloadSource."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/audio/types.ts",
       "note": "Playback options and return value."
     },
     {
       "title": "Block Puzzle · BlockPuzzleAudioService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts",
       "note": "Subscribing to game events."
     }
   ]
 }
 ---
 
-Add the sound to the asset list. In Block Puzzle, the audio service listens for `PlacementCompleted` and calls `engine.audio.playSfx` with the sound ID. It unsubscribes when the scene closes. [BlockPuzzleAudioService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts#L20)
+Add the sound to the asset list. In Block Puzzle, the audio service listens for `PlacementCompleted` and calls `engine.audio.playSfx` with the sound ID. It unsubscribes when the scene closes. [BlockPuzzleAudioService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleAudioService.ts#L20)
 
 ```ts
 ctx.engine.events.on(BlockPuzzleEvents.PlacementCompleted, () => {

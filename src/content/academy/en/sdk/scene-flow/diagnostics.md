@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/errors/index.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/errors/index.ts",
       "note": "Public diagnostic tools."
     },
     {
       "title": "SDK · DiBootstrapValidator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/di/DiBootstrapValidator.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/di/DiBootstrapValidator.ts",
       "note": "Checking DI connections at startup."
     },
     {
       "title": "Block Puzzle · GameDevtoolsApiService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts",
       "note": "The debug API and hook cleanup."
     },
     {
       "title": "SDK · RuntimeDiagnostics.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/diagnostics/RuntimeDiagnostics.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/diagnostics/RuntimeDiagnostics.ts",
       "note": "Error and CPU-time subscriptions without retained history."
     }
   ]
@@ -60,4 +60,4 @@ Call `off()` when observation ends. These are CPU timings, not measurements of c
 
 <h2 id="отладка-block-puzzle">Debugging Block Puzzle</h2>
 
-Block Puzzle has a debug service that sends `ResultReady` with a chosen score. This opens the results window without playing a full session. [GameDevtoolsApiService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts)
+Block Puzzle has a debug service that sends `ResultReady` with a chosen score. This opens the results window without playing a full session. [GameDevtoolsApiService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts)

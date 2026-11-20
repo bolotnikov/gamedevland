@@ -101,7 +101,7 @@ const academy = defineCollection({
 			title: z.string(),
 			url: z.url().refine((value) => {
 				const url = new URL(value);
-				const sdkSource = url.hostname === 'github.com' && /^\/gamedevland\/(sdk|block-puzzle|cyber-ui-toolkit)(\/|$)/.test(url.pathname);
+				const sdkSource = url.hostname === 'github.com' && /^\/(?:gamedevland|bolotnikov)\/(sdk|block-puzzle|cyber-ui-toolkit)(\/|$)/.test(url.pathname);
 				return url.protocol === 'https:' && (sdkSource || ['pixijs.com', 'pixijs.download', 'docs.npmjs.com', 'tc39.es', 'v8.dev', 'developer.chrome.com', 'html.spec.whatwg.org', 'dom.spec.whatwg.org', '262.ecma-international.org'].includes(url.hostname));
 			}, 'Academy sources must use official documentation or specifications.'),
 			note: z.string(),

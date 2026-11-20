@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/errors/index.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/errors/index.ts",
       "note": "Публичные средства диагностики."
     },
     {
       "title": "SDK · DiBootstrapValidator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/di/DiBootstrapValidator.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/di/DiBootstrapValidator.ts",
       "note": "Проверка связей DI на старте."
     },
     {
       "title": "Block Puzzle · GameDevtoolsApiService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts",
       "note": "Отладочный API с очисткой hook."
     },
     {
       "title": "SDK · RuntimeDiagnostics.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/diagnostics/RuntimeDiagnostics.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/diagnostics/RuntimeDiagnostics.ts",
       "note": "Подписки на ошибки и CPU-время без хранения истории."
     }
   ]
@@ -60,4 +60,4 @@ const off = engine.diagnostics.subscribe((record) => {
 
 ## Отладка Block Puzzle
 
-У Block Puzzle есть [GameDevtoolsApiService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts). Сервис отправляет `ResultReady` с заданными очками. Так можно открыть окно результата без прохождения партии.
+У Block Puzzle есть [GameDevtoolsApiService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/debug/scenes/game/services/GameDevtoolsApiService.ts). Сервис отправляет `ResultReady` с заданными очками. Так можно открыть окно результата без прохождения партии.

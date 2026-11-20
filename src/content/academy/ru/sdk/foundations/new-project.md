@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "SDK · ProjectCreator.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/src/project/ProjectCreator.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/vite/src/project/ProjectCreator.ts",
       "note": "Создание папки из шаблона, установка зависимостей и параметры команды."
     },
     {
       "title": "SDK · Empty project template",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/vite/templates/empty",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/vite/templates/empty",
       "note": "Состав проекта, конфигурация, пустая сцена, JSON-ресурсы и команды проверки."
     }
   ]

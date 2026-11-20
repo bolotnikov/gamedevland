@@ -25,7 +25,7 @@ roles:
   - Геймдизайн и интерфейс
 iconImage: /assets/games/block-puzzle/icon.webp
 iconAlt: Прототип Block Puzzle с полем восемь на восемь клеток и тремя разноцветными фигурами
-playableUrl: https://gamedev.land/play/block-puzzle/
+playableUrl: https://bolotnikov.github.io/block-puzzle/
 articleUrl: /articles/ai-assisted-game-development
 orientation: adaptive
 embedAspectRatio: 16 / 9

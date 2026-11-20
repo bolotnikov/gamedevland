@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/events/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/events/types.ts",
       "note": "data на входе и payload у подписчиков."
     },
     {
       "title": "SDK · EventBus.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/events/EventBus.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/events/EventBus.ts",
       "note": "Синхронная доставка, отписка и отсутствие await Promise."
     },
     {
       "title": "SDK · EngineEventBridge.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/EngineEventBridge.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/core/EngineEventBridge.ts",
       "note": "Доставка событий в активную FSM."
     }
   ]
@@ -39,7 +39,7 @@
 
 `EventBus` связывает сервисы, компоненты и FSM через события. После изменения очков сервис не ищет Text-узел: он отправляет `ScoreChanged`.
 
-Фрагмент отправки события из [BlockPuzzleGameplayService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L222):
+Фрагмент отправки события из [BlockPuzzleGameplayService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L222):
 
 ```ts
 this.sceneContext.engine.events.emit({
@@ -48,7 +48,7 @@ this.sceneContext.engine.events.emit({
 });
 ```
 
-Публичный метод `emit` принимает **data**. Подписчик получает `AppEvent`, где те же данные находятся в **payload**. Сократим обработчик из [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L58):
+Публичный метод `emit` принимает **data**. Подписчик получает `AppEvent`, где те же данные находятся в **payload**. Сократим обработчик из [BlockPuzzleScoreComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L58):
 
 ```ts
 const off = this.node.events.on(BlockPuzzleEvents.ScoreChanged, (event) => {

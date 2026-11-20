@@ -16,22 +16,22 @@
   "sources": [
     {
       "title": "SDK · AssetManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/assets/AssetManager.ts",
       "note": "loadBundle, loadRequiredBundle, load, has, get и управление загрузкой."
     },
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "Preload сцены и отсутствие автоматического удаления общих assets."
     },
     {
       "title": "Block Puzzle · BootPreloadRequestFactory.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/configs/BootPreloadRequestFactory.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/configs/BootPreloadRequestFactory.ts",
       "note": "Список наборов Block Puzzle."
     },
     {
       "title": "Block Puzzle · BootPreloadService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts",
       "note": "Исходный метод runPreload с последовательной загрузкой наборов."
     }
   ]
@@ -45,7 +45,7 @@
 
 `AssetManager` регистрирует ресурсы, загружает их и хранит результаты. Набор, или bundle, — именованная группа ресурсов, которую удобно загрузить целиком.
 
-В методе `runPreload` загрузочного сервиса [BootPreloadService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts#L53) ресурсы загружаются последовательно:
+В методе `runPreload` загрузочного сервиса [BootPreloadService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/boot/services/BootPreloadService.ts#L53) ресурсы загружаются последовательно:
 
 ```ts
 await this.sceneContext.engine.bootstrapConfigBundles(request.configBundles);

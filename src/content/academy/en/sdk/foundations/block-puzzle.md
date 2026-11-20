@@ -16,21 +16,21 @@
   "sources": [
     {
       "title": "Block Puzzle · package.json",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json",
       "note": "Dependency versions and existing npm scripts."
     },
     {
       "title": "Block Puzzle · vite.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/vite.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/vite.config.ts",
       "note": "Use of the shared Vite configuration."
     }
   ]
 }
 ---
 
-Open the [Block Puzzle demo](https://gamedev.land/play/block-puzzle/). The player drags pieces onto an 8 × 8 board. Completed rows and columns are cleared; the game ends when none of the pieces fit.
+Open the [Block Puzzle demo](https://bolotnikov.github.io/block-puzzle/). The player drags pieces onto an 8 × 8 board. Completed rows and columns are cleared; the game ends when none of the pieces fit.
 
-Now get the [game source](https://github.com/gamedevland/block-puzzle). The course uses the public revision `d1dd4e3`, so examples can be checked against unchanged code. Run the commands below to start it locally. The `dev:web` script is defined in [package.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
+Now get the [game source](https://github.com/bolotnikov/block-puzzle). The course uses the public revision `d1dd4e3`, so examples can be checked against unchanged code. Run the commands below to start it locally. The `dev:web` script is defined in [package.json](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
 
 ```sh
 git clone https://github.com/gamedevland/block-puzzle.git

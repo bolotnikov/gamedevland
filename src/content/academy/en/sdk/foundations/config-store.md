@@ -16,22 +16,22 @@
   "sources": [
     {
       "title": "SDK · ConfigStore.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/core/ConfigStore.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/core/ConfigStore.ts",
       "note": "Storage and validated reads."
     },
     {
       "title": "SDK · ConfigEntry.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/ConfigEntry.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/ConfigEntry.ts",
       "note": "The json/configs path and decoder contract."
     },
     {
       "title": "SDK · SettingsService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/SettingsService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/configs/services/SettingsService.ts",
       "note": "Reading an individual setting."
     },
     {
       "title": "Block Puzzle · scene.di.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts",
       "note": "Configurations passed into service constructors."
     }
   ]
@@ -45,7 +45,7 @@
 
 `ConfigStore` holds configurations prepared by the engine. To read the board dimensions, it needs the file ID and a decoder. `ConfigEntry` combines the ID and decoder so they do not have to be passed separately every time.
 
-The `BlockPuzzleConfigEntries.Board` fragment from [schemas.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18):
+The `BlockPuzzleConfigEntries.Board` fragment from [schemas.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18):
 
 ```ts
 static readonly Board = new ConfigEntry(
@@ -57,7 +57,7 @@ static readonly Board = new ConfigEntry(
 );
 ```
 
-Obtaining a validated value in the service factory in [scene.di.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L30):
+Obtaining a validated value in the service factory in [scene.di.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.di.ts#L30):
 
 ```ts
 configs.get(

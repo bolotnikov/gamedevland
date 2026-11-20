@@ -12,12 +12,12 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit · SignalBrackets",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/SignalBrackets.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/SignalBrackets.ts",
       "note": "Public API parameters and behavior."
     },
     {
       "title": "Cyber UI Toolkit · TriangleLoader",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit/blob/main/packages/core/src/TriangleLoader.ts",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit/blob/main/packages/core/src/TriangleLoader.ts",
       "note": "Public API parameters and behavior."
     }
   ]

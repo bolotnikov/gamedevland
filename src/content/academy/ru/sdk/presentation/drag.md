@@ -15,24 +15,24 @@
   "sources": [
     {
       "title": "Block Puzzle · BlockPuzzleDragComponent.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts",
       "note": "Реальный жест и preview исходной игры."
     },
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/index.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/index.ts",
       "note": "Публичные элементы общего drag API."
     },
     {
       "title": "SDK · DragInputBridgeComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/components/DragInputBridgeComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/interactions/components/DragInputBridgeComponent.ts",
       "note": "Преобразование фаз, pointercancel и координат."
     }
   ]
 }
 ---
 
-Пока игрок тянет фигуру, `BlockPuzzleDragComponent` двигает её изображение. Он переводит точку указателя в координаты поля и вызывает `previewPlacement`, чтобы подсветить клетки. При отпускании компонент отправляет `PlacementRequested`, а при отмене убирает подсветку. [BlockPuzzleDragComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts)
+Пока игрок тянет фигуру, `BlockPuzzleDragComponent` двигает её изображение. Он переводит точку указателя в координаты поля и вызывает `previewPlacement`, чтобы подсветить клетки. При отпускании компонент отправляет `PlacementRequested`, а при отмене убирает подсветку. [BlockPuzzleDragComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleDragComponent.ts)
 
 <figure class="sdk-figure is-flow">
   <div class="sdk-figure__body">

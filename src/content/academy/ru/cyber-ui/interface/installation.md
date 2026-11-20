@@ -12,7 +12,7 @@
   "sources": [
     {
       "title": "Cyber UI Toolkit",
-      "url": "https://github.com/gamedevland/cyber-ui-toolkit",
+      "url": "https://github.com/bolotnikov/cyber-ui-toolkit",
       "note": "Пакеты, требования и публичный API."
     },
     {

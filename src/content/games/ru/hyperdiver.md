@@ -23,7 +23,7 @@ roles:
   - Геймдизайн и интерфейс
 iconImage: /assets/games/hyperdiver/icon.png
 iconAlt: 'Иконка Hyperdiver: космический корабль среди фиолетовых молний'
-playableUrl: https://gamedev.land/play/hyperdiver/
+playableUrl: https://bolotnikov.github.io/hyperdiver/
 orientation: portrait
 embedAspectRatio: 3 / 4
 fitEmbedToViewport: true

@@ -16,24 +16,24 @@
   "sources": [
     {
       "title": "SDK · BaseScene.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/BaseScene.ts",
       "note": "Реальный порядок входа и выхода."
     },
     {
       "title": "SDK · SceneManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/scenes/SceneManager.ts",
       "note": "Очередь переходов, стек и параметры."
     },
     {
       "title": "Block Puzzle · scene.config.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts",
       "note": "Конфигурация игровой сцены."
     }
   ]
 }
 ---
 
-`SceneConfig` описывает сцену: её ключ, класс, ресурсы, layout и FSM. В Block Puzzle описание игровой сцены находится в [scene.config.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts):
+`SceneConfig` описывает сцену: её ключ, класс, ресурсы, layout и FSM. В Block Puzzle описание игровой сцены находится в [scene.config.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/scene.config.ts):
 
 ```ts
 import { GameScene } from '../../GameScene';

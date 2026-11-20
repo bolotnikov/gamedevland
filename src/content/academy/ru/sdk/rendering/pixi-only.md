@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · PixiRendererModule.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/PixiRendererModule.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/PixiRendererModule.ts",
       "note": "Подключение Pixi runtime и стандартных фабрик."
     },
     {
       "title": "SDK · index.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/index.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/renderers/pixi/index.ts",
       "note": "Импорты конкретных Pixi-узлов."
     },
     {
       "title": "SDK · NineSliceSprite.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NineSliceSprite.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/nodes/NineSliceSprite.ts",
       "note": "Растяжение панели и ограничения границ."
     }
   ]

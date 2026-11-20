@@ -15,22 +15,22 @@
   "sources": [
     {
       "title": "SDK · ParticlesManager.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/particles/ParticlesManager.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/particles/ParticlesManager.ts",
       "note": "Жизненный цикл эмиттеров и очистка поддерева."
     },
     {
       "title": "SDK · ParticleEmitterComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/ParticleEmitterComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/ParticleEmitterComponent.ts",
       "note": "Постоянный эмиттер на узле."
     },
     {
       "title": "SDK · DisplacementFilterComponent.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/DisplacementFilterComponent.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/layouts/components/DisplacementFilterComponent.ts",
       "note": "Владение фильтром и общая текстура."
     },
     {
       "title": "Block Puzzle · line-clear-particles.json",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/configs/scenes/game/line-clear-particles.json",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/configs/scenes/game/line-clear-particles.json",
       "note": "Пресет вспышки Block Puzzle."
     }
   ]
@@ -41,7 +41,7 @@
 
 `ParticleEmitterComponent`, `DisplacementFilterComponent` и `PlayParticlesAction` импортируем из `@gamedevland/engine/renderers/pixi`. Они работают с Pixi-узлами; Three-эффекты создаёт компонент Three-узла.
 
-При очистке линии вызовем действие с координатами клетки. Если в настройках указано `space: 'local'`, координаты отсчитываются от контейнера эффекта. [BlockPuzzleBoardEffectsComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts#L54)
+При очистке линии вызовем действие с координатами клетки. Если в настройках указано `space: 'local'`, координаты отсчитываются от контейнера эффекта. [BlockPuzzleBoardEffectsComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleBoardEffectsComponent.ts#L54)
 
 ```ts
 this.trackTask(

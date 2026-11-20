@@ -32,7 +32,7 @@ steps:
     title: Полезные ссылки
 ---
 
-- [Итоговый исходный код](https://github.com/gamedevland/pixi-project-template)
+- [Итоговый исходный код](https://github.com/bolotnikov/pixi-project-template)
 - [`PIXI.Application`](https://pixijs.download/dev/docs/PIXI.Application.html)
 - [`PIXI.Loader`](https://pixijs.download/v6.1.1/docs/PIXI.Loader.html)
 - [`PIXI.Sprite`](https://pixijs.download/dev/docs/PIXI.Sprite.html)

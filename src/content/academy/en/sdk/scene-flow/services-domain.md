@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · BaseSceneService.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseSceneService.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/scenes/BaseSceneService.ts",
       "note": "Availability of the service context."
     },
     {
       "title": "Block Puzzle · BlockPuzzleGameplayService.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts",
       "note": "The session, placement preview, and applying a move."
     },
     {
       "title": "Block Puzzle · BlockPuzzleBoard.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/domain/BlockPuzzleBoard.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/domain/BlockPuzzleBoard.ts",
       "note": "Board rules independent of PixiJS."
     }
   ]
@@ -41,7 +41,7 @@ In Block Puzzle, the `Gameplay` service stores the board, available pieces, scor
 
 <aside class="lesson-note" aria-labelledby="domain-model"><span class="lesson-note__label">Term</span><h3 id="domain-model">Domain model</h3><p>The code that implements the game rules. In Block Puzzle, it decides where a piece can go, which lines to clear, and how many points to award.</p></aside>
 
-The service coordinates several operations. This excerpt shows part of the `place` method. [BlockPuzzleGameplayService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L124)
+The service coordinates several operations. This excerpt shows part of the `place` method. [BlockPuzzleGameplayService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L124)
 
 ```ts
 const placedCells = session.board.place(shape, request.anchor);

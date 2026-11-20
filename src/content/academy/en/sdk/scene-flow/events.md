@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/events/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/events/types.ts",
       "note": "Input data and the payload seen by subscribers."
     },
     {
       "title": "SDK · EventBus.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/events/EventBus.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/events/EventBus.ts",
       "note": "Synchronous delivery, unsubscribing, and Promise handling."
     },
     {
       "title": "SDK · EngineEventBridge.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/core/EngineEventBridge.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/core/EngineEventBridge.ts",
       "note": "Delivering events to the active FSM."
     }
   ]
@@ -39,7 +39,7 @@
 
 `EventBus` connects services, components, and the FSM through events. When the score changes, the service sends `ScoreChanged`. The text node can respond on its own.
 
-The service sends the event as shown below. [BlockPuzzleGameplayService.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L222)
+The service sends the event as shown below. [BlockPuzzleGameplayService.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/services/BlockPuzzleGameplayService.ts#L222)
 
 ```ts
 this.sceneContext.engine.events.emit({
@@ -48,7 +48,7 @@ this.sceneContext.engine.events.emit({
 });
 ```
 
-The public `emit` method takes **data**. The subscriber receives an `AppEvent` with the same data in **payload**. Here is a shortened handler. [BlockPuzzleScoreComponent.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L58)
+The public `emit` method takes **data**. The subscriber receives an `AppEvent` with the same data in **payload**. Here is a shortened handler. [BlockPuzzleScoreComponent.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/components/BlockPuzzleScoreComponent.ts#L58)
 
 ```ts
 const off = this.node.events.on(BlockPuzzleEvents.ScoreChanged, (event) => {

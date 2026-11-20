@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · tokens.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/di/tokens.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/di/tokens.ts",
       "note": "Typed token categories and SystemServices."
     },
     {
       "title": "Block Puzzle · BlockPuzzleServices.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts",
       "note": "Game service tokens."
     },
     {
       "title": "Block Puzzle · StartBlockPuzzleSessionCommand.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts",
       "note": "Requesting a game service using its token."
     }
   ]
@@ -38,7 +38,7 @@
   <p>An object receives what it needs to work from outside. For example, configuration or another service can be passed through its constructor. These are called dependencies.</p>
 </aside>
 
-A token is a key the container uses to find an object. In Block Puzzle, the command that starts a session passes the `Gameplay` token to `getSceneService` and receives the game service. These excerpts show the relevant lines from [BlockPuzzleServices.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts#L7-L13) and [StartBlockPuzzleSessionCommand.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts#L5-L9).
+A token is a key the container uses to find an object. In Block Puzzle, the command that starts a session passes the `Gameplay` token to `getSceneService` and receives the game service. These excerpts show the relevant lines from [BlockPuzzleServices.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/BlockPuzzleServices.ts#L7-L13) and [StartBlockPuzzleSessionCommand.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/commands/StartBlockPuzzleSessionCommand.ts#L5-L9).
 
 ```ts
 // BlockPuzzleServices.ts

@@ -15,17 +15,17 @@
   "sources": [
     {
       "title": "SDK · Container.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/Container.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/layouts/nodes/Container.ts",
       "note": "spawnPrefab и ensureChildFromPrefab."
     },
     {
       "title": "SDK · types.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/prefabs/types.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/prefabs/types.ts",
       "note": "Результат создания и dispose."
     },
     {
       "title": "Block Puzzle · block-cell.json",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/prefabs/game/block-cell.json",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/assets/json/prefabs/game/block-cell.json",
       "note": "JSON-заготовка плитки."
     }
   ]

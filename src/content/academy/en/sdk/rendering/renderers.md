@@ -12,17 +12,17 @@
   "sources": [
     {
       "title": "SDK · GameConfig.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/src/core/GameConfig.ts",
       "note": "Required renderer selection."
     },
     {
       "title": "SDK · package.json",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/package.json",
       "note": "Public modules and optional Pixi and Three dependencies."
     },
     {
       "title": "SDK · MIGRATION_RENDERERS.md",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-10/packages/engine/MIGRATION_RENDERERS.md",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-10/packages/engine/MIGRATION_RENDERERS.md",
       "note": "Four ways to configure rendering."
     }
   ]

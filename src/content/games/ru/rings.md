@@ -23,7 +23,7 @@ roles:
   - Интерфейс, обучение и визуальные эффекты
 iconImage: /assets/games/rings/icon-rings.jpg
 coverImage: /assets/games/rings/cover.webp
-playableUrl: https://gamedev.land/play/rings/
+playableUrl: https://bolotnikov.github.io/rings-public/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 1

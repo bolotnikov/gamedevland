@@ -16,12 +16,12 @@
   "sources": [
     {
       "title": "SDK · SchemaDecoder.ts",
-      "url": "https://github.com/gamedevland/sdk/blob/sdk-2026-11-04/packages/engine/src/validation/schema/SchemaDecoder.ts",
+      "url": "https://github.com/bolotnikov/sdk/blob/sdk-2026-11-04/packages/engine/src/validation/schema/SchemaDecoder.ts",
       "note": "Combinators and validation execution."
     },
     {
       "title": "Block Puzzle · event.schemas.ts",
-      "url": "https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/event.schemas.ts",
+      "url": "https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/event.schemas.ts",
       "note": "The boundary between request structure and placement rules."
     }
   ]
@@ -37,7 +37,7 @@
 
 <aside class="lesson-note" aria-labelledby="decoder-term"><span class="lesson-note__label">Term</span><h3 id="decoder-term">Decoder</h3><p>A function that takes unknown data and either returns a validated value or reports an error.</p></aside>
 
-In [schemas.ts](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18), board width and height are validated as positive integers. Extract that check into `BoardSchema` for this example:
+In [schemas.ts](https://github.com/bolotnikov/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/game/src/scenes/game/configs/schemas.ts#L18), board width and height are validated as positive integers. Extract that check into `BoardSchema` for this example:
 
 ```ts
 import { SchemaDecoder } from '@gamedevland/engine/validation';
