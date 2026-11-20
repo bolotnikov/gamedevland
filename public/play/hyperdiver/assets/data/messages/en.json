@@ -1,0 +1,57 @@
+{
+	"noenergy": "Energy is not enough",
+	"restore_at": "Energy\r\nrestore time is\r\n",
+	"restore_now": "Restore now?",
+	"exit_game": "Exit game",
+	"exit_confirm": "Are you sure\r\nto exit game?",
+	"no_details": "Details is not enough",
+	"no_credits": "Credits is not enough",
+	"earn_details": "Get details\r\nfor rewards after\r\ncomplete levels",
+	"earn_credits": "Get more credits\r\nfor levels completing!",	
+	"select_locale_title": "Select language",
+
+	"ship": "SpaceShip",
+
+	"gun1": "Cannon",
+	"shield1": "Armor",
+	"engine1": "Engine",
+
+	"no_skill": "Skill is not available",
+	"restore_time": "Restore at\r\n",
+	"landing": "Landing",
+	"stars_left1": "Stars left\r\nto complete level goal:\r\n",
+	"stars_left2":"\r\n\r\nMake a landing now?",
+	"landing_confirm": "Land on the planet\r\nto get reward.\r\nStop the flight now\r\nwith no reward?",
+	"no_fuel": "No fuel",
+	"get_fuel": "Get fuel\r\nto prepare for\r\nHyperDive",
+
+	"force1": "Tap on selected cells,\r\nto open field around them!",
+	"force2": "Enemies blocking cells around.\r\nTap on enemy,\r\nto aim.",
+	"force3": "Tap on aimed enemy,\r\nto make a shot!\r\nShoot until you destroy the enemy!",
+	"force4": "Collect details to\r\nimprove your ship\r\nafter the flight",
+	"force5": "Get fuel,\r\nto access HyperDive\r\nthrough the Blackhole",
+	"force6": "With fuel,\r\ntap on blackhole,\r\nto jump\r\ninto HyperSpace",
+	"force7": "Continue your jorney\r\nas deep, as you can!\r\nCollect all stars to\r\ncomplete the level",
+	"force8": "Land on the planet\r\nto save your progress!",
+
+	"settings_title": "Settings",
+	"language": "Language",
+	"music": "Music",
+	"effects": "Effects",
+
+	"success": "SUCCESS",
+	"failure": "FAILURE",
+	"next": "NEXT",
+	"reward": "reward",
+	"ratings": "Ratings",
+	"ship_destroyed": "Keep your energy level\r\nduring the game\r\nto stay alive",
+
+	"login": "Login",
+	"register": "Register",
+	"logout": "Logout",
+	"min_length": "Fields must contain at least 3 characters",
+	"password_match": "Passwords are not equal",
+	"login or password incorrect":  "Login or password is invalid",
+	"login already exists": "Login already exists",
+	"could not create player": "Login failed"
+}

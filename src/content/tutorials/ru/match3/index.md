@@ -39,7 +39,7 @@ steps:
 
 ## Дополнительные материалы
 - [Полный исходный код](https://github.com/gamedevland/match3)
-- [Демонстрационная версия](https://gamedevland.github.io/match3/)
+- [Демонстрационная версия](https://gamedev.land/play/match3/)
 
 Перед началом разработки нужно выполнить два шага:
 

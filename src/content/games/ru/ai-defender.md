@@ -39,7 +39,7 @@ screenshots:
     landscapeAlt: Центр управления с выбором боя и показателями кампании
     portraitSrc: /assets/games/ai-defender/screens/port/hub.webp
     portraitAlt: Центр управления с вкладками кампании и агентов на телефоне
-playableUrl: https://gamedevland.github.io/ai-defender/
+playableUrl: https://gamedev.land/play/ai-defender/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: -1

@@ -23,7 +23,7 @@ roles:
   - UI, tutorial and visual effects
 iconImage: /assets/games/rings/icon-rings.jpg
 coverImage: /assets/games/rings/cover.webp
-playableUrl: https://gamedevland.github.io/rings/
+playableUrl: https://gamedev.land/play/rings/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 1

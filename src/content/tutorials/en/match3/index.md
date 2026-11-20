@@ -39,7 +39,7 @@ In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 
 ## Additional materials
 - [Complete source code](https://github.com/gamedevland/match3)
-- [Preview demo](https://gamedevland.github.io/match3/)
+- [Preview demo](https://gamedev.land/play/match3/)
 
 Before starting the development, we need to perform 2 steps:
 

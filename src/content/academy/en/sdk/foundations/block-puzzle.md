@@ -28,7 +28,7 @@
 }
 ---
 
-Open the [Block Puzzle demo](https://gamedevland.github.io/block-puzzle/). The player drags pieces onto an 8 × 8 board. Completed rows and columns are cleared; the game ends when none of the pieces fit.
+Open the [Block Puzzle demo](https://gamedev.land/play/block-puzzle/). The player drags pieces onto an 8 × 8 board. Completed rows and columns are cleared; the game ends when none of the pieces fit.
 
 Now get the [game source](https://github.com/gamedevland/block-puzzle). The course uses the public revision `d1dd4e3`, so examples can be checked against unchanged code. Run the commands below to start it locally. The `dev:web` script is defined in [package.json](https://github.com/gamedevland/block-puzzle/blob/d1dd4e35b3df7d71fcc6a3eca9f5133773f51177/package.json).
 

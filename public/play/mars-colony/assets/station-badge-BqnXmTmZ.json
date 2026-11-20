@@ -1,0 +1,277 @@
+{
+  "type": "Container",
+  "props": {
+    "visible": false
+  },
+  "components": {
+    "badge": {
+      "type": "ColonyStationBadge"
+    }
+  },
+  "children": {
+    "shadow": {
+      "type": "Graphics",
+      "props": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "bezel": {
+      "type": "Graphics",
+      "props": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "icon": {
+      "type": "Sprite",
+      "props": {
+        "asset": "images/ui/station-ice.webp",
+        "x": -72,
+        "y": 0,
+        "width": 27,
+        "height": 27,
+        "anchor": 0.5
+      }
+    },
+    "title": {
+      "type": "Text",
+      "props": {
+        "x": -49,
+        "y": -9,
+        "text": "",
+        "anchor": {
+          "x": 0,
+          "y": 0.5
+        },
+        "style": {
+          "fontFamily": "system-ui",
+          "fontSize": 16,
+          "fontWeight": "800",
+          "fill": "#253c3b"
+        }
+      }
+    },
+    "stock": {
+      "type": "Container",
+      "props": {
+        "x": 74,
+        "y": 0
+      },
+      "children": {
+        "plate": {
+          "type": "Graphics",
+          "props": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        "count": {
+          "type": "Text",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "text": "",
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "system-ui",
+              "fontSize": 14,
+              "fontWeight": "800",
+              "fill": "#fff0c6"
+            }
+          }
+        }
+      }
+    },
+    "process": {
+      "type": "Container",
+      "children": {
+        "symbol": {
+          "type": "Graphics",
+          "props": {
+            "x": -46,
+            "y": 10
+          }
+        },
+        "label": {
+          "type": "Text",
+          "props": {
+            "x": -37,
+            "y": 10,
+            "text": "",
+            "anchor": {
+              "x": 0,
+              "y": 0.5
+            },
+            "style": {
+              "fontFamily": "system-ui",
+              "fontSize": 12,
+              "fontWeight": "800",
+              "fill": "#53716a"
+            }
+          }
+        },
+        "rail": {
+          "type": "Graphics",
+          "props": {
+            "x": 8,
+            "y": 17
+          }
+        },
+        "fill": {
+          "type": "Graphics",
+          "props": {
+            "x": 8,
+            "y": 17
+          }
+        },
+        "segments": {
+          "type": "Graphics",
+          "props": {
+            "x": 8,
+            "y": 17
+          }
+        }
+      }
+    },
+    "needs": {
+      "type": "Container",
+      "children": {
+        "item0": {
+          "type": "Container",
+          "children": {
+            "plate": {
+              "type": "Graphics",
+              "props": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            "art": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/station-water.webp",
+                "x": 0,
+                "y": 0,
+                "width": 16,
+                "height": 16,
+                "anchor": 0.5
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "x": 0,
+                "y": 0,
+                "text": "",
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 13,
+                  "fontWeight": "800",
+                  "fill": "#194549"
+                }
+              }
+            }
+          }
+        },
+        "item1": {
+          "type": "Container",
+          "children": {
+            "plate": {
+              "type": "Graphics",
+              "props": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            "art": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/station-water.webp",
+                "x": 0,
+                "y": 0,
+                "width": 16,
+                "height": 16,
+                "anchor": 0.5
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "x": 0,
+                "y": 0,
+                "text": "",
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 13,
+                  "fontWeight": "800",
+                  "fill": "#194549"
+                }
+              }
+            }
+          }
+        },
+        "item2": {
+          "type": "Container",
+          "children": {
+            "plate": {
+              "type": "Graphics",
+              "props": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            "art": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/station-water.webp",
+                "x": 0,
+                "y": 0,
+                "width": 16,
+                "height": 16,
+                "anchor": 0.5
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "x": 0,
+                "y": 0,
+                "text": "",
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 13,
+                  "fontWeight": "800",
+                  "fill": "#194549"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "release": {
+      "type": "Text",
+      "props": {
+        "x": 74,
+        "y": -37,
+        "text": "",
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "system-ui",
+          "fontSize": 17,
+          "fontWeight": "800",
+          "fill": "#94fff2",
+          "stroke": {
+            "color": "#142c36",
+            "width": 3
+          }
+        },
+        "alpha": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "type": "Container",
+  "props": {
+    "visible": false
+  },
+  "components": {
+    "refill": {
+      "type": "IslandBoosterRefill",
+      "data": {
+        "width": 360,
+        "height": 350,
+        "margin": 12,
+        "backdropAlpha": 0.38,
+        "rewardCopy": "Get {count}",
+        "watchCopy": "Watch ad",
+        "loadingCopy": "Loading…",
+        "failureCopy": "Ad not completed.\nNo charges added. Try again.",
+        "backdropFadeDuration": 0.24,
+        "watchContent": {
+          "width": 228,
+          "centerY": 28.8,
+          "gap": 10,
+          "iconSize": 32
+        }
+      }
+    }
+  },
+  "children": {
+    "backdrop": {
+      "type": "Sprite",
+      "props": {
+        "asset": "images/ui/dimmer.png",
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1,
+        "anchor": 0,
+        "color": 3159636
+      }
+    },
+    "panel": {
+      "type": "Container",
+      "children": {
+        "skin": {
+          "type": "NineSliceSprite",
+          "props": {
+            "asset": "images/ui/settings-content-panel.webp",
+            "x": 0,
+            "y": 0,
+            "width": 1080,
+            "height": 1050,
+            "scale": 0.3333333333333333,
+            "anchor": 0,
+            "leftWidth": 100,
+            "rightWidth": 100,
+            "topHeight": 228,
+            "bottomHeight": 121
+          }
+        },
+        "heading": {
+          "type": "Text",
+          "props": {
+            "text": "Bigger Hole",
+            "x": 180,
+            "y": 29,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 26,
+              "fill": 16774879,
+              "stroke": {
+                "color": 4864884,
+                "width": 3,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "icon": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-25-booster-bigger-hole.webp",
+            "x": 180,
+            "y": 128,
+            "width": 96,
+            "height": 96,
+            "anchor": 0.5
+          }
+        },
+        "amount": {
+          "type": "Text",
+          "props": {
+            "text": "Get 3",
+            "x": 180,
+            "y": 204,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 30,
+              "fill": 5779571,
+              "align": "center"
+            }
+          }
+        },
+        "explanation": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 180,
+            "y": 234,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 12,
+              "fill": 5779571,
+              "align": "center"
+            }
+          }
+        },
+        "watch": {
+          "type": "Container",
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "HOLE_BOOST_REFILL_WATCH",
+                "pressScale": 1,
+                "animateScale": false
+              }
+            }
+          },
+          "children": {
+            "skin": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-15-button-primary.webp",
+                "x": 0,
+                "y": 0,
+                "width": 228,
+                "height": 64,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "Watch ad",
+                "x": 135,
+                "y": 28.8,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 24,
+                  "fill": 16777215,
+                  "align": "center",
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 2,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "ad": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/ad-clapperboard.webp",
+                "x": 55,
+                "y": 28.8,
+                "width": 32,
+                "height": 32,
+                "anchor": 0.5
+              }
+            }
+          },
+          "props": {
+            "x": 66,
+            "y": 250
+          }
+        },
+        "close": {
+          "type": "Container",
+          "props": {
+            "x": 308,
+            "y": 8,
+            "visible": true
+          },
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "HOLE_BOOST_REFILL_CLOSE",
+                "pressScale": 1,
+                "animateScale": false
+              }
+            }
+          },
+          "children": {
+            "skin": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-17-button-close.webp",
+                "x": 0,
+                "y": 0,
+                "width": 52,
+                "height": 54,
+                "anchor": 0
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "",
+                "x": 26,
+                "y": 27,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 24,
+                  "fill": 16774879
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "motion": {
+          "type": "IslandModalMotion",
+          "data": {
+            "duration": 0.42,
+            "startScale": 0.78,
+            "rise": 14,
+            "ease": "back.out(1.35)",
+            "fadeDuration": 0.16,
+            "fadeEase": "power1.out",
+            "starDelay": 0.1,
+            "starStep": 0.23,
+            "starAttack": 0.13,
+            "starSettle": 0.32,
+            "starScale": 1.4,
+            "starTilt": 0.14,
+            "starEase": "back.out(1.6)",
+            "starAttackEase": "power2.out",
+            "starWidth": 70,
+            "emptyAsset": "images/ui/generated-57-star-empty.webp",
+            "goldAsset": "images/ui/generated-58-star-gold.webp"
+          }
+        }
+      }
+    }
+  }
+}

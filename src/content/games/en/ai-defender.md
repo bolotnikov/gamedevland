@@ -39,7 +39,7 @@ screenshots:
     landscapeAlt: The command center with battle selection and campaign progress
     portraitSrc: /assets/games/ai-defender/screens/port/hub.webp
     portraitAlt: The command center with campaign and agent tabs on a phone
-playableUrl: https://gamedevland.github.io/ai-defender/
+playableUrl: https://gamedev.land/play/ai-defender/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: -1

@@ -53,7 +53,7 @@ steps:
 
 ## Дополнительные материалы
 - [Полный исходный код](https://github.com/gamedevland/tower-defense)
-- [Демонстрационная версия](https://gamedevland.github.io/tower-defense/)
+- [Демонстрационная версия](https://gamedev.land/play/tower-defense/)
 
 Перед началом разработки нужно выполнить два шага:
 

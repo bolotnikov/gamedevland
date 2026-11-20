@@ -1,0 +1,361 @@
+{
+  "root": {
+    "type": "Container",
+    "components": {
+      "tutorialOverlay": {
+        "type": "TutorialOverlayComponent",
+        "data": {
+          "messageOffsetYPx": -104,
+          "handOffsetXPx": 128,
+          "handOffsetYPx": 36,
+          "handScale": 0.82,
+          "screenPaddingPx": 28,
+          "messageScale": 1,
+          "messagePulseScale": 1.045,
+          "messagePulseDurationSeconds": 1.1,
+          "dimAlpha": 0.8,
+          "dimFadeDurationSeconds": 0.22,
+          "introScaleDurationSeconds": 0.28,
+          "introScaleEase": "back.out(1.35)",
+          "dimDisabledTutorialIds": ["level1Move"]
+        }
+      }
+    },
+    "children": {
+      "background": {
+        "type": "Sprite",
+        "props": {
+          "asset": "images/bg.jpg",
+          "x": 0,
+          "y": 0,
+          "anchor": {
+            "x": 0.5,
+            "y": 0.5
+          }
+        },
+        "components": {
+          "responsiveLayout": {
+            "type": "ResponsiveLayoutComponent",
+            "data": {
+              "scale": "cover",
+              "position": "center"
+            }
+          },
+          "waterDisplacement": {
+            "type": "DisplacementFilterComponent",
+            "data": {
+              "noiseAssetId": "images/common/noise.jpg",
+              "strengthX": 14,
+              "strengthY": 12,
+              "noiseScaleX": 8,
+              "noiseScaleY": 8,
+              "driftXPerSecond": 32,
+              "driftYPerSecond": 24
+            }
+          }
+        }
+      },
+      "ambientEffectsLayer": {
+        "type": "Container",
+        "components": {
+          "ambientBubbles": {
+            "type": "GameAmbientBubblesComponent",
+            "data": {
+              "bubbleAssetId": "images/common/bubble.png",
+              "minSpawnMs": 600,
+              "maxSpawnMs": 1100,
+              "chainLength": 20,
+              "chainPauseMs": 2200,
+              "maxActive": 14,
+              "minSpawnCount": 1,
+              "maxSpawnCount": 2
+            }
+          }
+        }
+      },
+      "levelLabel": {
+        "type": "Container",
+        "props": {
+          "zIndex": 70
+        },
+        "components": {
+          "levelLabel": {
+            "type": "GameLevelLabelComponent"
+          }
+        },
+        "children": {
+          "plate": {
+            "type": "Container",
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "position": {
+                    "y": "top",
+                    "offsetY": 10
+                  }
+                }
+              }
+            },
+            "children": {
+              "background": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/ux/level-label-plate.png",
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                },
+                "components": {
+                  "responsiveLayout": {
+                    "type": "ResponsiveLayoutComponent",
+                    "data": {
+                      "scale": {
+                        "mode": "width",
+                        "screenWidth": 0.26,
+                        "max": 0.35
+                      }
+                    }
+                  }
+                }
+              },
+              "title": {
+                "type": "Text",
+                "props": {
+                  "textKey": "game.level.badge",
+                  "y": -21,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "levelBadgeTitleText"
+                }
+              },
+              "number": {
+                "type": "Text",
+                "props": {
+                  "text": "",
+                  "y": 13,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "levelBadgeNumberText"
+                }
+              }
+            }
+          }
+        }
+      },
+      "playfield": {
+        "type": "Container",
+        "components": {
+          "responsiveLayout": {
+            "type": "ResponsiveLayoutComponent",
+            "data": {
+              "areaOnly": true,
+              "area": {
+                "padding": {
+                  "top": 34,
+                  "right": 0,
+                  "bottom": 34,
+                  "left": 0
+                }
+              },
+              "orientation": {
+                "land": {
+                  "area": {
+                    "padding": {
+                      "bottom": 104
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "levelPresentationNodes": {
+            "type": "GameLevelPresentationNodesComponent"
+          },
+          "levelPresentationVisualSync": {
+            "type": "GameLevelPresentationVisualSyncComponent"
+          },
+          "levelPresentation": {
+            "type": "GameLevelPresentationComponent",
+            "data": {
+              "branchPrefabId": "json/prefabs/game/branch/prefab.json",
+              "fishPrefabId": "json/prefabs/game/fish/prefab.json",
+              "lineAssetId": "images/line.png",
+              "referenceLineWidthPx": 400,
+              "referenceLineHeightPx": 20,
+              "columnGapPx": 56,
+              "innerEdgePaddingPx": 0,
+              "fishSlotSpanPx": 260,
+              "fishLineOverlapPx": 2,
+              "fishBaseScale": 0.72,
+              "maxFishHeightPx": 80,
+              "lineHitAreaPaddingPx": 4,
+              "minFitScale": 0.2,
+              "maxFitScale": 1,
+              "land": {
+                "verticalGapPx": 116,
+                "fishGapPx": 0,
+                "fishBaseScaleMultiplier": 1
+              },
+              "port": {
+                "verticalGapPx": 200,
+                "fishGapPx": 15,
+                "fishBaseScaleMultiplier": 1.4
+              },
+              "defaultZIndex": 0,
+              "focusZIndex": 90,
+              "introEnabled": true,
+              "introLineDurationMs": 520,
+              "introLineStaggerMs": 45,
+              "introFishStaggerMs": 90,
+              "introFishJitterMs": 45,
+              "introFishSpeedPxPerSecond": 360,
+              "introFishMinDurationMs": 460,
+              "introFishMaxDurationMs": 920,
+              "introFishEdgePaddingRatio": 0.04,
+              "introFishLiftMinPx": 24,
+              "introFishLiftMaxPx": 70
+            }
+          }
+        },
+        "children": {
+          "branchesLayer": {
+            "type": "Container"
+          },
+          "motionLayer": {
+            "type": "Container"
+          }
+        }
+      },
+      "boosterBar": {
+        "type": "Container",
+        "props": {
+          "zIndex": 70
+        },
+        "components": {
+          "responsiveLayout": {
+            "type": "ResponsiveLayoutComponent",
+            "enabled": false,
+            "data": {
+              "area": {
+                "padding": {
+                  "left": 24,
+                  "right": 24,
+                  "bottom": 18
+                }
+              },
+              "scale": {
+                "mode": "contain",
+                "min": 0.18,
+                "max": 0.34
+              },
+              "position": {
+                "y": "bottom"
+              }
+            }
+          },
+          "boosterBar": {
+            "type": "GameBoosterBarComponent",
+            "data": {
+              "buttonPrefabId": "json/prefabs/game/ui/booster-button/prefab.json",
+              "horizontalGapPx": 14,
+              "disabledIconDimAmount": 0.2,
+              "noMovesOverlayZIndex": 100
+            }
+          }
+        }
+      },
+      "settingsButton": {
+        "$include": "json/layouts/features/settings/_button.json"
+      },
+      "tutorialDimOverlay": {
+        "type": "Container",
+        "props": {
+          "visible": false,
+          "zIndex": 75
+        },
+        "children": {
+          "dim": {
+            "type": "Graphics",
+            "props": {
+              "width": 960,
+              "height": 540,
+              "color": "#031c2a",
+              "alpha": 0.8
+            },
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "resize": "stretch"
+                }
+              }
+            }
+          }
+        }
+      },
+      "tutorialFocusLayer": {
+        "type": "Container",
+        "props": {
+          "zIndex": 90
+        }
+      },
+      "tutorialOverlay": {
+        "type": "Container",
+        "props": {
+          "visible": false,
+          "zIndex": 130
+        },
+        "children": {
+          "message": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "anchor": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "style": "tutorialMessageText"
+            }
+          },
+          "hand": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/common/hand.png",
+              "anchor": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "actions": {
+              "tutorialHandMotion": {
+                "type": "TutorialHandMotionAction",
+                "data": {
+                  "pressAngleDeg": -8,
+                  "pressDurationSeconds": 0.42
+                }
+              }
+            }
+          }
+        }
+      },
+      "winPopup": {
+        "$include": "json/layouts/features/game/_win-popup.json"
+      },
+      "noMovesOverlay": {
+        "$include": "json/layouts/features/game/_no-moves-overlay.json"
+      },
+      "boosterPurchasePopup": {
+        "$include": "json/layouts/features/game/_booster-purchase-popup.json"
+      },
+      "settingsPopup": {
+        "$include": "json/layouts/features/settings/_popup.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "durationSeconds": 180,
+  "threeStarSeconds": 60,
+  "twoStarSeconds": 120,
+  "clockBonusSeconds": 20,
+  "prizeEvery": 5,
+  "initialCharges": 3,
+  "boosters": [
+    {
+      "id": "hat",
+      "level": 4,
+      "title": "Magic Hat",
+      "description": "Removes one random ring."
+    },
+    {
+      "id": "wand",
+      "level": 7,
+      "title": "Magic Wand",
+      "description": "Tap any ring to make it disappear."
+    },
+    {
+      "id": "clock",
+      "level": 9,
+      "title": "Magic Clock",
+      "description": "Adds 20 seconds to the level timer."
+    }
+  ],
+  "boosterSeconds": 0.75
+}

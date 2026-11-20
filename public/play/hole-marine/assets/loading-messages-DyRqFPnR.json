@@ -1,0 +1,246 @@
+{
+  "intervalMs": 1800,
+  "levels": [
+    {
+      "level": 1,
+      "messages": [
+        "Diving into the reef…",
+        "Gathering the shoals…",
+        "Polishing the pearls…",
+        "Following the ocean current…"
+      ]
+    },
+    {
+      "level": 2,
+      "messages": [
+        "Diving into Pearl Gardens…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 3,
+      "messages": [
+        "Diving into Puffer Atolls…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 4,
+      "messages": [
+        "Diving into Sunken Pearl Towers…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 5,
+      "messages": [
+        "Diving into Neon Shoal Bloom…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 6,
+      "messages": [
+        "Diving into Turtle Treasure Terraces…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 7,
+      "messages": [
+        "Diving into Manta Reef Channels…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 8,
+      "messages": [
+        "Diving into Sunken Cargo…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 9,
+      "messages": [
+        "Diving into Shark Spiral Festival…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 10,
+      "messages": [
+        "Diving into Whale Crown…",
+        "Following the sunlit current…",
+        "Arranging the ocean treasures…"
+      ]
+    },
+    {
+      "level": 11,
+      "messages": [
+        "Diving into Crab Crescent…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 12,
+      "messages": [
+        "Diving into Lobster Fan Gardens…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 13,
+      "messages": [
+        "Diving into Pearl Portal Court…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 14,
+      "messages": [
+        "Diving into Crab Cargo Gardens…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 15,
+      "messages": [
+        "Diving into Amphora Salvage Market…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 16,
+      "messages": [
+        "Diving into Manta Pilgrim Trail…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 17,
+      "messages": [
+        "Diving into Pearl Cascade Terraces…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 18,
+      "messages": [
+        "Diving into Sunken Freight Steps…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 19,
+      "messages": [
+        "Diving into Shark Estuary Expedition…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 20,
+      "messages": [
+        "Diving into Golden Tide Carnival…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 21,
+      "messages": [
+        "Diving into Twin Lobster Lagoons…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 22,
+      "messages": [
+        "Diving into Three Living Suns…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 23,
+      "messages": [
+        "Diving into Quiet Turtle Petals…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 24,
+      "messages": [
+        "Diving into Amphora Heart Harbour…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 25,
+      "messages": [
+        "Diving into Reef Compass Gardens…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 26,
+      "messages": [
+        "Diving into Blue Claw Shipyard…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 27,
+      "messages": [
+        "Diving into Pillars of the Red Reef…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 28,
+      "messages": [
+        "Diving into Coral Vault Labyrinth…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 29,
+      "messages": [
+        "Diving into Two Tide Colossi…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    },
+    {
+      "level": 30,
+      "messages": [
+        "Diving into Crown of the Sunlit Ocean…",
+        "Following the sunlit current…",
+        "Discovering the next ocean giant…"
+      ]
+    }
+  ]
+}

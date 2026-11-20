@@ -1,0 +1,264 @@
+{
+  "type": "Container",
+  "components": {
+    "tutorial": {
+      "type": "IslandTutorial",
+      "data": {
+        "width": 300,
+        "height": 200,
+        "margin": 14,
+        "bottomGap": 20,
+        "topClearance": 92,
+        "compactHeight": 440,
+        "compactScale": 0.72,
+        "landscapeX": 0.72,
+        "fadeDuration": 0.12,
+        "loopDuration": 2.8,
+        "idleDelay": 0.35,
+        "loopWidth": 66,
+        "loopHeight": 34,
+        "gestureY": 94,
+        "keysY": 143,
+        "joystickRadius": 70,
+        "knobRadius": 14,
+        "handWidth": 52,
+        "handHeight": 39,
+        "trackWidth": 3,
+        "trailWidth": 5,
+        "trailSamples": 20,
+        "trailFraction": 0.24,
+        "focusPadding": 5,
+        "focusRadius": 18,
+        "color": 16777215,
+        "outline": 4864884,
+        "accent": 16768368,
+        "keys": {
+          "width": 26,
+          "height": 28,
+          "radius": 6,
+          "cycleSeconds": 0.55
+        },
+        "copy": {
+          "move": "Move the Hole",
+          "bigger-hole": "Tap to grow \u00b7 {seconds}s",
+          "magnet": "Tap to attract fruit",
+          "goal-finder": "Tap to find your goals",
+          "time-freeze": "Tap to freeze time \u00b7 {seconds}s"
+        },
+        "touchHeight": 140,
+        "touchGestureY": 84,
+        "touchScale": 0.7
+      }
+    }
+  },
+  "children": {
+    "coach": {
+      "type": "Container",
+      "props": {
+        "visible": false
+      },
+      "children": {
+        "focus": {
+          "type": "Graphics"
+        },
+        "content": {
+          "type": "Container",
+          "children": {
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "",
+                "x": 0,
+                "y": 0,
+                "anchor": {
+                  "x": 0.5,
+                  "y": 0
+                },
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 24,
+                  "fill": 16777215,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 5,
+                    "join": "round"
+                  },
+                  "wordWrap": true,
+                  "wordWrapWidth": 300,
+                  "align": "center",
+                  "lineHeight": 30
+                }
+              }
+            },
+            "gesture": {
+              "type": "Graphics"
+            },
+            "hand": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/tutorial-hand.webp",
+                "anchor": {
+                  "x": 0.11,
+                  "y": 0.14
+                }
+              }
+            },
+            "keys": {
+              "type": "Container",
+              "children": {
+                "caps": {
+                  "type": "Graphics"
+                },
+                "key0": {
+                  "type": "Text",
+                  "props": {
+                    "text": "W",
+                    "x": -76,
+                    "y": 0,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key1": {
+                  "type": "Text",
+                  "props": {
+                    "text": "A",
+                    "x": -108,
+                    "y": 32,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key2": {
+                  "type": "Text",
+                  "props": {
+                    "text": "S",
+                    "x": -76,
+                    "y": 32,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key3": {
+                  "type": "Text",
+                  "props": {
+                    "text": "D",
+                    "x": -44,
+                    "y": 32,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key4": {
+                  "type": "Text",
+                  "props": {
+                    "text": "\u2191",
+                    "x": 76,
+                    "y": 0,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key5": {
+                  "type": "Text",
+                  "props": {
+                    "text": "\u2190",
+                    "x": 44,
+                    "y": 32,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key6": {
+                  "type": "Text",
+                  "props": {
+                    "text": "\u2193",
+                    "x": 76,
+                    "y": 32,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                },
+                "key7": {
+                  "type": "Text",
+                  "props": {
+                    "text": "\u2192",
+                    "x": 108,
+                    "y": 32,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": {
+                      "fontFamily": "Rubik",
+                      "fontWeight": "700",
+                      "fontSize": 16,
+                      "fill": 2504023
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

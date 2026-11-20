@@ -53,7 +53,7 @@ In this course we will create a tower defense game using PixiJS.
 
 ## Additional materials
 - [Complete source code](https://github.com/gamedevland/tower-defense)
-- [Preview demo](https://gamedevland.github.io/tower-defense/)
+- [Preview demo](https://gamedev.land/play/tower-defense/)
 
 Before starting the development, we need to make 2 steps:
 

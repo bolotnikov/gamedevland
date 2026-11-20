@@ -1,0 +1,489 @@
+{
+  "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "assets": [
+    {
+      "level": 1,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed.glb",
+        "models/seaworld/reef.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/starfish.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 2,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-02.glb",
+        "models/seaworld/reef-02.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/sand_dollar.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/treasure_pouch.glb"
+      ]
+    },
+    {
+      "level": 3,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-03.glb",
+        "models/seaworld/reef-03.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 4,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-04.glb",
+        "models/seaworld/reef-04.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/sand_dollar.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 5,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-05.glb",
+        "models/seaworld/reef-05.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 6,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-06.glb",
+        "models/seaworld/reef-06.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/treasure_pouch.glb"
+      ]
+    },
+    {
+      "level": 7,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-07.glb",
+        "models/seaworld/reef-07.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/manta_ray.glb",
+        "models/seaworld/sea_glass.glb"
+      ]
+    },
+    {
+      "level": 8,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-08.glb",
+        "models/seaworld/reef-08.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/octopus.glb",
+        "models/seaworld/palm_plank.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 9,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-09.glb",
+        "models/seaworld/reef-09.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/reef_shark.glb",
+        "models/seaworld/treasure_coin.glb"
+      ]
+    },
+    {
+      "level": 10,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-10.glb",
+        "models/seaworld/reef-10.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/reef_shark.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/whale.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 11,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-11.glb",
+        "models/seaworld/reef-11.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 12,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-12.glb",
+        "models/seaworld/reef-12.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/starfish.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 13,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-13.glb",
+        "models/seaworld/reef-13.glb",
+        "models/seaworld/bamboo_arch.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/sunken_amphora.glb"
+      ]
+    },
+    {
+      "level": 14,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-14.glb",
+        "models/seaworld/reef-14.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb"
+      ]
+    },
+    {
+      "level": 15,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-15.glb",
+        "models/seaworld/reef-15.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/palm_plank.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb"
+      ]
+    },
+    {
+      "level": 16,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-16.glb",
+        "models/seaworld/reef-16.glb",
+        "models/seaworld/bamboo_arch.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/manta_ray.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 17,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-17.glb",
+        "models/seaworld/reef-17.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/palm_plank.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 18,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-18.glb",
+        "models/seaworld/reef-18.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 19,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-19.glb",
+        "models/seaworld/reef-19.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/reef_shark.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/starfish.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 20,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-20.glb",
+        "models/seaworld/reef-20.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/treasure_pouch.glb"
+      ]
+    },
+    {
+      "level": 21,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-21.glb",
+        "models/seaworld/reef-21.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 22,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-22.glb",
+        "models/seaworld/reef-22.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/manta_ray.glb",
+        "models/seaworld/reef_shark.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_segment.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 23,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-23.glb",
+        "models/seaworld/reef-23.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 24,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-24.glb",
+        "models/seaworld/reef-24.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/palm_plank.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/wood_crate.glb"
+      ]
+    },
+    {
+      "level": 25,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-25.glb",
+        "models/seaworld/reef-25.glb",
+        "models/seaworld/bamboo_arch.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/manta_ray.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/starfish.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    },
+    {
+      "level": 26,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-26.glb",
+        "models/seaworld/reef-26.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/gold_bar.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/palm_plank.glb",
+        "models/seaworld/reef_shark.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb"
+      ]
+    },
+    {
+      "level": 27,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-27.glb",
+        "models/seaworld/reef-27.glb",
+        "models/seaworld/clownfish.glb",
+        "models/seaworld/cowrie_shell.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/sea_turtle.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/wood_segment.glb"
+      ]
+    },
+    {
+      "level": 28,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-28.glb",
+        "models/seaworld/reef-28.glb",
+        "models/seaworld/blue_tang.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/manta_ray.glb",
+        "models/seaworld/sea_glass.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/wood_crate.glb"
+      ]
+    },
+    {
+      "level": 29,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-29.glb",
+        "models/seaworld/reef-29.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/pufferfish.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/treasure_coin.glb",
+        "models/seaworld/whale.glb",
+        "models/seaworld/wood_crate.glb"
+      ]
+    },
+    {
+      "level": 30,
+      "models": [
+        "models/hole/hole.glb",
+        "models/seaworld/seabed-30.glb",
+        "models/seaworld/reef-30.glb",
+        "models/seaworld/conch_shell.glb",
+        "models/seaworld/crab.glb",
+        "models/seaworld/lobster.glb",
+        "models/seaworld/manta_ray.glb",
+        "models/seaworld/palm_plank.glb",
+        "models/seaworld/pearl.glb",
+        "models/seaworld/starfish.glb",
+        "models/seaworld/sunken_amphora.glb",
+        "models/seaworld/treasure_chest.glb",
+        "models/seaworld/whale.glb",
+        "models/seaworld/wood_crate.glb",
+        "models/seaworld/wood_segment.glb",
+        "models/seaworld/yellow_tang.glb"
+      ]
+    }
+  ]
+}

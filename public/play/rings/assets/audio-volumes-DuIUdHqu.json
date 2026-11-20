@@ -1,0 +1,15 @@
+{
+  "channel.music": 1,
+  "channel.sfx": 1,
+  "audio/fish-sort/music.mp3": 0.22,
+  "audio/fish-sort/sfx-btn.mp3": 0.55,
+  "audio/fish-sort/sfx-swoosh.mp3": 0.45,
+  "audio/puzzle/sfx-unlocked.mp3": 0.6,
+  "audio/fish-sort/sfx-success.mp3": 0.6,
+  "audio/results/sfx-confetti.mp3": 0.6,
+  "audio/results/sfx-applause.mp3": 0.65,
+  "audio/fish-sort/sfx-splash.mp3": 0.55,
+  "audio/fish-sort/sfx-bubble.mp3": 0.5,
+  "audio/fish-sort/sfx-swoosh-long.mp3": 0.6,
+  "audio/puzzle/sfx-blocked.mp3": 0.5
+}

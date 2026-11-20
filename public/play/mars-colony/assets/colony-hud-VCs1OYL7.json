@@ -1,0 +1,684 @@
+{
+  "type": "Container",
+  "components": {
+    "hud": {
+      "type": "ColonyHud"
+    }
+  },
+  "children": {
+    "widgets": {
+      "type": "Container",
+      "children": {
+        "objective": {
+          "type": "Container",
+          "props": {
+            "interactive": true
+          },
+          "children": {
+            "skin": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/order.webp",
+                "x": 0,
+                "y": 0,
+                "width": 280,
+                "height": 109,
+                "anchor": 0
+              }
+            },
+            "order": {
+              "type": "Text",
+              "props": {
+                "x": 83,
+                "y": 20,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 11,
+                  "fontWeight": "800",
+                  "fill": "#14565c"
+                }
+              }
+            },
+            "title": {
+              "type": "Text",
+              "props": {
+                "x": 83,
+                "y": 39,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 17,
+                  "fontWeight": "800",
+                  "fill": "#142c36"
+                }
+              }
+            },
+            "icon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/clay.webp",
+                "x": 35,
+                "y": 77,
+                "width": 29,
+                "height": 25,
+                "anchor": 0.5
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "x": 58,
+                "y": 77,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 17,
+                  "fontWeight": "800",
+                  "fill": "#142c36"
+                }
+              }
+            },
+            "progress": {
+              "type": "Graphics"
+            },
+            "weather": {
+              "type": "Text",
+              "props": {
+                "x": 266,
+                "y": 75,
+                "text": "",
+                "anchor": {
+                  "x": 1,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 10,
+                  "fontWeight": "800",
+                  "fill": "#14565c"
+                }
+              }
+            }
+          }
+        },
+        "cargo": {
+          "type": "Container",
+          "props": {
+            "interactive": true
+          },
+          "children": {
+            "skin": {
+              "type": "NineSliceSprite",
+              "props": {
+                "asset": "images/ui/panel.webp",
+                "x": 0,
+                "y": 0,
+                "width": 211,
+                "height": 52,
+                "anchor": 0,
+                "leftWidth": 14,
+                "rightWidth": 14,
+                "topHeight": 14,
+                "bottomHeight": 14
+              }
+            },
+            "heading": {
+              "type": "Text",
+              "props": {
+                "x": 12,
+                "y": 13,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 11,
+                  "fontWeight": "800",
+                  "fill": "#14565c"
+                }
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "x": 12,
+                "y": 34,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 15,
+                  "fontWeight": "800",
+                  "fill": "#142c36"
+                }
+              }
+            },
+            "slots": {
+              "type": "Container",
+              "children": {
+                "s0": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s1": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s2": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s3": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s4": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s5": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s6": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s7": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s8": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s9": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s10": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                },
+                "s11": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/socket.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 22,
+                    "height": 23,
+                    "anchor": 0
+                  }
+                }
+              }
+            },
+            "load": {
+              "type": "Container",
+              "children": {
+                "i0": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i1": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i2": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i3": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i4": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i5": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i6": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i7": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i8": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i9": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i10": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                },
+                "i11": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/ice.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16,
+                    "anchor": 0.5
+                  }
+                }
+              }
+            },
+            "slotFlash": {
+              "type": "Graphics"
+            }
+          }
+        },
+        "guide": {
+          "type": "Container",
+          "props": {
+            "interactive": true
+          },
+          "components": {
+            "button": {
+              "type": "ColonyHudButton"
+            }
+          },
+          "children": {
+            "skin": {
+              "type": "NineSliceSprite",
+              "props": {
+                "asset": "images/ui/guide.webp",
+                "x": 0,
+                "y": 0,
+                "width": 151,
+                "height": 48,
+                "anchor": 0,
+                "leftWidth": 14,
+                "rightWidth": 14,
+                "topHeight": 14,
+                "bottomHeight": 14
+              }
+            },
+            "icon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/next.webp",
+                "x": 23,
+                "y": 24,
+                "width": 19,
+                "height": 18,
+                "anchor": 0.5
+              }
+            },
+            "heading": {
+              "type": "Text",
+              "props": {
+                "x": 41,
+                "y": 14,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 9,
+                  "fontWeight": "800",
+                  "fill": "#c2e5da"
+                }
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "x": 41,
+                "y": 30,
+                "text": "",
+                "anchor": {
+                  "x": 0,
+                  "y": 0.5
+                },
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontSize": 14,
+                  "fontWeight": "800",
+                  "fill": "#fff3d3"
+                }
+              }
+            }
+          }
+        },
+        "controls": {
+          "type": "Container",
+          "children": {
+            "map": {
+              "type": "Container",
+              "props": {
+                "interactive": true
+              },
+              "components": {
+                "button": {
+                  "type": "ColonyHudButton"
+                }
+              },
+              "children": {
+                "skin": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/map.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 48,
+                    "height": 48,
+                    "anchor": 0
+                  }
+                }
+              }
+            },
+            "pause": {
+              "type": "Container",
+              "props": {
+                "interactive": true
+              },
+              "components": {
+                "button": {
+                  "type": "ColonyHudButton"
+                }
+              },
+              "children": {
+                "skin": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ui/pause.webp",
+                    "x": 0,
+                    "y": 0,
+                    "width": 48,
+                    "height": 48,
+                    "anchor": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "dock": {
+          "$include": "json/layouts/ui/dock-telemetry.json"
+        },
+        "notice": {
+          "type": "Container",
+          "props": {
+            "visible": false
+          },
+          "children": {
+            "skin": {
+              "type": "NineSliceSprite",
+              "props": {
+                "asset": "images/ui/badge.webp",
+                "x": 0,
+                "y": 0,
+                "width": 344,
+                "height": 32,
+                "anchor": 0.5,
+                "leftWidth": 13,
+                "rightWidth": 13,
+                "topHeight": 13,
+                "bottomHeight": 13
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "x": 0,
+                "y": 0,
+                "anchor": 0.5,
+                "text": "",
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontWeight": "800",
+                  "fontSize": 13,
+                  "fill": "#142c36"
+                }
+              }
+            }
+          }
+        },
+        "hint": {
+          "type": "Container",
+          "props": {
+            "visible": false
+          },
+          "children": {
+            "skin": {
+              "type": "Graphics",
+              "props": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "x": 13,
+                "y": 0,
+                "anchor": 0.5,
+                "text": "",
+                "style": {
+                  "fontFamily": "system-ui",
+                  "fontWeight": "800",
+                  "fontSize": 17,
+                  "fill": "#50351f"
+                }
+              }
+            },
+            "arrow": {
+              "type": "Graphics",
+              "props": {
+                "x": -151,
+                "y": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "stationCard": {
+      "type": "Container"
+    },
+    "stick": {
+      "type": "Container",
+      "props": {
+        "visible": false
+      },
+      "children": {
+        "base": {
+          "type": "Sprite",
+          "props": {"asset": "images/ui/joystick-ring.svg", "width": 100, "height": 100, "anchor": 0.5}
+        },
+        "thumb": {
+          "type": "Sprite",
+          "props": {"asset": "images/ui/joystick-thumb.svg", "width": 38, "height": 38, "anchor": 0.5}
+        }
+      }
+    },
+    "modal": {
+      "$include": "json/layouts/ui/colony-panel.json"
+    }
+  }
+}

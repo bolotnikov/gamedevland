@@ -1,0 +1,1641 @@
+{
+  "root": {
+    "type": "Group",
+    "components": {
+      "input": {
+        "type": "HoleInput",
+        "data": {
+          "joystickRadius": 54,
+          "deadzone": 3
+        }
+      },
+      "audio": {
+        "type": "HoleAudio",
+        "data": {
+          "pickupInterval": 0.09,
+          "music": "audio/hole/music.mp3",
+          "sounds": {
+            "pickup": "audio/hole/sfx/pickup.mp3",
+            "goalProgress": "audio/hole/sfx/goalProgress.mp3",
+            "goalComplete": "audio/hole/sfx/goalComplete.mp3",
+            "growth": "audio/hole/sfx/growth.mp3",
+            "won": "audio/hole/sfx/won.mp3",
+            "lost": "audio/hole/sfx/lost.mp3",
+            "timerWarning": "audio/hole/sfx/timerWarning.mp3",
+            "timerTick": "audio/hole/sfx/timerTick.mp3",
+            "pause": "audio/hole/sfx/popup-open.mp3",
+            "resume": "audio/hole/sfx/popup-close.mp3",
+            "uiClick": "audio/hole/sfx/uiClick.mp3",
+            "uiFocus": "audio/hole/sfx/uiClick.mp3",
+            "settingOn": "audio/hole/sfx/uiClick.mp3",
+            "settingOff": "audio/hole/sfx/uiClick.mp3",
+            "resultOpen": "audio/hole/sfx/popup-open.mp3"
+          },
+          "comboWindow": 0.45,
+          "maxPitchCombo": 6,
+          "pitchStep": 0.03,
+          "warningSeconds": 10,
+          "countdownSeconds": 5
+        }
+      }
+    },
+    "children": {
+      "water": {
+        "type": "Group",
+        "components": {
+          "water": {
+            "type": "HoleWater",
+            "data": {
+              "size": 100,
+              "height": -0.3,
+              "rippleMap": "images/water/lagoon-ripples-v1.png",
+              "tileMeters": 4.8,
+              "flowSpeed": 0.011,
+              "rippleStrength": 0.68,
+              "detailScale": 1.73,
+              "detailWeight": 0.42,
+              "distortion": 0.06,
+              "rippleSpeed": 0.8,
+              "refractionStrength": 0.15,
+              "causticScale": 0.82,
+              "causticStrength": 0.16,
+              "deepColor": "#299cd1",
+              "shallowColor": "#65d9e7",
+              "skyColor": "#c5efff",
+              "foamColor": "#e4fcfa",
+              "sunColor": "#fff8df",
+              "sunDirection": {
+                "x": -0.478365,
+                "y": 0.765384,
+                "z": 0.430528
+              },
+              "reflectionStrength": 0.32,
+              "specularStrength": 0.48,
+              "shininess": 64,
+              "heightTint": 0.1,
+              "shoreFadeMeters": 1.8,
+              "shoreFoamWidth": 0.055,
+              "shoreFoamStrength": 0.38,
+              "shoreRippleStrength": 0.055,
+              "shoreRippleSpacing": 0.48,
+              "shoreRippleSpeed": 0.075
+            }
+          }
+        }
+      },
+      "environment": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/surface.glb",
+          "castShadow": false,
+          "receiveShadow": true
+        },
+        "components": {
+          "cutout": {
+            "type": "HoleGroundCutout",
+            "data": {}
+          }
+        }
+      },
+      "hole": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/hole.glb",
+          "castShadow": true
+        },
+        "components": {
+          "visual": {
+            "type": "HolePlayerVisual",
+            "data": {
+              "authoredRadius": 0.42,
+              "growthArcName": "PH_GrowthArc",
+              "wellMeshNames": [
+                "PH_InnerWall",
+                "PH_Void"
+              ],
+              "wellRenderOrder": -1,
+              "pulseSeconds": 0.15,
+              "pulseAmount": 0.025,
+              "growthSettleSeconds": 0.09,
+              "growthBounce": 0.04,
+              "arcResponseSeconds": 0.075,
+              "arcInnerRadius": 0.473,
+              "arcOuterRadius": 0.508,
+              "arcHeight": 0.011,
+              "arcFillColor": "#63e600",
+              "arcTrackColor": "#4a3b74",
+              "arcRenderOrder": 2
+            }
+          }
+        }
+      },
+      "camera": {
+        "type": "PerspectiveCamera",
+        "props": {
+          "position": {
+            "x": 0,
+            "y": 5.819159353583025,
+            "z": 2.5315651581082905
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0.08,
+            "z": -0.52
+          },
+          "fov": 39,
+          "near": 0.05,
+          "far": 180
+        },
+        "components": {
+          "follow": {
+            "type": "HoleCamera",
+            "data": {
+              "portraitDistance": 7.2,
+              "landscapeDistance": 8,
+              "portraitFov": 39,
+              "landscapeFov": 32,
+              "pitchDegrees": 63,
+              "zoomSpeed": 6.8,
+              "growthZoomExponent": 0.46,
+              "lookAheadZ": -0.38,
+              "targetY": 0.06
+            }
+          }
+        }
+      },
+      "ambient": {
+        "type": "AmbientLight",
+        "props": {
+          "color": "#c8dbff",
+          "intensity": 0.9
+        }
+      },
+      "sun": {
+        "type": "DirectionalLight",
+        "props": {
+          "position": {
+            "x": -10,
+            "y": 16,
+            "z": 9
+          },
+          "target": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "color": "#fff4e5",
+          "intensity": 3.2,
+          "castShadow": true,
+          "shadowMapSize": 2048,
+          "shadowBounds": 14,
+          "shadowBias": -0.0001,
+          "shadowNormalBias": 0.008
+        }
+      },
+      "fill": {
+        "type": "DirectionalLight",
+        "props": {
+          "position": {
+            "x": 8,
+            "y": 9,
+            "z": -8
+          },
+          "target": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "color": "#bfd7ff",
+          "intensity": 0.4,
+          "castShadow": false
+        }
+      },
+      "juice": {
+        "type": "Group",
+        "components": {
+          "juice": {
+            "type": "HoleJuice",
+            "data": {
+              "particleCount": 72,
+              "pickupColor": "#b8eee0",
+              "winColor": "#f1cd75",
+              "lifetime": 0.55,
+              "pickupRadius": 0.018
+            }
+          }
+        }
+      },
+      "V5_L01_S_001": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_001"
+            }
+          }
+        }
+      },
+      "V5_L01_S_002": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_002"
+            }
+          }
+        }
+      },
+      "V5_L01_S_003": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_003"
+            }
+          }
+        }
+      },
+      "V5_L01_S_004": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_004"
+            }
+          }
+        }
+      },
+      "V5_L01_S_005": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_005"
+            }
+          }
+        }
+      },
+      "V5_L01_S_006": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_006"
+            }
+          }
+        }
+      },
+      "V5_L01_S_007": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_007"
+            }
+          }
+        }
+      },
+      "V5_L01_S_008": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_008"
+            }
+          }
+        }
+      },
+      "V5_L01_S_009": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_009"
+            }
+          }
+        }
+      },
+      "V5_L01_S_010": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_010"
+            }
+          }
+        }
+      },
+      "V5_L01_S_011": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_011"
+            }
+          }
+        }
+      },
+      "V5_L01_S_012": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_012"
+            }
+          }
+        }
+      },
+      "V5_L01_S_013": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_013"
+            }
+          }
+        }
+      },
+      "V5_L01_S_014": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_014"
+            }
+          }
+        }
+      },
+      "V5_L01_S_015": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_015"
+            }
+          }
+        }
+      },
+      "V5_L01_S_016": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_016"
+            }
+          }
+        }
+      },
+      "V5_L01_S_017": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_017"
+            }
+          }
+        }
+      },
+      "V5_L01_S_018": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_018"
+            }
+          }
+        }
+      },
+      "V5_L01_S_019": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_019"
+            }
+          }
+        }
+      },
+      "V5_L01_S_020": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_020"
+            }
+          }
+        }
+      },
+      "V5_L01_S_021": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_021"
+            }
+          }
+        }
+      },
+      "V5_L01_S_022": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_022"
+            }
+          }
+        }
+      },
+      "V5_L01_S_023": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_023"
+            }
+          }
+        }
+      },
+      "V5_L01_S_024": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_024"
+            }
+          }
+        }
+      },
+      "V5_L01_S_025": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_025"
+            }
+          }
+        }
+      },
+      "V5_L01_S_026": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_026"
+            }
+          }
+        }
+      },
+      "V5_L01_S_027": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_027"
+            }
+          }
+        }
+      },
+      "V5_L01_S_028": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_028"
+            }
+          }
+        }
+      },
+      "V5_L01_S_029": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_029"
+            }
+          }
+        }
+      },
+      "V5_L01_S_030": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_030"
+            }
+          }
+        }
+      },
+      "V5_L01_S_031": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_031"
+            }
+          }
+        }
+      },
+      "V5_L01_S_032": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_032"
+            }
+          }
+        }
+      },
+      "V5_L01_S_033": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_033"
+            }
+          }
+        }
+      },
+      "V5_L01_S_034": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_034"
+            }
+          }
+        }
+      },
+      "V5_L01_S_035": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_035"
+            }
+          }
+        }
+      },
+      "V5_L01_S_036": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_036"
+            }
+          }
+        }
+      },
+      "V5_L01_S_037": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_037"
+            }
+          }
+        }
+      },
+      "V5_L01_S_038": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_038"
+            }
+          }
+        }
+      },
+      "V5_L01_S_039": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_039"
+            }
+          }
+        }
+      },
+      "V5_L01_S_040": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_040"
+            }
+          }
+        }
+      },
+      "V5_L01_S_041": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_041"
+            }
+          }
+        }
+      },
+      "V5_L01_S_042": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_042"
+            }
+          }
+        }
+      },
+      "V5_L01_S_043": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_043"
+            }
+          }
+        }
+      },
+      "V5_L01_S_044": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_044"
+            }
+          }
+        }
+      },
+      "V5_L01_S_045": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_045"
+            }
+          }
+        }
+      },
+      "V5_L01_S_046": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_046"
+            }
+          }
+        }
+      },
+      "V5_L01_S_047": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_047"
+            }
+          }
+        }
+      },
+      "V5_L01_S_048": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/banana_slice.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_S_048"
+            }
+          }
+        }
+      },
+      "V5_L01_A_001": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_001"
+            }
+          }
+        }
+      },
+      "V5_L01_A_002": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_002"
+            }
+          }
+        }
+      },
+      "V5_L01_A_003": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_003"
+            }
+          }
+        }
+      },
+      "V5_L01_A_004": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_004"
+            }
+          }
+        }
+      },
+      "V5_L01_A_005": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_005"
+            }
+          }
+        }
+      },
+      "V5_L01_A_006": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_006"
+            }
+          }
+        }
+      },
+      "V5_L01_A_007": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_007"
+            }
+          }
+        }
+      },
+      "V5_L01_A_008": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_008"
+            }
+          }
+        }
+      },
+      "V5_L01_A_009": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_009"
+            }
+          }
+        }
+      },
+      "V5_L01_A_010": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_010"
+            }
+          }
+        }
+      },
+      "V5_L01_A_011": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_011"
+            }
+          }
+        }
+      },
+      "V5_L01_A_012": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_012"
+            }
+          }
+        }
+      },
+      "V5_L01_A_013": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_013"
+            }
+          }
+        }
+      },
+      "V5_L01_A_014": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_014"
+            }
+          }
+        }
+      },
+      "V5_L01_A_015": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_015"
+            }
+          }
+        }
+      },
+      "V5_L01_A_016": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_016"
+            }
+          }
+        }
+      },
+      "V5_L01_A_017": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_017"
+            }
+          }
+        }
+      },
+      "V5_L01_A_018": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_018"
+            }
+          }
+        }
+      },
+      "V5_L01_A_019": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_019"
+            }
+          }
+        }
+      },
+      "V5_L01_A_020": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_020"
+            }
+          }
+        }
+      },
+      "V5_L01_A_021": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_021"
+            }
+          }
+        }
+      },
+      "V5_L01_A_022": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_022"
+            }
+          }
+        }
+      },
+      "V5_L01_A_023": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_023"
+            }
+          }
+        }
+      },
+      "V5_L01_A_024": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_024"
+            }
+          }
+        }
+      },
+      "V5_L01_A_025": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_025"
+            }
+          }
+        }
+      },
+      "V5_L01_A_026": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_026"
+            }
+          }
+        }
+      },
+      "V5_L01_A_027": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_027"
+            }
+          }
+        }
+      },
+      "V5_L01_A_028": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_028"
+            }
+          }
+        }
+      },
+      "V5_L01_A_029": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_029"
+            }
+          }
+        }
+      },
+      "V5_L01_A_030": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_030"
+            }
+          }
+        }
+      },
+      "V5_L01_A_031": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_031"
+            }
+          }
+        }
+      },
+      "V5_L01_A_032": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/strawberry.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_A_032"
+            }
+          }
+        }
+      },
+      "V5_L01_B_001": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_001"
+            }
+          }
+        }
+      },
+      "V5_L01_B_002": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_002"
+            }
+          }
+        }
+      },
+      "V5_L01_B_003": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_003"
+            }
+          }
+        }
+      },
+      "V5_L01_B_004": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_004"
+            }
+          }
+        }
+      },
+      "V5_L01_B_005": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_005"
+            }
+          }
+        }
+      },
+      "V5_L01_B_006": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_006"
+            }
+          }
+        }
+      },
+      "V5_L01_B_007": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_007"
+            }
+          }
+        }
+      },
+      "V5_L01_B_008": {
+        "type": "Model",
+        "props": {
+          "asset": "models/hole/orange.glb",
+          "castShadow": true,
+          "receiveShadow": true
+        },
+        "components": {
+          "body": {
+            "type": "HoleRigidBody",
+            "data": {
+              "entityId": "V5_L01_B_008"
+            }
+          }
+        }
+      }
+    }
+  },
+  "ui": {
+    "$include": "json/layouts/ui/hole-ui.json"
+  }
+}

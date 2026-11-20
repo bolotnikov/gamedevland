@@ -1,0 +1,1862 @@
+{
+  "type": "Container",
+  "components": {
+    "hud": {
+      "type": "IslandHud",
+      "data": {
+        "margin": 14,
+        "goalGap": 7,
+        "goalWidth": 60,
+        "goalTop": 14,
+        "timerWidth": 126,
+        "pauseWidth": 50,
+        "progressWidth": 166,
+        "progressOffsetY": -14,
+        "progressFillWidth": 88,
+        "toolbarGap": 8,
+        "panelTextureScale": 0.5,
+        "sizeBadgeWidth": 100,
+        "modalWidth": 320,
+        "modalHeight": 330,
+        "flightDuration": 0.32,
+        "timerColor": 16775134,
+        "timerUrgentColor": 12867655,
+        "backdropColor": 3159636,
+        "backdropAlpha": 0.38,
+        "minViewportMargin": 12,
+        "compactHeight": 500,
+        "compactGoalScale": 1,
+        "compactGoalTop": 14,
+        "modalOffsetY": 24,
+        "normal": {
+          "width": 320,
+          "height": 330,
+          "titleX": 160,
+          "copyY": 163,
+          "primaryX": 46,
+          "primaryY": 193,
+          "settingsX": 35,
+          "settingsY": 278,
+          "settingsStep": 64
+        },
+        "paused": {
+          "width": 360,
+          "height": 246,
+          "titleX": 180,
+          "copyY": 84,
+          "primaryX": 56,
+          "primaryY": 206,
+          "settingsX": 30,
+          "settingsY": 76,
+          "settingsStep": 67
+        },
+        "compact": {
+          "width": 360,
+          "height": 246,
+          "titleX": 180,
+          "copyY": 84,
+          "primaryX": 50,
+          "primaryY": 130,
+          "settingsX": 30,
+          "settingsY": 76,
+          "settingsStep": 67
+        },
+        "sizeProgressWidth": 108,
+        "timerFillWidth": 104,
+        "boosterWidth": 54,
+        "boosterGap": 20,
+        "boosterBottom": 11,
+        "modalInsetMargin": 18,
+        "modalInsetTop": 67,
+        "headingWidth": 252,
+        "closeWidth": 52,
+        "starWidth": 70,
+        "starGap": 12,
+        "starTop": 96,
+        "toggleOnAsset": "images/ui/settings-toggle-on.webp",
+        "toggleOffAsset": "images/ui/settings-toggle-off.webp",
+        "pickupDuration": 0.75,
+        "pickupRise": 24,
+        "pickupCapacity": 5,
+        "responsive": {
+          "desktopMinWidth": 900,
+          "desktopReferenceHeight": 600,
+          "desktopMinScale": 1.25,
+          "desktopMaxScale": 2,
+          "landscapeScale": 1.15,
+          "boosterScale": 1.22
+        },
+        "goalRowStep": 88,
+        "pickupColumnGap": 72,
+        "pickupRowGap": 40,
+        "pickupColumns": 5,
+        "settingsCloseY": 8,
+        "victory": {
+          "width": 360,
+          "height": 320,
+          "titleX": 180,
+          "copyY": 194,
+          "primaryX": 66,
+          "primaryY": 230,
+          "settingsX": 30,
+          "settingsY": 76,
+          "settingsStep": 67
+        },
+        "backdropFadeDuration": 0.24,
+        "starCenterLift": 8
+      }
+    }
+  },
+  "children": {
+    "celebration": {
+      "$include": "json/prefabs/ui/celebration-fireworks.json"
+    },
+    "progress": {
+      "type": "Container",
+      "children": {
+        "skin": {
+          "type": "NineSliceSprite",
+          "props": {
+            "asset": "images/ui/progress-frame.webp",
+            "x": 0,
+            "y": 0,
+            "width": 332.0,
+            "height": 143.0,
+            "scale": 0.5,
+            "anchor": 0,
+            "leftWidth": 154,
+            "rightWidth": 56,
+            "topHeight": 52,
+            "bottomHeight": 64
+          }
+        },
+        "fill": {
+          "type": "NineSliceSprite",
+          "props": {
+            "asset": "images/ui/button-green.webp",
+            "x": 67,
+            "y": 18,
+            "width": 176.0,
+            "height": 56.0,
+            "scale": 0.5,
+            "anchor": 0,
+            "leftWidth": 72,
+            "rightWidth": 72,
+            "topHeight": 46,
+            "bottomHeight": 54
+          }
+        },
+        "level": {
+          "type": "Text",
+          "props": {
+            "text": "24",
+            "x": 33,
+            "y": 33,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 30,
+              "fill": 16777215,
+              "stroke": {
+                "color": 4864884,
+                "width": 3,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "value": {
+          "type": "Text",
+          "props": {
+            "text": "0 / 13",
+            "x": 111,
+            "y": 31,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 20,
+              "fill": 16777215,
+              "stroke": {
+                "color": 4864884,
+                "width": 3,
+                "join": "round"
+              }
+            }
+          }
+        }
+      },
+      "props": {
+        "visible": false
+      }
+    },
+    "timer": {
+      "type": "Container",
+      "children": {
+        "skin": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-09-timer-frame.webp",
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 50.53125,
+            "anchor": 0,
+            "visible": true
+          }
+        },
+        "icon": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-10-hourglass.webp",
+            "x": 25,
+            "y": 20,
+            "width": 16.03125,
+            "height": 27,
+            "anchor": 0.5,
+            "visible": true
+          }
+        },
+        "value": {
+          "type": "Text",
+          "props": {
+            "text": "03:45",
+            "x": 80,
+            "y": 20,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 28,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 3,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "fill": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-12-progress-fill.webp",
+            "x": 11,
+            "y": 37,
+            "width": 104,
+            "height": 5,
+            "anchor": 0,
+            "visible": true,
+            "zIndex": 2
+          }
+        }
+      }
+    },
+    "pause": {
+      "type": "Container",
+      "children": {
+        "control": {
+          "$include": "json/prefabs/ui/settings-button.json"
+        }
+      }
+    },
+    "goals": {
+      "type": "Container",
+      "children": {
+        "card0": {
+          "props": {
+            "x": 0,
+            "y": 0
+          },
+          "children": {
+            "skin": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-01-goal-card.webp",
+                "x": 0,
+                "y": 0,
+                "width": 60,
+                "height": 81,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "back": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-02-goal-card-back.webp",
+                "x": 0,
+                "y": 0,
+                "width": 60,
+                "height": 81,
+                "anchor": 0,
+                "visible": false
+              }
+            },
+            "icon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/hole-islands/icon-coconut_drink.webp",
+                "x": 30,
+                "y": 28,
+                "width": 44,
+                "height": 44,
+                "anchor": 0.5,
+                "visible": true
+              },
+              "components": {
+                "fruit": {
+                  "type": "IslandFruit",
+                  "data": {
+                    "kind": "coconut_drink",
+                    "size": 44
+                  }
+                }
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "text": "12",
+                "x": 30,
+                "y": 65,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 24,
+                  "fill": 16775134,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 3,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "check": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-19-checkmark.webp",
+                "x": 30,
+                "y": 65,
+                "width": 26,
+                "height": 26,
+                "anchor": 0.5,
+                "visible": false
+              }
+            }
+          },
+          "type": "Container",
+          "components": {
+            "goal": {
+              "type": "IslandGoal",
+              "data": {
+                "activeColor": 16775134,
+                "completeColor": 6809143,
+                "pulseDuration": 0.18,
+                "pulseAmount": 0.06,
+                "completeHold": 0.14,
+                "completePop": 0.12,
+                "completeScale": 1.12,
+                "completeSettle": 0.14,
+                "collapseDuration": 0.24,
+                "collapseScale": 0.02,
+                "reflowDuration": 0.24,
+                "pivotX": 30,
+                "pivotY": 40.5,
+                "pulseEase": "power2.out",
+                "settleEase": "power2.inOut",
+                "collapseEase": "power2.in",
+                "reflowEase": "power2.out"
+              }
+            }
+          }
+        },
+        "card1": {
+          "props": {
+            "x": 67,
+            "y": 0
+          },
+          "children": {
+            "skin": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-01-goal-card.webp",
+                "x": 0,
+                "y": 0,
+                "width": 60,
+                "height": 81,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "back": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-02-goal-card-back.webp",
+                "x": 0,
+                "y": 0,
+                "width": 60,
+                "height": 81,
+                "anchor": 0,
+                "visible": false
+              }
+            },
+            "icon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/hole-islands/icon-fruit_bowl.webp",
+                "x": 30,
+                "y": 28,
+                "width": 44,
+                "height": 44,
+                "anchor": 0.5,
+                "visible": true
+              },
+              "components": {
+                "fruit": {
+                  "type": "IslandFruit",
+                  "data": {
+                    "kind": "fruit_bowl",
+                    "size": 44
+                  }
+                }
+              }
+            },
+            "count": {
+              "type": "Text",
+              "props": {
+                "text": "1",
+                "x": 30,
+                "y": 65,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 24,
+                  "fill": 16775134,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 3,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "check": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-19-checkmark.webp",
+                "x": 30,
+                "y": 65,
+                "width": 26,
+                "height": 26,
+                "anchor": 0.5,
+                "visible": false
+              }
+            }
+          },
+          "type": "Container",
+          "components": {
+            "goal": {
+              "type": "IslandGoal",
+              "data": {
+                "activeColor": 16775134,
+                "completeColor": 6809143,
+                "pulseDuration": 0.18,
+                "pulseAmount": 0.06,
+                "completeHold": 0.14,
+                "completePop": 0.12,
+                "completeScale": 1.12,
+                "completeSettle": 0.14,
+                "collapseDuration": 0.24,
+                "collapseScale": 0.02,
+                "reflowDuration": 0.24,
+                "pivotX": 30,
+                "pivotY": 40.5,
+                "pulseEase": "power2.out",
+                "settleEase": "power2.inOut",
+                "collapseEase": "power2.in",
+                "reflowEase": "power2.out"
+              }
+            }
+          }
+        }
+      }
+    },
+    "size": {
+      "type": "Container",
+      "children": {
+        "value": {
+          "type": "Text",
+          "props": {
+            "text": "Size 1",
+            "x": 50,
+            "y": 10,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 20,
+              "fill": 16765515,
+              "stroke": {
+                "color": 4864884,
+                "width": 3,
+                "join": "round"
+              }
+            }
+          }
+        }
+      }
+    },
+    "toast": {
+      "type": "Text",
+      "props": {
+        "text": "NEW SIZE!",
+        "x": 270,
+        "y": 240,
+        "anchor": 0.5,
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 44,
+          "fill": 16777215,
+          "stroke": {
+            "color": 4864884,
+            "width": 5,
+            "join": "round"
+          }
+        }
+      }
+    },
+    "effects": {
+      "type": "Container",
+      "children": {
+        "f0": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f1": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f2": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f3": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f4": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f5": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f6": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f7": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f8": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f9": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f10": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f11": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f12": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f13": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f14": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f15": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f16": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f17": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f18": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f19": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f20": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f21": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f22": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        },
+        "f23": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-03-fruit-banana-slice.webp",
+            "x": 0,
+            "y": 0,
+            "width": 31.5,
+            "height": 36.0,
+            "anchor": 0.5,
+            "visible": false
+          },
+          "components": {
+            "fruit": {
+              "type": "IslandFruit",
+              "data": {
+                "kind": "banana_slice",
+                "size": 36
+              }
+            }
+          }
+        }
+      }
+    },
+    "joystick": {
+      "type": "Container",
+      "components": {
+        "joystick": {
+          "type": "IslandJoystick",
+          "data": {
+            "radius": 54,
+            "knobRadius": 24,
+            "baseAlpha": 0.85,
+            "knobAlpha": 0.8
+          }
+        }
+      },
+      "children": {
+        "base": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-31-joystick-ring.webp",
+            "x": 0,
+            "y": 0,
+            "width": 108,
+            "height": 108,
+            "anchor": 0.5,
+            "visible": true
+          }
+        },
+        "knob": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-32-joystick-thumb.webp",
+            "x": 0,
+            "y": 0,
+            "width": 48,
+            "height": 48,
+            "anchor": 0.5,
+            "visible": true
+          }
+        }
+      }
+    },
+    "fps": {
+      "type": "Text",
+      "props": {
+        "text": "FPS —",
+        "x": 500,
+        "y": 930,
+        "anchor": {
+          "x": 1,
+          "y": 1
+        },
+        "style": {
+          "fontFamily": "Rubik",
+          "fontWeight": "700",
+          "fontSize": 18,
+          "fill": 16777215,
+          "stroke": {
+            "color": 4864884,
+            "width": 3,
+            "join": "round"
+          }
+        },
+        "visible": false
+      },
+      "components": {
+        "fps": {
+          "type": "IslandFps",
+          "data": {
+            "sampleSeconds": 0.5
+          }
+        }
+      }
+    },
+    "lockedBonuses": {
+      "type": "Container",
+      "children": {
+        "slot0": {
+          "type": "Container",
+          "props": {
+            "x": 0,
+            "y": 0
+          },
+          "children": {
+            "ring": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-22-booster-base.webp",
+                "x": 0,
+                "y": 0,
+                "width": 54,
+                "height": 54,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "lock": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-25-booster-bigger-hole.webp",
+                "x": 8,
+                "y": 6,
+                "width": 38,
+                "height": 38,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "3",
+                "x": 27,
+                "y": 50,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 14,
+                  "fill": 16775134,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 3,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "adBadge": {
+              "$include": "json/prefabs/ui/booster-ad-badge.json"
+            }
+          },
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "HOLE_BOOST",
+                "intentData": {
+                  "kind": "bigger-hole"
+                },
+                "pressScale": 0.975
+              }
+            }
+          }
+        },
+        "slot1": {
+          "type": "Container",
+          "props": {
+            "x": 74,
+            "y": 0
+          },
+          "children": {
+            "ring": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-22-booster-base.webp",
+                "x": 0,
+                "y": 0,
+                "width": 54,
+                "height": 54,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "lock": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-26-booster-magnet.webp",
+                "x": 8,
+                "y": 6,
+                "width": 38,
+                "height": 38,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "3",
+                "x": 27,
+                "y": 50,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 14,
+                  "fill": 16775134,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 3,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "adBadge": {
+              "$include": "json/prefabs/ui/booster-ad-badge.json"
+            }
+          },
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "HOLE_BOOST",
+                "intentData": {
+                  "kind": "magnet"
+                },
+                "pressScale": 0.975
+              }
+            }
+          }
+        },
+        "slot2": {
+          "type": "Container",
+          "props": {
+            "x": 148,
+            "y": 0
+          },
+          "children": {
+            "ring": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-22-booster-base.webp",
+                "x": 0,
+                "y": 0,
+                "width": 54,
+                "height": 54,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "lock": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-27-booster-compass.webp",
+                "x": 8,
+                "y": 6,
+                "width": 38,
+                "height": 38,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "3",
+                "x": 27,
+                "y": 50,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 14,
+                  "fill": 16775134,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 3,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "adBadge": {
+              "$include": "json/prefabs/ui/booster-ad-badge.json"
+            }
+          },
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "HOLE_BOOST",
+                "intentData": {
+                  "kind": "goal-finder"
+                },
+                "pressScale": 0.975
+              }
+            }
+          }
+        },
+        "slot3": {
+          "type": "Container",
+          "props": {
+            "x": 222,
+            "y": 0
+          },
+          "children": {
+            "ring": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-22-booster-base.webp",
+                "x": 0,
+                "y": 0,
+                "width": 54,
+                "height": 54,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "lock": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-28-booster-freeze.webp",
+                "x": 8,
+                "y": 6,
+                "width": 38,
+                "height": 38,
+                "anchor": 0,
+                "visible": true
+              }
+            },
+            "label": {
+              "type": "Text",
+              "props": {
+                "text": "3",
+                "x": 27,
+                "y": 50,
+                "anchor": 0.5,
+                "style": {
+                  "fontFamily": "Rubik",
+                  "fontWeight": "700",
+                  "fontSize": 14,
+                  "fill": 16775134,
+                  "stroke": {
+                    "color": 4864884,
+                    "width": 3,
+                    "join": "round"
+                  }
+                }
+              }
+            },
+            "adBadge": {
+              "$include": "json/prefabs/ui/booster-ad-badge.json"
+            }
+          },
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "HOLE_BOOST",
+                "intentData": {
+                  "kind": "time-freeze"
+                },
+                "pressScale": 0.975
+              }
+            }
+          }
+        }
+      }
+    },
+    "pickupValues": {
+      "type": "Container",
+      "children": {
+        "p0": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p1": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p2": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p3": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p4": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p5": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p6": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p7": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p8": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p9": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p10": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "p11": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": 0,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 34,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 4,
+                "join": "round"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tutorial": {
+      "$include": "json/prefabs/ui/tutorial.json"
+    },
+    "backdrop": {
+      "type": "Sprite",
+      "props": {
+        "asset": "images/ui/dimmer.png",
+        "anchor": 0,
+        "visible": false
+      }
+    },
+    "modal": {
+      "type": "Container",
+      "children": {
+        "victorySkin": {
+          "$include": "json/prefabs/ui/victory-window-skin.json"
+        },
+        "settingsSkin": {
+          "$include": "json/prefabs/ui/settings-window-skin.json"
+        },
+        "skin": {
+          "type": "NineSliceSprite",
+          "props": {
+            "asset": "images/ui/generated-38-modal-panel.webp",
+            "x": 0,
+            "y": 0,
+            "width": 640,
+            "height": 660,
+            "scale": 0.5,
+            "anchor": 0,
+            "leftWidth": 80,
+            "rightWidth": 80,
+            "topHeight": 80,
+            "bottomHeight": 96
+          }
+        },
+        "inset": {
+          "type": "NineSliceSprite",
+          "props": {
+            "asset": "images/ui/generated-39-cream-inset.webp",
+            "x": 18,
+            "y": 67,
+            "width": 568,
+            "height": 290,
+            "scale": 0.5,
+            "anchor": 0,
+            "leftWidth": 80,
+            "rightWidth": 80,
+            "topHeight": 80,
+            "bottomHeight": 96
+          }
+        },
+        "heading": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ui/generated-16-button-secondary.webp",
+            "x": 34,
+            "y": 9,
+            "width": 252,
+            "height": 54,
+            "anchor": 0,
+            "visible": true
+          }
+        },
+        "title": {
+          "type": "Text",
+          "props": {
+            "text": "Settings",
+            "x": 160,
+            "y": 34,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 28,
+              "fill": 16775134,
+              "stroke": {
+                "color": 4864884,
+                "width": 3,
+                "join": "round"
+              }
+            }
+          }
+        },
+        "copy": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 160,
+            "y": 163,
+            "anchor": 0.5,
+            "style": {
+              "fontFamily": "Rubik",
+              "fontWeight": "700",
+              "fontSize": 22,
+              "fill": 3159636
+            },
+            "visible": false
+          }
+        },
+        "stars": {
+          "type": "Container",
+          "props": {
+            "visible": false
+          },
+          "children": {
+            "star0": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-57-star-empty.webp",
+                "x": 0,
+                "y": 0,
+                "width": 70,
+                "height": 70,
+                "anchor": 0.5,
+                "visible": true
+              }
+            },
+            "star1": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-57-star-empty.webp",
+                "x": 0,
+                "y": 0,
+                "width": 70,
+                "height": 70,
+                "anchor": 0.5,
+                "visible": true
+              }
+            },
+            "star2": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ui/generated-57-star-empty.webp",
+                "x": 0,
+                "y": 0,
+                "width": 70,
+                "height": 70,
+                "anchor": 0.5,
+                "visible": true
+              }
+            }
+          }
+        },
+        "primary": {
+          "$include": "json/prefabs/ui/action-button.json",
+          "props": {
+            "x": 36,
+            "y": 177
+          }
+        },
+        "music": {
+          "$include": "json/prefabs/ui/settings-toggle-row.json",
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "UI_music",
+                "pressScale": 1,
+                "animateScale": false,
+                "hitArea": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 300,
+                  "height": 58
+                }
+              }
+            }
+          }
+        },
+        "sound": {
+          "$include": "json/prefabs/ui/settings-toggle-row.json",
+          "components": {
+            "button": {
+              "type": "IslandButton",
+              "data": {
+                "intent": "UI_sound",
+                "pressScale": 1,
+                "animateScale": false,
+                "hitArea": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 300,
+                  "height": 58
+                }
+              }
+            }
+          }
+        },
+        "close": {
+          "$include": "json/prefabs/ui/settings-close-button.json"
+        }
+      },
+      "props": {
+        "visible": false
+      },
+      "components": {
+        "motion": {
+          "type": "IslandModalMotion",
+          "data": {
+            "duration": 0.42,
+            "startScale": 0.78,
+            "rise": 14,
+            "ease": "back.out(1.35)",
+            "fadeDuration": 0.16,
+            "fadeEase": "power1.out",
+            "starDelay": 0.1,
+            "starStep": 0.23,
+            "starAttack": 0.13,
+            "starSettle": 0.32,
+            "starScale": 1.4,
+            "starTilt": 0.14,
+            "starEase": "back.out(1.6)",
+            "starAttackEase": "power2.out",
+            "starWidth": 70,
+            "emptyAsset": "images/ui/generated-57-star-empty.webp",
+            "goldAsset": "images/ui/generated-58-star-gold.webp"
+          }
+        }
+      }
+    },
+    "boosterRefill": {
+      "$include": "json/prefabs/ui/booster-refill.json"
+    }
+  }
+}

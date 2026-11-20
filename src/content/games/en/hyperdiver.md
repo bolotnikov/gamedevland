@@ -23,7 +23,7 @@ roles:
   - Game design and UI
 iconImage: /assets/games/hyperdiver/icon.png
 iconAlt: Hyperdiver icon with a spaceship flying through purple lightning
-playableUrl: https://gamedevland.github.io/hyperdiver/
+playableUrl: https://gamedev.land/play/hyperdiver/
 orientation: portrait
 embedAspectRatio: 3 / 4
 fitEmbedToViewport: true

@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+canvas {
+    margin: 0 auto;
+}
+@font-face {
+    font-family: 'space';
+    src: url('../fonts/nasalization-rg.ttf');
+}
+
+.fontPreload {
+    font-family: space;
+    position:absolute;
+    left:-100px;
+}

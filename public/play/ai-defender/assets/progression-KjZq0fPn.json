@@ -1,0 +1,374 @@
+{
+  "waveBands": [
+    {
+      "through": 1,
+      "waves": 4
+    },
+    {
+      "through": 2,
+      "waves": 5
+    },
+    {
+      "through": 3,
+      "waves": 6
+    },
+    {
+      "through": 4,
+      "waves": 7
+    },
+    {
+      "through": 5,
+      "waves": 8
+    },
+    {
+      "through": 6,
+      "waves": 9
+    },
+    {
+      "through": 10,
+      "waves": 10
+    },
+    {
+      "through": 15,
+      "waves": 11
+    },
+    {
+      "through": 22,
+      "waves": 12
+    },
+    {
+      "through": 30,
+      "waves": 13
+    },
+    {
+      "through": 40,
+      "waves": 14
+    },
+    {
+      "through": 53,
+      "waves": 15
+    }
+  ],
+  "rewardedFromBattle": 3,
+  "softwareAt": 2,
+  "modulesAt": 6,
+  "questsAt": 4,
+  "boostsAt": 5,
+  "lastChipBattle": 52,
+  "moduleCost": 2,
+  "componentCredits": 100,
+  "agentPrices": [
+    120,
+    190,
+    300,
+    450,
+    650,
+    850
+  ],
+  "firstCredits": 180,
+  "creditStep": 25,
+  "waveCreditStep": 5,
+  "retryFraction": 0.4,
+  "defeatFraction": 0.45,
+  "trainingWaves": [
+    2,
+    3
+  ],
+  "agents": [
+    {
+      "id": "sentinel",
+      "name": "agent.sentinel.name",
+      "role": "agent.sentinel.role",
+      "modules": [
+        {
+          "name": "module.sentinel.0.name",
+          "detail": "module.sentinel.0.detail",
+          "effect": "pierce",
+          "value": 1
+        },
+        {
+          "name": "module.sentinel.1.name",
+          "detail": "module.sentinel.1.detail",
+          "effect": "period",
+          "value": 0.08
+        }
+      ]
+    },
+    {
+      "id": "scanner",
+      "name": "agent.scanner.name",
+      "role": "agent.scanner.role",
+      "modules": [
+        {
+          "name": "module.scanner.0.name",
+          "detail": "module.scanner.0.detail",
+          "effect": "damage",
+          "value": 0.12
+        },
+        {
+          "name": "module.scanner.1.name",
+          "detail": "module.scanner.1.detail",
+          "effect": "beamTime",
+          "value": 0.2
+        }
+      ]
+    },
+    {
+      "id": "quarantine",
+      "name": "agent.quarantine.name",
+      "role": "agent.quarantine.role",
+      "modules": [
+        {
+          "name": "module.quarantine.0.name",
+          "detail": "module.quarantine.0.detail",
+          "effect": "slowTime",
+          "value": 0.4
+        },
+        {
+          "name": "module.quarantine.1.name",
+          "detail": "module.quarantine.1.detail",
+          "effect": "period",
+          "value": 0.08
+        }
+      ]
+    },
+    {
+      "id": "arc",
+      "name": "agent.arc.name",
+      "role": "agent.arc.role",
+      "modules": [
+        {
+          "name": "module.arc.0.name",
+          "detail": "module.arc.0.detail",
+          "effect": "chains",
+          "value": 1
+        },
+        {
+          "name": "module.arc.1.name",
+          "detail": "module.arc.1.detail",
+          "effect": "damage",
+          "value": 0.12
+        }
+      ]
+    },
+    {
+      "id": "pulse",
+      "name": "agent.pulse.name",
+      "role": "agent.pulse.role",
+      "modules": [
+        {
+          "name": "module.pulse.0.name",
+          "detail": "module.pulse.0.detail",
+          "effect": "pulseRadius",
+          "value": 0.12
+        },
+        {
+          "name": "module.pulse.1.name",
+          "detail": "module.pulse.1.detail",
+          "effect": "push",
+          "value": 0.2
+        }
+      ]
+    },
+    {
+      "id": "blaze",
+      "name": "agent.blaze.name",
+      "role": "agent.blaze.role",
+      "modules": [
+        {
+          "name": "module.blaze.0.name",
+          "detail": "module.blaze.0.detail",
+          "effect": "burnRadius",
+          "value": 0.12
+        },
+        {
+          "name": "module.blaze.1.name",
+          "detail": "module.blaze.1.detail",
+          "effect": "burnTime",
+          "value": 0.5
+        }
+      ]
+    },
+    {
+      "id": "scatter",
+      "name": "agent.scatter.name",
+      "role": "agent.scatter.role",
+      "modules": [
+        {
+          "name": "module.scatter.0.name",
+          "detail": "module.scatter.0.detail",
+          "effect": "damage",
+          "value": 0.12
+        },
+        {
+          "name": "module.scatter.1.name",
+          "detail": "module.scatter.1.detail",
+          "effect": "range",
+          "value": 0.15
+        }
+      ]
+    },
+    {
+      "id": "toxin",
+      "name": "agent.toxin.name",
+      "role": "agent.toxin.role",
+      "modules": [
+        {
+          "name": "module.toxin.0.name",
+          "detail": "module.toxin.0.detail",
+          "effect": "poisonTime",
+          "value": 0.5
+        },
+        {
+          "name": "module.toxin.1.name",
+          "detail": "module.toxin.1.detail",
+          "effect": "poisonDamage",
+          "value": 0.15
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "attack",
+      "branch": 0,
+      "name": "research.attack.name",
+      "detail": "research.attack.detail",
+      "icon": "bolt",
+      "value": 0.03,
+      "costs": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "cooldown",
+      "branch": 0,
+      "name": "research.cooldown.name",
+      "detail": "research.cooldown.detail",
+      "icon": "speed",
+      "value": 0.03,
+      "costs": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "crit",
+      "branch": 0,
+      "name": "research.crit.name",
+      "detail": "research.crit.detail",
+      "icon": "target",
+      "value": 0.03,
+      "costs": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "critical",
+      "branch": 0,
+      "name": "research.critical.name",
+      "detail": "research.critical.detail",
+      "icon": "burst",
+      "value": 0.15,
+      "costs": [
+        4
+      ]
+    },
+    {
+      "id": "core",
+      "branch": 1,
+      "name": "research.core.name",
+      "detail": "research.core.detail",
+      "icon": "battle",
+      "value": 50,
+      "costs": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "regen",
+      "branch": 1,
+      "name": "research.regen.name",
+      "detail": "research.regen.detail",
+      "icon": "repair",
+      "value": 0.5,
+      "costs": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "reserve",
+      "branch": 1,
+      "name": "research.reserve.name",
+      "detail": "research.reserve.detail",
+      "icon": "chip",
+      "value": 25,
+      "costs": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "emergency",
+      "branch": 1,
+      "name": "research.emergency.name",
+      "detail": "research.emergency.detail",
+      "icon": "heart",
+      "value": 0.15,
+      "costs": [
+        4
+      ]
+    },
+    {
+      "id": "xp",
+      "branch": 2,
+      "name": "research.xp.name",
+      "detail": "research.xp.detail",
+      "icon": "scan",
+      "value": 0.04,
+      "costs": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "slowed",
+      "branch": 2,
+      "name": "research.slowed.name",
+      "detail": "research.slowed.detail",
+      "icon": "snow",
+      "value": 0.05,
+      "costs": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "boss",
+      "branch": 2,
+      "name": "research.boss.name",
+      "detail": "research.boss.detail",
+      "icon": "boss",
+      "value": 0.05,
+      "costs": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "priority",
+      "branch": 2,
+      "name": "research.priority.name",
+      "detail": "research.priority.detail",
+      "icon": "flag",
+      "value": 0.12,
+      "costs": [
+        4
+      ]
+    }
+  ]
+}

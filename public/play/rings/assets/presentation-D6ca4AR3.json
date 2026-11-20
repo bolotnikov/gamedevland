@@ -1,0 +1,48 @@
+{
+  "board": {
+    "portraitTop": 160,
+    "portraitBottom": 145,
+    "landscapeTop": 120,
+    "landscapeBottom": 120,
+    "margin": 36
+  },
+  "panel": {
+    "width": 500,
+    "height": 740,
+    "compactHeight": 400,
+    "margin": 24
+  },
+  "palette": [
+    15833686,
+    16176545,
+    13198146,
+    8894913,
+    13938040,
+    15253422,
+    8102844,
+    16103533,
+    11909309
+  ],
+  "header": {
+    "portraitY": 52,
+    "landscapeY": 36
+  },
+  "footer": {
+    "portraitY": 84,
+    "landscapeY": 65
+  },
+  "controls": {
+    "left": 100,
+    "portraitTop": 52,
+    "landscapeTop": 36,
+    "hintOffset": 88,
+    "timerOffset": 49,
+    "settingsRight": 44,
+    "boosterGap": 120
+  },
+  "timing": {
+    "settleSeconds": 1.02,
+    "alignmentSeconds": 0.22,
+    "exitSeconds": 0.14
+  }
+}

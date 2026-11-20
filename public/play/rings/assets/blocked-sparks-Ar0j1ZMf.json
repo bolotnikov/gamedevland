@@ -1,0 +1,115 @@
+{
+  "lifetime": {
+    "min": 0.12,
+    "max": 0.3
+  },
+  "frequency": 1,
+  "particlesPerWave": 10,
+  "maxParticles": 10,
+  "spawnChance": 1,
+  "pos": {
+    "x": 0,
+    "y": 0
+  },
+  "addAtBack": false,
+  "behaviors": [
+    {
+      "type": "textureSingle",
+      "config": {
+        "texture": "images/effects/sparkle.webp"
+      }
+    },
+    {
+      "type": "alpha",
+      "config": {
+        "alpha": {
+          "list": [
+            {
+              "time": 0,
+              "value": 1
+            },
+            {
+              "time": 0.15,
+              "value": 1
+            },
+            {
+              "time": 1,
+              "value": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "color",
+      "config": {
+        "color": {
+          "list": [
+            {
+              "time": 0,
+              "value": "fffbd0"
+            },
+            {
+              "time": 1,
+              "value": "ffc23e"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "scale",
+      "config": {
+        "scale": {
+          "list": [
+            {
+              "time": 0,
+              "value": 0.004
+            },
+            {
+              "time": 1,
+              "value": 0.0002
+            }
+          ]
+        },
+        "minMult": 0.6
+      }
+    },
+    {
+      "type": "moveSpeed",
+      "config": {
+        "speed": {
+          "list": [
+            {
+              "time": 0,
+              "value": 3
+            },
+            {
+              "time": 1,
+              "value": 0.2
+            }
+          ]
+        },
+        "minMult": 0.6
+      }
+    },
+    {
+      "type": "rotationStatic",
+      "config": {
+        "min": 0,
+        "max": 360
+      }
+    },
+    {
+      "type": "spawnShape",
+      "config": {
+        "type": "circle",
+        "data": {
+          "x": 0,
+          "y": 0,
+          "radius": 0.045
+        }
+      }
+    }
+  ]
+}

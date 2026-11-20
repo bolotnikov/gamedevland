@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+    <meta name="theme-color" content="#40b3f4"/>
+    <link rel="icon" href="data:,"/>
+    <link rel="preload" as="image" href="./assets/lagoon-water-v1-oofoIqrx.webp"/>
+    <link rel="preload" as="image" href="./assets/island-hero-v1-BHibDn1E.webp"/>
+    <link rel="preload" as="image" href="./assets/hole-islands-logo-v2-C2MUU71H.webp"/>
+    <link rel="preload" as="font" type="font/woff2" href="./assets/Rubik-Bold-knwvmnvi.woff2" crossorigin/>
+    <title>Hole Islands</title>
+    <script type="module" crossorigin src="./assets/index-9KzE9MhX.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DclECHGd.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-Dwnjz691.css">
+  </head>
+  <body>
+    <main id="app" aria-label="Hole Islands" inert></main>
+    <div id="loading" data-phase="boot" aria-label="Island loading">
+      <div class="loading-ocean" aria-hidden="true">
+        <div class="loading-water">
+          <img id="loading-water-texture" src="./assets/lagoon-water-v1-oofoIqrx.webp" alt="" hidden/>
+          <canvas id="loading-water"></canvas>
+        </div>
+        <div class="loading-artwork">
+          <img class="loading-logo" src="./assets/hole-islands-logo-v2-C2MUU71H.webp" alt="" fetchpriority="high"/>
+          <img class="loading-island" src="./assets/island-hero-v1-BHibDn1E.webp" alt="" fetchpriority="high"/>
+        </div>
+      </div>
+      <div class="loading-cloud loading-cloud-left" aria-hidden="true"><div class="loading-cloud-art"></div></div>
+      <div class="loading-cloud loading-cloud-right" aria-hidden="true"><div class="loading-cloud-art"></div></div>
+      <div class="loading-status">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <span id="loading-label" class="loading-copy" role="status" aria-live="polite">Slicing bananas…</span>
+        <button id="loading-start" class="loading-copy" type="button" hidden>Tap to Play</button>
+        <button id="loading-retry" class="loading-copy" type="button" hidden>Try again</button>
+      </div>
+    </div>
+  </body>
+</html>

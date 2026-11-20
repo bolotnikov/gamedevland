@@ -25,7 +25,7 @@ roles:
   - Геймдизайн и интерфейс
 iconImage: /assets/games/slide-merge/icon.webp
 iconAlt: 'Прототип Cakes Slide Merge: два небольших торта объединяются в большой украшенный торт'
-playableUrl: https://gamedevland.github.io/cakes-merge/
+playableUrl: https://gamedev.land/play/cakes-merge/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 7

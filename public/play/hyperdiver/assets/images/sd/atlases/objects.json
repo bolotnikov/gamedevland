@@ -1,0 +1,156 @@
+{"frames": [
+
+{
+	"filename": "asteroid_01",
+	"frame": {"x":0,"y":0,"w":108,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":108,"h":110},
+	"sourceSize": {"w":108,"h":110}
+},
+{
+	"filename": "asteroid_02",
+	"frame": {"x":108,"y":0,"w":40,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":59},
+	"sourceSize": {"w":40,"h":59}
+},
+{
+	"filename": "asteroid_03",
+	"frame": {"x":148,"y":0,"w":99,"h":138},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":99,"h":138},
+	"sourceSize": {"w":99,"h":138}
+},
+{
+	"filename": "asteroid_04",
+	"frame": {"x":247,"y":0,"w":71,"h":82},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":82},
+	"sourceSize": {"w":71,"h":82}
+},
+{
+	"filename": "asteroid_05",
+	"frame": {"x":318,"y":0,"w":21,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":28},
+	"sourceSize": {"w":21,"h":28}
+},
+{
+	"filename": "asteroid_06",
+	"frame": {"x":339,"y":0,"w":49,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":49,"h":57},
+	"sourceSize": {"w":49,"h":57}
+},
+{
+	"filename": "asteroid_07",
+	"frame": {"x":388,"y":0,"w":30,"h":33},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":33},
+	"sourceSize": {"w":30,"h":33}
+},
+{
+	"filename": "comet_01",
+	"frame": {"x":418,"y":0,"w":203,"h":531},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":203,"h":531},
+	"sourceSize": {"w":203,"h":531}
+},
+{
+	"filename": "comet_02",
+	"frame": {"x":621,"y":0,"w":55,"h":290},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":290},
+	"sourceSize": {"w":55,"h":290}
+},
+{
+	"filename": "comet_03",
+	"frame": {"x":676,"y":0,"w":59,"h":226},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":226},
+	"sourceSize": {"w":59,"h":226}
+},
+{
+	"filename": "hole",
+	"frame": {"x":0,"y":531,"w":344,"h":347},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":344,"h":347},
+	"sourceSize": {"w":344,"h":347}
+},
+{
+	"filename": "planet_01",
+	"frame": {"x":344,"y":531,"w":323,"h":323},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":323,"h":323},
+	"sourceSize": {"w":323,"h":323}
+},
+{
+	"filename": "planet_02",
+	"frame": {"x":0,"y":878,"w":378,"h":204},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":378,"h":204},
+	"sourceSize": {"w":378,"h":204}
+},
+{
+	"filename": "planet_03",
+	"frame": {"x":378,"y":878,"w":200,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":200},
+	"sourceSize": {"w":200,"h":200}
+},
+{
+	"filename": "planet_04",
+	"frame": {"x":578,"y":878,"w":262,"h":262},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":262,"h":262},
+	"sourceSize": {"w":262,"h":262}
+},
+{
+	"filename": "planet_05",
+	"frame": {"x":0,"y":1140,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+{
+	"filename": "planet_06",
+	"frame": {"x":300,"y":1140,"w":275,"h":275},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":275,"h":275},
+	"sourceSize": {"w":275,"h":275}
+},
+{
+	"filename": "planet_07",
+	"frame": {"x":575,"y":1140,"w":293,"h":223},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":293,"h":223},
+	"sourceSize": {"w":293,"h":223}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "objects",
+	"format": "RGBA8888",
+	"size": {"w":868,"h":1440},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:27aec9f09400444167ea9f6564d3430c:53f38b531c9131cbf6d8c0f0b9f35912:8d6d12ff4d5234f2a4b19e0a906dbf52$"
+}
+}

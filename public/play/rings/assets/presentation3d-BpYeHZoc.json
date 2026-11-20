@@ -1,0 +1,82 @@
+{
+  "fov": 32,
+  "yaw": -0.42,
+  "pitch": 0.35,
+  "orbitSpeed": 0.008,
+  "margin": 22,
+  "portraitTop": 205,
+  "portraitBottom": 215,
+  "landscapeTop": 140,
+  "landscapeBottom": 196,
+  "framing": 1.14,
+  "blockedSeconds": 0.22,
+  "palette": [
+    11693550,
+    4573670,
+    16744276,
+    6013361,
+    16765031,
+    15825587,
+    7507455,
+    16753568
+  ],
+  "metalness": 0.42,
+  "roughness": 0.22,
+  "selectedIntensity": 0.22,
+  "blockedColor": 16725591,
+  "blockedIntensity": 0.7,
+  "compactWidth": 500,
+  "compactTop": 240,
+  "compactHeaderY": 110,
+  "compactTimerY": 160,
+  "fallGravity": 48,
+  "landscapeHintY": 138,
+  "fallSpeed": 3.2,
+  "fallSpread": 2.4,
+  "fallTumble": 5.2,
+  "tutorial": {
+    "minimumOrbit": 8,
+    "gestureSeconds": 1.4,
+    "pauseSeconds": 0.55,
+    "swipeWidth": 125,
+    "handOffsetX": -8,
+    "handOffsetY": -8,
+    "headingOffset": 3,
+    "detailOffset": 34,
+    "arc": 1.15,
+    "idleSeconds": 15
+  },
+  "entrance": {
+    "seconds": 1.15,
+    "stagger": 0.07,
+    "maximumStagger": 0.5,
+    "turns": 1.2,
+    "distance": 1.65,
+    "tilt": 0.65,
+    "trailWidth": 3,
+    "trailAlpha": 0.5,
+    "sparkleRadius": 5
+  },
+  "motionGuide": {
+    "length": 64,
+    "offset": 16,
+    "width": 2.5,
+    "head": 8,
+    "alpha": 0.85
+  },
+  "hitPadding": 18,
+  "pull": {
+    "pixelsPerRadian": 80,
+    "minimumDistance": 6,
+    "arc": {
+      "minimumAngle": 0.45,
+      "relativeTolerance": 0.18,
+      "turn": 0.3
+    }
+  },
+  "reframe": {
+    "seconds": 0.42,
+    "padding": 0.12
+  },
+  "exitDistance": 0.35
+}

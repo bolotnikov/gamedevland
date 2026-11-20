@@ -1,0 +1,2189 @@
+{
+  "root": {
+    "type": "Container",
+    "children": {
+      "backdrop": {
+        "type": "Container",
+        "components": {
+          "view": {
+            "type": "CircuitBackground",
+            "data": {
+              "mode": "hub"
+            }
+          }
+        },
+        "children": {
+          "board": { "type": "Graphics" },
+          "signals": { "type": "Graphics" }
+        }
+      },
+      "console": {
+        "type": "Container",
+        "components": {
+          "view": {
+            "type": "HubConsole"
+          },
+          "glitch": {
+            "type": "IdleGlitch",
+            "data": { "durationMs": 500, "minDelayMs": 4000, "spreadMs": 3000 }
+          }
+        },
+        "children": {
+          "plate": {
+            "type": "Graphics"
+          },
+          "brand": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, sans-serif",
+                "fontSize": 16,
+                "fontWeight": "700",
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "status": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, sans-serif",
+                "fontSize": 16,
+                "fontWeight": "700",
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "walletCredits": { "type": "Graphics", "props": { "interactive": true } },
+          "walletChips": { "type": "Graphics", "props": { "interactive": true } },
+          "walletComponents": { "type": "Graphics", "props": { "interactive": true } },
+          "walletSource": { "type": "Graphics", "props": { "interactive": true } },
+          "walletSourceLabel": {
+            "type": "Text",
+            "props": { "anchor": { "x": 0, "y": 0.5 }, "text": "",
+              "style": { "fontFamily": "Oxanium, sans-serif", "fontSize": 11, "fontWeight": "700", "fill": "#e4f5ff" } }
+          },
+          "credits": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, sans-serif",
+                "fontSize": 16,
+                "fontWeight": "700",
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "capsules": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, sans-serif",
+                "fontSize": 16,
+                "fontWeight": "700",
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "keys": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, sans-serif",
+                "fontSize": 16,
+                "fontWeight": "700",
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "pagePanel": {
+            "type": "Container",
+            "actions": {
+              "reveal": {
+                "type": "PanelReveal"
+              }
+            },
+            "children": {
+              "researchDetail": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "plate": {
+                    "type": "Graphics"
+                  },
+                  "title": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "effect": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "status": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              },
+              "plate": {
+                "type": "Graphics"
+              },
+              "radarContacts": {
+                "type": "Container"
+              },
+              "musicCredit": {
+                "type": "Text",
+                "props": {
+                  "visible": false,
+                  "anchor": { "x": 0, "y": 0 },
+                  "text": "Music: 'Shredder' by Evgeny Bardyuzha on #Uppbeat\nhttps://uppbeat.io/c/evgeny-bardyuzha",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontSize": 10,
+                    "fontWeight": "400",
+                    "lineHeight": 14,
+                    "wordWrap": true,
+                    "breakWords": true
+                  }
+                }
+              },
+              "lockedSignal": {
+                "type": "Container",
+                "children": {
+                  "noise": { "type": "Graphics" },
+                  "echo": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": { "x": 0.5, "y": 0.5 },
+                      "text": "",
+                      "style": { "fontFamily": "Oxanium, sans-serif", "fontSize": 16, "fontWeight": "700", "fill": "#ff526d" }
+                    }
+                  },
+                  "title": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": { "x": 0.5, "y": 0.5 },
+                      "text": "",
+                      "style": { "fontFamily": "Oxanium, sans-serif", "fontSize": 16, "fontWeight": "700", "fill": "#e4f5ff" }
+                    }
+                  }
+                }
+              },
+              "heading": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, sans-serif",
+                    "fontSize": 16,
+                    "fontWeight": "700",
+                    "fill": "#e4f5ff"
+                  }
+                }
+              },
+              "detail": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, sans-serif",
+                    "fontSize": 16,
+                    "fontWeight": "700",
+                    "fill": "#e4f5ff"
+                  }
+                }
+              },
+              "eyebrow": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, sans-serif",
+                    "fontSize": 16,
+                    "fontWeight": "700",
+                    "fill": "#e4f5ff"
+                  }
+                }
+              },
+              "heroFoot": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, sans-serif",
+                    "fontSize": 16,
+                    "fontWeight": "700",
+                    "fill": "#e4f5ff"
+                  }
+                }
+              },
+              "sectionA": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, sans-serif",
+                    "fontSize": 16,
+                    "fontWeight": "700",
+                    "fill": "#e4f5ff"
+                  }
+                }
+              },
+              "branchOffense": {
+                "type": "Text",
+                "props": { "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                  "style": { "fontFamily": "Oxanium, sans-serif", "fontSize": 13, "fontWeight": "700", "align": "center", "fill": "#e4f5ff" } }
+              },
+              "branchDefense": {
+                "type": "Text",
+                "props": { "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                  "style": { "fontFamily": "Oxanium, sans-serif", "fontSize": 13, "fontWeight": "700", "align": "center", "fill": "#e4f5ff" } }
+              },
+              "branchAnalytics": {
+                "type": "Text",
+                "props": { "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                  "style": { "fontFamily": "Oxanium, sans-serif", "fontSize": 13, "fontWeight": "700", "align": "center", "fill": "#e4f5ff" } }
+              },
+              "sectionB": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, sans-serif",
+                    "fontSize": 16,
+                    "fontWeight": "700",
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "notice": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, sans-serif",
+                "fontSize": 16,
+                "fontWeight": "700",
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "settings": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "navBattle": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "navAgents": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "navSkills": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "navQuests": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "primary": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "prev": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "next": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "quickA": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "quickB": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "secondary": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tertiary": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item0": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item1": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item2": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item3": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item4": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item5": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item6": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item7": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item8": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item9": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item10": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "item11": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "content": {
+                "type": "Container",
+                "actions": {
+                  "reveal": {
+                    "type": "PanelReveal"
+                  }
+                },
+                "children": {
+                  "surface": {
+                    "type": "Graphics"
+                  },
+                  "signal": {
+                    "type": "Text",
+                    "props": { "visible": false, "anchor": { "x": 0.5, "y": 0.5 }, "text": "",
+                      "style": { "fontFamily": "Oxanium, monospace", "fontSize": 8, "lineHeight": 8, "align": "center", "fontWeight": "700", "fill": "#70ccff" } }
+                  },
+                  "interference": { "type": "Graphics" },
+                  "portrait": { "type": "Graphics" },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  },
+                  "detail": {
+                    "type": "Text",
+                    "props": {
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "text": "",
+                      "style": {
+                        "fontFamily": "Oxanium, sans-serif",
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "fill": "#e4f5ff"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scan": {
+            "type": "Graphics"
+          }
+        }
+      },
+      "languagePicker": {
+        "type": "Container",
+        "props": {
+          "visible": false
+        },
+        "components": {
+          "view": {
+            "type": "LanguagePicker",
+            "data": {
+              "scene": "hub",
+              "panelWidth": 480,
+              "rowHeight": 44,
+              "gap": 8,
+              "padding": 16,
+              "headerHeight": 72,
+              "footerHeight": 58,
+              "titleSize": 25,
+              "labelSize": 16,
+              "hintSize": 12,
+              "overlayAlpha": 0.9
+            }
+          }
+        },
+        "children": {
+          "surface": {
+            "type": "Graphics",
+            "props": {
+              "interactive": true
+            }
+          },
+          "title": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0.0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, NotoSans, sans-serif",
+                "fontWeight": "700",
+                "fontSize": 16,
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "hint": {
+            "type": "Text",
+            "props": {
+              "anchor": {
+                "x": 0.0,
+                "y": 0.5
+              },
+              "text": "",
+              "style": {
+                "fontFamily": "Oxanium, NotoSans, sans-serif",
+                "fontWeight": "700",
+                "fontSize": 16,
+                "fill": "#e4f5ff"
+              }
+            }
+          },
+          "close": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language0": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language1": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language2": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language3": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language4": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language5": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language6": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language7": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language8": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language9": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          },
+          "language10": {
+            "type": "Container",
+            "children": {
+              "surface": {
+                "type": "Graphics",
+                "props": {
+                  "interactive": true
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "anchor": {
+                    "x": 0.0,
+                    "y": 0.5
+                  },
+                  "text": "",
+                  "style": {
+                    "fontFamily": "Oxanium, NotoSans, sans-serif",
+                    "fontWeight": "700",
+                    "fontSize": 16,
+                    "fill": "#e4f5ff"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -32,7 +32,7 @@ AI очень помогает писать код, но одного AI для 
 Поэтому я создал собственный SDK для HTML5-игр:
 
 - пакеты SDK в npm: <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">@gamedevland/engine</a> и <a href="https://www.npmjs.com/package/@gamedevland/vite" target="_blank" rel="noreferrer">@gamedevland/vite</a>
-- пример игры: <a href="https://gamedevland.github.io/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
+- пример игры: <a href="https://gamedev.land/play/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
 - репозиторий игры: <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
 
 <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> — полноценная игра на этом SDK. В ней есть загрузочная сцена, предзагрузка, JSON-вёрстка, JSON-префабы, FSM, команды, сервисы сцены, доменная модель, компоненты, перетаскивание, очки, завершение игры, рекорд, звуки и сборка для продакшена.

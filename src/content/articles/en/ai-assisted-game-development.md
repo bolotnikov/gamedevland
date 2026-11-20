@@ -32,7 +32,7 @@ My approach is simple: AI agents write code, but they work inside a predefined a
 That is why I built my own HTML5 game SDK:
 
 - sdk npm packages: <a href="https://www.npmjs.com/package/@gamedevland/engine" target="_blank" rel="noreferrer">@gamedevland/engine</a> and <a href="https://www.npmjs.com/package/@gamedevland/vite" target="_blank" rel="noreferrer">@gamedevland/vite</a>
-- game example: <a href="https://gamedevland.github.io/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
+- game example: <a href="https://gamedev.land/play/block-puzzle/" target="_blank" rel="noreferrer">Block Puzzle</a>
 - game repository: <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">gamedevland/block-puzzle</a>
 
 <a href="https://github.com/gamedevland/block-puzzle" target="_blank" rel="noreferrer">Block Puzzle</a> is a complete game built on this SDK. It has a boot scene, preload, layout JSON, prefab JSON, FSM, commands, scene services, a domain model, components, drag-and-drop, score, game over, best score, sounds, and a production build.

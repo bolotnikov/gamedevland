@@ -1,0 +1,71 @@
+{
+  "world": {
+    "type": "Group",
+    "children": {
+      "camera": {
+        "type": "PerspectiveCamera",
+        "props": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 6.6
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "near": 0.1,
+          "far": 19.799999999999997,
+          "fov": 33
+        }
+      },
+      "assembly": {
+        "type": "Group"
+      },
+      "ambient": {
+        "type": "AmbientLight",
+        "props": {
+          "color": "#ffffff",
+          "intensity": 1.8
+        }
+      },
+      "light1": {
+        "type": "DirectionalLight",
+        "props": {
+          "color": "#fff0e6",
+          "intensity": 4,
+          "position": {
+            "x": -3,
+            "y": 4,
+            "z": 5
+          }
+        }
+      },
+      "light2": {
+        "type": "DirectionalLight",
+        "props": {
+          "color": "#9195ff",
+          "intensity": 2.5,
+          "position": {
+            "x": 4,
+            "y": 1,
+            "z": 2
+          }
+        }
+      },
+      "light3": {
+        "type": "DirectionalLight",
+        "props": {
+          "color": "#ffaac6",
+          "intensity": 3,
+          "position": {
+            "x": 0,
+            "y": 2,
+            "z": -4
+          }
+        }
+      }
+    }
+  }
+}

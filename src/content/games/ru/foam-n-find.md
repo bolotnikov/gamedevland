@@ -48,7 +48,7 @@ screenshots:
 promoVideo:
   mp4: /assets/games/foam-n-find/videos/land.mp4
   poster: /assets/games/foam-n-find/screens/land/attic.webp
-playableUrl: https://gamedevland.github.io/foam-n-find/
+playableUrl: https://gamedev.land/play/foam-n-find/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 4

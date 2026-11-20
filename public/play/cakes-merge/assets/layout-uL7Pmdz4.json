@@ -1,0 +1,901 @@
+{
+  "root": {
+    "type": "Container",
+    "children": {
+      "background": {
+        "type": "Sprite",
+        "props": {
+          "asset": "images/bg.jpg",
+          "anchor": {
+            "x": 0.5,
+            "y": 0.5
+          }
+        },
+        "components": {
+          "responsiveLayout": {
+            "type": "ResponsiveLayoutComponent",
+            "data": {
+              "scale": "cover",
+              "position": "center"
+            }
+          }
+        }
+      },
+      "playSceneRoot": {
+        "type": "Container",
+        "children": {
+          "roundStage": {
+            "type": "Container",
+            "props": {
+              "zIndex": 0
+            },
+            "children": {
+              "mergeTable": {
+                "type": "Container",
+                "children": {
+                  "tableSurface": {
+                    "type": "Container",
+                    "children": {
+                      "tableImage": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/table.png",
+                          "anchor": {
+                            "x": 0.5,
+                            "y": 0.5
+                          },
+                          "x": 0,
+                          "y": 0
+                        }
+                      }
+                    }
+                  },
+                  "itemsLayer": {
+                    "type": "Container",
+                    "props": {
+                      "y": 0,
+                      "zIndex": 10
+                    },
+                    "components": {
+                      "itemsView": {
+                        "type": "SlideMergeItemsViewComponent",
+                        "data": {
+                          "mergeGlowAssetId": "images/fx/merge-glow.png",
+                          "mergeGlowAlpha": 0.95,
+                          "mergeGlowDurationSec": 0.72,
+                          "mergeGlowFadeDurationSec": 0.5,
+                          "mergeGlowScale": 1.62,
+                          "mergeGlowAngleDeg": 40,
+                          "mergeGlowZIndex": 130000,
+                          "mergeFxCenterOffsetX": 0,
+                          "mergeFxCenterOffsetY": -30,
+                          "mergeParticleAssetIds": [
+                            "images/fx/sparkle-1.png",
+                            "images/fx/sparkle-2.png",
+                            "images/fx/spark-dot.png"
+                          ],
+                          "mergeParticleCount": 20,
+                          "mergeParticleDurationSec": 0.48,
+                          "mergeParticleFadeDelaySec": 0.12,
+                          "mergeParticleFadeDurationSec": 0.32,
+                          "mergeParticleSpawnRadius": 24,
+                          "mergeParticleTravelMin": 82,
+                          "mergeParticleTravelMax": 118,
+                          "mergeParticleStartScale": 0.34,
+                          "mergeParticlePeakScale": 0.9,
+                          "mergeParticleEndScale": 0.24,
+                          "mergeParticleZIndex": 120000,
+                          "mergeCollapseDurationSec": 0.15,
+                          "mergeCollapseEase": "sine.out",
+                          "mergeCollapseScaleEase": "sine.in",
+                          "mergeCollapseScaleMultiplier": 0.5,
+                          "mergeCollapseAlpha": 0,
+                          "mergeRevealAlphaDurationSec": 0.05,
+                          "mergeRevealScaleDurationSec": 0.12,
+                          "mergeRevealJumpUpDurationSec": 0.2,
+                          "mergeRevealBounceDurationSec": 0.6,
+                          "mergeRevealPopScaleMultiplier": 1.05,
+                          "mergeRevealJumpOffsetY": 0,
+                          "mergeRevealScaleEase": "back.out(1.35)",
+                          "mergeRevealJumpUpEase": "power2.out",
+                          "mergeRevealBounceEase": "bounce.out"
+                        }
+                      }
+                    },
+                    "children": {
+                      "fxLayer": {
+                        "type": "Container",
+                        "props": {
+                          "zIndex": 50000
+                        }
+                      },
+                      "failLine": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/line.png",
+                          "anchor": {
+                            "x": 0.5,
+                            "y": 0.5
+                          },
+                          "x": 2.823529411764696,
+                          "y": 102.31451612903231,
+                          "width": 1016.470588235294,
+                          "height": 12,
+                          "zIndex": 1
+                        }
+                      },
+                      "dropCursor": {
+                        "type": "Container",
+                        "props": {
+                          "y": 0,
+                          "zIndex": 3000
+                        },
+                        "components": {
+                          "dropCursor": {
+                            "type": "SlideMergeDropCursorComponent",
+                            "data": {
+                              "itemAppearDelaySec": 0.08,
+                              "itemAppearDurationSec": 0.15,
+                              "itemAppearEase": "back.out(1.45)",
+                              "guideFadeDelaySec": 0.08,
+                              "guideFadeDurationSec": 0.22,
+                              "guideFadeEase": "sine.out",
+                              "guideVisibleAlpha": 0.92,
+                              "guideMaxLength": 620,
+                              "guideHeight": 22,
+                              "guideStartGap": 6,
+                              "guideTextureWidth": 768,
+                              "guideAngleDeg": -90,
+                              "guideAngleOffsetDivisor": 52,
+                              "guideZIndex": 20
+                            }
+                          }
+                        }
+                      },
+                      "firstMoveHint": {
+                        "type": "Container",
+                        "props": {
+                          "zIndex": 4200
+                        },
+                        "components": {
+                          "firstMoveHint": {
+                            "type": "SlideMergeFirstMoveHintComponent",
+                            "data": {
+                              "introBaseScale": 1,
+                              "introPulseScale": 1.08,
+                              "introPulseDurationSec": 0.8,
+                              "introPulseEase": "sine.inOut",
+                              "touchPointerPressScaleDelta": 0.2,
+                              "touchPointerPressDurationSec": 0.2,
+                              "touchPointerReleaseDurationSec": 0.5,
+                              "touchPointerPulseEase": "power2.inOut",
+                              "rippleDelaySec": 0.2,
+                              "rippleInnerDurationSec": 0.4,
+                              "rippleOuterDurationSec": 0.38,
+                              "rippleInnerScale": 2.4,
+                              "rippleOuterScale": 4.8,
+                              "rippleInnerLineWidth": 20,
+                              "rippleOuterLineWidth": 12,
+                              "rippleRadius": 18,
+                              "rippleInnerEase": "sine.in",
+                              "rippleOuterEase": "sine.out",
+                              "rippleColor": 16777215,
+                              "arrowMotionDistance": 18,
+                              "arrowMotionDurationSec": 1.1,
+                              "arrowMotionEase": "sine.inOut"
+                            }
+                          }
+                        },
+                        "children": {
+                          "leftArrow": {
+                            "type": "Sprite",
+                            "props": {
+                              "asset": "images/hud/arrow.png",
+                              "x": -227.1764705882353,
+                              "y": 176,
+                              "anchor": {
+                                "x": 0.5,
+                                "y": 0.5
+                              },
+                              "scale": 0.24,
+                              "zIndex": 1
+                            }
+                          },
+                          "rightArrow": {
+                            "type": "Sprite",
+                            "props": {
+                              "asset": "images/hud/arrow.png",
+                              "x": 232.8235294117647,
+                              "y": 176,
+                              "anchor": {
+                                "x": 0.5,
+                                "y": 0.5
+                              },
+                              "scale": 0.24,
+                              "angle": 180,
+                              "zIndex": 1
+                            }
+                          },
+                          "slideHintText": {
+                            "type": "Text",
+                            "props": {
+                              "text": "Slide to merge",
+                              "x": 0,
+                              "y": -246,
+                              "anchor": {
+                                "x": 0.5,
+                                "y": 0.5
+                              },
+                              "style": "slideMergeFirstMoveHintText",
+                              "zIndex": 4
+                            }
+                          },
+                          "touchPulse": {
+                            "type": "Container",
+                            "props": {
+                              "x": 4,
+                              "y": 221,
+                              "zIndex": 2
+                            },
+                            "children": {
+                              "rippleInner": {
+                                "type": "Graphics",
+                                "props": {
+                                  "visible": false
+                                }
+                              },
+                              "rippleOuter": {
+                                "type": "Graphics",
+                                "props": {
+                                  "visible": false
+                                }
+                              }
+                            }
+                          },
+                          "touchPointer": {
+                            "type": "Sprite",
+                            "props": {
+                              "asset": "images/touch-pointer.png",
+                              "x": 0,
+                              "y": 221,
+                              "anchor": {
+                                "x": 0,
+                                "y": 0.1
+                              },
+                              "scale": 1.7,
+                              "zIndex": 3
+                            }
+                          }
+                        }
+                      },
+                      "debugWorld": {
+                        "type": "Graphics",
+                        "props": {
+                          "zIndex": 5000,
+                          "visible": false
+                        },
+                        "components": {
+                          "physicsDebug": {
+                            "type": "SlideMergePhysicsDebugComponent"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "components": {
+                  "responsiveLayout": {
+                    "type": "ResponsiveLayoutComponent",
+                    "data": {
+                      "scale": {
+                        "mode": "contain",
+                        "min": 0.35416666666666663,
+                        "max": 0.35416666666666663
+                      },
+                      "position": {
+                        "x": "center",
+                        "y": "center",
+                        "offsetY": 38
+                      },
+                      "orientation": {
+                        "port": {
+                          "scale": {
+                            "min": 0.4722222222222222,
+                            "max": 0.4722222222222222
+                          },
+                          "position": {
+                            "offsetY": 67.55555555555556
+                          }
+                        },
+                        "land": {
+                          "scale": {
+                            "min": 0.35416666666666663,
+                            "max": 0.35416666666666663
+                          },
+                          "position": {
+                            "offsetY": 38
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "hud": {
+        "type": "Container",
+        "props": {
+          "zIndex": 100
+        },
+        "components": {
+          "hud": {
+            "type": "SlideMergeHudComponent",
+            "data": {
+              "nextPreviewMaxWidth": 46,
+              "nextPreviewMaxHeight": 36,
+              "settingsOpenEventType": "SLIDE_MERGE__SETTINGS_OPEN_REQUESTED"
+            }
+          }
+        },
+        "children": {
+          "scorePanel": {
+            "type": "Container",
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "area": {
+                    "padding": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0,
+                      "left": 24
+                    }
+                  },
+                  "position": {
+                    "x": "left",
+                    "y": "center"
+                  },
+                  "orientation": {
+                    "port": {
+                      "area": {
+                        "padding": {
+                          "top": 24,
+                          "left": 0
+                        }
+                      },
+                      "scale": {
+                        "mode": "contain",
+                        "max": 1.25
+                      },
+                      "position": {
+                        "x": "center",
+                        "y": "top"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "children": {
+              "background": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/hud/score.png",
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.5
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "text": "SCORE",
+                  "x": 0,
+                  "y": -11,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "scorePanelLabelText"
+                }
+              },
+              "value": {
+                "type": "Text",
+                "props": {
+                  "text": "0",
+                  "x": 0,
+                  "y": 8,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "scorePanelValueText"
+                }
+              }
+            }
+          },
+          "nextPanel": {
+            "type": "Container",
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "area": {
+                    "padding": {
+                      "top": 0,
+                      "right": 24,
+                      "bottom": 0,
+                      "left": 0
+                    }
+                  },
+                  "position": {
+                    "x": "right",
+                    "y": "center"
+                  },
+                  "orientation": {
+                    "port": {
+                      "area": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 24
+                        }
+                      },
+                      "scale": {
+                        "mode": "contain",
+                        "max": 1.25
+                      },
+                      "position": {
+                        "x": "center",
+                        "y": "bottom",
+                        "offsetX": 0
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "children": {
+              "background": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/hud/next.png",
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.5
+                }
+              },
+              "label": {
+                "type": "Text",
+                "props": {
+                  "text": "NEXT",
+                  "y": -21,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "nextItemLabelText"
+                }
+              },
+              "preview": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/items/1.png",
+                  "y": 8,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                }
+              }
+            }
+          },
+          "settingsButton": {
+            "type": "Container",
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "area": {
+                    "padding": {
+                      "top": 19,
+                      "right": 20,
+                      "bottom": 0,
+                      "left": 0
+                    }
+                  },
+                  "position": {
+                    "x": "right",
+                    "y": "top"
+                  },
+                  "orientation": {
+                    "port": {
+                      "area": {
+                        "padding": {
+                          "top": 33
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "children": {
+              "background": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/hud/settings.png",
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.5
+                }
+              }
+            }
+          }
+        }
+      },
+      "settingsPopup": {
+        "type": "Container",
+        "props": {
+          "visible": false,
+          "zIndex": 220
+        },
+        "components": {
+          "popup": {
+            "type": "SlideMergeSettingsPopupComponent",
+            "data": {
+              "closeEventType": "SLIDE_MERGE__SETTINGS_CLOSE_REQUESTED",
+              "restartEventType": "SLIDE_MERGE__RESTART_REQUESTED",
+              "popupOpenedEventType": "SLIDE_MERGE__POPUP_OPENED",
+              "musicOnAssetId": "images/popups/iconMusicOn.png",
+              "musicOffAssetId": "images/popups/iconMusicOff.png",
+              "soundOnAssetId": "images/popups/iconSoundOn.png",
+              "soundOffAssetId": "images/popups/iconSoundOff.png",
+              "openBlockerDurationMs": 280,
+              "openPanelDurationMs": 380,
+              "openPanelEase": "back.out(1.5)",
+              "closeBlockerDurationMs": 220,
+              "closePanelDurationMs": 220,
+              "closeEase": "power2.in",
+              "closePanelScale": 0
+            }
+          }
+        },
+        "children": {
+          "blocker": {
+            "type": "Graphics",
+            "props": {
+              "width": 960,
+              "height": 540,
+              "color": "#04263a",
+              "alpha": 0.72
+            },
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "resize": "stretch"
+                }
+              }
+            }
+          },
+          "panel": {
+            "type": "Container",
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "area": {
+                    "width": "94%",
+                    "height": "88%",
+                    "centerX": 0,
+                    "centerY": 0
+                  },
+                  "scale": {
+                    "mode": "contain",
+                    "max": 1
+                  },
+                  "position": "center",
+                  "orientation": {
+                    "port": {
+                      "scale": {
+                        "mode": "contain",
+                        "max": 1.2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "children": {
+              "background": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/popups/popup-settings-bg.png",
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.5
+                }
+              },
+              "title": {
+                "type": "Text",
+                "props": {
+                  "textKey": "ui.settings.title",
+                  "x": 0,
+                  "y": -82,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "settingsPopupLabelText"
+                }
+              },
+              "musicToggle": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/popups/iconMusicOn.png",
+                  "x": -66,
+                  "y": 12,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.26
+                }
+              },
+              "soundToggle": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/popups/iconSoundOn.png",
+                  "x": 75,
+                  "y": 12,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.245
+                }
+              },
+              "restartButton": {
+                "type": "Container",
+                "props": {
+                  "x": 1,
+                  "y": 116
+                },
+                "children": {
+                  "background": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/popups/popup-btn.png",
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "scale": 0.5
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "textKey": "ui.common.restart",
+                      "x": 0,
+                      "y": 0,
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "style": "settingsPopupRestartText"
+                    }
+                  }
+                }
+              },
+              "closeButton": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/hud/close.png",
+                  "x": 185,
+                  "y": -136,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.5
+                }
+              }
+            }
+          }
+        }
+      },
+      "resultPopup": {
+        "type": "Container",
+        "props": {
+          "visible": false,
+          "zIndex": 230
+        },
+        "components": {
+          "popup": {
+            "type": "SlideMergeResultPopupComponent",
+            "data": {
+              "restartEventType": "SLIDE_MERGE__RESTART_REQUESTED",
+              "popupOpenedEventType": "SLIDE_MERGE__POPUP_OPENED",
+              "openBlockerDurationMs": 280,
+              "openPanelDurationMs": 380,
+              "openPanelEase": "back.out(1.5)"
+            }
+          }
+        },
+        "children": {
+          "blocker": {
+            "type": "Graphics",
+            "props": {
+              "width": 960,
+              "height": 540,
+              "color": "#04263a",
+              "alpha": 0.72
+            },
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "resize": "stretch"
+                }
+              }
+            }
+          },
+          "panel": {
+            "type": "Container",
+            "components": {
+              "responsiveLayout": {
+                "type": "ResponsiveLayoutComponent",
+                "data": {
+                  "area": {
+                    "width": "94%",
+                    "height": "88%",
+                    "centerX": 0,
+                    "centerY": 0
+                  },
+                  "scale": {
+                    "mode": "contain",
+                    "max": 1
+                  },
+                  "position": "center",
+                  "orientation": {
+                    "port": {
+                      "scale": {
+                        "mode": "contain",
+                        "max": 1.2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "children": {
+              "background": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/popups/popup-over-bg.png",
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "scale": 0.5
+                }
+              },
+              "title": {
+                "type": "Text",
+                "props": {
+                  "textKey": "game.result.title",
+                  "x": 0,
+                  "y": -84,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "resultPopupTitleText"
+                }
+              },
+              "scoreLabel": {
+                "type": "Text",
+                "props": {
+                  "textKey": "game.result.score",
+                  "x": -110,
+                  "y": -16,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "resultPopupLabelText"
+                }
+              },
+              "scoreValue": {
+                "type": "Text",
+                "props": {
+                  "text": "0",
+                  "x": 100,
+                  "y": -16,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "resultPopupValueText"
+                }
+              },
+              "bestLabel": {
+                "type": "Text",
+                "props": {
+                  "textKey": "game.result.best",
+                  "x": -110,
+                  "y": 42,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "resultPopupLabelText"
+                }
+              },
+              "bestValue": {
+                "type": "Text",
+                "props": {
+                  "text": "0",
+                  "x": 100,
+                  "y": 42,
+                  "anchor": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "style": "resultPopupValueText"
+                }
+              },
+              "restartButton": {
+                "type": "Container",
+                "props": {
+                  "x": 1,
+                  "y": 112
+                },
+                "children": {
+                  "background": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/popups/popup-btn.png",
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "scale": 0.5
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "textKey": "ui.common.restart",
+                      "x": 0,
+                      "y": 0,
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      },
+                      "style": "resultPopupButtonText"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

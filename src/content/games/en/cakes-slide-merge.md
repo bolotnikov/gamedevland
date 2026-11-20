@@ -25,7 +25,7 @@ roles:
   - Game design and UI
 iconImage: /assets/games/slide-merge/icon.webp
 iconAlt: Cakes Slide Merge prototype with two small cakes merging into a larger decorated cake
-playableUrl: https://gamedevland.github.io/cakes-merge/
+playableUrl: https://gamedev.land/play/cakes-merge/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: 7

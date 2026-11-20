@@ -1,0 +1,221 @@
+{
+  "type": "Container",
+  "props": {
+    "visible": false,
+    "zIndex": 220
+  },
+  "components": {
+    "popup": {
+      "type": "GameBoosterPurchasePopupComponent",
+      "data": {
+        "ctaLabelOffsetXByLocale": {
+          "ru": 20
+        }
+      }
+    }
+  },
+  "actions": {
+    "boosterPurchasePopupMotion": {
+      "type": "BoosterPurchasePopupMotionAction",
+      "data": {
+        "openBlockerDurationMs": 280,
+        "openPanelDurationMs": 380,
+        "openPanelEase": "back.out(1.5)",
+        "closeBlockerDurationMs": 220,
+        "closePanelDurationMs": 220,
+        "closeEase": "power2.in",
+        "closePanelScale": 0
+      }
+    }
+  },
+  "children": {
+    "blocker": {
+      "type": "Graphics",
+      "props": {
+        "width": 960,
+        "height": 540,
+        "color": "#04263a",
+        "alpha": 0.72
+      },
+      "components": {
+        "responsiveLayout": {
+          "type": "ResponsiveLayoutComponent",
+          "data": {
+            "resize": "stretch"
+          }
+        }
+      }
+    },
+    "panel": {
+      "type": "Container",
+      "components": {
+        "responsiveLayout": {
+          "type": "ResponsiveLayoutComponent",
+          "data": {
+            "area": {
+              "width": "82%",
+              "height": "78%",
+              "centerX": 0,
+              "centerY": 0
+            },
+            "scale": {
+              "mode": "contain",
+              "max": 0.92
+            },
+            "position": "center"
+          }
+        }
+      },
+      "children": {
+        "background": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ux/popup-panel.png",
+            "anchor": {
+              "x": 0.5,
+              "y": 0.5
+            }
+          }
+        },
+        "title": {
+          "type": "Text",
+          "props": {
+            "text": "",
+            "x": 0,
+            "y": -484,
+            "anchor": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "style": "boosterPurchaseTitleText"
+          }
+        },
+        "boosterPreviewButton": {
+          "type": "Container",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "scale": 1.5
+          },
+          "children": {
+            "background": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ux/ui-button-base.png",
+                "anchor": {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              }
+            },
+            "boosterPreviewIcon": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ux/undo-icon.png",
+                "x": 0,
+                "y": 0,
+                "anchor": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "scale": 0.62
+              }
+            },
+            "boosterPreviewBadge": {
+              "type": "Container",
+              "props": {
+                "x": 80,
+                "y": 80,
+                "scale": 0.7
+              },
+              "children": {
+                "background": {
+                  "type": "Sprite",
+                  "props": {
+                    "asset": "images/ux/counter-badge.png",
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  }
+                },
+                "boosterPreviewBadgeText": {
+                  "type": "Text",
+                  "props": {
+                    "text": "1",
+                    "x": 0,
+                    "y": 0,
+                    "anchor": {
+                      "x": 0.5,
+                      "y": 0.5
+                    },
+                    "style": "boosterPurchasePreviewBadgeText"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ctaButton": {
+          "type": "Container",
+          "props": {
+            "x": 0,
+            "y": 339,
+            "scale": 1.24
+          },
+          "children": {
+            "background": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ux/primary-popup-button.png",
+                "anchor": {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              }
+            },
+            "ctaAdBadge": {
+              "type": "Sprite",
+              "props": {
+                "asset": "images/ux/ad-badge-icon.png",
+                "x": -110,
+                "y": 0,
+                "anchor": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "scale": 0.5
+              }
+            },
+            "ctaLabel": {
+              "type": "Text",
+              "props": {
+                "textKey": "game.boosters.cta.refill",
+                "x": 60,
+                "y": 0,
+                "anchor": {
+                  "x": 0.5,
+                  "y": 0.5
+                },
+                "style": "boosterPurchaseCtaText"
+              }
+            }
+          }
+        },
+        "closeButton": {
+          "type": "Sprite",
+          "props": {
+            "asset": "images/ux/close-button.png",
+            "x": 355,
+            "y": -456,
+            "anchor": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "scale": 0.6
+          }
+        }
+      }
+    }
+  }
+}

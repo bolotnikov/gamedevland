@@ -1,0 +1,10 @@
+Sound effects adapted from the following Kenney audio packs (www.kenney.nl):
+
+- Digital Audio
+- Impact Sounds
+- Interface Sounds
+- Sci-Fi Sounds
+- UI Audio
+
+These packs are released under CC0 1.0 Universal.
+https://creativecommons.org/publicdomain/zero/1.0/

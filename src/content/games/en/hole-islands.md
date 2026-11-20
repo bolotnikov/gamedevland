@@ -52,7 +52,7 @@ promoVideo:
   mp4: /assets/games/hole-islands/gameplay.mp4
   aspectRatio: 9 / 16
   poster: /assets/games/hole-islands/screens/port/level-5.webp
-playableUrl: https://gamedevland.github.io/hole-islands/
+playableUrl: https://gamedev.land/play/hole-islands/
 orientation: adaptive
 embedAspectRatio: 16 / 9
 order: -3

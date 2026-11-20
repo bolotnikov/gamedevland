@@ -29,7 +29,7 @@ This article shows how I manage scene flow through an FSM in [`@gamedevland/engi
     <span>SDK</span>
     <strong>@gamedevland/engine</strong>
   </a>
-  <a href="https://gamedevland.github.io/block-puzzle/" target="_blank" rel="noreferrer">
+  <a href="https://gamedev.land/play/block-puzzle/" target="_blank" rel="noreferrer">
     <span>Play</span>
     <strong>Block Puzzle demo</strong>
   </a>

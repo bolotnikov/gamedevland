@@ -23,7 +23,7 @@ roles:
   - Геймдизайн и интерфейс
 iconImage: /assets/games/shaman/icon.png
 iconAlt: Иконка Shaman's Way с шаманом в капюшоне у горного озера
-playableUrl: https://gamedevland.github.io/shaman/
+playableUrl: https://gamedev.land/play/shaman/
 orientation: portrait
 embedAspectRatio: 3 / 4
 fitEmbedToViewport: true

@@ -1,0 +1,71 @@
+{
+  "world": {
+    "type": "Group",
+    "children": {
+      "camera": {
+        "type": "PerspectiveCamera",
+        "props": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 5
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "near": 0.1,
+          "far": 100,
+          "fov": 32
+        }
+      },
+      "puzzle": {
+        "type": "Group"
+      },
+      "ambient": {
+        "type": "AmbientLight",
+        "props": {
+          "color": "#dce8ff",
+          "intensity": 1.5
+        }
+      },
+      "light1": {
+        "type": "DirectionalLight",
+        "props": {
+          "color": "#ffffff",
+          "intensity": 3.5,
+          "position": {
+            "x": -4,
+            "y": 6,
+            "z": 8
+          }
+        }
+      },
+      "light2": {
+        "type": "DirectionalLight",
+        "props": {
+          "color": "#9bdcff",
+          "intensity": 2,
+          "position": {
+            "x": 5,
+            "y": 1,
+            "z": 4
+          }
+        }
+      },
+      "light3": {
+        "type": "DirectionalLight",
+        "props": {
+          "color": "#ffd9a0",
+          "intensity": 3,
+          "position": {
+            "x": 0,
+            "y": -3,
+            "z": -4
+          }
+        }
+      }
+    }
+  }
+}

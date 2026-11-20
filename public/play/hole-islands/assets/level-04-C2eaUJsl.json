@@ -1,0 +1,3779 @@
+{
+  "id": "fruit-lagoon-04-v5",
+  "title": "Kiwi Amphitheatre",
+  "timer": 130,
+  "spawn": {
+    "x": 0.0,
+    "z": 9.7
+  },
+  "bounds": {
+    "halfX": 9.0,
+    "halfZ": 11.5
+  },
+  "ground": {
+    "surfaceY": 0,
+    "thickness": 0.32,
+    "extent": 40,
+    "segments": 32,
+    "wallHeight": 0.28,
+    "undercut": 0.16
+  },
+  "physics": {
+    "gravity": {
+      "x": 0,
+      "y": -26,
+      "z": 0
+    },
+    "fixedStep": 0.016666666666666666,
+    "maxSubSteps": 3,
+    "maxFrameDelta": 0.05,
+    "solverIterations": 24,
+    "friction": 0.45,
+    "restitution": 0,
+    "sleepSpeedLimit": 0.16,
+    "sleepTimeLimit": 0.3,
+    "captureAcceleration": 12,
+    "captureInwardAcceleration": 10
+  },
+  "growth": [
+    {
+      "threshold": 0,
+      "radius": 0.42,
+      "speed": 2.35
+    },
+    {
+      "threshold": 20,
+      "radius": 0.78,
+      "speed": 2.65
+    },
+    {
+      "threshold": 64,
+      "radius": 1.08,
+      "speed": 2.95
+    },
+    {
+      "threshold": 112,
+      "radius": 1.38,
+      "speed": 3.22
+    }
+  ],
+  "motion": {
+    "acceleration": 32,
+    "release": 48,
+    "growthAnticipation": 0.07,
+    "growthDuration": 0.22,
+    "startDistance": 0.025
+  },
+  "bodyProfiles": [
+    {
+      "id": "apricot_slice",
+      "shape": "convex",
+      "spheres": [],
+      "center": {
+        "x": -0.0,
+        "y": 0.04,
+        "z": 0.0
+      },
+      "bounds": {
+        "min": {
+          "x": -0.11999999731779099,
+          "y": -0.03999999910593033,
+          "z": -0.11999999731779099
+        },
+        "max": {
+          "x": 0.11999999731779099,
+          "y": 0.03999999910593033,
+          "z": 0.11999999731779099
+        }
+      },
+      "vertices": [
+        {
+          "x": 0.1056,
+          "y": -0.04,
+          "z": -0.0
+        },
+        {
+          "x": 0.0746705,
+          "y": -0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": -0.04,
+          "z": -0.1056
+        },
+        {
+          "x": -0.0746705,
+          "y": -0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": -0.1056,
+          "y": -0.04,
+          "z": -0.0
+        },
+        {
+          "x": -0.0746705,
+          "y": -0.04,
+          "z": 0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": -0.04,
+          "z": 0.1056
+        },
+        {
+          "x": 0.0746705,
+          "y": -0.04,
+          "z": 0.0746705
+        },
+        {
+          "x": 0.1056,
+          "y": 0.04,
+          "z": -0.0
+        },
+        {
+          "x": 0.0746705,
+          "y": 0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": 0.04,
+          "z": -0.1056
+        },
+        {
+          "x": -0.0746705,
+          "y": 0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": -0.1056,
+          "y": 0.04,
+          "z": -0.0
+        },
+        {
+          "x": -0.0746705,
+          "y": 0.04,
+          "z": 0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": 0.04,
+          "z": 0.1056
+        },
+        {
+          "x": 0.0746705,
+          "y": 0.04,
+          "z": 0.0746705
+        }
+      ],
+      "faces": [
+        [
+          3,
+          2,
+          1,
+          0,
+          7,
+          6,
+          5,
+          4
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          8
+        ],
+        [
+          11,
+          10,
+          2,
+          3
+        ],
+        [
+          1,
+          9,
+          8,
+          0
+        ],
+        [
+          13,
+          12,
+          4,
+          5
+        ],
+        [
+          2,
+          10,
+          9,
+          1
+        ],
+        [
+          0,
+          8,
+          15,
+          7
+        ],
+        [
+          12,
+          11,
+          3,
+          4
+        ],
+        [
+          7,
+          15,
+          14,
+          6
+        ],
+        [
+          14,
+          13,
+          5,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "kiwi_slice",
+      "shape": "convex",
+      "spheres": [],
+      "center": {
+        "x": -0.0,
+        "y": 0.04,
+        "z": 0.0
+      },
+      "bounds": {
+        "min": {
+          "x": -0.11999999731779099,
+          "y": -0.03999999910593033,
+          "z": -0.11999999731779099
+        },
+        "max": {
+          "x": 0.11999999731779099,
+          "y": 0.03999999910593033,
+          "z": 0.11999999731779099
+        }
+      },
+      "vertices": [
+        {
+          "x": 0.1056,
+          "y": -0.04,
+          "z": -0.0
+        },
+        {
+          "x": 0.0746705,
+          "y": -0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": -0.04,
+          "z": -0.1056
+        },
+        {
+          "x": -0.0746705,
+          "y": -0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": -0.1056,
+          "y": -0.04,
+          "z": -0.0
+        },
+        {
+          "x": -0.0746705,
+          "y": -0.04,
+          "z": 0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": -0.04,
+          "z": 0.1056
+        },
+        {
+          "x": 0.0746705,
+          "y": -0.04,
+          "z": 0.0746705
+        },
+        {
+          "x": 0.1056,
+          "y": 0.04,
+          "z": -0.0
+        },
+        {
+          "x": 0.0746705,
+          "y": 0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": 0.04,
+          "z": -0.1056
+        },
+        {
+          "x": -0.0746705,
+          "y": 0.04,
+          "z": -0.0746705
+        },
+        {
+          "x": -0.1056,
+          "y": 0.04,
+          "z": -0.0
+        },
+        {
+          "x": -0.0746705,
+          "y": 0.04,
+          "z": 0.0746705
+        },
+        {
+          "x": 0.0,
+          "y": 0.04,
+          "z": 0.1056
+        },
+        {
+          "x": 0.0746705,
+          "y": 0.04,
+          "z": 0.0746705
+        }
+      ],
+      "faces": [
+        [
+          3,
+          2,
+          1,
+          0,
+          7,
+          6,
+          5,
+          4
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          8
+        ],
+        [
+          11,
+          10,
+          2,
+          3
+        ],
+        [
+          1,
+          9,
+          8,
+          0
+        ],
+        [
+          13,
+          12,
+          4,
+          5
+        ],
+        [
+          2,
+          10,
+          9,
+          1
+        ],
+        [
+          0,
+          8,
+          15,
+          7
+        ],
+        [
+          12,
+          11,
+          3,
+          4
+        ],
+        [
+          7,
+          15,
+          14,
+          6
+        ],
+        [
+          14,
+          13,
+          5,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "wood_segment",
+      "shape": "convex",
+      "spheres": [],
+      "center": {
+        "x": -0.0,
+        "y": 0.14,
+        "z": 0.0
+      },
+      "bounds": {
+        "min": {
+          "x": -0.36000001430511475,
+          "y": -0.13999997079372406,
+          "z": -0.36000001430511475
+        },
+        "max": {
+          "x": 0.36000001430511475,
+          "y": 0.14000003039836884,
+          "z": 0.36000001430511475
+        }
+      },
+      "vertices": [
+        {
+          "x": 0.3168,
+          "y": -0.14,
+          "z": -0.0
+        },
+        {
+          "x": 0.2240114,
+          "y": -0.14,
+          "z": -0.2240114
+        },
+        {
+          "x": 0.0,
+          "y": -0.14,
+          "z": -0.3168
+        },
+        {
+          "x": -0.2240114,
+          "y": -0.14,
+          "z": -0.2240114
+        },
+        {
+          "x": -0.3168,
+          "y": -0.14,
+          "z": -0.0
+        },
+        {
+          "x": -0.2240114,
+          "y": -0.14,
+          "z": 0.2240114
+        },
+        {
+          "x": 0.0,
+          "y": -0.14,
+          "z": 0.3168
+        },
+        {
+          "x": 0.2240114,
+          "y": -0.14,
+          "z": 0.2240114
+        },
+        {
+          "x": 0.3168,
+          "y": 0.14,
+          "z": -0.0
+        },
+        {
+          "x": 0.2240114,
+          "y": 0.14,
+          "z": -0.2240114
+        },
+        {
+          "x": 0.0,
+          "y": 0.14,
+          "z": -0.3168
+        },
+        {
+          "x": -0.2240114,
+          "y": 0.14,
+          "z": -0.2240114
+        },
+        {
+          "x": -0.3168,
+          "y": 0.14,
+          "z": -0.0
+        },
+        {
+          "x": -0.2240114,
+          "y": 0.14,
+          "z": 0.2240114
+        },
+        {
+          "x": 0.0,
+          "y": 0.14,
+          "z": 0.3168
+        },
+        {
+          "x": 0.2240114,
+          "y": 0.14,
+          "z": 0.2240114
+        }
+      ],
+      "faces": [
+        [
+          13,
+          12,
+          4,
+          5
+        ],
+        [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          8
+        ],
+        [
+          11,
+          10,
+          2,
+          3
+        ],
+        [
+          1,
+          9,
+          8,
+          0
+        ],
+        [
+          3,
+          2,
+          1,
+          0,
+          7,
+          6,
+          5,
+          4
+        ],
+        [
+          2,
+          10,
+          9,
+          1
+        ],
+        [
+          0,
+          8,
+          15,
+          7
+        ],
+        [
+          12,
+          11,
+          3,
+          4
+        ],
+        [
+          7,
+          15,
+          14,
+          6
+        ],
+        [
+          14,
+          13,
+          5,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "golden_kiwi_slice",
+      "shape": "convex",
+      "spheres": [],
+      "center": {
+        "x": -0.0,
+        "y": 0.12,
+        "z": 0.0
+      },
+      "bounds": {
+        "min": {
+          "x": -0.5299999713897705,
+          "y": -0.11999998986721039,
+          "z": -0.5299999713897705
+        },
+        "max": {
+          "x": 0.5299999713897705,
+          "y": 0.12000000476837158,
+          "z": 0.5299999713897705
+        }
+      },
+      "vertices": [
+        {
+          "x": 0.4664,
+          "y": -0.12,
+          "z": -0.0
+        },
+        {
+          "x": 0.3297946,
+          "y": -0.12,
+          "z": -0.3297946
+        },
+        {
+          "x": 0.0,
+          "y": -0.12,
+          "z": -0.4664
+        },
+        {
+          "x": -0.3297946,
+          "y": -0.12,
+          "z": -0.3297946
+        },
+        {
+          "x": -0.4664,
+          "y": -0.12,
+          "z": -0.0
+        },
+        {
+          "x": -0.3297946,
+          "y": -0.12,
+          "z": 0.3297946
+        },
+        {
+          "x": 0.0,
+          "y": -0.12,
+          "z": 0.4664
+        },
+        {
+          "x": 0.3297946,
+          "y": -0.12,
+          "z": 0.3297946
+        },
+        {
+          "x": 0.4664,
+          "y": 0.12,
+          "z": -0.0
+        },
+        {
+          "x": 0.3297946,
+          "y": 0.12,
+          "z": -0.3297946
+        },
+        {
+          "x": 0.0,
+          "y": 0.12,
+          "z": -0.4664
+        },
+        {
+          "x": -0.3297946,
+          "y": 0.12,
+          "z": -0.3297946
+        },
+        {
+          "x": -0.4664,
+          "y": 0.12,
+          "z": -0.0
+        },
+        {
+          "x": -0.3297946,
+          "y": 0.12,
+          "z": 0.3297946
+        },
+        {
+          "x": 0.0,
+          "y": 0.12,
+          "z": 0.4664
+        },
+        {
+          "x": 0.3297946,
+          "y": 0.12,
+          "z": 0.3297946
+        }
+      ],
+      "faces": [
+        [
+          1,
+          9,
+          8,
+          0
+        ],
+        [
+          13,
+          14,
+          15,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        [
+          13,
+          12,
+          4,
+          5
+        ],
+        [
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          10,
+          9,
+          1
+        ],
+        [
+          11,
+          10,
+          2,
+          3
+        ],
+        [
+          0,
+          8,
+          15,
+          7
+        ],
+        [
+          12,
+          11,
+          3,
+          4
+        ],
+        [
+          7,
+          15,
+          14,
+          6
+        ],
+        [
+          14,
+          13,
+          5,
+          6
+        ]
+      ]
+    }
+  ],
+  "goals": [
+    {
+      "kind": "apricot_slice",
+      "count": 40,
+      "label": "Apricot slices",
+      "icon": "images/ui/icon-apricot_slice.webp"
+    },
+    {
+      "kind": "kiwi_slice",
+      "count": 30,
+      "label": "Kiwi slices",
+      "icon": "images/ui/icon-kiwi_slice.webp"
+    },
+    {
+      "kind": "golden_kiwi_slice",
+      "count": 4,
+      "label": "Golden kiwi",
+      "icon": "images/ui/icon-golden_kiwi_slice.webp"
+    }
+  ],
+  "entities": [
+    {
+      "id": "V5_L04_apricot_slice_000",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -2.65,
+        "y": 0.008,
+        "z": 5.5
+      },
+      "yaw": 0.0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_001",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -3.045406,
+        "y": 0.008,
+        "z": 4.545406
+      },
+      "yaw": 3.883222,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_002",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 4.15
+      },
+      "yaw": 1.483259,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_003",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.954594,
+        "y": 0.008,
+        "z": 4.545406
+      },
+      "yaw": 5.366481,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_004",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -5.35,
+        "y": 0.008,
+        "z": 5.5
+      },
+      "yaw": 2.966518,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_005",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.954594,
+        "y": 0.008,
+        "z": 6.454594
+      },
+      "yaw": 0.566554,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_006",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 6.85
+      },
+      "yaw": 4.449777,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_007",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -3.045406,
+        "y": 0.008,
+        "z": 6.454594
+      },
+      "yaw": 2.049813,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_000",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -2.31125,
+        "y": 0.008,
+        "z": 4.525
+      },
+      "yaw": 0.0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_001",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 3.55
+      },
+      "yaw": 3.883222,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_002",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -5.68875,
+        "y": 0.008,
+        "z": 4.525
+      },
+      "yaw": 1.483259,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_003",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -5.68875,
+        "y": 0.008,
+        "z": 6.475
+      },
+      "yaw": 5.366481,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_004",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 7.45
+      },
+      "yaw": 2.966518,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_005",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -2.31125,
+        "y": 0.008,
+        "z": 6.475
+      },
+      "yaw": 0.566554,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_000",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_001",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.29,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_002",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.572,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_003",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.854,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_004",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.136,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_005",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.418,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_golden_kiwi_slice_000",
+      "kind": "golden_kiwi_slice",
+      "asset": "models/campaign/golden_kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.7,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 4,
+      "collision": {
+        "profile": "golden_kiwi_slice",
+        "radius": 0.53,
+        "height": 0.24,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_008",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 5.35,
+        "y": 0.008,
+        "z": 5.5
+      },
+      "yaw": 5.933035,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_009",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.954594,
+        "y": 0.008,
+        "z": 4.545406
+      },
+      "yaw": 3.533072,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_010",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 4.15
+      },
+      "yaw": 1.133109,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_011",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 3.045406,
+        "y": 0.008,
+        "z": 4.545406
+      },
+      "yaw": 5.016331,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_012",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 2.65,
+        "y": 0.008,
+        "z": 5.5
+      },
+      "yaw": 2.616368,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_013",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 3.045406,
+        "y": 0.008,
+        "z": 6.454594
+      },
+      "yaw": 0.216405,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_014",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 6.85
+      },
+      "yaw": 4.099627,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_015",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.954594,
+        "y": 0.008,
+        "z": 6.454594
+      },
+      "yaw": 1.699663,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_006",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 5.68875,
+        "y": 0.008,
+        "z": 4.525
+      },
+      "yaw": 4.449777,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_007",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 3.55
+      },
+      "yaw": 2.049813,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_008",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 2.31125,
+        "y": 0.008,
+        "z": 4.525
+      },
+      "yaw": 5.933035,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_009",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 2.31125,
+        "y": 0.008,
+        "z": 6.475
+      },
+      "yaw": 3.533072,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_010",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 7.45
+      },
+      "yaw": 1.133109,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_011",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 5.68875,
+        "y": 0.008,
+        "z": 6.475
+      },
+      "yaw": 5.016331,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_006",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_007",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.29,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_008",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.572,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_009",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.854,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_010",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.136,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_011",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.418,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_golden_kiwi_slice_001",
+      "kind": "golden_kiwi_slice",
+      "asset": "models/campaign/golden_kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.7,
+        "z": 5.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 4,
+      "collision": {
+        "profile": "golden_kiwi_slice",
+        "radius": 0.53,
+        "height": 0.24,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_016",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -2.65,
+        "y": 0.008,
+        "z": -0.5
+      },
+      "yaw": 5.582885,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_017",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -3.045406,
+        "y": 0.008,
+        "z": -1.454594
+      },
+      "yaw": 3.182922,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_018",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -1.85
+      },
+      "yaw": 0.782959,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_019",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.954594,
+        "y": 0.008,
+        "z": -1.454594
+      },
+      "yaw": 4.666181,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_020",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -5.35,
+        "y": 0.008,
+        "z": -0.5
+      },
+      "yaw": 2.266218,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_021",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.954594,
+        "y": 0.008,
+        "z": 0.454594
+      },
+      "yaw": 6.14944,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_022",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 0.85
+      },
+      "yaw": 3.749477,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_023",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -3.045406,
+        "y": 0.008,
+        "z": 0.454594
+      },
+      "yaw": 1.349513,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_012",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -2.31125,
+        "y": 0.008,
+        "z": -1.475
+      },
+      "yaw": 2.616368,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_013",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -2.45
+      },
+      "yaw": 0.216405,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_014",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -5.68875,
+        "y": 0.008,
+        "z": -1.475
+      },
+      "yaw": 4.099627,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_015",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -5.68875,
+        "y": 0.008,
+        "z": 0.475
+      },
+      "yaw": 1.699663,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_016",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": 1.45
+      },
+      "yaw": 5.582885,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_017",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -2.31125,
+        "y": 0.008,
+        "z": 0.475
+      },
+      "yaw": 3.182922,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_012",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_013",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.29,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_014",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.572,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_015",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.854,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_016",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.136,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_017",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.418,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_golden_kiwi_slice_002",
+      "kind": "golden_kiwi_slice",
+      "asset": "models/campaign/golden_kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.7,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 4,
+      "collision": {
+        "profile": "golden_kiwi_slice",
+        "radius": 0.53,
+        "height": 0.24,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_024",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 5.35,
+        "y": 0.008,
+        "z": -0.5
+      },
+      "yaw": 5.232736,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_025",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.954594,
+        "y": 0.008,
+        "z": -1.454594
+      },
+      "yaw": 2.832772,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_026",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -1.85
+      },
+      "yaw": 0.432809,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_027",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 3.045406,
+        "y": 0.008,
+        "z": -1.454594
+      },
+      "yaw": 4.316031,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_028",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 2.65,
+        "y": 0.008,
+        "z": -0.5
+      },
+      "yaw": 1.916068,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_029",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 3.045406,
+        "y": 0.008,
+        "z": 0.454594
+      },
+      "yaw": 5.79929,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_030",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 0.85
+      },
+      "yaw": 3.399327,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_031",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.954594,
+        "y": 0.008,
+        "z": 0.454594
+      },
+      "yaw": 0.999364,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_018",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 5.68875,
+        "y": 0.008,
+        "z": -1.475
+      },
+      "yaw": 0.782959,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_019",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -2.45
+      },
+      "yaw": 4.666181,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_020",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 2.31125,
+        "y": 0.008,
+        "z": -1.475
+      },
+      "yaw": 2.266218,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_021",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 2.31125,
+        "y": 0.008,
+        "z": 0.475
+      },
+      "yaw": 6.14944,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_022",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": 1.45
+      },
+      "yaw": 3.749477,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_023",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 5.68875,
+        "y": 0.008,
+        "z": 0.475
+      },
+      "yaw": 1.349513,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_018",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_019",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.29,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_020",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.572,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_021",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.854,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_022",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.136,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_023",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.418,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_golden_kiwi_slice_003",
+      "kind": "golden_kiwi_slice",
+      "asset": "models/campaign/golden_kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.7,
+        "z": -0.5
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 4,
+      "collision": {
+        "profile": "golden_kiwi_slice",
+        "radius": 0.53,
+        "height": 0.24,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_032",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -2.65,
+        "y": 0.008,
+        "z": -7.0
+      },
+      "yaw": 4.882586,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_033",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -3.045406,
+        "y": 0.008,
+        "z": -7.954594
+      },
+      "yaw": 2.482622,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_034",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -8.35
+      },
+      "yaw": 0.082659,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_035",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.954594,
+        "y": 0.008,
+        "z": -7.954594
+      },
+      "yaw": 3.965881,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_036",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -5.35,
+        "y": 0.008,
+        "z": -7.0
+      },
+      "yaw": 1.565918,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_037",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.954594,
+        "y": 0.008,
+        "z": -6.045406
+      },
+      "yaw": 5.44914,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_038",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -5.65
+      },
+      "yaw": 3.049177,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_039",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": -3.045406,
+        "y": 0.008,
+        "z": -6.045406
+      },
+      "yaw": 0.649214,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_024",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -2.31125,
+        "y": 0.008,
+        "z": -7.975
+      },
+      "yaw": 5.232736,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_025",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -8.95
+      },
+      "yaw": 2.832772,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_026",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -5.68875,
+        "y": 0.008,
+        "z": -7.975
+      },
+      "yaw": 0.432809,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_027",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -5.68875,
+        "y": 0.008,
+        "z": -6.025
+      },
+      "yaw": 4.316031,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_028",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -5.05
+      },
+      "yaw": 1.916068,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_029",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": -2.31125,
+        "y": 0.008,
+        "z": -6.025
+      },
+      "yaw": 5.79929,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_024",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.008,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_025",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.29,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_026",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.572,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_027",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 0.854,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_028",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.136,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_029",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.418,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_golden_kiwi_slice_004",
+      "kind": "golden_kiwi_slice",
+      "asset": "models/campaign/golden_kiwi_slice.glb",
+      "position": {
+        "x": -4.0,
+        "y": 1.7,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 4,
+      "collision": {
+        "profile": "golden_kiwi_slice",
+        "radius": 0.53,
+        "height": 0.24,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_040",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 5.35,
+        "y": 0.008,
+        "z": -7.0
+      },
+      "yaw": 4.532436,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_041",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.954594,
+        "y": 0.008,
+        "z": -7.954594
+      },
+      "yaw": 2.132472,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_042",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -8.35
+      },
+      "yaw": 6.015695,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_043",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 3.045406,
+        "y": 0.008,
+        "z": -7.954594
+      },
+      "yaw": 3.615731,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_044",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 2.65,
+        "y": 0.008,
+        "z": -7.0
+      },
+      "yaw": 1.215768,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_045",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 3.045406,
+        "y": 0.008,
+        "z": -6.045406
+      },
+      "yaw": 5.09899,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_046",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -5.65
+      },
+      "yaw": 2.699027,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_apricot_slice_047",
+      "kind": "apricot_slice",
+      "asset": "models/campaign/apricot_slice.glb",
+      "position": {
+        "x": 4.954594,
+        "y": 0.008,
+        "z": -6.045406
+      },
+      "yaw": 0.299064,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "apricot_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_030",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 5.68875,
+        "y": 0.008,
+        "z": -7.975
+      },
+      "yaw": 3.399327,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_031",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -8.95
+      },
+      "yaw": 0.999364,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_032",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 2.31125,
+        "y": 0.008,
+        "z": -7.975
+      },
+      "yaw": 4.882586,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_033",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 2.31125,
+        "y": 0.008,
+        "z": -6.025
+      },
+      "yaw": 2.482622,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_034",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -5.05
+      },
+      "yaw": 0.082659,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_kiwi_slice_035",
+      "kind": "kiwi_slice",
+      "asset": "models/campaign/kiwi_slice.glb",
+      "position": {
+        "x": 5.68875,
+        "y": 0.008,
+        "z": -6.025
+      },
+      "yaw": 3.965881,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "kiwi_slice",
+        "radius": 0.12,
+        "height": 0.08,
+        "mass": 0.016
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_030",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.008,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_031",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.29,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_032",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.572,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_033",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 0.854,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_034",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.136,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_wood_segment_035",
+      "kind": "wood_segment",
+      "asset": "models/campaign/wood_segment.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.418,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 1,
+      "collision": {
+        "profile": "wood_segment",
+        "radius": 0.36,
+        "height": 0.28,
+        "mass": 0.07
+      }
+    },
+    {
+      "id": "V5_L04_golden_kiwi_slice_005",
+      "kind": "golden_kiwi_slice",
+      "asset": "models/campaign/golden_kiwi_slice.glb",
+      "position": {
+        "x": 4.0,
+        "y": 1.7,
+        "z": -7.0
+      },
+      "yaw": 0,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "growth": 4,
+      "collision": {
+        "profile": "golden_kiwi_slice",
+        "radius": 0.53,
+        "height": 0.24,
+        "mass": 0.07
+      }
+    }
+  ],
+  "collectY": -2.28,
+  "rescueY": -5.5,
+  "rescueDistance": 3,
+  "rewards": {
+    "coins": 38,
+    "secondStarFraction": 0.2,
+    "thirdStarFraction": 0.45
+  },
+  "shoreline": [
+    {
+      "x": -6.0,
+      "z": 11.5
+    },
+    {
+      "x": 6.0,
+      "z": 11.5
+    },
+    {
+      "x": 9.0,
+      "z": 8.5
+    },
+    {
+      "x": 9.0,
+      "z": -6.5
+    },
+    {
+      "x": 7.0,
+      "z": -6.5
+    },
+    {
+      "x": 7.0,
+      "z": -10.5
+    },
+    {
+      "x": 5.0,
+      "z": -11.5
+    },
+    {
+      "x": -5.0,
+      "z": -11.5
+    },
+    {
+      "x": -7.0,
+      "z": -10.5
+    },
+    {
+      "x": -7.0,
+      "z": -6.5
+    },
+    {
+      "x": -9.0,
+      "z": -6.5
+    },
+    {
+      "x": -9.0,
+      "z": 8.5
+    }
+  ],
+  "waterHoles": [],
+  "navigation": [
+    {
+      "x": 0.0,
+      "z": 8.5
+    },
+    {
+      "x": -4.0,
+      "z": 5.5
+    },
+    {
+      "x": 4.0,
+      "z": 5.5
+    },
+    {
+      "x": 0.0,
+      "z": -0.5
+    },
+    {
+      "x": -4.0,
+      "z": -7.0
+    },
+    {
+      "x": 4.0,
+      "z": -7.0
+    }
+  ],
+  "boosters": [
+    {
+      "kind": "bigger-hole",
+      "duration": 10,
+      "multiplier": 1.3,
+      "range": 3.2,
+      "force": 3.5
+    }
+  ]
+}

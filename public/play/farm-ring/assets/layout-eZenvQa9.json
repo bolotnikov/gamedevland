@@ -1,0 +1,2144 @@
+{
+  "camera": {
+    "type": "OrthographicCamera",
+    "props": {
+      "height": 12.9,
+      "near": 0.1,
+      "far": 180,
+      "position": {
+        "x": 0,
+        "y": 19,
+        "z": 14
+      },
+      "lookAt": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    }
+  },
+  "ambient": {
+    "type": "AmbientLight",
+    "props": {
+      "color": "#f2fbff",
+      "intensity": 1.54
+    }
+  },
+  "sun": {
+    "type": "DirectionalLight",
+    "props": {
+      "color": "#fff9ee",
+      "intensity": 2.32,
+      "position": {
+        "x": -3.3,
+        "y": 13,
+        "z": 3.2
+      },
+      "castShadow": true,
+      "shadowMapSize": 2048,
+      "shadowBounds": 13
+    }
+  },
+  "farm": {
+    "type": "Model",
+    "props": {
+      "asset": "models/farm.glb",
+      "castShadow": true,
+      "receiveShadow": true
+    },
+    "components": {
+      "world": {
+        "type": "FarmWorld"
+      }
+    }
+  },
+  "hud": {
+    "type": "Container",
+    "components": {
+      "hud": {
+        "type": "FarmHud"
+      },
+      "settings": {
+        "type": "SettingsPopup",
+        "data": {
+          "popup": "settings",
+          "opener": "settingsButton",
+          "close": "settings.panel.close",
+          "music": {
+            "button": "settings.panel.music",
+            "on": "settings.panel.music.on",
+            "off": "settings.panel.music.off"
+          },
+          "sound": {
+            "button": "settings.panel.sound",
+            "on": "settings.panel.sound.on",
+            "off": "settings.panel.sound.off"
+          },
+          "intents": {
+            "open": {
+              "type": "FARM_PAUSE",
+              "data": {
+                "action": "pause"
+              }
+            },
+            "close": {
+              "type": "FARM_RESUME",
+              "data": {
+                "action": "resume"
+              }
+            },
+            "music": {
+              "type": "FARM_SOUND",
+              "data": {
+                "action": "toggleMusic"
+              }
+            },
+            "sound": {
+              "type": "FARM_SOUND",
+              "data": {
+                "action": "toggleSound"
+              }
+            }
+          },
+          "keys": [],
+          "pressScale": 0.95,
+          "pressDuration": 0.1
+        }
+      }
+    },
+    "children": {
+      "brand": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/brand.webp",
+              "width": 374,
+              "height": 51,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 57,
+              "y": 23,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 20,
+                "fill": "#63391f"
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 336,
+              "y": 23,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 14,
+                "fill": "#63391f"
+              }
+            }
+          },
+          "progress": {
+            "type": "Graphics"
+          }
+        }
+      },
+      "coin": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/coin.webp",
+              "width": 154,
+              "height": 49,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 99,
+              "y": 22,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 25,
+                "fill": "#ffffed",
+                "stroke": {
+                  "color": "#386e13",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "settingsButton": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/settings.webp",
+              "width": 51,
+              "height": 51,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          }
+        }
+      },
+      "card": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/card.webp",
+              "width": 229,
+              "height": 129,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "note": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 55,
+              "y": 25,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 14,
+                "fill": "#fffcef",
+                "stroke": {
+                  "color": "#1766a2",
+                  "width": 2
+                }
+              }
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 21,
+              "y": 60,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 20,
+                "fill": "#63391f"
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 21,
+              "y": 91,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "800",
+                "fontSize": 13,
+                "fill": "#63391f",
+                "wordWrap": true,
+                "wordWrapWidth": 184,
+                "lineHeight": 14
+              }
+            }
+          },
+          "count": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 188,
+              "y": 105,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 14,
+                "fill": "#133f37"
+              }
+            }
+          },
+          "plot1": {
+            "type": "Container",
+            "props": {
+              "x": 21,
+              "y": 88
+            },
+            "children": {
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-empty.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              },
+              "filled": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-full.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              }
+            }
+          },
+          "plot2": {
+            "type": "Container",
+            "props": {
+              "x": 46,
+              "y": 88
+            },
+            "children": {
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-empty.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              },
+              "filled": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-full.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              }
+            }
+          },
+          "plot3": {
+            "type": "Container",
+            "props": {
+              "x": 71,
+              "y": 88
+            },
+            "children": {
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-empty.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              },
+              "filled": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-full.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              }
+            }
+          },
+          "plot4": {
+            "type": "Container",
+            "props": {
+              "x": 96,
+              "y": 88
+            },
+            "children": {
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-empty.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              },
+              "filled": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-full.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              }
+            }
+          },
+          "plot5": {
+            "type": "Container",
+            "props": {
+              "x": 121,
+              "y": 88
+            },
+            "children": {
+              "empty": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-empty.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              },
+              "filled": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/plot-full.webp",
+                  "width": 24,
+                  "height": 25,
+                  "anchor": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "expand": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/primary.webp",
+              "width": 196,
+              "height": 51,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 46,
+              "y": 22,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "price": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 165,
+              "y": 22,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 17,
+                "fill": "#fffff2",
+                "stroke": {
+                  "color": "#4a8018",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "guide": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/button.webp",
+              "width": 252,
+              "height": 60,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 62,
+              "y": 27,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 19,
+                "fill": "#ffffed",
+                "stroke": {
+                  "color": "#386e13",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "crop": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/seeds.webp",
+              "width": 204,
+              "height": 49,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "icon": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/crop-radish.webp",
+              "width": 36,
+              "height": 36,
+              "x": 25,
+              "y": 21,
+              "anchor": 0.5
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 54,
+              "y": 22,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 15,
+                "fill": "#fff9e8",
+                "stroke": {
+                  "color": "#4b8411",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "upgradePlot": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bed-up.webp",
+              "width": 204,
+              "height": 49,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 54,
+              "y": 22,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 15,
+                "fill": "#fff9e8",
+                "stroke": {
+                  "color": "#a15b21",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "sprinkle": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/sprinkle.webp",
+              "width": 204,
+              "height": 49,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 54,
+              "y": 22,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 15,
+                "fill": "#fff9e8",
+                "stroke": {
+                  "color": "#166da0",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "dispatch": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/dispatch.webp",
+              "width": 184,
+              "height": 56,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 111,
+              "y": 23,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 15,
+                "fill": "#ffffed",
+                "stroke": {
+                  "color": "#386e13",
+                  "width": 2
+                }
+              }
+            }
+          },
+          "load": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 111,
+              "y": 13,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, sans-serif",
+                "fill": "#f5ffcf",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "stroke": {
+                  "color": "#509222",
+                  "width": 1.2
+                }
+              }
+            }
+          }
+        }
+      },
+      "workshop": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/tool.webp",
+              "width": 158,
+              "height": 52,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 48,
+              "y": 23,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 18,
+                "fill": "#63391f"
+              }
+            }
+          }
+        }
+      },
+      "workbench": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/workbench.webp",
+              "width": 307,
+              "height": 320,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "Workshop",
+              "x": 57,
+              "y": 27,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 25,
+                "fill": "#fffcef",
+                "stroke": {
+                  "color": "#1766a2",
+                  "width": 2
+                }
+              }
+            }
+          },
+          "cargo": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 78,
+              "y": 197,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 18,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "cargoDetail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 78,
+              "y": 220,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 13,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "ringLabel": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 78,
+              "y": 257,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 17,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "ringStatus": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 78,
+              "y": 279,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 13,
+                "fill": "#57321f"
+              }
+            }
+          }
+        }
+      },
+      "benchClose": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bench-close.webp",
+              "width": 38,
+              "height": 38,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          }
+        }
+      },
+      "capacity": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bench-price.webp",
+              "width": 83,
+              "height": 44,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 55,
+              "y": 19,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 20,
+                "fill": "#ffffed",
+                "stroke": {
+                  "color": "#386e13",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "waterSpeed": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bench-price.webp",
+              "width": 83,
+              "height": 44,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 55,
+              "y": 19,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 20,
+                "fill": "#ffffed",
+                "stroke": {
+                  "color": "#386e13",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "harvestSpeed": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bench-price.webp",
+              "width": 83,
+              "height": 44,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 55,
+              "y": 19,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 20,
+                "fill": "#ffffed",
+                "stroke": {
+                  "color": "#386e13",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "waterTab": {
+        "type": "Container",
+        "children": {
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#63391f"
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 23,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "800",
+                "fontSize": 12,
+                "fill": "#63391f"
+              }
+            }
+          }
+        }
+      },
+      "harvestTab": {
+        "type": "Container",
+        "children": {
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#63391f"
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 23,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "800",
+                "fontSize": 12,
+                "fill": "#63391f"
+              }
+            }
+          }
+        }
+      },
+      "earned": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/token.webp",
+              "width": 22,
+              "height": 21,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 24,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 22,
+                "fill": "#fff4bd",
+                "stroke": {
+                  "color": "#65143e",
+                  "width": 3
+                }
+              }
+            }
+          }
+        }
+      },
+      "reward": {
+        "type": "Container",
+        "children": {
+          "parcel": {
+            "type": "Graphics"
+          },
+          "stars": {
+            "type": "Graphics"
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 20,
+                "fill": "#fff8b3",
+                "stroke": {
+                  "color": "#4b3847",
+                  "width": 4
+                }
+              }
+            }
+          }
+        }
+      },
+      "closePlot": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bench-close.webp",
+              "width": 35,
+              "height": 35,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          }
+        }
+      },
+      "openDaily": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/daily-tab.webp",
+              "width": 54,
+              "height": 53,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "Quests",
+              "x": 27,
+              "y": 33,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 11,
+                "fill": "#57321f"
+              }
+            }
+          }
+        }
+      },
+      "openWheel": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/wheel-tab.webp",
+              "width": 54,
+              "height": 53,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "Wheel",
+              "x": 27,
+              "y": 33,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 11,
+                "fill": "#57321f"
+              }
+            }
+          }
+        }
+      },
+      "openCollection": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/journal-tab.webp",
+              "width": 54,
+              "height": 53,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "Journal",
+              "x": 27,
+              "y": 33,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 11,
+                "fill": "#57321f"
+              }
+            }
+          }
+        }
+      },
+      "activityShade": {
+        "type": "Container",
+        "children": {
+          "face": {
+            "type": "Graphics"
+          }
+        }
+      },
+      "activitySheet": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/daily-sheet.webp",
+              "width": 288,
+              "height": 278,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "face": {
+            "type": "Graphics"
+          },
+          "title": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 56,
+              "y": 27,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 22,
+                "fill": "#fffcef",
+                "stroke": {
+                  "color": "#1766a2",
+                  "width": 2
+                }
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 29,
+              "y": 76,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 15,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "wheel": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/fair-wheel.webp",
+              "width": 150,
+              "height": 150,
+              "x": 144,
+              "y": 134,
+              "anchor": 0.5
+            }
+          },
+          "prize0": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize1": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize2": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize3": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize4": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize5": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize6": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "prize7": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#623b26"
+              }
+            }
+          },
+          "pointer": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/fair-pointer.webp",
+              "width": 24,
+              "height": 23,
+              "x": 144,
+              "y": 61,
+              "anchor": 0.5
+            }
+          },
+          "journalArt": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/journal-crops.webp",
+              "x": 19,
+              "y": 64,
+              "width": 250,
+              "height": 104,
+              "anchor": 0
+            }
+          },
+          "journalStamps": {
+            "type": "Graphics"
+          },
+          "entry0": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry1": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry2": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry3": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry4": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry5": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry6": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry7": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry8": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "entry9": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 0,
+              "y": 0,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 10,
+                "fill": "#61391e"
+              }
+            }
+          },
+          "status": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 29,
+              "y": 114,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "bonus": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 50,
+              "y": 205,
+              "anchor": {
+                "x": 0,
+                "y": 0.5
+              },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 14,
+                "fill": "#57321f"
+              }
+            }
+          }
+        }
+      },
+      "activityAction": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/activity-action.webp",
+              "width": 150,
+              "height": 43,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 75,
+              "y": 19,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#fffef0",
+                "stroke": {
+                  "color": "#4a8018",
+                  "width": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      "activityClose": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/bench-close.webp",
+              "width": 38,
+              "height": 38,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          }
+        }
+      },
+      "fieldNote": {
+        "type": "Container",
+        "children": {
+          "skin": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/field-note.webp",
+              "width": 254,
+              "height": 74,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "icon": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/crop-radish.webp",
+              "width": 45,
+              "height": 45,
+              "x": 37,
+              "y": 34,
+              "anchor": 0.5
+            }
+          },
+          "title": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 73,
+              "y": 8,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 16,
+                "fill": "#57321f"
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 73,
+              "y": 29,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 12,
+                "fill": "#57321f",
+                "wordWrap": true,
+                "wordWrapWidth": 171,
+                "lineHeight": 14
+              }
+            }
+          },
+          "status": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 73,
+              "y": 46,
+              "anchor": 0,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 12,
+                "fill": "#2574a0"
+              }
+            }
+          }
+        }
+      },
+      "notice": {
+        "type": "Container",
+        "children": {
+          "paper": {
+            "type": "Sprite",
+            "props": {
+              "asset": "images/notice.webp",
+              "width": 255,
+              "height": 35,
+              "x": 0,
+              "y": 0,
+              "anchor": 0
+            }
+          },
+          "label": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "x": 127.5,
+              "y": 15.5,
+              "anchor": 0.5,
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "900",
+                "fontSize": 14,
+                "fill": "#fffae7"
+              }
+            }
+          }
+        }
+      },
+      "tutorial": {
+        "type": "Container",
+        "children": {
+          "background": {
+            "type": "Graphics"
+          },
+          "title": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "y": 11,
+              "anchor": { "x": 0.5, "y": 0 },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "1000",
+                "fontSize": 27,
+                "fill": "#fff4c8",
+                "align": "center",
+                "wordWrap": true
+              }
+            }
+          },
+          "detail": {
+            "type": "Text",
+            "props": {
+              "text": "",
+              "anchor": { "x": 0.5, "y": 0 },
+              "style": {
+                "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                "fontWeight": "800",
+                "fontSize": 19,
+                "fill": "#ffffff",
+                "align": "center",
+                "wordWrap": true
+              }
+            }
+          }
+        }
+      },
+      "arrow": {
+        "type": "Container",
+        "children": {
+          "dragTrack": {
+            "type": "Graphics"
+          },
+          "targetRing": {
+            "type": "Graphics"
+          },
+          "dragDestination": {
+            "type": "Graphics"
+          },
+          "ripple": {
+            "type": "Graphics"
+          },
+          "hand": {
+            "type": "Container",
+            "children": {
+              "icon": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/hand.webp",
+                  "width": 40,
+                  "height": 40,
+                  "x": -4,
+                  "y": -3,
+                  "anchor": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "type": "Container",
+        "children": {
+          "shade": {
+            "type": "Container",
+            "children": {
+              "face": {
+                "type": "Graphics"
+              }
+            }
+          },
+          "panel": {
+            "type": "Container",
+            "children": {
+              "skin": {
+                "type": "Sprite",
+                "props": {
+                  "asset": "images/settings-sheet.webp",
+                  "width": 288,
+                  "height": 235,
+                  "x": 0,
+                  "y": 0,
+                  "anchor": 0
+                }
+              },
+              "title": {
+                "type": "Text",
+                "props": {
+                  "text": "Settings",
+                  "x": 56,
+                  "y": 27,
+                  "anchor": {
+                    "x": 0,
+                    "y": 0.5
+                  },
+                  "style": {
+                    "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                    "fontWeight": "900",
+                    "fontSize": 24,
+                    "fill": "#fffcef",
+                    "stroke": {
+                      "color": "#1766a2",
+                      "width": 2
+                    }
+                  }
+                }
+              },
+              "close": {
+                "type": "Container",
+                "children": {
+                  "skin": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/bench-close.webp",
+                      "width": 38,
+                      "height": 38,
+                      "x": 0,
+                      "y": 0,
+                      "anchor": 0
+                    }
+                  }
+                },
+                "props": {
+                  "x": 241,
+                  "y": 10
+                }
+              },
+              "music": {
+                "type": "Container",
+                "children": {
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "Music",
+                      "x": 50,
+                      "y": 16,
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                        "fontWeight": "900",
+                        "fontSize": 18,
+                        "fill": "#57321f"
+                      }
+                    }
+                  },
+                  "on": {
+                    "type": "Container",
+                    "children": {
+                      "skin": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/toggle-on.webp",
+                          "width": 81,
+                          "height": 36,
+                          "x": 0,
+                          "y": 0,
+                          "anchor": 0
+                        }
+                      },
+                      "label": {
+                        "type": "Text",
+                        "props": {
+                          "text": "ON",
+                          "x": 32,
+                          "y": 15,
+                          "anchor": 0.5,
+                          "style": {
+                            "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                            "fontWeight": "900",
+                            "fontSize": 13,
+                            "fill": "#203f12"
+                          }
+                        }
+                      }
+                    },
+                    "props": {
+                      "x": 170,
+                      "y": 0
+                    }
+                  },
+                  "off": {
+                    "type": "Container",
+                    "children": {
+                      "skin": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/toggle-off.webp",
+                          "width": 81,
+                          "height": 36,
+                          "x": 0,
+                          "y": 0,
+                          "anchor": 0
+                        }
+                      },
+                      "label": {
+                        "type": "Text",
+                        "props": {
+                          "text": "OFF",
+                          "x": 50,
+                          "y": 15,
+                          "anchor": 0.5,
+                          "style": {
+                            "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                            "fontWeight": "900",
+                            "fontSize": 13,
+                            "fill": "#fffef2",
+                            "stroke": {
+                              "color": "#17649f",
+                              "width": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "props": {
+                      "x": 170,
+                      "y": 0
+                    }
+                  }
+                },
+                "props": {
+                  "x": 13,
+                  "y": 73
+                }
+              },
+              "sound": {
+                "type": "Container",
+                "children": {
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "Sounds",
+                      "x": 50,
+                      "y": 16,
+                      "anchor": {
+                        "x": 0,
+                        "y": 0.5
+                      },
+                      "style": {
+                        "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                        "fontWeight": "900",
+                        "fontSize": 18,
+                        "fill": "#57321f"
+                      }
+                    }
+                  },
+                  "on": {
+                    "type": "Container",
+                    "children": {
+                      "skin": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/toggle-on.webp",
+                          "width": 81,
+                          "height": 36,
+                          "x": 0,
+                          "y": 0,
+                          "anchor": 0
+                        }
+                      },
+                      "label": {
+                        "type": "Text",
+                        "props": {
+                          "text": "ON",
+                          "x": 32,
+                          "y": 15,
+                          "anchor": 0.5,
+                          "style": {
+                            "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                            "fontWeight": "900",
+                            "fontSize": 13,
+                            "fill": "#203f12"
+                          }
+                        }
+                      }
+                    },
+                    "props": {
+                      "x": 170,
+                      "y": 0
+                    }
+                  },
+                  "off": {
+                    "type": "Container",
+                    "children": {
+                      "skin": {
+                        "type": "Sprite",
+                        "props": {
+                          "asset": "images/toggle-off.webp",
+                          "width": 81,
+                          "height": 36,
+                          "x": 0,
+                          "y": 0,
+                          "anchor": 0
+                        }
+                      },
+                      "label": {
+                        "type": "Text",
+                        "props": {
+                          "text": "OFF",
+                          "x": 50,
+                          "y": 15,
+                          "anchor": 0.5,
+                          "style": {
+                            "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                            "fontWeight": "900",
+                            "fontSize": 13,
+                            "fill": "#fffef2",
+                            "stroke": {
+                              "color": "#17649f",
+                              "width": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "props": {
+                      "x": 170,
+                      "y": 0
+                    }
+                  }
+                },
+                "props": {
+                  "x": 13,
+                  "y": 130
+                }
+              },
+              "replay": {
+                "type": "Container",
+                "children": {
+                  "skin": {
+                    "type": "Sprite",
+                    "props": {
+                      "asset": "images/replay.webp",
+                      "width": 194,
+                      "height": 43,
+                      "x": 0,
+                      "y": 0,
+                      "anchor": 0
+                    }
+                  },
+                  "label": {
+                    "type": "Text",
+                    "props": {
+                      "text": "",
+                      "x": 110,
+                      "y": 19,
+                      "anchor": 0.5,
+                      "style": {
+                        "fontFamily": "Nunito Variable, Trebuchet MS, sans-serif",
+                        "fontWeight": "900",
+                        "fontSize": 16,
+                        "fill": "#57321f"
+                      }
+                    }
+                  }
+                },
+                "props": {
+                  "x": 47,
+                  "y": 181
+                }
+              }
+            }
+          }
+        },
+        "props": {
+          "visible": false
+        }
+      }
+    }
+  }
+}

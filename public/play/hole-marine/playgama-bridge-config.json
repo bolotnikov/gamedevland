@@ -1,0 +1,6 @@
+{
+  "game": { "adaptToSafeArea": true },
+  "advertisement": {
+    "interstitial": { "placements": [{ "id": "level_transition" }] }
+  }
+}
