@@ -23,7 +23,7 @@ roles:
   - Геймдизайн и интерфейс
 iconImage: /assets/games/aphorisms/icon.avif
 iconAlt: 'Иконка Aphorisms: сказочная башня на фоне яркого голубого неба'
-playableUrl: https://gamedevland.github.io/aphorisms/
+playableUrl: https://gamedev.land/play/aphorisms/
 orientation: portrait
 embedAspectRatio: 3 / 4
 fitEmbedToViewport: true

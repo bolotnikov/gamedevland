@@ -23,7 +23,7 @@ roles:
   - Game design and UI
 iconImage: /assets/games/aphorisms/icon.avif
 iconAlt: Aphorisms game icon with a storybook tower against a bright blue sky
-playableUrl: https://gamedevland.github.io/aphorisms/
+playableUrl: https://gamedev.land/play/aphorisms/
 orientation: portrait
 embedAspectRatio: 3 / 4
 fitEmbedToViewport: true
