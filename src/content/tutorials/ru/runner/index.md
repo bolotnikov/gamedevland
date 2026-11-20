@@ -67,7 +67,7 @@ steps:
 
 ## Дополнительные материалы
 - [Полный исходный код](https://github.com/gamedevland/runner)
-- [Демонстрационная версия](https://gamedevland.github.io/runner/)
+- [Демонстрационная версия](https://gamedev.land/play/runner/)
 
 Перед началом разработки нужно выполнить два шага:
 

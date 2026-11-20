@@ -67,7 +67,7 @@ In this article, we will create an infinite runner game using [PIXI](https://pix
 
 ## Additional materials
 - [Complete source code](https://github.com/gamedevland/runner)
-- [Preview demo](https://gamedevland.github.io/runner/)
+- [Preview demo](https://gamedev.land/play/runner/)
 
 Before starting the development, we need to perform 2 steps:
 
