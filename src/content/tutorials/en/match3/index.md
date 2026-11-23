@@ -28,7 +28,7 @@ In this article, we will create a match3 game using [PIXI](https://pixijs.com/).
 <a id="видеоверсия" class="translation-anchor" aria-hidden="true"></a>
 
 ## Video version
-[YouTube](https://www.youtube.com/watch?v=kgIg5Ms-HRA)
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kgIg5Ms-HRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <a id="пошаговое-руководство-на-udemy" class="translation-anchor" aria-hidden="true"></a>
 

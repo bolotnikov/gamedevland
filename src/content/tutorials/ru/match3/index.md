@@ -28,7 +28,7 @@ steps:
 <a id="video-version" class="translation-anchor" aria-hidden="true"></a>
 
 ## Видеоверсия
-[YouTube](https://www.youtube.com/watch?v=kgIg5Ms-HRA)
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kgIg5Ms-HRA" title="Видеоплеер YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <a id="step-by-step-guide-on-udemy" class="translation-anchor" aria-hidden="true"></a>
 

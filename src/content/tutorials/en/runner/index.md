@@ -61,7 +61,7 @@ In this article, we will create an infinite runner game using [PIXI](https://pix
 <a id="видеоверсия" class="translation-anchor" aria-hidden="true"></a>
 
 ## Video version
-[YouTube](https://www.youtube.com/watch?v=oZInrjsClPg)
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/oZInrjsClPg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 <a id="дополнительные-материалы" class="translation-anchor" aria-hidden="true"></a>
 
