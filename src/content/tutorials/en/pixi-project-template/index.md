@@ -37,7 +37,7 @@ In this article, our goal is to develop a simple project template that we will u
 <a id="видеоверсия" class="translation-anchor" aria-hidden="true"></a>
 
 ## Video version
-<iframe width="560" height="315" src="https://www.youtube.com/embed/itT6L3LQ1cM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[YouTube](https://www.youtube.com/watch?v=itT6L3LQ1cM)
 
 <a id="пошаговое-руководство-на-udemy" class="translation-anchor" aria-hidden="true"></a>
 
