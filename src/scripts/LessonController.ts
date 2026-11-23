@@ -114,8 +114,7 @@ export class LessonController {
 			const result = form.querySelector('[data-quiz-result]');
 			if (result) result.textContent = this.i18n.t("Ответы самопроверки сброшены.");
 		});
-		form.addEventListener('submit', (event) => {
-			event.preventDefault();
+		form.querySelector('[data-check-quiz]')?.addEventListener('click', () => {
 			let correct = 0;
 			let answered = 0;
 			for (const field of fields) {

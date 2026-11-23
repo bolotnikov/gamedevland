@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
+    "@fontsource-variable/inter": "5.3.0",
     "@gamedevland/cyber-ui": "0.2.0",
     "@gamedevland/engine": "0.0.11",
     "astro": "^6.1.6",
