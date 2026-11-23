@@ -61,7 +61,7 @@ steps:
 <a id="video-version" class="translation-anchor" aria-hidden="true"></a>
 
 ## Видеоверсия
-[YouTube](https://www.youtube.com/watch?v=oZInrjsClPg)
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/oZInrjsClPg" title="Видеоплеер YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 <a id="additional-materials" class="translation-anchor" aria-hidden="true"></a>
 
